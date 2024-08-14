@@ -1,4 +1,4 @@
-package com.db.flyway;
+package com.db.piramalswasthya;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
