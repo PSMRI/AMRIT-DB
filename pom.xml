@@ -13,7 +13,7 @@
 	<version>0.0.1</version>
 	<packaging>war</packaging>
 	<name>Amrit-DB</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Flyway project for Spring Boot</description>
 	<url/>
 	
 	<properties>
