@@ -49,7 +49,7 @@ public class VersionController {
 		try {
 			List<FlywaySchemaVersion> latestVersion = service.getLatestVersion();
 			Gson gson = new Gson();
-			if (null != latestVersion && CollectionUtils.isEmpty(latestVersion)) {
+			if (null != latestVersion && !CollectionUtils.isEmpty(latestVersion)) {
 				resp = gson.toJson(latestVersion);
 			}
 		} catch (Exception e) {
