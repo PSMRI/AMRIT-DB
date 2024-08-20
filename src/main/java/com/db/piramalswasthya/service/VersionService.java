@@ -34,8 +34,13 @@ import java.util.List;
 
 @Repository
 public class VersionService {
-	@Autowired
+	
     private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	public void setCommonServiceImpl(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
 	
 	
 	public List<FlywaySchemaVersion> getLatestVersion() {

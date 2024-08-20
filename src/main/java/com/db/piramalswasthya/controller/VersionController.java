@@ -40,11 +40,16 @@ import com.google.gson.Gson;
 @RequestMapping("/db/migration")
 public class VersionController {
 	private Logger logger = LoggerFactory.getLogger(VersionController.class);
-	@Autowired
+	
 	private VersionService service;
+	
+	@Autowired
+	public void setCommonServiceImpl(VersionService service) {
+		this.service = service;
+	}
 
 	@GetMapping("/version")
-	public String getLatestDBMigrationVersion() {
+	public String getLatestDBMigrationVersion() throws Exception {
 		String resp = null;
 		try {
 			List<FlywaySchemaVersion> latestVersion = service.getLatestVersion();
@@ -53,7 +58,8 @@ public class VersionController {
 				resp = gson.toJson(latestVersion);
 			}
 		} catch (Exception e) {
-			logger.error("Error while getting DB Migration version :" + e);
+			logger.error("Error while getting DB Migration version : {} " , e);
+			throw new Exception("Error while getting DB Migration version : {} " + e);
 		}
 		return resp;
 	}
