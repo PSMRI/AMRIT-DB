@@ -58,8 +58,7 @@ public class VersionController {
 				resp = gson.toJson(latestVersion);
 			}
 		} catch (Exception e) {
-			logger.error("Error while getting DB Migration version : {} " , e);
-			throw new Exception("Error while getting DB Migration version : {} " + e);
+			throw new Exception("Error while getting DB Migration version: " + e.getMessage(), e);
 		}
 		return resp;
 	}
