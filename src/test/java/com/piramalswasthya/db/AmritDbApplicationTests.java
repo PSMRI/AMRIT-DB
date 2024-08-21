@@ -1,8 +1,10 @@
-package com.db.piramalswasthya;
+package com.piramalswasthya.db;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.piramalswasthya.db.AmritDbApplication;
 
 @SpringBootTest
 class AmritDbApplicationTests {

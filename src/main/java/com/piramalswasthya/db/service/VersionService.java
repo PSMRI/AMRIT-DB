@@ -19,14 +19,14 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see https://www.gnu.org/licenses/.
 */
-package com.db.piramalswasthya.service;
+package com.piramalswasthya.db.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.db.piramalswasthya.data.FlywaySchemaVersion;
+import com.piramalswasthya.db.data.FlywaySchemaVersion;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,7 +41,6 @@ public class VersionService {
 	public void setCommonServiceImpl(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
-	
 	
 	public List<FlywaySchemaVersion> getLatestVersion() {
 		String sql = "SELECT * FROM flyway_schema_history order by 1 desc limit 1";
