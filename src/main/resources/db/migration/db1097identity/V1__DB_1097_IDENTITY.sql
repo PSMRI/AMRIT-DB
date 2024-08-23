@@ -3,7 +3,7 @@
 -- Host: 192.168.35.151    Database: db_1097_identity
 -- ------------------------------------------------------
 -- Server version	5.7.31-log
-use db_1097_identity_flyway;
+use db_1097_identity;
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
