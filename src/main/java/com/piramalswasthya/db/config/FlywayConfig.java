@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @Configuration
 public class FlywayConfig {
 	@Bean
-	@ConfigurationProperties(prefix = "spring.datasource.dbiemr")
+	//@ConfigurationProperties(prefix = "spring.flyway.dbiemr")
     public Flyway flyway1(@Qualifier("datasource1") DataSource dataSource1) {
         return Flyway.configure()
                      .dataSource(dataSource1)
@@ -21,7 +21,7 @@ public class FlywayConfig {
                      .load();
     }
 	@Bean
-	@ConfigurationProperties(prefix = "spring.datasource.dbidentity")
+	//@ConfigurationProperties(prefix = "spring.flyway.dbidentity")
     public Flyway flyway2(@Qualifier("datasource2") DataSource dataSource2) {
         return Flyway.configure()
                      .dataSource(dataSource2)
@@ -30,13 +30,13 @@ public class FlywayConfig {
     }
 
 	@Bean
-	@ConfigurationProperties(prefix = "spring.datasource.dbreporting")
+	//@ConfigurationProperties(prefix = "spring.flyway.dbreporting")
 	public Flyway flyway3(@Qualifier("datasource3") DataSource dataSource3) {
 		return Flyway.configure().dataSource(dataSource3).locations("classpath:db/migration/dbreporing").load();
 	}
 
 	@Bean
-	@ConfigurationProperties(prefix = "spring.datasource.db1097identity")
+	//@ConfigurationProperties(prefix = "spring.flyway.db1097identity")
     public Flyway flyway4(@Qualifier("datasource4") DataSource dataSource4) {
         return Flyway.configure()
                      .dataSource(dataSource4)
