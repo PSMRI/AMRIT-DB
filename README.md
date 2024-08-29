@@ -22,7 +22,9 @@ Spring Boot 3.2.2+
 A Relational Database (e.g., MySQL, PostgreSQL)
 ### Creating Migrations
 Flyway migrations are SQL scripts located in the src/main/resources/db/migration directory. Each migration file should be named according to the Flyway convention: V1__Description.sql, V2__Description.sql, etc.
-
+### Run Migrations
+* Give Database credentials in application.properties
+* Flyway automatically run migrations at application startup if you have configured it properly.
 ### Common Issues & Troubleshooting
 * Migration Failure : Check your SQL syntax and review the flyway_schema_history table for issues.
 * Database Connection Issues: Verify the connection details in application.properties.
