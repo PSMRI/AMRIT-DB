@@ -29,7 +29,7 @@ import lombok.Data;
 @Data
 public class FlywaySchemaVersion {
 	private int installedRank;
-    private String version;
+	private String version;
     private String description;
     private String type;
     private String script;

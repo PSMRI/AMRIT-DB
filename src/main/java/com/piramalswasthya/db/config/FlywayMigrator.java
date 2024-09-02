@@ -9,23 +9,23 @@ import jakarta.annotation.PostConstruct;
 @Component
 public class FlywayMigrator {
 	@Autowired
-	private Flyway flyway1;
+	private Flyway flywaydbiemr;
 	
 	@Autowired
-	private Flyway flyway2;
+	private Flyway flywaydbidentity;
 	
 	@Autowired
-	private Flyway flyway3;
+	private Flyway flywaydbreporting;
 	
 	@Autowired
-	private Flyway flyway4;
+	private Flyway flywaydb1097identity;
 	@PostConstruct
 	public void migrate() {
 		try {
-		flyway1.migrate();
-		flyway2.migrate();
-		flyway3.migrate();
-		flyway4.migrate();
+			flywaydbiemr.migrate();
+			flywaydbidentity.migrate();
+			flywaydbreporting.migrate();
+			flywaydb1097identity.migrate();
 		}catch (Exception e) {
 			throw new RuntimeException("Flyway Migration Failed ",e);
 		}

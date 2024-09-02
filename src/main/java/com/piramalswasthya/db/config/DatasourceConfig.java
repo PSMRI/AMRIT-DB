@@ -2,11 +2,14 @@ package com.piramalswasthya.db.config;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 @Configuration
 public class DatasourceConfig {
 	
@@ -24,26 +27,27 @@ public class DatasourceConfig {
 	
 	@Bean
 	@ConfigurationProperties(prefix = "spring.datasource.dbiemr")
-	public DataSource datasource1() {
+	public DataSource datasourcedbiemr() {
 		return DataSourceBuilder.create().url(dbiemrurl)
 				.build();
 	}
 	@Bean
 	@ConfigurationProperties(prefix = "spring.datasource.dbidentity")
-	public DataSource datasource2() {
+	public DataSource datasourcedbidentity() {
 		return DataSourceBuilder.create().url(dbidentityurl)
 				.build();
 	}
 	@Bean
 	@ConfigurationProperties(prefix = "spring.datasource.dbreporting")
-	public DataSource datasource3() {
+	public DataSource datasourcedbreporting() {
 		return DataSourceBuilder.create().url(dbreportingurl)
 				.build();
 	}
 	@Bean
 	@ConfigurationProperties(prefix = "spring.datasource.db1097identity")
-	public DataSource datasource4() {
+	public DataSource datasourcedb1097identity() {
 		return DataSourceBuilder.create().url(db1097identityurl)
 				.build();
 	}
+	
 }
