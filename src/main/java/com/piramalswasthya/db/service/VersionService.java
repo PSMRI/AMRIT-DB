@@ -46,7 +46,6 @@ public class VersionService {
 				history.setType(rs.getString("type"));
 				history.setScript(rs.getString("script"));
 				history.setChecksum(rs.getInt("checksum"));
-				history.setInstalledBy(rs.getString("installed_by"));
 				history.setInstalledOn(rs.getTimestamp("installed_on"));
 				history.setExecutionTime(rs.getInt("execution_time"));
 				history.setSuccess(rs.getBoolean("success"));
