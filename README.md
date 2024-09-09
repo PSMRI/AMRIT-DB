@@ -26,7 +26,7 @@ Configure your database connection in application.properties or application.yml.
 spring.datasource.url=jdbc:mysql://localhost:3306/your_database
 spring.datasource.username=your_username
 spring.datasource.password=your_password
-spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 ### Initial Migration Scripts
 Created a directory src/main/resources/db/migration in project. Placed initial Flyway migration scripts in this directory. 
