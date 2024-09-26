@@ -21,16 +21,15 @@ This service utilizes Flyway, a powerfull database migration tool, within a spri
 * Schema Management : Flyway automates the process of creating and managing the database tables allowing for easy version control of database changes.
 * Migration Scripts : The service can include SQL migration scripts that define the structure of the database tables ,constraints, and relationships, ensuring that schema is created exactly as needed.
 Below are the mandatory schemas you should create.
-* db_iemr
-* db_reporting
-* db_identity
-* db_1097_identity
+ db_iemr
+ db_reporting
+ db_identity
+ db_1097_identity
 ### Prerequisites
 Before you start, ensure you have the following installed:
 
 Java 17
-Maven 3.6+ or Gradle 6+
-Spring Boot 3.2.2+
+Maven 3.6+
 A Relational Database (e.g., MySQL, PostgreSQL)
 ### Creating Migrations
 Flyway migrations are SQL scripts located in the src/main/resources/db/migration directory. Each migration file should be named according to the Flyway convention: V1__Description.sql, V2__Description.sql, etc.
