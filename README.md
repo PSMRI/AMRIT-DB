@@ -1,17 +1,20 @@
 # AMRIT - DB Service
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)  ![branch parameter](https://github.com/PSMRI/Amrit-DB/actions/workflows/sast-and-package.yml/badge.svg)
-Overview
-This repository demonstrates how to integrate Flyway for database version control in a Spring Boot application. Flyway is a powerful tool that handles database migrations, ensuring that your database schema is kept in sync across different environments.
+
+### Overview
+This AMRIT-DB spring boot service provides a robust solution for managing and cloning empty database schema tables, making it an invaluable tool for developers looking to maintain consistency in their development environments.
 
 ### Table of Contents
 * Introduction
+* Key Features
 * Prerequisites
 * Creating Migrations
 * Common Issues & Troubleshooting
 * Contributing
   
 ### Introduction
-Flyway is a database migration tool that allows you to apply version control to your database. In this repository, we show you how to configure Flyway in a Spring Boot project, create and apply migrations, and maintain a consistent database schema.
+This AMRIT-DB spring boot service provides a robust solution for managing and cloning empty database schema tables, making it an invaluable tool for developers looking to maintain consistency in their development environments.
+This service utilizes Flyway, a powerfull database migration tool, within a spring boot application to clone an empty database tables. It is designed to help developersquickly setup their local environment by ensuring that the databse structure is consistent and up-to-date with the application requirement.
 
 ### Prerequisites
 Before you start, ensure you have the following installed:
