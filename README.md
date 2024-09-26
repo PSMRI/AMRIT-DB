@@ -15,7 +15,7 @@ This AMRIT-DB spring boot service provides a robust solution for managing and cl
 ### Introduction
 This AMRIT-DB spring boot service provides a robust solution for managing and cloning empty database schema tables, making it an invaluable tool for developers looking to maintain consistency in their development environments.
 
-This service utilizes Flyway, a powerfull database migration tool, within a spring boot application to clone an empty database tables. It is designed to help developersquickly setup their local environment by ensuring that the databse structure is consistent and up-to-date with the application requirement.
+This service utilizes Flyway, a powerfull database migration tool, within a spring boot application to clone an empty database tables. It is designed to help developers quickly setup their local environment by ensuring that the databse structure is consistent and up-to-date with the application requirement.
 
 ### Key Features
 
