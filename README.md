@@ -25,8 +25,11 @@ This service utilizes Flyway, a powerfull database migration tool, within a spri
 Below are the mandatory schemas you should create.
 
  *db_iemr
+ 
  *db_reporting
+ 
  *db_identity
+ 
  *db_1097_identity
 
 ### Prerequisites
