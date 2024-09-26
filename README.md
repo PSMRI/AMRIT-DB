@@ -19,13 +19,15 @@ This service utilizes Flyway, a powerfull database migration tool, within a spri
 
 ### Key Features
 
-* Schema Management: Flyway automates the process of creating and managing the database tables allowing for easy version control of database changes.
-* Migration Scripts : The service can include SQL migration scripts that define the structure of the database tables, constraints, and relationships, ensuring that schema is created exactly as needed.
+**Schema Management**: Flyway automates the process of creating and managing the database tables allowing for easy version control of database changes.
+**Migration Scripts** : The service can include SQL migration scripts that define the structure of the database tables, constraints, and relationships, ensuring that schema is created exactly as needed.
+
 Below are the mandatory schemas you should create.
- db_iemr,
- db_reporting,
- db_identity,
- db_1097_identity
+
+ *db_iemr
+ *db_reporting
+ *db_identity
+ *db_1097_identity
 
 ### Prerequisites
 Before you start, ensure you have the following installed:
