@@ -3,7 +3,7 @@
 -- Host: 192.168.5.5    Database: db_iemr
 -- ------------------------------------------------------
 -- Server version	5.7.19-log
-
+ 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -19,7 +19,7 @@
 -- Table structure for table `amrit_bkptable`
 --
 
-use db_iemr_flyway;
+use db_iemr;
 DROP TABLE IF EXISTS `amrit_bkptable`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
