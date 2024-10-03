@@ -19,13 +19,12 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see https://www.gnu.org/licenses/.
 */
-package com.piramalswasthya.db;
+package com.db.piramalswasthya;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
-@SpringBootApplication(exclude = {HibernateJpaAutoConfiguration.class,JpaRepositoriesAutoConfiguration.class})
+
+@SpringBootApplication
 public class AmritDbApplication {
 
 	public static void main(String[] args) {
