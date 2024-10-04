@@ -36,4 +36,5 @@ class AmritDbApplicationTests {
 	public void test() {
 		amritDbApplication.toString();
 	}
+	
 }

@@ -49,5 +49,4 @@ public class DatasourceConfig {
 		return DataSourceBuilder.create().url(db1097identityurl)
 				.build();
 	}
-	
 }

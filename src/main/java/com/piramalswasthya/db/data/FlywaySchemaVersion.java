@@ -39,3 +39,4 @@ public class FlywaySchemaVersion {
     private int executionTime;
     private boolean success;
 }
+

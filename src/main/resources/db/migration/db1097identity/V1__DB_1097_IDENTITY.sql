@@ -1,5 +1,5 @@
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
---
+
 -- Host: 192.168.35.151    Database: db_1097_identity
 -- ------------------------------------------------------
 -- Server version	5.7.31-log
