@@ -19,7 +19,7 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see https://www.gnu.org/licenses/.
 */
-package com.piramalswasthya.db.controller;
+package com.db.piramalswasthya.controller;
 
 import java.util.List;
 
@@ -32,9 +32,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.db.piramalswasthya.data.FlywaySchemaVersion;
+import com.db.piramalswasthya.service.VersionService;
 import com.google.gson.Gson;
-import com.piramalswasthya.db.data.FlywaySchemaVersion;
-import com.piramalswasthya.db.service.VersionService;
 
 @RestController
 @RequestMapping("/db/migration")

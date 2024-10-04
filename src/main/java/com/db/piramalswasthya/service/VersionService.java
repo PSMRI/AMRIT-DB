@@ -11,7 +11,7 @@ This program is distributed in the hope that it will be useful,but WITHOUT ANY W
 
 You should have received a copy of the GNU General Public License along with this program.If not,see https://www.gnu.org/licenses/.
 */
-package com.piramalswasthya.db.service;
+package com.db.piramalswasthya.service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +23,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.piramalswasthya.db.data.FlywaySchemaVersion;
+import com.db.piramalswasthya.data.FlywaySchemaVersion;
 
 @Repository
 public class VersionService {

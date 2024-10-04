@@ -19,16 +19,24 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see https://www.gnu.org/licenses/.
 */
-package com.piramalswasthya.db;
+package com.db.piramalswasthya.data;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
-@SpringBootApplication(exclude = {HibernateJpaAutoConfiguration.class,JpaRepositoriesAutoConfiguration.class})
-public class AmritDbApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(AmritDbApplication.class, args);
-	}
+import java.sql.Timestamp;
+
+import lombok.Data;
+
+@Data
+public class FlywaySchemaVersion {
+	private int installedRank;
+	private String version;
+    private String description;
+    private String type;
+    private String script;
+    private Integer checksum;
+    private String installedBy;
+    private Timestamp installedOn;
+    private int executionTime;
+    private boolean success;
 }
+

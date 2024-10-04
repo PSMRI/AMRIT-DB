@@ -1,4 +1,4 @@
-package com.piramalswasthya.db.config;
+package com.db.piramalswasthya.config;
 
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Autowired;

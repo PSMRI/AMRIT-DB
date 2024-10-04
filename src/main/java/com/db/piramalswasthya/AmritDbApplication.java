@@ -19,22 +19,16 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see https://www.gnu.org/licenses/.
 */
-package com.piramalswasthya.db;
+package com.db.piramalswasthya;
 
-import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+@SpringBootApplication(exclude = {HibernateJpaAutoConfiguration.class,JpaRepositoriesAutoConfiguration.class})
+public class AmritDbApplication {
 
-import com.piramalswasthya.db.AmritDbApplication;
-
-@SpringBootTest
-class AmritDbApplicationTests {
-	@Mock
-	AmritDbApplication amritDbApplication;
-
-	@Test
-	public void test() {
-		amritDbApplication.toString();
+	public static void main(String[] args) {
+		SpringApplication.run(AmritDbApplication.class, args);
 	}
-	
 }

@@ -1,4 +1,4 @@
-package com.piramalswasthya.db.config;
+package com.db.piramalswasthya.config;
 
 import javax.sql.DataSource;
 

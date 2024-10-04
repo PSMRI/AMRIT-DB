@@ -19,24 +19,22 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see https://www.gnu.org/licenses/.
 */
-package com.piramalswasthya.db.data;
+package com.db.piramalswasthya;
 
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import java.sql.Timestamp;
+import com.db.piramalswasthya.AmritDbApplication;
 
-import lombok.Data;
+@SpringBootTest
+class AmritDbApplicationTests {
+	@Mock
+	AmritDbApplication amritDbApplication;
 
-@Data
-public class FlywaySchemaVersion {
-	private int installedRank;
-	private String version;
-    private String description;
-    private String type;
-    private String script;
-    private Integer checksum;
-    private String installedBy;
-    private Timestamp installedOn;
-    private int executionTime;
-    private boolean success;
+	@Test
+	public void test() {
+		amritDbApplication.toString();
+	}
+	
 }
-
