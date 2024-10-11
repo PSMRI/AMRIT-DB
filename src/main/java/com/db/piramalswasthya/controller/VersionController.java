@@ -29,33 +29,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.db.piramalswasthya.data.FlywaySchemaVersion;
-import com.db.piramalswasthya.service.VersionService;
+import com.db.piramalswasthya .service.VersionService;
 import com.google.gson.Gson;
 
 @RestController
+
 @RequestMapping("/db/migration")
 public class VersionController {
 	private Logger logger = LoggerFactory.getLogger(VersionController.class);
-	@Autowired
+	
 	private VersionService service;
 	
+	@Autowired
+	public void setCommonServiceImpl(VersionService service) {
+		this.service = service;
+	}
+
 	@GetMapping("/version")
-	public String getLatestDBMigrationVersion(@RequestParam("database") String database) throws Exception {
+	public String getLatestDBMigrationVersion() throws Exception {
 		String resp = null;
 		try {
-			if(null!=database) {
-			List<FlywaySchemaVersion> latestVersion = service.getLatestVersion(database);
+			List<FlywaySchemaVersion> latestVersion = service.getLatestVersion();
 			Gson gson = new Gson();
 			if (null != latestVersion && !CollectionUtils.isEmpty(latestVersion)) {
 				resp = gson.toJson(latestVersion);
 			}
-			}
 		} catch (Exception e) {
-			logger.error("Error while getting DB Migration version {}: ", e.getMessage(), e);
 			throw new Exception("Error while getting DB Migration version: " + e.getMessage(), e);
 		}
 		return resp;
