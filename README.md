@@ -40,10 +40,21 @@ Java 17
 Maven 3.6+
 A Relational Database (e.g., MySQL, PostgreSQL)
 ### Creating Migrations
-Flyway migrations are SQL scripts located in the src/main/resources/db/migration directory. Each migration file should be named according to the Flyway convention: V1__Description.sql, V2__Description.sql, etc.
+Flyway migrations are SQL scripts located in the src/main/resources/db/migration directory, which contains four subfolders, each corresponding for four given schemas.
+
+Any additions or modifications related to a schema should be placed in the appropriate folder.
+
+For example, if there are changes to the db_iemr schema, the relevant script should be added to the dbiemr folder.
+
+Each migration file must adhere to the Flyway naming convention, which follows an incremental format: for example, V1__Description.sql, V2__ColumnAddition.sql.
+
+The next added migration file should be named V3__<related_change_description>.sql.
+ 
 ### Run Migrations
 * Give Database credentials in application.properties
 * Flyway automatically run migrations at application startup if you have configured it properly.
+*   cd /path/to/your/project
+    mvn spring-boot:run
 ### Common Issues & Troubleshooting
 * Migration Failure : Check your SQL syntax and review the flyway_schema_history table for issues.
 * Database Connection Issues: Verify the connection details in application.properties.
