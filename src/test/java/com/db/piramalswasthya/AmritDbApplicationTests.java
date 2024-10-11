@@ -19,6 +19,7 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see https://www.gnu.org/licenses/.
 */
+
 package com.db.piramalswasthya;
 
 import org.junit.jupiter.api.Test;
@@ -36,5 +37,5 @@ class AmritDbApplicationTests {
 	public void test() {
 		amritDbApplication.toString();
 	}
-	
+
 }

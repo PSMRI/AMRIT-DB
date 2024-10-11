@@ -19,7 +19,7 @@
 -- Table structure for table `amrit_bkptable`
 --
 
-use db_iemr;
+use db_iemr_flyway;
 DROP TABLE IF EXISTS `amrit_bkptable`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
