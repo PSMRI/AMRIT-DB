@@ -29,7 +29,7 @@ public class FlywayConfig {
 
 	@Bean
 	public Flyway flywaydbreporting(@Qualifier("datasourcedbreporting") DataSource dbreporting) {
-		return Flyway.configure().dataSource(dbreporting).locations("classpath:db/migration/dbreporing").load();
+		return Flyway.configure().dataSource(dbreporting).locations("classpath:db/migration/dbreporting").load();
 	}
 
 	@Bean
