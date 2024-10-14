@@ -22,8 +22,6 @@
 
 package com.db.piramalswasthya;
 
-import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.db.piramalswasthya.AmritDbApplication;
