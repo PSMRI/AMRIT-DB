@@ -13,9 +13,12 @@ This AMRIT-DB spring boot service provides a robust solution for managing and cl
 * Contributing
   
 ### Introduction
+
 This AMRIT-DB spring boot service provides a robust solution for managing and cloning empty database schema tables, making it an invaluable tool for developers looking to maintain consistency in their development environments.
 
-This service utilizes Flyway, a powerfull database migration tool, within a spring boot application to clone an empty database tables. It is designed to help developers quickly setup their local environment by ensuring that the databse structure is consistent and up-to-date with the application requirement.
+This service utilizes Flyway, a powerful database migration tool, within a Spring Boot application to clone an empty database tables. 
+It is designed to help developers quickly setup their local environment by ensuring that the database structure is consistent and up-to-date with the application requirement.
+
 
 ### Key Features
 
@@ -38,8 +41,10 @@ Before you start, ensure you have the following installed:
 
 Java 17
 Maven 3.6+
-A Relational Database (e.g., MySQL, PostgreSQL)
+MySQL 8
+
 ### Creating Migrations
+
 Flyway migrations are SQL scripts located in the src/main/resources/db/migration directory, which contains four subfolders, each corresponding for four given schemas.
 
 Any additions or modifications related to a schema should be placed in the appropriate folder.
@@ -51,15 +56,20 @@ Each migration file must adhere to the Flyway naming convention, which follows a
 The next added migration file should be named V3__<related_change_description>.sql.
  
 ### Run Migrations
+
 * Give Database credentials in application.properties
 * Flyway automatically run migrations at application startup if you have configured it properly.
 * To start the application follow below commands
 *   cd /path/to/your/project
-    mvn spring-boot:run
+    mvn spring-boot:run -DENV_VAR=local
+
 ### Common Issues & Troubleshooting
+
 * Migration Failure : Check your SQL syntax and review the flyway_schema_history table for issues.
 * Database Connection Issues: Verify the connection details in application.properties.
+
 ### Contributing
+
 We welcome contributions! Please follow these steps:
 
 Fork the repository.

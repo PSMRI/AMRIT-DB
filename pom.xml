@@ -10,14 +10,17 @@
 	</parent>
 	<groupId>com.db</groupId>
 	<artifactId>Amrit-DB</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.0</version>
 	<packaging>war</packaging>
 	<name>Amrit-DB</name>
-	<description>Flyway project for Spring Boot</description>
+	<description>DB service module for AMRIT to setup DB schema</description>
 	<url/>
 	
 	<properties>
 		<java.version>17</java.version>
+		<environment>${ENV_VAR}</environment>
+		<target-properties>target/classes/application.properties</target-properties>
+		<source-properties>target/classes/common_${environment}.properties</source-properties>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -108,7 +111,77 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.3.1</version>
+				<executions>
+					<execution>
+						<id>filter-resources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>resources</goal>
+						</goals>
+						<configuration>
+							<delimiters>@</delimiters>
+							<useDefaultDelimiters>false</useDefaultDelimiters>
+							<resources>
+								<resource>
+									<directory>src/main/environment</directory>
+									<filtering>true</filtering>
+									<includes>
+										<include>
+											common_${environment}.properties</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<id>merge-properties</id>
+						<configuration>
+							<target>
+								<echo>
+									concatenating properties file
+									${target-properties} and
+									${source-properties}
+								</echo>
+								<concat destfile="${target-properties}"
+										append="yes"
+										force="yes">
+									<fileset file="${source-properties}">
+									</fileset>
+								</concat>
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<id>clean-property-files</id>
+						<configuration>
+							<target>
+								<delete>
+									<file file="${source-properties}" />
+								</delete>
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
-
 </project>
