@@ -53,6 +53,7 @@ The next added migration file should be named V3__<related_change_description>.s
 ### Run Migrations
 * Give Database credentials in application.properties
 * Flyway automatically run migrations at application startup if you have configured it properly.
+* To start the application follow below commands
 *   cd /path/to/your/project
     mvn spring-boot:run
 ### Common Issues & Troubleshooting
