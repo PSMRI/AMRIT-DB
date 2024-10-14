@@ -30,12 +30,5 @@ import com.db.piramalswasthya.AmritDbApplication;
 
 @SpringBootTest
 class AmritDbApplicationTests {
-	@Mock
-	AmritDbApplication amritDbApplication;
-
-	@Test
-	public void test() {
-		amritDbApplication.toString();
-	}
 
 }
