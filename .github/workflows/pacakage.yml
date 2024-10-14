@@ -37,4 +37,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Common-API
-        path: target/commonapi-v1.0.war
+        path: target/Amrit-DB-1.0.0.war
