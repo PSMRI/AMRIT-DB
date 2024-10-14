@@ -1,12 +1,12 @@
 name: CodeQL
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "main","develop" ]
     paths-ignore:
      - target/**
      
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "main","develop" ]
     paths-ignore:
      - target/**
 
