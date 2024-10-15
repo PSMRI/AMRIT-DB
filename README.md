@@ -54,7 +54,25 @@ For example, if there are changes to the db_iemr schema, the relevant script sho
 Each migration file must adhere to the Flyway naming convention, which follows an incremental format: for example, V1__Description.sql, V2__ColumnAddition.sql.
 
 The next added migration file should be named V3__<related_change_description>.sql.
- 
+
+ ### Creating a build configuration in STS / Eclipse
+
+* You can copy `common_example.properties` to `common_local.properties` and edit the file accordingly. The file is under `src/main/environment` folder.
+* In your editor, click on Run -> Run configuration.
+* Double-click on Maven build and give a suitable name for the new configuration.
+* Populate the base directory by clicking on workspace and selecting AMRIT-DB module.
+* Set goals to clean install -DENV_VAR=local(your choice of desired environment) and click on Apply. 
+* It is advisable have a personal environment properties file under src/main/environment filling out all the placeholders to avoid repetitive manual work each time you run locally.
+* Click Run to run the build configuration.
+
+### Creating a run configuration in STS / Eclipse
+
+* In your editor, click on Run -> Run configuration.
+* Double click on Spring Boot App(in STS) / Java Application(in Eclipse) and give a suitable name for the new configuration.
+* Select the project and main class and click on Apply.
+* Click Run to run the configuration. Keep the Redis server open during this run.
+* Once the run is complete, load http://localhost:8080/swagger-ui.html#!/
+  
 ### Run Migrations
 
 * Give Database credentials in application.properties
