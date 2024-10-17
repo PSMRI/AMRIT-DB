@@ -871,7 +871,7 @@ begin
  and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
               and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
  			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
-        and fr2.questionid in(875,874) and fr2.answer is not null
+        and fr2.questionid in(281,284) and fr2.answer is not null
  union 
  select distinct  
  date(fb.CreatedDate) 'Call Date',
@@ -898,7 +898,7 @@ begin
  and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
               and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
  			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
-              and fr2.questionid in(875,874) and fr2.answer is not null)a;
+              and fr2.questionid in(281,284) and fr2.answer is not null)a;
               
                   drop temporary table if exists temp_ECDMiscarriageReport_2;
   create temporary table temp_ECDMiscarriageReport_2
