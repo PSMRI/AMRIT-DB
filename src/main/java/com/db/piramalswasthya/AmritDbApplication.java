@@ -30,5 +30,4 @@ public class AmritDbApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AmritDbApplication.class, args);
 	}
-
 }
