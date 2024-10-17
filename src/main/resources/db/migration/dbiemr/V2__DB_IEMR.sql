@@ -61,6 +61,33 @@ CREATE TABLE if not exists `t_mapsectionprojects` (
    CONSTRAINT `FK_t_Mapsectionprojects_SectionID` FOREIGN KEY (`SectionID`) REFERENCES `m_registrationsections` (`SectionID`)
  ) ;
 
+CREATE TABLE if not exists `t_registrationfields` (
+   `ID` int NOT NULL AUTO_INCREMENT,
+   `SectionID` int DEFAULT NULL,
+   `FieldName` varchar(50) NOT NULL,
+   `FieldTitle` varchar(50) DEFAULT NULL,
+   `FieldTypeID` int DEFAULT NULL,
+   `FieldType` varchar(50) NOT NULL,
+   `AllowMin` int DEFAULT NULL,
+   `AllowMax` int DEFAULT NULL,
+   `Rank` int NOT NULL,
+   `AllowText` varchar(50) DEFAULT NULL,
+   `IsRequired` bit(1) DEFAULT b'0',
+   `Options` varchar(100) DEFAULT NULL,
+   `IsEditable` bit(1) DEFAULT b'1',
+   `Placeholder` varchar(100) DEFAULT NULL,
+   `Deleted` bit(1) DEFAULT b'0',
+   `Processed` char(4) NOT NULL DEFAULT 'N',
+   `CreatedBy` varchar(50) NOT NULL,
+   `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   `ModifiedBy` varchar(50) DEFAULT NULL,
+   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+   `ServiceProviderID` int DEFAULT NULL,
+   PRIMARY KEY (`ID`),
+   KEY `FK_t_registrationsections_SectionID` (`SectionID`),
+   CONSTRAINT `FK_t_registrationsections_SectionID` FOREIGN KEY (`SectionID`) REFERENCES `m_registrationsections` (`SectionID`)
+ ) ;
+
 CREATE TABLE if not exists `t_projectservicelinemapping` (
    `ID` int NOT NULL AUTO_INCREMENT,
    `ServiceLineId` int NOT NULL,
@@ -229,6 +256,46 @@ CREATE
         (`a`.`Rank` IS NOT NULL);
 
 
+USE `db_iemr`;
+CREATE 
+    
+ OR REPLACE VIEW `v_get_prkngplc_dist_zone_state_from_spid` AS
+    SELECT 
+        `m_sp`.`ProviderServiceMapID` AS `ProviderServiceMapID`,
+        `m_sp`.`ServicePointID` AS `ServicePointID`,
+        `m_sp`.`ParkingPlaceID` AS `ParkingPlaceID`,
+        `m_pp`.`ParkingPlaceName` AS `ParkingPlaceName`,
+        `m_ppsdm`.`DistrictID` AS `DistrictID`,
+        `m_d`.`DistrictName` AS `DistrictName`,
+        `m_zdm`.`ZoneID` AS `ZoneID`,
+        `m_z`.`ZoneName` AS `ZoneName`,
+        `m_d`.`StateID` AS `StateID`,
+        `m_s`.`StateName` AS `StateName`,
+        `m_b`.`BlockID` AS `blockid`,
+        `m_b`.`BlockName` AS `blockname`
+    FROM
+        ((((((((`m_servicepoint` `m_sp`
+        JOIN `m_parkingplacesubdistrictmap` `m_ppsdm` ON (((`m_sp`.`ParkingPlaceID` = `m_ppsdm`.`ParkingPlaceID`)
+            AND (`m_sp`.`ProviderServiceMapID` = `m_ppsdm`.`ProviderServiceMapID`)
+            AND ((0 <> `m_ppsdm`.`Deleted`) IS FALSE))))
+        JOIN `m_zonedistrictmap` `m_zdm` ON (((`m_zdm`.`DistrictID` = `m_ppsdm`.`DistrictID`)
+            AND (`m_zdm`.`ProviderServiceMapID` = `m_ppsdm`.`ProviderServiceMapID`)
+            AND ((0 <> `m_zdm`.`Deleted`) IS FALSE))))
+        JOIN `m_parkingplace` `m_pp` ON (((`m_sp`.`ParkingPlaceID` = `m_pp`.`ParkingPlaceID`)
+            AND ((0 <> `m_pp`.`Deleted`) IS FALSE))))
+        JOIN `m_district` `m_d` ON (((`m_d`.`DistrictID` = `m_zdm`.`DistrictID`)
+            AND ((0 <> `m_d`.`Deleted`) IS FALSE))))
+        JOIN `m_districtblock` `m_b` ON ((`m_b`.`DistrictID` = `m_d`.`DistrictID`)))
+        JOIN `m_userservicerolemapping` `usrm` ON ((`usrm`.`Blockid` = `m_b`.`BlockID`)))
+        JOIN `m_zone` `m_z` ON (((`m_zdm`.`ZoneID` = `m_z`.`ZoneID`)
+            AND ((0 <> `m_z`.`Deleted`) IS FALSE))))
+        JOIN `m_state` `m_s` ON (((`m_d`.`StateID` = `m_s`.`StateID`)
+            AND ((0 <> `m_s`.`Deleted`) IS FALSE))))
+    WHERE
+        ((0 <> `m_sp`.`Deleted`) IS FALSE);
+
+
+
 Delimiter $$
 SET @dbname = "db_iemr";
 SET @tablename = "m_providerserviceaddmapping";
@@ -242,7 +309,7 @@ SET @preparedStatement = (select if (
       AND (column_name = @columnname)
     )
     ,'select ''Column exists'';'
-    ,CONCAT("ALTER TABLE ", @tablename, " ADD ", @columnname, "  INT  DEFAULT NULL;")) );
+    ,CONCAT("ALTER TABLE ", @tablename, " ADD ", @columnname, "  varchar(20)  DEFAULT NULL;")) );
 PREPARE stmt1 FROM @preparedStatement;
 EXECUTE stmt1;
 DEALLOCATE PREPARE stmt1 $$
@@ -265,6 +332,26 @@ SET @preparedStatement = (select if (
     )
     ,'select ''Column exists'';'
     ,CONCAT("ALTER TABLE ", @tablename, " ADD ", @columnname, "  VARCHAR(100) NULL DEFAULT NULL;")) );
+PREPARE stmt1 FROM @preparedStatement;
+EXECUTE stmt1;
+DEALLOCATE PREPARE stmt1 $$
+Delimiter ;
+
+
+Delimiter $$
+SET @dbname = "db_iemr";
+SET @tablename = "t_benvisitdetail";
+SET @columnname = "AbdmFacilityID";
+SET @preparedStatement = (select if (
+    exists(
+       SELECT Distinct column_name  FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE
+      (table_name = @tablename)
+      AND (table_schema = @dbname)
+      AND (column_name = @columnname)
+    )
+    ,'select ''Column exists'';'
+    ,CONCAT("ALTER TABLE ", @tablename, " ADD ", @columnname, "  varchar(20)  DEFAULT NULL after CarecontextLinkDate;")) );
 PREPARE stmt1 FROM @preparedStatement;
 EXECUTE stmt1;
 DEALLOCATE PREPARE stmt1 $$
@@ -719,7 +806,6 @@ END$$
 
 DELIMITER ;
 ;
-
 
 
 
