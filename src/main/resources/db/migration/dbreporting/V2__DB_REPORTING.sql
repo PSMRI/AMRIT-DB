@@ -664,7 +664,7 @@ DROP procedure IF EXISTS `db_reporting`.`Pr_ECDBabyDeathReport`;
 
 DELIMITER $$
 USE `db_reporting`$$
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDBabyDeathReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDBabyDeathReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -756,7 +756,7 @@ DROP procedure IF EXISTS `db_reporting`.`Pr_ECDDeliveryStatusReport`;
 
 DELIMITER $$
 USE `db_reporting`$$
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDDeliveryStatusReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDDeliveryStatusReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -841,7 +841,7 @@ DROP procedure IF EXISTS `db_reporting`.`Pr_ECDMiscarriageReport`;
 
 DELIMITER $$
 USE `db_reporting`$$
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDMiscarriageReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDMiscarriageReport`(v_starttime datetime,v_endtime datetime,
  v_Agentid int(11),v_psmid int(11))
 begin
  
@@ -927,7 +927,7 @@ DROP procedure IF EXISTS `db_reporting`.`Pr_ECDStillBirthReport`;
 
 DELIMITER $$
 USE `db_reporting`$$
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDStillBirthReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDStillBirthReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 
