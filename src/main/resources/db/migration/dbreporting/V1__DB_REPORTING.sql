@@ -2808,7 +2808,7 @@ DELIMITER ;;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
 /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
 /*!50003 SET time_zone             = 'SYSTEM' */ ;;
-/*!50106 CREATE*/ /*!50117 DEFINER=`piramaldev`@`%`*/ /*!50106 EVENT `Event_ECDReporting` ON SCHEDULE EVERY 24 HOUR STARTS '2023-12-31 04:01:00' ON COMPLETION PRESERVE ENABLE COMMENT 'Load_ECDReporting' DO begin
+/*!50106 CREATE*/ /*!50117 */ /*!50106 EVENT `Event_ECDReporting` ON SCHEDULE EVERY 24 HOUR STARTS '2023-12-31 04:01:00' ON COMPLETION PRESERVE ENABLE COMMENT 'Load_ECDReporting' DO begin
 CALL db_reporting.Pr_UpdateECDReporting();
 end */ ;;
 /*!50003 SET time_zone             = @saved_time_zone */ ;;
@@ -2828,7 +2828,7 @@ DELIMITER ;;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
 /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
 /*!50003 SET time_zone             = 'SYSTEM' */ ;;
-/*!50106 CREATE*/ /*!50117 DEFINER=`piramaldev`@`%`*/ /*!50106 EVENT `Event_TMSaveWorkList` ON SCHEDULE EVERY 30 MINUTE STARTS '2021-02-23 11:15:10' ON COMPLETION NOT PRESERVE DISABLE DO begin
+/*!50106 CREATE*/ /*!50117 */ /*!50106 EVENT `Event_TMSaveWorkList` ON SCHEDULE EVERY 30 MINUTE STARTS '2021-02-23 11:15:10' ON COMPLETION NOT PRESERVE DISABLE DO begin
 CALL db_iemr.Pr_TMSaveWorkList();
 
 end */ ;;
@@ -2849,7 +2849,7 @@ DELIMITER ;;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
 /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
 /*!50003 SET time_zone             = 'SYSTEM' */ ;;
-/*!50106 CREATE*/ /*!50117 DEFINER=`masteruser`@`%`*/ /*!50106 EVENT `Identity_Commonn` ON SCHEDULE EVERY 24 HOUR STARTS '2019-02-15 00:35:10' ON COMPLETION PRESERVE ENABLE COMMENT 'Load_Beneficiary' DO begin
+/*!50106 CREATE*/ /*!50117 */ /*!50106 EVENT `Identity_Commonn` ON SCHEDULE EVERY 24 HOUR STARTS '2019-02-15 00:35:10' ON COMPLETION PRESERVE ENABLE COMMENT 'Load_Beneficiary' DO begin
 CALL db_reporting.SP_Load_Dim_beneficiary();
 end */ ;;
 /*!50003 SET time_zone             = @saved_time_zone */ ;;
@@ -2869,7 +2869,7 @@ DELIMITER ;;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
 /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
 /*!50003 SET time_zone             = 'SYSTEM' */ ;;
-/*!50106 CREATE*/ /*!50117 DEFINER=`masteruser`@`localhost`*/ /*!50106 EVENT `IEMR_Commonn` ON SCHEDULE EVERY 24 HOUR STARTS '2019-02-15 01:00:10' ON COMPLETION PRESERVE ENABLE COMMENT 'Load_IEMR_Transaction' DO begin
+/*!50106 CREATE*/ /*!50117 */ /*!50106 EVENT `IEMR_Commonn` ON SCHEDULE EVERY 24 HOUR STARTS '2019-02-15 01:00:10' ON COMPLETION PRESERVE ENABLE COMMENT 'Load_IEMR_Transaction' DO begin
 CALL db_reporting.SP_Load_Dim_User();
 CALL db_reporting.SP_Load_Fact_104BenMedHistory();
 CALL db_reporting.SP_Load_Fact_104prescription();
@@ -2914,7 +2914,7 @@ DELIMITER ;;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
 /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
 /*!50003 SET time_zone             = 'SYSTEM' */ ;;
-/*!50106 CREATE*/ /*!50117 DEFINER=`masteruser`@`%`*/ /*!50106 EVENT `InventoryReport` ON SCHEDULE EVERY 24 HOUR STARTS '2019-02-15 01:30:10' ON COMPLETION PRESERVE ENABLE COMMENT 'Load_Inventory' DO begin
+/*!50106 CREATE*/ /*!50117 */ /*!50106 EVENT `InventoryReport` ON SCHEDULE EVERY 24 HOUR STARTS '2019-02-15 01:30:10' ON COMPLETION PRESERVE ENABLE COMMENT 'Load_Inventory' DO begin
 call db_reporting.temp_LoadInventoryReport();
 end */ ;;
 /*!50003 SET time_zone             = @saved_time_zone */ ;;
@@ -2934,7 +2934,7 @@ DELIMITER ;;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
 /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
 /*!50003 SET time_zone             = 'SYSTEM' */ ;;
-/*!50106 CREATE*/ /*!50117 DEFINER=`root`@`localhost`*/ /*!50106 EVENT `TMReport` ON SCHEDULE EVERY 1 DAY STARTS '2019-01-29 02:00:00' ON COMPLETION NOT PRESERVE ENABLE DO call db_reporting.temp_LoadTMReport() */ ;;
+/*!50106 CREATE*/ /*!50117 */ /*!50106 EVENT `TMReport` ON SCHEDULE EVERY 1 DAY STARTS '2019-01-29 02:00:00' ON COMPLETION NOT PRESERVE ENABLE DO call db_reporting.temp_LoadTMReport() */ ;;
 /*!50003 SET time_zone             = @saved_time_zone */ ;;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;;
@@ -2956,7 +2956,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_mmu_adolescent`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_mmu_adolescent`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare totalPatient LONG;
@@ -2994,7 +2994,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_AllDiabetic`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_AllDiabetic`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_AllDiabetic int;
@@ -3133,7 +3133,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_AllDiaHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_AllDiaHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_AllDiaHTN int;
@@ -3258,7 +3258,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_AllDiaTest`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_AllDiaTest`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 Declare v_AllRBS int;
@@ -3307,7 +3307,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_AllHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_AllHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_AllHTN int;
@@ -3449,7 +3449,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_mmu_anc`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_mmu_anc`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 declare totalANC LONG;
 declare newANC LONG;
@@ -3508,7 +3508,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_mmu_below_5`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_mmu_below_5`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 declare totalPatient LONG;
 declare totalBelow5 LONG;
@@ -3555,7 +3555,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_mmu_common`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_mmu_common`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 declare totalPatient LONG; 
 declare newPatient LONG; 
@@ -3592,7 +3592,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_NewDiabetic`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_NewDiabetic`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_NewDiabetic int;
@@ -3694,7 +3694,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_NewDiaDetected`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_NewDiaDetected`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_NewDiaDetected int;
@@ -3778,7 +3778,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_NewHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_NewHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_NewHTN int;
@@ -3880,7 +3880,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_OldDiabetic`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_OldDiabetic`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_OldDiabetic int;
@@ -3912,7 +3912,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_OldDiaFollowUp`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_OldDiaFollowUp`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_OldDiaFollowUp int;
@@ -3946,7 +3946,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_OldDiaTest`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_OldDiaTest`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 
@@ -4011,7 +4011,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_OldHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_OldHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_OldHTN int;
@@ -4043,7 +4043,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_OldHTNFollowUp`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_OldHTNFollowUp`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_OldHTNFollowUp int;
@@ -4077,7 +4077,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_mmu_pnc`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_mmu_pnc`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 declare totalPNC LONG;
 declare newPNC LONG;
@@ -4116,7 +4116,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `getANCRecIFATab`(fromDate DATETIME, toDate DATETIME, PSMID int)
+CREATE  PROCEDURE `getANCRecIFATab`(fromDate DATETIME, toDate DATETIME, PSMID int)
 BEGIN
 SELECT COUNT(DISTINCT PI.BeneficiaryRegID)
 FROM t_benvisitdetail BVD
@@ -4141,7 +4141,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `getANCRefCount`(fromDate DATETIME, toDate DATETIME, PSMID int)
+CREATE  PROCEDURE `getANCRefCount`(fromDate DATETIME, toDate DATETIME, PSMID int)
 BEGIN
 SELECT count(distinct BRD.BeneficiaryRegID) FROM t_benvisitdetail BVD
 INNER JOIN t_benreferdetails BRD ON BVD.BeneficiaryRegID = BRD.BeneficiaryRegID AND BVD.VisitCode = BRD.VisitCode
@@ -4162,7 +4162,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`` PROCEDURE `PopulateDateDimension`(BeginDate DATETIME, EndDate DATETIME)
+CREATE  PROCEDURE `PopulateDateDimension`(BeginDate DATETIME, EndDate DATETIME)
 BEGIN
 
  # =============================================
@@ -4289,7 +4289,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104BeneficiaryReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
+CREATE  PROCEDURE `Pr_104BeneficiaryReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 select b.beneficiaryID "Beneficiary ID", b.title "Title", 
  b.firstName "First Name",b.MiddleName "Middle Name", b.lastName "Last Name",
@@ -4342,7 +4342,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104BoodRequest`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104BoodRequest`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct
@@ -4403,7 +4403,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_104BoodRequestDetails_Componentwise`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104BoodRequestDetails_Componentwise`(v_starttime datetime,v_endtime datetime,
 v_districtid int(11),v_talukid int(11),v_villageid int(11),v_psmid int(11))
 begin
 
@@ -4470,7 +4470,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_104BoodRequestDetails_Componentwise_Pivot`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104BoodRequestDetails_Componentwise_Pivot`(v_starttime datetime,v_endtime datetime,
 v_districtid int(11),v_talukid int(11),v_villageid int(11),v_psmid int(11))
 begin
 
@@ -4579,7 +4579,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_104BoodRequestDetails_Groupwise`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104BoodRequestDetails_Groupwise`(v_starttime datetime,v_endtime datetime,
 v_districtid int(11),v_talukid int(11),v_villageid int(11),v_psmid int(11))
 begin
 
@@ -4618,7 +4618,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_104BoodRequestDetails_Groupwise_Pivot`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104BoodRequestDetails_Groupwise_Pivot`(v_starttime datetime,v_endtime datetime,
 v_districtid int(11),v_talukid int(11),v_villageid int(11),v_psmid int(11))
 begin
 
@@ -4730,7 +4730,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_104CallQuality_AgentWise`(v_starttime datetime,
+CREATE  PROCEDURE `Pr_104CallQuality_AgentWise`(v_starttime datetime,
 v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
@@ -4764,7 +4764,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_104CallQuality_CallTypeWise`(v_starttime datetime,
+CREATE  PROCEDURE `Pr_104CallQuality_CallTypeWise`(v_starttime datetime,
 v_endtime datetime,v_calltypeid int(11),
 v_psmid int(11))
 begin
@@ -4791,7 +4791,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_104CallQuality_DateWise`(v_starttime datetime,
+CREATE  PROCEDURE `Pr_104CallQuality_DateWise`(v_starttime datetime,
 v_endtime datetime,
 v_psmid int(11))
 begin
@@ -4818,7 +4818,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_104CallQuality_LocationWise`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104CallQuality_LocationWise`(v_starttime datetime,v_endtime datetime,
 v_locationid int(11),v_psmid int(11))
 begin
  select md.locationname "Center",count(1) "Count Of Calls"  from fact_bencall fb 
@@ -4846,7 +4846,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_104CallQuality_RoleWise`(v_starttime datetime,
+CREATE  PROCEDURE `Pr_104CallQuality_RoleWise`(v_starttime datetime,
 v_endtime datetime,
 v_roleid int(11),v_psmid int(11))
 begin
@@ -4878,7 +4878,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_104CallQuality_SkillsetWise`(v_starttime datetime,
+CREATE  PROCEDURE `Pr_104CallQuality_SkillsetWise`(v_starttime datetime,
 v_endtime datetime,
 v_roleid int(11),v_psmid int(11))
 begin
@@ -4910,7 +4910,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104CallSummaryReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104CallSummaryReport`(v_starttime datetime,v_endtime datetime,
 v_rolename varchar(100),v_calltypeid int(11),
 v_Agentid int(11),v_psmid int(11))
 begin
@@ -4947,7 +4947,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104CODetailGCategoryReport`(v_starttime datetime,v_endtime datetime,v_psmid int(11))
+CREATE  PROCEDURE `Pr_104CODetailGCategoryReport`(v_starttime datetime,v_endtime datetime,v_psmid int(11))
 begin
 select CategoryName "Category",count(1) Count from fact_104benmedhistory
 where CategoryName is not null
@@ -4973,7 +4973,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104CODetailGuidelinesReport`(v_starttime datetime,v_endtime datetime,v_psmid int(11))
+CREATE  PROCEDURE `Pr_104CODetailGuidelinesReport`(v_starttime datetime,v_endtime datetime,v_psmid int(11))
 begin
 select DiseaseSummary "Guidelines",count(1) Count from fact_104benmedhistory
 where DiseaseSummary is not null
@@ -4999,7 +4999,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104COReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
+CREATE  PROCEDURE `Pr_104COReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
 select distinct b.beneficiaryID "Beneficiary ID",
@@ -5067,7 +5067,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104DirectoryServiceReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104DirectoryServiceReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -5113,7 +5113,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104DSusedValidCallAtHAO`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104DSusedValidCallAtHAO`(v_starttime datetime,v_endtime datetime,
 v_callTypeName varchar(100),v_receivedRoleName varchar(100),
 v_Agentid int(11),v_psmid int(11))
 begin
@@ -5156,7 +5156,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104Epidemicoutbreak`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104Epidemicoutbreak`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -5198,7 +5198,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104FoodsafetyComplaint`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104FoodsafetyComplaint`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -5243,7 +5243,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104GrievanceDetailsReport`(v_starttime datetime,v_endtime datetime,v_feedbackNatureID int(11),
+CREATE  PROCEDURE `Pr_104GrievanceDetailsReport`(v_starttime datetime,v_endtime datetime,v_feedbackNatureID int(11),
 v_feedbacktypeid int(11),
 v_feedbacktypename varchar(100),v_psmid int(11))
 begin
@@ -5271,7 +5271,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104GrievanceReport`(v_starttime datetime,v_endtime datetime,v_feedbackTypeID int(11),v_Agentid int(11),v_psmid int(11))
+CREATE  PROCEDURE `Pr_104GrievanceReport`(v_starttime datetime,v_endtime datetime,v_feedbackTypeID int(11),v_Agentid int(11),v_psmid int(11))
 begin
 
 	select b.beneficiaryID, t.feedbackAgainst, t.feedbackID, t.feedbackNatureName, 
@@ -5306,7 +5306,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104HAHTDisconnectedCalls`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104HAHTDisconnectedCalls`(v_starttime datetime,v_endtime datetime,
 v_callTypeName varchar(100),v_receivedRoleName varchar(100),
 v_Agentid int(11),v_psmid int(11))
 begin
@@ -5349,7 +5349,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104HAHTvalidcallsclosedatHAO`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104HAHTvalidcallsclosedatHAO`(v_starttime datetime,v_endtime datetime,
 v_callTypeName varchar(100),v_receivedRoleName varchar(100),
 v_Agentid int(11),v_psmid int(11))
 begin
@@ -5391,7 +5391,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_104HAOReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
+CREATE  PROCEDURE `Pr_104HAOReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 #SNo	Action By HAO	Action By P D	Allergies	Selected Diagnosis	Selected Diagnosis ID	Added Advice	Disease Summary ID	Prescription ID	Request ID	Ben History ID	First Name	Last Name	Patient Name	Is Self	Date Of birth	Patient Age	Gender	Health Care Worker	Phone Number	District	Sub District	Village	Ben Call ID	Call Type	Call Sub Type	Call Received User ID	Call End User ID	Symptom ID	Action By C O	Action By M O	Date	Beneficiary ID	Agent ID	Agent Name	Have You Travelled In Last14 Days	Travel Type	Symptom	Covid19 Contact History	Did You Seek Medical Consultation	Suspected Covid19	Recommendation	
 
@@ -5477,7 +5477,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104HealthSchemes`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104HealthSchemes`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -5516,7 +5516,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104LAHTAlgorithmCalls`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104LAHTAlgorithmCalls`(v_starttime datetime,v_endtime datetime,
 v_callTypeName varchar(100),v_receivedRoleName varchar(100),
 v_Agentid int(11),v_psmid int(11))
 begin
@@ -5551,7 +5551,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104LAHTTransferCallsMO`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104LAHTTransferCallsMO`(v_starttime datetime,v_endtime datetime,
 v_callTypeName varchar(100),v_receivedRoleName varchar(100),
 v_Agentid int(11),v_psmid int(11))
 begin
@@ -5592,7 +5592,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104MODetailsReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104MODetailsReport`(v_starttime datetime,v_endtime datetime,
 v_districtid int(11),v_SubDistrictId int(11),v_villageid int(11),
 v_roleid int(11),v_locationid int(11),v_psmid int(11))
 begin
@@ -5627,7 +5627,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104MOReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
+CREATE  PROCEDURE `Pr_104MOReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
 select 
@@ -5712,7 +5712,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104OrganDonation`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104OrganDonation`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -5756,7 +5756,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104OtherAdviceCalls`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104OtherAdviceCalls`(v_starttime datetime,v_endtime datetime,
 v_callTypeName varchar(100),v_receivedRoleName varchar(100),
 v_Agentid int(11),v_psmid int(11))
 begin
@@ -5789,7 +5789,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104PrescriptionReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
+CREATE  PROCEDURE `Pr_104PrescriptionReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
  select b.beneficiaryID, t.diagnosisProvided,t.drugForm,t.drugGroupName, t.drugName,
 t.drugRoute,t.frequency,t.noOfDays,t.dosage,  t.timeToConsume, t.prescriptionID, t.remarks, 
@@ -5820,7 +5820,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104psychiatrist`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104psychiatrist`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -5867,7 +5867,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104QAReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104QAReport`(v_starttime datetime,v_endtime datetime,
 v_receivedRoleName varchar(100),
 v_Agentid int(11),v_psmid int(11))
 begin
@@ -5913,7 +5913,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104RandomPickup`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104RandomPickup`(v_starttime datetime,v_endtime datetime,
 v_callTypeName varchar(100),v_receivedRoleName varchar(100),
 v_Agentid int(11),v_psmid int(11))
 begin
@@ -5951,7 +5951,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104SurveyorReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104SurveyorReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -5988,7 +5988,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104UnblockUserReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_104UnblockUserReport`(v_starttime datetime,v_endtime datetime,
 v_psmid int(11))
 begin
 select phoneNo "Phone Number",createddate "Entry Date" from db_reporting.fact_phoneblock phoneBlock
@@ -6011,7 +6011,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_1097AgegroupDistribution`(
+CREATE  PROCEDURE `Pr_1097AgegroupDistribution`(
 v_starttime datetime,
 v_endtime datetime,
 v_statename varchar(100),
@@ -6133,7 +6133,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_1097calltypeReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_1097calltypeReport`(v_starttime datetime,v_endtime datetime,
  v_statename varchar(100),v_districtname varchar(100),
  v_CallType varchar(100),v_Callsubtype varchar(100),
  v_language varchar(100),
@@ -6202,7 +6202,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_1097GenderDistribution`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_1097GenderDistribution`(v_starttime datetime,v_endtime datetime,
  v_statename varchar(100),v_districtname varchar(100),v_Gender varchar(100),v_psmrid int(11))
 begin
  declare v_totalcount int(11) default 0;
@@ -6308,7 +6308,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_1097LanguageDistribution`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_1097LanguageDistribution`(v_starttime datetime,v_endtime datetime,
  v_statename varchar(100),v_districtname varchar(100),v_language varchar(100),v_psmrid int(11))
 begin
  declare v_totalcount int(11) default 0;
@@ -6413,7 +6413,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_1097Sexualorientation`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_1097Sexualorientation`(v_starttime datetime,v_endtime datetime,
  v_statename varchar(100),v_districtname varchar(100),v_SexualOrientationType varchar(100),v_psmrid int(11))
 begin
  declare v_totalcount int(11) default 0;
@@ -6517,7 +6517,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_DistrictwisecallvolumeReport`(v_starttime datetime,v_endtime datetime,v_psmid int(11), v_districtid int(11))
+CREATE  PROCEDURE `Pr_DistrictwisecallvolumeReport`(v_starttime datetime,v_endtime datetime,v_psmid int(11), v_districtid int(11))
 begin
 
 select db.PermDistrictId,db.PermDistrict,fb.CallTypeID,fb.callsubtypename,db.Gender,count(1) callcount  
@@ -6547,7 +6547,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_DistrictwisecallvolumeReport_pivot`(v_starttime datetime,v_endtime datetime,v_psmid int(11), v_districtid int(11))
+CREATE  PROCEDURE `Pr_DistrictwisecallvolumeReport_pivot`(v_starttime datetime,v_endtime datetime,v_psmid int(11), v_districtid int(11))
 begin
 
 Declare LCL_SQL_STATEMENT TEXT; 
@@ -6655,7 +6655,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDAashaHomeVisitGapReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDAashaHomeVisitGapReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -6719,7 +6719,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDAbortionReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDAbortionReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -6782,7 +6782,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDAbortionReport_Correction`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDAbortionReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -6845,7 +6845,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDAbortionReport_Datacheck`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDAbortionReport_Datacheck`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -6934,7 +6934,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDAbsenceInVHSNDReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDAbsenceInVHSNDReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -6999,7 +6999,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDAbsenceInVHSNDReport_correction`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDAbsenceInVHSNDReport_correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -7063,7 +7063,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDBabyDeathReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDBabyDeathReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -7130,7 +7130,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDBabyDeathReport_Correction`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDBabyDeathReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -7197,7 +7197,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDBabyDeathReport_Datacheck`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDBabyDeathReport_Datacheck`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -7290,7 +7290,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDBeneficiarywisefollowupdetails`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
+CREATE  PROCEDURE `Pr_ECDBeneficiarywisefollowupdetails`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 /*select `RCHNO`,`Phone No`,`Beneficiary Name`,`District`,`Block`,LMP,edd,
 `ECD-1`,`ECD-2`,`ECD-3`,`ECD-4`,`ECD-5`,`ECD-6`,`ECD-7`,`ECD-8`,`ECD-9`,`ECD-10`,`ECD-11`,
@@ -7437,7 +7437,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDBeneficiarywisefollowupdetails_bkp_09112023`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
+CREATE  PROCEDURE `Pr_ECDBeneficiarywisefollowupdetails_bkp_09112023`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 /*select `RCHNO`,`Phone No`,`Beneficiary Name`,`District`,`Block`,LMP,edd,
 `ECD-1`,`ECD-2`,`ECD-3`,`ECD-4`,`ECD-5`,`ECD-6`,`ECD-7`,`ECD-8`,`ECD-9`,`ECD-10`,`ECD-11`,
@@ -7584,7 +7584,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDBirthDefectReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDBirthDefectReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -7652,7 +7652,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDBirthDefectReport_Correction`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDBirthDefectReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -7720,7 +7720,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDCalciumIFATabNonadherenceReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDCalciumIFATabNonadherenceReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -7784,7 +7784,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDCallDetailsReport`(
+CREATE  PROCEDURE `Pr_ECDCallDetailsReport`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -7888,7 +7888,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDCallDetailsReport_16042024`(
+CREATE  PROCEDURE `Pr_ECDCallDetailsReport_16042024`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -8000,7 +8000,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDCallDetailsReport_bkp_03052024`(
+CREATE  PROCEDURE `Pr_ECDCallDetailsReport_bkp_03052024`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -8124,7 +8124,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDCallDetailsReport_bkp_09112023`(
+CREATE  PROCEDURE `Pr_ECDCallDetailsReport_bkp_09112023`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -8218,7 +8218,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDCallDetailsReport_Correction`(
+CREATE  PROCEDURE `Pr_ECDCallDetailsReport_Correction`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -8328,7 +8328,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDCallSummaryReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11),
+CREATE  PROCEDURE `Pr_ECDCallSummaryReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11),
 v_role varchar(50))
 begin
 
@@ -8453,7 +8453,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDCallSummaryReport_bkp_06112023`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11),
+CREATE  PROCEDURE `Pr_ECDCallSummaryReport_bkp_06112023`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11),
 v_role varchar(50))
 begin
 
@@ -8578,7 +8578,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDCallUniqueDetailsReport`(
+CREATE  PROCEDURE `Pr_ECDCallUniqueDetailsReport`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -8702,7 +8702,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDCallUniqueDetailsReport_03052024`(
+CREATE  PROCEDURE `Pr_ECDCallUniqueDetailsReport_03052024`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -8867,7 +8867,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDCallUniqueDetailsReport_bkp_09052024`(
+CREATE  PROCEDURE `Pr_ECDCallUniqueDetailsReport_bkp_09052024`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -9032,7 +9032,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDCallUniqueDetailsReport_bkp_09112023`(
+CREATE  PROCEDURE `Pr_ECDCallUniqueDetailsReport_bkp_09112023`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -9197,7 +9197,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDCumulativeDistrictReport`(
+CREATE  PROCEDURE `Pr_ECDCumulativeDistrictReport`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11),v_role varchar(50))
 begin
 
@@ -9323,7 +9323,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDCumulativeDistrictReport_09112023`(
+CREATE  PROCEDURE `Pr_ECDCumulativeDistrictReport_09112023`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11),v_role varchar(50))
 begin
 
@@ -9449,7 +9449,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDCumulativeDistrictReport_bkp_09112023`(
+CREATE  PROCEDURE `Pr_ECDCumulativeDistrictReport_bkp_09112023`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11),v_role varchar(50))
 begin
 
@@ -9575,7 +9575,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDDeliveryStatusReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDDeliveryStatusReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -9637,7 +9637,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDDeliveryStatusReport_Datacheck`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDDeliveryStatusReport_Datacheck`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -9723,7 +9723,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDDevelopmentalDelayReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDDevelopmentalDelayReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -9788,7 +9788,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDHRPWCasesIdentifiedReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDHRPWCasesIdentifiedReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -9856,7 +9856,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDHRPWCasesIdentifiedReport_Correction`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDHRPWCasesIdentifiedReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -9924,7 +9924,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDInfantsHighRiskReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDInfantsHighRiskReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -10044,7 +10044,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDInfantsHighRiskReport_Correction`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDInfantsHighRiskReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -10164,7 +10164,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDJSYRelatedComplaintsReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDJSYRelatedComplaintsReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -10226,7 +10226,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDJSYRelatedComplaintsReport_Correction`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDJSYRelatedComplaintsReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -10288,7 +10288,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDMaternalDeathReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDMaternalDeathReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -10355,7 +10355,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDMaternalDeathReport_Correction`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDMaternalDeathReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -10422,7 +10422,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDMiscarriageReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDMiscarriageReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -10487,7 +10487,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDMiscarriageReport_Correction`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDMiscarriageReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -10552,7 +10552,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDMiscarriageReport_Datacheck`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDMiscarriageReport_Datacheck`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -10640,7 +10640,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDNCDIdentifiedReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDNCDIdentifiedReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -10704,7 +10704,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDNotConnectedPhonelistDiffformatReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDNotConnectedPhonelistDiffformatReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -10782,7 +10782,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDNotConnectedPhonelistDiffformatReport_16042024`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDNotConnectedPhonelistDiffformatReport_16042024`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -10860,7 +10860,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDNotConnectedPhonelistDiffformatReport_23012024`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDNotConnectedPhonelistDiffformatReport_23012024`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -10940,7 +10940,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDNotConnectedPhonelistDiffformatReport_Correction`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDNotConnectedPhonelistDiffformatReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -11018,7 +11018,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDStillBirthReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDStillBirthReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -11085,7 +11085,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDStillBirthReport_Correction`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDStillBirthReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -11152,7 +11152,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDStillBirthReport_datacheck`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDStillBirthReport_datacheck`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -11252,7 +11252,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDVaccineDropOutIdentifiedReport`(v_starttime datetime,
+CREATE  PROCEDURE `Pr_ECDVaccineDropOutIdentifiedReport`(v_starttime datetime,
 v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
@@ -11318,7 +11318,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDVaccineDropOutIdentifiedReport_Correction`(v_starttime datetime,
+CREATE  PROCEDURE `Pr_ECDVaccineDropOutIdentifiedReport_Correction`(v_starttime datetime,
 v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
@@ -11384,7 +11384,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDVaccineLeftOutIdentifiedReport`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDVaccineLeftOutIdentifiedReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -11449,7 +11449,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ECDVaccineLeftOutIdentifiedReport_Correction`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_ECDVaccineLeftOutIdentifiedReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
 select distinct 
@@ -11514,7 +11514,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `PR_FetchChildOutboundWorklist`(v_AllocatedUserID int)
+CREATE  PROCEDURE `PR_FetchChildOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
 /********************************************************************************************************************
 -- SP/Function Name : PR_FetchChildOutboundWorklist
@@ -11594,7 +11594,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `PR_FetchMCTS_1`( IN P_ProviderServiceMapID INT)
+CREATE  PROCEDURE `PR_FetchMCTS_1`( IN P_ProviderServiceMapID INT)
 BEGIN
 
 select 
@@ -11799,7 +11799,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `PR_FetchMCTS_2`(IN P_ProviderServiceMapID INT, IN P_CallDateFrom DATETIME,IN P_CallDateTo DATETIME)
+CREATE  PROCEDURE `PR_FetchMCTS_2`(IN P_ProviderServiceMapID INT, IN P_CallDateFrom DATETIME,IN P_CallDateTo DATETIME)
 BEGIN
 
 select 
@@ -12006,7 +12006,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `PR_FetchMCTS_3`(IN P_ProviderServiceMapID INT)
+CREATE  PROCEDURE `PR_FetchMCTS_3`(IN P_ProviderServiceMapID INT)
 BEGIN
 
 select 
@@ -12181,7 +12181,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `PR_FetchMCTS_4`(IN P_ProviderServiceMapID INT, IN P_CallDateFrom DATETIME,IN P_CallDateTo DATETIME )
+CREATE  PROCEDURE `PR_FetchMCTS_4`(IN P_ProviderServiceMapID INT, IN P_CallDateFrom DATETIME,IN P_CallDateTo DATETIME )
 BEGIN
 
 select 
@@ -12361,7 +12361,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `PR_FetchMotherChildOutboundWorklist`(v_AllocatedUserID int)
+CREATE  PROCEDURE `PR_FetchMotherChildOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
 /********************************************************************************************************************
 
@@ -12451,7 +12451,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `PR_FetchMotherOutboundWorklist`(v_AllocatedUserID int)
+CREATE  PROCEDURE `PR_FetchMotherOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
 /********************************************************************************************************************
 
@@ -12544,7 +12544,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `PR_FetchSpecialist`(specializationid int,parkingplaceid int)
+CREATE  PROCEDURE `PR_FetchSpecialist`(specializationid int,parkingplaceid int)
 BEGIN
 select usr.UserName,usr.UserID,usr.FirstName,usr.MiddleName,
 usr.LastName, usm.SpecializationID,gen.GenderName,til.TitleName,usr.EmailID,usr.ContactNo,
@@ -12577,7 +12577,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `PR_FetchUnregisteredUser`(v_ParkingPlace int)
+CREATE  PROCEDURE `PR_FetchUnregisteredUser`(v_ParkingPlace int)
 BEGIN
 
 select usr.UserID, usr.FirstName, usr.LastName, usr.UserName from m_userparkingplacemap uspm
@@ -12603,7 +12603,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `PR_FetchUserDetails`(v_ServiceProviderID int, v_PSMStateID int, v_ServiceID int, v_RoleID int, v_Name_User varchar(50), v_UserID int)
+CREATE  PROCEDURE `PR_FetchUserDetails`(v_ServiceProviderID int, v_PSMStateID int, v_ServiceID int, v_RoleID int, v_Name_User varchar(50), v_UserID int)
 BEGIN
 
  
@@ -12703,7 +12703,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `PR_Insert104BRCategory`(v_SubServiceID smallint, v_ProviderServiceMapID int)
+CREATE  PROCEDURE `PR_Insert104BRCategory`(v_SubServiceID smallint, v_ProviderServiceMapID int)
 BEGIN
  
 
@@ -12757,7 +12757,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `PR_InsertCallType`(v_ProviderServiceMapID int)
+CREATE  PROCEDURE `PR_InsertCallType`(v_ProviderServiceMapID int)
 BEGIN
  
 
@@ -12830,7 +12830,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `PR_InsertInNotificationMap`(v_RoleID int, v_NotificationID int, v_ProviderServiceMapID int,v_NotificationTypeID int, v_CreatedBy varchar(50), v_ValidFrom datetime, v_WorkingLocationID int)
+CREATE  PROCEDURE `PR_InsertInNotificationMap`(v_RoleID int, v_NotificationID int, v_ProviderServiceMapID int,v_NotificationTypeID int, v_CreatedBy varchar(50), v_ValidFrom datetime, v_WorkingLocationID int)
 BEGIN
 
  
@@ -12947,7 +12947,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `PR_InsertMCTSFieldsStatewise`(v_ProviderServiceMapID int)
+CREATE  PROCEDURE `PR_InsertMCTSFieldsStatewise`(v_ProviderServiceMapID int)
 BEGIN
  
 
@@ -13008,7 +13008,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `PR_InstituteBulkUpload`(
+CREATE  PROCEDURE `PR_InstituteBulkUpload`(
 IN_InstDet longtext,v_Created_by varchar(50),v_userid int(11),v_serviceproviderid int(11)
 )
 BEGIN
@@ -13266,7 +13266,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_MCTSCallAnsweredReport_Pivot`(
+CREATE  PROCEDURE `Pr_MCTSCallAnsweredReport_Pivot`(
  v_starttime datetime,v_endtime datetime,
  v_effectiveFrom datetime,v_outboundCallType varchar(20),
  v_VerifiedData varchar(10),
@@ -13517,7 +13517,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_MCTSCallDetailsReport`(
+CREATE  PROCEDURE `Pr_MCTSCallDetailsReport`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -13589,7 +13589,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_MCTSCallDetailsUniqueReport`(
+CREATE  PROCEDURE `Pr_MCTSCallDetailsUniqueReport`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 -- User ID	Call Time	Mother ID	Status	Remarks
@@ -13621,7 +13621,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_MCTSCallNotAnsweredReport`(
+CREATE  PROCEDURE `Pr_MCTSCallNotAnsweredReport`(
 v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
@@ -13684,7 +13684,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_MCTSComplaintReport_Child`(
+CREATE  PROCEDURE `Pr_MCTSComplaintReport_Child`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -13726,7 +13726,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_MCTSComplaintReport_Mother`(
+CREATE  PROCEDURE `Pr_MCTSComplaintReport_Mother`(
  v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
  
@@ -13768,7 +13768,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_MCTSCongenitalAnomalies`(
+CREATE  PROCEDURE `Pr_MCTSCongenitalAnomalies`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -13801,7 +13801,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_MCTSDailyReport`(
+CREATE  PROCEDURE `Pr_MCTSDailyReport`(
 v_starttime datetime,v_endtime datetime,
 v_isMother varchar(10),
 v_Agentid int(11),v_psmid int(11))
@@ -14077,7 +14077,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_MCTSDataReport_Child`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_MCTSDataReport_Child`(v_starttime datetime,v_endtime datetime,
 -- v_Agentid int(11),
 v_psmid int(11)
 )
@@ -14172,7 +14172,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_MCTSDataReport_Mother`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_MCTSDataReport_Mother`(v_starttime datetime,v_endtime datetime,
 -- v_Agentid int(11),
 v_psmid int(11)
 )
@@ -14265,7 +14265,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_MCTSHighRiskReport`(
+CREATE  PROCEDURE `Pr_MCTSHighRiskReport`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -14336,7 +14336,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_MCTSInvalidRecords_child`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_MCTSInvalidRecords_child`(v_starttime datetime,v_endtime datetime,
  -- v_Agentid int(11),
  v_psmid int(11)
  )
@@ -14404,7 +14404,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_MCTSInvalidrecords_Mother`(v_starttime datetime,v_endtime datetime,
+CREATE  PROCEDURE `Pr_MCTSInvalidrecords_Mother`(v_starttime datetime,v_endtime datetime,
 -- v_Agentid int(11),
 v_psmid int(11)
 )
@@ -14527,7 +14527,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_MCTSNHMReport`(
+CREATE  PROCEDURE `Pr_MCTSNHMReport`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 -- Date	District	Beneficiary ID	Name	Health Block	Phc	Sub Center Name	Facility 
@@ -14586,7 +14586,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `PR_StockDetail`(v_FromDate date, v_ToDate date)
+CREATE  PROCEDURE `PR_StockDetail`(v_FromDate date, v_ToDate date)
 BEGIN
 
 select C.*,
@@ -14667,7 +14667,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `PR_StockSummary`(v_FromDate date, v_ToDate date)
+CREATE  PROCEDURE `PR_StockSummary`(v_FromDate date, v_ToDate date)
 BEGIN
 
 select D.ItemID,
@@ -14766,7 +14766,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_TMSaveWorkList`()
+CREATE  PROCEDURE `Pr_TMSaveWorkList`()
 begin
 insert into i_ben_flow_outreach(
  beneficiary_reg_id, beneficiary_visit_id, beneficiary_visit_code, visit_reason, visit_category,
@@ -14827,7 +14827,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_UpdateECDReporting`()
+CREATE  PROCEDURE `Pr_UpdateECDReporting`()
 begin
 
 
@@ -15825,7 +15825,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `PR_UpdateHRP_HRniReasons`(v_BenCallID bigint(20), v_obcallid bigint(20))
+CREATE  PROCEDURE `PR_UpdateHRP_HRniReasons`(v_BenCallID bigint(20), v_obcallid bigint(20))
 BEGIN
 -- DECLARE v_NotificationState VARCHAR(30)  default 'unread';
  
@@ -15904,7 +15904,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `PR_UpdateNotificationMap`(v_NotificationID int, v_ModifiedBy varchar(50), v_ValidFrom datetime, v_Deleted bit)
+CREATE  PROCEDURE `PR_UpdateNotificationMap`(v_NotificationID int, v_ModifiedBy varchar(50), v_ValidFrom datetime, v_Deleted bit)
 BEGIN
 
  
@@ -15940,7 +15940,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `SP_ANC`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
+CREATE  PROCEDURE `SP_ANC`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
 SELECT 
 AD.ID, 
@@ -15992,7 +15992,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `SP_ANCHighRisk`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
+CREATE  PROCEDURE `SP_ANCHighRisk`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
 SELECT 
 AD.ID, 
@@ -16046,7 +16046,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `SP_BenDisease`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
+CREATE  PROCEDURE `SP_BenDisease`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
 SELECT
 BEND.FactDiaHyperCaseID, 
@@ -16092,7 +16092,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `SP_ChiefComplaintReport`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ParkingPlaceID INT)
+CREATE  PROCEDURE `SP_ChiefComplaintReport`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ParkingPlaceID INT)
 BEGIN
 SELECT 
 ChiefComplaintID,
@@ -16130,7 +16130,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_ChildrenCases`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
+CREATE  PROCEDURE `SP_ChildrenCases`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
 
 select
@@ -16180,7 +16180,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_Consultation`(IN P_CallDateFrom Date, IN P_CallDateTo Date, IN P_ParkingPlaceID INT)
+CREATE  PROCEDURE `SP_Consultation`(IN P_CallDateFrom Date, IN P_CallDateTo Date, IN P_ParkingPlaceID INT)
 BEGIN
 
 SELECT
@@ -16283,7 +16283,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `SP_DiabeticHyper`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
+CREATE  PROCEDURE `SP_DiabeticHyper`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
 SELECT
 DHC.FactDiaHyperCaseID, 
@@ -16330,7 +16330,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `SP_LabTestresult`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
+CREATE  PROCEDURE `SP_LabTestresult`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
 SELECT 
 LTR.ID, 
@@ -16380,7 +16380,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`localhost` PROCEDURE `SP_LabTestresult_SPARSHA`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
+CREATE  PROCEDURE `SP_LabTestresult_SPARSHA`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
 SELECT 
  
@@ -16420,7 +16420,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Dim_1097Beneficiary`()
+CREATE  PROCEDURE `SP_Load_Dim_1097Beneficiary`()
 BEGIN
 /********************************************************************************************************************
 
@@ -16606,7 +16606,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_Load_Dim_beneficiary`()
+CREATE  PROCEDURE `SP_Load_Dim_beneficiary`()
 BEGIN
 
 /********************************************************************************************************************
@@ -17091,7 +17091,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Dim_User`()
+CREATE  PROCEDURE `SP_Load_Dim_User`()
 BEGIN
 
 
@@ -17269,7 +17269,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_104BenCDIResponse`()
+CREATE  PROCEDURE `SP_Load_Fact_104BenCDIResponse`()
 BEGIN
 /********************************************************************************************************************
 
@@ -17357,7 +17357,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `sp_load_fact_104benmedhistory`()
+CREATE  PROCEDURE `sp_load_fact_104benmedhistory`()
 BEGIN
 
 
@@ -17512,7 +17512,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_104prescription`()
+CREATE  PROCEDURE `SP_Load_Fact_104prescription`()
 BEGIN
 
 /********************************************************************************************************************
@@ -17616,7 +17616,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `SP_Load_Fact_1097CallSummary`()
+CREATE  PROCEDURE `SP_Load_Fact_1097CallSummary`()
 BEGIN
 
 
@@ -17728,7 +17728,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_ANCCare`()
+CREATE  PROCEDURE `SP_Load_Fact_ANCCare`()
 BEGIN
 
 /********************************************************************************************************************
@@ -17850,7 +17850,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_ANCDiagnosis`()
+CREATE  PROCEDURE `SP_Load_Fact_ANCDiagnosis`()
 BEGIN
 
 /********************************************************************************************************************
@@ -17974,7 +17974,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `SP_Load_Fact_BenCall`()
+CREATE  PROCEDURE `SP_Load_Fact_BenCall`()
 BEGIN
 
 
@@ -18107,7 +18107,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_BenChiefComplaint`()
+CREATE  PROCEDURE `SP_Load_Fact_BenChiefComplaint`()
 BEGIN
 
 /********************************************************************************************************************
@@ -18239,7 +18239,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_BenDisease`()
+CREATE  PROCEDURE `SP_Load_Fact_BenDisease`()
 BEGIN
 
 /********************************************************************************************************************
@@ -18442,7 +18442,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_BenReferDetails`()
+CREATE  PROCEDURE `SP_Load_Fact_BenReferDetails`()
 BEGIN
 
 /********************************************************************************************************************
@@ -18538,7 +18538,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_BenVisitDetail`()
+CREATE  PROCEDURE `SP_Load_Fact_BenVisitDetail`()
 BEGIN
 
 /********************************************************************************************************************
@@ -18655,7 +18655,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_BloodRequest`()
+CREATE  PROCEDURE `SP_Load_Fact_BloodRequest`()
 BEGIN
 /********************************************************************************************************************
 
@@ -18840,7 +18840,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_ChildCongenitalAnomalies`()
+CREATE  PROCEDURE `SP_Load_Fact_ChildCongenitalAnomalies`()
 BEGIN
 
 /********************************************************************************************************************
@@ -18927,7 +18927,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_ChildInValidRecord`()
+CREATE  PROCEDURE `SP_Load_Fact_ChildInValidRecord`()
 BEGIN
 
 /********************************************************************************************************************
@@ -19228,7 +19228,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `SP_Load_Fact_ChildValidRecord`()
+CREATE  PROCEDURE `SP_Load_Fact_ChildValidRecord`()
 BEGIN
 
 /********************************************************************************************************************
@@ -19536,7 +19536,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_DiaHyperCase`()
+CREATE  PROCEDURE `SP_Load_Fact_DiaHyperCase`()
 BEGIN
 
 /********************************************************************************************************************
@@ -19822,7 +19822,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_DirectoryService`()
+CREATE  PROCEDURE `SP_Load_Fact_DirectoryService`()
 BEGIN
 
  /********************************************************************************************************************
@@ -19929,7 +19929,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_EpidemicOutbreak`()
+CREATE  PROCEDURE `SP_Load_Fact_EpidemicOutbreak`()
 BEGIN
  /********************************************************************************************************************
 
@@ -20026,7 +20026,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_Feedback`()
+CREATE  PROCEDURE `SP_Load_Fact_Feedback`()
 BEGIN
 /********************************************************************************************************************
 
@@ -20182,7 +20182,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_FoodSafetyCopmlaint`()
+CREATE  PROCEDURE `SP_Load_Fact_FoodSafetyCopmlaint`()
 BEGIN
 
 /********************************************************************************************************************
@@ -20321,7 +20321,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `SP_Load_Fact_ItemStockEntry`()
+CREATE  PROCEDURE `SP_Load_Fact_ItemStockEntry`()
 BEGIN
 
 insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_Load_Fact_ItemStockEntry','started',now());
@@ -20433,7 +20433,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `SP_Load_Fact_ItemStockExit`()
+CREATE  PROCEDURE `SP_Load_Fact_ItemStockExit`()
 BEGIN
 
 insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_Load_Fact_ItemStockExit','started',now());
@@ -20545,7 +20545,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_LabTestOrder`()
+CREATE  PROCEDURE `SP_Load_Fact_LabTestOrder`()
 BEGIN
 
 /********************************************************************************************************************
@@ -20653,7 +20653,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_LabTestResult`()
+CREATE  PROCEDURE `SP_Load_Fact_LabTestResult`()
 BEGIN
 
 /********************************************************************************************************************
@@ -20772,7 +20772,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `SP_Load_Fact_MCTSCallResponse`()
+CREATE  PROCEDURE `SP_Load_Fact_MCTSCallResponse`()
 BEGIN
 /********************************************************************************************************************
 
@@ -20857,7 +20857,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `SP_Load_Fact_MctsOutboundCall`()
+CREATE  PROCEDURE `SP_Load_Fact_MctsOutboundCall`()
 BEGIN
 /********************************************************************************************************************
 
@@ -20955,7 +20955,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_MotherInValidRecord`()
+CREATE  PROCEDURE `SP_Load_Fact_MotherInValidRecord`()
 BEGIN
 
 /********************************************************************************************************************
@@ -21304,7 +21304,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `SP_Load_Fact_MotherValidRecord`()
+CREATE  PROCEDURE `SP_Load_Fact_MotherValidRecord`()
 BEGIN
 
 /********************************************************************************************************************
@@ -21966,7 +21966,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_OrganDonation`()
+CREATE  PROCEDURE `SP_Load_Fact_OrganDonation`()
 BEGIN
 
 /********************************************************************************************************************
@@ -22123,7 +22123,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_PatientIssueExit`()
+CREATE  PROCEDURE `SP_Load_Fact_PatientIssueExit`()
 BEGIN
 
 /********************************************************************************************************************
@@ -22267,7 +22267,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_PhoneBlock`()
+CREATE  PROCEDURE `SP_Load_Fact_PhoneBlock`()
 BEGIN
 
 /********************************************************************************************************************
@@ -22347,7 +22347,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`localhost` PROCEDURE `SP_Load_Fact_PhyVitals`()
+CREATE  PROCEDURE `SP_Load_Fact_PhyVitals`()
 BEGIN
   insert into db_reporting.scheduler_status (proc_name, status ,time) 
   values('SP_Load_Fact_PhyVitals','Started',now());
@@ -22450,7 +22450,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_PNCCare`()
+CREATE  PROCEDURE `SP_Load_Fact_PNCCare`()
 BEGIN
 
 /********************************************************************************************************************
@@ -22588,7 +22588,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_PNCDiagnosis`()
+CREATE  PROCEDURE `SP_Load_Fact_PNCDiagnosis`()
 BEGIN
 
 /********************************************************************************************************************
@@ -22689,7 +22689,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_PrescribedDrug`()
+CREATE  PROCEDURE `SP_Load_Fact_PrescribedDrug`()
 BEGIN
 
 /********************************************************************************************************************
@@ -22809,7 +22809,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_Prescription`()
+CREATE  PROCEDURE `SP_Load_Fact_Prescription`()
 BEGIN
 
 /********************************************************************************************************************
@@ -22921,7 +22921,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_SchemeService`()
+CREATE  PROCEDURE `SP_Load_Fact_SchemeService`()
 BEGIN
 
 /********************************************************************************************************************
@@ -23008,7 +23008,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `SP_Load_Fact_TMrequest`()
+CREATE  PROCEDURE `SP_Load_Fact_TMrequest`()
 BEGIN
 
 /********************************************************************************************************************
@@ -23142,7 +23142,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `SP_PatientAttended`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
+CREATE  PROCEDURE `SP_PatientAttended`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
 select
 BVD.BenVisitID,
@@ -23185,7 +23185,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `SP_PatientInfo`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
+CREATE  PROCEDURE `SP_PatientInfo`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
 
 select
@@ -23233,7 +23233,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`localhost` PROCEDURE `SP_PatientVisitInfo_SPARSHA`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
+CREATE  PROCEDURE `SP_PatientVisitInfo_SPARSHA`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
 
 select
@@ -23288,7 +23288,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`localhost` PROCEDURE `SP_PhyVitals_SPARSHA`(IN P_CallDateFrom DATETIME, 
+CREATE  PROCEDURE `SP_PhyVitals_SPARSHA`(IN P_CallDateFrom DATETIME, 
 IN P_CallDateTo DATETIME, 
 IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
@@ -23352,7 +23352,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `SP_PNCHighRisk`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
+CREATE  PROCEDURE `SP_PNCHighRisk`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
 SELECT 
 PNCD.FactPNCDiagnosisID, 
@@ -23404,7 +23404,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`localhost` PROCEDURE `SP_PrescribedDrug_SPARSHA`(IN P_CallDateFrom DATETIME, 
+CREATE  PROCEDURE `SP_PrescribedDrug_SPARSHA`(IN P_CallDateFrom DATETIME, 
 IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
  
@@ -23449,7 +23449,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `sp_test`()
+CREATE  PROCEDURE `sp_test`()
 begin
 
 insert into db_reporting.scheduler_status (proc_name, status ,time) values('eventStarted','started',now());
@@ -23470,7 +23470,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `SP_TestConducted`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
+CREATE  PROCEDURE `SP_TestConducted`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
 
 select
@@ -23516,7 +23516,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `SP_TMDailyReport`(IN P_CallDate DATETIME, IN P_ParkingPlaceID INT)
+CREATE  PROCEDURE `SP_TMDailyReport`(IN P_CallDate DATETIME, IN P_ParkingPlaceID INT)
 BEGIN
 select monthdata.vanid,monthdata.vanname,count,revisitcount,monthcount,revisitmonthcount from (select vanid,vanname,DATE_FORMAT(RequestDate,'%b-%y') datemonth,count(*) monthcount,count(case when VisitNo>1 then 1 end) revisitmonthcount from db_reporting.fact_tmrequest
 where Status in ('A','N','D') and month(requestdate)=month(P_CallDate) and year(requestdate)=year(P_CallDate) and parkingplaceid=P_ParkingPlaceID
@@ -23543,7 +23543,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `SP_TMMonthlyReport`(IN P_CallDateFrom DATETIME, 
+CREATE  PROCEDURE `SP_TMMonthlyReport`(IN P_CallDateFrom DATETIME, 
  IN P_CallDateTo DATETIME, IN P_ParkingPlaceID INT,IN P_VanID INT)
 BEGIN
 
@@ -23642,7 +23642,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `SP_TotalConsultation`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ParkingPlaceID INT)
+CREATE  PROCEDURE `SP_TotalConsultation`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ParkingPlaceID INT)
 BEGIN
 SELECT vanid,vanname,DATE_FORMAT(RequestDate,'%b-%y') date ,count(Fact_TMRequestID) count
 FROM db_reporting.fact_tmrequest
@@ -23669,7 +23669,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `temp_LoadInventoryReport`()
+CREATE  PROCEDURE `temp_LoadInventoryReport`()
 BEGIN
 
 truncate db_reporting.fact_itemstockentry;
@@ -23967,7 +23967,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `temp_LoadTMReport`()
+CREATE  PROCEDURE `temp_LoadTMReport`()
 BEGIN
 
 truncate db_reporting.Fact_BenChiefComplaint;
@@ -24139,7 +24139,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`%` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `assam_104` AS (select cast(`t`.`CreatedDate` as date) AS `Date`,count(distinct `t`.`ReceivedAgentID`) AS `Agent_Loggedin`,count(distinct (case when ((`t`.`ReceivedRoleName` like '%HAO%') and (`t`.`IsOutbound` is false) and (`t`.`CallTypeID` is not null)) then `t`.`BenCallID` end)) AS `Inbound Calls`,count(distinct (case when (`t`.`IsOutbound` is true) then `t`.`CallID` end)) AS `Outbound Calls`,(count(distinct (case when ((`t`.`ReceivedRoleName` like '%HAO%') and (`t`.`IsOutbound` is false) and (`t`.`CallTypeID` is not null)) then `t`.`BenCallID` end)) + count(distinct (case when (`t`.`IsOutbound` is true) then `t`.`CallID` end))) AS `Total Calls`,count(distinct (case when (`m`.`CallType` like '%Grievance%') then `t`.`CallID` end)) AS `Grievance Received`,avg((case when ((`m`.`CallGroupType` in ('Valid','Transfer')) and (`t`.`ReceivedRoleName` like '%HAO%')) then timestampdiff(SECOND,`t`.`CallTime`,`t`.`CallEndTime`) end)) AS `Average Call Handling Time` from ((`db_iemr`.`t_bencall` `t` left join `db_iemr`.`m_calltype` `m` on((`m`.`CallTypeID` = `t`.`CallTypeID`))) left join `db_iemr`.`t_feedback` `f` on((`f`.`BenCallID` = `t`.`BenCallID`))) group by cast(`t`.`CreatedDate` as date)) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -24157,7 +24157,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`masteruser`@`%` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `fac_bencall` AS select `dben`.`PermDistrict` AS `PermDistrict`,`fbc`.`CallSubTypeName` AS `CallSubTypeName`,count(`fbc`.`BenCallID`) AS `count(fbc.BenCallID)` from (`fact_bencall` `fbc` join `dim_beneficiary` `dben` on((`fbc`.`BeneficiaryRegID` = `dben`.`BeneficiaryRegID`))) where (`fbc`.`ProviderServiceMapID` = 1247) group by `dben`.`PermDistrict`,`fbc`.`CallSubTypeName` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -24175,7 +24175,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`%` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `sanjeevani_dashboard` AS (select `vital`.`CurrDistrict` AS `CurrDistrict`,`vital`.`CreatedBy` AS `CreatedBy`,`vital`.`VisitCode` AS `VisitCode`,`vital`.`servicePoint` AS `servicePoint`,`vital`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`vital`.`VisitCategory` AS `VisitCategory`,`vital`.`visit_date` AS `visit_date`,`vital`.`visit_time` AS `visit_time`,`vital`.`visit_month` AS `visit_month`,`vital`.`visit_year` AS `visit_year`,`vital`.`beneficiary_id` AS `beneficiary_id`,`vital`.`ben_name` AS `ben_name`,`vital`.`FirstName` AS `FirstName`,`vital`.`father_name` AS `father_name`,`vital`.`spouse_name` AS `spouse_name`,`vital`.`ben_phone_no` AS `ben_phone_no`,`vital`.`New/Repeat_visit` AS `New/Repeat_visit`,`vital`.`registrationDate` AS `registrationDate`,`vital`.`ben_dob` AS `ben_dob`,`vital`.`age_part1` AS `age_part1`,`vital`.`age_part2` AS `age_part2`,`vital`.`ben_gender` AS `ben_gender`,`vital`.`maritalstatus` AS `maritalstatus`,`vital`.`community` AS `community`,`vital`.`religion` AS `religion`,`vital`.`incomestatus` AS `incomestatus`,`vital`.`Weight_Kg` AS `Weight_Kg`,`vital`.`Height_cm` AS `Height_cm`,`vital`.`BMI` AS `BMI`,`vital`.`WaistCircumference_cm` AS `WaistCircumference_cm`,`vital`.`ANC/PNC` AS `ANC/PNC`,`vital`.`LMP_Date` AS `LMP_Date`,`vital`.`EDD` AS `EDD`,`vital`.`GestationalAge` AS `GestationalAge`,`vital`.`Temperature` AS `Temperature`,`vital`.`PulseRate` AS `PulseRate`,`vital`.`SystolicBP_1stReading` AS `SystolicBP_1stReading`,`vital`.`DiastolicBP_1stReading` AS `DiastolicBP_1stReading`,`vital`.`DiagnosisProvided1` AS `DiagnosisProvided1`,`vital`.`DiagnosisProvided2` AS `DiagnosisProvided2`,`vital`.`DiagnosisProvided3` AS `DiagnosisProvided3`,`vital`.`DiagnosisProvided4` AS `DiagnosisProvided4`,`vital`.`DiagnosisProvided5` AS `DiagnosisProvided5`,`vital`.`ChiefComplaint` AS `ChiefComplaint`,`vital`.`Reffred_To` AS `Reffred_To`,`vital`.`Referred_For` AS `Referred_For`,`l`.`VisitCode_Test` AS `VisitCode_Test`,`l`.`RBS_Test` AS `RBS_Test`,`l`.`Hemoglobin` AS `Hemoglobin`,`l`.`Vision_Aquity_Test` AS `Vision_Aquity_Test`,`l`.`HbA1c` AS `HbA1c`,`l`.`Malaria` AS `Malaria`,`idrs`.`VisitCode_Screening` AS `VisitCode_Screening`,`idrs`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`idrs`.`Epilepsy_Screenings` AS `Epilepsy_Screenings`,`idrs`.`Asthma_Screenings` AS `Asthma_Screenings`,`idrs`.`Vision_Screenings` AS `Vision_Screenings`,`idrs`.`Tuberculosis_Screenings` AS `Tuberculosis_Screenings`,`idrs`.`Malaria_Screenings` AS `Malaria_Screenings`,`idrs`.`Diabetes_Screenings` AS `Diabetes_Screenings`,`idrs`.`Epilepsy_suspected` AS `Epilepsy_suspected`,`idrs`.`Asthma_suspected` AS `Asthma_suspected`,`idrs`.`Vision_suspected` AS `Vision_suspected`,`idrs`.`Tuberculosis_suspected` AS `Tuberculosis_suspected`,`idrs`.`Malaria_suspected` AS `Malaria_suspected`,`idrs`.`Diabetes_suspected` AS `Diabetes_suspected`,`idrs`.`Hypertension_suspected` AS `Hypertension_suspected`,`idrs`.`Epilepsy_confirmed` AS `Epilepsy_confirmed`,`idrs`.`Asthma_confirmed` AS `Asthma_confirmed`,`idrs`.`Vision_confirmed` AS `Vision_confirmed`,`idrs`.`Tuberculosis_confirmed` AS `Tuberculosis_confirmed`,`idrs`.`Malaria_confirmed` AS `Malaria_confirmed`,`idrs`.`Diabetes_confirmed` AS `Diabetes_confirmed`,`idrs`.`Hypertension_confirmed` AS `Hypertension_confirmed`,`drug`.`VisitCode_Drug` AS `VisitCode_Drug`,`drug`.`Total_drug` AS `Total_drug`,`drug`.`drug_1` AS `drug_1`,`drug`.`drug1_Qty` AS `drug1_Qty`,`drug`.`drug_2` AS `drug_2`,`drug`.`drug2_Qty` AS `drug2_Qty`,`drug`.`drug_3` AS `drug_3`,`drug`.`drug3_Qty` AS `drug3_Qty`,`drug`.`drug_4` AS `drug_4`,`drug`.`drug4_Qty` AS `drug4_Qty`,`drug`.`drug_5` AS `drug_5`,`drug`.`drug5_Qty` AS `drug5_Qty`,`drug`.`drug_6` AS `drug_6`,`drug`.`drug6_Qty` AS `drug6_Qty`,`drug`.`drug_7` AS `drug_7`,`drug`.`drug7_Qty` AS `drug7_Qty` from (((((select substr(`v`.`CreatedBy`,1,(length(`v`.`CreatedBy`) - 5)) AS `CurrDistrict`,substr(`v`.`CreatedBy`,(length(`v`.`CreatedBy`) - 4),2) AS `CreatedBy`,`v`.`VisitCode` AS `VisitCode`,`m`.`servicePoint` AS `servicePoint`,`v`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`v`.`VisitCategory` AS `VisitCategory`,cast(`v`.`CreatedDate` as date) AS `visit_date`,cast(`v`.`CreatedDate` as time) AS `visit_time`,month(`v`.`CreatedDate`) AS `visit_month`,year(`v`.`CreatedDate`) AS `visit_year`,`m`.`beneficiary_id` AS `beneficiary_id`,`m`.`ben_name` AS `ben_name`,`idi`.`FirstName` AS `FirstName`,`m`.`father_name` AS `father_name`,`m`.`spouse_name` AS `spouse_name`,`m`.`ben_phone_no` AS `ben_phone_no`,(case when (`v`.`VisitNo` = 1) then 'New' else 'Revisit' end) AS `New/Repeat_visit`,`m`.`registrationDate` AS `registrationDate`,cast(`m`.`ben_dob` as date) AS `ben_dob`,substring_index(`m`.`ben_age`,'-',1) AS `age_part1`,substring_index(`m`.`ben_age`,'-',-(1)) AS `age_part2`,`m`.`ben_gender` AS `ben_gender`,`idi`.`maritalstatus` AS `maritalstatus`,`idi`.`community` AS `community`,`idi`.`religion` AS `religion`,`idi`.`incomestatus` AS `incomestatus`,`an`.`Weight_Kg` AS `Weight_Kg`,`an`.`Height_cm` AS `Height_cm`,`an`.`BMI` AS `BMI`,`an`.`WaistCircumference_cm` AS `WaistCircumference_cm`,(case when (`v`.`VisitCategory` = 'ANC') then 'ANC' when (`v`.`VisitCategory` = 'PNC') then 'PNC' else NULL end) AS `ANC/PNC`,`anc`.`LastMenstrualPeriod_LMP` AS `LMP_Date`,`anc`.`ExpectedDateofDelivery` AS `EDD`,`anc`.`GestationalAgeOrPeriodofAmenorrhea_POA` AS `GestationalAge`,`p`.`Temperature` AS `Temperature`,`p`.`PulseRate` AS `PulseRate`,`p`.`SystolicBP_1stReading` AS `SystolicBP_1stReading`,`p`.`DiastolicBP_1stReading` AS `DiastolicBP_1stReading`,substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',1),'||',-(1)) AS `DiagnosisProvided1`,(case when (strcmp(substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',1),'||',-(1)),substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',2),'||',-(1))) <> 0) then substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',2),'||',-(1)) end) AS `DiagnosisProvided2`,(case when (strcmp(substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',2),'||',-(1)),substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',3),'||',-(1))) <> 0) then substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',3),'||',-(1)) end) AS `DiagnosisProvided3`,(case when (strcmp(substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',3),'||',-(1)),substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',4),'||',-(1))) <> 0) then substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',4),'||',-(1)) end) AS `DiagnosisProvided4`,(case when (strcmp(substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',4),'||',-(1)),substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',5),'||',-(1))) <> 0) then substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',5),'||',-(1)) end) AS `DiagnosisProvided5`,`chief`.`ChiefComplaint` AS `ChiefComplaint`,`ref`.`referredToInstituteName` AS `Reffred_To`,`ref`.`referralreason` AS `Referred_For` from (((((((((`db_iemr`.`t_benvisitdetail` `v` join `db_iemr`.`i_ben_flow_outreach` `m` on(((`m`.`beneficiary_reg_id` = `v`.`BeneficiaryRegID`) and (`m`.`beneficiary_visit_code` = `v`.`VisitCode`)))) left join `db_iemr`.`t_phy_vitals` `p` on(((`p`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`p`.`VisitCode` = `v`.`VisitCode`)))) left join `db_iemr`.`t_phy_anthropometry` `an` on(((`an`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`an`.`VisitCode` = `v`.`VisitCode`)))) left join `db_iemr`.`t_anccare` `anc` on(((`anc`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`anc`.`VisitCode` = `v`.`VisitCode`)))) left join `db_iemr`.`m_district` `dist` on((`dist`.`DistrictID` = `m`.`districtID`))) left join (select `mp`.`BenRegId` AS `BenRegId`,`mp`.`CreatedDate` AS `registrationdate`,`d`.`Gender` AS `gender`,`d`.`Status` AS `Status`,`d`.`FirstName` AS `FirstName`,`d`.`MaritalStatus` AS `maritalstatus`,`d`.`LiteracyStatus` AS `literacystatus`,`d`.`education` AS `education`,`d`.`occupation` AS `occupation`,`d`.`incomeStatus` AS `incomestatus`,`d`.`community` AS `community`,`d`.`religion` AS `religion`,`ad`.`CurrDistrict` AS `CurrDistrict`,`ad`.`CurrVillage` AS `CurrVillage`,`ad`.`CurrServicePoint` AS `CurrServicePoint` from ((`db_identity`.`i_beneficiarydetails` `d` join `db_identity`.`i_beneficiarymapping` `mp` on(((`mp`.`BenDetailsId` = `d`.`VanSerialNo`) and (`mp`.`VanID` = `d`.`VanID`)))) left join `db_identity`.`i_beneficiaryaddress` `ad` on(((`mp`.`BenAddressId` = `ad`.`VanSerialNo`) and (`mp`.`VanID` = `ad`.`VanID`))))) `idi` on((`idi`.`BenRegId` = `m`.`beneficiary_reg_id`))) left join (select `db_iemr`.`t_benreferdetails`.`VisitCode` AS `visitcode`,`db_iemr`.`t_benreferdetails`.`referredToInstituteName` AS `referredToInstituteName`,`db_iemr`.`t_benreferdetails`.`referralreason` AS `referralreason` from `db_iemr`.`t_benreferdetails` where (`db_iemr`.`t_benreferdetails`.`ProviderServiceMapID` = 18) group by `db_iemr`.`t_benreferdetails`.`VisitCode`) `ref` on((`ref`.`visitcode` = `v`.`VisitCode`))) left join (select `db_iemr`.`t_benchiefcomplaint`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`db_iemr`.`t_benchiefcomplaint`.`VisitCode` AS `VisitCode`,group_concat(distinct `db_iemr`.`t_benchiefcomplaint`.`ChiefComplaint` separator ',') AS `ChiefComplaint` from `db_iemr`.`t_benchiefcomplaint` where (`db_iemr`.`t_benchiefcomplaint`.`ProviderServiceMapID` = 18) group by `db_iemr`.`t_benchiefcomplaint`.`BeneficiaryRegID`,`db_iemr`.`t_benchiefcomplaint`.`VisitCode`) `chief` on(((`chief`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`chief`.`VisitCode` = `v`.`VisitCode`)))) left join (select `db_iemr`.`t_prescription`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`db_iemr`.`t_prescription`.`VisitCode` AS `VisitCode`,group_concat(distinct if((`db_iemr`.`t_prescription`.`DiagnosisProvided` = ''),NULL,`db_iemr`.`t_prescription`.`DiagnosisProvided`) separator '||') AS `DiagnosisProvided` from `db_iemr`.`t_prescription` where (`db_iemr`.`t_prescription`.`ProviderServiceMapID` = 18) group by `db_iemr`.`t_prescription`.`BeneficiaryRegID`,`db_iemr`.`t_prescription`.`VisitCode`) `pre` on(((`pre`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`pre`.`VisitCode` = `v`.`VisitCode`)))) where ((`v`.`ProviderServiceMapID` = 18) and (`v`.`CreatedDate` >= '2022-03-01 00:00:00')))) `vital` left join (select `temp`.`visitcode` AS `VisitCode_Test`,`temp`.`RBS_Test` AS `RBS_Test`,`temp`.`Hemoglobin` AS `Hemoglobin`,`temp`.`Vision_Aquity_Test` AS `Vision_Aquity_Test`,`temp`.`HbA1c` AS `HbA1c`,`temp`.`Malaria` AS `Malaria` from (select `t`.`VisitCode` AS `visitcode`,group_concat((case when (`tr`.`ProcedureID` = 71) then `tr`.`TestResultValue` end) separator ',') AS `RBS_Test`,group_concat((case when (`tr`.`ProcedureID` = 72) then `tr`.`TestResultValue` end) separator ',') AS `Hemoglobin`,group_concat((case when (`tr`.`ProcedureID` = 79) then `tr`.`TestResultValue` end) separator ',') AS `HbA1c`,group_concat((case when (`tr`.`ProcedureID` = 73) then `tr`.`TestResultValue` end) separator ',') AS `Malaria`,group_concat((case when (`tr`.`ProcedureID` = 75) then `tr`.`TestResultValue` end) separator ',') AS `Vision_Aquity_Test` from (`db_iemr`.`t_lab_testorder` `t` left join `db_iemr`.`t_lab_testresult` `tr` on(((`t`.`VisitCode` = `tr`.`VisitCode`) and (`t`.`ProcedureID` = `tr`.`ProcedureID`)))) where (`t`.`ProviderServiceMapID` = 18) group by `t`.`VisitCode`) `temp`) `l` on((`vital`.`VisitCode` = `l`.`VisitCode_Test`))) left join (select `temp`.`Visitcode` AS `VisitCode_Screening`,`temp`.`BeneficiaryRegID` AS `BeneficiaryRegID`,(case when (`temp`.`screening` like '%Epilepsy%') then 'Yes' else NULL end) AS `Epilepsy_Screenings`,(case when (`temp`.`screening` like '%Asthma%') then 'Yes' else NULL end) AS `Asthma_Screenings`,(case when (`temp`.`screening` like '%Vision%') then 'Yes' else NULL end) AS `Vision_Screenings`,(case when (`temp`.`screening` like '%Tuberculosis%') then 'Yes' else NULL end) AS `Tuberculosis_Screenings`,(case when (`temp`.`screening` like '%Malaria%') then 'Yes' else NULL end) AS `Malaria_Screenings`,(case when (`temp`.`screening` like '%Diabetes%') then 'Yes' else NULL end) AS `Diabetes_Screenings`,(case when (`temp`.`suspected` like '%Epilepsy%') then 'Yes' else NULL end) AS `Epilepsy_suspected`,(case when (`temp`.`suspected` like '%Asthma%') then 'Yes' else NULL end) AS `Asthma_suspected`,(case when (`temp`.`suspected` like '%Vision%') then 'Yes' else NULL end) AS `Vision_suspected`,(case when (`temp`.`suspected` like '%Tuberculosis%') then 'Yes' else NULL end) AS `Tuberculosis_suspected`,(case when (`temp`.`suspected` like '%Malaria%') then 'Yes' else NULL end) AS `Malaria_suspected`,(case when (`temp`.`suspected` like '%Diabetes%') then 'Yes' else NULL end) AS `Diabetes_suspected`,(case when (`temp`.`suspected` like '%Hypertension%') then 'Yes' else NULL end) AS `Hypertension_suspected`,(case when (`temp`.`confirmed` like '%Epilepsy%') then 'Yes' else NULL end) AS `Epilepsy_confirmed`,(case when (`temp`.`confirmed` like '%Asthma%') then 'Yes' else NULL end) AS `Asthma_confirmed`,(case when (`temp`.`confirmed` like '%Vision%') then 'Yes' else NULL end) AS `Vision_confirmed`,(case when (`temp`.`confirmed` like '%Tuberculosis%') then 'Yes' else NULL end) AS `Tuberculosis_confirmed`,(case when (`temp`.`confirmed` like '%Malaria%') then 'Yes' else NULL end) AS `Malaria_confirmed`,(case when (`temp`.`confirmed` like '%Diabetes%') then 'Yes' else NULL end) AS `Diabetes_confirmed`,(case when (`temp`.`confirmed` like '%Hypertension%') then 'Yes' else NULL end) AS `Hypertension_confirmed` from (select `db_iemr`.`t_idrsdetails`.`Visitcode` AS `Visitcode`,`db_iemr`.`t_idrsdetails`.`BeneficiaryRegID` AS `BeneficiaryRegID`,group_concat(distinct `db_iemr`.`t_idrsdetails`.`DiseaseQuestionType` separator ',') AS `screening`,group_concat(distinct `db_iemr`.`t_idrsdetails`.`SuspectedDiseases` separator ',') AS `suspected`,group_concat(distinct `db_iemr`.`t_idrsdetails`.`ConfirmedDiseases` separator ',') AS `confirmed` from `db_iemr`.`t_idrsdetails` where (`db_iemr`.`t_idrsdetails`.`ProviderServiceMapID` = 18) group by `db_iemr`.`t_idrsdetails`.`Visitcode`) `temp`) `idrs` on((`idrs`.`VisitCode_Screening` = `vital`.`VisitCode`))) left join (select `a`.`visitcode` AS `VisitCode_Drug`,`a`.`cnt` AS `Total_drug`,(case when (`a`.`cnt` > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',`a`.`cnt`),',',-(1)) end) AS `drug_1`,(case when (`a`.`cnt` > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',`a`.`cnt`),',',-(1)) end) AS `drug1_Qty`,(case when ((`a`.`cnt` - 1) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 1)),',',-(1)) end) AS `drug_2`,(case when ((`a`.`cnt` - 1) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 1)),',',-(1)) end) AS `drug2_Qty`,(case when ((`a`.`cnt` - 2) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 2)),',',-(1)) end) AS `drug_3`,(case when ((`a`.`cnt` - 2) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 2)),',',-(1)) end) AS `drug3_Qty`,(case when ((`a`.`cnt` - 3) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 3)),',',-(1)) end) AS `drug_4`,(case when ((`a`.`cnt` - 3) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 3)),',',-(1)) end) AS `drug4_Qty`,(case when ((`a`.`cnt` - 4) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 4)),',',-(1)) end) AS `drug_5`,(case when ((`a`.`cnt` - 4) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 4)),',',-(1)) end) AS `drug5_Qty`,(case when ((`a`.`cnt` - 5) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 5)),',',-(1)) end) AS `drug_6`,(case when ((`a`.`cnt` - 5) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 5)),',',-(1)) end) AS `drug6_Qty`,(case when ((`a`.`cnt` - 6) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 6)),',',-(1)) end) AS `drug_7`,(case when ((`a`.`cnt` - 6) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 6)),',',-(1)) end) AS `drug7_Qty` from (select `db_iemr`.`t_prescribeddrug`.`VisitCode` AS `visitcode`,group_concat(`db_iemr`.`t_prescribeddrug`.`GenericDrugName` separator ',') AS `GenericDrugName`,group_concat(`db_iemr`.`t_prescribeddrug`.`QtyPrescribed` separator ',') AS `QtyPrescribed`,count(0) AS `cnt` from `db_iemr`.`t_prescribeddrug` where (`db_iemr`.`t_prescribeddrug`.`ProviderServiceMapID` = 18) group by `db_iemr`.`t_prescribeddrug`.`VisitCode`) `a`) `drug` on((`vital`.`VisitCode` = `drug`.`VisitCode_Drug`)))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;

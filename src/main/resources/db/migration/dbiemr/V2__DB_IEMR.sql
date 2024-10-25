@@ -294,68 +294,15 @@ CREATE
     WHERE
         ((0 <> `m_sp`.`Deleted`) IS FALSE);
 
-
-
-Delimiter $$
-SET @dbname = "db_iemr";
-SET @tablename = "m_providerserviceaddmapping";
-SET @columnname = "AbdmFacilityID";
-SET @preparedStatement = (select if (
-    exists(
-       SELECT Distinct column_name  FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE
-      (table_name = @tablename)
-      AND (table_schema = @dbname)
-      AND (column_name = @columnname)
-    )
-    ,'select ''Column exists'';'
-    ,CONCAT("ALTER TABLE ", @tablename, " ADD ", @columnname, "  varchar(20)  DEFAULT NULL;")) );
-PREPARE stmt1 FROM @preparedStatement;
-EXECUTE stmt1;
-DEALLOCATE PREPARE stmt1 $$
-Delimiter ;
-
-
 use db_iemr;
 
-Delimiter $$
-SET @dbname = "db_iemr";
-SET @tablename = "m_providerserviceaddmapping";
-SET @columnname = "AbdmFacilityName";
-SET @preparedStatement = (select if (
-    exists(
-       SELECT Distinct column_name  FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE
-      (table_name = @tablename)
-      AND (table_schema = @dbname)
-      AND (column_name = @columnname)
-    )
-    ,'select ''Column exists'';'
-    ,CONCAT("ALTER TABLE ", @tablename, " ADD ", @columnname, "  VARCHAR(100) NULL DEFAULT NULL;")) );
-PREPARE stmt1 FROM @preparedStatement;
-EXECUTE stmt1;
-DEALLOCATE PREPARE stmt1 $$
-Delimiter ;
+alter table m_providerserviceaddmapping add AbdmFacilityID VARCHAR(20)  DEFAULT NULL;
+
+alter table m_providerserviceaddmapping add AbdmFacilityName VARCHAR(100)  DEFAULT NULL;
+
+alter table t_benvisitdetail add AbdmFacilityID varchar(20)  DEFAULT NULL after CarecontextLinkDate;
 
 
-Delimiter $$
-SET @dbname = "db_iemr";
-SET @tablename = "t_benvisitdetail";
-SET @columnname = "AbdmFacilityID";
-SET @preparedStatement = (select if (
-    exists(
-       SELECT Distinct column_name  FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE
-      (table_name = @tablename)
-      AND (table_schema = @dbname)
-      AND (column_name = @columnname)
-    )
-    ,'select ''Column exists'';'
-    ,CONCAT("ALTER TABLE ", @tablename, " ADD ", @columnname, "  varchar(20)  DEFAULT NULL after CarecontextLinkDate;")) );
-PREPARE stmt1 FROM @preparedStatement;
-EXECUTE stmt1;
-DEALLOCATE PREPARE stmt1 $$
-Delimiter ;
 
 USE `db_iemr`;
 CREATE 
