@@ -1,92 +1,124 @@
 # AMRIT - DB Service
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)  ![branch parameter](https://github.com/PSMRI/AMRIT-DB/actions/workflows/sast-and-package.yml/badge.svg)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-### Overview
-This AMRIT-DB spring boot service provides a robust solution for managing and cloning empty database schema tables, making it an invaluable tool for developers looking to maintain consistency in their development environments.
+## Overview  
+The AMRIT-DB service is a Spring Boot application designed to simplify database schema management and cloning. Using Flyway for migrations, it ensures consistency and ease in setting up local environments, making it an invaluable tool for developers.
 
-### Table of Contents
-* Introduction
-* Key Features
-* Prerequisites
-* Creating Migrations
-* Common Issues & Troubleshooting
-* Contributing
-  
-### Introduction
+---
 
-This AMRIT-DB spring boot service provides a robust solution for managing and cloning empty database schema tables, making it an invaluable tool for developers looking to maintain consistency in their development environments.
+## Table of Contents  
+- [Introduction](#introduction)  
+- [Key Features](#key-features)  
+- [Prerequisites](#prerequisites)  
+- [Creating Migrations](#creating-migrations)  
+- [Build Configuration](#build-configuration)  
+- [Run Configuration](#run-configuration)  
+- [Running Migrations](#running-migrations)  
+- [Common Issues & Troubleshooting](#common-issues--troubleshooting)  
+- [Contributing](#contributing)  
 
-This service utilizes Flyway, a powerful database migration tool, within a Spring Boot application to clone an empty database tables. 
-It is designed to help developers quickly setup their local environment by ensuring that the database structure is consistent and up-to-date with the application requirement.
+---
 
+## Introduction  
 
-### Key Features
+The AMRIT-DB service leverages Flyway within a Spring Boot framework to manage and clone empty database schema tables. It ensures that database structures remain consistent with application requirements, reducing setup time and preventing discrepancies.  
 
-**Schema Management**: Flyway automates the process of creating and managing the database tables allowing for easy version control of database changes.
+---
 
-**Migration Scripts** : The service can include SQL migration scripts that define the structure of the database tables, constraints, and relationships, ensuring that schema is created exactly as needed.
+## Key Features  
 
-Below are the mandatory schemas you should create.
+- **Schema Management**: Automates database schema creation and version control using Flyway.  
+- **Migration Scripts**: Supports SQL-based migration scripts for defining tables, constraints, and relationships.  
 
- * db_iemr
- 
- * db_reporting
- 
- * db_identity
- 
- * db_1097_identity
+### Mandatory Database  
 
-### Prerequisites
-Before you start, ensure you have the following installed:
+Ensure the following databases are created:  
 
-Java 17
-Maven 3.6+
-MySQL 8
+- `db_iemr`  
+- `db_reporting`  
+- `db_identity`  
+- `db_1097_identity`  
 
-### Creating Migrations
+---
 
-Flyway migrations are SQL scripts located in the src/main/resources/db/migration directory, which contains four subfolders, each corresponding for four given schemas.
+## Prerequisites  
 
-Any additions or modifications related to a schema should be placed in the appropriate folder.
+Ensure you have the following installed before starting:  
 
-For example, if there are changes to the db_iemr schema, the relevant script should be added to the dbiemr folder.
+- Java 17  
+- Maven 3.6+  
+- MySQL 8  
 
-Each migration file must adhere to the Flyway naming convention, which follows an incremental format: for example, V1__Description.sql, V2__ColumnAddition.sql.
+---
 
-The next added migration file should be named V3__<related_change_description>.sql.
+## Creating Migrations  
 
- ### Creating a build configuration in STS / Eclipse
+Flyway migrations are stored in the `src/main/resources/db/migration` directory. Each schema has its own subfolder.  
 
-* You can copy `common_example.properties` to `common_local.properties` and edit the file accordingly. The file is under `src/main/environment` folder.
-* In your editor, click on Run -> Run configuration.
-* Double-click on Maven build and give a suitable name for the new configuration.
-* Populate the base directory by clicking on workspace and selecting AMRIT-DB module.
-* Set goals to clean install -DENV_VAR=local(your choice of desired environment) and click on Apply. 
-* It is advisable have a personal environment properties file under src/main/environment filling out all the placeholders to avoid repetitive manual work each time you run locally.
-* Click Run to run the build configuration.
+- Place new or updated migration scripts in the corresponding schema folder.  
+- Follow Flyway’s naming convention:  
+  - Example: `V1__InitialSetup.sql`, `V2__AddNewColumn.sql`  
 
-### Creating a run configuration in STS / Eclipse
+For subsequent changes, increment the version number, e.g., `V3__<description>.sql`.  
 
-* In your editor, click on Run -> Run configuration.
-* Double click on Spring Boot App(in STS) / Java Application(in Eclipse) and give a suitable name for the new configuration.
-* Select the project and main class and click on Apply.
-* Click Run to run the configuration. Keep the Redis server open during this run.
-* Once the run is complete, load http://localhost:8080/swagger-ui.html#!/
-  
-### Run Migrations
+---
 
-* Give Database credentials in application.properties
-* Flyway automatically run migrations at application startup if you have configured it properly.
-* To start the application follow below commands
-*   cd /path/to/your/project
-    mvn spring-boot:run -DENV_VAR=local
+## Build Configuration  
 
-### Common Issues & Troubleshooting
+1. **Setup Local Properties**:  
+   - Copy `common_example.properties` to `common_local.properties` and update it for your environment.  
+   - File location: `src/main/environment`  
 
-* Migration Failure : Check your SQL syntax and review the flyway_schema_history table for issues.
-* Database Connection Issues: Verify the connection details in application.properties.
+2. **Create Build Configuration in STS/Eclipse**:  
+   - Go to **Run > Run Configurations**.  
+   - Select **Maven Build** and create a new configuration.  
+   - Set the **Base Directory** to the `AMRIT-DB` module.  
+   - Set **Goals** to:  
+     ```
+     clean install -DENV_VAR=local
+     ```  
+   - Apply and run the configuration.  
 
-### Contributing
+---
+
+## Run Configuration  
+
+1. **Setup Spring Boot Configuration**:  
+   - Go to **Run > Run Configurations**.  
+   - Select **Spring Boot App (STS)** or **Java Application (Eclipse)** and create a new configuration.  
+   - Choose the project and main class.  
+   - Apply and run the configuration.  
+
+2. **Verify Application**:  
+   - Access Swagger UI: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)  
+
+---
+
+## Running Migrations  
+
+1. **Database Credentials**:  
+   - Add credentials in `application.properties`.  
+
+2. **Run Migrations**:  
+   - Flyway automatically runs migrations at application startup if configured correctly.  
+   - Start the application using:  
+     ```bash
+     mvn spring-boot:run -DENV_VAR=local
+     ```  
+
+---
+
+## Common Issues & Troubleshooting  
+
+- **Migration Failures**:  
+  - Check SQL syntax and review the `flyway_schema_history` table for errors.  
+
+- **Database Connection Issues**:  
+  - Verify details in `application.properties`.  
+
+---
+
+## Contributing  
 
 We welcome contributions! Please follow these steps:
 
