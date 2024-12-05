@@ -1,4 +1,5 @@
 /*
+
 * AMRIT – Accessible Medical Records via Integrated Technology 
 * Integrated EHR (Electronic Health Records) Solution 
 *
@@ -22,6 +23,7 @@
 package com.db.piramalswasthya.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -41,7 +43,6 @@ public class VersionService {
 	public void setCommonServiceImpl(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
-	
 	
 	public List<FlywaySchemaVersion> getLatestVersion() {
 		String sql = "SELECT * FROM flyway_schema_history order by 1 desc limit 1";

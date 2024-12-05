@@ -3,7 +3,7 @@
 -- Host: 192.168.5.5    Database: db_iemr
 -- ------------------------------------------------------
 -- Server version	5.7.19-log
-
+ 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -19,7 +19,7 @@
 -- Table structure for table `amrit_bkptable`
 --
 
-use db_iemr_flyway;
+use db_iemr;
 DROP TABLE IF EXISTS `amrit_bkptable`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -457,7 +457,7 @@ CREATE TABLE `i_ben_flow_outreach` (
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`piramaldev`@`localhost`*/ /*!50003 TRIGGER TRG_VisitData
+/*!50003 CREATE*/ /*!50017 */ /*!50003 TRIGGER TRG_VisitData
  AFTER UPDATE
  ON i_ben_flow_outreach FOR EACH ROW
  BEGIN
@@ -6089,7 +6089,7 @@ CREATE TABLE `m_notification` (
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`masteruser`@`%`*/ /*!50003 trigger InsertNotificationMapping after insert on m_notification
+/*!50003 CREATE*/ /*!50017 */ /*!50003 trigger InsertNotificationMapping after insert on m_notification
 for each row
 begin
 call PR_InsertInNotificationMap(new.RoleID, new.NotificationID, new.ProviderServiceMapID,new.NotificationTypeID,new.CreatedBy,new.ValidFrom, new.WorkingLocationID);
@@ -6108,7 +6108,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`masteruser`@`%`*/ /*!50003 trigger UpdateNotificationMapping after update on m_notification
+/*!50003 CREATE*/ /*!50017 */ /*!50003 trigger UpdateNotificationMapping after update on m_notification
 for each row
 begin
 call PR_UpdateNotificationMap(new.NotificationID, new.ModifiedBy,new.ValidFrom, new.Deleted);
@@ -6722,7 +6722,7 @@ CREATE TABLE `m_providerservicemapping` (
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`masteruser`@`%`*/ /*!50003 trigger MCTSExcelMapping after insert on m_providerservicemapping
+/*!50003 CREATE*/ /*!50017 */ /*!50003 trigger MCTSExcelMapping after insert on m_providerservicemapping
 for each row
 begin
 call PR_InsertMCTSFieldsStatewise(new.ProviderServiceMapID);
@@ -6741,7 +6741,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`masteruser`@`%`*/ /*!50003 trigger InsertCallType after insert on m_providerservicemapping
+/*!50003 CREATE*/ /*!50017 */ /*!50003 trigger InsertCallType after insert on m_providerservicemapping
 for each row
 begin
 
@@ -7954,7 +7954,7 @@ CREATE TABLE `m_subservice` (
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`masteruser`@`%`*/ /*!50003 trigger Insert104BRCategory after insert on m_subservice
+/*!50003 CREATE*/ /*!50017 */ /*!50003 trigger Insert104BRCategory after insert on m_subservice
 for each row
 begin
 if(new.SubServiceName = "Blood Request")
@@ -19827,7 +19827,7 @@ DELIMITER ;;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
 /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
 /*!50003 SET time_zone             = 'SYSTEM' */ ;;
-/*!50106 CREATE*/ /*!50117 DEFINER=`piramaldev`@`%`*/ /*!50106 EVENT `Event_TMSaveWorkList` ON SCHEDULE EVERY 30 MINUTE STARTS '2021-02-23 11:15:10' ON COMPLETION NOT PRESERVE DISABLE DO begin
+/*!50106 CREATE*/ /*!50117 %`*/ /*!50106 EVENT `Event_TMSaveWorkList` ON SCHEDULE EVERY 30 MINUTE STARTS '2021-02-23 11:15:10' ON COMPLETION NOT PRESERVE DISABLE DO begin
 CALL Pr_TMSaveWorkList();
 
 end */ ;;
@@ -19848,7 +19848,7 @@ DELIMITER ;;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
 /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
 /*!50003 SET time_zone             = 'SYSTEM' */ ;;
-/*!50106 CREATE*/ /*!50117 DEFINER=`piramaldev`@`%`*/ /*!50106 EVENT `Event_UpdateIsOutboundnullData` ON SCHEDULE EVERY 1 DAY STARTS '2023-12-20 03:00:00' ON COMPLETION NOT PRESERVE ENABLE DO begin
+/*!50106 CREATE*/ /*!50117 %`*/ /*!50106 EVENT `Event_UpdateIsOutboundnullData` ON SCHEDULE EVERY 1 DAY STARTS '2023-12-20 03:00:00' ON COMPLETION NOT PRESERVE ENABLE DO begin
 CALL Pr_UpdateIsOutboundnull_Data();
 
 end */ ;;
@@ -19873,7 +19873,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_mmu_adolescent`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_mmu_adolescent`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare totalPatient LONG;
@@ -19911,7 +19911,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_AllDiabetic`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_AllDiabetic`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_AllDiabetic int;
@@ -20050,7 +20050,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_AllDiaHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_AllDiaHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_AllDiaHTN int;
@@ -20175,7 +20175,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_AllDiaTest`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_AllDiaTest`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 Declare v_AllRBS int;
@@ -20224,7 +20224,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_AllHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_AllHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_AllHTN int;
@@ -20366,7 +20366,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_mmu_anc`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_mmu_anc`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 declare totalANC LONG;
 declare newANC LONG;
@@ -20425,7 +20425,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_mmu_below_5`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_mmu_below_5`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 declare totalPatient LONG;
 declare totalBelow5 LONG;
@@ -20472,7 +20472,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_mmu_common`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_mmu_common`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 declare totalPatient LONG; 
 declare newPatient LONG; 
@@ -20509,7 +20509,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_NewDiabetic`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_NewDiabetic`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_NewDiabetic int;
@@ -20611,7 +20611,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_NewDiaDetected`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_NewDiaDetected`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_NewDiaDetected int;
@@ -20695,7 +20695,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_NewHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_NewHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_NewHTN int;
@@ -20797,7 +20797,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_OldDiabetic`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_OldDiabetic`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_OldDiabetic int;
@@ -20829,7 +20829,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_OldDiaFollowUp`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_OldDiaFollowUp`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_OldDiaFollowUp int;
@@ -20863,7 +20863,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_OldDiaTest`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_OldDiaTest`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 
@@ -20928,7 +20928,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_OldHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_OldHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_OldHTN int;
@@ -20960,7 +20960,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_MMU_OldHTNFollowUp`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_MMU_OldHTNFollowUp`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 
 declare v_OldHTNFollowUp int;
@@ -20994,7 +20994,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `D_mmu_pnc`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
+CREATE  PROCEDURE `D_mmu_pnc`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
 declare totalPNC LONG;
 declare newPNC LONG;
@@ -21033,7 +21033,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `FHIR_R_AllergyIntolerance`(
+CREATE  PROCEDURE `FHIR_R_AllergyIntolerance`(
 # IN parameter
  IN beneficiaryRegID_IN bigint(20), IN visitCode_IN bigint(20), 
 # OUT parameter
@@ -21067,7 +21067,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `FHIR_R_Appointment`(
+CREATE  PROCEDURE `FHIR_R_Appointment`(
 # IN parameter
  IN beneficiaryRegID_IN bigint(20), IN visitCode_IN bigint(20), 
 # OUT parameter
@@ -21103,7 +21103,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `FHIR_R_ChiefComplaints`(
+CREATE  PROCEDURE `FHIR_R_ChiefComplaints`(
 # IN parameter
  IN beneficiaryRegID_IN bigint(20), IN visitCode_IN bigint(20), 
 # OUT parameter
@@ -21138,7 +21138,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `FHIR_R_Diagnosis`(
+CREATE  PROCEDURE `FHIR_R_Diagnosis`(
 # IN parameter
  IN beneficiaryRegID_IN bigint(20), IN visitCode_IN bigint(20), 
 # OUT parameter
@@ -21215,7 +21215,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `FHIR_R_DiagnosticReportLab`(
+CREATE  PROCEDURE `FHIR_R_DiagnosticReportLab`(
 # IN parameter
  IN beneficiaryRegID_IN bigint(20), IN visitCode_IN bigint(20), 
 # OUT parameter
@@ -21255,7 +21255,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `FHIR_R_Encounter`(
+CREATE  PROCEDURE `FHIR_R_Encounter`(
 # IN parameter
  IN beneficiaryRegID_IN bigint(20), IN visitCode_IN bigint(20), 
 # OUT parameter
@@ -21296,7 +21296,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `FHIR_R_FamilyMemberHistory`(
+CREATE  PROCEDURE `FHIR_R_FamilyMemberHistory`(
 # IN parameter
  IN beneficiaryRegID_IN bigint(20), IN visitCode_IN bigint(20), 
 # OUT parameter
@@ -21331,7 +21331,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `FHIR_R_Immunization`(
+CREATE  PROCEDURE `FHIR_R_Immunization`(
 # IN parameter
  IN beneficiaryRegID_IN bigint(20), IN visitCode_IN bigint(20), 
 # OUT parameter
@@ -21370,7 +21370,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `FHIR_R_MedicationStatement`(
+CREATE  PROCEDURE `FHIR_R_MedicationStatement`(
 # IN parameter
  IN beneficiaryRegID_IN bigint(20), IN visitCode_IN bigint(20), 
 # OUT parameter
@@ -21411,7 +21411,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `FHIR_R_PatientDemographic`(
+CREATE  PROCEDURE `FHIR_R_PatientDemographic`(
 # IN parameter
  IN beneficiaryRegID_IN bigint(20),  
 # OUT parameter
@@ -21483,7 +21483,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `FHIR_R_Vitals_Anthropometry`(
+CREATE  PROCEDURE `FHIR_R_Vitals_Anthropometry`(
 # IN parameter
 IN beneficiaryRegID_IN bigint(20), IN visitCode_IN bigint(20),
 # OUT parameter
@@ -21567,7 +21567,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `getANCRecIFATab`(fromDate DATETIME, toDate DATETIME, PSMID int)
+CREATE  PROCEDURE `getANCRecIFATab`(fromDate DATETIME, toDate DATETIME, PSMID int)
 BEGIN
 SELECT COUNT(DISTINCT PI.BeneficiaryRegID)
 FROM t_benvisitdetail BVD
@@ -21592,7 +21592,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `getANCRefCount`(fromDate DATETIME, toDate DATETIME, PSMID int)
+CREATE  PROCEDURE `getANCRefCount`(fromDate DATETIME, toDate DATETIME, PSMID int)
 BEGIN
 SELECT count(distinct BRD.BeneficiaryRegID) FROM t_benvisitdetail BVD
 INNER JOIN t_benreferdetails BRD ON BVD.BeneficiaryRegID = BRD.BeneficiaryRegID AND BVD.VisitCode = BRD.VisitCode
@@ -21613,7 +21613,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_104HAOReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
+CREATE  PROCEDURE `Pr_104HAOReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
 select t.benHistoryID, t.requestID, t.beneficiaryRegID, t.benCallID, t.patientName, t.patientAge, t.patientGenderName, t.algorithm, 
@@ -21651,7 +21651,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_104IntegrationBhayaData`(v_fromdate datetime,v_todate datetime)
+CREATE %` PROCEDURE `Pr_104IntegrationBhayaData`(v_fromdate datetime,v_todate datetime)
 begin
 
 
@@ -21778,7 +21778,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_actor_wise_quality_rating`(v_psmrid int(11),v_rolename varchar(100),v_monthname varchar(50))
+CREATE %` PROCEDURE `Pr_actor_wise_quality_rating`(v_psmrid int(11),v_rolename varchar(100),v_monthname varchar(50))
 begin
 select t2.ReceivedAgentID,concat(ifnull(u.firstname,''),' ',ifnull(u.lastname,'')) Agentname,sum(distinct finalscore) Score 
 from t_qualityauditorrating t1
@@ -21805,7 +21805,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_BenChiefcomplaint_Diagnosis`(
+CREATE %` PROCEDURE `Pr_BenChiefcomplaint_Diagnosis`(
 
  IN beneficiaryRegID_IN bigint(20)
  -- , IN visitCode_IN bigint(20)
@@ -21898,7 +21898,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_BeneficiaryCallResponse`(v_bencallid bigint(20))
+CREATE  PROCEDURE `Pr_BeneficiaryCallResponse`(v_bencallid bigint(20))
 begin
 select ms.id sectionid,ms.name SectionName,t2.QuestionID,mq.Question,t2.Answer from t_bencall t1
 inner join t_mctscallresponse t2 on t1.BenCallID=t2.bencallid
@@ -21921,7 +21921,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_BeneficiaryCasesheet`(v_bencallid bigint(20))
+CREATE  PROCEDURE `Pr_BeneficiaryCasesheet`(v_bencallid bigint(20))
 begin
 select  t2.BeneficiaryRegID,t3.bencallid,t1.Motherid Motherid,t1.childid,
 t2.Name BeneficiaryName,null MotherName,t2.Husband_Name SpouseName,2 Genderid,"Female" Gender,
@@ -21975,7 +21975,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_BeneficiaryDetails`(v_BenRegid bigint(20))
+CREATE  PROCEDURE `Pr_BeneficiaryDetails`(v_BenRegid bigint(20))
 begin
 SELECT
 concat(ifnull(BD.FirstName,''),
@@ -22017,7 +22017,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_ConfirmatoryScreening`(v_benregid bigint(20))
+CREATE %` PROCEDURE `Pr_ConfirmatoryScreening`(v_benregid bigint(20))
 begin
 -- select BeneficiaryRegID, case when ConfirmarotyDiabetes 
 select BeneficiaryRegID,max(ConfirmarotyDiabetes) ConfirmarotyDiabetes,
@@ -22073,7 +22073,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `Pr_ECDCallDetailsReport_16042024`(
+CREATE  PROCEDURE `Pr_ECDCallDetailsReport_16042024`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
@@ -22178,7 +22178,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_ECDMapQuestions`(
+CREATE  PROCEDURE `Pr_ECDMapQuestions`(
 v_psmid int(11))
 begin
 
@@ -22217,7 +22217,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `PR_FetchChildOutboundWorklist`(v_AllocatedUserID int)
+CREATE %` PROCEDURE `PR_FetchChildOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
 /********************************************************************************************************************
 -- SP/Function Name : PR_FetchChildOutboundWorklist
@@ -22297,7 +22297,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `PR_FetchECDChildOutboundWorklist`(v_AllocatedUserID int)
+CREATE %` PROCEDURE `PR_FetchECDChildOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
 
  declare v_NextAttemptPeriod int(11);
@@ -22554,7 +22554,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `PR_FetchECDChildOutboundWorklist_test190224`(v_AllocatedUserID int)
+CREATE %` PROCEDURE `PR_FetchECDChildOutboundWorklist_test190224`(v_AllocatedUserID int)
 BEGIN
 
  declare v_NextAttemptPeriod int(11);
@@ -22811,7 +22811,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `PR_FetchECDMotherOutboundWorklist`(v_AllocatedUserID int)
+CREATE  PROCEDURE `PR_FetchECDMotherOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
  declare v_NextAttemptPeriod int(11);
 select distinct NextAttemptPeriod into v_NextAttemptPeriod from m_mctscallconfiguration
@@ -22957,7 +22957,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `PR_FetchMCTS_1`( IN P_ProviderServiceMapID INT)
+CREATE %` PROCEDURE `PR_FetchMCTS_1`( IN P_ProviderServiceMapID INT)
 BEGIN
 select * from (
 select 
@@ -23174,7 +23174,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `PR_FetchMCTS_2`(IN P_ProviderServiceMapID INT, 
+CREATE  PROCEDURE `PR_FetchMCTS_2`(IN P_ProviderServiceMapID INT, 
  IN P_CallDateFrom DATETIME,IN P_CallDateTo DATETIME)
 BEGIN
  
@@ -23393,7 +23393,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `PR_FetchMCTS_3`(IN P_ProviderServiceMapID INT)
+CREATE %` PROCEDURE `PR_FetchMCTS_3`(IN P_ProviderServiceMapID INT)
 BEGIN
 select * from (
 select
@@ -23577,7 +23577,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `PR_FetchMCTS_4`(IN P_ProviderServiceMapID INT, IN P_CallDateFrom DATETIME,IN P_CallDateTo DATETIME )
+CREATE  PROCEDURE `PR_FetchMCTS_4`(IN P_ProviderServiceMapID INT, IN P_CallDateFrom DATETIME,IN P_CallDateTo DATETIME )
 BEGIN
 
 select 
@@ -23767,7 +23767,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `PR_FetchMotherChildOutboundWorklist`(v_AllocatedUserID int)
+CREATE %` PROCEDURE `PR_FetchMotherChildOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
 select 
 B.OBCallID,B.BeneficiaryRegID BeneficiaryRegID,
@@ -23839,7 +23839,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `PR_FetchMotherOutboundWorklist`(v_AllocatedUserID int)
+CREATE %` PROCEDURE `PR_FetchMotherOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
 /********************************************************************************************************************
 
@@ -23932,7 +23932,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser1`@`%` PROCEDURE `PR_FetchSpecialist`(specializationid int,parkingplaceid int)
+CREATE  PROCEDURE `PR_FetchSpecialist`(specializationid int,parkingplaceid int)
 BEGIN
 select usr.UserName,usr.UserID,usr.FirstName,usr.MiddleName,
 usr.LastName, usm.SpecializationID,gen.GenderName,til.TitleName,usr.EmailID,usr.ContactNo,
@@ -23965,7 +23965,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `PR_FetchUnregisteredUser`(v_ParkingPlace int)
+CREATE  PROCEDURE `PR_FetchUnregisteredUser`(v_ParkingPlace int)
 BEGIN
 
 select usr.UserID, usr.FirstName, usr.LastName, usr.UserName from m_userparkingplacemap uspm
@@ -23991,7 +23991,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `PR_FetchUserDetails`(v_ServiceProviderID int, v_PSMStateID int, v_ServiceID int, v_RoleID int, v_Name_User varchar(50), v_UserID int)
+CREATE %` PROCEDURE `PR_FetchUserDetails`(v_ServiceProviderID int, v_PSMStateID int, v_ServiceID int, v_RoleID int, v_Name_User varchar(50), v_UserID int)
 BEGIN
 
  
@@ -24091,7 +24091,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_GetCallHistory`(v_obcallid int(11))
+CREATE %` PROCEDURE `Pr_GetCallHistory`(v_obcallid int(11))
 begin
 select t1.callid,t2.MotherID,t3.Name,null Child_id,null child_name,
 t1.PhoneNo,t3.ASHA_Name,t1.ReceivedRoleName,t3.LMP_Date,null dob,
@@ -24124,7 +24124,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_GetHRPDetails`(v_motherid bigint(20), v_childid bigint(20))
+CREATE %` PROCEDURE `Pr_GetHRPDetails`(v_motherid bigint(20), v_childid bigint(20))
 begin
 declare v_obcallid_mother bigint(20);
 declare v_obcallid_child bigint(20);
@@ -24163,7 +24163,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_grade_wise_agent_count`(v_psmrid int(11),
+CREATE %` PROCEDURE `Pr_grade_wise_agent_count`(v_psmrid int(11),
 v_type varchar(50),v_month varchar(30))
 begin
 if(v_type='Cycle Wise') then
@@ -24237,7 +24237,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `PR_Insert104BRCategory`(v_SubServiceID smallint, v_ProviderServiceMapID int)
+CREATE %` PROCEDURE `PR_Insert104BRCategory`(v_SubServiceID smallint, v_ProviderServiceMapID int)
 BEGIN
  
 
@@ -24291,7 +24291,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `PR_InsertCallType`(v_ProviderServiceMapID int)
+CREATE  PROCEDURE `PR_InsertCallType`(v_ProviderServiceMapID int)
 BEGIN
  
 
@@ -24364,7 +24364,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `PR_InsertInNotificationMap`(v_RoleID int, v_NotificationID int, v_ProviderServiceMapID int,v_NotificationTypeID int, v_CreatedBy varchar(50), v_ValidFrom datetime, v_WorkingLocationID int)
+CREATE %` PROCEDURE `PR_InsertInNotificationMap`(v_RoleID int, v_NotificationID int, v_ProviderServiceMapID int,v_NotificationTypeID int, v_CreatedBy varchar(50), v_ValidFrom datetime, v_WorkingLocationID int)
 BEGIN
 
  
@@ -24481,7 +24481,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`%` PROCEDURE `PR_InsertMCTSFieldsStatewise`(v_ProviderServiceMapID int)
+CREATE  PROCEDURE `PR_InsertMCTSFieldsStatewise`(v_ProviderServiceMapID int)
 BEGIN
  
 
@@ -24542,7 +24542,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `PR_InstituteBulkUpload`(
+CREATE  PROCEDURE `PR_InstituteBulkUpload`(
 IN_InstDet longtext,v_Created_by varchar(50),v_userid int(11),v_serviceproviderid int(11)
 )
 BEGIN
@@ -24800,7 +24800,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_Locationdetails`(v_villageid int(11))
+CREATE %` PROCEDURE `Pr_Locationdetails`(v_villageid int(11))
 begin
 select distinct DistrictBranchID villageid,villagename,
 b.blockid,b.blockname,
@@ -24830,7 +24830,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_QualityAuditorSectionQuestionaire`(v_psmrid int(11))
+CREATE  PROCEDURE `Pr_QualityAuditorSectionQuestionaire`(v_psmrid int(11))
 begin
 select s.id sectionid,
 s.Name SectionName,
@@ -24864,7 +24864,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_QualityAuditorWorklist`(v_fromdate datetime,v_todate datetime,v_psmrid int(11),
+CREATE  PROCEDURE `Pr_QualityAuditorWorklist`(v_fromdate datetime,v_todate datetime,v_psmrid int(11),
 v_languageid int(11),v_agentid int(11),v_roleid int(11),v_isvalid bit(1),
 v_cycle int(11),v_Prfromdate datetime,v_Prtodate datetime)
 begin
@@ -25127,7 +25127,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_QualityAuditorWorklistDatewise`(v_fromdate datetime,v_todate datetime,v_psmrid int(11),
+CREATE  PROCEDURE `Pr_QualityAuditorWorklistDatewise`(v_fromdate datetime,v_todate datetime,v_psmrid int(11),
 v_languageid int(11),v_agentid int(11),v_roleid int(11),v_isvalid bit(1))
 begin
 if(v_isvalid is true) then
@@ -25194,7 +25194,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_Stockdetail`(v_FromDate date, v_ToDate date,
+CREATE  PROCEDURE `Pr_Stockdetail`(v_FromDate date, v_ToDate date,
 v_facilityid int(11))
 BEGIN
 
@@ -25287,7 +25287,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_Stocksummary`(v_FromDate date,
+CREATE  PROCEDURE `Pr_Stocksummary`(v_FromDate date,
   v_ToDate date,v_facilityid int(11))
 BEGIN
  
@@ -25392,7 +25392,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_tenture_wise_quality_rating`(v_psmrid int(11),
+CREATE %` PROCEDURE `Pr_tenture_wise_quality_rating`(v_psmrid int(11),
 v_rolename varchar(50))
 begin
 select case when months between 0 and 6 then '0-6 months' 
@@ -25433,7 +25433,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `Pr_TMSaveWorkList`()
+CREATE  PROCEDURE `Pr_TMSaveWorkList`()
 begin
 insert into i_ben_flow_outreach(
  beneficiary_reg_id, beneficiary_visit_id, beneficiary_visit_code, visit_reason, visit_category,
@@ -25494,7 +25494,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_trend_overall_quality_rating`(v_psmrid int(11),
+CREATE %` PROCEDURE `Pr_trend_overall_quality_rating`(v_psmrid int(11),
 v_type varchar(50),v_month varchar(30))
 begin
 if(v_type='Cycle Wise') then
@@ -25567,7 +25567,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `PR_UpdateHRP_HRniReasons`(v_BenCallID bigint(20), v_obcallid bigint(20))
+CREATE %` PROCEDURE `PR_UpdateHRP_HRniReasons`(v_BenCallID bigint(20), v_obcallid bigint(20))
 BEGIN
 -- DECLARE v_NotificationState VARCHAR(30)  default 'unread';
  
@@ -25653,7 +25653,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `PR_UpdateHRP_HRniReasons_bkp2024feb26`(v_BenCallID bigint(20), v_obcallid bigint(20))
+CREATE %` PROCEDURE `PR_UpdateHRP_HRniReasons_bkp2024feb26`(v_BenCallID bigint(20), v_obcallid bigint(20))
 BEGIN
 -- DECLARE v_NotificationState VARCHAR(30)  default 'unread';
  
@@ -25732,7 +25732,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`localhost` PROCEDURE `PR_UpdateHRP_HRniReasons_bkp2024jan11`(v_BenCallID bigint(20), v_obcallid bigint(20))
+CREATE  PROCEDURE `PR_UpdateHRP_HRniReasons_bkp2024jan11`(v_BenCallID bigint(20), v_obcallid bigint(20))
 BEGIN
 -- DECLARE v_NotificationState VARCHAR(30)  default 'unread';
  
@@ -25811,7 +25811,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_UpdateIsOutboundnull_Data`()
+CREATE %` PROCEDURE `Pr_UpdateIsOutboundnull_Data`()
 begin
 
 update t_detailedcallreport  t1
@@ -25836,7 +25836,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `PR_UpdateNotificationMap`(v_NotificationID int, v_ModifiedBy varchar(50), v_ValidFrom datetime, v_Deleted bit)
+CREATE %` PROCEDURE `PR_UpdateNotificationMap`(v_NotificationID int, v_ModifiedBy varchar(50), v_ValidFrom datetime, v_Deleted bit)
 BEGIN
 
  
@@ -25872,7 +25872,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `question_report_procedure`()
+CREATE %` PROCEDURE `question_report_procedure`()
 BEGIN
 SET @sql = NULL;
 SET SESSION group_concat_max_len = 1000000;
@@ -25914,7 +25914,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `question_report_procedure1`()
+CREATE %` PROCEDURE `question_report_procedure1`()
 BEGIN
 SET @sql = NULL;
 SET SESSION group_concat_max_len = 1000000;
@@ -25955,7 +25955,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`masteruser`@`localhost` PROCEDURE `sp_load_fact_104benmedhistory`()
+CREATE  PROCEDURE `sp_load_fact_104benmedhistory`()
 BEGIN
 
 
@@ -26111,7 +26111,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`%` SQL SECURITY DEFINER */
+/*!50013 %` SQL SECURITY DEFINER */
 /*!50001 VIEW `question_report` AS select `t`.`MotherID` AS `MotherID`,`t`.`CreatedDate` AS `CreatedDate`,`t`.`QuestionID` AS `QuestionID`,`r`.`Question` AS `Question`,`t`.`Answer` AS `Answer`,`m`.`Name` AS `Name`,`m`.`District_Name` AS `District_Name`,`m`.`Block_Name` AS `Block_Name`,`m`.`LMP_Date` AS `LMP_Date`,`m`.`EDD` AS `EDD`,`b`.`ReceivedAgentID` AS `ReceivedAgentID`,`b`.`CallTime` AS `CallTime`,`b`.`CallEndTime` AS `CallEndTime`,`b`.`PhoneNo` AS `PhoneNo`,`c`.`CallType` AS `CallType`,if((`b`.`isCallAnswered` = '1'),'YES','NO') AS `isCallAnswered`,if((`b`.`isCallDisconnected` = '1'),'YES','NO') AS `isCallDisconnected`,if((`b`.`isWrongNumber` = '1'),'YES','NO') AS `isWrongNumber` from ((((`t_mctscallresponse` `t` join `m_questionnaire` `r` on((`r`.`QuestionID` = `t`.`QuestionID`))) join `t_mothervalidrecord` `m` on((`m`.`MCTSID_no` = `t`.`MotherID`))) left join `t_bencall` `b` on((`t`.`BenCallID` = `b`.`BenCallID`))) left join `m_calltype` `c` on((`c`.`CallTypeID` = `b`.`CallTypeID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26129,7 +26129,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`%` SQL SECURITY DEFINER */
+/*!50013 %` SQL SECURITY DEFINER */
 /*!50001 VIEW `question_report1` AS select `t`.`ChildID` AS `ChildID`,`t`.`CreatedDate` AS `CreatedDate`,`t`.`QuestionID` AS `QuestionID`,`r`.`Question` AS `Question`,`t`.`Answer` AS `Answer`,`m`.`Child_Name` AS `Child_Name`,`m`.`District_Name` AS `District_Name`,`m`.`Block_Name` AS `Block_Name`,`m`.`DOB` AS `DOB`,`m`.`Mother_Name` AS `Mother_Name`,`b`.`CallTime` AS `CallTime`,`m`.`Phone_No` AS `Phone_No` from ((((`t_mctscallresponse` `t` join `m_questionnaire` `r` on((`r`.`QuestionID` = `t`.`QuestionID`))) join `t_childvaliddata` `m` on((`m`.`MCTSID_no_Child_ID` = `t`.`ChildID`))) left join `t_bencall` `b` on((`t`.`BenCallID` = `b`.`BenCallID`))) left join `m_calltype` `c` on((`c`.`CallTypeID` = `b`.`CallTypeID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26147,7 +26147,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`%` SQL SECURITY DEFINER */
+/*!50013 %` SQL SECURITY DEFINER */
 /*!50001 VIEW `showofficedetails` AS select `psam`.`PSAddMapID` AS `PSAddMapID`,`psam`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`psm`.`ServiceProviderID` AS `ServiceProviderID`,`sp`.`ServiceProviderName` AS `ServiceProviderName`,`psm`.`StateID` AS `StateID`,`st`.`StateName` AS `StateName`,`psm`.`ServiceID` AS `ServiceID`,`sm`.`ServiceName` AS `ServiceName`,`sm`.`IsNational` AS `IsNational`,`psam`.`DistrictID` AS `DistrictID`,`dis`.`DistrictName` AS `DistrictName`,`psam`.`LocationName` AS `LocationName`,`psam`.`Address` AS `Address`,`psam`.`Deleted` AS `Deleted`,`psam`.`CreatedBy` AS `CreatedBy`,`psam`.`CreatedDate` AS `CreatedDate`,`psam`.`ModifiedBy` AS `ModifiedBy`,`psam`.`LastModDate` AS `LastModDate` from (((((`m_providerserviceaddmapping` `psam` left join `m_providerservicemapping` `psm` on((`psam`.`ProviderServiceMapID` = `psm`.`ProviderServiceMapID`))) left join `m_district` `dis` on((`psam`.`DistrictID` = `dis`.`DistrictID`))) left join `m_serviceprovider` `sp` on((`psm`.`ServiceProviderID` = `sp`.`ServiceProviderID`))) left join `m_state` `st` on((`psm`.`StateID` = `st`.`StateID`))) left join `m_servicemaster` `sm` on((`psm`.`ServiceID` = `sm`.`ServiceID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26165,7 +26165,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`%` SQL SECURITY DEFINER */
+/*!50013 %` SQL SECURITY DEFINER */
 /*!50001 VIEW `showuserdetailsfromuserservicerolemapping` AS select `usr`.`USRMappingID` AS `USRMappingID`,`usr`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`usr`.`UserID` AS `UserID`,`usr`.`RoleID` AS `RoleID`,`role`.`RoleName` AS `RoleName`,`us`.`TitleID` AS `TitleID`,`ti`.`TitleName` AS `TitleName`,`us`.`FirstName` AS `FirstName`,`us`.`MiddleName` AS `MiddleName`,`us`.`LastName` AS `LastName`,`us`.`GenderID` AS `GenderID`,`gn`.`GenderName` AS `GenderName`,`us`.`MaritalStatusID` AS `MaritalStatusID`,`ms`.`Status` AS `MaritalStatus`,`us`.`AadhaarNo` AS `AadhaarNo`,`us`.`PAN` AS `PAN`,`us`.`DOB` AS `DOB`,`us`.`DOJ` AS `DOJ`,`us`.`QualificationID` AS `QualificationID`,`qua`.`Name` AS `Qualification`,`us`.`UserName` AS `UserName`,`us`.`Password` AS `Password`,`usr`.`AgentID` AS `AgentID`,`usr`.`AgentPassword` AS `AgentPassword`,`usr`.`CZRole` AS `CZRole`,`us`.`EmailID` AS `EmailID`,`ulmc`.`languages` AS `Languages`,`us`.`StatusID` AS `StatusID`,`sta`.`Status` AS `UserStatus`,`us`.`EmergencyContactPerson` AS `EmergencyContactPerson`,`us`.`EmergencyContactNo` AS `EmergencyContactNo`,`us`.`IsSupervisor` AS `IsSupervisor`,`us`.`Deleted` AS `UserDeleted`,`usd`.`DemographicID` AS `DemographicID`,`usd`.`FathersName` AS `FathersName`,`usd`.`MothersName` AS `MothersName`,`usd`.`CommunityID` AS `CommunityID`,`com`.`CommunityType` AS `CommunityType`,`usd`.`ReligionID` AS `ReligionID`,`rel`.`ReligionType` AS `ReligionType`,`usd`.`AddressLine1` AS `UserAddressLine1`,`usd`.`AddressLine2` AS `UserAddressLine2`,`usd`.`PermAddressLine1` AS `PermAddressLine1`,`usd`.`PermAddressLine2` AS `PermAddressLine2`,`usd`.`PermStateID` AS `PermStateID`,`usd`.`PermDistrictID` AS `PermDistrictID`,`usd`.`PermPinCode` AS `PermPinCode`,`usd`.`PermanentAddress` AS `UserPremanentAddress`,`usd`.`CityID` AS `UserCityID`,`ct`.`CityName` AS `UserCity`,`usd`.`StateID` AS `UserStateID`,`st`.`StateName` AS `UserState`,`usd`.`CountryID` AS `UserCountryID`,`cou`.`CountryName` AS `UserCountry`,`usd`.`PinCode` AS `PinCode`,`usd`.`IsPresent` AS `IsPresent`,`usd`.`IsPermanent` AS `IsPermanent`,`psm`.`ServiceProviderID` AS `ServiceProviderID`,`sp`.`ServiceProviderName` AS `ServiceProviderName`,`psm`.`ServiceID` AS `ServiceID`,`ser`.`ServiceName` AS `ServiceName`,`ser`.`IsNational` AS `IsNational`,`psm`.`StateID` AS `PSMStateID`,`st1`.`StateName` AS `PSMStateName`,`usr`.`WorkingLocationID` AS `WorkingLocationID`,`psam`.`LocationName` AS `WorkingLocationName`,`psam`.`DistrictID` AS `WorkingDistrictID`,`dis1`.`DistrictName` AS `WorkingDistrictName`,`psam`.`Address` AS `WorkingAddress`,`usr`.`Deleted` AS `USRMDeleted` from ((((((((((((((((((((`m_userservicerolemapping` `usr` left join `m_user` `us` on((`usr`.`UserID` = `us`.`UserID`))) left join `m_userdemographics` `usd` on((`us`.`UserID` = `usd`.`UserID`))) left join `m_role` `role` on((`usr`.`RoleID` = `role`.`RoleID`))) left join `m_providerservicemapping` `psm` on((`usr`.`ProviderServiceMapID` = `psm`.`ProviderServiceMapID`))) left join `m_providerserviceaddmapping` `psam` on((`usr`.`WorkingLocationID` = `psam`.`PSAddMapID`))) left join `m_title` `ti` on((`us`.`TitleID` = `ti`.`TitleID`))) left join `m_gender` `gn` on((`us`.`GenderID` = `gn`.`GenderID`))) left join `m_maritalstatus` `ms` on((`us`.`MaritalStatusID` = `ms`.`MaritalStatusID`))) left join `m_userqualification` `qua` on((`us`.`QualificationID` = `qua`.`QualificationID`))) left join `m_status` `sta` on((`us`.`StatusID` = `sta`.`StatusID`))) left join `m_community` `com` on((`usd`.`CommunityID` = `com`.`CommunityID`))) left join `m_religion` `rel` on((`usd`.`ReligionID` = `rel`.`ReligionID`))) left join `m_city` `ct` on((`usd`.`CityID` = `ct`.`CityID`))) left join `m_state` `st` on((`usd`.`StateID` = `st`.`StateID`))) left join `m_country` `cou` on((`usd`.`CountryID` = `cou`.`CountryID`))) left join `m_serviceprovider` `sp` on((`psm`.`ServiceProviderID` = `sp`.`ServiceProviderID`))) left join `m_servicemaster` `ser` on((`psm`.`ServiceID` = `ser`.`ServiceID`))) left join `m_state` `st1` on((`psm`.`StateID` = `st1`.`StateID`))) left join `m_district` `dis1` on((`psam`.`DistrictID` = `dis1`.`DistrictID`))) left join (select `ulm`.`UserID` AS `UserID`,group_concat(`ulm`.`LanguageID` separator ',') AS `languages` from `m_userlangmapping` `ulm` group by `ulm`.`UserID`) `ulmc` on((`ulmc`.`UserID` = `usr`.`UserID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26183,7 +26183,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`masteruser`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_104benmedhistory` AS select `t_104benmedhistory`.`BenHistoryID` AS `BenHistoryID`,`t_104benmedhistory`.`RequestID` AS `RequestID`,`t_104benmedhistory`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`t_104benmedhistory`.`BenCallID` AS `BenCallID`,`t_104benmedhistory`.`PatientName` AS `PatientName`,`t_104benmedhistory`.`PatientAge` AS `PatientAge`,`t_104benmedhistory`.`PatientGenderID` AS `PatientGenderID`,`t_104benmedhistory`.`Algorithm` AS `Symptom Results`,`t_104benmedhistory`.`SelecteDiagnosisID` AS `DiseaseSummaryID`,`t_104benmedhistory`.`SelecteDiagnosis` AS `DiseaseSummary`,NULL AS `ChiefComplaintID`,NULL AS `ChiefComplaint`,`t_104benmedhistory`.`Allergies` AS `Allergies`,NULL AS `SelecteDiagnosisID`,NULL AS `SelecteDiagnosis`,`t_104benmedhistory`.`CategoryID` AS `CategoryID`,`t_104benmedhistory`.`SubCategoryID` AS `SubCategoryID`,`t_104benmedhistory`.`AddedAdvice` AS `AddedAdvice`,`t_104benmedhistory`.`PrescriptionID` AS `PrescriptionID`,`t_104benmedhistory`.`ActionByHAO` AS `ActionByHAO`,`t_104benmedhistory`.`ActionByCO` AS `ActionByCO`,`t_104benmedhistory`.`ActionByMO` AS `ActionByMO`,`t_104benmedhistory`.`ActionByPD` AS `ActionByPD`,`t_104benmedhistory`.`Remarks` AS `Remarks`,`t_104benmedhistory`.`IsSelf` AS `IsSelf`,`t_104benmedhistory`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`t_104benmedhistory`.`Deleted` AS `Deleted`,`t_104benmedhistory`.`Processed` AS `Processed`,`t_104benmedhistory`.`CreatedBy` AS `CreatedBy`,`t_104benmedhistory`.`CreatedDate` AS `CreatedDate`,`t_104benmedhistory`.`ModifiedBy` AS `ModifiedBy`,`t_104benmedhistory`.`LastModDate` AS `LastModDate`,`t_104benmedhistory`.`IsChiefComplaint` AS `IsChiefComplaint` from `t_104benmedhistory` where (`t_104benmedhistory`.`IsChiefComplaint` = 0) union all select `t_104benmedhistory`.`BenHistoryID` AS `BenHistoryID`,`t_104benmedhistory`.`RequestID` AS `RequestID`,`t_104benmedhistory`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`t_104benmedhistory`.`BenCallID` AS `BenCallID`,`t_104benmedhistory`.`PatientName` AS `PatientName`,`t_104benmedhistory`.`PatientAge` AS `PatientAge`,`t_104benmedhistory`.`PatientGenderID` AS `PatientGenderID`,`t_104benmedhistory`.`Algorithm` AS `Symptom Results`,NULL AS `DiseaseSummaryID`,NULL AS `DiseaseSummary`,`t_104benmedhistory`.`DiseaseSummaryID` AS `ChiefComplaintID`,`t_104benmedhistory`.`DiseaseSummary` AS `ChiefComplaint`,`t_104benmedhistory`.`Allergies` AS `Allergies`,`t_104benmedhistory`.`SelecteDiagnosisID` AS `SelecteDiagnosisID`,`t_104benmedhistory`.`SelecteDiagnosis` AS `SelecteDiagnosis`,`t_104benmedhistory`.`CategoryID` AS `CategoryID`,`t_104benmedhistory`.`SubCategoryID` AS `SubCategoryID`,`t_104benmedhistory`.`AddedAdvice` AS `AddedAdvice`,`t_104benmedhistory`.`PrescriptionID` AS `PrescriptionID`,`t_104benmedhistory`.`ActionByHAO` AS `ActionByHAO`,`t_104benmedhistory`.`ActionByCO` AS `ActionByCO`,`t_104benmedhistory`.`ActionByMO` AS `ActionByMO`,`t_104benmedhistory`.`ActionByPD` AS `ActionByPD`,`t_104benmedhistory`.`Remarks` AS `Remarks`,`t_104benmedhistory`.`IsSelf` AS `IsSelf`,`t_104benmedhistory`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`t_104benmedhistory`.`Deleted` AS `Deleted`,`t_104benmedhistory`.`Processed` AS `Processed`,`t_104benmedhistory`.`CreatedBy` AS `CreatedBy`,`t_104benmedhistory`.`CreatedDate` AS `CreatedDate`,`t_104benmedhistory`.`ModifiedBy` AS `ModifiedBy`,`t_104benmedhistory`.`LastModDate` AS `LastModDate`,`t_104benmedhistory`.`IsChiefComplaint` AS `IsChiefComplaint` from `t_104benmedhistory` where (`t_104benmedhistory`.`IsChiefComplaint` = 1) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26201,7 +26201,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_benprocedurecomponentdetails` AS select uuid() AS `id`,`lto`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`lto`.`BenVisitID` AS `BenVisitID`,`lto`.`VisitCode` AS `VisitCode`,`lto`.`PrescriptionID` AS `PrescriptionID`,`lto`.`ProcedureID` AS `ProcedureID`,`mp`.`ProcedureName` AS `ProcedureName`,`mp`.`ProcedureDesc` AS `ProcedureDesc`,`mp`.`ProcedureType` AS `ProcedureType`,`ip`.`ProcedureName` AS `IOTProcedureName`,`ip`.`ProcedureCode` AS `ProcedureCode`,`ip`.`ProcedureStartAPI` AS `ProcedureStartAPI`,`ip`.`ProcedureEndAPI` AS `ProcedureEndAPI`,`ip`.`ProcedureStatusAPI` AS `ProcedureStatusAPI`,`ip`.`CalibrationStartAPI` AS `CalibrationStartAPI`,`ip`.`CalibrationStatusAPI` AS `CalibrationStatusAPI`,`ip`.`CalibrationEndAPI` AS `CalibrationEndAPI`,`ip`.`isLabProcedure` AS `isLabProcedure`,`ip`.`DiscoveryCode` AS `DiscoveryCode`,`mpcm`.`TestComponentID` AS `TestComponentID`,`mtc`.`TestComponentName` AS `TestComponentName`,`mtc`.`TestComponentDesc` AS `TestComponentDesc`,`mtc`.`InputType` AS `InputType`,`mtc`.`MeasurementUnit` AS `MeasurementUnit`,`mtc`.`Range_min` AS `Range_min`,`mtc`.`Range_max` AS `Range_max`,`mtc`.`Range_normal_min` AS `Range_normal_min`,`mtc`.`Range_normal_max` AS `Range_normal_max`,`ic`.`ComponentName` AS `IOTComponentName`,`ic`.`ComponentCode` AS `ComponentCode`,`ic`.`IOTProcedureID` AS `IOTProcedureID`,`ic`.`ComponentUnit` AS `ComponentUnit`,`crm`.`ResultValue` AS `ResultValue`,`mtc`.`isDecimal` AS `isDecimal`,`mp`.`isMandatory` AS `isMandatory` from ((((((`t_lab_testorder` `lto` join `m_procedure` `mp` on(((`lto`.`ProcedureID` = `mp`.`ProcedureID`) and (`mp`.`Deleted` = 0x00)))) join `m_procedurecomponentmap` `mpcm` on(((`lto`.`ProcedureID` = `mpcm`.`ProcedureID`) and (`mpcm`.`Deleted` = 0x00)))) join `m_testcomponent` `mtc` on(((`mpcm`.`TestComponentID` = `mtc`.`TestComponentID`) and (`mtc`.`Deleted` = 0x00)))) left join `m_componentresultmap` `crm` on(((`mtc`.`TestComponentID` = `crm`.`TestComponentID`) and (`crm`.`Deleted` = 0x00)))) left join `m_iotprocedure` `ip` on(((`mp`.`IOTProcedureID` = `ip`.`IOTProcedureID`) and (`ip`.`Deleted` = 0x00)))) left join `m_iotcomponent` `ic` on(((`mtc`.`IOTComponentID` = `ic`.`IOTComponentId`) and (`ic`.`Deleted` = 0x00)))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26219,7 +26219,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_doortodooruserdetails` AS select uuid() AS `id`,`u`.`UserID` AS `UserID`,`u`.`UserName` AS `UserName`,`u`.`ContactNo` AS `ContactNo`,`u`.`EmergencyContactNo` AS `EmergencyContactNo`,`u`.`EmergencyContactPerson` AS `EmergencyContactPerson`,`r`.`RoleID` AS `RoleID`,`r`.`RoleName` AS `RoleName`,`upp`.`StateID` AS `StateID`,`s`.`StateName` AS `StateName`,`psd`.`DistrictID` AS `DistrictID`,`d`.`DistrictName` AS `DistrictName`,`psd`.`DistrictBlockID` AS `DistrictBlockID`,`db`.`BlockName` AS `BlockName`,`spv`.`DistrictBranchID` AS `DistrictBranchID`,`v`.`VillageName` AS `VillageName`,`ud`.`DesignationID` AS `designationid`,`ud`.`DesignationName` AS `designationname` from ((((((((((((`m_user` `u` join `m_designation` `ud` on((`ud`.`DesignationID` = `u`.`DesignationID`))) join `m_userservicerolemapping` `usr` on((`u`.`UserID` = `usr`.`UserID`))) join `m_userparkingplacemap` `upp` on((`u`.`UserID` = `upp`.`UserID`))) join `m_parkingplacesubdistrictmap` `psd` on((`upp`.`ParkingPlaceID` = `psd`.`ParkingPlaceID`))) join `m_uservanmapping` `uv` on((`upp`.`UserParkingPlaceMapID` = `uv`.`UserParkingPlaceMapID`))) join `m_vanservicepointmap` `vsp` on((`uv`.`VanID` = `vsp`.`VanID`))) join `m_servicepointvillagemap` `spv` on((`vsp`.`ServicePointID` = `spv`.`ServicePointID`))) join `m_role` `r` on((`usr`.`RoleID` = `r`.`RoleID`))) join `m_state` `s` on((`upp`.`StateID` = `s`.`StateID`))) join `m_district` `d` on((`psd`.`DistrictID` = `d`.`DistrictID`))) join `m_districtblock` `db` on((`psd`.`DistrictBlockID` = `db`.`BlockID`))) join `m_districtbranchmapping` `v` on((`spv`.`DistrictBranchID` = `v`.`DistrictBranchID`))) where ((`u`.`Deleted` is false) and (`usr`.`Deleted` is false) and (`upp`.`Deleted` is false) and (`psd`.`Deleted` is false) and (`uv`.`Deleted` is false) and (`vsp`.`Deleted` is false) and (`spv`.`Deleted` is false) and (`r`.`Deleted` is false) and (`s`.`Deleted` is false) and (`d`.`Deleted` is false) and (`db`.`Deleted` is false) and (`v`.`Deleted` is false) and (`u`.`DesignationID` is not null)) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26237,7 +26237,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_drugforprescription` AS select `mifm`.`ItemFacilityMapID` AS `id`,`mi`.`ItemID` AS `itemID`,`mi`.`ItemName` AS `itemName`,`mi`.`Strength` AS `Strength`,`mu`.`UOMName` AS `unitOfMeasurement`,cast(sum(ifnull(`tise`.`QuantityInHand`,0)) as unsigned) AS `quantityInHand`,`mi`.`ItemFormID` AS `itemFormID`,`mi`.`RouteID` AS `routeID`,`mifm`.`FacilityID` AS `facilityID`,`mi`.`Sctcode` AS `Sctcode`,`mi`.`SctTerm` AS `SctTerm`,`mi`.`Composition` AS `composition`,`mi`.`isEDL` AS `isedl` from (((`m_itemfacilitymapping` `mifm` join `m_item` `mi` on(((`mifm`.`ItemID` = `mi`.`ItemID`) and (`mifm`.`ProviderServiceMapID` = `mi`.`ProviderServiceMapID`) and (`mi`.`Deleted` is false)))) left join `t_itemstockentry` `tise` on(((`mifm`.`FacilityID` = `tise`.`FacilityID`) and (`mifm`.`ItemID` = `tise`.`ItemID`) and (`tise`.`Deleted` is false)))) left join `m_uom` `mu` on(((`mi`.`UOMID` = `mu`.`UOMID`) and (`mu`.`Deleted` is false)))) where ((`mifm`.`Deleted` is false) and (`mi`.`ItemFormID` is not null) and ((`tise`.`ExpiryDate` > curdate()) or isnull(`tise`.`ExpiryDate`))) group by `mifm`.`FacilityID`,`mi`.`ItemID` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26255,7 +26255,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_emailstockalert` AS select uuid() AS `uuid`,`f`.`FacilityID` AS `facilityId`,`i`.`ItemID` AS `itemID`,`f`.`FacilityName` AS `FacilityName`,`i`.`ItemName` AS `ItemName`,sum(`t`.`Quantity`) AS `Totalquantity`,sum(`t`.`QuantityInHand`) AS `Quantityinhand`,`t`.`CreatedBy` AS `CreatedBy`,`u`.`emailid` AS `emailid`,`prkdis`.`districtname` AS `DistrictName`,(100 - ((sum(`t`.`QuantityInHand`) * 100) / sum(`t`.`Quantity`))) AS `QuantityConsumedPercent` from (((((`t_itemstockentry` `t` join `m_item` `i` on((`i`.`ItemID` = `t`.`ItemID`))) join `m_facility` `f` on((`f`.`FacilityID` = `t`.`FacilityID`))) join (select `m_user`.`UserID` AS `userid`,`m_user`.`UserName` AS `username`,`m_user`.`EmailID` AS `emailid` from `m_user` where (`m_user`.`EmailID` is not null)) `u` on((`u`.`username` = `t`.`CreatedBy`))) left join `m_van` `v` on((`v`.`FacilityID` = `t`.`FacilityID`))) left join (select `p`.`ParkingPlaceID` AS `parkingplaceid`,group_concat(distinct `d`.`DistrictName` separator ',') AS `districtname` from (`m_parkingplacesubdistrictmap` `p` join `m_district` `d` on((`d`.`DistrictID` = `p`.`DistrictID`))) group by `p`.`ParkingPlaceID`) `prkdis` on((`v`.`ParkingPlaceID` = `prkdis`.`parkingplaceid`))) where (`i`.`Deleted` is false) group by `f`.`FacilityID`,`i`.`ItemID` having ((((sum(`t`.`QuantityInHand`) * 100) / sum(`t`.`Quantity`)) <= 20) and (sum(`t`.`QuantityInHand`) > 0)) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26273,7 +26273,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`masteruser`@`%` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_fetchfacility` AS select `mf`.`FacilityID` AS `FacilityID`,`mf`.`FacilityName` AS `FacilityName`,`mf`.`FacilityDesc` AS `FacilityDesc`,`mf`.`FacilityCode` AS `FacilityCode`,`mf`.`FacilityTypeID` AS `FacilityTypeID`,`mf`.`Location` AS `Location`,`mf`.`PhysicalLocation` AS `PhysicalLocation`,`mf`.`StoreType` AS `StoreType`,`mf`.`Status` AS `Status`,`mf`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`mf`.`IsMainFacility` AS `IsMainFacility`,`mf`.`MainFacilityID` AS `MainFacilityID`,`mf`.`Deleted` AS `FacilityDeleted`,`mf`.`CreatedBy` AS `FacilityCreatedBy`,`mf`.`CreatedDate` AS `FacilityCreatedDate`,`mf`.`ModifiedBy` AS `FacilityModifiedBy`,`mf`.`ModifiedBy` AS `FacilityLastModDate`,`mp`.`ParkingPlaceID` AS `ParkingPlaceID`,`mp`.`ParkingPlaceName` AS `ParkingPlaceName`,`mp`.`ParkingPlaceDesc` AS `ParkingPlaceDesc`,`mp`.`AreaHQAddress` AS `AreaHQAddress`,`mp`.`Deleted` AS `PPDeleted`,`mv`.`VanID` AS `VanID`,`mv`.`VanName` AS `VanName`,`mv`.`VehicalNo` AS `VehicalNo`,`mv`.`VanTypeID` AS `VanTypeID`,`mv`.`ParkingPlaceID` AS `VanParkingPlaceID`,`mv`.`Deleted` AS `VanDeleted` from ((`m_facility` `mf` left join `m_van` `mv` on((`mv`.`FacilityID` = `mf`.`FacilityID`))) left join `m_parkingplace` `mp` on((`mp`.`FacilityID` = `mf`.`FacilityID`))) order by `mf`.`FacilityID` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26291,7 +26291,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`masteruser`@`%` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_fetchitemfacilitymap` AS select `ifm`.`ItemFacilityMapID` AS `ItemFacilityMapID`,`ifm`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`ifm`.`Status` AS `Status`,`ifm`.`Deleted` AS `ItemFacilityMappingDeleted`,`ifm`.`FacilityID` AS `FacilityID`,`fc`.`FacilityName` AS `FacilityName`,`fc`.`FacilityDesc` AS `FacilityDesc`,`fc`.`FacilityCode` AS `FacilityCode`,`fc`.`FacilityTypeID` AS `FacilityTypeID`,`fct`.`FacilityTypeName` AS `FacilityTypeName`,`fct`.`FacilityTypeDesc` AS `FacilityTypeDesc`,`fct`.`FacilityTypeCode` AS `FacilityTypeCode`,`fc`.`Location` AS `Location`,`fc`.`PhysicalLocation` AS `PhysicalLocation`,`fc`.`StoreType` AS `StoreType`,`fc`.`IsMainFacility` AS `IsMainFacility`,`fc`.`Deleted` AS `FacilityDeleted`,`it`.`ItemID` AS `ItemID`,`it`.`ItemName` AS `ItemName`,`it`.`ItemDesc` AS `ItemDesc`,`it`.`ItemCode` AS `ItemCode`,`it`.`ItemCategoryID` AS `ItemCategoryID`,`itc`.`ItemCategoryName` AS `ItemCategoryName`,`itc`.`ItemCategoryDesc` AS `ItemCategoryDesc`,`itc`.`ItemCategoryCode` AS `ItemCategoryCode`,`it`.`IsMedical` AS `IsMedical`,`it`.`ItemFormID` AS `ItemFormID`,`itf`.`ItemFormName` AS `ItemFormName`,`itf`.`ItemFormDesc` AS `ItemFormDesc`,`itf`.`ItemFormCode` AS `ItemFormCode`,`it`.`PharmacologyCategoryID` AS `PharmacologyCategoryID`,`pcat`.`PharmCategoryName` AS `PharmCategoryName`,`pcat`.`PharmCategoryDesc` AS `PharmCategoryDesc`,`pcat`.`PharmCategoryCode` AS `PharmCategoryCode`,`it`.`ManufacturerID` AS `ManufacturerID`,concat(`it`.`Strength`,' ',`uom`.`UOMName`) AS `Strength`,`it`.`IsScheduledDrug` AS `IsScheduledDrug`,`it`.`RouteID` AS `RouteID`,`it`.`Deleted` AS `ItemDeleted` from (((((((`m_itemfacilitymapping` `ifm` left join `m_facility` `fc` on((`ifm`.`FacilityID` = `fc`.`FacilityID`))) left join `m_item` `it` on((`ifm`.`ItemID` = `it`.`ItemID`))) left join `m_facilitytype` `fct` on((`fc`.`FacilityTypeID` = `fct`.`FacilityTypeID`))) left join `m_itemcategory` `itc` on((`it`.`ItemCategoryID` = `itc`.`ItemCategoryID`))) left join `m_itemform` `itf` on((`it`.`ItemFormID` = `itf`.`ItemFormID`))) left join `m_pharmacologicalcategory` `pcat` on((`it`.`PharmacologyCategoryID` = `pcat`.`PharmCategoryID`))) left join `m_uom` `uom` on((`it`.`UOMID` = `uom`.`UOMID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26309,7 +26309,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`masteruser`@`%` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_fetchnotification` AS select `unm`.`UserNotificationMapID` AS `UserNotificationMapID`,`unm`.`NotificationID` AS `NotificationID`,`unm`.`UserID` AS `UserID`,`unm`.`RoleID` AS `RoleID`,`unm`.`NotificationState` AS `NotificationState`,`unm`.`NotificationTypeID` AS `NotificationTypeID`,`unm`.`NotificationType` AS `NotificationType`,`unm`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`unm`.`WorkingLocationID` AS `WorkingLocationID`,`unm`.`Deleted` AS `Deleted`,`unm`.`Processed` AS `Processed`,`unm`.`CreatedBy` AS `CreatedBy`,`unm`.`CreatedDate` AS `CreatedDate`,`unm`.`ModifiedBy` AS `ModifiedBy`,`unm`.`LastModDate` AS `LastModDate` from (`m_usernotificationmap` `unm` left join `m_notification` `noti` on((`unm`.`NotificationID` = `noti`.`NotificationID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26327,7 +26327,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`%` SQL SECURITY DEFINER */
+/*!50013 %` SQL SECURITY DEFINER */
 /*!50001 VIEW `v_get_call_section_mapping` AS select `c`.`ID` AS `id`,`c`.`callConfigId` AS `callconfigid`,`s`.`id` AS `sectionid`,`s`.`name` AS `sectionname`,`c`.`IsChecked` AS `ischecked`,`c`.`CallSectionRank` AS `callsectionrank`,`c`.`ProviderServiceMapID` AS `providerservicemapid`,`c`.`Deleted` AS `deleted` from (`m_section` `s` join `m_callsectionmapping` `c` on(((`s`.`id` = `c`.`SectionID`) and (`c`.`Deleted` is false)))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26345,7 +26345,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`%` SQL SECURITY DEFINER */
+/*!50013 %` SQL SECURITY DEFINER */
 /*!50001 VIEW `v_get_prkngplc_blok_dist_zone_state` AS select distinct `m_sp`.`ServicePointID` AS `Servicepointid`,`m_pp`.`ParkingPlaceID` AS `ParkingPlaceID`,`m_pp`.`ParkingPlaceName` AS `ParkingPlaceName`,`m_db`.`BlockID` AS `BlockID`,`m_db`.`BlockName` AS `BlockName`,`m_d`.`DistrictID` AS `DistrictID`,`m_d`.`DistrictName` AS `DistrictName`,`m_zdm`.`ZoneID` AS `ZoneID`,`m_z`.`ZoneName` AS `ZoneName`,`m_s`.`StateID` AS `StateID`,`m_s`.`StateName` AS `StateName`,`m_sp`.`ProviderServiceMapID` AS `SPproviderservicemapid`,`m_pp`.`ProviderServiceMapID` AS `PPproviderservicemapid`,`m_zdm`.`ProviderServiceMapID` AS `ZDMproviderservicemapid` from ((((((`m_servicepoint` `m_sp` join `m_parkingplace` `m_pp` on(((`m_sp`.`ParkingPlaceID` = `m_pp`.`ParkingPlaceID`) and (`m_pp`.`Deleted` is false)))) join `m_districtblock` `m_db` on(((`m_pp`.`DistrictBlockID` = `m_db`.`BlockID`) and (`m_db`.`Deleted` is false)))) join `m_district` `m_d` on(((`m_db`.`DistrictID` = `m_d`.`DistrictID`) and (`m_d`.`Deleted` is false)))) join `m_zonedistrictmap` `m_zdm` on(((`m_d`.`DistrictID` = `m_zdm`.`DistrictID`) and (`m_zdm`.`Deleted` is false)))) join `m_zone` `m_z` on(((`m_z`.`ZoneID` = `m_zdm`.`ZoneID`) and (`m_z`.`Deleted` is false)))) join `m_state` `m_s` on(((`m_d`.`StateID` = `m_s`.`StateID`) and (`m_s`.`Deleted` is false)))) where (`m_sp`.`Deleted` is false) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26363,7 +26363,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`masteruser`@`%` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_get_prkngplc_dist_zone_state_from_spid` AS select `m_sp`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`m_sp`.`ServicePointID` AS `ServicePointID`,`m_sp`.`ParkingPlaceID` AS `ParkingPlaceID`,`m_pp`.`ParkingPlaceName` AS `ParkingPlaceName`,`m_ppsdm`.`DistrictID` AS `DistrictID`,`m_d`.`DistrictName` AS `DistrictName`,`m_zdm`.`ZoneID` AS `ZoneID`,`m_z`.`ZoneName` AS `ZoneName`,`m_d`.`StateID` AS `StateID`,`m_s`.`StateName` AS `StateName` from ((((((`m_servicepoint` `m_sp` join `m_parkingplacesubdistrictmap` `m_ppsdm` on(((`m_sp`.`ParkingPlaceID` = `m_ppsdm`.`ParkingPlaceID`) and (`m_sp`.`ProviderServiceMapID` = `m_ppsdm`.`ProviderServiceMapID`) and (`m_ppsdm`.`Deleted` is false)))) join `m_zonedistrictmap` `m_zdm` on(((`m_zdm`.`DistrictID` = `m_ppsdm`.`DistrictID`) and (`m_zdm`.`ProviderServiceMapID` = `m_ppsdm`.`ProviderServiceMapID`) and (`m_zdm`.`Deleted` is false)))) join `m_parkingplace` `m_pp` on(((`m_sp`.`ParkingPlaceID` = `m_pp`.`ParkingPlaceID`) and (`m_pp`.`Deleted` is false)))) join `m_district` `m_d` on(((`m_d`.`DistrictID` = `m_zdm`.`DistrictID`) and (`m_d`.`Deleted` is false)))) join `m_zone` `m_z` on(((`m_zdm`.`ZoneID` = `m_z`.`ZoneID`) and (`m_z`.`Deleted` is false)))) join `m_state` `m_s` on(((`m_d`.`StateID` = `m_s`.`StateID`) and (`m_s`.`Deleted` is false)))) where (`m_sp`.`Deleted` is false) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26381,7 +26381,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_get_qualityaudit_sectionquestionairevalues` AS select uuid() AS `id`,`t1`.`id` AS `sectionId`,`t1`.`Name` AS `sectionName`,`t1`.`SectionRank` AS `SectionRank`,`t2`.`id` AS `questionId`,`t2`.`Question` AS `Question`,`t2`.`QuestionRank` AS `QuestionRank`,`t3`.`id` AS `optionId`,`t3`.`QuestionValues` AS `QuestionValues`,`t3`.`Score` AS `Score`,`t1`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`t2`.`isFatalQuestion` AS `isFatalQuestion` from ((`m_qualityauditsection` `t1` join `m_qualityauditquestionnaire` `t2` on((`t1`.`id` = `t2`.`Sectionid`))) join `m_qualityauditquestionnairevalues` `t3` on((`t2`.`id` = `t3`.`QuestionID`))) where ((`t1`.`Deleted` is false) and (`t2`.`Deleted` is false) and (`t3`.`Deleted` is false)) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26399,7 +26399,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_get_section_question_mapping` AS select `t1`.`id` AS `id`,`t1`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`t1`.`Sectionid` AS `Sectionid`,`t2`.`name` AS `sectionName`,`t1`.`SectionQuestionRank` AS `SectionQuestionRank`,`t1`.`Questionid` AS `Questionid`,`t3`.`Question` AS `Question`,`t3`.`QuestionRank` AS `QuestionRank`,`t3`.`QuestionTypeID` AS `QuestionTypeID`,`t1`.`Role` AS `Role`,`t4`.`QuestionType` AS `QuestionType`,`t1`.`Deleted` AS `deleted` from (((`m_sectionqamapping` `t1` join `m_section` `t2` on((`t1`.`Sectionid` = `t2`.`id`))) join `m_questionnaire` `t3` on((`t1`.`Questionid` = `t3`.`QuestionID`))) join `m_questiontype` `t4` on((`t3`.`QuestionTypeID` = `t4`.`QuestionTypeID`))) order by `t1`.`LastModDate` desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26417,7 +26417,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_get_section_question_mapping_associate` AS select `a`.`id` AS `id`,`a`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`a`.`Sectionid` AS `Sectionid`,`a`.`sectionName` AS `sectionName`,`a`.`SectionQuestionRank` AS `SectionQuestionRank`,`a`.`Questionid` AS `Questionid`,`a`.`Question` AS `Question`,`a`.`QuestionRank` AS `QuestionRank`,`a`.`QuestionTypeID` AS `QuestionTypeID`,`a`.`QuestionType` AS `QuestionType`,`a`.`deleted` AS `deleted`,`a`.`CallSectionRank` AS `CallSectionRank`,`a`.`AnswerType` AS `AnswerType`,`a`.`callConfigId` AS `callConfigId`,group_concat(`a`.`parentQuestionID` separator ',') AS `parentQuestionID`,group_concat(`a`.`parentQuestion` separator ',') AS `parentQuestion`,group_concat(`a`.`parentAnswer` separator '||') AS `parentAnswer`,`a`.`Role` AS `Role` from (select distinct `t1`.`id` AS `id`,`t1`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`t1`.`Sectionid` AS `Sectionid`,`t2`.`name` AS `sectionName`,`t1`.`SectionQuestionRank` AS `SectionQuestionRank`,`t1`.`Questionid` AS `Questionid`,`t3`.`Question` AS `Question`,`t3`.`QuestionRank` AS `QuestionRank`,`t3`.`QuestionTypeID` AS `QuestionTypeID`,`t4`.`QuestionType` AS `QuestionType`,`t1`.`Deleted` AS `deleted`,`t5`.`CallSectionRank` AS `CallSectionRank`,`t3`.`AnswerType` AS `AnswerType`,`t6`.`MCTSCallConfigID` AS `callConfigId`,(case when (`t1`.`Questionid` = `t7`.`childQuestionID`) then `t7`.`parentQuestionID` else NULL end) AS `parentQuestionID`,(case when (`t1`.`Questionid` = `t7`.`childQuestionID`) then `t8`.`Question` else NULL end) AS `parentQuestion`,(case when (`t1`.`Questionid` = `t7`.`childQuestionID`) then `t7`.`AnswerType` else NULL end) AS `parentAnswer`,`t1`.`Role` AS `Role` from (((((((`m_sectionqamapping` `t1` join `m_section` `t2` on((`t1`.`Sectionid` = `t2`.`id`))) join `m_questionnaire` `t3` on((`t1`.`Questionid` = `t3`.`QuestionID`))) join `m_questiontype` `t4` on((`t3`.`QuestionTypeID` = `t4`.`QuestionTypeID`))) join `m_callsectionmapping` `t5` on((`t1`.`Sectionid` = `t5`.`SectionID`))) join `m_mctscallconfiguration` `t6` on((`t5`.`callConfigId` = `t6`.`MCTSCallConfigID`))) left join `m_mapquestion` `t7` on((`t1`.`Questionid` = `t7`.`childQuestionID`))) left join `m_questionnaire` `t8` on((`t8`.`QuestionID` = `t7`.`parentQuestionID`))) where ((`t1`.`Deleted` is false) and (`t5`.`IsChecked` is true))) `a` group by `a`.`Questionid`,`a`.`callConfigId`,`a`.`Sectionid` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26435,7 +26435,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`%` SQL SECURITY DEFINER */
+/*!50013 %` SQL SECURITY DEFINER */
 /*!50001 VIEW `v_get_userlangmapping` AS select `ul`.`UserLangID` AS `userlangid`,`ul`.`UserID` AS `userid`,`ul`.`LanguageID` AS `languageid`,`l`.`LanguageName` AS `LanguageName` from (`m_userlangmapping` `ul` join `m_language` `l` on((`l`.`LanguageID` = `ul`.`LanguageID`))) where (`ul`.`Deleted` is false) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26453,7 +26453,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`%` SQL SECURITY DEFINER */
+/*!50013 %` SQL SECURITY DEFINER */
 /*!50001 VIEW `v_getagentsbyroleid` AS select `usr`.`USRMappingID` AS `USRMappingID`,`u`.`UserID` AS `UserID`,`u`.`FirstName` AS `FirstName`,`u`.`MiddleName` AS `MiddleName`,`u`.`LastName` AS `LastName`,`usr`.`RoleID` AS `RoleID`,`usr`.`AgentID` AS `AgentID` from (`m_user` `u` join `m_userservicerolemapping` `usr` on((`u`.`UserID` = `usr`.`UserID`))) where ((`u`.`Deleted` is false) and (`usr`.`Deleted` is false)) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26471,7 +26471,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`%` SQL SECURITY DEFINER */
+/*!50013 %` SQL SECURITY DEFINER */
 /*!50001 VIEW `v_getdialpreference` AS select `t1`.`USRMappingID` AS `USRMappingID`,`t1`.`UserID` AS `UserID`,`t2`.`FirstName` AS `FirstName`,`t2`.`MiddleName` AS `MiddleName`,`t2`.`LastName` AS `LastName`,`t1`.`RoleID` AS `RoleID`,`t3`.`RoleName` AS `RoleName`,`t1`.`isAutoPreviewDial` AS `isAutoPreviewDial`,`t1`.`PreviewWindowTime` AS `PreviewWindowTime`,`t1`.`ProviderServiceMapID` AS `ProviderServiceMapID` from ((`m_userservicerolemapping` `t1` join `m_user` `t2` on(((`t1`.`UserID` = `t2`.`UserID`) and (`t1`.`Deleted` is false)))) join `m_role` `t3` on((`t1`.`RoleID` = `t3`.`RoleID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26489,7 +26489,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`masteruser`@`%` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_getprescribeddrugswithdetails` AS select `pd`.`PrescribedDrugID` AS `PrescribedDrugID`,`pd`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`pd`.`BenVisitID` AS `BenVisitID`,`pd`.`VisitCode` AS `VisitCode`,`pd`.`PrescriptionID` AS `PrescriptionID`,`pd`.`DrugID` AS `DrugID`,`pd`.`GenericDrugName` AS `GenericDrugName`,`pd`.`DrugForm` AS `DrugForm`,`pd`.`DrugStrength` AS `DrugStrength`,`pd`.`Dose` AS `Dose`,`pd`.`Route` AS `Route`,`pd`.`Frequency` AS `Frequency`,`pd`.`Duration` AS `Duration`,`pd`.`DuartionUnit` AS `DuartionUnit`,`pd`.`RelationToFood` AS `RelationToFood`,`pd`.`SpecialInstruction` AS `SpecialInstruction`,ifnull(`pd`.`QtyPrescribed`,0) AS `QtyPrescribed`,`pd`.`CreatedDate` AS `CreatedDate`,`pd`.`CreatedBy` AS `CreatedBy`,`ise`.`ItemStockEntryID` AS `ItemStockEntryID`,`ise`.`FacilityID` AS `FacilityID`,`ise`.`BatchNo` AS `BatchNo`,ifnull(`ise`.`QuantityInHand`,0) AS `QuantityInHand`,`ise`.`ExpiryDate` AS `ExpiryDate`,`pd`.`isEDL` AS `isEDL` from (`t_prescribeddrug` `pd` left join `t_itemstockentry` `ise` on(((`pd`.`DrugID` = `ise`.`ItemID`) and (`pd`.`VanID` = `ise`.`VanID`) and (`ise`.`Deleted` is false)))) where (`pd`.`Deleted` is false) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26507,7 +26507,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`%` SQL SECURITY DEFINER */
+/*!50013 %` SQL SECURITY DEFINER */
 /*!50001 VIEW `v_getvanlocdetails` AS select distinct `van`.`VanID` AS `VanID`,`van`.`ParkingPlaceID` AS `ParkingPlaceID`,`dis`.`StateID` AS `StateID`,`dis`.`DistrictID` AS `DistrictID`,`dis`.`DistrictName` AS `DistrictName`,`db`.`BlockID` AS `blockid`,`db`.`BlockName` AS `blockname`,`usrm`.`Villageid` AS `villageid`,`usrm`.`VillageName` AS `VillageName`,`dis`.`GovtDistrictID` AS `District_LGDCode`,`dis`.`GovtStateID` AS `State_LGDCode`,`usrm`.`ProviderServiceMapID` AS `ProviderServiceMapID` from ((((`m_van` `van` left join `m_parkingplacesubdistrictmap` `prkdis` on((`van`.`ParkingPlaceID` = `prkdis`.`ParkingPlaceID`))) left join `m_district` `dis` on((`prkdis`.`DistrictID` = `dis`.`DistrictID`))) left join `m_districtblock` `db` on((`db`.`DistrictID` = `dis`.`DistrictID`))) left join `m_userservicerolemapping` `usrm` on((`usrm`.`Blockid` = `db`.`BlockID`))) where ((`van`.`Deleted` is false) and (`db`.`Deleted` is false) and (`prkdis`.`Deleted` is false) and (`dis`.`Deleted` is false)) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26525,7 +26525,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`masteruser1`@`%` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_mother_child_feedback_report` AS select distinct `tf`.`FeedbackID` AS `FeedbackID`,`tf`.`RequestID` AS `RequestID`,`tf`.`InstitutionID` AS `InstitutionID`,`mi`.`InstitutionName` AS `Institute_Facility_Name`,`tf`.`DesignationID` AS `DesignationID`,`md`.`DesignationName` AS `Designation`,`tf`.`StateID` AS `StateID`,`tf`.`DistrictID` AS `DistrictID`,`tf`.`BlockID` AS `BlockID`,`tf`.`DistrictBranchID` AS `DistrictBranchID`,`tf`.`InstitutionTypeID` AS `InstitutionTypeID`,`tf`.`SeverityID` AS `SeverityID`,`tf`.`FeedbackTypeID` AS `FeedbackTypeID`,`mf`.`FeedbackTypeName` AS `Type_of_complain`,`tf`.`FeedbackNatureID` AS `FeedbackNatureID`,`mf1`.`FeedbackNature` AS `Nature_of_Complaint`,`tf`.`FeedbackStatusID` AS `FeedbackStatusID`,`tf`.`Feedback` AS `Brief_of_Complaint`,`tf`.`Comments` AS `Details_of_Complaint`,`tf`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`tf`.`UserID` AS `UserID`,`tf`.`FeedbackAgainst` AS `FeedbackAgainst`,`tf`.`SMSPhoneNo` AS `SMSPhoneNo`,`tf`.`ServiceAvailDate` AS `DateofComplaint`,`tf`.`EmailStatusID` AS `EmailStatusID`,`tf`.`FeedbackActual` AS `FeedbackActual`,`tf`.`FeedbackUpdated` AS `FeedbackUpdated`,`tf`.`FeedbackResponse` AS `FeedbackResponse`,`tf`.`AgentUserID` AS `AgentUserID`,`tf`.`SupUserID` AS `SupUserID`,`tf`.`Comments` AS `Comments`,`tf`.`AuthName` AS `AuthName`,`tf`.`AuthDesignation` AS `AuthDesignation`,`tf`.`AuthInstitution` AS `AuthInstitution`,`tf`.`AuthEmailID` AS `AuthEmailID`,`tf`.`CreatedDate` AS `CreatedDate`,(case when (`tm`.`BeneficiaryRegID` is not null) then TRUE else FALSE end) AS `is_mother`,`tm`.`MotherValidRecordID` AS `MotherValidRecordID`,`tm`.`RowID` AS `RowID`,`tm`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`tm`.`Date_of_Entry` AS `Date_of_Entry`,`tm`.`Entry_type` AS `Entry_type`,`tm`.`MCTSID_no` AS `MCTSID_no`,`tm`.`Name` AS `Name`,`tm`.`Husband_Name` AS `Husband_Name`,`tm`.`PhoneNo_Of_Whom` AS `PhoneNo_Of_Whom`,`tm`.`Whom_PhoneNo` AS `Alternate_number`,`tm`.`Birth_Date` AS `Birth_Date`,`tm`.`Age` AS `Age`,`tm`.`Blood_Group` AS `Blood_Group`,`tm`.`Caste` AS `Caste`,`tm`.`Aadhar_no` AS `Aadhar_no`,`tm`.`State_ID` AS `State_ID`,`tm`.`State_Name` AS `State_Name`,`tm`.`District_ID` AS `District_ID`,`tm`.`District_Name` AS `District_Name`,`tm`.`Taluka_Name` AS `Taluka_Name`,`tm`.`Taluka_ID` AS `Taluka_ID`,`tm`.`Block_ID` AS `Block_ID`,`tm`.`Block_Name` AS `Block_Name`,`tm`.`SubCenter_ID` AS `SubCenter_ID`,`tm`.`SubCenter_Name` AS `SubCenter_Name`,`tm`.`Village_ID` AS `Village_ID`,`tm`.`Village_Name` AS `Village_Name`,`tm`.`City_ID` AS `City_ID`,`tm`.`City_Name` AS `City_Name`,`tm`.`SubCenter_Name1` AS `SubCenter_Name1`,`tm`.`ANM_ID` AS `ANM_ID`,`tm`.`ANM_Name` AS `ANM_Name`,`tm`.`ANM_Ph` AS `ANM_Ph`,`tm`.`ASHA_ID` AS `ASHA_ID`,`tm`.`ASHA_Name` AS `ASHA_Name`,`tm`.`ASHA_Ph` AS `ASHA_Ph`,`tm`.`PHC_ID` AS `PHC_ID`,`tm`.`PHC_Name` AS `PHC_Name`,`tm`.`SUBPHC_ID` AS `SUBPHC_ID`,`tm`.`SUBPHC_Name` AS `SUBPHC_Name`,`tm`.`YR` AS `YR`,`tm`.`GP_Village` AS `GP_Village`,`tm`.`Address` AS `Address`,`tm`.`LMP_Date` AS `LMP_Date`,`tm`.`ANC1_Date` AS `ANC1_Date`,`tm`.`ANC2_Date` AS `ANC2_Date`,`tm`.`ANC3_Date` AS `ANC3_Date`,`tm`.`ANC4_Date` AS `ANC4_Date`,`tm`.`ANC_Complication` AS `ANC_Complication`,`tm`.`TT1_Date` AS `TT1_Date`,`tm`.`TT2_Date` AS `TT2_Date`,`tm`.`TTBooster_Date` AS `TTBooster_Date`,`tm`.`IFA100_Given_Date` AS `IFA100_Given_Date`,`tm`.`EDD` AS `EDD`,`tm`.`Anemia` AS `Anemia`,`tm`.`RTI_STI` AS `RTI_STI`,`tm`.`Delivery_Lnk_Facility` AS `Delivery_Lnk_Facility`,`tm`.`Facility_Name` AS `Facility_Name`,`tm`.`Delivery_Date` AS `Delivery_Date`,`tm`.`Delivery_Place_home_type` AS `Delivery_Place_home_type`,`tm`.`Delivery_Place_Public` AS `Delivery_Place_Public`,`tm`.`Delivery_Place_Private` AS `Delivery_Place_Private`,`tm`.`Delivery_type` AS `Delivery_type`,`tm`.`Delivery_Complications` AS `Delivery_Complications`,`tm`.`Discharge_Date` AS `Discharge_Date`,`tm`.`Abortion` AS `Abortion`,`tm`.`PNC_Home_Visit` AS `PNC_Home_Visit`,`tm`.`PNC_Complication` AS `PNC_Complication`,`tm`.`PPC_Method` AS `PPC_Method`,`tm`.`PNC_Checkup` AS `PNC_Checkup`,`tm`.`Outcome_Nos` AS `Outcome_Nos`,`tm`.`Child1_ID` AS `Child1_ID`,`tm`.`Child1_Name` AS `Child1_Name`,`tm`.`Child1_Gender` AS `Child1_Gender`,`tm`.`Child1_Weight` AS `Child1_Weight`,`tm`.`Child1_BreastFeeding` AS `Child1_BreastFeeding`,`tm`.`Child2_ID` AS `Child2_ID`,`tm`.`Child2_Name` AS `Child2_Name`,`tm`.`Child2_Gender` AS `Child2_Gender`,`tm`.`Child2_weight` AS `Child2_weight`,`tm`.`Child2_Breastfeeding` AS `Child2_Breastfeeding`,`tm`.`Child3_ID` AS `Child3_ID`,`tm`.`Child3_Name` AS `Child3_Name`,`tm`.`Child3_Gender` AS `Child3_Gender`,`tm`.`Child3_Weight` AS `Child3_Weight`,`tm`.`Child3_Breastfeeding` AS `Child3_Breastfeeding`,`tm`.`Child4_ID` AS `Child4_ID`,`tm`.`Child4_Name` AS `Child4_Name`,`tm`.`Child4_Gender` AS `Child4_Gender`,`tm`.`Child4_Weight` AS `Child4_Weight`,`tm`.`Child4_Breastfeeding` AS `Child4_Breastfeeding`,`tm`.`Mother_Reg_Date` AS `Mother_Reg_Date`,`tm`.`Last_Update_Date` AS `Last_Update_Date`,`tm`.`EID` AS `EID`,`tm`.`EID_time` AS `EID_time`,`tm`.`CPSMS_Flag` AS `CPSMS_Flag`,`tm`.`JSY_Beneficiary` AS `JSY_Beneficiary`,`tm`.`JSY_Paid_Date` AS `JSY_Paid_Date`,`tm`.`Bank_Name` AS `Bank_Name`,`tm`.`Bank_Branch_Name` AS `Bank_Branch_Name`,`tm`.`Acc_No` AS `Acc_No`,`tm`.`IFSC_Code` AS `IFSC_Code`,`tm`.`Remarks` AS `Remarks`,`tm`.`Referred_By_Telecaller` AS `Referred_By_Telecaller`,`tm`.`Referred_Date` AS `Referred_Date`,`tm`.`No_of_Try` AS `No_of_Try`,`tm`.`Call_Answered` AS `Call_Answered`,`tm`.`Status` AS `Status`,`tm`.`High_Risk` AS `High_Risk`,`tm`.`High_Risk_Reason` AS `High_Risk_Reason`,`tm`.`Call_Verified` AS `Call_Verified`,`tm`.`Associate` AS `Associate`,`tm`.`Call_Date` AS `Call_Date`,`tm`.`Due_Services` AS `Due_Services`,`tm`.`Due_Services_Response` AS `Due_Services_Response`,`tm`.`Overdue_Services` AS `Overdue_Services`,`tm`.`Overdue_Services_Response` AS `Overdue_Services_Response`,`tm`.`Given_Services` AS `Given_Services`,`tm`.`Given_Services_Response` AS `Given_Services_Response`,`tm`.`Miscarriage` AS `Miscarriage`,`tm`.`Baby_Died` AS `Baby_Died`,`tm`.`Call_No` AS `Call_No`,`tm`.`Questions_Asked` AS `Questions_Asked`,`tm`.`Asnwer_Given_by_Benificary` AS `Asnwer_Given_by_Benificary`,`tm`.`Source` AS `Source`,`tm`.`NoCall_Reason` AS `NoCall_Reason`,`tm`.`NoPhone_Reason` AS `NoPhone_Reason`,`tm`.`Created_By` AS `Created_By`,`tm`.`Updated_By` AS `Updated_By`,`tm`.`BPL_APL` AS `BPL_APL`,`tm`.`MDDS_StateID` AS `MDDS_StateID`,`tm`.`MDDS_District_ID` AS `MDDS_District_ID`,`tm`.`MDDS_Taluka_ID` AS `MDDS_Taluka_ID`,`tm`.`MDDS_Village_ID` AS `MDDS_Village_ID`,`tm`.`Is_Valid` AS `Is_Valid`,`tm`.`InValid_Reason` AS `InValid_Reason`,`tm`.`Is_Error` AS `Is_Error`,`tm`.`Error_Reason` AS `Error_Reason`,`tm`.`FileID` AS `FileID`,`tm`.`IsAllocated` AS `IsAllocated`,`tm`.`Deleted` AS `Deleted`,`tm`.`Processed` AS `Processed`,`tm`.`CreatedBy` AS `CreatedBy`,`tm`.`ModifiedBy` AS `ModifiedBy`,`tm`.`LastModDate` AS `LastModDate`,`tc`.`MCTSID_no_Child_ID` AS `MCTSID_no_Child_ID`,`tc`.`Child_Name` AS `Child_Name`,`tc`.`Father_Name` AS `Father_Name`,`tc`.`Mother_Name` AS `Mother_Name`,`tc`.`Mother_ID` AS `Mother_ID`,`tc`.`DOB` AS `DOB`,`tc`.`Place_of_Birth` AS `Place_of_Birth`,`tc`.`Gender` AS `Gender`,`tc`.`BloodGroup` AS `BloodGroup`,`tc`.`Child_Aadhaar_No` AS `Child_Aadhaar_No`,`tc`.`Weight_of_Child` AS `Weight_of_Child`,`tc`.`Child_EID` AS `Child_EID`,`tc`.`Child_EID_Time` AS `Child_EID_Time`,`tc`.`Emamta_Health_ID` AS `Emamta_Health_ID`,`tc`.`Emamta_Family_ID` AS `Emamta_Family_ID`,`tc`.`Phone_No_of` AS `Phone_No_of`,`tc`.`Phone_No` AS `Phone_No`,`tc`.`Registration_Date` AS `Registration_Date`,`tc`.`Updated_Date` AS `Updated_Date`,`tc`.`CityID` AS `CityID`,`tc`.`City` AS `City`,`tc`.`Year` AS `Year`,`tc`.`ANM_Phone_No` AS `ANM_Phone_No`,`tc`.`ASHA_Phone_No` AS `ASHA_Phone_No`,`tc`.`BCG_Date` AS `BCG_Date`,`tc`.`OPV0_Date` AS `OPV0_Date`,`tc`.`Hepatitis_B1_Date` AS `Hepatitis_B1_Date`,`tc`.`DPT1_Date` AS `DPT1_Date`,`tc`.`OPV1_Date` AS `OPV1_Date`,`tc`.`Hepatitis_B2_Date` AS `Hepatitis_B2_Date`,`tc`.`DPT2_Date` AS `DPT2_Date`,`tc`.`OPV2_Date` AS `OPV2_Date`,`tc`.`Hepatitis_B3_Date` AS `Hepatitis_B3_Date`,`tc`.`DPT3_Date` AS `DPT3_Date`,`tc`.`OPV3_Date` AS `OPV3_Date`,`tc`.`Hepatitis_B4_Date` AS `Hepatitis_B4_Date`,`tc`.`Measles_Date` AS `Measles_Date`,`tc`.`VitA_Dose1_Date` AS `VitA_Dose1_Date`,`tc`.`MR_Date` AS `MR_Date`,`tc`.`DPTBooster_Date` AS `DPTBooster_Date`,`tc`.`OPVBooster_Date` AS `OPVBooster_Date`,`tc`.`VitA_Dose2_Date` AS `VitA_Dose2_Date`,`tc`.`VitA_Dose3_Date` AS `VitA_Dose3_Date`,`tc`.`VitA_Dose99_Date` AS `VitA_Dose99_Date`,`tc`.`VitA_Dose5_Date` AS `VitA_Dose5_Date`,`tc`.`VitA_Dose6_Date` AS `VitA_Dose6_Date`,`tc`.`VitA_Dose7_Date` AS `VitA_Dose7_Date`,`tc`.`VitA_Dose8_Date` AS `VitA_Dose8_Date`,`tc`.`VitA_Dose9_Date` AS `VitA_Dose9_Date`,`tc`.`JE_Date` AS `JE_Date`,`tc`.`DT5_Date` AS `DT5_Date`,`tc`.`TT10_Date` AS `TT10_Date`,`tc`.`TT16_Date` AS `TT16_Date`,`tc`.`Measles_2_Date` AS `Measles_2_Date`,`tc`.`PentaValent1_Date` AS `PentaValent1_Date`,`tc`.`PentaValent2_Date` AS `PentaValent2_Date`,`tc`.`PentaValent3_Date` AS `PentaValent3_Date`,`tc`.`is_Upload` AS `is_Upload`,`tc`.`Delete_Mother` AS `Delete_Mother`,`tc`.`Delete_Reason` AS `Delete_Reason`,`tc`.`Deleted_ON` AS `Deleted_ON`,`tc`.`SMS_Status` AS `SMS_Status`,`tc`.`BirthCertificateNo` AS `BirthCertificateNo`,`tc`.`Rural_urban` AS `Rural_urban`,`tc`.`SNO` AS `SNO`,`tc`.`Lead_ID` AS `Lead_ID`,`tc`.`My_ID` AS `My_ID`,`tc`.`CID_NO` AS `CID_NO`,`tc`.`MID_NO` AS `MID_NO`,`tc`.`Duplicate_Bit` AS `Duplicate_Bit`,`tc`.`FacilityType` AS `FacilityType`,`tc`.`DueServices` AS `DueServices`,`tc`.`OverDueServices` AS `OverDueServices`,`tc`.`GivenServices` AS `GivenServices` from ((((((`t_feedback` `tf` left join `t_mothervalidrecord` `tm` on((`tf`.`BeneficiaryRegID` = `tm`.`BeneficiaryRegID`))) left join `t_childvaliddata` `tc` on((`tc`.`BeneficiaryRegID` = `tm`.`BeneficiaryRegID`))) left join `m_feedbacktype` `mf` on((`mf`.`FeedbackTypeID` = `tf`.`FeedbackTypeID`))) left join `m_feedbacknature` `mf1` on((`mf1`.`FeedbackTypeID` = `mf`.`FeedbackTypeID`))) left join `m_designation` `md` on((`md`.`DesignationID` = `tf`.`DesignationID`))) left join `m_institution` `mi` on((`mi`.`InstitutionID` = `tf`.`InstitutionID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26543,7 +26543,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`%` SQL SECURITY DEFINER */
+/*!50013 %` SQL SECURITY DEFINER */
 /*!50001 VIEW `v_showprovideradmin` AS select `usrm`.`USRMappingID` AS `USRMappingID`,`usrm`.`UserID` AS `UserID`,`usr`.`TitleID` AS `TitleID`,`title`.`TitleName` AS `TitleName`,`usr`.`FirstName` AS `FirstName`,`usr`.`MiddleName` AS `MiddleName`,`usr`.`LastName` AS `LastName`,`usr`.`IsSupervisor` AS `IsSupervisor`,`usr`.`Deleted` AS `UserDeleted`,`usrm`.`RoleID` AS `RoleID`,`role`.`RoleName` AS `RoleName`,`role`.`Deleted` AS `RoleDeleted`,`usrm`.`AgentID` AS `AgentID`,`usrm`.`AgentPassword` AS `AgentPassword`,`usrm`.`CZRole` AS `CZRole`,`usrm`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`psm`.`Deleted` AS `ProviderServiceMapDeleted`,`usrm`.`WorkingLocationID` AS `WorkingLocationID`,`psam`.`LocationName` AS `LocationName`,`psam`.`Deleted` AS `WorkingLocationDeleted`,`usrm`.`Deleted` AS `USRMDeleted`,`psm`.`ServiceProviderID` AS `ServiceProviderID`,`sp`.`ServiceProviderName` AS `ServiceProviderName`,`sp`.`Deleted` AS `ServiceProviderDeleted`,`psm`.`ServiceID` AS `ServiceID`,`sm`.`ServiceName` AS `ServiceName`,`sm`.`IsNational` AS `IsNational`,`sm`.`Deleted` AS `ServiceDeleted`,`psm`.`StateID` AS `StateID`,`st`.`StateName` AS `StateName` from ((((((((`m_userservicerolemapping` `usrm` left join `m_providerservicemapping` `psm` on((`usrm`.`ProviderServiceMapID` = `psm`.`ProviderServiceMapID`))) left join `m_user` `usr` on((`usrm`.`UserID` = `usr`.`UserID`))) left join `m_role` `role` on((`usrm`.`RoleID` = `role`.`RoleID`))) left join `m_providerserviceaddmapping` `psam` on((`usrm`.`WorkingLocationID` = `psam`.`PSAddMapID`))) left join `m_serviceprovider` `sp` on((`psm`.`ServiceProviderID` = `sp`.`ServiceProviderID`))) left join `m_servicemaster` `sm` on((`psm`.`ServiceID` = `sm`.`ServiceID`))) left join `m_state` `st` on((`psm`.`StateID` = `st`.`StateID`))) left join `m_title` `title` on((`usr`.`TitleID` = `title`.`TitleID`))) where (`role`.`RoleID` = 11) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26561,7 +26561,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`%` SQL SECURITY DEFINER */
+/*!50013 %` SQL SECURITY DEFINER */
 /*!50001 VIEW `v_showproviderservicemapping` AS select `psm`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`psm`.`ServiceProviderID` AS `ServiceProviderID`,`sp`.`ServiceProviderName` AS `ServiceProviderName`,`psm`.`ServiceID` AS `ServiceID`,`ser`.`ServiceName` AS `ServiceName`,`ser`.`IsNational` AS `IsNational`,`psm`.`CountryID` AS `CountryID`,`cou`.`CountryName` AS `CountryName`,`psm`.`StateID` AS `StateID`,`st`.`StateName` AS `StateName`,`psm`.`DistrictID` AS `DistrictID`,`psm`.`CityID` AS `CityID`,`psm`.`DistrictBlockID` AS `DistrictBlockID`,`psm`.`Address` AS `Address`,`psm`.`StatusID` AS `StatusID`,`sta`.`Status` AS `Status`,`psm`.`CTI_CampaignName` AS `CTI_CampaignName`,`psm`.`ValidFrom` AS `ValidFrom`,`psm`.`ValidTill` AS `ValidTill`,`psm`.`Deleted` AS `Deleted`,`psm`.`Processed` AS `Processed`,`psm`.`CreatedBy` AS `CreatedBy`,`psm`.`CreatedDate` AS `CreatedDate`,`psm`.`ModifiedBy` AS `ModifiedBy`,`psm`.`LastModDate` AS `LastModDate` from (((((`m_providerservicemapping` `psm` left join `m_country` `cou` on((`psm`.`CountryID` = `cou`.`CountryID`))) left join `m_serviceprovider` `sp` on((`psm`.`ServiceProviderID` = `sp`.`ServiceProviderID`))) left join `m_servicemaster` `ser` on((`psm`.`ServiceID` = `ser`.`ServiceID`))) left join `m_state` `st` on((`psm`.`StateID` = `st`.`StateID`))) left join `m_status` `sta` on((`psm`.`StatusID` = `sta`.`StatusID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26579,7 +26579,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`%` SQL SECURITY DEFINER */
+/*!50013 %` SQL SECURITY DEFINER */
 /*!50001 VIEW `v_showsubcategory` AS select `ca`.`CategoryID` AS `CategoryID`,`ca`.`CategoryName` AS `CategoryName`,`ca`.`CategoryDesc` AS `CategoryDesc`,`sc`.`SubCategoryID` AS `SubCategoryID`,`sc`.`SubCategoryName` AS `SubCategoryName`,`sc`.`SubCategoryDesc` AS `SubCategoryDesc`,`sc`.`SubCatFilePath` AS `SubCatFilePath`,`sc`.`Deleted` AS `SubCategoryDeleted`,`ca`.`SubServiceID` AS `SubServiceID`,`sus`.`SubServiceName` AS `SubServiceName`,`ca`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`ca`.`Deleted` AS `CategoryDeleted` from ((`m_category` `ca` left join `m_subcategory` `sc` on((`sc`.`CategoryID` = `ca`.`CategoryID`))) left join `m_subservice` `sus` on((`ca`.`SubServiceID` = `sus`.`SubServiceID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26597,7 +26597,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_showuser` AS select `usr`.`UserID` AS `UserID`,`usr`.`TitleID` AS `TitleID`,`usr`.`FirstName` AS `FirstName`,`usr`.`MiddleName` AS `MiddleName`,`usr`.`LastName` AS `LastName`,`usr`.`GenderID` AS `GenderID`,`usr`.`MaritalStatusID` AS `MaritalStatusID`,`usr`.`AadhaarNo` AS `AadhaarNo`,`usr`.`PAN` AS `PAN`,`usr`.`DOB` AS `DOB`,`usr`.`DOJ` AS `DOJ`,`usr`.`QualificationID` AS `QualificationID`,`usr`.`DesignationID` AS `DesignationID`,`usr`.`UserName` AS `UserName`,`usr`.`Password` AS `Password`,`usr`.`CZUserID` AS `CZUserID`,`usr`.`CZPassword` AS `CZPassword`,`usr`.`AgentID` AS `AgentID`,`usr`.`AgentPassword` AS `AgentPassword`,`usr`.`CZRole` AS `CZRole`,`usr`.`ContactNo` AS `ContactNo`,`usr`.`EmailID` AS `EmailID`,`usr`.`StatusID` AS `StatusID`,`usr`.`ServiceProviderID` AS `ServiceProviderID`,`usr`.`EmergencyContactPerson` AS `EmergencyContactPerson`,`usr`.`EmergencyContactNo` AS `EmergencyContactNo`,`usr`.`IsExternal` AS `IsExternal`,`usr`.`IsSupervisor` AS `IsSupervisor`,`usr`.`IsProviderAdmin` AS `IsProviderAdmin`,`usr`.`Remarks` AS `Remarks`,`usr`.`Deleted` AS `Deleted`,`usr`.`Processed` AS `Processed`,`usr`.`CreatedBy` AS `CreatedBy`,`usr`.`CreatedDate` AS `CreatedDate`,`usr`.`ModifiedBy` AS `ModifiedBy`,`usr`.`LastModDate` AS `LastModDate`,`titl`.`TitleName` AS `TitleName`,`gen`.`GenderName` AS `GenderName`,`usrq`.`Name` AS `UserQualification`,`desg`.`DesignationName` AS `DesignationName`,`marst`.`Status` AS `MaritalStatus`,`sta`.`Status` AS `Status`,`usrd`.`DemographicID` AS `DemographicID`,`usrd`.`FathersName` AS `FathersName`,`usrd`.`MothersName` AS `MothersName`,`usrd`.`CommunityID` AS `CommunityID`,`com`.`CommunityType` AS `CommunityType`,`usrd`.`ReligionID` AS `ReligionID`,`rel`.`ReligionType` AS `ReligionType`,`usrd`.`AddressLine1` AS `AddressLine1`,`usrd`.`AddressLine2` AS `AddressLine2`,`usrd`.`PermAddressLine1` AS `PermAddressLine1`,`usrd`.`PermAddressLine2` AS `PermAddressLine2`,`usrd`.`PermStateID` AS `PermStateID`,`usrd`.`PermDistrictID` AS `PermDistrictID`,`usrd`.`PermPinCode` AS `PermPinCode`,`usrd`.`PermanentAddress` AS `PermanentAddress`,`usrd`.`CityID` AS `CityID`,`usrd`.`DistrictID` AS `DistrictID`,`distr`.`DistrictName` AS `DistrictName`,`usrd`.`StateID` AS `StateID`,`st`.`StateName` AS `StateName`,`usrd`.`CountryID` AS `CountryID`,`cou`.`CountryName` AS `CountryName`,`usrd`.`PinCode` AS `PinCode`,`usrd`.`IsPresent` AS `IsPresent`,`usrd`.`IsPermanent` AS `IsPermanent`,`usrd`.`Deleted` AS `DemographicDeleted`,`usr`.`HealthProfessionalID` AS `HealthProfessionalID` from ((((((((((((`m_user` `usr` left join `m_userdemographics` `usrd` on((`usr`.`UserID` = `usrd`.`UserID`))) left join `m_title` `titl` on((`usr`.`TitleID` = `titl`.`TitleID`))) left join `m_gender` `gen` on((`usr`.`GenderID` = `gen`.`GenderID`))) left join `m_userqualification` `usrq` on((`usr`.`QualificationID` = `usrq`.`QualificationID`))) left join `m_designation` `desg` on((`usr`.`DesignationID` = `desg`.`DesignationID`))) left join `m_status` `sta` on((`usr`.`StatusID` = `sta`.`StatusID`))) left join `m_maritalstatus` `marst` on((`usr`.`MaritalStatusID` = `marst`.`MaritalStatusID`))) left join `m_community` `com` on((`usrd`.`CommunityID` = `com`.`CommunityID`))) left join `m_religion` `rel` on((`usrd`.`ReligionID` = `rel`.`ReligionID`))) left join `m_district` `distr` on((`usrd`.`DistrictID` = `distr`.`DistrictID`))) left join `m_state` `st` on((`usrd`.`StateID` = `st`.`StateID`))) left join `m_country` `cou` on((`usrd`.`CountryID` = `cou`.`CountryID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26615,7 +26615,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`%` SQL SECURITY DEFINER */
+/*!50013 %` SQL SECURITY DEFINER */
 /*!50001 VIEW `v_temp` AS select `t1`.`id` AS `id`,`t1`.`Bencallid` AS `Bencallid`,`t1`.`outboundCallType` AS `outboundCallType`,`t1`.`Sectionid` AS `Sectionid`,`t1`.`SectionName` AS `SectionName`,`t1`.`QuestionID` AS `QuestionID`,`t1`.`Answer` AS `Answer`,`t1`.`Score` AS `Score`,`t1`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`t1`.`Deleted` AS `Deleted`,`t1`.`Processed` AS `Processed`,`t1`.`CreatedBy` AS `CreatedBy`,`t1`.`CreatedDate` AS `CreatedDate`,`t1`.`ModifiedBy` AS `ModifiedBy`,`t1`.`LastModDate` AS `LastModDate`,`t2`.`Name` AS `sectionNameN`,`t2`.`SectionRank` AS `SectionRank`,`t3`.`Question` AS `Question`,`t3`.`QuestionRank` AS `QuestionRank` from ((`t_qualityauditorcallresponse` `t1` join `m_qualityauditsection` `t2` on((`t1`.`Sectionid` = `t2`.`id`))) join `m_qualityauditquestionnaire` `t3` on((`t1`.`QuestionID` = `t3`.`id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26633,7 +26633,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`%` SQL SECURITY DEFINER */
+/*!50013 %` SQL SECURITY DEFINER */
 /*!50001 VIEW `v_userprkngplacvanspstatedisblok` AS select `upp`.`UserID` AS `userid`,`uvm`.`VanID` AS `VanID`,concat(`mv`.`VehicalNo`,' - ',`mvt`.`VanType`) AS `vanNoAndType`,`mvsp`.`VanSession` AS `VanSession`,`mvsp`.`ServicePointID` AS `ServicePointID`,`msp`.`ServicePointName` AS `ServicePointName`,`upp`.`ParkingPlaceID` AS `parkingplaceid`,`mv`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`mv`.`IsFacility` AS `IsFacility`,`mv`.`FacilityID` AS `FacilityID` from ((((((`m_uservanmapping` `uvm` join `m_userparkingplacemap` `upp` on(((`uvm`.`UserParkingPlaceMapID` = `upp`.`UserParkingPlaceMapID`) and (`upp`.`Deleted` is false)))) join `m_van` `mv` on(((`uvm`.`VanID` = `mv`.`VanID`) and (`mv`.`Deleted` is false)))) join `m_servicepoint` `msp` on(((`upp`.`ParkingPlaceID` = `msp`.`ParkingPlaceID`) and (`msp`.`Deleted` is false)))) join `m_vanservicepointmap` `mvsp` on(((`mv`.`VanID` = `mvsp`.`VanID`) and (`msp`.`ServicePointID` = `mvsp`.`ServicePointID`) and (`mvsp`.`Deleted` is false)))) join `m_parkingplace` `mpp` on(((`upp`.`ParkingPlaceID` = `mpp`.`ParkingPlaceID`) and (`mpp`.`Deleted` is false)))) join `m_vantype` `mvt` on(((`mv`.`VanTypeID` = `mvt`.`VanTypeID`) and (`mvt`.`Deleted` is false)))) where (`uvm`.`Deleted` is false) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26651,7 +26651,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`piramaldev`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_userservicerolemapping` AS select `usr`.`UserID` AS `UserID`,`usrm`.`USRMappingID` AS `USRMappingID`,concat(coalesce(`usr`.`FirstName`,''),' ',coalesce(`usr`.`MiddleName`,''),' ',coalesce(`usr`.`LastName`,'')) AS `Name`,`usr`.`UserName` AS `UserName`,`psm`.`ServiceID` AS `ServiceID`,`sm`.`ServiceName` AS `ServiceName`,`sm`.`IsNational` AS `IsNational`,`psm`.`StateID` AS `StateID`,`st`.`StateName` AS `StateName`,`psam`.`DistrictID` AS `WorkingDistrictID`,`dist`.`DistrictName` AS `WorkingDistrictName`,`usrm`.`WorkingLocationID` AS `WorkingLocationID`,`usrm`.`ServiceProviderID` AS `ServiceProviderID`,`psam`.`LocationName` AS `LocationName`,`psam`.`Address` AS `WorkingLocationAddress`,`usrm`.`RoleID` AS `RoleID`,`rol`.`RoleName` AS `RoleName`,`usrm`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`usrm`.`AgentID` AS `AgentID`,`psm`.`StatusID` AS `PSMStatusID`,`sta`.`Status` AS `PSMStatus`,`usrm`.`Deleted` AS `UserServciceRoleDeleted`,`usr`.`Deleted` AS `UserDeleted`,`sp`.`Deleted` AS `ServiceProviderDeleted`,`rol`.`Deleted` AS `RoleDeleted`,`psm`.`Deleted` AS `ProviderServiceMappingDeleted`,`usrm`.`isInbound` AS `isInbound`,`usrm`.`isOutbound` AS `isOutbound`,`usrm`.`Blockid` AS `blockid`,`usrm`.`BlockName` AS `blockname`,`usrm`.`Villageid` AS `villageid`,`usrm`.`VillageName` AS `villagename`,`usrm`.`isSanjeevani` AS `isSanjeevani` from (((((((((`m_userservicerolemapping` `usrm` left join `m_user` `usr` on((`usrm`.`UserID` = `usr`.`UserID`))) left join `m_role` `rol` on((`usrm`.`RoleID` = `rol`.`RoleID`))) left join `m_providerservicemapping` `psm` on((`usrm`.`ProviderServiceMapID` = `psm`.`ProviderServiceMapID`))) left join `m_providerserviceaddmapping` `psam` on((`usrm`.`WorkingLocationID` = `psam`.`PSAddMapID`))) left join `m_district` `dist` on((`psam`.`DistrictID` = `dist`.`DistrictID`))) left join `m_state` `st` on((`psm`.`StateID` = `st`.`StateID`))) left join `m_serviceprovider` `sp` on((`psm`.`ServiceProviderID` = `sp`.`ServiceProviderID`))) left join `m_servicemaster` `sm` on((`psm`.`ServiceID` = `sm`.`ServiceID`))) left join `m_status` `sta` on((`psm`.`StatusID` = `sta`.`StatusID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
