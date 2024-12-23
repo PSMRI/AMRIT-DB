@@ -19827,7 +19827,7 @@ DELIMITER ;;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
 /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
 /*!50003 SET time_zone             = 'SYSTEM' */ ;;
-/*!50106 CREATE*/ /*!50117 %`*/ /*!50106 EVENT `Event_TMSaveWorkList` ON SCHEDULE EVERY 30 MINUTE STARTS '2021-02-23 11:15:10' ON COMPLETION NOT PRESERVE DISABLE DO begin
+/*!50106 CREATE*/ /*!50117 */ /*!50106 EVENT `Event_TMSaveWorkList` ON SCHEDULE EVERY 30 MINUTE STARTS '2021-02-23 11:15:10' ON COMPLETION NOT PRESERVE DISABLE DO begin
 CALL Pr_TMSaveWorkList();
 
 end */ ;;
@@ -19848,7 +19848,7 @@ DELIMITER ;;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
 /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
 /*!50003 SET time_zone             = 'SYSTEM' */ ;;
-/*!50106 CREATE*/ /*!50117 %`*/ /*!50106 EVENT `Event_UpdateIsOutboundnullData` ON SCHEDULE EVERY 1 DAY STARTS '2023-12-20 03:00:00' ON COMPLETION NOT PRESERVE ENABLE DO begin
+/*!50106 CREATE*/ /*!50117 */ /*!50106 EVENT `Event_UpdateIsOutboundnullData` ON SCHEDULE EVERY 1 DAY STARTS '2023-12-20 03:00:00' ON COMPLETION NOT PRESERVE ENABLE DO begin
 CALL Pr_UpdateIsOutboundnull_Data();
 
 end */ ;;
@@ -21651,7 +21651,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `Pr_104IntegrationBhayaData`(v_fromdate datetime,v_todate datetime)
+CREATE  PROCEDURE `Pr_104IntegrationBhayaData`(v_fromdate datetime,v_todate datetime)
 begin
 
 
@@ -21778,7 +21778,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `Pr_actor_wise_quality_rating`(v_psmrid int(11),v_rolename varchar(100),v_monthname varchar(50))
+CREATE  PROCEDURE `Pr_actor_wise_quality_rating`(v_psmrid int(11),v_rolename varchar(100),v_monthname varchar(50))
 begin
 select t2.ReceivedAgentID,concat(ifnull(u.firstname,''),' ',ifnull(u.lastname,'')) Agentname,sum(distinct finalscore) Score 
 from t_qualityauditorrating t1
@@ -21805,7 +21805,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `Pr_BenChiefcomplaint_Diagnosis`(
+CREATE  PROCEDURE `Pr_BenChiefcomplaint_Diagnosis`(
 
  IN beneficiaryRegID_IN bigint(20)
  -- , IN visitCode_IN bigint(20)
@@ -22017,7 +22017,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `Pr_ConfirmatoryScreening`(v_benregid bigint(20))
+CREATE  PROCEDURE `Pr_ConfirmatoryScreening`(v_benregid bigint(20))
 begin
 -- select BeneficiaryRegID, case when ConfirmarotyDiabetes 
 select BeneficiaryRegID,max(ConfirmarotyDiabetes) ConfirmarotyDiabetes,
@@ -22217,7 +22217,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `PR_FetchChildOutboundWorklist`(v_AllocatedUserID int)
+CREATE  PROCEDURE `PR_FetchChildOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
 /********************************************************************************************************************
 -- SP/Function Name : PR_FetchChildOutboundWorklist
@@ -22297,7 +22297,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `PR_FetchECDChildOutboundWorklist`(v_AllocatedUserID int)
+CREATE  PROCEDURE `PR_FetchECDChildOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
 
  declare v_NextAttemptPeriod int(11);
@@ -22554,7 +22554,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `PR_FetchECDChildOutboundWorklist_test190224`(v_AllocatedUserID int)
+CREATE  PROCEDURE `PR_FetchECDChildOutboundWorklist_test190224`(v_AllocatedUserID int)
 BEGIN
 
  declare v_NextAttemptPeriod int(11);
@@ -22957,7 +22957,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `PR_FetchMCTS_1`( IN P_ProviderServiceMapID INT)
+CREATE  PROCEDURE `PR_FetchMCTS_1`( IN P_ProviderServiceMapID INT)
 BEGIN
 select * from (
 select 
@@ -23393,7 +23393,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `PR_FetchMCTS_3`(IN P_ProviderServiceMapID INT)
+CREATE  PROCEDURE `PR_FetchMCTS_3`(IN P_ProviderServiceMapID INT)
 BEGIN
 select * from (
 select
@@ -23767,7 +23767,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `PR_FetchMotherChildOutboundWorklist`(v_AllocatedUserID int)
+CREATE  PROCEDURE `PR_FetchMotherChildOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
 select 
 B.OBCallID,B.BeneficiaryRegID BeneficiaryRegID,
@@ -23839,7 +23839,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `PR_FetchMotherOutboundWorklist`(v_AllocatedUserID int)
+CREATE  PROCEDURE `PR_FetchMotherOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
 /********************************************************************************************************************
 
@@ -23991,7 +23991,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `PR_FetchUserDetails`(v_ServiceProviderID int, v_PSMStateID int, v_ServiceID int, v_RoleID int, v_Name_User varchar(50), v_UserID int)
+CREATE  PROCEDURE `PR_FetchUserDetails`(v_ServiceProviderID int, v_PSMStateID int, v_ServiceID int, v_RoleID int, v_Name_User varchar(50), v_UserID int)
 BEGIN
 
  
@@ -24091,7 +24091,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `Pr_GetCallHistory`(v_obcallid int(11))
+CREATE  PROCEDURE `Pr_GetCallHistory`(v_obcallid int(11))
 begin
 select t1.callid,t2.MotherID,t3.Name,null Child_id,null child_name,
 t1.PhoneNo,t3.ASHA_Name,t1.ReceivedRoleName,t3.LMP_Date,null dob,
@@ -24124,7 +24124,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `Pr_GetHRPDetails`(v_motherid bigint(20), v_childid bigint(20))
+CREATE  PROCEDURE `Pr_GetHRPDetails`(v_motherid bigint(20), v_childid bigint(20))
 begin
 declare v_obcallid_mother bigint(20);
 declare v_obcallid_child bigint(20);
@@ -24163,7 +24163,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `Pr_grade_wise_agent_count`(v_psmrid int(11),
+CREATE  PROCEDURE `Pr_grade_wise_agent_count`(v_psmrid int(11),
 v_type varchar(50),v_month varchar(30))
 begin
 if(v_type='Cycle Wise') then
@@ -24237,7 +24237,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `PR_Insert104BRCategory`(v_SubServiceID smallint, v_ProviderServiceMapID int)
+CREATE  PROCEDURE `PR_Insert104BRCategory`(v_SubServiceID smallint, v_ProviderServiceMapID int)
 BEGIN
  
 
@@ -24364,7 +24364,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `PR_InsertInNotificationMap`(v_RoleID int, v_NotificationID int, v_ProviderServiceMapID int,v_NotificationTypeID int, v_CreatedBy varchar(50), v_ValidFrom datetime, v_WorkingLocationID int)
+CREATE  PROCEDURE `PR_InsertInNotificationMap`(v_RoleID int, v_NotificationID int, v_ProviderServiceMapID int,v_NotificationTypeID int, v_CreatedBy varchar(50), v_ValidFrom datetime, v_WorkingLocationID int)
 BEGIN
 
  
@@ -24800,7 +24800,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `Pr_Locationdetails`(v_villageid int(11))
+CREATE  PROCEDURE `Pr_Locationdetails`(v_villageid int(11))
 begin
 select distinct DistrictBranchID villageid,villagename,
 b.blockid,b.blockname,
@@ -25392,7 +25392,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `Pr_tenture_wise_quality_rating`(v_psmrid int(11),
+CREATE  PROCEDURE `Pr_tenture_wise_quality_rating`(v_psmrid int(11),
 v_rolename varchar(50))
 begin
 select case when months between 0 and 6 then '0-6 months' 
@@ -25494,7 +25494,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `Pr_trend_overall_quality_rating`(v_psmrid int(11),
+CREATE  PROCEDURE `Pr_trend_overall_quality_rating`(v_psmrid int(11),
 v_type varchar(50),v_month varchar(30))
 begin
 if(v_type='Cycle Wise') then
@@ -25567,7 +25567,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `PR_UpdateHRP_HRniReasons`(v_BenCallID bigint(20), v_obcallid bigint(20))
+CREATE  PROCEDURE `PR_UpdateHRP_HRniReasons`(v_BenCallID bigint(20), v_obcallid bigint(20))
 BEGIN
 -- DECLARE v_NotificationState VARCHAR(30)  default 'unread';
  
@@ -25653,7 +25653,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `PR_UpdateHRP_HRniReasons_bkp2024feb26`(v_BenCallID bigint(20), v_obcallid bigint(20))
+CREATE  PROCEDURE `PR_UpdateHRP_HRniReasons_bkp2024feb26`(v_BenCallID bigint(20), v_obcallid bigint(20))
 BEGIN
 -- DECLARE v_NotificationState VARCHAR(30)  default 'unread';
  
@@ -25811,7 +25811,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `Pr_UpdateIsOutboundnull_Data`()
+CREATE  PROCEDURE `Pr_UpdateIsOutboundnull_Data`()
 begin
 
 update t_detailedcallreport  t1
@@ -25836,7 +25836,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `PR_UpdateNotificationMap`(v_NotificationID int, v_ModifiedBy varchar(50), v_ValidFrom datetime, v_Deleted bit)
+CREATE  PROCEDURE `PR_UpdateNotificationMap`(v_NotificationID int, v_ModifiedBy varchar(50), v_ValidFrom datetime, v_Deleted bit)
 BEGIN
 
  
@@ -25872,7 +25872,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `question_report_procedure`()
+CREATE  PROCEDURE `question_report_procedure`()
 BEGIN
 SET @sql = NULL;
 SET SESSION group_concat_max_len = 1000000;
@@ -25914,7 +25914,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE %` PROCEDURE `question_report_procedure1`()
+CREATE  PROCEDURE `question_report_procedure1`()
 BEGIN
 SET @sql = NULL;
 SET SESSION group_concat_max_len = 1000000;
@@ -26111,7 +26111,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 %` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `question_report` AS select `t`.`MotherID` AS `MotherID`,`t`.`CreatedDate` AS `CreatedDate`,`t`.`QuestionID` AS `QuestionID`,`r`.`Question` AS `Question`,`t`.`Answer` AS `Answer`,`m`.`Name` AS `Name`,`m`.`District_Name` AS `District_Name`,`m`.`Block_Name` AS `Block_Name`,`m`.`LMP_Date` AS `LMP_Date`,`m`.`EDD` AS `EDD`,`b`.`ReceivedAgentID` AS `ReceivedAgentID`,`b`.`CallTime` AS `CallTime`,`b`.`CallEndTime` AS `CallEndTime`,`b`.`PhoneNo` AS `PhoneNo`,`c`.`CallType` AS `CallType`,if((`b`.`isCallAnswered` = '1'),'YES','NO') AS `isCallAnswered`,if((`b`.`isCallDisconnected` = '1'),'YES','NO') AS `isCallDisconnected`,if((`b`.`isWrongNumber` = '1'),'YES','NO') AS `isWrongNumber` from ((((`t_mctscallresponse` `t` join `m_questionnaire` `r` on((`r`.`QuestionID` = `t`.`QuestionID`))) join `t_mothervalidrecord` `m` on((`m`.`MCTSID_no` = `t`.`MotherID`))) left join `t_bencall` `b` on((`t`.`BenCallID` = `b`.`BenCallID`))) left join `m_calltype` `c` on((`c`.`CallTypeID` = `b`.`CallTypeID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26129,7 +26129,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 %` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `question_report1` AS select `t`.`ChildID` AS `ChildID`,`t`.`CreatedDate` AS `CreatedDate`,`t`.`QuestionID` AS `QuestionID`,`r`.`Question` AS `Question`,`t`.`Answer` AS `Answer`,`m`.`Child_Name` AS `Child_Name`,`m`.`District_Name` AS `District_Name`,`m`.`Block_Name` AS `Block_Name`,`m`.`DOB` AS `DOB`,`m`.`Mother_Name` AS `Mother_Name`,`b`.`CallTime` AS `CallTime`,`m`.`Phone_No` AS `Phone_No` from ((((`t_mctscallresponse` `t` join `m_questionnaire` `r` on((`r`.`QuestionID` = `t`.`QuestionID`))) join `t_childvaliddata` `m` on((`m`.`MCTSID_no_Child_ID` = `t`.`ChildID`))) left join `t_bencall` `b` on((`t`.`BenCallID` = `b`.`BenCallID`))) left join `m_calltype` `c` on((`c`.`CallTypeID` = `b`.`CallTypeID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26147,7 +26147,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 %` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `showofficedetails` AS select `psam`.`PSAddMapID` AS `PSAddMapID`,`psam`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`psm`.`ServiceProviderID` AS `ServiceProviderID`,`sp`.`ServiceProviderName` AS `ServiceProviderName`,`psm`.`StateID` AS `StateID`,`st`.`StateName` AS `StateName`,`psm`.`ServiceID` AS `ServiceID`,`sm`.`ServiceName` AS `ServiceName`,`sm`.`IsNational` AS `IsNational`,`psam`.`DistrictID` AS `DistrictID`,`dis`.`DistrictName` AS `DistrictName`,`psam`.`LocationName` AS `LocationName`,`psam`.`Address` AS `Address`,`psam`.`Deleted` AS `Deleted`,`psam`.`CreatedBy` AS `CreatedBy`,`psam`.`CreatedDate` AS `CreatedDate`,`psam`.`ModifiedBy` AS `ModifiedBy`,`psam`.`LastModDate` AS `LastModDate` from (((((`m_providerserviceaddmapping` `psam` left join `m_providerservicemapping` `psm` on((`psam`.`ProviderServiceMapID` = `psm`.`ProviderServiceMapID`))) left join `m_district` `dis` on((`psam`.`DistrictID` = `dis`.`DistrictID`))) left join `m_serviceprovider` `sp` on((`psm`.`ServiceProviderID` = `sp`.`ServiceProviderID`))) left join `m_state` `st` on((`psm`.`StateID` = `st`.`StateID`))) left join `m_servicemaster` `sm` on((`psm`.`ServiceID` = `sm`.`ServiceID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26165,7 +26165,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 %` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `showuserdetailsfromuserservicerolemapping` AS select `usr`.`USRMappingID` AS `USRMappingID`,`usr`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`usr`.`UserID` AS `UserID`,`usr`.`RoleID` AS `RoleID`,`role`.`RoleName` AS `RoleName`,`us`.`TitleID` AS `TitleID`,`ti`.`TitleName` AS `TitleName`,`us`.`FirstName` AS `FirstName`,`us`.`MiddleName` AS `MiddleName`,`us`.`LastName` AS `LastName`,`us`.`GenderID` AS `GenderID`,`gn`.`GenderName` AS `GenderName`,`us`.`MaritalStatusID` AS `MaritalStatusID`,`ms`.`Status` AS `MaritalStatus`,`us`.`AadhaarNo` AS `AadhaarNo`,`us`.`PAN` AS `PAN`,`us`.`DOB` AS `DOB`,`us`.`DOJ` AS `DOJ`,`us`.`QualificationID` AS `QualificationID`,`qua`.`Name` AS `Qualification`,`us`.`UserName` AS `UserName`,`us`.`Password` AS `Password`,`usr`.`AgentID` AS `AgentID`,`usr`.`AgentPassword` AS `AgentPassword`,`usr`.`CZRole` AS `CZRole`,`us`.`EmailID` AS `EmailID`,`ulmc`.`languages` AS `Languages`,`us`.`StatusID` AS `StatusID`,`sta`.`Status` AS `UserStatus`,`us`.`EmergencyContactPerson` AS `EmergencyContactPerson`,`us`.`EmergencyContactNo` AS `EmergencyContactNo`,`us`.`IsSupervisor` AS `IsSupervisor`,`us`.`Deleted` AS `UserDeleted`,`usd`.`DemographicID` AS `DemographicID`,`usd`.`FathersName` AS `FathersName`,`usd`.`MothersName` AS `MothersName`,`usd`.`CommunityID` AS `CommunityID`,`com`.`CommunityType` AS `CommunityType`,`usd`.`ReligionID` AS `ReligionID`,`rel`.`ReligionType` AS `ReligionType`,`usd`.`AddressLine1` AS `UserAddressLine1`,`usd`.`AddressLine2` AS `UserAddressLine2`,`usd`.`PermAddressLine1` AS `PermAddressLine1`,`usd`.`PermAddressLine2` AS `PermAddressLine2`,`usd`.`PermStateID` AS `PermStateID`,`usd`.`PermDistrictID` AS `PermDistrictID`,`usd`.`PermPinCode` AS `PermPinCode`,`usd`.`PermanentAddress` AS `UserPremanentAddress`,`usd`.`CityID` AS `UserCityID`,`ct`.`CityName` AS `UserCity`,`usd`.`StateID` AS `UserStateID`,`st`.`StateName` AS `UserState`,`usd`.`CountryID` AS `UserCountryID`,`cou`.`CountryName` AS `UserCountry`,`usd`.`PinCode` AS `PinCode`,`usd`.`IsPresent` AS `IsPresent`,`usd`.`IsPermanent` AS `IsPermanent`,`psm`.`ServiceProviderID` AS `ServiceProviderID`,`sp`.`ServiceProviderName` AS `ServiceProviderName`,`psm`.`ServiceID` AS `ServiceID`,`ser`.`ServiceName` AS `ServiceName`,`ser`.`IsNational` AS `IsNational`,`psm`.`StateID` AS `PSMStateID`,`st1`.`StateName` AS `PSMStateName`,`usr`.`WorkingLocationID` AS `WorkingLocationID`,`psam`.`LocationName` AS `WorkingLocationName`,`psam`.`DistrictID` AS `WorkingDistrictID`,`dis1`.`DistrictName` AS `WorkingDistrictName`,`psam`.`Address` AS `WorkingAddress`,`usr`.`Deleted` AS `USRMDeleted` from ((((((((((((((((((((`m_userservicerolemapping` `usr` left join `m_user` `us` on((`usr`.`UserID` = `us`.`UserID`))) left join `m_userdemographics` `usd` on((`us`.`UserID` = `usd`.`UserID`))) left join `m_role` `role` on((`usr`.`RoleID` = `role`.`RoleID`))) left join `m_providerservicemapping` `psm` on((`usr`.`ProviderServiceMapID` = `psm`.`ProviderServiceMapID`))) left join `m_providerserviceaddmapping` `psam` on((`usr`.`WorkingLocationID` = `psam`.`PSAddMapID`))) left join `m_title` `ti` on((`us`.`TitleID` = `ti`.`TitleID`))) left join `m_gender` `gn` on((`us`.`GenderID` = `gn`.`GenderID`))) left join `m_maritalstatus` `ms` on((`us`.`MaritalStatusID` = `ms`.`MaritalStatusID`))) left join `m_userqualification` `qua` on((`us`.`QualificationID` = `qua`.`QualificationID`))) left join `m_status` `sta` on((`us`.`StatusID` = `sta`.`StatusID`))) left join `m_community` `com` on((`usd`.`CommunityID` = `com`.`CommunityID`))) left join `m_religion` `rel` on((`usd`.`ReligionID` = `rel`.`ReligionID`))) left join `m_city` `ct` on((`usd`.`CityID` = `ct`.`CityID`))) left join `m_state` `st` on((`usd`.`StateID` = `st`.`StateID`))) left join `m_country` `cou` on((`usd`.`CountryID` = `cou`.`CountryID`))) left join `m_serviceprovider` `sp` on((`psm`.`ServiceProviderID` = `sp`.`ServiceProviderID`))) left join `m_servicemaster` `ser` on((`psm`.`ServiceID` = `ser`.`ServiceID`))) left join `m_state` `st1` on((`psm`.`StateID` = `st1`.`StateID`))) left join `m_district` `dis1` on((`psam`.`DistrictID` = `dis1`.`DistrictID`))) left join (select `ulm`.`UserID` AS `UserID`,group_concat(`ulm`.`LanguageID` separator ',') AS `languages` from `m_userlangmapping` `ulm` group by `ulm`.`UserID`) `ulmc` on((`ulmc`.`UserID` = `usr`.`UserID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26327,7 +26327,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 %` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_get_call_section_mapping` AS select `c`.`ID` AS `id`,`c`.`callConfigId` AS `callconfigid`,`s`.`id` AS `sectionid`,`s`.`name` AS `sectionname`,`c`.`IsChecked` AS `ischecked`,`c`.`CallSectionRank` AS `callsectionrank`,`c`.`ProviderServiceMapID` AS `providerservicemapid`,`c`.`Deleted` AS `deleted` from (`m_section` `s` join `m_callsectionmapping` `c` on(((`s`.`id` = `c`.`SectionID`) and (`c`.`Deleted` is false)))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26345,7 +26345,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 %` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_get_prkngplc_blok_dist_zone_state` AS select distinct `m_sp`.`ServicePointID` AS `Servicepointid`,`m_pp`.`ParkingPlaceID` AS `ParkingPlaceID`,`m_pp`.`ParkingPlaceName` AS `ParkingPlaceName`,`m_db`.`BlockID` AS `BlockID`,`m_db`.`BlockName` AS `BlockName`,`m_d`.`DistrictID` AS `DistrictID`,`m_d`.`DistrictName` AS `DistrictName`,`m_zdm`.`ZoneID` AS `ZoneID`,`m_z`.`ZoneName` AS `ZoneName`,`m_s`.`StateID` AS `StateID`,`m_s`.`StateName` AS `StateName`,`m_sp`.`ProviderServiceMapID` AS `SPproviderservicemapid`,`m_pp`.`ProviderServiceMapID` AS `PPproviderservicemapid`,`m_zdm`.`ProviderServiceMapID` AS `ZDMproviderservicemapid` from ((((((`m_servicepoint` `m_sp` join `m_parkingplace` `m_pp` on(((`m_sp`.`ParkingPlaceID` = `m_pp`.`ParkingPlaceID`) and (`m_pp`.`Deleted` is false)))) join `m_districtblock` `m_db` on(((`m_pp`.`DistrictBlockID` = `m_db`.`BlockID`) and (`m_db`.`Deleted` is false)))) join `m_district` `m_d` on(((`m_db`.`DistrictID` = `m_d`.`DistrictID`) and (`m_d`.`Deleted` is false)))) join `m_zonedistrictmap` `m_zdm` on(((`m_d`.`DistrictID` = `m_zdm`.`DistrictID`) and (`m_zdm`.`Deleted` is false)))) join `m_zone` `m_z` on(((`m_z`.`ZoneID` = `m_zdm`.`ZoneID`) and (`m_z`.`Deleted` is false)))) join `m_state` `m_s` on(((`m_d`.`StateID` = `m_s`.`StateID`) and (`m_s`.`Deleted` is false)))) where (`m_sp`.`Deleted` is false) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26435,7 +26435,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 %` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_get_userlangmapping` AS select `ul`.`UserLangID` AS `userlangid`,`ul`.`UserID` AS `userid`,`ul`.`LanguageID` AS `languageid`,`l`.`LanguageName` AS `LanguageName` from (`m_userlangmapping` `ul` join `m_language` `l` on((`l`.`LanguageID` = `ul`.`LanguageID`))) where (`ul`.`Deleted` is false) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26453,7 +26453,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 %` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_getagentsbyroleid` AS select `usr`.`USRMappingID` AS `USRMappingID`,`u`.`UserID` AS `UserID`,`u`.`FirstName` AS `FirstName`,`u`.`MiddleName` AS `MiddleName`,`u`.`LastName` AS `LastName`,`usr`.`RoleID` AS `RoleID`,`usr`.`AgentID` AS `AgentID` from (`m_user` `u` join `m_userservicerolemapping` `usr` on((`u`.`UserID` = `usr`.`UserID`))) where ((`u`.`Deleted` is false) and (`usr`.`Deleted` is false)) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26471,7 +26471,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 %` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_getdialpreference` AS select `t1`.`USRMappingID` AS `USRMappingID`,`t1`.`UserID` AS `UserID`,`t2`.`FirstName` AS `FirstName`,`t2`.`MiddleName` AS `MiddleName`,`t2`.`LastName` AS `LastName`,`t1`.`RoleID` AS `RoleID`,`t3`.`RoleName` AS `RoleName`,`t1`.`isAutoPreviewDial` AS `isAutoPreviewDial`,`t1`.`PreviewWindowTime` AS `PreviewWindowTime`,`t1`.`ProviderServiceMapID` AS `ProviderServiceMapID` from ((`m_userservicerolemapping` `t1` join `m_user` `t2` on(((`t1`.`UserID` = `t2`.`UserID`) and (`t1`.`Deleted` is false)))) join `m_role` `t3` on((`t1`.`RoleID` = `t3`.`RoleID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26507,7 +26507,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 %` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_getvanlocdetails` AS select distinct `van`.`VanID` AS `VanID`,`van`.`ParkingPlaceID` AS `ParkingPlaceID`,`dis`.`StateID` AS `StateID`,`dis`.`DistrictID` AS `DistrictID`,`dis`.`DistrictName` AS `DistrictName`,`db`.`BlockID` AS `blockid`,`db`.`BlockName` AS `blockname`,`usrm`.`Villageid` AS `villageid`,`usrm`.`VillageName` AS `VillageName`,`dis`.`GovtDistrictID` AS `District_LGDCode`,`dis`.`GovtStateID` AS `State_LGDCode`,`usrm`.`ProviderServiceMapID` AS `ProviderServiceMapID` from ((((`m_van` `van` left join `m_parkingplacesubdistrictmap` `prkdis` on((`van`.`ParkingPlaceID` = `prkdis`.`ParkingPlaceID`))) left join `m_district` `dis` on((`prkdis`.`DistrictID` = `dis`.`DistrictID`))) left join `m_districtblock` `db` on((`db`.`DistrictID` = `dis`.`DistrictID`))) left join `m_userservicerolemapping` `usrm` on((`usrm`.`Blockid` = `db`.`BlockID`))) where ((`van`.`Deleted` is false) and (`db`.`Deleted` is false) and (`prkdis`.`Deleted` is false) and (`dis`.`Deleted` is false)) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26543,7 +26543,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 %` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_showprovideradmin` AS select `usrm`.`USRMappingID` AS `USRMappingID`,`usrm`.`UserID` AS `UserID`,`usr`.`TitleID` AS `TitleID`,`title`.`TitleName` AS `TitleName`,`usr`.`FirstName` AS `FirstName`,`usr`.`MiddleName` AS `MiddleName`,`usr`.`LastName` AS `LastName`,`usr`.`IsSupervisor` AS `IsSupervisor`,`usr`.`Deleted` AS `UserDeleted`,`usrm`.`RoleID` AS `RoleID`,`role`.`RoleName` AS `RoleName`,`role`.`Deleted` AS `RoleDeleted`,`usrm`.`AgentID` AS `AgentID`,`usrm`.`AgentPassword` AS `AgentPassword`,`usrm`.`CZRole` AS `CZRole`,`usrm`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`psm`.`Deleted` AS `ProviderServiceMapDeleted`,`usrm`.`WorkingLocationID` AS `WorkingLocationID`,`psam`.`LocationName` AS `LocationName`,`psam`.`Deleted` AS `WorkingLocationDeleted`,`usrm`.`Deleted` AS `USRMDeleted`,`psm`.`ServiceProviderID` AS `ServiceProviderID`,`sp`.`ServiceProviderName` AS `ServiceProviderName`,`sp`.`Deleted` AS `ServiceProviderDeleted`,`psm`.`ServiceID` AS `ServiceID`,`sm`.`ServiceName` AS `ServiceName`,`sm`.`IsNational` AS `IsNational`,`sm`.`Deleted` AS `ServiceDeleted`,`psm`.`StateID` AS `StateID`,`st`.`StateName` AS `StateName` from ((((((((`m_userservicerolemapping` `usrm` left join `m_providerservicemapping` `psm` on((`usrm`.`ProviderServiceMapID` = `psm`.`ProviderServiceMapID`))) left join `m_user` `usr` on((`usrm`.`UserID` = `usr`.`UserID`))) left join `m_role` `role` on((`usrm`.`RoleID` = `role`.`RoleID`))) left join `m_providerserviceaddmapping` `psam` on((`usrm`.`WorkingLocationID` = `psam`.`PSAddMapID`))) left join `m_serviceprovider` `sp` on((`psm`.`ServiceProviderID` = `sp`.`ServiceProviderID`))) left join `m_servicemaster` `sm` on((`psm`.`ServiceID` = `sm`.`ServiceID`))) left join `m_state` `st` on((`psm`.`StateID` = `st`.`StateID`))) left join `m_title` `title` on((`usr`.`TitleID` = `title`.`TitleID`))) where (`role`.`RoleID` = 11) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26561,7 +26561,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 %` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_showproviderservicemapping` AS select `psm`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`psm`.`ServiceProviderID` AS `ServiceProviderID`,`sp`.`ServiceProviderName` AS `ServiceProviderName`,`psm`.`ServiceID` AS `ServiceID`,`ser`.`ServiceName` AS `ServiceName`,`ser`.`IsNational` AS `IsNational`,`psm`.`CountryID` AS `CountryID`,`cou`.`CountryName` AS `CountryName`,`psm`.`StateID` AS `StateID`,`st`.`StateName` AS `StateName`,`psm`.`DistrictID` AS `DistrictID`,`psm`.`CityID` AS `CityID`,`psm`.`DistrictBlockID` AS `DistrictBlockID`,`psm`.`Address` AS `Address`,`psm`.`StatusID` AS `StatusID`,`sta`.`Status` AS `Status`,`psm`.`CTI_CampaignName` AS `CTI_CampaignName`,`psm`.`ValidFrom` AS `ValidFrom`,`psm`.`ValidTill` AS `ValidTill`,`psm`.`Deleted` AS `Deleted`,`psm`.`Processed` AS `Processed`,`psm`.`CreatedBy` AS `CreatedBy`,`psm`.`CreatedDate` AS `CreatedDate`,`psm`.`ModifiedBy` AS `ModifiedBy`,`psm`.`LastModDate` AS `LastModDate` from (((((`m_providerservicemapping` `psm` left join `m_country` `cou` on((`psm`.`CountryID` = `cou`.`CountryID`))) left join `m_serviceprovider` `sp` on((`psm`.`ServiceProviderID` = `sp`.`ServiceProviderID`))) left join `m_servicemaster` `ser` on((`psm`.`ServiceID` = `ser`.`ServiceID`))) left join `m_state` `st` on((`psm`.`StateID` = `st`.`StateID`))) left join `m_status` `sta` on((`psm`.`StatusID` = `sta`.`StatusID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26579,7 +26579,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 %` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_showsubcategory` AS select `ca`.`CategoryID` AS `CategoryID`,`ca`.`CategoryName` AS `CategoryName`,`ca`.`CategoryDesc` AS `CategoryDesc`,`sc`.`SubCategoryID` AS `SubCategoryID`,`sc`.`SubCategoryName` AS `SubCategoryName`,`sc`.`SubCategoryDesc` AS `SubCategoryDesc`,`sc`.`SubCatFilePath` AS `SubCatFilePath`,`sc`.`Deleted` AS `SubCategoryDeleted`,`ca`.`SubServiceID` AS `SubServiceID`,`sus`.`SubServiceName` AS `SubServiceName`,`ca`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`ca`.`Deleted` AS `CategoryDeleted` from ((`m_category` `ca` left join `m_subcategory` `sc` on((`sc`.`CategoryID` = `ca`.`CategoryID`))) left join `m_subservice` `sus` on((`ca`.`SubServiceID` = `sus`.`SubServiceID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26615,7 +26615,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 %` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_temp` AS select `t1`.`id` AS `id`,`t1`.`Bencallid` AS `Bencallid`,`t1`.`outboundCallType` AS `outboundCallType`,`t1`.`Sectionid` AS `Sectionid`,`t1`.`SectionName` AS `SectionName`,`t1`.`QuestionID` AS `QuestionID`,`t1`.`Answer` AS `Answer`,`t1`.`Score` AS `Score`,`t1`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`t1`.`Deleted` AS `Deleted`,`t1`.`Processed` AS `Processed`,`t1`.`CreatedBy` AS `CreatedBy`,`t1`.`CreatedDate` AS `CreatedDate`,`t1`.`ModifiedBy` AS `ModifiedBy`,`t1`.`LastModDate` AS `LastModDate`,`t2`.`Name` AS `sectionNameN`,`t2`.`SectionRank` AS `SectionRank`,`t3`.`Question` AS `Question`,`t3`.`QuestionRank` AS `QuestionRank` from ((`t_qualityauditorcallresponse` `t1` join `m_qualityauditsection` `t2` on((`t1`.`Sectionid` = `t2`.`id`))) join `m_qualityauditquestionnaire` `t3` on((`t1`.`QuestionID` = `t3`.`id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -26633,7 +26633,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 %` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_userprkngplacvanspstatedisblok` AS select `upp`.`UserID` AS `userid`,`uvm`.`VanID` AS `VanID`,concat(`mv`.`VehicalNo`,' - ',`mvt`.`VanType`) AS `vanNoAndType`,`mvsp`.`VanSession` AS `VanSession`,`mvsp`.`ServicePointID` AS `ServicePointID`,`msp`.`ServicePointName` AS `ServicePointName`,`upp`.`ParkingPlaceID` AS `parkingplaceid`,`mv`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`mv`.`IsFacility` AS `IsFacility`,`mv`.`FacilityID` AS `FacilityID` from ((((((`m_uservanmapping` `uvm` join `m_userparkingplacemap` `upp` on(((`uvm`.`UserParkingPlaceMapID` = `upp`.`UserParkingPlaceMapID`) and (`upp`.`Deleted` is false)))) join `m_van` `mv` on(((`uvm`.`VanID` = `mv`.`VanID`) and (`mv`.`Deleted` is false)))) join `m_servicepoint` `msp` on(((`upp`.`ParkingPlaceID` = `msp`.`ParkingPlaceID`) and (`msp`.`Deleted` is false)))) join `m_vanservicepointmap` `mvsp` on(((`mv`.`VanID` = `mvsp`.`VanID`) and (`msp`.`ServicePointID` = `mvsp`.`ServicePointID`) and (`mvsp`.`Deleted` is false)))) join `m_parkingplace` `mpp` on(((`upp`.`ParkingPlaceID` = `mpp`.`ParkingPlaceID`) and (`mpp`.`Deleted` is false)))) join `m_vantype` `mvt` on(((`mv`.`VanTypeID` = `mvt`.`VanTypeID`) and (`mvt`.`Deleted` is false)))) where (`uvm`.`Deleted` is false) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;

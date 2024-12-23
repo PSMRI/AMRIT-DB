@@ -755,4 +755,211 @@ DELIMITER ;
 ;
 
 
+use db_iemr;
+
+alter table db_iemr.t_mothervalidrecord add  preferredLanguage varchar(30) after IsAllocated;
+
+alter table db_iemr.t_childvaliddata add  preferredLanguage varchar(30) after SMS_Status;
+
+alter table db_iemr.t_registrationfields add ProjectID int(11) not null;
+
+alter table db_iemr.t_feedback add BeneficiaryConsent bit(1)  null;
+
+alter table db_iemr.high_risk_assess modify id bigint not null auto_increment;
+
+
+use db_iemr;
+
+set sql_safe_updates=0;
+set foreign_key_checks=0;
+truncate table m_fieldtypes;
+LOCK TABLES `m_fieldtypes` WRITE;
+/*!40000 ALTER TABLE `m_fieldtypes` DISABLE KEYS */;
+INSERT INTO `m_fieldtypes` VALUES (1,'Text',NULL,_binary '\0','N','Admin','2023-03-23 14:06:42',NULL,'2023-04-05 17:17:27'),
+(2,'Radio',NULL,_binary '\0','N','Admin','2023-03-23 14:06:42',NULL,'2023-03-23 14:06:42'),(3,'Dropdown',NULL,_binary '\0','N','Admin','2023-03-23 14:06:42',NULL,'2023-03-23 14:06:42'),(4,'Date',NULL,_binary '\0','N','Admin','2023-03-23 14:06:42',NULL,'2023-03-23 14:06:42'),(7,'Multiple',NULL,_binary '\0','N','Admin','2023-03-23 14:06:42',NULL,'2023-03-23 14:06:42');
+/*!40000 ALTER TABLE `m_fieldtypes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+truncate table m_registrationsections;
+LOCK TABLES `m_registrationsections` WRITE;
+/*!40000 ALTER TABLE `m_registrationsections` DISABLE KEYS */;
+INSERT INTO `m_registrationsections` VALUES (1,'Personal Information',_binary '\0','N','Admin','2024-03-27 11:19:30',NULL,'2024-03-27 11:19:30'),(2,'Location Information',_binary '\0','N','Admin','2024-03-27 11:19:30',NULL,'2024-03-27 11:19:30'),(3,'Other Information',_binary '\0','N','Admin','2024-03-27 11:19:30',NULL,'2024-03-27 11:19:30'),(4,'Abha Information',_binary '\0','N','Admin','2024-03-27 11:19:30',NULL,'2024-03-27 11:19:30');
+/*!40000 ALTER TABLE `m_registrationsections` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+truncate table t_registrationfields;
+LOCK TABLES `t_registrationfields` WRITE;
+/*!40000 ALTER TABLE `t_registrationfields` DISABLE KEYS */;
+INSERT INTO `t_registrationfields` VALUES (1,1,'firstName','First Name',1,'Text',1,20,1,'alpha',_binary '',NULL,_binary '\0',NULL,_binary '\0','N','Admin','2024-05-22 11:53:02',NULL,'2024-08-06 12:38:18',0,0),(4,1,'genderName','Gender',3,'Dropdown',NULL,NULL,4,NULL,_binary '','Male,Female,Transgender',_binary '\0',NULL,_binary '\0','N','Admin','2024-05-22 11:53:02',NULL,'2024-05-31 19:15:22',0,0),(5,1,'age','Age',1,'Text',1,100,5,'numeric',_binary '',NULL,_binary '\0',NULL,_binary '\0','N','Admin','2024-05-22 11:53:02',NULL,'2024-05-22 11:53:02',0,0),(6,1,'ageUnits','Age Unit',3,'Dropdown',NULL,NULL,6,NULL,_binary '','Years,Months,Days',_binary '\0',NULL,_binary '\0','N','Admin','2024-05-22 11:53:02',NULL,'2024-08-01 23:39:04',0,0),(7,1,'dOB','DOB (DD/MM/YYYY)',4,'Date',NULL,NULL,7,NULL,_binary '',NULL,_binary '\0',NULL,_binary '\0','N','Admin','2024-05-22 11:53:02',NULL,'2024-05-22 11:53:02',0,0),(12,1,'maritalStatusName','Marital Status',3,'Dropdown',NULL,NULL,8,NULL,_binary '','Married,Unmarried,Seperated,Divorced,Not Applicable',_binary '\0',NULL,_binary '\0','N','Admin','2024-05-22 11:53:02',NULL,'2024-06-06 09:59:47',0,0),(15,2,'stateName','State',3,'Dropdown',NULL,NULL,1,NULL,_binary '',NULL,_binary '\0',NULL,_binary '\0','N','Admin','2024-05-22 11:53:02',NULL,'2024-05-22 11:53:02',0,0),(16,2,'districtName','District',3,'Dropdown',NULL,NULL,2,NULL,_binary '',NULL,_binary '\0',NULL,_binary '\0','N','Admin','2024-05-22 11:53:02',NULL,'2024-05-22 11:53:02',0,0),(17,2,'blockName','Taluk/Tehsil',3,'Dropdown',NULL,NULL,3,NULL,_binary '',NULL,_binary '\0',NULL,_binary '\0','N','Admin','2024-05-22 11:53:02',NULL,'2024-05-22 11:53:02',0,0),(388,4,'healthIdNumber','ABHA Number',1,'Text',1,17,1,'alphaNumeric',_binary '\0',NULL,_binary '\0','ABHA Number',_binary '\0','N','Admin','2024-12-03 00:00:00',NULL,'2024-12-13 18:36:02',0,0);
+/*!40000 ALTER TABLE `t_registrationfields` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+USE `db_iemr`;
+CREATE 
+   
+ OR REPLACE VIEW `db_iemr`.`v_customizationdatafields` AS
+    SELECT 
+        UUID() AS `uuid`,
+        `a`.`ServiceLineId` AS `ServiceLineId`,
+        `a`.`ServiceLine` AS `ServiceLine`,
+        `a`.`stateid` AS `stateid`,
+        `a`.`StateName` AS `StateName`,
+        `a`.`DistrictID` AS `DistrictID`,
+        `a`.`DistrictName` AS `DistrictName`,
+        `a`.`BlockID` AS `BlockID`,
+        `a`.`BlockName` AS `BlockName`,
+        `a`.`ProjectID` AS `ProjectID`,
+        `a`.`ProjectName` AS `ProjectName`,
+        `a`.`ServiceProviderID` AS `ServiceProviderID`,
+        `a`.`SectionID` AS `SectionID`,
+        `a`.`SectionName` AS `SectionName`,
+        `a`.`FieldName` AS `FieldName`,
+        `a`.`Placeholder` AS `Placeholder`,
+        `a`.`FieldTypeID` AS `FieldTypeID`,
+        `a`.`FieldType` AS `FieldType`,
+        `a`.`Options` AS `Options`,
+        `a`.`AllowMin` AS `AllowMin`,
+        `a`.`AllowMax` AS `AllowMax`,
+        `a`.`IsRequired` AS `IsRequired`,
+        `a`.`FieldTitle` AS `FieldTitle`,
+        `a`.`Rank` AS `Rank`,
+        `a`.`AllowText` AS `AllowText`,
+        `a`.`IsEditable` AS `IsEditable`
+    FROM
+        (SELECT DISTINCT
+            `t1`.`ServiceLineId` AS `ServiceLineId`,
+                `t1`.`ServiceLine` AS `ServiceLine`,
+                `t1`.`StateId` AS `stateid`,
+                `t1`.`StateName` AS `StateName`,
+                `t1`.`DistrictID` AS `DistrictID`,
+                `t1`.`DistrictName` AS `DistrictName`,
+                `t1`.`BlockID` AS `BlockID`,
+                `t1`.`BlockName` AS `BlockName`,
+                `t1`.`ProjectID` AS `ProjectID`,
+                `t1`.`ProjectName` AS `ProjectName`,
+                `t1`.`ServiceProviderID` AS `ServiceProviderID`,
+                `t2`.`SectionID` AS `SectionID`,
+                `t2`.`SectionName` AS `SectionName`,
+                `t3`.`FieldName` AS `FieldName`,
+                `t3`.`Placeholder` AS `Placeholder`,
+                `t3`.`FieldTypeID` AS `FieldTypeID`,
+                `t3`.`FieldType` AS `FieldType`,
+                `t3`.`Options` AS `Options`,
+                `t3`.`AllowMin` AS `AllowMin`,
+                `t3`.`AllowMax` AS `AllowMax`,
+                `t3`.`IsRequired` AS `IsRequired`,
+                `t3`.`FieldTitle` AS `FieldTitle`,
+                `t3`.`Rank` AS `Rank`,
+                `t3`.`AllowText` AS `AllowText`,
+                `t3`.`IsEditable` AS `IsEditable`
+        FROM
+            (((`db_iemr`.`t_projectservicelinemapping` `t1`
+        LEFT JOIN (SELECT 
+            `db_iemr`.`t_mapsectionprojects`.`ID` AS `ID`,
+                `db_iemr`.`t_mapsectionprojects`.`ProjectID` AS `ProjectID`,
+                `db_iemr`.`t_mapsectionprojects`.`ProjectName` AS `ProjectName`,
+                `db_iemr`.`t_mapsectionprojects`.`SectionID` AS `SectionID`,
+                `db_iemr`.`t_mapsectionprojects`.`SectionName` AS `SectionName`,
+                `db_iemr`.`t_mapsectionprojects`.`serviceProviderId` AS `serviceProviderId`,
+                `db_iemr`.`t_mapsectionprojects`.`Deleted` AS `Deleted`,
+                `db_iemr`.`t_mapsectionprojects`.`Processed` AS `Processed`,
+                `db_iemr`.`t_mapsectionprojects`.`CreatedBy` AS `CreatedBy`,
+                `db_iemr`.`t_mapsectionprojects`.`CreatedDate` AS `CreatedDate`,
+                `db_iemr`.`t_mapsectionprojects`.`ModifiedBy` AS `ModifiedBy`,
+                `db_iemr`.`t_mapsectionprojects`.`LastModDate` AS `LastModDate`
+        FROM
+            `db_iemr`.`t_mapsectionprojects`
+        WHERE
+            ((0 <> `db_iemr`.`t_mapsectionprojects`.`Deleted`)
+                IS FALSE)) `t4` ON ((`t4`.`ProjectID` = `t1`.`ProjectID`)))
+        LEFT JOIN `db_iemr`.`m_registrationsections` `t2` ON ((`t4`.`SectionID` = `t2`.`SectionID`)))
+        LEFT JOIN `db_iemr`.`t_registrationfields` `t3` ON (((`t3`.`SectionID` = `t2`.`SectionID`)
+            AND (`t1`.`ServiceProviderID` = `t3`.`ServiceProviderID`)
+            AND (`t3`.`ProjectID` = `t4`.`ProjectID`)
+            AND ((0 <> `t3`.`Deleted`) IS FALSE)
+            AND ((0 <> `t4`.`Deleted`) IS FALSE)))) UNION SELECT DISTINCT
+            `t1`.`ServiceLineId` AS `ServiceLineId`,
+                `t1`.`ServiceLine` AS `ServiceLine`,
+                `t1`.`StateId` AS `stateid`,
+                `t1`.`StateName` AS `StateName`,
+                `t1`.`DistrictID` AS `DistrictID`,
+                `t1`.`DistrictName` AS `DistrictName`,
+                `t1`.`BlockID` AS `BlockID`,
+                `t1`.`BlockName` AS `BlockName`,
+                `t1`.`ProjectID` AS `ProjectID`,
+                `t1`.`ProjectName` AS `ProjectName`,
+                `t1`.`ServiceProviderID` AS `ServiceProviderID`,
+                `t2`.`SectionID` AS `SectionID`,
+                `t2`.`SectionName` AS `SectionName`,
+                `t3`.`FieldName` AS `FieldName`,
+                `t3`.`Placeholder` AS `Placeholder`,
+                `t3`.`FieldTypeID` AS `FieldTypeID`,
+                `t3`.`FieldType` AS `FieldType`,
+                `t3`.`Options` AS `Options`,
+                `t3`.`AllowMin` AS `AllowMin`,
+                `t3`.`AllowMax` AS `AllowMax`,
+                `t3`.`IsRequired` AS `IsRequired`,
+                `t3`.`FieldTitle` AS `FieldTitle`,
+                `t3`.`Rank` AS `Rank`,
+                `t3`.`AllowText` AS `AllowText`,
+                `t3`.`IsEditable` AS `IsEditable`
+        FROM
+            (((`db_iemr`.`t_projectservicelinemapping` `t1`
+        LEFT JOIN (SELECT 
+            `db_iemr`.`t_mapsectionprojects`.`ID` AS `ID`,
+                `db_iemr`.`t_mapsectionprojects`.`ProjectID` AS `ProjectID`,
+                `db_iemr`.`t_mapsectionprojects`.`ProjectName` AS `ProjectName`,
+                `db_iemr`.`t_mapsectionprojects`.`SectionID` AS `SectionID`,
+                `db_iemr`.`t_mapsectionprojects`.`SectionName` AS `SectionName`,
+                `db_iemr`.`t_mapsectionprojects`.`serviceProviderId` AS `serviceProviderId`,
+                `db_iemr`.`t_mapsectionprojects`.`Deleted` AS `Deleted`,
+                `db_iemr`.`t_mapsectionprojects`.`Processed` AS `Processed`,
+                `db_iemr`.`t_mapsectionprojects`.`CreatedBy` AS `CreatedBy`,
+                `db_iemr`.`t_mapsectionprojects`.`CreatedDate` AS `CreatedDate`,
+                `db_iemr`.`t_mapsectionprojects`.`ModifiedBy` AS `ModifiedBy`,
+                `db_iemr`.`t_mapsectionprojects`.`LastModDate` AS `LastModDate`
+        FROM
+            `db_iemr`.`t_mapsectionprojects`
+        WHERE
+            ((0 <> `db_iemr`.`t_mapsectionprojects`.`Deleted`)
+                IS FALSE)) `t4` ON ((`t4`.`ProjectID` = `t1`.`ProjectID`)))
+        LEFT JOIN `db_iemr`.`m_registrationsections` `t2` ON ((`t4`.`SectionID` = `t2`.`SectionID`)))
+        LEFT JOIN `db_iemr`.`t_registrationfields` `t3` ON (((`t3`.`SectionID` = `t2`.`SectionID`)
+            AND ((0 <> `t3`.`Deleted`) IS FALSE)
+            AND ((0 <> `t4`.`Deleted`) IS FALSE))))
+        WHERE
+            (`t3`.`ServiceProviderID` = 0)) `a`
+    WHERE
+        (`a`.`Rank` IS NOT NULL);
+
+
+USE `db_iemr`;
+CREATE 
+ OR REPLACE VIEW `db_iemr`.`v_getagentsbyroleid` AS
+    SELECT 
+        `usr`.`USRMappingID` AS `USRMappingID`,
+        `u`.`UserID` AS `UserID`,
+        `u`.`FirstName` AS `FirstName`,
+        `u`.`MiddleName` AS `MiddleName`,
+        `u`.`LastName` AS `LastName`,
+        `usr`.`RoleID` AS `RoleID`,
+        `usr`.`AgentID` AS `AgentID`,
+        `ulm`.`LanguageID` AS `preferredlanguageid`,
+        (CASE
+            WHEN ((0 <> `ulm`.`CanRead`) IS TRUE) THEN `l`.`LanguageName`
+            ELSE NULL
+        END) AS `preferredlanguage`
+    FROM
+        (((`db_iemr`.`m_user` `u`
+        JOIN `db_iemr`.`m_userservicerolemapping` `usr` ON ((`u`.`UserID` = `usr`.`UserID`)))
+        LEFT JOIN `db_iemr`.`m_userlangmapping` `ulm` ON ((`ulm`.`UserID` = `usr`.`UserID`)))
+        LEFT JOIN `db_iemr`.`m_language` `l` ON ((`l`.`LanguageID` = `ulm`.`LanguageID`)))
+    WHERE
+        (((0 <> `u`.`Deleted`) IS FALSE)
+            AND ((0 <> `usr`.`Deleted`) IS FALSE));
+
 
