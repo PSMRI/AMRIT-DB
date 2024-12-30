@@ -768,36 +768,6 @@ alter table db_iemr.t_feedback add BeneficiaryConsent bit(1)  null;
 alter table db_iemr.high_risk_assess modify id bigint not null auto_increment;
 
 
-use db_iemr;
-
-set sql_safe_updates=0;
-set foreign_key_checks=0;
-truncate table m_fieldtypes;
-LOCK TABLES `m_fieldtypes` WRITE;
-/*!40000 ALTER TABLE `m_fieldtypes` DISABLE KEYS */;
-INSERT INTO `m_fieldtypes` VALUES (1,'Text',NULL,_binary '\0','N','Admin','2023-03-23 14:06:42',NULL,'2023-04-05 17:17:27'),
-(2,'Radio',NULL,_binary '\0','N','Admin','2023-03-23 14:06:42',NULL,'2023-03-23 14:06:42'),(3,'Dropdown',NULL,_binary '\0','N','Admin','2023-03-23 14:06:42',NULL,'2023-03-23 14:06:42'),(4,'Date',NULL,_binary '\0','N','Admin','2023-03-23 14:06:42',NULL,'2023-03-23 14:06:42'),(7,'Multiple',NULL,_binary '\0','N','Admin','2023-03-23 14:06:42',NULL,'2023-03-23 14:06:42');
-/*!40000 ALTER TABLE `m_fieldtypes` ENABLE KEYS */;
-UNLOCK TABLES;
-
-truncate table m_registrationsections;
-LOCK TABLES `m_registrationsections` WRITE;
-/*!40000 ALTER TABLE `m_registrationsections` DISABLE KEYS */;
-INSERT INTO `m_registrationsections` VALUES (1,'Personal Information',_binary '\0','N','Admin','2024-03-27 11:19:30',NULL,'2024-03-27 11:19:30'),(2,'Location Information',_binary '\0','N','Admin','2024-03-27 11:19:30',NULL,'2024-03-27 11:19:30'),(3,'Other Information',_binary '\0','N','Admin','2024-03-27 11:19:30',NULL,'2024-03-27 11:19:30'),(4,'Abha Information',_binary '\0','N','Admin','2024-03-27 11:19:30',NULL,'2024-03-27 11:19:30');
-/*!40000 ALTER TABLE `m_registrationsections` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-
-truncate table t_registrationfields;
-LOCK TABLES `t_registrationfields` WRITE;
-/*!40000 ALTER TABLE `t_registrationfields` DISABLE KEYS */;
-INSERT INTO `t_registrationfields` VALUES (1,1,'firstName','First Name',1,'Text',1,20,1,'alpha',_binary '',NULL,_binary '\0',NULL,_binary '\0','N','Admin','2024-05-22 11:53:02',NULL,'2024-08-06 12:38:18',0,0),(4,1,'genderName','Gender',3,'Dropdown',NULL,NULL,4,NULL,_binary '','Male,Female,Transgender',_binary '\0',NULL,_binary '\0','N','Admin','2024-05-22 11:53:02',NULL,'2024-05-31 19:15:22',0,0),(5,1,'age','Age',1,'Text',1,100,5,'numeric',_binary '',NULL,_binary '\0',NULL,_binary '\0','N','Admin','2024-05-22 11:53:02',NULL,'2024-05-22 11:53:02',0,0),(6,1,'ageUnits','Age Unit',3,'Dropdown',NULL,NULL,6,NULL,_binary '','Years,Months,Days',_binary '\0',NULL,_binary '\0','N','Admin','2024-05-22 11:53:02',NULL,'2024-08-01 23:39:04',0,0),(7,1,'dOB','DOB (DD/MM/YYYY)',4,'Date',NULL,NULL,7,NULL,_binary '',NULL,_binary '\0',NULL,_binary '\0','N','Admin','2024-05-22 11:53:02',NULL,'2024-05-22 11:53:02',0,0),(12,1,'maritalStatusName','Marital Status',3,'Dropdown',NULL,NULL,8,NULL,_binary '','Married,Unmarried,Seperated,Divorced,Not Applicable',_binary '\0',NULL,_binary '\0','N','Admin','2024-05-22 11:53:02',NULL,'2024-06-06 09:59:47',0,0),(15,2,'stateName','State',3,'Dropdown',NULL,NULL,1,NULL,_binary '',NULL,_binary '\0',NULL,_binary '\0','N','Admin','2024-05-22 11:53:02',NULL,'2024-05-22 11:53:02',0,0),(16,2,'districtName','District',3,'Dropdown',NULL,NULL,2,NULL,_binary '',NULL,_binary '\0',NULL,_binary '\0','N','Admin','2024-05-22 11:53:02',NULL,'2024-05-22 11:53:02',0,0),(17,2,'blockName','Taluk/Tehsil',3,'Dropdown',NULL,NULL,3,NULL,_binary '',NULL,_binary '\0',NULL,_binary '\0','N','Admin','2024-05-22 11:53:02',NULL,'2024-05-22 11:53:02',0,0),(388,4,'healthIdNumber','ABHA Number',1,'Text',1,17,1,'alphaNumeric',_binary '\0',NULL,_binary '\0','ABHA Number',_binary '\0','N','Admin','2024-12-03 00:00:00',NULL,'2024-12-13 18:36:02',0,0);
-/*!40000 ALTER TABLE `t_registrationfields` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-
 USE `db_iemr`;
 CREATE 
    
