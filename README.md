@@ -77,6 +77,11 @@ For subsequent changes, increment the version number, e.g., `V3__<description>.s
      ```
      clean install -DENV_VAR=local
      ```  
+   - Go to **Environment** tab and click **Add**.  Set
+     ```
+     Name : ENV_VAR 
+     Value: local
+     ```
    - Apply and run the configuration.  
 
 ---
@@ -97,7 +102,7 @@ For subsequent changes, increment the version number, e.g., `V3__<description>.s
 ## Running Migrations  
 
 1. **Database Credentials**:  
-   - Add credentials in `application.properties`.  
+   - Add credentials in `common_local.properties`.  
 
 2. **Run Migrations**:  
    - Flyway automatically runs migrations at application startup if configured correctly.  
