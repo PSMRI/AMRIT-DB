@@ -66,7 +66,7 @@ For subsequent changes, increment the version number, e.g., `V3__<description>.s
 ## Build Configuration  
 
 1. **Setup Local Properties**:  
-   - Go to `common_local.properties` and update it for your environment.  
+   - Copy `common_example.properties` to `common_local.properties` and update it for your environment.  
    - File location: `src/main/environment`  
 
 2. **Create Build Configuration in STS/Eclipse**:  
