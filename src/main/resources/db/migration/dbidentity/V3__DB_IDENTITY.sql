@@ -10,7 +10,7 @@ use db_identity;
 --
 
 use db_identity
- alter table i_beneficiarydetails add isConsent varchar  DEFAULT NULL;
+ alter table i_beneficiarydetails add isConsent tinyint(1)  DEFAULT NULL;
 
  alter table i_bornbirthdeatils add birthCertificateFileFrontView varchar(500)  DEFAULT NULL;
 
