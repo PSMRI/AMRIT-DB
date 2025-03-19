@@ -73,7 +73,7 @@ CREATE TABLE `asha_profile` (
    `transportation_mode` varchar(100) DEFAULT NULL,
    `user_id` bigint(20) NOT NULL,
    `community_support_contact` varchar(11) DEFAULT NULL,
-   `ben_id` mediumtext DEFAULT NULL,
+   `ben_id` bigint(20) DEFAULT NULL,
    PRIMARY KEY (`id`),
    UNIQUE KEY `id` (`id`)
  ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4
