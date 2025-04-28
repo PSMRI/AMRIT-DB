@@ -10,6 +10,7 @@ CREATE TABLE `t_videocallparameter` (
   `CallStatus` VARCHAR(255) DEFAULT NULL,
   `CallDuration` VARCHAR(255) DEFAULT NULL,
   `ProviderServiceMapID` INT(11) DEFAULT NULL,
+  `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `ClosureRemark` TEXT DEFAULT NULL,
   `Deleted` BOOLEAN DEFAULT FALSE,
   `CreatedBy` VARCHAR(255) DEFAULT NULL,
