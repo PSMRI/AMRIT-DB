@@ -13,6 +13,8 @@ CREATE TABLE `t_videocallparameter` (
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `ClosureRemark` TEXT DEFAULT NULL,
   `Deleted` BOOLEAN DEFAULT FALSE,
+  `LinkGeneratedAt` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `IsLinkUsed` TINYINT(1) DEFAULT 0,
   `CreatedBy` VARCHAR(255) DEFAULT NULL,
   `CreatedDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `ModifiedBy` VARCHAR(255) DEFAULT NULL,
