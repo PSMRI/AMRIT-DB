@@ -36,7 +36,7 @@ CREATE TABLE `asha_profile` (
    `ProviderServiceMapID` varchar(100) DEFAULT NULL,
    PRIMARY KEY (`id`),
    UNIQUE KEY `employee_id` (`employee_id`)
- ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4
+ ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Table structure for table `m_otp_beneficiary`
@@ -49,7 +49,7 @@ CREATE TABLE `asha_profile` (
    `otp` int(11) NOT NULL,
    `createdAt` timestamp NULL DEFAULT current_timestamp(),
    PRIMARY KEY (`Id`)
- ) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4
+ ) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Table structure for table `t_micro_birth_plan`
@@ -76,7 +76,7 @@ CREATE TABLE `asha_profile` (
    `ben_id` bigint(20) DEFAULT NULL,
    PRIMARY KEY (`id`),
    UNIQUE KEY `id` (`id`)
- ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4
+ ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 
  use db_iemr;
@@ -86,4 +86,9 @@ CREATE TABLE `asha_profile` (
  alter table t_eligible_couple_register add lmp_date VARCHAR(50)  DEFAULT NULL;
 
 alter table anc_visit add file_path varchar(500) DEFAULT NULL;
+
+alter table asha_profile add  profileImage varchar(1000) DEFAULT NULL;
+alter table asha_profile add  supervisorName varchar(225) DEFAULT NULL;
+alter table asha_profile add  supervisorMobile varchar(225) DEFAULT NULL;
+alter table asha_profile add  isFatherOrSpouse tinyint(1);
 
