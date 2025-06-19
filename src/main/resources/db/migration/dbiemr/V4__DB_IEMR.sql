@@ -3,11 +3,11 @@
 -- Host: 192.168.5.5    Database: db_iemr
 -- ------------------------------------------------------
 -- Server version	5.7.19-log
- use db_iemr
+ use db_iemr;
 --
 -- Table structure for table `screening`
 --
-CREATE TABLE if not exists`screening_malaria` (
+CREATE TABLE if not exists `screening_malaria` (
   `id` bigint(20)  NOT NULL AUTO_INCREMENT,
   `ben_id` bigint(20) DEFAULT NULL,
   `houseHoldDetailsId` bigint(20) DEFAULT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE if not exists`screening_malaria` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE  if not exists `screening_leprosy` (
+CREATE TABLE if not exists `screening_leprosy` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `ben_id` bigint(20) DEFAULT NULL,
   `houseHoldDetailsId` bigint(20) DEFAULT NULL,
@@ -109,7 +109,7 @@ CREATE TABLE if not exists `screening_filaria` (
 
 
 
-CREATE TABLE if not exists  `screening_aesje` (
+CREATE TABLE if not exists `screening_aesje` (
   `id` bigint(20) NOT NULL,
   `ben_id` bigint(20) DEFAULT NULL,
   `houseHoldDetailsId` bigint(20) DEFAULT NULL,
@@ -180,7 +180,7 @@ CREATE TABLE if not exists `vhnc_form` (
  -- Table structure for table `vhnd_form`
  --
 
- CREATE TABLE if not exists `vhnd_form` (
+CREATE TABLE if not exists `vhnd_form` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `place` text DEFAULT NULL,
     `no_of_beneficiaries_attended` int(11) DEFAULT NULL,
@@ -235,7 +235,7 @@ CREATE TABLE if not exists `deworming_form` (
   -- Table structure for table `phc_review_meeting`
   --
 
- CREATE TABLE if not exists `phc_review_meeting` (
+CREATE TABLE if not exists `phc_review_meeting` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `place` varchar(255) DEFAULT NULL,
     `no_of_beneficiaries_attended` int(11) DEFAULT NULL,
@@ -252,7 +252,7 @@ CREATE TABLE if not exists `deworming_form` (
   --
     -- Table structure for table `firebase user token`
     --
-  CREATE TABLE if not exists `user_tokens` (
+CREATE TABLE if not exists `user_tokens` (
      `user_id` bigint(20) NOT NULL,
      `token` varchar(500) NOT NULL,
      `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),

@@ -9,10 +9,11 @@ use db_identity;
 -- Table structure for table 'i_beneficiarydetails'
 --
 
-use db_identity
- alter table i_beneficiarydetails add isConsent varchar(50) DEFAULT NULL;
+use db_identity;
 
- alter table i_bornbirthdeatils add birthCertificateFileFrontView varchar(500)  DEFAULT NULL;
+alter table i_beneficiarydetails add isConsent varchar(50) DEFAULT NULL;
 
- alter table i_bornbirthdeatils add birthCertificateFileBackView varchar(500)  DEFAULT NULL;
+alter table i_bornbirthdeatils add birthCertificateFileFrontView varchar(500)  DEFAULT NULL;
+
+alter table i_bornbirthdeatils add birthCertificateFileBackView varchar(500)  DEFAULT NULL;
 
