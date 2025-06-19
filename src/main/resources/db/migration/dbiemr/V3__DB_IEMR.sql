@@ -85,7 +85,7 @@ CREATE TABLE `asha_profile` (
 
  alter table t_eligible_couple_register add lmp_date VARCHAR(50)  DEFAULT NULL;
 
-alter table anc_visit add file_path varchar(500) DEFAULT NULL;
+alter table t_anc_visit add file_path varchar(500) DEFAULT NULL;
 
 alter table asha_profile add  profileImage varchar(1000) DEFAULT NULL;
 alter table asha_profile add  supervisorName varchar(225) DEFAULT NULL;
