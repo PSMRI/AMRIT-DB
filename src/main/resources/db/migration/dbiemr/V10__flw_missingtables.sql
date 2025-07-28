@@ -61,21 +61,23 @@ CREATE TABLE  if not exists `t_user_activity_logs` (
 
 
 
-CREATE TABLE  if not exists `t_prescription_templates` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `UserID` int(11) NOT NULL,
-  `TemplateID` int(11) DEFAULT NULL,
-  `TemplateName` varchar(100) NOT NULL,
-  `DrugName` varchar(255) DEFAULT NULL,
-  `DrugID` int(11) DEFAULT NULL,
-  `Frequency` varchar(100) DEFAULT NULL,
-  `Unit` varchar(50) DEFAULT NULL,
-  `Duration` varchar(50) DEFAULT NULL,
-  `Instructions` varchar(255) DEFAULT NULL,
-  `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `ModifiedDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-);
+CREATE TABLE if not exists `t_prescription_templates` (
+   `id` bigint NOT NULL AUTO_INCREMENT,
+   `UserID` int NOT NULL,
+   `TemplateID` int DEFAULT NULL,
+   `TemplateName` varchar(100) NOT NULL,
+   `DrugName` varchar(255) DEFAULT NULL,
+   `DrugID` int DEFAULT NULL,
+   `Frequency` varchar(100) DEFAULT NULL,
+   `Unit` varchar(50) DEFAULT NULL,
+   `Duration` varchar(50) DEFAULT NULL,
+   `Instructions` varchar(255) DEFAULT NULL,
+   `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   `ModifiedDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+   PRIMARY KEY (`id`),
+   KEY `t_presc_templates_user_fk` (`UserID`),
+   CONSTRAINT `t_presc_templates_user_fk` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE CASCADE
+ ) ;
 
 
 
@@ -119,3 +121,5 @@ CREATE TABLE  if not exists `m_userbiometricmapping` (
   UNIQUE KEY `FK_UserBiometricMapping_User_idx` (`UserID`),
   CONSTRAINT `FK_UserBiometricMapping_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ;
+
+
