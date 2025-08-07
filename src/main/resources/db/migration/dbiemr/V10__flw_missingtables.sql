@@ -19,6 +19,7 @@ CREATE TABLE if not exists `m_outreach` (
 
 
 
+
 CREATE TABLE if not exists `t_outreach_activity` (
    `ActivityId` int NOT NULL AUTO_INCREMENT,
    `UserId` int NOT NULL,
@@ -44,6 +45,7 @@ CREATE TABLE if not exists `t_outreach_activity` (
  ) ;
 
 
+
 CREATE TABLE  if not exists `t_user_activity_logs` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `UserId` int(11) NOT NULL,
@@ -59,9 +61,6 @@ CREATE TABLE  if not exists `t_user_activity_logs` (
   `IsOutOfReach` bit(1) DEFAULT NULL,
   PRIMARY KEY (`Id`)
 );
-
-
-
 
 
 CREATE TABLE if not exists `t_prescription_templates` (
