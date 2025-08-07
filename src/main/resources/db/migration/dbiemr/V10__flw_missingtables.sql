@@ -19,31 +19,29 @@ CREATE TABLE if not exists `m_outreach` (
 
 
 
-CREATE TABLE  if not exists `t_outreach_activity` (
-  `ActivityId` int(11) NOT NULL AUTO_INCREMENT,
-  `UserId` int(11) NOT NULL,
-  `UserName` varchar(50) DEFAULT NULL,
-  `ActivityName` varchar(100) DEFAULT NULL,
-  `EventDesc` varchar(255) DEFAULT NULL,
-  `NoOfParticipants` int(11) DEFAULT NULL,
-  `ActivityDate` datetime DEFAULT NULL,
-  `Img1` mediumblob,
-  `Img1TimeStamp` datetime DEFAULT NULL,
-  `Img1Latitude` double DEFAULT NULL,
-  `Img1Longitude` double DEFAULT NULL,
-  `Img1Address` varchar(255) DEFAULT NULL,
-  `Img2` mediumblob,
-  `Img2TimeStamp` datetime DEFAULT NULL,
-  `Img2Latitude` double DEFAULT NULL,
-  `Img2Longitude` double DEFAULT NULL,
-  `Img2Address` varchar(255) DEFAULT NULL,
-  `Deleted` bit(1) DEFAULT b'0',
-  PRIMARY KEY (`ActivityId`)
-) ;
-
-ALTER TABLE t_outreach_activity ADD CONSTRAINT FK_t_outreach_activity_userid_idx 
-  FOREIGN KEY (UserId) REFERENCES m_user(UserId);
-
+CREATE TABLE if not exists `t_outreach_activity` (
+   `ActivityId` int NOT NULL AUTO_INCREMENT,
+   `UserId` int NOT NULL,
+   `UserName` varchar(50) DEFAULT NULL,
+   `ActivityName` varchar(100) DEFAULT NULL,
+   `EventDesc` varchar(255) DEFAULT NULL,
+   `NoOfParticipants` int DEFAULT NULL,
+   `ActivityDate` datetime DEFAULT NULL,
+   `Img1` mediumblob,
+   `Img1TimeStamp` datetime DEFAULT NULL,
+   `Img1Latitude` double DEFAULT NULL,
+   `Img1Longitude` double DEFAULT NULL,
+   `Img1Address` varchar(255) DEFAULT NULL,
+   `Img2` mediumblob,
+   `Img2TimeStamp` datetime DEFAULT NULL,
+   `Img2Latitude` double DEFAULT NULL,
+   `Img2Longitude` double DEFAULT NULL,
+   `Img2Address` varchar(255) DEFAULT NULL,
+   `Deleted` bit(1) DEFAULT b'0',
+   PRIMARY KEY (`ActivityId`),
+   KEY `FK_t_outreach_activity_userid_idx` (`UserId`),
+   CONSTRAINT `FK_t_outreach_activity_userid_idx` FOREIGN KEY (`UserId`) REFERENCES `m_user` (`UserID`)
+ ) ;
 
 
 CREATE TABLE  if not exists `t_user_activity_logs` (
