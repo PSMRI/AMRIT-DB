@@ -14,8 +14,5 @@ create index inx_villageid on i_ben_flow_outreach(villageID);
 create index inx_modified_date on i_ben_flow_outreach(modified_date);
 
 
-create index inx_villageid on i_ben_flow_outreach(villageID);
-
-create index inx_modified_date on i_ben_flow_outreach(modified_date);
 
 
