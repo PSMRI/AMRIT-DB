@@ -36,3 +36,35 @@ VIEW `db_iemr`.`v_get_qualityaudit_sectionquestionairevalues` AS
         ((`t1`.`Deleted` IS FALSE)
             AND (`t2`.`Deleted` IS FALSE)
             AND (`t3`.`Deleted` IS FALSE));
+
+DROP PROCEDURE IF EXISTS `Pr_QualityAuditorSectionQuestionaire`;
+
+DELIMITER $$
+
+CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_QualityAuditorSectionQuestionaire`(v_psmrid INT(11))
+BEGIN
+    SELECT 
+        s.id AS sectionid,
+        s.Name AS SectionName,
+        q.id AS Questionid,
+        q.Question,
+        s.sectionrank,
+        q.questionrank,
+        q.AnswerType,
+        s.providerservicemapid,
+        q.isFatalQuestion,
+        q.deleted,
+        s.createdby,
+        s.createdDate,
+        s.modifiedBy,
+        s.lastModDate,
+        q.Role
+    FROM m_qualityauditsection s
+    INNER JOIN m_qualityauditquestionnaire q 
+        ON s.id = q.sectionid
+    WHERE s.providerservicemapid = IFNULL(v_psmrid, s.providerservicemapid)
+      AND s.providerservicemapid IS NOT NULL
+      AND s.id IS NOT NULL;
+END$$
+
+DELIMITER ;
