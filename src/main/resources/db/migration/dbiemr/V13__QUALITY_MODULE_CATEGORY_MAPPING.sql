@@ -39,9 +39,11 @@ VIEW `db_iemr`.`v_get_qualityaudit_sectionquestionairevalues` AS
 
 DROP PROCEDURE IF EXISTS `Pr_QualityAuditorSectionQuestionaire`;
 
+DROP PROCEDURE IF EXISTS `Pr_QualityAuditorSectionQuestionaire`;
+
 DELIMITER $$
 
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_QualityAuditorSectionQuestionaire`(v_psmrid INT(11))
+CREATE PROCEDURE `Pr_QualityAuditorSectionQuestionaire`(IN v_psmrid INT)
 BEGIN
     SELECT 
         s.id AS sectionid,
