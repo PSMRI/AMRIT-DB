@@ -79,6 +79,7 @@ public class VersionService {
 			history.setExecutionTime(rs.getInt("execution_time"));
 			history.setSuccess(rs.getBoolean("success"));
 			return history;
+
 		});
 	}
 }
