@@ -22,6 +22,7 @@
 package com.db.piramalswasthya.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +53,7 @@ public class VersionController {
 	public String getLatestDBMigrationVersion() throws Exception {
 		String resp = null;
 		try {
-			List<FlywaySchemaVersion> latestVersion = service.getLatestVersion();
+			Map<String,List<FlywaySchemaVersion>> latestVersion = service.getAllLatestVersion();
 			Gson gson = new Gson();
 			if (null != latestVersion && !CollectionUtils.isEmpty(latestVersion)) {
 				resp = gson.toJson(latestVersion);
