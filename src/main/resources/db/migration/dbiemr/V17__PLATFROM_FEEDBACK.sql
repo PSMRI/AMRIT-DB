@@ -2,10 +2,6 @@
 -- AMRIT Feedback Module DB Seed Script
 -- ================================================================
 USE db_iemr;
--- Drop existing (order matters because of FK)
-DROP TABLE IF EXISTS m_platform_feedback;
-DROP TABLE IF EXISTS m_feedback_category;
-
 -- ================================================================
 -- Create: Feedback Categories
 -- ================================================================
