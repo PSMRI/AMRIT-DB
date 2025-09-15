@@ -1,23 +1,10 @@
-### Summary
-This PR introduces two new tables to support multi-language incentive activities
-and maintain state-wise ranking for activities.
-
-### Schema Changes
-
-1. **m_incentive_activity_lang_mapping**
-   - Stores translations of incentive activities in different languages.
-   - Columns include `activity_name`, `group_name`, `activity_description`,
-     `payment_parameter`, and `rate_per_activity`.
-   - Foreign key `language_id` references `m_language.LanguageID` for language integrity.
-
-2. **m_incentive_activity_rank_mapping**
-   - Manages state-level ranking and activation of incentive activities.
-   - Includes `rank_order` for display ordering and `is_active` for enabling/disabling activities.
-   - Enforces uniqueness on `(activity_id, state_code)` to prevent duplicates.
-   - Foreign key `activity_id` references `incentive_activity(id)` with `ON DELETE CASCADE`.
-
+-- Migration: add incentive activity language and rank mapping tables
 
 use db_iemr;
+
+--
+-- Table structure for table `m_incentive_activity_lang_mapping`
+--
 CREATE TABLE `m_incentive_activity_lang_mapping` (
    `id` bigint NOT NULL AUTO_INCREMENT,
    `activity_id` bigint NOT NULL,
@@ -34,6 +21,9 @@ CREATE TABLE `m_incentive_activity_lang_mapping` (
    CONSTRAINT `fk_lang_mapping_language` FOREIGN KEY (`language_id`) REFERENCES `m_language` (`LanguageID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Table structure for table `m_incentive_activity_rank_mapping`
+--
 
 CREATE TABLE `m_incentive_activity_rank_mapping` (
    `id` BIGINT NOT NULL AUTO_INCREMENT,
