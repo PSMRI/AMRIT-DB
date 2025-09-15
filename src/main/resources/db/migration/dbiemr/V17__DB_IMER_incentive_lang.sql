@@ -27,6 +27,9 @@ CREATE TABLE `m_incentive_activity_lang_mapping` (
    `activity_description` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
    `payment_parameter` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
    `rate_per_activity` int DEFAULT NULL,
+    `created_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `updated_by` VARCHAR(255) DEFAULT NULL,
+    `updated_date` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
    PRIMARY KEY (`id`),
    CONSTRAINT `fk_lang_mapping_language` FOREIGN KEY (`language_id`) REFERENCES `m_language` (`LanguageID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -36,7 +39,7 @@ CREATE TABLE `m_incentive_activity_rank_mapping` (
    `id` BIGINT NOT NULL AUTO_INCREMENT,
    `activity_id` BIGINT NOT NULL,
    `state_code` INT NOT NULL,
-   `is_active` BIT(1) DEFAULT b'1',
+   `is_active` TINYINT(1) DEFAULT b 1,
    `rank_order` INT NOT NULL DEFAULT 0,
    `created_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
    `updated_by` VARCHAR(255) DEFAULT NULL,
@@ -46,7 +49,9 @@ CREATE TABLE `m_incentive_activity_rank_mapping` (
    CONSTRAINT `uq_activity_state` UNIQUE (`activity_id`, `state_code`),
    CONSTRAINT `fk_activity_state_mapping`
        FOREIGN KEY (`activity_id`) REFERENCES `incentive_activity` (`id`)
-       ON DELETE CASCADE
+       ON DELETE CASCADE ,
+        KEY `idx_state_active_rank` (`state_code`,`is_active`,`rank_order`),
+        CHECK (`rank_order` >= 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
