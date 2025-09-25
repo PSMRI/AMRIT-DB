@@ -1,3 +1,6 @@
+use db_iemr;
+drop procedure if exists Pr_Stockdetail;
+
 DELIMITER $$
 
 CREATE PROCEDURE `Pr_Stockdetail`(
