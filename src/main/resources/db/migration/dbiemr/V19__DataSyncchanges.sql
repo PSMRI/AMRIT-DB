@@ -2,6 +2,10 @@ UPDATE `db_iemr`.`m_synctabledetail` SET `ServerColumnName` = 'PermAddrLine1,Per
 
 UPDATE `db_iemr`.`m_synctabledetail` SET `VanColumnName` = 'BenRegId,BenDetailsId,BenAddressId,BenImageId,BenContactsId,BenConsentId,BenAccountID,BenSecureStackId,Deleted,Processed,CreatedBy,date_format(CreatedDate,\'%Y-%m-%d %H:%i:%s\'),Reserved,ReservedFor,ReservedOn,ReservedById,ModifiedBy,date_format(LastModDate,\'%Y-%m-%d %H:%i:%s\'),BenMapId,VanSerialNo,VanID,VehicalNo,ParkingPlaceID,SyncedBy,date_format(SyncedDate,\'%Y-%m-%d %H:%i:%s\'),ReservedForChange' WHERE (`SyncTableDetailID` = '65');
 
+UPDATE `db_iemr`.`m_synctabledetail` SET `SchemaName` =TRIM(SchemaName);
+
+update `db_iemr`.`m_synctabledetail` SET `vancolumnname` = "ItemStockEntryID,FacilityID,Quantity,ProviderServiceMapID,ExitTypeID,ExitType,Deleted,Processed,CreatedBy,date_format(CreatedDate,'%Y-%m-%d %H:%i:%s'),ModifiedBy,date_format(LastModDate,'%Y-%m-%d %H:%i:%s'),ItemStockExitID,VanSerialNo,VanID,VehicalNo,ParkingPlaceID,SyncedBy,date_format(SyncedDate,'%Y-%m-%d %H:%i:%s'),ReservedForChange" where (`tablename`='t_itemstockexit');
+
 use db_identity;
 ALTER TABLE i_beneficiaryaccount    ADD COLUMN SyncFailureReason VARCHAR(500);
 ALTER TABLE i_beneficiaryaddress    ADD COLUMN SyncFailureReason VARCHAR(500);
