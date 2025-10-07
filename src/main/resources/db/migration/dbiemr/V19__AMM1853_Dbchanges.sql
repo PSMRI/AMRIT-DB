@@ -1,8 +1,9 @@
 
 
 
-alter table t_pmsma add visitDate Datetime Default null;
- 
-alter table t_pmsma add visitNo smallint Default null;
- 
-alter table t_pmsma add anyOtherHighRiskCondition varchar(100) Default null;
+
+
+alter table t_pmsma
+  add column visitDate datetime null,
+  add column visitNo smallint null,
+  add column anyOtherHighRiskCondition varchar(100) null;
