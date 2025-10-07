@@ -41,7 +41,7 @@ CREATE TABLE `m_incentive_activity_rank_mapping` (
 
    CONSTRAINT `uq_activity_state` UNIQUE (`activity_id`, `state_code`),
    CONSTRAINT `fk_activity_state_mapping`
-       FOREIGN KEY (`activity_id`) REFERENCES `incentive_activity` (`id`)
+       FOREIGN KEY (`activity_id`) REFERENCES `m_incentive_activity` (`id`)
        ON DELETE CASCADE ,
         KEY `idx_state_active_rank` (`state_code`,`is_active`,`rank_order`),
         CHECK (`rank_order` >= 0)
