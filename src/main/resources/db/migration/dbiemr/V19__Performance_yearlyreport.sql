@@ -1,9 +1,9 @@
 use db_iemr;
-drop procedure if exists Pr_Stockdetail;
+drop procedure if exists pr_Stockdetail;
 
 DELIMITER $$
 
-CREATE PROCEDURE `Pr_Stockdetail`(
+CREATE PROCEDURE `pr_Stockdetail`(
   IN v_FromDate DATE,
   IN v_ToDate   DATE,
   IN v_facilityid INT
