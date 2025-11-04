@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `m_feedback_category` (
    PRIMARY KEY (`CategoryID`),
    UNIQUE KEY `uq_category_slug` (`Slug`),
    CONSTRAINT `chk_category_slug_format` CHECK (regexp_like(`Slug`,_utf8mb4'^[a-z0-9]+(-[a-z0-9]+)*$'))
- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ================================================================
 -- Create: Platform Feedback
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `m_platform_feedback` (
    CONSTRAINT `fk_platform_feedback_category` FOREIGN KEY (`CategoryID`) REFERENCES `m_feedback_category` (`CategoryID`),
    CONSTRAINT `fk_platform_feedback_user` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`),
    CONSTRAINT `m_platform_feedback_chk_1` CHECK ((`Rating` between 1 and 5))
- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ================================================================
 -- Helpful indexes
