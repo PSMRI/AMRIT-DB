@@ -3,7 +3,7 @@ USE db_iemr;
 -- ================================================================
 -- Create: Feedback Categories
 -- ================================================================
-CREATE TABLE m_feedback_category (
+CREATE TABLE if not exists m_feedback_category (
   CategoryID CHAR(36) PRIMARY KEY,
   Slug VARCHAR(64) NOT NULL COMMENT 'Stable machine identifier; lowercase alphanumeric with optional dashes',
   Label VARCHAR(128) NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE m_feedback_category (
 -- ================================================================
 -- Create: Platform Feedback
 -- ================================================================
-CREATE TABLE m_platform_feedback (
+CREATE TABLE if not exists m_platform_feedback (
   FeedbackID CHAR(36) PRIMARY KEY,
   
   -- DB-managed timestamps
