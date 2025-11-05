@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.db</groupId>
 	<artifactId>Amrit-DB</artifactId>
-	<version>1.0.0</version>
+	<version>3.7.0</version>
 	<packaging>war</packaging>
 	<name>Amrit-DB</name>
 	<description>DB service module for AMRIT to setup DB schema</description>
