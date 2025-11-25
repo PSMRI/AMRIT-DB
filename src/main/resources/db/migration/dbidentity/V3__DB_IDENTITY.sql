@@ -11,9 +11,10 @@ use db_identity;
 
 use db_identity;
 
-alter table i_beneficiarydetails add isConsent varchar(50) DEFAULT NULL;
+-- make ALTER add operations idempotent: only add columns when they do NOT already exist
+alter table i_beneficiarydetails add column if not exists isConsent varchar(50) DEFAULT NULL;
 
-alter table i_bornbirthdeatils add birthCertificateFileFrontView varchar(500)  DEFAULT NULL;
+alter table i_bornbirthdeatils add column if not exists birthCertificateFileFrontView varchar(500) DEFAULT NULL;
 
-alter table i_bornbirthdeatils add birthCertificateFileBackView varchar(500)  DEFAULT NULL;
+alter table i_bornbirthdeatils add column if not exists birthCertificateFileBackView varchar(500) DEFAULT NULL;
 

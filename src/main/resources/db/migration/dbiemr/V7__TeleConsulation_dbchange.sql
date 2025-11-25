@@ -1,7 +1,9 @@
 
 use db_iemr;
 
-alter table m_userservicerolemapping change isSanjeevani   teleConsultation varchar(100);
+ALTER TABLE m_userservicerolemapping
+CHANGE COLUMN isSanjeevani teleConsultation VARCHAR(100);
+
 
 USE `db_iemr`;
 CREATE 

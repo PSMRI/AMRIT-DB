@@ -1,11 +1,14 @@
+ALTER TABLE t_cbacdetails
+ADD COLUMN IF NOT EXISTS Cbac_OccupationalExposure VARCHAR(100);
 
+ALTER TABLE t_cbacdetails
+ADD COLUMN IF NOT EXISTS Cbac_BotheredProblem_last2weeks VARCHAR(100);
 
+ALTER TABLE t_cbacdetails
+ADD COLUMN IF NOT EXISTS Cbac_LittleInterest_Pleasure VARCHAR(100);
 
+ALTER TABLE t_cbacdetails
+ADD COLUMN IF NOT EXISTS Cbac_Depressed_hopeless VARCHAR(100);
 
-
-alter table t_cbacdetails
-  add column Cbac_OccupationalExposure varchar(100),
-  add column Cbac_BotheredProblem_last2weeks varchar(100),
-  add column Cbac_LittleInterest_Pleasure varchar(100),
-  add column Cbac_Depressed_hopeless varchar(100),
-  add column Cbac_DiscolorationSkin varchar(100);
+ALTER TABLE t_cbacdetails
+ADD COLUMN IF NOT EXISTS Cbac_DiscolorationSkin VARCHAR(100);

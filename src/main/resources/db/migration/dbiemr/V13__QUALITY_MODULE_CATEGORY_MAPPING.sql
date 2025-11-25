@@ -1,7 +1,10 @@
 use db_iemr;
 
+
+
 ALTER TABLE m_qualityauditquestionnaire
-ADD COLUMN Role VARCHAR(50) DEFAULT 'Associate,ANM,MO';
+ADD COLUMN IF NOT EXISTS Role VARCHAR(50) DEFAULT 'Associate,ANM,MO';
+
 
 UPDATE m_qualityauditquestionnaire
 SET Role = 'Associate,ANM,MO'

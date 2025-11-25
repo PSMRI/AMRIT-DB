@@ -755,17 +755,28 @@ DELIMITER ;
 ;
 
 
-use db_iemr;
+USE db_iemr;
 
-alter table db_iemr.t_mothervalidrecord add  preferredLanguage varchar(30) after IsAllocated;
+-- 1) Add preferredLanguage to t_mothervalidrecord if column does not exist
+ALTER TABLE db_iemr.t_mothervalidrecord
+ADD COLUMN IF NOT EXISTS preferredLanguage VARCHAR(30) AFTER IsAllocated;
 
-alter table db_iemr.t_childvaliddata add  preferredLanguage varchar(30) after SMS_Status;
+-- 2) Add preferredLanguage to t_childvaliddata if column does not exist
+ALTER TABLE db_iemr.t_childvaliddata
+ADD COLUMN IF NOT EXISTS preferredLanguage VARCHAR(30) AFTER SMS_Status;
 
-alter table db_iemr.t_registrationfields add ProjectID int(11) not null;
+-- 3) Add ProjectID column if not exists
+ALTER TABLE db_iemr.t_registrationfields
+ADD COLUMN IF NOT EXISTS ProjectID INT(11) NOT NULL;
 
-alter table db_iemr.t_feedback add BeneficiaryConsent bit(1)  null;
+-- 4) Add BeneficiaryConsent if column does not exist
+ALTER TABLE db_iemr.t_feedback
+ADD COLUMN IF NOT EXISTS BeneficiaryConsent BIT(1) NULL;
 
 alter table db_iemr.high_risk_assess modify id bigint not null auto_increment;
+
+
+
 
 
 USE `db_iemr`;

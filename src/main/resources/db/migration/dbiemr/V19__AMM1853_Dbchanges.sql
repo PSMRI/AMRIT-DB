@@ -1,9 +1,9 @@
 
+ALTER TABLE t_pmsma 
+ADD COLUMN IF NOT EXISTS visitDate DATETIME NULL;
 
+ALTER TABLE t_pmsma 
+ADD COLUMN IF NOT EXISTS visitNo SMALLINT NULL;
 
-
-
-alter table t_pmsma
-  add column visitDate datetime null,
-  add column visitNo smallint null,
-  add column anyOtherHighRiskCondition varchar(100) null;
+ALTER TABLE t_pmsma 
+ADD COLUMN IF NOT EXISTS anyOtherHighRiskCondition VARCHAR(100) NULL;

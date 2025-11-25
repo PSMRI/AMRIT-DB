@@ -8,7 +8,7 @@
 -- Table structure for table `asha_profile`
 --
 
-CREATE TABLE `asha_profile` (
+CREATE TABLE IF NOT EXISTS `asha_profile` (
    `id` bigint(20) NOT NULL AUTO_INCREMENT,
    `name` varchar(255) NOT NULL,
    `village` varchar(255) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE `asha_profile` (
 -- Table structure for table `m_otp_beneficiary`
 --
 
-CREATE TABLE `m_otp_beneficiary` (
+CREATE TABLE IF NOT EXISTS `m_otp_beneficiary` (
    `Id` int(11) NOT NULL AUTO_INCREMENT,
    `phoneNumber` varchar(45) NOT NULL,
    `isOtpVerify` tinyint(1) DEFAULT 0,
@@ -54,7 +54,7 @@ CREATE TABLE `m_otp_beneficiary` (
 -- Table structure for table `t_micro_birth_plan`
 --
 
-CREATE TABLE `t_micro_birth_plan` (
+CREATE TABLE IF NOT EXISTS `t_micro_birth_plan` (
    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
    `contact_no_1` varchar(10) DEFAULT NULL,
    `contact_no_2` varchar(10) DEFAULT NULL,
@@ -77,14 +77,24 @@ CREATE TABLE `t_micro_birth_plan` (
    UNIQUE KEY `id` (`id`)
  ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
-alter table eligible_couple_tracking add lmp_date VARCHAR(50) DEFAULT NULL;
 
-alter table t_eligible_couple_register add lmp_date VARCHAR(50) DEFAULT NULL;
+ALTER TABLE eligible_couple_tracking 
+ADD COLUMN IF NOT EXISTS lmp_date VARCHAR(50) DEFAULT NULL;
 
-alter table t_anc_visit add file_path varchar(500) DEFAULT NULL;
+ALTER TABLE t_eligible_couple_register 
+ADD COLUMN IF NOT EXISTS lmp_date VARCHAR(50) DEFAULT NULL;
 
-alter table asha_profile add profileImage varchar(1000) DEFAULT NULL;
-alter table asha_profile add supervisorName varchar(225) DEFAULT NULL;
-alter table asha_profile add supervisorMobile varchar(225) DEFAULT NULL;
-alter table asha_profile add isFatherOrSpouse tinyint(1);
+ALTER TABLE t_anc_visit 
+ADD COLUMN IF NOT EXISTS file_path VARCHAR(500) DEFAULT NULL;
 
+ALTER TABLE asha_profile 
+ADD COLUMN IF NOT EXISTS profileImage VARCHAR(1000) DEFAULT NULL;
+
+ALTER TABLE asha_profile 
+ADD COLUMN IF NOT EXISTS supervisorName VARCHAR(225) DEFAULT NULL;
+
+ALTER TABLE asha_profile 
+ADD COLUMN IF NOT EXISTS supervisorMobile VARCHAR(225) DEFAULT NULL;
+
+ALTER TABLE asha_profile 
+ADD COLUMN IF NOT EXISTS isFatherOrSpouse TINYINT(1) DEFAULT NULL;

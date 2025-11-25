@@ -1,12 +1,11 @@
 use db_identity;
--- add  beneficiary death column
-ALTER TABLE i_beneficiarydetails_rmnch
-ADD COLUMN isDeath TINYINT(1) DEFAULT 0 ;
-ADD COLUMN isDeathValue VARCHAR(50) DEFAULT NULL ;
-ADD COLUMN timeOfDeath VARCHAR(20) DEFAULT NULL ;
-ADD COLUMN reasonOfDeath VARCHAR(255) DEFAULT NULL ;
-ADD COLUMN reasonOfDeathId INT DEFAULT NULL ;
-ADD COLUMN placeOfDeath VARCHAR(255) DEFAULT NULl;
-ADD COLUMN placeOfDeathId INT DEFAULT NULL;
-ADD COLUMN otherPlaceOfDeath VARCHAR(255) DEFAULT;
-ADD COLUMN dateOfDeath VARCHAR(200) DEFAULT NULL;
+-- add beneficiary death column (make idempotent: add only if not exists)
+alter table i_beneficiarydetails_rmnch add column if not exists isDeath TINYINT(1) DEFAULT 0;
+alter table i_beneficiarydetails_rmnch add column if not exists isDeathValue VARCHAR(50) DEFAULT NULL;
+alter table i_beneficiarydetails_rmnch add column if not exists timeOfDeath VARCHAR(20) DEFAULT NULL;
+alter table i_beneficiarydetails_rmnch add column if not exists reasonOfDeath VARCHAR(255) DEFAULT NULL;
+alter table i_beneficiarydetails_rmnch add column if not exists reasonOfDeathId INT DEFAULT NULL;
+alter table i_beneficiarydetails_rmnch add column if not exists placeOfDeath VARCHAR(255) DEFAULT NULL;
+alter table i_beneficiarydetails_rmnch add column if not exists placeOfDeathId INT DEFAULT NULL;
+alter table i_beneficiarydetails_rmnch add column if not exists otherPlaceOfDeath VARCHAR(255) DEFAULT NULL;
+alter table i_beneficiarydetails_rmnch add column if not exists dateOfDeath VARCHAR(200) DEFAULT NULL;
