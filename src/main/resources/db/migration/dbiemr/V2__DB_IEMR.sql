@@ -294,14 +294,61 @@ CREATE
     WHERE
         ((0 <> `m_sp`.`Deleted`) IS FALSE);
 
-use db_iemr;
+-- use db_iemr;
 
-alter table m_providerserviceaddmapping add AbdmFacilityID VARCHAR(20)  DEFAULT NULL;
+-- alter table m_providerserviceaddmapping add AbdmFacilityID VARCHAR(20)  DEFAULT NULL;
 
-alter table m_providerserviceaddmapping add AbdmFacilityName VARCHAR(100)  DEFAULT NULL;
+-- alter table m_providerserviceaddmapping add AbdmFacilityName VARCHAR(100)  DEFAULT NULL;
 
-alter table t_benvisitdetail add AbdmFacilityID varchar(20)  DEFAULT NULL after CarecontextLinkDate;
+-- alter table t_benvisitdetail add AbdmFacilityID varchar(20)  DEFAULT NULL after CarecontextLinkDate;
 
+USE db_iemr;
+
+-- 1) Add AbdmFacilityID to m_providerserviceaddmapping
+SET @exists := (
+    SELECT COUNT(*)
+    FROM information_schema.columns
+    WHERE table_schema = 'db_iemr'
+      AND table_name = 'm_providerserviceaddmapping'
+      AND column_name = 'AbdmFacilityID'
+);
+SET @sql := IF(@exists = 0,
+    'ALTER TABLE db_iemr.m_providerserviceaddmapping ADD COLUMN AbdmFacilityID VARCHAR(20) DEFAULT NULL;',
+    'SELECT "Column AbdmFacilityID already exists";'
+);
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+
+
+-- 2) Add AbdmFacilityName to m_providerserviceaddmapping
+SET @exists := (
+    SELECT COUNT(*)
+    FROM information_schema.columns
+    WHERE table_schema = 'db_iemr'
+      AND table_name = 'm_providerserviceaddmapping'
+      AND column_name = 'AbdmFacilityName'
+);
+SET @sql := IF(@exists = 0,
+    'ALTER TABLE db_iemr.m_providerserviceaddmapping ADD COLUMN AbdmFacilityName VARCHAR(100) DEFAULT NULL;',
+    'SELECT "Column AbdmFacilityName already exists";'
+);
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+
+
+-- 3) Add AbdmFacilityID to t_benvisitdetail (after CarecontextLinkDate)
+SET @exists := (
+    SELECT COUNT(*)
+    FROM information_schema.columns
+    WHERE table_schema = 'db_iemr'
+      AND table_name = 't_benvisitdetail'
+      AND column_name = 'AbdmFacilityID'
+);
+SET @sql := IF(@exists = 0,
+    'ALTER TABLE db_iemr.t_benvisitdetail ADD COLUMN AbdmFacilityID VARCHAR(20) DEFAULT NULL AFTER CarecontextLinkDate;',
+    'SELECT "Column AbdmFacilityID already exists";'
+);
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
 
 USE `db_iemr`;
@@ -752,21 +799,101 @@ DELIMITER ;
 
 USE db_iemr;
 
--- 1) Add preferredLanguage to t_mothervalidrecord if column does not exist
-ALTER TABLE db_iemr.t_mothervalidrecord
-ADD COLUMN IF NOT EXISTS preferredLanguage VARCHAR(30) AFTER IsAllocated;
+-- -- 1) Add preferredLanguage to t_mothervalidrecord if column does not exist
+-- ALTER TABLE db_iemr.t_mothervalidrecord
+-- ADD COLUMN  preferredLanguage VARCHAR(30) AFTER IsAllocated;
 
--- 2) Add preferredLanguage to t_childvaliddata if column does not exist
-ALTER TABLE db_iemr.t_childvaliddata
-ADD COLUMN IF NOT EXISTS preferredLanguage VARCHAR(30) AFTER SMS_Status;
+-- -- 2) Add preferredLanguage to t_childvaliddata if column does not exist
+-- ALTER TABLE db_iemr.t_childvaliddata
+-- ADD COLUMN  preferredLanguage VARCHAR(30) AFTER SMS_Status;
 
--- 3) Add ProjectID column if not exists
-ALTER TABLE db_iemr.t_registrationfields
-ADD COLUMN IF NOT EXISTS ProjectID INT(11) NOT NULL;
+-- -- 3) Add ProjectID column if not exists
+-- ALTER TABLE db_iemr.t_registrationfields
+-- ADD COLUMN  ProjectID INT(11) NOT NULL;
 
--- 4) Add BeneficiaryConsent if column does not exist
-ALTER TABLE db_iemr.t_feedback
-ADD COLUMN IF NOT EXISTS BeneficiaryConsent BIT(1) NULL;
+-- -- 4) Add BeneficiaryConsent if column does not exist
+-- ALTER TABLE db_iemr.t_feedback
+-- ADD COLUMN  BeneficiaryConsent BIT(1) NULL;
+
+
+USE db_iemr;
+
+---------------------------------------------------------------
+-- 1) Add preferredLanguage to t_mothervalidrecord
+---------------------------------------------------------------
+SET @exists := (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA='db_iemr'
+      AND TABLE_NAME='t_mothervalidrecord'
+      AND COLUMN_NAME='preferredLanguage'
+);
+
+SET @sql := IF(
+    @exists = 0,
+    'ALTER TABLE t_mothervalidrecord ADD COLUMN preferredLanguage VARCHAR(30) AFTER IsAllocated;',
+    'SELECT "preferredLanguage column already exists in t_mothervalidrecord";'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+---------------------------------------------------------------
+-- 2) Add preferredLanguage to t_childvaliddata
+---------------------------------------------------------------
+SET @exists := (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA='db_iemr'
+      AND TABLE_NAME='t_childvaliddata'
+      AND COLUMN_NAME='preferredLanguage'
+);
+
+SET @sql := IF(
+    @exists = 0,
+    'ALTER TABLE t_childvaliddata ADD COLUMN preferredLanguage VARCHAR(30) AFTER SMS_Status;',
+    'SELECT "preferredLanguage column already exists in t_childvaliddata";'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+---------------------------------------------------------------
+-- 3) Add ProjectID to t_registrationfields
+---------------------------------------------------------------
+SET @exists := (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA='db_iemr'
+      AND TABLE_NAME='t_registrationfields'
+      AND COLUMN_NAME='ProjectID'
+);
+
+SET @sql := IF(
+    @exists = 0,
+    'ALTER TABLE t_registrationfields ADD COLUMN ProjectID INT(11) NOT NULL;',
+    'SELECT "ProjectID already exists in t_registrationfields";'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+---------------------------------------------------------------
+-- 4) Add BeneficiaryConsent to t_feedback
+---------------------------------------------------------------
+SET @exists := (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA='db_iemr'
+      AND TABLE_NAME='t_feedback'
+      AND COLUMN_NAME='BeneficiaryConsent'
+);
+
+SET @sql := IF(
+    @exists = 0,
+    'ALTER TABLE t_feedback ADD COLUMN BeneficiaryConsent BIT(1) NULL;',
+    'SELECT "BeneficiaryConsent already exists in t_feedback";'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
 
 alter table db_iemr.high_risk_assess modify id bigint not null auto_increment;
 

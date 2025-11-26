@@ -20,7 +20,7 @@ SET @need_change := (
 -- Build ALTER TABLE query only if needed
 SET @sql := IF(
     @need_change = 1,
-    'ALTER TABLE i_cbac_additional_details MODIFY cbacAdditionalDetailId BIGINT NOT NULL AUTO_INCREMENT;',
+    'ALTER TABLE db_identity.i_cbac_additional_details MODIFY cbacAdditionalDetailId BIGINT NOT NULL AUTO_INCREMENT;',
     'SELECT "cbacAdditionalDetailId already BIGINT AUTO_INCREMENT";'
 );
 

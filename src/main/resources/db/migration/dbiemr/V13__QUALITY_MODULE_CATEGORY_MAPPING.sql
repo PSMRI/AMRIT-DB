@@ -1,9 +1,27 @@
 use db_iemr;
 
+-- ALTER TABLE m_qualityauditquestionnaire
+-- ADD COLUMN Role VARCHAR(50) DEFAULT 'Associate,ANM,MO';
 
 
-ALTER TABLE m_qualityauditquestionnaire
-ADD COLUMN IF NOT EXISTS Role VARCHAR(50) DEFAULT 'Associate,ANM,MO';
+-- Check if column exists
+SELECT COUNT(*) INTO @col_exists
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = DATABASE()
+  AND TABLE_NAME = 'm_qualityauditquestionnaire'
+  AND COLUMN_NAME = 'Role';
+
+-- Build dynamic SQL
+SET @sql = IF(
+    @col_exists = 0,
+    'ALTER TABLE m_qualityauditquestionnaire ADD COLUMN Role VARCHAR(50) DEFAULT ''Associate,ANM,MO'';',
+    'SELECT "Column already exists";'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
 
 
 UPDATE m_qualityauditquestionnaire
@@ -39,8 +57,6 @@ VIEW `db_iemr`.`v_get_qualityaudit_sectionquestionairevalues` AS
         ((`t1`.`Deleted` IS FALSE)
             AND (`t2`.`Deleted` IS FALSE)
             AND (`t3`.`Deleted` IS FALSE));
-
-DROP PROCEDURE IF EXISTS `Pr_QualityAuditorSectionQuestionaire`;
 
 DROP PROCEDURE IF EXISTS `Pr_QualityAuditorSectionQuestionaire`;
 

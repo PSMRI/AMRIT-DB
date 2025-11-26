@@ -45,7 +45,6 @@ CREATE TABLE if not EXISTS  m_platform_feedback (
 -- ================================================================
 -- Helpful indexes
 -- ================================================================
-CREATE INDEX if not EXISTS ix_feedback_CreatedAt   ON m_platform_feedback (CreatedAt);
-CREATE INDEX if not EXISTS ix_feedback_ServiceLine ON m_platform_feedback (ServiceLine);
-CREATE INDEX if not EXISTS ix_feedback_CategoryID  ON m_platform_feedback (CategoryID);
-CREATE INDEX if not EXISTS ix_feedback_IsAnonymous ON m_platform_feedback (IsAnonymous);
+CREATE INDEX  ix_feedback_ServiceLine ON m_platform_feedback (ServiceLine);
+CREATE INDEX  ix_feedback_CategoryID  ON m_platform_feedback (CategoryID);
+CREATE INDEX  ix_feedback_IsAnonymous ON m_platform_feedback (IsAnonymous);
