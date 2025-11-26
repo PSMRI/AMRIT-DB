@@ -338,8 +338,7 @@ CREATE
         LEFT JOIN `m_servicemaster` `sm` ON ((`psm`.`ServiceID` = `sm`.`ServiceID`)));
 
 
-USE `db_iemr`;
-DROP procedure IF EXISTS `PR_FetchECDChildOutboundWorklist`;
+
 
 USE `db_iemr`;
 DROP procedure IF EXISTS `db_iemr`.`PR_FetchECDChildOutboundWorklist`;
@@ -604,12 +603,8 @@ DELIMITER ;
 ;
 
 
-USE `db_iemr`;
-DROP procedure IF EXISTS `PR_FetchECDMotherOutboundWorklist`;
+DROP PROCEDURE IF EXISTS db_iemr.PR_FetchECDMotherOutboundWorklist;
 
-USE `db_iemr`;
-DROP procedure IF EXISTS `db_iemr`.`PR_FetchECDMotherOutboundWorklist`;
-;
 
 DELIMITER $$
 USE `db_iemr`$$

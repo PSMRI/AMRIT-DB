@@ -1,5 +1,7 @@
 use db_iemr;
 
+
+
 alter table db_iemr.t_registrationfields modify Options varchar(500);
 
 ALTER TABLE `db_iemr`.`m_providerserviceaddmapping` 

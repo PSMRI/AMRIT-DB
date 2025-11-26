@@ -1,6 +1,6 @@
 use db_iemr;
 
-CREATE TABLE if not exist`t_videocallparameter` (
+CREATE TABLE if not EXISTS`t_videocallparameter` (
   `MeetingID` INT(11) NOT NULL AUTO_INCREMENT,
   `DateOfCall` TIMESTAMP DEFAULT NULL,
   `CallerPhoneNumber` VARCHAR(255) DEFAULT NULL,

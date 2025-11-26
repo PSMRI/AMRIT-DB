@@ -1,8 +1,28 @@
 
-use db_iemr;
 
-ALTER TABLE m_userservicerolemapping
-CHANGE COLUMN isSanjeevani teleConsultation VARCHAR(100);
+
+-- Check if old column exists
+SET @col_exists := (
+    SELECT COUNT(*)
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = 'db_iemr'
+      AND TABLE_NAME = 'm_userservicerolemapping'
+      AND COLUMN_NAME = 'isSanjeevani'
+);
+
+-- Build dynamic SQL based on existence
+SET @sql := IF(
+    @col_exists = 1,
+    'ALTER TABLE db_iemr.m_userservicerolemapping CHANGE COLUMN isSanjeevani teleConsultation VARCHAR(100);',
+    'SELECT "Column already renamed";'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+
 
 
 USE `db_iemr`;

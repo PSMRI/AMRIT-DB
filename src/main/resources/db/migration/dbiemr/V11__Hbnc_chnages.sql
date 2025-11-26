@@ -1,13 +1,13 @@
 USE db_iemr;
 
 -- Step 1: Take backup of existing data
-CREATE TABLE t_hbnc_visit_backup AS SELECT * FROM t_hbnc_visit;
+CREATE TABLE if not EXISTS t_hbnc_visit_backup AS SELECT * FROM t_hbnc_visit;
 
 -- Step 2: Drop the existing table
 -- DROP TABLE IF EXISTS t_hbnc_visit;
 
 -- Step 3: Create the new table
-CREATE TABLE if not exist `t_hbnc_visit` (
+CREATE TABLE if not EXISTS `t_hbnc_visit` (
    `id` bigint(20) NOT NULL AUTO_INCREMENT,
    `baby_alive` bit(1) DEFAULT NULL,
    `baby_immunization_status` varchar(255) DEFAULT NULL,

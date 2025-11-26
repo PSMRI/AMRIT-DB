@@ -1,8 +1,11 @@
 use db_1097_identity;
 
-alter table i_beneficiarydetails add ExtraFields JSON after `Others`;
- 
-alter table i_beneficiarydetails add faceEmbedding longtext after Others;
+ALTER TABLE i_beneficiarydetails 
+    ADD COLUMN IF NOT EXISTS ExtraFields JSON AFTER `Others`;
+
+ALTER TABLE i_beneficiarydetails 
+    ADD COLUMN IF NOT EXISTS faceEmbedding LONGTEXT AFTER `Others`;
+
 
 CREATE 
 OR REPLACE VIEW `db_1097_identity`.`v_benadvancesearch` AS

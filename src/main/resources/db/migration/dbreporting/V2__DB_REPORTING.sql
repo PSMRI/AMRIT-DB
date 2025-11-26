@@ -232,8 +232,7 @@ DELIMITER ;
 
 
 
-USE `db_reporting`;
-DROP procedure IF EXISTS `Pr_ECDCallSummaryReport`;
+
 
 USE `db_reporting`;
 DROP procedure IF EXISTS `db_reporting`.`Pr_ECDCallSummaryReport`;
@@ -369,8 +368,7 @@ DELIMITER ;
 
 
 
-USE `db_reporting`;
-DROP procedure IF EXISTS `Pr_ECDCumulativeDistrictReport`;
+
 
 USE `db_reporting`;
 DROP procedure IF EXISTS `db_reporting`.`Pr_ECDCumulativeDistrictReport`;
@@ -507,8 +505,6 @@ end$$
 DELIMITER ;
 ;
 
-USE `db_reporting`;
-DROP procedure IF EXISTS `Pr_ECDAashaHomeVisitGapReport`;
 
 USE `db_reporting`;
 DROP procedure IF EXISTS `db_reporting`.`Pr_ECDAashaHomeVisitGapReport`;
@@ -570,8 +566,7 @@ DELIMITER ;
 ;
 
 
-USE `db_reporting`;
-DROP procedure IF EXISTS `Pr_ECDAbortionReport`;
+
 
 USE `db_reporting`;
 DROP procedure IF EXISTS `db_reporting`.`Pr_ECDAbortionReport`;
@@ -655,8 +650,6 @@ end$$
 DELIMITER ;
 ;
 
-USE `db_reporting`;
-DROP procedure IF EXISTS `Pr_ECDBabyDeathReport`;
 
 USE `db_reporting`;
 DROP procedure IF EXISTS `db_reporting`.`Pr_ECDBabyDeathReport`;
@@ -747,8 +740,6 @@ DELIMITER ;
 ;
 
 
-USE `db_reporting`;
-DROP procedure IF EXISTS `Pr_ECDDeliveryStatusReport`;
 
 USE `db_reporting`;
 DROP procedure IF EXISTS `db_reporting`.`Pr_ECDDeliveryStatusReport`;
@@ -832,8 +823,7 @@ DELIMITER ;
 ;
 
 
-USE `db_reporting`;
-DROP procedure IF EXISTS `Pr_ECDMiscarriageReport`;
+
 
 USE `db_reporting`;
 DROP procedure IF EXISTS `db_reporting`.`Pr_ECDMiscarriageReport`;
@@ -918,8 +908,7 @@ begin
 DELIMITER ;
 ;
 
-USE `db_reporting`;
-DROP procedure IF EXISTS `Pr_ECDStillBirthReport`;
+
 
 USE `db_reporting`;
 DROP procedure IF EXISTS `db_reporting`.`Pr_ECDStillBirthReport`;
