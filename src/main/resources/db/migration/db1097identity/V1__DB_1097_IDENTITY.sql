@@ -2,7 +2,7 @@
 
 -- Host: 192.168.35.151    Database: db_1097_identity
 -- ------------------------------------------------------
--- Server version	5.7.31-log
+-- Server version 5.7.31-log
 use db_1097_identity;
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -19,10 +19,10 @@ use db_1097_identity;
 -- Table structure for table `i_beneficiaryaccount`
 --
 
-DROP TABLE IF EXISTS `i_beneficiaryaccount`;
+-- DROP TABLE IF EXISTS `i_beneficiaryaccount`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_beneficiaryaccount` (
+CREATE TABLE IF NOT EXISTS `i_beneficiaryaccount` (
   `BenAccountID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BankName` varchar(100) DEFAULT NULL,
   `BranchName` varchar(100) DEFAULT NULL,
@@ -53,10 +53,10 @@ CREATE TABLE `i_beneficiaryaccount` (
 -- Table structure for table `i_beneficiaryaddress`
 --
 
-DROP TABLE IF EXISTS `i_beneficiaryaddress`;
+-- DROP TABLE IF EXISTS `i_beneficiaryaddress`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_beneficiaryaddress` (
+CREATE TABLE IF NOT EXISTS `i_beneficiaryaddress` (
   `BenAddressID` bigint(20) NOT NULL AUTO_INCREMENT,
   `PermAddrLine1` varchar(50) DEFAULT NULL,
   `PermAddrLine2` varchar(50) DEFAULT NULL,
@@ -152,10 +152,10 @@ CREATE TABLE `i_beneficiaryaddress` (
 -- Table structure for table `i_beneficiaryconsent`
 --
 
-DROP TABLE IF EXISTS `i_beneficiaryconsent`;
+-- DROP TABLE IF EXISTS `i_beneficiaryconsent`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_beneficiaryconsent` (
+CREATE TABLE IF NOT EXISTS `i_beneficiaryconsent` (
   `BenConsentID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenConsent` bit(1) DEFAULT NULL,
   `SharePersonalDetailsWithSpouse` bit(1) DEFAULT NULL,
@@ -200,10 +200,10 @@ CREATE TABLE `i_beneficiaryconsent` (
 -- Table structure for table `i_beneficiarycontacts`
 --
 
-DROP TABLE IF EXISTS `i_beneficiarycontacts`;
+-- DROP TABLE IF EXISTS `i_beneficiarycontacts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_beneficiarycontacts` (
+CREATE TABLE IF NOT EXISTS `i_beneficiarycontacts` (
   `BenContactsID` bigint(20) NOT NULL AUTO_INCREMENT,
   `PreferredPhoneNum` varchar(25) DEFAULT NULL,
   `PreferredPhoneTyp` varchar(15) DEFAULT NULL,
@@ -247,10 +247,10 @@ CREATE TABLE `i_beneficiarycontacts` (
 -- Table structure for table `i_beneficiarydetails`
 --
 
-DROP TABLE IF EXISTS `i_beneficiarydetails`;
+-- DROP TABLE IF EXISTS `i_beneficiarydetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_beneficiarydetails` (
+CREATE TABLE IF NOT EXISTS `i_beneficiarydetails` (
   `BeneficiaryDetailsId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `TitleId` int(11) DEFAULT NULL,
@@ -328,10 +328,10 @@ CREATE TABLE `i_beneficiarydetails` (
 -- Table structure for table `i_beneficiarydetails_fsr`
 --
 
-DROP TABLE IF EXISTS `i_beneficiarydetails_fsr`;
+-- DROP TABLE IF EXISTS `i_beneficiarydetails_fsr`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_beneficiarydetails_fsr` (
+CREATE TABLE IF NOT EXISTS `i_beneficiarydetails_fsr` (
   `BeneficiaryDetailsId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `TitleId` int(11) DEFAULT NULL,
@@ -404,10 +404,10 @@ CREATE TABLE `i_beneficiarydetails_fsr` (
 -- Table structure for table `i_beneficiarydetails_rmnch`
 --
 
-DROP TABLE IF EXISTS `i_beneficiarydetails_rmnch`;
+-- DROP TABLE IF EXISTS `i_beneficiarydetails_rmnch`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_beneficiarydetails_rmnch` (
+CREATE TABLE IF NOT EXISTS `i_beneficiarydetails_rmnch` (
   `beneficiaryDetails_RmnchId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `aadhaNo` varchar(500) DEFAULT NULL,
@@ -505,10 +505,10 @@ CREATE TABLE `i_beneficiarydetails_rmnch` (
 -- Table structure for table `i_beneficiaryfamilymapping`
 --
 
-DROP TABLE IF EXISTS `i_beneficiaryfamilymapping`;
+-- DROP TABLE IF EXISTS `i_beneficiaryfamilymapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_beneficiaryfamilymapping` (
+CREATE TABLE IF NOT EXISTS `i_beneficiaryfamilymapping` (
   `BenFamilyMapId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenMapId` bigint(20) DEFAULT NULL,
   `AssociatedBenRegID` bigint(20) DEFAULT NULL,
@@ -540,10 +540,10 @@ CREATE TABLE `i_beneficiaryfamilymapping` (
 -- Table structure for table `i_beneficiaryidentity`
 --
 
-DROP TABLE IF EXISTS `i_beneficiaryidentity`;
+-- DROP TABLE IF EXISTS `i_beneficiaryidentity`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_beneficiaryidentity` (
+CREATE TABLE IF NOT EXISTS `i_beneficiaryidentity` (
   `BenIdentityId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenMapId` bigint(20) NOT NULL,
   `IdentityName` varchar(20) DEFAULT NULL,
@@ -581,10 +581,10 @@ CREATE TABLE `i_beneficiaryidentity` (
 -- Table structure for table `i_beneficiaryimage`
 --
 
-DROP TABLE IF EXISTS `i_beneficiaryimage`;
+-- DROP TABLE IF EXISTS `i_beneficiaryimage`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_beneficiaryimage` (
+CREATE TABLE IF NOT EXISTS `i_beneficiaryimage` (
   `BenImageId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenImage` longtext,
   `BenBiometric` longtext,
@@ -613,10 +613,10 @@ CREATE TABLE `i_beneficiaryimage` (
 -- Table structure for table `i_beneficiarymapping`
 --
 
-DROP TABLE IF EXISTS `i_beneficiarymapping`;
+-- DROP TABLE IF EXISTS `i_beneficiarymapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_beneficiarymapping` (
+CREATE TABLE IF NOT EXISTS `i_beneficiarymapping` (
   `BenMapId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenRegId` bigint(20) NOT NULL,
   `BenDetailsId` bigint(20) NOT NULL,
@@ -659,10 +659,10 @@ CREATE TABLE `i_beneficiarymapping` (
 -- Table structure for table `i_beneficiaryservicemapping`
 --
 
-DROP TABLE IF EXISTS `i_beneficiaryservicemapping`;
+-- DROP TABLE IF EXISTS `i_beneficiaryservicemapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_beneficiaryservicemapping` (
+CREATE TABLE IF NOT EXISTS `i_beneficiaryservicemapping` (
   `BenServiceMapID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenMapID` bigint(20) NOT NULL,
   `ServiceId` int(15) DEFAULT NULL,
@@ -701,10 +701,10 @@ CREATE TABLE `i_beneficiaryservicemapping` (
 -- Table structure for table `i_bornbirthdeatils`
 --
 
-DROP TABLE IF EXISTS `i_bornbirthdeatils`;
+-- DROP TABLE IF EXISTS `i_bornbirthdeatils`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_bornbirthdeatils` (
+CREATE TABLE IF NOT EXISTS `i_bornbirthdeatils` (
   `BornBirthDeatilsId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `beneficiaryId` bigint(20) DEFAULT NULL,
@@ -789,10 +789,10 @@ CREATE TABLE `i_bornbirthdeatils` (
 -- Table structure for table `i_cbacdetails`
 --
 
-DROP TABLE IF EXISTS `i_cbacdetails`;
+-- DROP TABLE IF EXISTS `i_cbacdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_cbacdetails` (
+CREATE TABLE IF NOT EXISTS `i_cbacdetails` (
   `CBACDetailsId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `cbac_age` varchar(500) DEFAULT NULL,
@@ -928,10 +928,10 @@ CREATE TABLE `i_cbacdetails` (
 -- Table structure for table `i_householddetails`
 --
 
-DROP TABLE IF EXISTS `i_householddetails`;
+-- DROP TABLE IF EXISTS `i_householddetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_householddetails` (
+CREATE TABLE IF NOT EXISTS `i_householddetails` (
   `houseHoldDetailsId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `Countyid` int(11) DEFAULT NULL,
@@ -1020,10 +1020,10 @@ CREATE TABLE `i_householddetails` (
 -- Table structure for table `m_beneficiaryregidmapping`
 --
 
-DROP TABLE IF EXISTS `m_beneficiaryregidmapping`;
+-- DROP TABLE IF EXISTS `m_beneficiaryregidmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_beneficiaryregidmapping` (
+CREATE TABLE IF NOT EXISTS `m_beneficiaryregidmapping` (
   `BenRegId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryID` bigint(20) NOT NULL,
   `Provisioned` bit(1) DEFAULT b'0',
@@ -1055,10 +1055,10 @@ CREATE TABLE `m_beneficiaryregidmapping` (
 -- Table structure for table `m_bensecurestack`
 --
 
-DROP TABLE IF EXISTS `m_bensecurestack`;
+-- DROP TABLE IF EXISTS `m_bensecurestack`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_bensecurestack` (
+CREATE TABLE IF NOT EXISTS `m_bensecurestack` (
   `BenSecureStackId` int(15) NOT NULL AUTO_INCREMENT,
   `BenSecureStackSchemeId` int(15) NOT NULL,
   `BenSecureStackSchemeName` varchar(50) DEFAULT NULL,
@@ -1093,10 +1093,10 @@ CREATE TABLE `m_bensecurestack` (
 -- Table structure for table `t_bendataaccess`
 --
 
-DROP TABLE IF EXISTS `t_bendataaccess`;
+-- DROP TABLE IF EXISTS `t_bendataaccess`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_bendataaccess` (
+CREATE TABLE IF NOT EXISTS `t_bendataaccess` (
   `AccessId` bigint(20) NOT NULL AUTO_INCREMENT,
   `AuthId` varchar(150) NOT NULL,
   `BenConsentId` bigint(20) NOT NULL,
@@ -1130,7 +1130,7 @@ CREATE TABLE `t_bendataaccess` (
 -- Temporary view structure for view `v_benadvancesearch`
 --
 
-DROP TABLE IF EXISTS `v_benadvancesearch`;
+-- DROP TABLE IF EXISTS `v_benadvancesearch`;
 /*!50001 DROP VIEW IF EXISTS `v_benadvancesearch`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -1158,7 +1158,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_centraldashboard`
 --
 
-DROP TABLE IF EXISTS `v_centraldashboard`;
+-- DROP TABLE IF EXISTS `v_centraldashboard`;
 /*!50001 DROP VIEW IF EXISTS `v_centraldashboard`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;

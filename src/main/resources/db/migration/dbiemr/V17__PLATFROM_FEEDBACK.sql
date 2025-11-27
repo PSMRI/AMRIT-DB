@@ -3,7 +3,7 @@ USE db_iemr;
 -- ================================================================
 -- Create: Feedback Categories
 -- ================================================================
-CREATE TABLE  m_feedback_category (
+CREATE TABLE if not EXISTS m_feedback_category (
   CategoryID CHAR(36) PRIMARY KEY,
   Slug VARCHAR(64) NOT NULL COMMENT 'Stable machine identifier; lowercase alphanumeric with optional dashes',
   Label VARCHAR(128) NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE  m_feedback_category (
 -- ================================================================
 -- Create: Platform Feedback
 -- ================================================================
-CREATE TABLE  m_platform_feedback (
+CREATE TABLE if not EXISTS  m_platform_feedback (
   FeedbackID CHAR(36) PRIMARY KEY,
 
   -- DB-managed timestamps
@@ -45,7 +45,6 @@ CREATE TABLE  m_platform_feedback (
 -- ================================================================
 -- Helpful indexes
 -- ================================================================
-CREATE INDEX ix_feedback_CreatedAt   ON m_platform_feedback (CreatedAt);
-CREATE INDEX ix_feedback_ServiceLine ON m_platform_feedback (ServiceLine);
-CREATE INDEX ix_feedback_CategoryID  ON m_platform_feedback (CategoryID);
-CREATE INDEX ix_feedback_IsAnonymous ON m_platform_feedback (IsAnonymous);
+CREATE INDEX  ix_feedback_ServiceLine ON m_platform_feedback (ServiceLine);
+CREATE INDEX  ix_feedback_CategoryID  ON m_platform_feedback (CategoryID);
+CREATE INDEX  ix_feedback_IsAnonymous ON m_platform_feedback (IsAnonymous);

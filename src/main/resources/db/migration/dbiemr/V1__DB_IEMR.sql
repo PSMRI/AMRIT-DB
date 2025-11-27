@@ -2,7 +2,7 @@
 --
 -- Host: 192.168.5.5    Database: db_iemr
 -- ------------------------------------------------------
--- Server version	5.7.19-log
+-- Server version 5.7.19-log
  
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -20,10 +20,10 @@
 --
 
 use db_iemr;
-DROP TABLE IF EXISTS `amrit_bkptable`;
+-- DROP TABLE IF EXISTS `amrit_bkptable`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `amrit_bkptable` (
+CREATE TABLE IF NOT EXISTS `amrit_bkptable` (
   `BenCallID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `CallID` varchar(30) DEFAULT NULL,
@@ -88,10 +88,10 @@ CREATE TABLE `amrit_bkptable` (
 -- Table structure for table `chirag_old_bkp`
 --
 
-DROP TABLE IF EXISTS `chirag_old_bkp`;
+-- DROP TABLE IF EXISTS `chirag_old_bkp`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `chirag_old_bkp` (
+CREATE TABLE IF NOT EXISTS `chirag_old_bkp` (
   `BeneficiaryDetailsId` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `TitleId` int(11) DEFAULT NULL,
@@ -161,10 +161,10 @@ CREATE TABLE `chirag_old_bkp` (
 -- Table structure for table `czentriclog`
 --
 
-DROP TABLE IF EXISTS `czentriclog`;
+-- DROP TABLE IF EXISTS `czentriclog`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `czentriclog` (
+CREATE TABLE IF NOT EXISTS `czentriclog` (
   `CZentricLogid` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenCallID` bigint(20) DEFAULT NULL,
   `CallID` varchar(30) NOT NULL,
@@ -186,10 +186,10 @@ CREATE TABLE `czentriclog` (
 -- Table structure for table `czentrix_bkptable`
 --
 
-DROP TABLE IF EXISTS `czentrix_bkptable`;
+-- DROP TABLE IF EXISTS `czentrix_bkptable`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `czentrix_bkptable` (
+CREATE TABLE IF NOT EXISTS `czentrix_bkptable` (
   `id` bigint(20) NOT NULL DEFAULT '0',
   `AgentName` varchar(100) DEFAULT NULL,
   `AgentID` int(11) DEFAULT NULL,
@@ -257,10 +257,10 @@ CREATE TABLE `czentrix_bkptable` (
 -- Table structure for table `dataporting2`
 --
 
-DROP TABLE IF EXISTS `dataporting2`;
+-- DROP TABLE IF EXISTS `dataporting2`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `dataporting2` (
+CREATE TABLE IF NOT EXISTS `dataporting2` (
   `created_date` varchar(300) DEFAULT NULL,
   `ben_phone_no` varchar(300) DEFAULT NULL,
   `ben_name` varchar(300) DEFAULT NULL,
@@ -281,10 +281,10 @@ CREATE TABLE `dataporting2` (
 -- Table structure for table `eaushadilogger`
 --
 
-DROP TABLE IF EXISTS `eaushadilogger`;
+-- DROP TABLE IF EXISTS `eaushadilogger`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `eaushadilogger` (
+CREATE TABLE IF NOT EXISTS `eaushadilogger` (
   `ELID` int(11) NOT NULL AUTO_INCREMENT,
   `Amrith_Facilityid` int(11) NOT NULL,
   `Eaushadi_Facilityid` int(11) NOT NULL,
@@ -308,10 +308,10 @@ CREATE TABLE `eaushadilogger` (
 -- Table structure for table `eligible_couple_tracking`
 --
 
-DROP TABLE IF EXISTS `eligible_couple_tracking`;
+-- DROP TABLE IF EXISTS `eligible_couple_tracking`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `eligible_couple_tracking` (
+CREATE TABLE IF NOT EXISTS `eligible_couple_tracking` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `ben_id` bigint(20) DEFAULT NULL,
   `created_by` varchar(255) DEFAULT NULL,
@@ -333,10 +333,10 @@ CREATE TABLE `eligible_couple_tracking` (
 -- Table structure for table `hibernate_sequence`
 --
 
-DROP TABLE IF EXISTS `hibernate_sequence`;
+-- DROP TABLE IF EXISTS `hibernate_sequence`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `hibernate_sequence` (
+CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
   `next_val` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -345,10 +345,10 @@ CREATE TABLE `hibernate_sequence` (
 -- Table structure for table `high_risk_assess`
 --
 
-DROP TABLE IF EXISTS `high_risk_assess`;
+-- DROP TABLE IF EXISTS `high_risk_assess`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `high_risk_assess` (
+CREATE TABLE IF NOT EXISTS `high_risk_assess` (
   `id` bigint(20) NOT NULL,
   `age_check` varchar(255) DEFAULT NULL,
   `ben_id` bigint(20) DEFAULT NULL,
@@ -368,10 +368,10 @@ CREATE TABLE `high_risk_assess` (
 -- Table structure for table `i_ben_flow_outreach`
 --
 
-DROP TABLE IF EXISTS `i_ben_flow_outreach`;
+-- DROP TABLE IF EXISTS `i_ben_flow_outreach`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_ben_flow_outreach` (
+CREATE TABLE IF NOT EXISTS `i_ben_flow_outreach` (
   `ben_flow_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `beneficiary_reg_id` bigint(20) DEFAULT NULL,
   `beneficiary_visit_id` bigint(20) DEFAULT NULL,
@@ -485,10 +485,10 @@ DELIMITER ;
 -- Table structure for table `i_ben_flow_outreach_bkp_04052022`
 --
 
-DROP TABLE IF EXISTS `i_ben_flow_outreach_bkp_04052022`;
+-- DROP TABLE IF EXISTS `i_ben_flow_outreach_bkp_04052022`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_ben_flow_outreach_bkp_04052022` (
+CREATE TABLE IF NOT EXISTS `i_ben_flow_outreach_bkp_04052022` (
   `ben_flow_id` bigint(20) NOT NULL DEFAULT '0',
   `beneficiary_reg_id` bigint(20) DEFAULT NULL,
   `beneficiary_visit_id` bigint(20) DEFAULT NULL,
@@ -555,10 +555,10 @@ CREATE TABLE `i_ben_flow_outreach_bkp_04052022` (
 -- Table structure for table `i_ben_flow_outreach_bkp_13042022`
 --
 
-DROP TABLE IF EXISTS `i_ben_flow_outreach_bkp_13042022`;
+-- DROP TABLE IF EXISTS `i_ben_flow_outreach_bkp_13042022`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_ben_flow_outreach_bkp_13042022` (
+CREATE TABLE IF NOT EXISTS `i_ben_flow_outreach_bkp_13042022` (
   `ben_flow_id` bigint(20) NOT NULL DEFAULT '0',
   `beneficiary_reg_id` bigint(20) DEFAULT NULL,
   `beneficiary_visit_id` bigint(20) DEFAULT NULL,
@@ -625,10 +625,10 @@ CREATE TABLE `i_ben_flow_outreach_bkp_13042022` (
 -- Table structure for table `i_ben_flow_outreach_bkp_20042022`
 --
 
-DROP TABLE IF EXISTS `i_ben_flow_outreach_bkp_20042022`;
+-- DROP TABLE IF EXISTS `i_ben_flow_outreach_bkp_20042022`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_ben_flow_outreach_bkp_20042022` (
+CREATE TABLE IF NOT EXISTS `i_ben_flow_outreach_bkp_20042022` (
   `ben_flow_id` bigint(20) NOT NULL DEFAULT '0',
   `beneficiary_reg_id` bigint(20) DEFAULT NULL,
   `beneficiary_visit_id` bigint(20) DEFAULT NULL,
@@ -695,10 +695,10 @@ CREATE TABLE `i_ben_flow_outreach_bkp_20042022` (
 -- Table structure for table `i_beneficiaryaddress_bkp_02122021`
 --
 
-DROP TABLE IF EXISTS `i_beneficiaryaddress_bkp_02122021`;
+-- DROP TABLE IF EXISTS `i_beneficiaryaddress_bkp_02122021`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_beneficiaryaddress_bkp_02122021` (
+CREATE TABLE IF NOT EXISTS `i_beneficiaryaddress_bkp_02122021` (
   `BenAddressID` bigint(20) NOT NULL DEFAULT '0',
   `PermAddrLine1` varchar(50) DEFAULT NULL,
   `PermAddrLine2` varchar(50) DEFAULT NULL,
@@ -793,10 +793,10 @@ CREATE TABLE `i_beneficiaryaddress_bkp_02122021` (
 -- Table structure for table `i_benphonemap`
 --
 
-DROP TABLE IF EXISTS `i_benphonemap`;
+-- DROP TABLE IF EXISTS `i_benphonemap`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `i_benphonemap` (
+CREATE TABLE IF NOT EXISTS `i_benphonemap` (
   `BenPhMapID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenificiaryRegID` bigint(20) DEFAULT NULL,
   `ParentBenRegID` bigint(20) DEFAULT NULL,
@@ -822,10 +822,10 @@ CREATE TABLE `i_benphonemap` (
 -- Table structure for table `incentive_activity`
 --
 
-DROP TABLE IF EXISTS `incentive_activity`;
+-- DROP TABLE IF EXISTS `incentive_activity`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `incentive_activity` (
+CREATE TABLE IF NOT EXISTS `incentive_activity` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `created_by` varchar(255) DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
@@ -849,10 +849,10 @@ CREATE TABLE `incentive_activity` (
 -- Table structure for table `incentive_activity_record`
 --
 
-DROP TABLE IF EXISTS `incentive_activity_record`;
+-- DROP TABLE IF EXISTS `incentive_activity_record`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `incentive_activity_record` (
+CREATE TABLE IF NOT EXISTS `incentive_activity_record` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `activity_id` bigint(20) DEFAULT NULL,
   `amount` bigint(20) DEFAULT NULL,
@@ -873,10 +873,10 @@ CREATE TABLE `incentive_activity_record` (
 -- Table structure for table `m_104actionmaster`
 --
 
-DROP TABLE IF EXISTS `m_104actionmaster`;
+-- DROP TABLE IF EXISTS `m_104actionmaster`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104actionmaster` (
+CREATE TABLE IF NOT EXISTS `m_104actionmaster` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(300) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -893,10 +893,10 @@ CREATE TABLE `m_104actionmaster` (
 -- Table structure for table `m_104appetite`
 --
 
-DROP TABLE IF EXISTS `m_104appetite`;
+-- DROP TABLE IF EXISTS `m_104appetite`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104appetite` (
+CREATE TABLE IF NOT EXISTS `m_104appetite` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(20) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -914,10 +914,10 @@ CREATE TABLE `m_104appetite` (
 -- Table structure for table `m_104bladder`
 --
 
-DROP TABLE IF EXISTS `m_104bladder`;
+-- DROP TABLE IF EXISTS `m_104bladder`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104bladder` (
+CREATE TABLE IF NOT EXISTS `m_104bladder` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -935,10 +935,10 @@ CREATE TABLE `m_104bladder` (
 -- Table structure for table `m_104bowel`
 --
 
-DROP TABLE IF EXISTS `m_104bowel`;
+-- DROP TABLE IF EXISTS `m_104bowel`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104bowel` (
+CREATE TABLE IF NOT EXISTS `m_104bowel` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -956,10 +956,10 @@ CREATE TABLE `m_104bowel` (
 -- Table structure for table `m_104course`
 --
 
-DROP TABLE IF EXISTS `m_104course`;
+-- DROP TABLE IF EXISTS `m_104course`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104course` (
+CREATE TABLE IF NOT EXISTS `m_104course` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -977,10 +977,10 @@ CREATE TABLE `m_104course` (
 -- Table structure for table `m_104diseasesummary`
 --
 
-DROP TABLE IF EXISTS `m_104diseasesummary`;
+-- DROP TABLE IF EXISTS `m_104diseasesummary`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104diseasesummary` (
+CREATE TABLE IF NOT EXISTS `m_104diseasesummary` (
   `DiseasesummaryID` int(11) NOT NULL AUTO_INCREMENT,
   `DiseaseName` varchar(300) DEFAULT NULL,
   `summary` longtext,
@@ -1007,10 +1007,10 @@ CREATE TABLE `m_104diseasesummary` (
 -- Table structure for table `m_104druggroup`
 --
 
-DROP TABLE IF EXISTS `m_104druggroup`;
+-- DROP TABLE IF EXISTS `m_104druggroup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104druggroup` (
+CREATE TABLE IF NOT EXISTS `m_104druggroup` (
   `DrugGroupID` int(11) NOT NULL AUTO_INCREMENT,
   `DrugGroup` varchar(100) DEFAULT NULL,
   `DrugGroupDesc` varchar(100) DEFAULT NULL,
@@ -1031,10 +1031,10 @@ CREATE TABLE `m_104druggroup` (
 -- Table structure for table `m_104druglist`
 --
 
-DROP TABLE IF EXISTS `m_104druglist`;
+-- DROP TABLE IF EXISTS `m_104druglist`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104druglist` (
+CREATE TABLE IF NOT EXISTS `m_104druglist` (
   `DrugID` int(11) NOT NULL AUTO_INCREMENT,
   `DrugName` varchar(100) DEFAULT NULL,
   `DrugDesc` varchar(100) DEFAULT NULL,
@@ -1056,10 +1056,10 @@ CREATE TABLE `m_104druglist` (
 -- Table structure for table `m_104drugmapping`
 --
 
-DROP TABLE IF EXISTS `m_104drugmapping`;
+-- DROP TABLE IF EXISTS `m_104drugmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104drugmapping` (
+CREATE TABLE IF NOT EXISTS `m_104drugmapping` (
   `DrugMapID` int(11) NOT NULL AUTO_INCREMENT,
   `DrugId` int(11) DEFAULT NULL,
   `DrugName` varchar(100) DEFAULT NULL,
@@ -1087,10 +1087,10 @@ CREATE TABLE `m_104drugmapping` (
 -- Table structure for table `m_104drugstrength`
 --
 
-DROP TABLE IF EXISTS `m_104drugstrength`;
+-- DROP TABLE IF EXISTS `m_104drugstrength`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104drugstrength` (
+CREATE TABLE IF NOT EXISTS `m_104drugstrength` (
   `DrugStrengthID` int(11) NOT NULL AUTO_INCREMENT,
   `DrugStrength` varchar(50) DEFAULT NULL,
   `DrugStrengthDesc` varchar(50) DEFAULT NULL,
@@ -1111,10 +1111,10 @@ CREATE TABLE `m_104drugstrength` (
 -- Table structure for table `m_104familycondition`
 --
 
-DROP TABLE IF EXISTS `m_104familycondition`;
+-- DROP TABLE IF EXISTS `m_104familycondition`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104familycondition` (
+CREATE TABLE IF NOT EXISTS `m_104familycondition` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1132,10 +1132,10 @@ CREATE TABLE `m_104familycondition` (
 -- Table structure for table `m_104gettingwithfamily`
 --
 
-DROP TABLE IF EXISTS `m_104gettingwithfamily`;
+-- DROP TABLE IF EXISTS `m_104gettingwithfamily`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104gettingwithfamily` (
+CREATE TABLE IF NOT EXISTS `m_104gettingwithfamily` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1153,10 +1153,10 @@ CREATE TABLE `m_104gettingwithfamily` (
 -- Table structure for table `m_104householdwork`
 --
 
-DROP TABLE IF EXISTS `m_104householdwork`;
+-- DROP TABLE IF EXISTS `m_104householdwork`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104householdwork` (
+CREATE TABLE IF NOT EXISTS `m_104householdwork` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1174,10 +1174,10 @@ CREATE TABLE `m_104householdwork` (
 -- Table structure for table `m_104hygieneselfcare`
 --
 
-DROP TABLE IF EXISTS `m_104hygieneselfcare`;
+-- DROP TABLE IF EXISTS `m_104hygieneselfcare`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104hygieneselfcare` (
+CREATE TABLE IF NOT EXISTS `m_104hygieneselfcare` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1195,10 +1195,10 @@ CREATE TABLE `m_104hygieneselfcare` (
 -- Table structure for table `m_104issuesatworkplace`
 --
 
-DROP TABLE IF EXISTS `m_104issuesatworkplace`;
+-- DROP TABLE IF EXISTS `m_104issuesatworkplace`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104issuesatworkplace` (
+CREATE TABLE IF NOT EXISTS `m_104issuesatworkplace` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1216,10 +1216,10 @@ CREATE TABLE `m_104issuesatworkplace` (
 -- Table structure for table `m_104libido`
 --
 
-DROP TABLE IF EXISTS `m_104libido`;
+-- DROP TABLE IF EXISTS `m_104libido`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104libido` (
+CREATE TABLE IF NOT EXISTS `m_104libido` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1237,10 +1237,10 @@ CREATE TABLE `m_104libido` (
 -- Table structure for table `m_104pastmedicalcondition`
 --
 
-DROP TABLE IF EXISTS `m_104pastmedicalcondition`;
+-- DROP TABLE IF EXISTS `m_104pastmedicalcondition`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104pastmedicalcondition` (
+CREATE TABLE IF NOT EXISTS `m_104pastmedicalcondition` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1258,10 +1258,10 @@ CREATE TABLE `m_104pastmedicalcondition` (
 -- Table structure for table `m_104pastpsychiatriccondition`
 --
 
-DROP TABLE IF EXISTS `m_104pastpsychiatriccondition`;
+-- DROP TABLE IF EXISTS `m_104pastpsychiatriccondition`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104pastpsychiatriccondition` (
+CREATE TABLE IF NOT EXISTS `m_104pastpsychiatriccondition` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1279,10 +1279,10 @@ CREATE TABLE `m_104pastpsychiatriccondition` (
 -- Table structure for table `m_104precipitatingfactor`
 --
 
-DROP TABLE IF EXISTS `m_104precipitatingfactor`;
+-- DROP TABLE IF EXISTS `m_104precipitatingfactor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104precipitatingfactor` (
+CREATE TABLE IF NOT EXISTS `m_104precipitatingfactor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1300,10 +1300,10 @@ CREATE TABLE `m_104precipitatingfactor` (
 -- Table structure for table `m_104progress`
 --
 
-DROP TABLE IF EXISTS `m_104progress`;
+-- DROP TABLE IF EXISTS `m_104progress`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104progress` (
+CREATE TABLE IF NOT EXISTS `m_104progress` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1321,10 +1321,10 @@ CREATE TABLE `m_104progress` (
 -- Table structure for table `m_104psychiatricchiefcomplaints`
 --
 
-DROP TABLE IF EXISTS `m_104psychiatricchiefcomplaints`;
+-- DROP TABLE IF EXISTS `m_104psychiatricchiefcomplaints`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104psychiatricchiefcomplaints` (
+CREATE TABLE IF NOT EXISTS `m_104psychiatricchiefcomplaints` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1342,10 +1342,10 @@ CREATE TABLE `m_104psychiatricchiefcomplaints` (
 -- Table structure for table `m_104questionscore`
 --
 
-DROP TABLE IF EXISTS `m_104questionscore`;
+-- DROP TABLE IF EXISTS `m_104questionscore`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104questionscore` (
+CREATE TABLE IF NOT EXISTS `m_104questionscore` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `QuestionID` int(11) DEFAULT NULL,
   `Answer` varchar(50) DEFAULT NULL,
@@ -1367,10 +1367,10 @@ CREATE TABLE `m_104questionscore` (
 -- Table structure for table `m_104regularworok`
 --
 
-DROP TABLE IF EXISTS `m_104regularworok`;
+-- DROP TABLE IF EXISTS `m_104regularworok`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104regularworok` (
+CREATE TABLE IF NOT EXISTS `m_104regularworok` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1388,10 +1388,10 @@ CREATE TABLE `m_104regularworok` (
 -- Table structure for table `m_104relationship`
 --
 
-DROP TABLE IF EXISTS `m_104relationship`;
+-- DROP TABLE IF EXISTS `m_104relationship`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104relationship` (
+CREATE TABLE IF NOT EXISTS `m_104relationship` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1409,10 +1409,10 @@ CREATE TABLE `m_104relationship` (
 -- Table structure for table `m_104sleep`
 --
 
-DROP TABLE IF EXISTS `m_104sleep`;
+-- DROP TABLE IF EXISTS `m_104sleep`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104sleep` (
+CREATE TABLE IF NOT EXISTS `m_104sleep` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1430,10 +1430,10 @@ CREATE TABLE `m_104sleep` (
 -- Table structure for table `m_104treatmenttype`
 --
 
-DROP TABLE IF EXISTS `m_104treatmenttype`;
+-- DROP TABLE IF EXISTS `m_104treatmenttype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_104treatmenttype` (
+CREATE TABLE IF NOT EXISTS `m_104treatmenttype` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1451,10 +1451,10 @@ CREATE TABLE `m_104treatmenttype` (
 -- Table structure for table `m_agegroup`
 --
 
-DROP TABLE IF EXISTS `m_agegroup`;
+-- DROP TABLE IF EXISTS `m_agegroup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_agegroup` (
+CREATE TABLE IF NOT EXISTS `m_agegroup` (
   `AgeGroupID` smallint(6) NOT NULL AUTO_INCREMENT,
   `AgeGroup` varchar(20) DEFAULT NULL,
   `AgeGroupDesc` varchar(30) DEFAULT NULL,
@@ -1472,10 +1472,10 @@ CREATE TABLE `m_agegroup` (
 -- Table structure for table `m_ageunits`
 --
 
-DROP TABLE IF EXISTS `m_ageunits`;
+-- DROP TABLE IF EXISTS `m_ageunits`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_ageunits` (
+CREATE TABLE IF NOT EXISTS `m_ageunits` (
   `Ageunitid` smallint(6) NOT NULL AUTO_INCREMENT,
   `AgeUnit` varchar(20) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1492,10 +1492,10 @@ CREATE TABLE `m_ageunits` (
 -- Table structure for table `m_allergicreactiontype`
 --
 
-DROP TABLE IF EXISTS `m_allergicreactiontype`;
+-- DROP TABLE IF EXISTS `m_allergicreactiontype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_allergicreactiontype` (
+CREATE TABLE IF NOT EXISTS `m_allergicreactiontype` (
   `AllergicReactionTypeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(20) DEFAULT NULL,
   `AllergicReactionTypeDesc` varchar(50) DEFAULT NULL,
@@ -1513,10 +1513,10 @@ CREATE TABLE `m_allergicreactiontype` (
 -- Table structure for table `m_allergystatus`
 --
 
-DROP TABLE IF EXISTS `m_allergystatus`;
+-- DROP TABLE IF EXISTS `m_allergystatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_allergystatus` (
+CREATE TABLE IF NOT EXISTS `m_allergystatus` (
   `AllergyStatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(20) DEFAULT NULL,
   `AllergyStatusDesc` varchar(50) DEFAULT NULL,
@@ -1534,10 +1534,10 @@ CREATE TABLE `m_allergystatus` (
 -- Table structure for table `m_allergytype`
 --
 
-DROP TABLE IF EXISTS `m_allergytype`;
+-- DROP TABLE IF EXISTS `m_allergytype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_allergytype` (
+CREATE TABLE IF NOT EXISTS `m_allergytype` (
   `AllergyTypeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(20) DEFAULT NULL,
   `AllergyTypeDesc` varchar(50) DEFAULT NULL,
@@ -1555,10 +1555,10 @@ CREATE TABLE `m_allergytype` (
 -- Table structure for table `m_answertype`
 --
 
-DROP TABLE IF EXISTS `m_answertype`;
+-- DROP TABLE IF EXISTS `m_answertype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_answertype` (
+CREATE TABLE IF NOT EXISTS `m_answertype` (
   `AnswerTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `AnswerType` varchar(30) DEFAULT NULL,
   `AnswerTypeDesc` varchar(50) DEFAULT NULL,
@@ -1576,10 +1576,10 @@ CREATE TABLE `m_answertype` (
 -- Table structure for table `m_areasubdistrictmap`
 --
 
-DROP TABLE IF EXISTS `m_areasubdistrictmap`;
+-- DROP TABLE IF EXISTS `m_areasubdistrictmap`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_areasubdistrictmap` (
+CREATE TABLE IF NOT EXISTS `m_areasubdistrictmap` (
   `AreaSubDistrictMapID` int(11) NOT NULL AUTO_INCREMENT,
   `AreaID` int(11) DEFAULT NULL,
   `DistrictBlockID` int(11) DEFAULT NULL,
@@ -1604,10 +1604,10 @@ CREATE TABLE `m_areasubdistrictmap` (
 -- Table structure for table `m_authorityemail`
 --
 
-DROP TABLE IF EXISTS `m_authorityemail`;
+-- DROP TABLE IF EXISTS `m_authorityemail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_authorityemail` (
+CREATE TABLE IF NOT EXISTS `m_authorityemail` (
   `AuthorityEmailID` int(11) NOT NULL AUTO_INCREMENT,
   `StateID` int(11) DEFAULT NULL,
   `DistrictID` int(11) DEFAULT NULL,
@@ -1644,10 +1644,10 @@ CREATE TABLE `m_authorityemail` (
 -- Table structure for table `m_bencall104servicesmapping`
 --
 
-DROP TABLE IF EXISTS `m_bencall104servicesmapping`;
+-- DROP TABLE IF EXISTS `m_bencall104servicesmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_bencall104servicesmapping` (
+CREATE TABLE IF NOT EXISTS `m_bencall104servicesmapping` (
   `BenCall104ServiceMapID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenCallID` bigint(20) DEFAULT NULL,
@@ -1670,10 +1670,10 @@ CREATE TABLE `m_bencall104servicesmapping` (
 -- Table structure for table `m_bencall1097servicesmapping`
 --
 
-DROP TABLE IF EXISTS `m_bencall1097servicesmapping`;
+-- DROP TABLE IF EXISTS `m_bencall1097servicesmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_bencall1097servicesmapping` (
+CREATE TABLE IF NOT EXISTS `m_bencall1097servicesmapping` (
   `BenCall97ServiceMapID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenCallID` bigint(20) DEFAULT NULL,
@@ -1716,10 +1716,10 @@ CREATE TABLE `m_bencall1097servicesmapping` (
 -- Table structure for table `m_beneficiaryeducation`
 --
 
-DROP TABLE IF EXISTS `m_beneficiaryeducation`;
+-- DROP TABLE IF EXISTS `m_beneficiaryeducation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_beneficiaryeducation` (
+CREATE TABLE IF NOT EXISTS `m_beneficiaryeducation` (
   `EducationID` smallint(6) NOT NULL AUTO_INCREMENT,
   `EducationType` varchar(50) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1736,10 +1736,10 @@ CREATE TABLE `m_beneficiaryeducation` (
 -- Table structure for table `m_beneficiaryincomestatus`
 --
 
-DROP TABLE IF EXISTS `m_beneficiaryincomestatus`;
+-- DROP TABLE IF EXISTS `m_beneficiaryincomestatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_beneficiaryincomestatus` (
+CREATE TABLE IF NOT EXISTS `m_beneficiaryincomestatus` (
   `IncomeStatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `IncomeStatus` varchar(10) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1756,10 +1756,10 @@ CREATE TABLE `m_beneficiaryincomestatus` (
 -- Table structure for table `m_beneficiaryoccupation`
 --
 
-DROP TABLE IF EXISTS `m_beneficiaryoccupation`;
+-- DROP TABLE IF EXISTS `m_beneficiaryoccupation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_beneficiaryoccupation` (
+CREATE TABLE IF NOT EXISTS `m_beneficiaryoccupation` (
   `OccupationID` smallint(6) NOT NULL AUTO_INCREMENT,
   `OccupationType` varchar(50) DEFAULT NULL,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -1779,10 +1779,10 @@ CREATE TABLE `m_beneficiaryoccupation` (
 -- Table structure for table `m_benhealthidmapping`
 --
 
-DROP TABLE IF EXISTS `m_benhealthidmapping`;
+-- DROP TABLE IF EXISTS `m_benhealthidmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_benhealthidmapping` (
+CREATE TABLE IF NOT EXISTS `m_benhealthidmapping` (
   `benHealthID` int(11) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `HealthID` varchar(200) DEFAULT NULL,
@@ -1806,10 +1806,10 @@ CREATE TABLE `m_benhealthidmapping` (
 -- Table structure for table `m_benrelationshiptype`
 --
 
-DROP TABLE IF EXISTS `m_benrelationshiptype`;
+-- DROP TABLE IF EXISTS `m_benrelationshiptype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_benrelationshiptype` (
+CREATE TABLE IF NOT EXISTS `m_benrelationshiptype` (
   `BenRelationshipID` smallint(6) NOT NULL AUTO_INCREMENT,
   `BenRelationshipType` varchar(20) DEFAULT NULL,
   `Gender` varchar(10) DEFAULT NULL,
@@ -1827,10 +1827,10 @@ CREATE TABLE `m_benrelationshiptype` (
 -- Table structure for table `m_birthdosevaccinationreceivedat`
 --
 
-DROP TABLE IF EXISTS `m_birthdosevaccinationreceivedat`;
+-- DROP TABLE IF EXISTS `m_birthdosevaccinationreceivedat`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_birthdosevaccinationreceivedat` (
+CREATE TABLE IF NOT EXISTS `m_birthdosevaccinationreceivedat` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1847,10 +1847,10 @@ CREATE TABLE `m_birthdosevaccinationreceivedat` (
 -- Table structure for table `m_blocksubcentermapping`
 --
 
-DROP TABLE IF EXISTS `m_blocksubcentermapping`;
+-- DROP TABLE IF EXISTS `m_blocksubcentermapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_blocksubcentermapping` (
+CREATE TABLE IF NOT EXISTS `m_blocksubcentermapping` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Employee_Code` varchar(50) DEFAULT NULL,
   `Employee_Name` varchar(50) DEFAULT NULL,
@@ -1907,10 +1907,10 @@ CREATE TABLE `m_blocksubcentermapping` (
 -- Table structure for table `m_bloodglucosetype`
 --
 
-DROP TABLE IF EXISTS `m_bloodglucosetype`;
+-- DROP TABLE IF EXISTS `m_bloodglucosetype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_bloodglucosetype` (
+CREATE TABLE IF NOT EXISTS `m_bloodglucosetype` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -1927,10 +1927,10 @@ CREATE TABLE `m_bloodglucosetype` (
 -- Table structure for table `m_bloodgroup`
 --
 
-DROP TABLE IF EXISTS `m_bloodgroup`;
+-- DROP TABLE IF EXISTS `m_bloodgroup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_bloodgroup` (
+CREATE TABLE IF NOT EXISTS `m_bloodgroup` (
   `BloodGroupID` int(11) NOT NULL AUTO_INCREMENT,
   `BloodGroup` varchar(10) DEFAULT NULL,
   `BloodGroupDesc` varchar(50) DEFAULT NULL,
@@ -1948,10 +1948,10 @@ CREATE TABLE `m_bloodgroup` (
 -- Table structure for table `m_bmicalculation`
 --
 
-DROP TABLE IF EXISTS `m_bmicalculation`;
+-- DROP TABLE IF EXISTS `m_bmicalculation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_bmicalculation` (
+CREATE TABLE IF NOT EXISTS `m_bmicalculation` (
   `Bmiid` int(11) NOT NULL AUTO_INCREMENT,
   `YearMonth` varchar(10) DEFAULT NULL,
   `Month` int(11) DEFAULT NULL,
@@ -1976,10 +1976,10 @@ CREATE TABLE `m_bmicalculation` (
 -- Table structure for table `m_bpanddiabeticstatus`
 --
 
-DROP TABLE IF EXISTS `m_bpanddiabeticstatus`;
+-- DROP TABLE IF EXISTS `m_bpanddiabeticstatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_bpanddiabeticstatus` (
+CREATE TABLE IF NOT EXISTS `m_bpanddiabeticstatus` (
   `BPAndDiabeticStatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `BPAndDiabeticStatus` varchar(50) DEFAULT NULL,
   `BPAndDiabeticStatusDesc` varchar(50) DEFAULT NULL,
@@ -1998,10 +1998,10 @@ CREATE TABLE `m_bpanddiabeticstatus` (
 -- Table structure for table `m_breaktype`
 --
 
-DROP TABLE IF EXISTS `m_breaktype`;
+-- DROP TABLE IF EXISTS `m_breaktype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_breaktype` (
+CREATE TABLE IF NOT EXISTS `m_breaktype` (
   `BreakID` int(11) NOT NULL AUTO_INCREMENT,
   `BreakType` varchar(50) DEFAULT NULL,
   `BreakSubType` varchar(50) DEFAULT NULL,
@@ -2023,10 +2023,10 @@ CREATE TABLE `m_breaktype` (
 -- Table structure for table `m_calibration`
 --
 
-DROP TABLE IF EXISTS `m_calibration`;
+-- DROP TABLE IF EXISTS `m_calibration`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_calibration` (
+CREATE TABLE IF NOT EXISTS `m_calibration` (
   `calibrationID` bigint(20) NOT NULL AUTO_INCREMENT,
   `CalibrationStartAPI` varchar(300) NOT NULL,
   `CalibrationStatusAPI` varchar(300) NOT NULL,
@@ -2048,10 +2048,10 @@ CREATE TABLE `m_calibration` (
 -- Table structure for table `m_calibrationstrips`
 --
 
-DROP TABLE IF EXISTS `m_calibrationstrips`;
+-- DROP TABLE IF EXISTS `m_calibrationstrips`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_calibrationstrips` (
+CREATE TABLE IF NOT EXISTS `m_calibrationstrips` (
   `calibrationStripID` bigint(20) NOT NULL AUTO_INCREMENT,
   `StripCode` varchar(50) NOT NULL,
   `ExpiryDate` datetime DEFAULT NULL,
@@ -2072,10 +2072,10 @@ CREATE TABLE `m_calibrationstrips` (
 -- Table structure for table `m_callnotansweredreasons`
 --
 
-DROP TABLE IF EXISTS `m_callnotansweredreasons`;
+-- DROP TABLE IF EXISTS `m_callnotansweredreasons`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_callnotansweredreasons` (
+CREATE TABLE IF NOT EXISTS `m_callnotansweredreasons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -2092,10 +2092,10 @@ CREATE TABLE `m_callnotansweredreasons` (
 -- Table structure for table `m_callsectionmapping`
 --
 
-DROP TABLE IF EXISTS `m_callsectionmapping`;
+-- DROP TABLE IF EXISTS `m_callsectionmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_callsectionmapping` (
+CREATE TABLE IF NOT EXISTS `m_callsectionmapping` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `callConfigId` int(11) DEFAULT NULL,
   `OutboundCallType` varchar(20) DEFAULT NULL,
@@ -2123,10 +2123,10 @@ CREATE TABLE `m_callsectionmapping` (
 -- Table structure for table `m_callstatus`
 --
 
-DROP TABLE IF EXISTS `m_callstatus`;
+-- DROP TABLE IF EXISTS `m_callstatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_callstatus` (
+CREATE TABLE IF NOT EXISTS `m_callstatus` (
   `CallStatusID` int(11) NOT NULL AUTO_INCREMENT,
   `CallStatus` varchar(30) DEFAULT NULL,
   `CallStatusDesc` varchar(50) DEFAULT NULL,
@@ -2147,10 +2147,10 @@ CREATE TABLE `m_callstatus` (
 -- Table structure for table `m_calltype`
 --
 
-DROP TABLE IF EXISTS `m_calltype`;
+-- DROP TABLE IF EXISTS `m_calltype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_calltype` (
+CREATE TABLE IF NOT EXISTS `m_calltype` (
   `CallTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `CallGroupType` varchar(30) DEFAULT NULL,
   `CallType` varchar(45) DEFAULT NULL,
@@ -2177,10 +2177,10 @@ CREATE TABLE `m_calltype` (
 -- Table structure for table `m_calltype_before_execute_triggers`
 --
 
-DROP TABLE IF EXISTS `m_calltype_before_execute_triggers`;
+-- DROP TABLE IF EXISTS `m_calltype_before_execute_triggers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_calltype_before_execute_triggers` (
+CREATE TABLE IF NOT EXISTS `m_calltype_before_execute_triggers` (
   `CallTypeID` int(11) NOT NULL DEFAULT '0',
   `CallGroupType` varchar(30) DEFAULT NULL,
   `CallType` varchar(45) DEFAULT NULL,
@@ -2204,10 +2204,10 @@ CREATE TABLE `m_calltype_before_execute_triggers` (
 -- Table structure for table `m_cancerdiseasetype`
 --
 
-DROP TABLE IF EXISTS `m_cancerdiseasetype`;
+-- DROP TABLE IF EXISTS `m_cancerdiseasetype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_cancerdiseasetype` (
+CREATE TABLE IF NOT EXISTS `m_cancerdiseasetype` (
   `CancerDiseaseTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `CancerDiseaseType` varchar(30) DEFAULT NULL,
   `CancerDiseaseTypeDesc` varchar(50) DEFAULT NULL,
@@ -2228,10 +2228,10 @@ CREATE TABLE `m_cancerdiseasetype` (
 -- Table structure for table `m_cancerimage`
 --
 
-DROP TABLE IF EXISTS `m_cancerimage`;
+-- DROP TABLE IF EXISTS `m_cancerimage`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_cancerimage` (
+CREATE TABLE IF NOT EXISTS `m_cancerimage` (
   `CancerImageID` smallint(6) NOT NULL AUTO_INCREMENT,
   `CancerImage` blob,
   `ImageDesc` varchar(50) DEFAULT NULL,
@@ -2250,10 +2250,10 @@ CREATE TABLE `m_cancerimage` (
 -- Table structure for table `m_cancerpersonalhabittype`
 --
 
-DROP TABLE IF EXISTS `m_cancerpersonalhabittype`;
+-- DROP TABLE IF EXISTS `m_cancerpersonalhabittype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_cancerpersonalhabittype` (
+CREATE TABLE IF NOT EXISTS `m_cancerpersonalhabittype` (
   `CancerPersonalHabitID` int(11) NOT NULL AUTO_INCREMENT,
   `HabitType` varchar(50) DEFAULT NULL,
   `HabitValue` varchar(50) DEFAULT NULL,
@@ -2271,10 +2271,10 @@ CREATE TABLE `m_cancerpersonalhabittype` (
 -- Table structure for table `m_category`
 --
 
-DROP TABLE IF EXISTS `m_category`;
+-- DROP TABLE IF EXISTS `m_category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_category` (
+CREATE TABLE IF NOT EXISTS `m_category` (
   `CategoryID` int(11) NOT NULL AUTO_INCREMENT,
   `CategoryName` varchar(100) DEFAULT NULL,
   `CategoryDesc` varchar(100) DEFAULT NULL,
@@ -2302,10 +2302,10 @@ CREATE TABLE `m_category` (
 -- Table structure for table `m_category_before_trigger_execution`
 --
 
-DROP TABLE IF EXISTS `m_category_before_trigger_execution`;
+-- DROP TABLE IF EXISTS `m_category_before_trigger_execution`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_category_before_trigger_execution` (
+CREATE TABLE IF NOT EXISTS `m_category_before_trigger_execution` (
   `CategoryID` int(11) NOT NULL DEFAULT '0',
   `CategoryName` varchar(100) DEFAULT NULL,
   `CategoryDesc` varchar(100) DEFAULT NULL,
@@ -2326,10 +2326,10 @@ CREATE TABLE `m_category_before_trigger_execution` (
 -- Table structure for table `m_cbacquestions`
 --
 
-DROP TABLE IF EXISTS `m_cbacquestions`;
+-- DROP TABLE IF EXISTS `m_cbacquestions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_cbacquestions` (
+CREATE TABLE IF NOT EXISTS `m_cbacquestions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(300) DEFAULT NULL,
   `Gender` varchar(100) DEFAULT NULL,
@@ -2352,10 +2352,10 @@ CREATE TABLE `m_cbacquestions` (
 -- Table structure for table `m_cdssdata`
 --
 
-DROP TABLE IF EXISTS `m_cdssdata`;
+-- DROP TABLE IF EXISTS `m_cdssdata`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_cdssdata` (
+CREATE TABLE IF NOT EXISTS `m_cdssdata` (
   `SymptomId` int(11) NOT NULL AUTO_INCREMENT,
   `Symptom` varchar(100) NOT NULL,
   `Gender` varchar(45) NOT NULL,
@@ -2377,10 +2377,10 @@ CREATE TABLE `m_cdssdata` (
 -- Table structure for table `m_cervicallymphnodes`
 --
 
-DROP TABLE IF EXISTS `m_cervicallymphnodes`;
+-- DROP TABLE IF EXISTS `m_cervicallymphnodes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_cervicallymphnodes` (
+CREATE TABLE IF NOT EXISTS `m_cervicallymphnodes` (
   `id` int(11) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -2397,10 +2397,10 @@ CREATE TABLE `m_cervicallymphnodes` (
 -- Table structure for table `m_chiefcomplaint`
 --
 
-DROP TABLE IF EXISTS `m_chiefcomplaint`;
+-- DROP TABLE IF EXISTS `m_chiefcomplaint`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_chiefcomplaint` (
+CREATE TABLE IF NOT EXISTS `m_chiefcomplaint` (
   `ChiefComplaintID` int(11) NOT NULL AUTO_INCREMENT,
   `ChiefComplaint` varchar(100) DEFAULT NULL,
   `ChiefComplaintDesc` varchar(100) DEFAULT NULL,
@@ -2418,10 +2418,10 @@ CREATE TABLE `m_chiefcomplaint` (
 -- Table structure for table `m_childstagging`
 --
 
-DROP TABLE IF EXISTS `m_childstagging`;
+-- DROP TABLE IF EXISTS `m_childstagging`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_childstagging` (
+CREATE TABLE IF NOT EXISTS `m_childstagging` (
   `RowID` bigint(20) NOT NULL AUTO_INCREMENT,
   `Date_of_Entry` datetime DEFAULT NULL,
   `Entry_type` smallint(6) DEFAULT NULL,
@@ -2546,10 +2546,10 @@ CREATE TABLE `m_childstagging` (
 -- Table structure for table `m_childvaccination`
 --
 
-DROP TABLE IF EXISTS `m_childvaccination`;
+-- DROP TABLE IF EXISTS `m_childvaccination`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_childvaccination` (
+CREATE TABLE IF NOT EXISTS `m_childvaccination` (
   `VaccinationID` smallint(6) NOT NULL AUTO_INCREMENT,
   `VaccinationTime` varchar(20) DEFAULT NULL,
   `VaccineName` varchar(50) DEFAULT NULL,
@@ -2569,10 +2569,10 @@ CREATE TABLE `m_childvaccination` (
 -- Table structure for table `m_city`
 --
 
-DROP TABLE IF EXISTS `m_city`;
+-- DROP TABLE IF EXISTS `m_city`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_city` (
+CREATE TABLE IF NOT EXISTS `m_city` (
   `CityID` int(11) NOT NULL AUTO_INCREMENT,
   `CityName` varchar(30) NOT NULL,
   `DistrictID` int(11) DEFAULT NULL,
@@ -2595,10 +2595,10 @@ CREATE TABLE `m_city` (
 -- Table structure for table `m_community`
 --
 
-DROP TABLE IF EXISTS `m_community`;
+-- DROP TABLE IF EXISTS `m_community`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_community` (
+CREATE TABLE IF NOT EXISTS `m_community` (
   `CommunityID` smallint(6) NOT NULL AUTO_INCREMENT,
   `CommunityType` varchar(10) DEFAULT NULL,
   `CommunityDesc` varchar(20) DEFAULT NULL,
@@ -2616,10 +2616,10 @@ CREATE TABLE `m_community` (
 -- Table structure for table `m_comorbidcondition`
 --
 
-DROP TABLE IF EXISTS `m_comorbidcondition`;
+-- DROP TABLE IF EXISTS `m_comorbidcondition`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_comorbidcondition` (
+CREATE TABLE IF NOT EXISTS `m_comorbidcondition` (
   `ComorbidConditionID` smallint(6) NOT NULL AUTO_INCREMENT,
   `ComorbidCondition` varchar(30) DEFAULT NULL,
   `ComorbidConditionDesc` varchar(50) DEFAULT NULL,
@@ -2640,10 +2640,10 @@ CREATE TABLE `m_comorbidcondition` (
 -- Table structure for table `m_compfeeds`
 --
 
-DROP TABLE IF EXISTS `m_compfeeds`;
+-- DROP TABLE IF EXISTS `m_compfeeds`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_compfeeds` (
+CREATE TABLE IF NOT EXISTS `m_compfeeds` (
   `FeedID` int(11) NOT NULL AUTO_INCREMENT,
   `Type` varchar(20) DEFAULT NULL,
   `Value` varchar(20) DEFAULT NULL,
@@ -2661,10 +2661,10 @@ CREATE TABLE `m_compfeeds` (
 -- Table structure for table `m_complaint`
 --
 
-DROP TABLE IF EXISTS `m_complaint`;
+-- DROP TABLE IF EXISTS `m_complaint`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_complaint` (
+CREATE TABLE IF NOT EXISTS `m_complaint` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -2681,10 +2681,10 @@ CREATE TABLE `m_complaint` (
 -- Table structure for table `m_complication`
 --
 
-DROP TABLE IF EXISTS `m_complication`;
+-- DROP TABLE IF EXISTS `m_complication`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_complication` (
+CREATE TABLE IF NOT EXISTS `m_complication` (
   `ComplicationID` smallint(6) NOT NULL AUTO_INCREMENT,
   `ComplicationValue` varchar(50) DEFAULT NULL,
   `ComplicationType` varchar(50) DEFAULT NULL,
@@ -2703,10 +2703,10 @@ CREATE TABLE `m_complication` (
 -- Table structure for table `m_component`
 --
 
-DROP TABLE IF EXISTS `m_component`;
+-- DROP TABLE IF EXISTS `m_component`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_component` (
+CREATE TABLE IF NOT EXISTS `m_component` (
   `ComponentID` int(11) NOT NULL AUTO_INCREMENT,
   `Component` varchar(50) DEFAULT NULL,
   `ComponentDesc` varchar(50) DEFAULT NULL,
@@ -2724,10 +2724,10 @@ CREATE TABLE `m_component` (
 -- Table structure for table `m_componentresultmap`
 --
 
-DROP TABLE IF EXISTS `m_componentresultmap`;
+-- DROP TABLE IF EXISTS `m_componentresultmap`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_componentresultmap` (
+CREATE TABLE IF NOT EXISTS `m_componentresultmap` (
   `ComponentResultMapID` int(11) NOT NULL AUTO_INCREMENT,
   `TestComponentID` int(11) DEFAULT NULL,
   `ResultValue` varchar(30) DEFAULT NULL,
@@ -2750,10 +2750,10 @@ CREATE TABLE `m_componentresultmap` (
 -- Table structure for table `m_componenttype`
 --
 
-DROP TABLE IF EXISTS `m_componenttype`;
+-- DROP TABLE IF EXISTS `m_componenttype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_componenttype` (
+CREATE TABLE IF NOT EXISTS `m_componenttype` (
   `ComponentTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `ComponentType` varchar(50) DEFAULT NULL,
   `ComponentTypeDesc` varchar(50) DEFAULT NULL,
@@ -2771,10 +2771,10 @@ CREATE TABLE `m_componenttype` (
 -- Table structure for table `m_congenitalanomalies`
 --
 
-DROP TABLE IF EXISTS `m_congenitalanomalies`;
+-- DROP TABLE IF EXISTS `m_congenitalanomalies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_congenitalanomalies` (
+CREATE TABLE IF NOT EXISTS `m_congenitalanomalies` (
   `CongenitalAnomaliesID` int(11) NOT NULL AUTO_INCREMENT,
   `CongenitalAnomalies` varchar(30) DEFAULT NULL,
   `CongenitalAnomaliesDesc` varchar(50) DEFAULT NULL,
@@ -2795,10 +2795,10 @@ CREATE TABLE `m_congenitalanomalies` (
 -- Table structure for table `m_congenitalanomaliessubcategory`
 --
 
-DROP TABLE IF EXISTS `m_congenitalanomaliessubcategory`;
+-- DROP TABLE IF EXISTS `m_congenitalanomaliessubcategory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_congenitalanomaliessubcategory` (
+CREATE TABLE IF NOT EXISTS `m_congenitalanomaliessubcategory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(300) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -2815,10 +2815,10 @@ CREATE TABLE `m_congenitalanomaliessubcategory` (
 -- Table structure for table `m_counsellingprovided`
 --
 
-DROP TABLE IF EXISTS `m_counsellingprovided`;
+-- DROP TABLE IF EXISTS `m_counsellingprovided`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_counsellingprovided` (
+CREATE TABLE IF NOT EXISTS `m_counsellingprovided` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `VisitCategoryID` int(11) DEFAULT NULL,
@@ -2836,10 +2836,10 @@ CREATE TABLE `m_counsellingprovided` (
 -- Table structure for table `m_counsellingtype`
 --
 
-DROP TABLE IF EXISTS `m_counsellingtype`;
+-- DROP TABLE IF EXISTS `m_counsellingtype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_counsellingtype` (
+CREATE TABLE IF NOT EXISTS `m_counsellingtype` (
   `CounsellingTypeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `CounsellingType` varchar(30) DEFAULT NULL,
   `CounsellingTypeDesc` varchar(50) DEFAULT NULL,
@@ -2857,10 +2857,10 @@ CREATE TABLE `m_counsellingtype` (
 -- Table structure for table `m_country`
 --
 
-DROP TABLE IF EXISTS `m_country`;
+-- DROP TABLE IF EXISTS `m_country`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_country` (
+CREATE TABLE IF NOT EXISTS `m_country` (
   `CountryID` int(11) NOT NULL AUTO_INCREMENT,
   `CountryName` varchar(100) NOT NULL,
   `CountryCode` char(4) DEFAULT NULL,
@@ -2879,10 +2879,10 @@ CREATE TABLE `m_country` (
 -- Table structure for table `m_countrycity`
 --
 
-DROP TABLE IF EXISTS `m_countrycity`;
+-- DROP TABLE IF EXISTS `m_countrycity`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_countrycity` (
+CREATE TABLE IF NOT EXISTS `m_countrycity` (
   `CityID` int(11) NOT NULL AUTO_INCREMENT,
   `cityname` varchar(100) DEFAULT NULL,
   `CountryId` int(11) DEFAULT NULL,
@@ -2902,10 +2902,10 @@ CREATE TABLE `m_countrycity` (
 -- Table structure for table `m_countrycity_temp`
 --
 
-DROP TABLE IF EXISTS `m_countrycity_temp`;
+-- DROP TABLE IF EXISTS `m_countrycity_temp`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_countrycity_temp` (
+CREATE TABLE IF NOT EXISTS `m_countrycity_temp` (
   `Countryid` int(11) DEFAULT NULL,
   `CityName` varchar(100) DEFAULT NULL,
   `CountryName` varchar(100) DEFAULT NULL
@@ -2916,10 +2916,10 @@ CREATE TABLE `m_countrycity_temp` (
 -- Table structure for table `m_covidcontacthistory`
 --
 
-DROP TABLE IF EXISTS `m_covidcontacthistory`;
+-- DROP TABLE IF EXISTS `m_covidcontacthistory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_covidcontacthistory` (
+CREATE TABLE IF NOT EXISTS `m_covidcontacthistory` (
   `CovidcontacthistoryID` int(11) NOT NULL AUTO_INCREMENT,
   `ContactHistory` varchar(500) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -2936,10 +2936,10 @@ CREATE TABLE `m_covidcontacthistory` (
 -- Table structure for table `m_coviddosetype`
 --
 
-DROP TABLE IF EXISTS `m_coviddosetype`;
+-- DROP TABLE IF EXISTS `m_coviddosetype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_coviddosetype` (
+CREATE TABLE IF NOT EXISTS `m_coviddosetype` (
   `CovidDoseTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `DoseType` varchar(50) DEFAULT NULL,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -2959,10 +2959,10 @@ CREATE TABLE `m_coviddosetype` (
 -- Table structure for table `m_covidmaster`
 --
 
-DROP TABLE IF EXISTS `m_covidmaster`;
+-- DROP TABLE IF EXISTS `m_covidmaster`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_covidmaster` (
+CREATE TABLE IF NOT EXISTS `m_covidmaster` (
   `CovidmasterID` int(11) NOT NULL AUTO_INCREMENT,
   `MasterType` varchar(100) DEFAULT NULL,
   `MasterValues` varchar(500) DEFAULT NULL,
@@ -2983,10 +2983,10 @@ CREATE TABLE `m_covidmaster` (
 -- Table structure for table `m_covidrecommendation`
 --
 
-DROP TABLE IF EXISTS `m_covidrecommendation`;
+-- DROP TABLE IF EXISTS `m_covidrecommendation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_covidrecommendation` (
+CREATE TABLE IF NOT EXISTS `m_covidrecommendation` (
   `CovidrecommendationID` int(11) NOT NULL AUTO_INCREMENT,
   `Recommendation` varchar(500) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -3003,10 +3003,10 @@ CREATE TABLE `m_covidrecommendation` (
 -- Table structure for table `m_covidsymptoms`
 --
 
-DROP TABLE IF EXISTS `m_covidsymptoms`;
+-- DROP TABLE IF EXISTS `m_covidsymptoms`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_covidsymptoms` (
+CREATE TABLE IF NOT EXISTS `m_covidsymptoms` (
   `CovidsymptomID` int(11) NOT NULL AUTO_INCREMENT,
   `Symptoms` varchar(300) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -3023,10 +3023,10 @@ CREATE TABLE `m_covidsymptoms` (
 -- Table structure for table `m_covidvaccinetype`
 --
 
-DROP TABLE IF EXISTS `m_covidvaccinetype`;
+-- DROP TABLE IF EXISTS `m_covidvaccinetype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_covidvaccinetype` (
+CREATE TABLE IF NOT EXISTS `m_covidvaccinetype` (
   `CovidVaccineTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `VaccineType` varchar(50) DEFAULT NULL,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -3046,10 +3046,10 @@ CREATE TABLE `m_covidvaccinetype` (
 -- Table structure for table `m_currentimmunizationservice`
 --
 
-DROP TABLE IF EXISTS `m_currentimmunizationservice`;
+-- DROP TABLE IF EXISTS `m_currentimmunizationservice`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_currentimmunizationservice` (
+CREATE TABLE IF NOT EXISTS `m_currentimmunizationservice` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `VisitCategoryID` int(11) DEFAULT NULL,
@@ -3067,10 +3067,10 @@ CREATE TABLE `m_currentimmunizationservice` (
 -- Table structure for table `m_cycle`
 --
 
-DROP TABLE IF EXISTS `m_cycle`;
+-- DROP TABLE IF EXISTS `m_cycle`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_cycle` (
+CREATE TABLE IF NOT EXISTS `m_cycle` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -3087,10 +3087,10 @@ CREATE TABLE `m_cycle` (
 -- Table structure for table `m_dashboardurl`
 --
 
-DROP TABLE IF EXISTS `m_dashboardurl`;
+-- DROP TABLE IF EXISTS `m_dashboardurl`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_dashboardurl` (
+CREATE TABLE IF NOT EXISTS `m_dashboardurl` (
   `DashboardURLID` int(11) NOT NULL AUTO_INCREMENT,
   `StateID` int(11) DEFAULT NULL,
   `StateName` varchar(100) DEFAULT NULL,
@@ -3112,10 +3112,10 @@ CREATE TABLE `m_dashboardurl` (
 -- Table structure for table `m_deliveryconductedby`
 --
 
-DROP TABLE IF EXISTS `m_deliveryconductedby`;
+-- DROP TABLE IF EXISTS `m_deliveryconductedby`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_deliveryconductedby` (
+CREATE TABLE IF NOT EXISTS `m_deliveryconductedby` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -3132,10 +3132,10 @@ CREATE TABLE `m_deliveryconductedby` (
 -- Table structure for table `m_deliveryplace`
 --
 
-DROP TABLE IF EXISTS `m_deliveryplace`;
+-- DROP TABLE IF EXISTS `m_deliveryplace`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_deliveryplace` (
+CREATE TABLE IF NOT EXISTS `m_deliveryplace` (
   `DeliveryPlaceID` smallint(6) NOT NULL AUTO_INCREMENT,
   `DeliveryPlace` varchar(20) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -3152,10 +3152,10 @@ CREATE TABLE `m_deliveryplace` (
 -- Table structure for table `m_deliverytype`
 --
 
-DROP TABLE IF EXISTS `m_deliverytype`;
+-- DROP TABLE IF EXISTS `m_deliverytype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_deliverytype` (
+CREATE TABLE IF NOT EXISTS `m_deliverytype` (
   `DeliveryTypeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `DeliveryType` varchar(50) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -3172,10 +3172,10 @@ CREATE TABLE `m_deliverytype` (
 -- Table structure for table `m_designation`
 --
 
-DROP TABLE IF EXISTS `m_designation`;
+-- DROP TABLE IF EXISTS `m_designation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_designation` (
+CREATE TABLE IF NOT EXISTS `m_designation` (
   `DesignationID` int(11) NOT NULL AUTO_INCREMENT,
   `DesignationName` varchar(50) DEFAULT NULL,
   `DesignationDesc` varchar(50) DEFAULT NULL,
@@ -3193,10 +3193,10 @@ CREATE TABLE `m_designation` (
 -- Table structure for table `m_developmentproblem`
 --
 
-DROP TABLE IF EXISTS `m_developmentproblem`;
+-- DROP TABLE IF EXISTS `m_developmentproblem`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_developmentproblem` (
+CREATE TABLE IF NOT EXISTS `m_developmentproblem` (
   `ID` smallint(6) NOT NULL AUTO_INCREMENT,
   `DevelopmentProblem` varchar(50) DEFAULT NULL,
   `ProblemDesc` varchar(50) DEFAULT NULL,
@@ -3214,10 +3214,10 @@ CREATE TABLE `m_developmentproblem` (
 -- Table structure for table `m_diseasetype`
 --
 
-DROP TABLE IF EXISTS `m_diseasetype`;
+-- DROP TABLE IF EXISTS `m_diseasetype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_diseasetype` (
+CREATE TABLE IF NOT EXISTS `m_diseasetype` (
   `DiseaseTypeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `DiseaseType` varchar(30) DEFAULT NULL,
   `DiseaseTypeDesc` varchar(50) DEFAULT NULL,
@@ -3238,10 +3238,10 @@ CREATE TABLE `m_diseasetype` (
 -- Table structure for table `m_dispositionstatus`
 --
 
-DROP TABLE IF EXISTS `m_dispositionstatus`;
+-- DROP TABLE IF EXISTS `m_dispositionstatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_dispositionstatus` (
+CREATE TABLE IF NOT EXISTS `m_dispositionstatus` (
   `DispositionStatusID` int(11) NOT NULL AUTO_INCREMENT,
   `DispositionStatus` varchar(15) DEFAULT NULL,
   `DispositionStatusDesc` varchar(30) DEFAULT NULL,
@@ -3259,10 +3259,10 @@ CREATE TABLE `m_dispositionstatus` (
 -- Table structure for table `m_district`
 --
 
-DROP TABLE IF EXISTS `m_district`;
+-- DROP TABLE IF EXISTS `m_district`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_district` (
+CREATE TABLE IF NOT EXISTS `m_district` (
   `DistrictID` int(11) NOT NULL AUTO_INCREMENT,
   `DistrictName` varchar(50) NOT NULL,
   `GovtDistrictID` int(11) DEFAULT NULL,
@@ -3284,10 +3284,10 @@ CREATE TABLE `m_district` (
 -- Table structure for table `m_districtblock`
 --
 
-DROP TABLE IF EXISTS `m_districtblock`;
+-- DROP TABLE IF EXISTS `m_districtblock`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_districtblock` (
+CREATE TABLE IF NOT EXISTS `m_districtblock` (
   `BlockID` int(11) NOT NULL AUTO_INCREMENT,
   `DistrictID` int(11) DEFAULT NULL,
   `BlockName` varchar(50) NOT NULL,
@@ -3312,10 +3312,10 @@ CREATE TABLE `m_districtblock` (
 -- Table structure for table `m_districtbranchmapping`
 --
 
-DROP TABLE IF EXISTS `m_districtbranchmapping`;
+-- DROP TABLE IF EXISTS `m_districtbranchmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_districtbranchmapping` (
+CREATE TABLE IF NOT EXISTS `m_districtbranchmapping` (
   `DistrictBranchID` int(11) NOT NULL AUTO_INCREMENT,
   `BlockID` int(11) DEFAULT NULL,
   `PanchayatName` varchar(30) DEFAULT NULL,
@@ -3348,10 +3348,10 @@ CREATE TABLE `m_districtbranchmapping` (
 -- Table structure for table `m_districtbranchmapping_bkp_02122021`
 --
 
-DROP TABLE IF EXISTS `m_districtbranchmapping_bkp_02122021`;
+-- DROP TABLE IF EXISTS `m_districtbranchmapping_bkp_02122021`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_districtbranchmapping_bkp_02122021` (
+CREATE TABLE IF NOT EXISTS `m_districtbranchmapping_bkp_02122021` (
   `DistrictBranchID` int(11) NOT NULL DEFAULT '0',
   `BlockID` int(11) DEFAULT NULL,
   `PanchayatName` varchar(30) DEFAULT NULL,
@@ -3374,10 +3374,10 @@ CREATE TABLE `m_districtbranchmapping_bkp_02122021` (
 -- Table structure for table `m_donatableorgan`
 --
 
-DROP TABLE IF EXISTS `m_donatableorgan`;
+-- DROP TABLE IF EXISTS `m_donatableorgan`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_donatableorgan` (
+CREATE TABLE IF NOT EXISTS `m_donatableorgan` (
   `DonatableOrganID` int(11) NOT NULL AUTO_INCREMENT,
   `DonatableOrgan` varchar(50) DEFAULT NULL,
   `DonatableOrganDesc` varchar(50) DEFAULT NULL,
@@ -3395,10 +3395,10 @@ CREATE TABLE `m_donatableorgan` (
 -- Table structure for table `m_donationtype`
 --
 
-DROP TABLE IF EXISTS `m_donationtype`;
+-- DROP TABLE IF EXISTS `m_donationtype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_donationtype` (
+CREATE TABLE IF NOT EXISTS `m_donationtype` (
   `DonationTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `DonationType` varchar(20) DEFAULT NULL,
   `DonationTypeDesc` varchar(50) DEFAULT NULL,
@@ -3416,10 +3416,10 @@ CREATE TABLE `m_donationtype` (
 -- Table structure for table `m_downloadmastertable`
 --
 
-DROP TABLE IF EXISTS `m_downloadmastertable`;
+-- DROP TABLE IF EXISTS `m_downloadmastertable`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_downloadmastertable` (
+CREATE TABLE IF NOT EXISTS `m_downloadmastertable` (
   `DownloadMasterTableID` int(11) NOT NULL AUTO_INCREMENT,
   `SchemaName` varchar(50) DEFAULT NULL,
   `TableName` varchar(50) DEFAULT NULL,
@@ -3442,10 +3442,10 @@ CREATE TABLE `m_downloadmastertable` (
 -- Table structure for table `m_downloadmastertable_bkp_20052021`
 --
 
-DROP TABLE IF EXISTS `m_downloadmastertable_bkp_20052021`;
+-- DROP TABLE IF EXISTS `m_downloadmastertable_bkp_20052021`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_downloadmastertable_bkp_20052021` (
+CREATE TABLE IF NOT EXISTS `m_downloadmastertable_bkp_20052021` (
   `DownloadMasterTableID` int(11) NOT NULL DEFAULT '0',
   `SchemaName` varchar(50) DEFAULT NULL,
   `TableName` varchar(50) DEFAULT NULL,
@@ -3467,10 +3467,10 @@ CREATE TABLE `m_downloadmastertable_bkp_20052021` (
 -- Table structure for table `m_downloadmastertable_bkp_25102019`
 --
 
-DROP TABLE IF EXISTS `m_downloadmastertable_bkp_25102019`;
+-- DROP TABLE IF EXISTS `m_downloadmastertable_bkp_25102019`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_downloadmastertable_bkp_25102019` (
+CREATE TABLE IF NOT EXISTS `m_downloadmastertable_bkp_25102019` (
   `DownloadMasterTableID` int(11) NOT NULL DEFAULT '0',
   `SchemaName` varchar(50) DEFAULT NULL,
   `TableName` varchar(50) DEFAULT NULL,
@@ -3492,10 +3492,10 @@ CREATE TABLE `m_downloadmastertable_bkp_25102019` (
 -- Table structure for table `m_drugcompliance`
 --
 
-DROP TABLE IF EXISTS `m_drugcompliance`;
+-- DROP TABLE IF EXISTS `m_drugcompliance`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_drugcompliance` (
+CREATE TABLE IF NOT EXISTS `m_drugcompliance` (
   `DrugComplianceID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(20) DEFAULT NULL,
   `DrugComplianceDesc` varchar(50) DEFAULT NULL,
@@ -3513,10 +3513,10 @@ CREATE TABLE `m_drugcompliance` (
 -- Table structure for table `m_drugdose`
 --
 
-DROP TABLE IF EXISTS `m_drugdose`;
+-- DROP TABLE IF EXISTS `m_drugdose`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_drugdose` (
+CREATE TABLE IF NOT EXISTS `m_drugdose` (
   `DrugDoseID` int(11) NOT NULL AUTO_INCREMENT,
   `DrugDose` varchar(30) DEFAULT NULL,
   `DrugDoseDesc` varchar(50) DEFAULT NULL,
@@ -3537,10 +3537,10 @@ CREATE TABLE `m_drugdose` (
 -- Table structure for table `m_drugduration`
 --
 
-DROP TABLE IF EXISTS `m_drugduration`;
+-- DROP TABLE IF EXISTS `m_drugduration`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_drugduration` (
+CREATE TABLE IF NOT EXISTS `m_drugduration` (
   `DrugDurationID` int(11) NOT NULL AUTO_INCREMENT,
   `DrugDuration` varchar(30) DEFAULT NULL,
   `DrugDurationDesc` varchar(50) DEFAULT NULL,
@@ -3558,10 +3558,10 @@ CREATE TABLE `m_drugduration` (
 -- Table structure for table `m_drugform`
 --
 
-DROP TABLE IF EXISTS `m_drugform`;
+-- DROP TABLE IF EXISTS `m_drugform`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_drugform` (
+CREATE TABLE IF NOT EXISTS `m_drugform` (
   `DrugFormID` int(11) NOT NULL AUTO_INCREMENT,
   `DrugForm` varchar(30) DEFAULT NULL,
   `DrugFormDecs` varchar(50) DEFAULT NULL,
@@ -3579,10 +3579,10 @@ CREATE TABLE `m_drugform` (
 -- Table structure for table `m_drugfrequency`
 --
 
-DROP TABLE IF EXISTS `m_drugfrequency`;
+-- DROP TABLE IF EXISTS `m_drugfrequency`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_drugfrequency` (
+CREATE TABLE IF NOT EXISTS `m_drugfrequency` (
   `DrugFrequencyID` int(11) NOT NULL AUTO_INCREMENT,
   `Frequency` varchar(30) DEFAULT NULL,
   `FrequencyDesc` varchar(50) DEFAULT NULL,
@@ -3600,10 +3600,10 @@ CREATE TABLE `m_drugfrequency` (
 -- Table structure for table `m_drugroute`
 --
 
-DROP TABLE IF EXISTS `m_drugroute`;
+-- DROP TABLE IF EXISTS `m_drugroute`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_drugroute` (
+CREATE TABLE IF NOT EXISTS `m_drugroute` (
   `DrugRouteID` int(11) NOT NULL AUTO_INCREMENT,
   `DrugRoute` varchar(30) DEFAULT NULL,
   `DrugRouteDesc` varchar(50) DEFAULT NULL,
@@ -3621,10 +3621,10 @@ CREATE TABLE `m_drugroute` (
 -- Table structure for table `m_ecgabnormalities`
 --
 
-DROP TABLE IF EXISTS `m_ecgabnormalities`;
+-- DROP TABLE IF EXISTS `m_ecgabnormalities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_ecgabnormalities` (
+CREATE TABLE IF NOT EXISTS `m_ecgabnormalities` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(300) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -3641,10 +3641,10 @@ CREATE TABLE `m_ecgabnormalities` (
 -- Table structure for table `m_emailparameter`
 --
 
-DROP TABLE IF EXISTS `m_emailparameter`;
+-- DROP TABLE IF EXISTS `m_emailparameter`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_emailparameter` (
+CREATE TABLE IF NOT EXISTS `m_emailparameter` (
   `EmailParameterID` int(11) NOT NULL AUTO_INCREMENT,
   `EmailParamSource` varchar(250) DEFAULT NULL,
   `EmailParamName` varchar(250) DEFAULT NULL,
@@ -3664,10 +3664,10 @@ CREATE TABLE `m_emailparameter` (
 -- Table structure for table `m_emailparametermapping`
 --
 
-DROP TABLE IF EXISTS `m_emailparametermapping`;
+-- DROP TABLE IF EXISTS `m_emailparametermapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_emailparametermapping` (
+CREATE TABLE IF NOT EXISTS `m_emailparametermapping` (
   `EmailParameterMapID` int(11) NOT NULL AUTO_INCREMENT,
   `EmailTemplateID` int(11) DEFAULT NULL,
   `EmailParameterID` int(11) DEFAULT NULL,
@@ -3693,10 +3693,10 @@ CREATE TABLE `m_emailparametermapping` (
 -- Table structure for table `m_emailstatus`
 --
 
-DROP TABLE IF EXISTS `m_emailstatus`;
+-- DROP TABLE IF EXISTS `m_emailstatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_emailstatus` (
+CREATE TABLE IF NOT EXISTS `m_emailstatus` (
   `EmailStatusID` int(11) NOT NULL AUTO_INCREMENT,
   `EmailStatus` varchar(20) DEFAULT NULL,
   `EmailStatusDesc` varchar(50) DEFAULT NULL,
@@ -3714,10 +3714,10 @@ CREATE TABLE `m_emailstatus` (
 -- Table structure for table `m_emailtemplate`
 --
 
-DROP TABLE IF EXISTS `m_emailtemplate`;
+-- DROP TABLE IF EXISTS `m_emailtemplate`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_emailtemplate` (
+CREATE TABLE IF NOT EXISTS `m_emailtemplate` (
   `EmailTemplateID` int(11) NOT NULL AUTO_INCREMENT,
   `EmailTemplateName` varchar(50) DEFAULT NULL,
   `EmailTemplate` text,
@@ -3742,10 +3742,10 @@ CREATE TABLE `m_emailtemplate` (
 -- Table structure for table `m_emailtype`
 --
 
-DROP TABLE IF EXISTS `m_emailtype`;
+-- DROP TABLE IF EXISTS `m_emailtype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_emailtype` (
+CREATE TABLE IF NOT EXISTS `m_emailtype` (
   `EmailTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `EmailType` varchar(50) DEFAULT NULL,
   `EmailTypeDesc` varchar(50) DEFAULT NULL,
@@ -3766,10 +3766,10 @@ CREATE TABLE `m_emailtype` (
 -- Table structure for table `m_emergencycontacts`
 --
 
-DROP TABLE IF EXISTS `m_emergencycontacts`;
+-- DROP TABLE IF EXISTS `m_emergencycontacts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_emergencycontacts` (
+CREATE TABLE IF NOT EXISTS `m_emergencycontacts` (
   `EmergContactID` int(11) NOT NULL AUTO_INCREMENT,
   `EmergContactName` varchar(50) DEFAULT NULL,
   `DesignationID` int(11) DEFAULT NULL,
@@ -3798,10 +3798,10 @@ CREATE TABLE `m_emergencycontacts` (
 -- Table structure for table `m_everwellguidelines`
 --
 
-DROP TABLE IF EXISTS `m_everwellguidelines`;
+-- DROP TABLE IF EXISTS `m_everwellguidelines`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_everwellguidelines` (
+CREATE TABLE IF NOT EXISTS `m_everwellguidelines` (
   `egid` int(11) NOT NULL AUTO_INCREMENT,
   `GuidelineName` varchar(200) NOT NULL,
   `GuidelineDesc` varchar(200) NOT NULL,
@@ -3829,10 +3829,10 @@ CREATE TABLE `m_everwellguidelines` (
 -- Table structure for table `m_facility`
 --
 
-DROP TABLE IF EXISTS `m_facility`;
+-- DROP TABLE IF EXISTS `m_facility`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_facility` (
+CREATE TABLE IF NOT EXISTS `m_facility` (
   `FacilityID` int(11) NOT NULL AUTO_INCREMENT,
   `FacilityName` varchar(100) DEFAULT NULL,
   `FacilityDesc` varchar(100) DEFAULT NULL,
@@ -3867,10 +3867,10 @@ CREATE TABLE `m_facility` (
 -- Table structure for table `m_facility_bkp_10012022`
 --
 
-DROP TABLE IF EXISTS `m_facility_bkp_10012022`;
+-- DROP TABLE IF EXISTS `m_facility_bkp_10012022`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_facility_bkp_10012022` (
+CREATE TABLE IF NOT EXISTS `m_facility_bkp_10012022` (
   `FacilityID` int(11) NOT NULL DEFAULT '0',
   `FacilityName` varchar(100) DEFAULT NULL,
   `FacilityDesc` varchar(100) DEFAULT NULL,
@@ -3896,10 +3896,10 @@ CREATE TABLE `m_facility_bkp_10012022` (
 -- Table structure for table `m_facilitytype`
 --
 
-DROP TABLE IF EXISTS `m_facilitytype`;
+-- DROP TABLE IF EXISTS `m_facilitytype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_facilitytype` (
+CREATE TABLE IF NOT EXISTS `m_facilitytype` (
   `FacilityTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `FacilityTypeName` varchar(100) DEFAULT NULL,
   `FacilityTypeDesc` varchar(100) DEFAULT NULL,
@@ -3922,10 +3922,10 @@ CREATE TABLE `m_facilitytype` (
 -- Table structure for table `m_feedbacknature`
 --
 
-DROP TABLE IF EXISTS `m_feedbacknature`;
+-- DROP TABLE IF EXISTS `m_feedbacknature`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_feedbacknature` (
+CREATE TABLE IF NOT EXISTS `m_feedbacknature` (
   `FeedbackNatureID` int(11) NOT NULL AUTO_INCREMENT,
   `FeedbackNature` varchar(50) DEFAULT NULL,
   `FeedbackNatureDesc` varchar(100) DEFAULT NULL,
@@ -3947,10 +3947,10 @@ CREATE TABLE `m_feedbacknature` (
 -- Table structure for table `m_feedbackstatus`
 --
 
-DROP TABLE IF EXISTS `m_feedbackstatus`;
+-- DROP TABLE IF EXISTS `m_feedbackstatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_feedbackstatus` (
+CREATE TABLE IF NOT EXISTS `m_feedbackstatus` (
   `FeedbackStatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `FeedbackStatus` varchar(20) DEFAULT NULL,
   `FeedbackStatusDesc` varchar(50) DEFAULT NULL,
@@ -3971,10 +3971,10 @@ CREATE TABLE `m_feedbackstatus` (
 -- Table structure for table `m_feedbacktype`
 --
 
-DROP TABLE IF EXISTS `m_feedbacktype`;
+-- DROP TABLE IF EXISTS `m_feedbacktype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_feedbacktype` (
+CREATE TABLE IF NOT EXISTS `m_feedbacktype` (
   `FeedbackTypeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `FeedbackTypeName` varchar(50) DEFAULT NULL,
   `FeedbackDesc` varchar(100) DEFAULT NULL,
@@ -3996,10 +3996,10 @@ CREATE TABLE `m_feedbacktype` (
 -- Table structure for table `m_fertilitystatus`
 --
 
-DROP TABLE IF EXISTS `m_fertilitystatus`;
+-- DROP TABLE IF EXISTS `m_fertilitystatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_fertilitystatus` (
+CREATE TABLE IF NOT EXISTS `m_fertilitystatus` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -4016,10 +4016,10 @@ CREATE TABLE `m_fertilitystatus` (
 -- Table structure for table `m_fetosensetests`
 --
 
-DROP TABLE IF EXISTS `m_fetosensetests`;
+-- DROP TABLE IF EXISTS `m_fetosensetests`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_fetosensetests` (
+CREATE TABLE IF NOT EXISTS `m_fetosensetests` (
   `fetosensetestid` int(11) NOT NULL AUTO_INCREMENT,
   `TestName` varchar(100) DEFAULT NULL,
   `TestDesc` varchar(100) DEFAULT NULL,
@@ -4040,10 +4040,10 @@ CREATE TABLE `m_fetosensetests` (
 -- Table structure for table `m_fileeventseq`
 --
 
-DROP TABLE IF EXISTS `m_fileeventseq`;
+-- DROP TABLE IF EXISTS `m_fileeventseq`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_fileeventseq` (
+CREATE TABLE IF NOT EXISTS `m_fileeventseq` (
   `FileEventSeqID` int(11) NOT NULL AUTO_INCREMENT,
   `FileTypeID` int(11) DEFAULT NULL,
   `SequenceName` varchar(30) DEFAULT NULL,
@@ -4065,10 +4065,10 @@ CREATE TABLE `m_fileeventseq` (
 -- Table structure for table `m_fileprocessstatus`
 --
 
-DROP TABLE IF EXISTS `m_fileprocessstatus`;
+-- DROP TABLE IF EXISTS `m_fileprocessstatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_fileprocessstatus` (
+CREATE TABLE IF NOT EXISTS `m_fileprocessstatus` (
   `FileProcessStatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `ProcessStatus` varchar(15) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -4085,10 +4085,10 @@ CREATE TABLE `m_fileprocessstatus` (
 -- Table structure for table `m_filestatus`
 --
 
-DROP TABLE IF EXISTS `m_filestatus`;
+-- DROP TABLE IF EXISTS `m_filestatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_filestatus` (
+CREATE TABLE IF NOT EXISTS `m_filestatus` (
   `FileStatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `FileStatus` varchar(20) DEFAULT NULL,
   `FileStatusDesc` varchar(50) DEFAULT NULL,
@@ -4106,10 +4106,10 @@ CREATE TABLE `m_filestatus` (
 -- Table structure for table `m_filetaskstatus`
 --
 
-DROP TABLE IF EXISTS `m_filetaskstatus`;
+-- DROP TABLE IF EXISTS `m_filetaskstatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_filetaskstatus` (
+CREATE TABLE IF NOT EXISTS `m_filetaskstatus` (
   `FileTaskStatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `TaskStatus` varchar(15) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -4126,10 +4126,10 @@ CREATE TABLE `m_filetaskstatus` (
 -- Table structure for table `m_filetype`
 --
 
-DROP TABLE IF EXISTS `m_filetype`;
+-- DROP TABLE IF EXISTS `m_filetype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_filetype` (
+CREATE TABLE IF NOT EXISTS `m_filetype` (
   `FileTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `FileTypeName` varchar(30) DEFAULT NULL,
   `ReadFilePath` varchar(100) DEFAULT NULL,
@@ -4149,10 +4149,10 @@ CREATE TABLE `m_filetype` (
 -- Table structure for table `m_foodintolerancestatus`
 --
 
-DROP TABLE IF EXISTS `m_foodintolerancestatus`;
+-- DROP TABLE IF EXISTS `m_foodintolerancestatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_foodintolerancestatus` (
+CREATE TABLE IF NOT EXISTS `m_foodintolerancestatus` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `IntoleranceStatus` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -4169,10 +4169,10 @@ CREATE TABLE `m_foodintolerancestatus` (
 -- Table structure for table `m_fpcounselledon`
 --
 
-DROP TABLE IF EXISTS `m_fpcounselledon`;
+-- DROP TABLE IF EXISTS `m_fpcounselledon`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_fpcounselledon` (
+CREATE TABLE IF NOT EXISTS `m_fpcounselledon` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -4189,10 +4189,10 @@ CREATE TABLE `m_fpcounselledon` (
 -- Table structure for table `m_fpmethodfollowup`
 --
 
-DROP TABLE IF EXISTS `m_fpmethodfollowup`;
+-- DROP TABLE IF EXISTS `m_fpmethodfollowup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_fpmethodfollowup` (
+CREATE TABLE IF NOT EXISTS `m_fpmethodfollowup` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `Gender` varchar(10) DEFAULT NULL,
@@ -4210,10 +4210,10 @@ CREATE TABLE `m_fpmethodfollowup` (
 -- Table structure for table `m_fpsideeffects`
 --
 
-DROP TABLE IF EXISTS `m_fpsideeffects`;
+-- DROP TABLE IF EXISTS `m_fpsideeffects`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_fpsideeffects` (
+CREATE TABLE IF NOT EXISTS `m_fpsideeffects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -4230,10 +4230,10 @@ CREATE TABLE `m_fpsideeffects` (
 -- Table structure for table `m_frequency`
 --
 
-DROP TABLE IF EXISTS `m_frequency`;
+-- DROP TABLE IF EXISTS `m_frequency`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_frequency` (
+CREATE TABLE IF NOT EXISTS `m_frequency` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -4250,10 +4250,10 @@ CREATE TABLE `m_frequency` (
 -- Table structure for table `m_fundalheight`
 --
 
-DROP TABLE IF EXISTS `m_fundalheight`;
+-- DROP TABLE IF EXISTS `m_fundalheight`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_fundalheight` (
+CREATE TABLE IF NOT EXISTS `m_fundalheight` (
   `FundalHeightID` smallint(6) NOT NULL AUTO_INCREMENT,
   `FundalHeight` varchar(30) DEFAULT NULL,
   `FundalHeightDesc` varchar(50) DEFAULT NULL,
@@ -4271,10 +4271,10 @@ CREATE TABLE `m_fundalheight` (
 -- Table structure for table `m_gender`
 --
 
-DROP TABLE IF EXISTS `m_gender`;
+-- DROP TABLE IF EXISTS `m_gender`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_gender` (
+CREATE TABLE IF NOT EXISTS `m_gender` (
   `GenderID` smallint(6) NOT NULL AUTO_INCREMENT,
   `GenderName` char(15) NOT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -4291,10 +4291,10 @@ CREATE TABLE `m_gender` (
 -- Table structure for table `m_gestation`
 --
 
-DROP TABLE IF EXISTS `m_gestation`;
+-- DROP TABLE IF EXISTS `m_gestation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_gestation` (
+CREATE TABLE IF NOT EXISTS `m_gestation` (
   `GestationID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(20) DEFAULT NULL,
   `GestationDesc` varchar(50) DEFAULT NULL,
@@ -4312,10 +4312,10 @@ CREATE TABLE `m_gestation` (
 -- Table structure for table `m_govtidentitytype`
 --
 
-DROP TABLE IF EXISTS `m_govtidentitytype`;
+-- DROP TABLE IF EXISTS `m_govtidentitytype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_govtidentitytype` (
+CREATE TABLE IF NOT EXISTS `m_govtidentitytype` (
   `GovtIdentityTypeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `IdentityType` varchar(50) DEFAULT NULL,
   `IsGovtID` bit(1) DEFAULT NULL,
@@ -4333,10 +4333,10 @@ CREATE TABLE `m_govtidentitytype` (
 -- Table structure for table `m_grade`
 --
 
-DROP TABLE IF EXISTS `m_grade`;
+-- DROP TABLE IF EXISTS `m_grade`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_grade` (
+CREATE TABLE IF NOT EXISTS `m_grade` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(20) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -4354,10 +4354,10 @@ CREATE TABLE `m_grade` (
 -- Table structure for table `m_grossmotormilestone`
 --
 
-DROP TABLE IF EXISTS `m_grossmotormilestone`;
+-- DROP TABLE IF EXISTS `m_grossmotormilestone`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_grossmotormilestone` (
+CREATE TABLE IF NOT EXISTS `m_grossmotormilestone` (
   `GMMilestoneID` smallint(6) NOT NULL AUTO_INCREMENT,
   `GMMilestone` varchar(30) DEFAULT NULL,
   `GMMilestoneDesc` varchar(50) DEFAULT NULL,
@@ -4375,10 +4375,10 @@ CREATE TABLE `m_grossmotormilestone` (
 -- Table structure for table `m_healthcareworker`
 --
 
-DROP TABLE IF EXISTS `m_healthcareworker`;
+-- DROP TABLE IF EXISTS `m_healthcareworker`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_healthcareworker` (
+CREATE TABLE IF NOT EXISTS `m_healthcareworker` (
   `HealthCareWorkerID` smallint(6) NOT NULL AUTO_INCREMENT,
   `HealthCareWorkerType` varchar(30) DEFAULT NULL,
   `HealthCareWorkerDesc` varchar(50) DEFAULT NULL,
@@ -4396,10 +4396,10 @@ CREATE TABLE `m_healthcareworker` (
 -- Table structure for table `m_highriskpregreason`
 --
 
-DROP TABLE IF EXISTS `m_highriskpregreason`;
+-- DROP TABLE IF EXISTS `m_highriskpregreason`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_highriskpregreason` (
+CREATE TABLE IF NOT EXISTS `m_highriskpregreason` (
   `HighRiskPregReasonID` smallint(6) NOT NULL AUTO_INCREMENT,
   `HighRiskPregReason` varchar(50) DEFAULT NULL,
   `HighRiskPregReasonDesc` varchar(50) DEFAULT NULL,
@@ -4417,10 +4417,10 @@ CREATE TABLE `m_highriskpregreason` (
 -- Table structure for table `m_hrni`
 --
 
-DROP TABLE IF EXISTS `m_hrni`;
+-- DROP TABLE IF EXISTS `m_hrni`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_hrni` (
+CREATE TABLE IF NOT EXISTS `m_hrni` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(300) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -4437,10 +4437,10 @@ CREATE TABLE `m_hrni` (
 -- Table structure for table `m_hrp`
 --
 
-DROP TABLE IF EXISTS `m_hrp`;
+-- DROP TABLE IF EXISTS `m_hrp`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_hrp` (
+CREATE TABLE IF NOT EXISTS `m_hrp` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(300) DEFAULT NULL,
   `isMother` bit(1) DEFAULT NULL,
@@ -4458,10 +4458,10 @@ CREATE TABLE `m_hrp` (
 -- Table structure for table `m_idrsscreenquestions`
 --
 
-DROP TABLE IF EXISTS `m_idrsscreenquestions`;
+-- DROP TABLE IF EXISTS `m_idrsscreenquestions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_idrsscreenquestions` (
+CREATE TABLE IF NOT EXISTS `m_idrsscreenquestions` (
   `IDRSQuestionID` int(11) NOT NULL AUTO_INCREMENT,
   `Question` varchar(500) DEFAULT NULL,
   `DiseaseQuestionType` varchar(50) DEFAULT NULL,
@@ -4483,10 +4483,10 @@ CREATE TABLE `m_idrsscreenquestions` (
 -- Table structure for table `m_illness`
 --
 
-DROP TABLE IF EXISTS `m_illness`;
+-- DROP TABLE IF EXISTS `m_illness`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_illness` (
+CREATE TABLE IF NOT EXISTS `m_illness` (
   `IllnessID` int(11) NOT NULL AUTO_INCREMENT,
   `IllnessType` varchar(30) DEFAULT NULL,
   `isAcute` bit(1) DEFAULT NULL,
@@ -4508,10 +4508,10 @@ CREATE TABLE `m_illness` (
 -- Table structure for table `m_immunizationservicedose`
 --
 
-DROP TABLE IF EXISTS `m_immunizationservicedose`;
+-- DROP TABLE IF EXISTS `m_immunizationservicedose`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_immunizationservicedose` (
+CREATE TABLE IF NOT EXISTS `m_immunizationservicedose` (
   `Doseid` smallint(6) NOT NULL AUTO_INCREMENT,
   `VaccinationID` smallint(6) NOT NULL,
   `VaccinationName` varchar(100) DEFAULT NULL,
@@ -4532,10 +4532,10 @@ CREATE TABLE `m_immunizationservicedose` (
 -- Table structure for table `m_immunizationserviceroute`
 --
 
-DROP TABLE IF EXISTS `m_immunizationserviceroute`;
+-- DROP TABLE IF EXISTS `m_immunizationserviceroute`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_immunizationserviceroute` (
+CREATE TABLE IF NOT EXISTS `m_immunizationserviceroute` (
   `Routeid` smallint(6) NOT NULL AUTO_INCREMENT,
   `VaccinationID` smallint(6) NOT NULL,
   `VaccinationName` varchar(100) DEFAULT NULL,
@@ -4558,10 +4558,10 @@ CREATE TABLE `m_immunizationserviceroute` (
 -- Table structure for table `m_immunizationservicestype`
 --
 
-DROP TABLE IF EXISTS `m_immunizationservicestype`;
+-- DROP TABLE IF EXISTS `m_immunizationservicestype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_immunizationservicestype` (
+CREATE TABLE IF NOT EXISTS `m_immunizationservicestype` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -4578,10 +4578,10 @@ CREATE TABLE `m_immunizationservicestype` (
 -- Table structure for table `m_immunizationservicevaccination`
 --
 
-DROP TABLE IF EXISTS `m_immunizationservicevaccination`;
+-- DROP TABLE IF EXISTS `m_immunizationservicevaccination`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_immunizationservicevaccination` (
+CREATE TABLE IF NOT EXISTS `m_immunizationservicevaccination` (
   `VaccinationID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Currentimmunizationserviceid` smallint(6) NOT NULL,
   `Currentimmunizationservice` varchar(100) DEFAULT NULL,
@@ -4611,10 +4611,10 @@ CREATE TABLE `m_immunizationservicevaccination` (
 -- Table structure for table `m_imrmmrbasecommunity`
 --
 
-DROP TABLE IF EXISTS `m_imrmmrbasecommunity`;
+-- DROP TABLE IF EXISTS `m_imrmmrbasecommunity`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_imrmmrbasecommunity` (
+CREATE TABLE IF NOT EXISTS `m_imrmmrbasecommunity` (
   `imrmmrcommunityID` int(11) NOT NULL AUTO_INCREMENT,
   `CommunityType` varchar(100) DEFAULT NULL,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -4634,10 +4634,10 @@ CREATE TABLE `m_imrmmrbasecommunity` (
 -- Table structure for table `m_imrmmrfacility`
 --
 
-DROP TABLE IF EXISTS `m_imrmmrfacility`;
+-- DROP TABLE IF EXISTS `m_imrmmrfacility`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_imrmmrfacility` (
+CREATE TABLE IF NOT EXISTS `m_imrmmrfacility` (
   `ImrmmrfacilityID` int(11) NOT NULL AUTO_INCREMENT,
   `facilityName` varchar(100) DEFAULT NULL,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -4657,10 +4657,10 @@ CREATE TABLE `m_imrmmrfacility` (
 -- Table structure for table `m_imrmmrhealthworker`
 --
 
-DROP TABLE IF EXISTS `m_imrmmrhealthworker`;
+-- DROP TABLE IF EXISTS `m_imrmmrhealthworker`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_imrmmrhealthworker` (
+CREATE TABLE IF NOT EXISTS `m_imrmmrhealthworker` (
   `imrmmrhwID` int(11) NOT NULL AUTO_INCREMENT,
   `HealthWorkerType` varchar(100) DEFAULT NULL,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -4680,10 +4680,10 @@ CREATE TABLE `m_imrmmrhealthworker` (
 -- Table structure for table `m_imrmmrsupportservices`
 --
 
-DROP TABLE IF EXISTS `m_imrmmrsupportservices`;
+-- DROP TABLE IF EXISTS `m_imrmmrsupportservices`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_imrmmrsupportservices` (
+CREATE TABLE IF NOT EXISTS `m_imrmmrsupportservices` (
   `supportServiceID` int(11) NOT NULL AUTO_INCREMENT,
   `supportServiceName` varchar(100) DEFAULT NULL,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -4703,10 +4703,10 @@ CREATE TABLE `m_imrmmrsupportservices` (
 -- Table structure for table `m_imrmmrtransittype`
 --
 
-DROP TABLE IF EXISTS `m_imrmmrtransittype`;
+-- DROP TABLE IF EXISTS `m_imrmmrtransittype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_imrmmrtransittype` (
+CREATE TABLE IF NOT EXISTS `m_imrmmrtransittype` (
   `imrmmrtransitID` int(11) NOT NULL AUTO_INCREMENT,
   `TransitType` varchar(100) DEFAULT NULL,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -4726,10 +4726,10 @@ CREATE TABLE `m_imrmmrtransittype` (
 -- Table structure for table `m_inspectionbreasts`
 --
 
-DROP TABLE IF EXISTS `m_inspectionbreasts`;
+-- DROP TABLE IF EXISTS `m_inspectionbreasts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_inspectionbreasts` (
+CREATE TABLE IF NOT EXISTS `m_inspectionbreasts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -4746,10 +4746,10 @@ CREATE TABLE `m_inspectionbreasts` (
 -- Table structure for table `m_institutedirectory`
 --
 
-DROP TABLE IF EXISTS `m_institutedirectory`;
+-- DROP TABLE IF EXISTS `m_institutedirectory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_institutedirectory` (
+CREATE TABLE IF NOT EXISTS `m_institutedirectory` (
   `InstituteDirectoryID` int(11) NOT NULL AUTO_INCREMENT,
   `InstituteDirectoryName` varchar(50) DEFAULT NULL,
   `InstituteDirectoryDesc` varchar(100) DEFAULT NULL,
@@ -4770,10 +4770,10 @@ CREATE TABLE `m_institutedirectory` (
 -- Table structure for table `m_institutedirectorymapping`
 --
 
-DROP TABLE IF EXISTS `m_institutedirectorymapping`;
+-- DROP TABLE IF EXISTS `m_institutedirectorymapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_institutedirectorymapping` (
+CREATE TABLE IF NOT EXISTS `m_institutedirectorymapping` (
   `InstituteDirMapID` bigint(20) NOT NULL AUTO_INCREMENT,
   `InstitutionID` int(11) DEFAULT NULL,
   `InstituteDirectoryID` int(11) DEFAULT NULL,
@@ -4804,10 +4804,10 @@ CREATE TABLE `m_institutedirectorymapping` (
 -- Table structure for table `m_instituteroutedirectory`
 --
 
-DROP TABLE IF EXISTS `m_instituteroutedirectory`;
+-- DROP TABLE IF EXISTS `m_instituteroutedirectory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_instituteroutedirectory` (
+CREATE TABLE IF NOT EXISTS `m_instituteroutedirectory` (
   `InstituteRouteDirectoryID` int(11) NOT NULL AUTO_INCREMENT,
   `InstituteSubDirectoryID` int(11) DEFAULT NULL,
   `InstituteRouteDirectoryName` varchar(50) DEFAULT NULL,
@@ -4830,10 +4830,10 @@ CREATE TABLE `m_instituteroutedirectory` (
 -- Table structure for table `m_institutesubdirectory`
 --
 
-DROP TABLE IF EXISTS `m_institutesubdirectory`;
+-- DROP TABLE IF EXISTS `m_institutesubdirectory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_institutesubdirectory` (
+CREATE TABLE IF NOT EXISTS `m_institutesubdirectory` (
   `InstituteSubDirectoryID` int(11) NOT NULL AUTO_INCREMENT,
   `InstituteDirectoryID` int(11) DEFAULT NULL,
   `InstituteSubDirectoryName` varchar(50) DEFAULT NULL,
@@ -4857,10 +4857,10 @@ CREATE TABLE `m_institutesubdirectory` (
 -- Table structure for table `m_institution`
 --
 
-DROP TABLE IF EXISTS `m_institution`;
+-- DROP TABLE IF EXISTS `m_institution`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_institution` (
+CREATE TABLE IF NOT EXISTS `m_institution` (
   `InstitutionID` int(11) NOT NULL AUTO_INCREMENT,
   `GovtInstituteID` varchar(20) DEFAULT NULL,
   `InstitutionName` varchar(100) DEFAULT NULL,
@@ -4906,10 +4906,10 @@ CREATE TABLE `m_institution` (
 -- Table structure for table `m_institutiontype`
 --
 
-DROP TABLE IF EXISTS `m_institutiontype`;
+-- DROP TABLE IF EXISTS `m_institutiontype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_institutiontype` (
+CREATE TABLE IF NOT EXISTS `m_institutiontype` (
   `InstitutionTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `InstitutionType` varchar(300) DEFAULT NULL,
   `InstitutionTypeDesc` varchar(300) DEFAULT NULL,
@@ -4933,10 +4933,10 @@ CREATE TABLE `m_institutiontype` (
 -- Table structure for table `m_interaction`
 --
 
-DROP TABLE IF EXISTS `m_interaction`;
+-- DROP TABLE IF EXISTS `m_interaction`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_interaction` (
+CREATE TABLE IF NOT EXISTS `m_interaction` (
   `InteractionID` int(11) NOT NULL AUTO_INCREMENT,
   `Interaction` text,
   `InteractionDesc` varchar(50) DEFAULT NULL,
@@ -4961,10 +4961,10 @@ CREATE TABLE `m_interaction` (
 -- Table structure for table `m_iotcomponent`
 --
 
-DROP TABLE IF EXISTS `m_iotcomponent`;
+-- DROP TABLE IF EXISTS `m_iotcomponent`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_iotcomponent` (
+CREATE TABLE IF NOT EXISTS `m_iotcomponent` (
   `IOTComponentId` int(11) NOT NULL AUTO_INCREMENT,
   `ComponentName` varchar(50) DEFAULT NULL,
   `ComponentCode` varchar(50) DEFAULT NULL,
@@ -4989,10 +4989,10 @@ CREATE TABLE `m_iotcomponent` (
 -- Table structure for table `m_iotprocedure`
 --
 
-DROP TABLE IF EXISTS `m_iotprocedure`;
+-- DROP TABLE IF EXISTS `m_iotprocedure`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_iotprocedure` (
+CREATE TABLE IF NOT EXISTS `m_iotprocedure` (
   `IOTProcedureID` int(11) NOT NULL AUTO_INCREMENT,
   `ProcedureName` varchar(50) DEFAULT NULL,
   `ProcedureCode` varchar(50) DEFAULT NULL,
@@ -5019,10 +5019,10 @@ CREATE TABLE `m_iotprocedure` (
 -- Table structure for table `m_item`
 --
 
-DROP TABLE IF EXISTS `m_item`;
+-- DROP TABLE IF EXISTS `m_item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_item` (
+CREATE TABLE IF NOT EXISTS `m_item` (
   `ItemID` int(11) NOT NULL AUTO_INCREMENT,
   `ItemName` varchar(100) DEFAULT NULL,
   `ItemDesc` varchar(100) DEFAULT NULL,
@@ -5075,10 +5075,10 @@ CREATE TABLE `m_item` (
 -- Table structure for table `m_itemcategory`
 --
 
-DROP TABLE IF EXISTS `m_itemcategory`;
+-- DROP TABLE IF EXISTS `m_itemcategory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_itemcategory` (
+CREATE TABLE IF NOT EXISTS `m_itemcategory` (
   `ItemCategoryID` int(11) NOT NULL AUTO_INCREMENT,
   `ItemCategoryName` varchar(100) DEFAULT NULL,
   `ItemCategoryDesc` varchar(100) DEFAULT NULL,
@@ -5103,10 +5103,10 @@ CREATE TABLE `m_itemcategory` (
 -- Table structure for table `m_itemfacilitymapping`
 --
 
-DROP TABLE IF EXISTS `m_itemfacilitymapping`;
+-- DROP TABLE IF EXISTS `m_itemfacilitymapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_itemfacilitymapping` (
+CREATE TABLE IF NOT EXISTS `m_itemfacilitymapping` (
   `ItemFacilityMapID` int(11) NOT NULL AUTO_INCREMENT,
   `FacilityID` int(11) DEFAULT NULL,
   `ItemID` int(11) DEFAULT NULL,
@@ -5131,10 +5131,10 @@ CREATE TABLE `m_itemfacilitymapping` (
 -- Table structure for table `m_itemfacilitymapping_bkp_10012022`
 --
 
-DROP TABLE IF EXISTS `m_itemfacilitymapping_bkp_10012022`;
+-- DROP TABLE IF EXISTS `m_itemfacilitymapping_bkp_10012022`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_itemfacilitymapping_bkp_10012022` (
+CREATE TABLE IF NOT EXISTS `m_itemfacilitymapping_bkp_10012022` (
   `ItemFacilityMapID` int(11) NOT NULL DEFAULT '0',
   `FacilityID` int(11) DEFAULT NULL,
   `ItemID` int(11) DEFAULT NULL,
@@ -5154,10 +5154,10 @@ CREATE TABLE `m_itemfacilitymapping_bkp_10012022` (
 -- Table structure for table `m_itemform`
 --
 
-DROP TABLE IF EXISTS `m_itemform`;
+-- DROP TABLE IF EXISTS `m_itemform`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_itemform` (
+CREATE TABLE IF NOT EXISTS `m_itemform` (
   `ItemFormID` int(11) NOT NULL AUTO_INCREMENT,
   `ItemFormName` varchar(100) DEFAULT NULL,
   `ItemFormDesc` varchar(100) DEFAULT NULL,
@@ -5179,10 +5179,10 @@ CREATE TABLE `m_itemform` (
 -- Table structure for table `m_itemissueconfig`
 --
 
-DROP TABLE IF EXISTS `m_itemissueconfig`;
+-- DROP TABLE IF EXISTS `m_itemissueconfig`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_itemissueconfig` (
+CREATE TABLE IF NOT EXISTS `m_itemissueconfig` (
   `ItemIssueConfigID` int(11) NOT NULL AUTO_INCREMENT,
   `ItemCategoryID` int(11) DEFAULT NULL,
   `IssueType` varchar(50) DEFAULT NULL,
@@ -5206,10 +5206,10 @@ CREATE TABLE `m_itemissueconfig` (
 -- Table structure for table `m_iucdinsertiondoneby`
 --
 
-DROP TABLE IF EXISTS `m_iucdinsertiondoneby`;
+-- DROP TABLE IF EXISTS `m_iucdinsertiondoneby`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_iucdinsertiondoneby` (
+CREATE TABLE IF NOT EXISTS `m_iucdinsertiondoneby` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -5226,10 +5226,10 @@ CREATE TABLE `m_iucdinsertiondoneby` (
 -- Table structure for table `m_jointtype`
 --
 
-DROP TABLE IF EXISTS `m_jointtype`;
+-- DROP TABLE IF EXISTS `m_jointtype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_jointtype` (
+CREATE TABLE IF NOT EXISTS `m_jointtype` (
   `JointID` smallint(6) NOT NULL AUTO_INCREMENT,
   `JointType` varchar(30) DEFAULT NULL,
   `JointTypeDesc` varchar(50) DEFAULT NULL,
@@ -5247,10 +5247,10 @@ CREATE TABLE `m_jointtype` (
 -- Table structure for table `m_labtests`
 --
 
-DROP TABLE IF EXISTS `m_labtests`;
+-- DROP TABLE IF EXISTS `m_labtests`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_labtests` (
+CREATE TABLE IF NOT EXISTS `m_labtests` (
   `TestID` int(11) NOT NULL AUTO_INCREMENT,
   `TestName` varchar(50) DEFAULT NULL,
   `TestDesc` varchar(50) DEFAULT NULL,
@@ -5270,10 +5270,10 @@ CREATE TABLE `m_labtests` (
 -- Table structure for table `m_language`
 --
 
-DROP TABLE IF EXISTS `m_language`;
+-- DROP TABLE IF EXISTS `m_language`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_language` (
+CREATE TABLE IF NOT EXISTS `m_language` (
   `LanguageID` int(11) NOT NULL AUTO_INCREMENT,
   `LanguageName` varchar(15) DEFAULT NULL,
   `LanguageDesc` varchar(50) DEFAULT NULL,
@@ -5293,10 +5293,10 @@ CREATE TABLE `m_language` (
 -- Table structure for table `m_literacystatus`
 --
 
-DROP TABLE IF EXISTS `m_literacystatus`;
+-- DROP TABLE IF EXISTS `m_literacystatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_literacystatus` (
+CREATE TABLE IF NOT EXISTS `m_literacystatus` (
   `LiteracystatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Literacystatus` varchar(50) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -5313,10 +5313,10 @@ CREATE TABLE `m_literacystatus` (
 -- Table structure for table `m_locationofnextimmunization`
 --
 
-DROP TABLE IF EXISTS `m_locationofnextimmunization`;
+-- DROP TABLE IF EXISTS `m_locationofnextimmunization`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_locationofnextimmunization` (
+CREATE TABLE IF NOT EXISTS `m_locationofnextimmunization` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -5333,10 +5333,10 @@ CREATE TABLE `m_locationofnextimmunization` (
 -- Table structure for table `m_loginsecurityquestions`
 --
 
-DROP TABLE IF EXISTS `m_loginsecurityquestions`;
+-- DROP TABLE IF EXISTS `m_loginsecurityquestions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_loginsecurityquestions` (
+CREATE TABLE IF NOT EXISTS `m_loginsecurityquestions` (
   `QuestionID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Question` varchar(100) NOT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -5353,10 +5353,10 @@ CREATE TABLE `m_loginsecurityquestions` (
 -- Table structure for table `m_loinc`
 --
 
-DROP TABLE IF EXISTS `m_loinc`;
+-- DROP TABLE IF EXISTS `m_loinc`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_loinc` (
+CREATE TABLE IF NOT EXISTS `m_loinc` (
   `loinc_num` varchar(10) NOT NULL,
   `component` varchar(255) DEFAULT NULL,
   `property` varchar(255) DEFAULT NULL,
@@ -5416,10 +5416,10 @@ CREATE TABLE `m_loinc` (
 -- Table structure for table `m_manufacturer`
 --
 
-DROP TABLE IF EXISTS `m_manufacturer`;
+-- DROP TABLE IF EXISTS `m_manufacturer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_manufacturer` (
+CREATE TABLE IF NOT EXISTS `m_manufacturer` (
   `ManufacturerID` int(11) NOT NULL AUTO_INCREMENT,
   `ManufacturerName` varchar(100) DEFAULT NULL,
   `ManufacturerDesc` varchar(100) DEFAULT NULL,
@@ -5456,10 +5456,10 @@ CREATE TABLE `m_manufacturer` (
 -- Table structure for table `m_mapquestion`
 --
 
-DROP TABLE IF EXISTS `m_mapquestion`;
+-- DROP TABLE IF EXISTS `m_mapquestion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_mapquestion` (
+CREATE TABLE IF NOT EXISTS `m_mapquestion` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `parentQuestionID` int(11) DEFAULT NULL,
   `childQuestionID` int(11) DEFAULT NULL,
@@ -5483,10 +5483,10 @@ CREATE TABLE `m_mapquestion` (
 -- Table structure for table `m_maritalstatus`
 --
 
-DROP TABLE IF EXISTS `m_maritalstatus`;
+-- DROP TABLE IF EXISTS `m_maritalstatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_maritalstatus` (
+CREATE TABLE IF NOT EXISTS `m_maritalstatus` (
   `MaritalStatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Status` varchar(15) DEFAULT NULL,
   `StatusDesc` varchar(30) DEFAULT NULL,
@@ -5504,10 +5504,10 @@ CREATE TABLE `m_maritalstatus` (
 -- Table structure for table `m_mctscallconfiguration`
 --
 
-DROP TABLE IF EXISTS `m_mctscallconfiguration`;
+-- DROP TABLE IF EXISTS `m_mctscallconfiguration`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_mctscallconfiguration` (
+CREATE TABLE IF NOT EXISTS `m_mctscallconfiguration` (
   `MCTSCallConfigID` int(11) NOT NULL AUTO_INCREMENT,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
   `OutboundCallType` varchar(30) DEFAULT NULL,
@@ -5540,10 +5540,10 @@ CREATE TABLE `m_mctscallconfiguration` (
 -- Table structure for table `m_mctsfieldsstatewise`
 --
 
-DROP TABLE IF EXISTS `m_mctsfieldsstatewise`;
+-- DROP TABLE IF EXISTS `m_mctsfieldsstatewise`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_mctsfieldsstatewise` (
+CREATE TABLE IF NOT EXISTS `m_mctsfieldsstatewise` (
   `SlNo` int(11) NOT NULL AUTO_INCREMENT,
   `StateID` int(11) DEFAULT NULL,
   `DataFields` longtext,
@@ -5567,10 +5567,10 @@ CREATE TABLE `m_mctsfieldsstatewise` (
 -- Table structure for table `m_mctsqamapping`
 --
 
-DROP TABLE IF EXISTS `m_mctsqamapping`;
+-- DROP TABLE IF EXISTS `m_mctsqamapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_mctsqamapping` (
+CREATE TABLE IF NOT EXISTS `m_mctsqamapping` (
   `MctsQAMapID` int(11) NOT NULL AUTO_INCREMENT,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
   `OutboundCallType` varchar(20) DEFAULT NULL,
@@ -5599,10 +5599,10 @@ CREATE TABLE `m_mctsqamapping` (
 -- Table structure for table `m_menstrualcyclerange`
 --
 
-DROP TABLE IF EXISTS `m_menstrualcyclerange`;
+-- DROP TABLE IF EXISTS `m_menstrualcyclerange`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_menstrualcyclerange` (
+CREATE TABLE IF NOT EXISTS `m_menstrualcyclerange` (
   `MenstrualRangeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `RangeType` varchar(20) DEFAULT NULL,
   `MenstrualCycleRange` varchar(15) DEFAULT NULL,
@@ -5621,10 +5621,10 @@ CREATE TABLE `m_menstrualcyclerange` (
 -- Table structure for table `m_menstrualcyclestatus`
 --
 
-DROP TABLE IF EXISTS `m_menstrualcyclestatus`;
+-- DROP TABLE IF EXISTS `m_menstrualcyclestatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_menstrualcyclestatus` (
+CREATE TABLE IF NOT EXISTS `m_menstrualcyclestatus` (
   `MenstrualCycleStatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) DEFAULT NULL,
   `MenstrualCycleStatusDesc` varchar(50) DEFAULT NULL,
@@ -5645,10 +5645,10 @@ CREATE TABLE `m_menstrualcyclestatus` (
 -- Table structure for table `m_menstrualproblem`
 --
 
-DROP TABLE IF EXISTS `m_menstrualproblem`;
+-- DROP TABLE IF EXISTS `m_menstrualproblem`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_menstrualproblem` (
+CREATE TABLE IF NOT EXISTS `m_menstrualproblem` (
   `MenstrualProblemID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) DEFAULT NULL,
   `MenstrualProblemDesc` varchar(50) DEFAULT NULL,
@@ -5666,10 +5666,10 @@ CREATE TABLE `m_menstrualproblem` (
 -- Table structure for table `m_module`
 --
 
-DROP TABLE IF EXISTS `m_module`;
+-- DROP TABLE IF EXISTS `m_module`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_module` (
+CREATE TABLE IF NOT EXISTS `m_module` (
   `ModuleID` smallint(6) NOT NULL AUTO_INCREMENT,
   `ModuleName` varchar(30) DEFAULT NULL,
   `ScreenName` varchar(50) DEFAULT NULL,
@@ -5688,10 +5688,10 @@ CREATE TABLE `m_module` (
 -- Table structure for table `m_motherdatastatewise`
 --
 
-DROP TABLE IF EXISTS `m_motherdatastatewise`;
+-- DROP TABLE IF EXISTS `m_motherdatastatewise`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_motherdatastatewise` (
+CREATE TABLE IF NOT EXISTS `m_motherdatastatewise` (
   `SlNo` int(11) NOT NULL AUTO_INCREMENT,
   `MasterFields` varchar(30) DEFAULT NULL,
   `AssamFields` varchar(30) DEFAULT NULL,
@@ -5714,10 +5714,10 @@ CREATE TABLE `m_motherdatastatewise` (
 -- Table structure for table `m_motherstaging`
 --
 
-DROP TABLE IF EXISTS `m_motherstaging`;
+-- DROP TABLE IF EXISTS `m_motherstaging`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_motherstaging` (
+CREATE TABLE IF NOT EXISTS `m_motherstaging` (
   `RowID` bigint(20) NOT NULL AUTO_INCREMENT,
   `Date_of_Entry` datetime DEFAULT NULL,
   `Entry_type` smallint(6) DEFAULT NULL,
@@ -5872,10 +5872,10 @@ CREATE TABLE `m_motherstaging` (
 -- Table structure for table `m_mouthopening`
 --
 
-DROP TABLE IF EXISTS `m_mouthopening`;
+-- DROP TABLE IF EXISTS `m_mouthopening`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_mouthopening` (
+CREATE TABLE IF NOT EXISTS `m_mouthopening` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -5892,10 +5892,10 @@ CREATE TABLE `m_mouthopening` (
 -- Table structure for table `m_musculoskeletal`
 --
 
-DROP TABLE IF EXISTS `m_musculoskeletal`;
+-- DROP TABLE IF EXISTS `m_musculoskeletal`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_musculoskeletal` (
+CREATE TABLE IF NOT EXISTS `m_musculoskeletal` (
   `ID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Type` varchar(15) DEFAULT NULL,
   `Value` varchar(15) DEFAULT NULL,
@@ -5913,10 +5913,10 @@ CREATE TABLE `m_musculoskeletal` (
 -- Table structure for table `m_ncdcaretype`
 --
 
-DROP TABLE IF EXISTS `m_ncdcaretype`;
+-- DROP TABLE IF EXISTS `m_ncdcaretype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_ncdcaretype` (
+CREATE TABLE IF NOT EXISTS `m_ncdcaretype` (
   `NCDCareTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `NCDCareType` varchar(50) DEFAULT NULL,
   `NCDCareTypeDesc` varchar(50) DEFAULT NULL,
@@ -5934,10 +5934,10 @@ CREATE TABLE `m_ncdcaretype` (
 -- Table structure for table `m_ncdscreeningcondition`
 --
 
-DROP TABLE IF EXISTS `m_ncdscreeningcondition`;
+-- DROP TABLE IF EXISTS `m_ncdscreeningcondition`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_ncdscreeningcondition` (
+CREATE TABLE IF NOT EXISTS `m_ncdscreeningcondition` (
   `NCDScreeningConditionID` int(11) NOT NULL AUTO_INCREMENT,
   `NCDScreeningCondition` varchar(100) DEFAULT NULL,
   `NCDScreeningConditionDesc` varchar(50) DEFAULT NULL,
@@ -5955,10 +5955,10 @@ CREATE TABLE `m_ncdscreeningcondition` (
 -- Table structure for table `m_ncdscreeningreason`
 --
 
-DROP TABLE IF EXISTS `m_ncdscreeningreason`;
+-- DROP TABLE IF EXISTS `m_ncdscreeningreason`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_ncdscreeningreason` (
+CREATE TABLE IF NOT EXISTS `m_ncdscreeningreason` (
   `NCDScreeningReasonID` int(11) NOT NULL AUTO_INCREMENT,
   `NCDScreeningReason` varchar(30) DEFAULT NULL,
   `NCDScreeningReasonDesc` varchar(50) DEFAULT NULL,
@@ -5979,10 +5979,10 @@ CREATE TABLE `m_ncdscreeningreason` (
 -- Table structure for table `m_newbornhealthstatus`
 --
 
-DROP TABLE IF EXISTS `m_newbornhealthstatus`;
+-- DROP TABLE IF EXISTS `m_newbornhealthstatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_newbornhealthstatus` (
+CREATE TABLE IF NOT EXISTS `m_newbornhealthstatus` (
   `NewBornHealthStatusID` int(11) NOT NULL AUTO_INCREMENT,
   `NewBornHealthStatus` varchar(30) DEFAULT NULL,
   `NewBornHealthStatusDesc` varchar(50) DEFAULT NULL,
@@ -6000,10 +6000,10 @@ CREATE TABLE `m_newbornhealthstatus` (
 -- Table structure for table `m_nextduevaccines`
 --
 
-DROP TABLE IF EXISTS `m_nextduevaccines`;
+-- DROP TABLE IF EXISTS `m_nextduevaccines`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_nextduevaccines` (
+CREATE TABLE IF NOT EXISTS `m_nextduevaccines` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -6020,10 +6020,10 @@ CREATE TABLE `m_nextduevaccines` (
 -- Table structure for table `m_nofurthercallrequired`
 --
 
-DROP TABLE IF EXISTS `m_nofurthercallrequired`;
+-- DROP TABLE IF EXISTS `m_nofurthercallrequired`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_nofurthercallrequired` (
+CREATE TABLE IF NOT EXISTS `m_nofurthercallrequired` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -6040,10 +6040,10 @@ CREATE TABLE `m_nofurthercallrequired` (
 -- Table structure for table `m_notification`
 --
 
-DROP TABLE IF EXISTS `m_notification`;
+-- DROP TABLE IF EXISTS `m_notification`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_notification` (
+CREATE TABLE IF NOT EXISTS `m_notification` (
   `NotificationID` int(11) NOT NULL AUTO_INCREMENT,
   `Notification` varchar(300) DEFAULT NULL,
   `NotificationDesc` varchar(300) DEFAULT NULL,
@@ -6123,10 +6123,10 @@ DELIMITER ;
 -- Table structure for table `m_notificationtype`
 --
 
-DROP TABLE IF EXISTS `m_notificationtype`;
+-- DROP TABLE IF EXISTS `m_notificationtype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_notificationtype` (
+CREATE TABLE IF NOT EXISTS `m_notificationtype` (
   `NotificationTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `NotificationType` varchar(100) DEFAULT NULL,
   `NotificationTypeDesc` varchar(100) DEFAULT NULL,
@@ -6147,10 +6147,10 @@ CREATE TABLE `m_notificationtype` (
 -- Table structure for table `m_optionalvaccination`
 --
 
-DROP TABLE IF EXISTS `m_optionalvaccination`;
+-- DROP TABLE IF EXISTS `m_optionalvaccination`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_optionalvaccination` (
+CREATE TABLE IF NOT EXISTS `m_optionalvaccination` (
   `OptionalVaccinationID` smallint(6) NOT NULL AUTO_INCREMENT,
   `OptionalVaccinationTime` varchar(20) DEFAULT NULL,
   `OptionalVaccineName` varchar(50) DEFAULT NULL,
@@ -6171,10 +6171,10 @@ CREATE TABLE `m_optionalvaccination` (
 -- Table structure for table `m_oralcavityfinding`
 --
 
-DROP TABLE IF EXISTS `m_oralcavityfinding`;
+-- DROP TABLE IF EXISTS `m_oralcavityfinding`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_oralcavityfinding` (
+CREATE TABLE IF NOT EXISTS `m_oralcavityfinding` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -6191,10 +6191,10 @@ CREATE TABLE `m_oralcavityfinding` (
 -- Table structure for table `m_oralvitaminnumberofdose`
 --
 
-DROP TABLE IF EXISTS `m_oralvitaminnumberofdose`;
+-- DROP TABLE IF EXISTS `m_oralvitaminnumberofdose`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_oralvitaminnumberofdose` (
+CREATE TABLE IF NOT EXISTS `m_oralvitaminnumberofdose` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -6211,10 +6211,10 @@ CREATE TABLE `m_oralvitaminnumberofdose` (
 -- Table structure for table `m_outreachfeature`
 --
 
-DROP TABLE IF EXISTS `m_outreachfeature`;
+-- DROP TABLE IF EXISTS `m_outreachfeature`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_outreachfeature` (
+CREATE TABLE IF NOT EXISTS `m_outreachfeature` (
   `OutreachFeatureID` int(11) NOT NULL AUTO_INCREMENT,
   `Type` varchar(50) DEFAULT NULL,
   `Category` varchar(50) DEFAULT NULL,
@@ -6240,10 +6240,10 @@ CREATE TABLE `m_outreachfeature` (
 -- Table structure for table `m_palpationbreasts`
 --
 
-DROP TABLE IF EXISTS `m_palpationbreasts`;
+-- DROP TABLE IF EXISTS `m_palpationbreasts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_palpationbreasts` (
+CREATE TABLE IF NOT EXISTS `m_palpationbreasts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -6260,10 +6260,10 @@ CREATE TABLE `m_palpationbreasts` (
 -- Table structure for table `m_palpationlymphnodes`
 --
 
-DROP TABLE IF EXISTS `m_palpationlymphnodes`;
+-- DROP TABLE IF EXISTS `m_palpationlymphnodes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_palpationlymphnodes` (
+CREATE TABLE IF NOT EXISTS `m_palpationlymphnodes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -6280,10 +6280,10 @@ CREATE TABLE `m_palpationlymphnodes` (
 -- Table structure for table `m_palpationoforalcavity`
 --
 
-DROP TABLE IF EXISTS `m_palpationoforalcavity`;
+-- DROP TABLE IF EXISTS `m_palpationoforalcavity`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_palpationoforalcavity` (
+CREATE TABLE IF NOT EXISTS `m_palpationoforalcavity` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -6300,10 +6300,10 @@ CREATE TABLE `m_palpationoforalcavity` (
 -- Table structure for table `m_parkingplace`
 --
 
-DROP TABLE IF EXISTS `m_parkingplace`;
+-- DROP TABLE IF EXISTS `m_parkingplace`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_parkingplace` (
+CREATE TABLE IF NOT EXISTS `m_parkingplace` (
   `ParkingPlaceID` int(11) NOT NULL AUTO_INCREMENT,
   `ParkingPlaceName` varchar(50) DEFAULT NULL,
   `ParkingPlaceDesc` varchar(100) DEFAULT NULL,
@@ -6347,10 +6347,10 @@ CREATE TABLE `m_parkingplace` (
 -- Table structure for table `m_parkingplacesubdistrictmap`
 --
 
-DROP TABLE IF EXISTS `m_parkingplacesubdistrictmap`;
+-- DROP TABLE IF EXISTS `m_parkingplacesubdistrictmap`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_parkingplacesubdistrictmap` (
+CREATE TABLE IF NOT EXISTS `m_parkingplacesubdistrictmap` (
   `PPSubDistrictMapID` int(11) NOT NULL AUTO_INCREMENT,
   `ParkingPlaceID` int(11) DEFAULT NULL,
   `DistrictID` int(11) DEFAULT NULL,
@@ -6378,10 +6378,10 @@ CREATE TABLE `m_parkingplacesubdistrictmap` (
 -- Table structure for table `m_personalhabittype`
 --
 
-DROP TABLE IF EXISTS `m_personalhabittype`;
+-- DROP TABLE IF EXISTS `m_personalhabittype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_personalhabittype` (
+CREATE TABLE IF NOT EXISTS `m_personalhabittype` (
   `PersonalHabitTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `HabitType` varchar(50) DEFAULT NULL,
   `HabitValue` varchar(50) DEFAULT NULL,
@@ -6399,10 +6399,10 @@ CREATE TABLE `m_personalhabittype` (
 -- Table structure for table `m_pharmacologicalcategory`
 --
 
-DROP TABLE IF EXISTS `m_pharmacologicalcategory`;
+-- DROP TABLE IF EXISTS `m_pharmacologicalcategory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_pharmacologicalcategory` (
+CREATE TABLE IF NOT EXISTS `m_pharmacologicalcategory` (
   `PharmCategoryID` int(11) NOT NULL AUTO_INCREMENT,
   `PharmCategoryName` varchar(100) DEFAULT NULL,
   `PharmCategoryDesc` varchar(100) DEFAULT NULL,
@@ -6425,10 +6425,10 @@ CREATE TABLE `m_pharmacologicalcategory` (
 -- Table structure for table `m_phonetype`
 --
 
-DROP TABLE IF EXISTS `m_phonetype`;
+-- DROP TABLE IF EXISTS `m_phonetype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_phonetype` (
+CREATE TABLE IF NOT EXISTS `m_phonetype` (
   `PhoneTypeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `PhoneType` varchar(20) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -6445,10 +6445,10 @@ CREATE TABLE `m_phonetype` (
 -- Table structure for table `m_physicalactivity`
 --
 
-DROP TABLE IF EXISTS `m_physicalactivity`;
+-- DROP TABLE IF EXISTS `m_physicalactivity`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_physicalactivity` (
+CREATE TABLE IF NOT EXISTS `m_physicalactivity` (
   `PAID` int(11) NOT NULL AUTO_INCREMENT,
   `ActivityType` varchar(200) DEFAULT NULL,
   `Score` int(11) DEFAULT NULL,
@@ -6469,10 +6469,10 @@ CREATE TABLE `m_physicalactivity` (
 -- Table structure for table `m_pregduration`
 --
 
-DROP TABLE IF EXISTS `m_pregduration`;
+-- DROP TABLE IF EXISTS `m_pregduration`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_pregduration` (
+CREATE TABLE IF NOT EXISTS `m_pregduration` (
   `PregDurationID` smallint(6) NOT NULL AUTO_INCREMENT,
   `DurationType` varchar(20) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -6489,10 +6489,10 @@ CREATE TABLE `m_pregduration` (
 -- Table structure for table `m_pregoutcome`
 --
 
-DROP TABLE IF EXISTS `m_pregoutcome`;
+-- DROP TABLE IF EXISTS `m_pregoutcome`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_pregoutcome` (
+CREATE TABLE IF NOT EXISTS `m_pregoutcome` (
   `PregOutcomeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `PregOutcome` varchar(20) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -6509,10 +6509,10 @@ CREATE TABLE `m_pregoutcome` (
 -- Table structure for table `m_premalignantlesion`
 --
 
-DROP TABLE IF EXISTS `m_premalignantlesion`;
+-- DROP TABLE IF EXISTS `m_premalignantlesion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_premalignantlesion` (
+CREATE TABLE IF NOT EXISTS `m_premalignantlesion` (
   `PreMalignantLesionID` int(11) NOT NULL AUTO_INCREMENT,
   `PreMalignantLesionType` varchar(50) DEFAULT NULL,
   `PreMalignantLesionDesc` varchar(50) DEFAULT NULL,
@@ -6530,10 +6530,10 @@ CREATE TABLE `m_premalignantlesion` (
 -- Table structure for table `m_procedure`
 --
 
-DROP TABLE IF EXISTS `m_procedure`;
+-- DROP TABLE IF EXISTS `m_procedure`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_procedure` (
+CREATE TABLE IF NOT EXISTS `m_procedure` (
   `ProcedureID` int(11) NOT NULL AUTO_INCREMENT,
   `ProcedureName` varchar(100) DEFAULT NULL,
   `ProcedureDesc` varchar(100) DEFAULT NULL,
@@ -6561,10 +6561,10 @@ CREATE TABLE `m_procedure` (
 -- Table structure for table `m_procedurecomponentmap`
 --
 
-DROP TABLE IF EXISTS `m_procedurecomponentmap`;
+-- DROP TABLE IF EXISTS `m_procedurecomponentmap`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_procedurecomponentmap` (
+CREATE TABLE IF NOT EXISTS `m_procedurecomponentmap` (
   `ProcedureComponentMapID` int(11) NOT NULL AUTO_INCREMENT,
   `ProcedureID` int(11) DEFAULT NULL,
   `TestComponentID` int(11) DEFAULT NULL,
@@ -6589,10 +6589,10 @@ CREATE TABLE `m_procedurecomponentmap` (
 -- Table structure for table `m_providerconfiguration`
 --
 
-DROP TABLE IF EXISTS `m_providerconfiguration`;
+-- DROP TABLE IF EXISTS `m_providerconfiguration`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_providerconfiguration` (
+CREATE TABLE IF NOT EXISTS `m_providerconfiguration` (
   `ConfigurationID` int(11) NOT NULL AUTO_INCREMENT,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
   `KeyName` varchar(50) DEFAULT NULL,
@@ -6615,10 +6615,10 @@ CREATE TABLE `m_providerconfiguration` (
 -- Table structure for table `m_providerserviceaddmapping`
 --
 
-DROP TABLE IF EXISTS `m_providerserviceaddmapping`;
+-- DROP TABLE IF EXISTS `m_providerserviceaddmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_providerserviceaddmapping` (
+CREATE TABLE IF NOT EXISTS `m_providerserviceaddmapping` (
   `PSAddMapID` int(11) NOT NULL AUTO_INCREMENT,
   `LocationName` varchar(45) DEFAULT NULL,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -6642,10 +6642,10 @@ CREATE TABLE `m_providerserviceaddmapping` (
 -- Table structure for table `m_providerservicelangmapping`
 --
 
-DROP TABLE IF EXISTS `m_providerservicelangmapping`;
+-- DROP TABLE IF EXISTS `m_providerservicelangmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_providerservicelangmapping` (
+CREATE TABLE IF NOT EXISTS `m_providerservicelangmapping` (
   `PSLangMapID` int(11) NOT NULL AUTO_INCREMENT,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
   `LanguageID` int(11) DEFAULT NULL,
@@ -6667,10 +6667,10 @@ CREATE TABLE `m_providerservicelangmapping` (
 -- Table structure for table `m_providerservicemapping`
 --
 
-DROP TABLE IF EXISTS `m_providerservicemapping`;
+-- DROP TABLE IF EXISTS `m_providerservicemapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_providerservicemapping` (
+CREATE TABLE IF NOT EXISTS `m_providerservicemapping` (
   `ProviderServiceMapID` int(11) NOT NULL AUTO_INCREMENT,
   `ServiceProviderID` smallint(6) DEFAULT NULL,
   `ServiceID` smallint(6) DEFAULT NULL,
@@ -6758,10 +6758,10 @@ DELIMITER ;
 -- Table structure for table `m_providerservicemapping_bkp_15_03_2024`
 --
 
-DROP TABLE IF EXISTS `m_providerservicemapping_bkp_15_03_2024`;
+-- DROP TABLE IF EXISTS `m_providerservicemapping_bkp_15_03_2024`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_providerservicemapping_bkp_15_03_2024` (
+CREATE TABLE IF NOT EXISTS `m_providerservicemapping_bkp_15_03_2024` (
   `ProviderServiceMapID` int(11) NOT NULL DEFAULT '0',
   `ServiceProviderID` smallint(6) DEFAULT NULL,
   `ServiceID` smallint(6) DEFAULT NULL,
@@ -6792,10 +6792,10 @@ CREATE TABLE `m_providerservicemapping_bkp_15_03_2024` (
 -- Table structure for table `m_qareporttype`
 --
 
-DROP TABLE IF EXISTS `m_qareporttype`;
+-- DROP TABLE IF EXISTS `m_qareporttype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_qareporttype` (
+CREATE TABLE IF NOT EXISTS `m_qareporttype` (
   `QAreportTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `ReportType` varchar(100) DEFAULT NULL,
   `ReportTypeDesc` varchar(100) DEFAULT NULL,
@@ -6816,10 +6816,10 @@ CREATE TABLE `m_qareporttype` (
 -- Table structure for table `m_qualityauditgrade`
 --
 
-DROP TABLE IF EXISTS `m_qualityauditgrade`;
+-- DROP TABLE IF EXISTS `m_qualityauditgrade`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_qualityauditgrade` (
+CREATE TABLE IF NOT EXISTS `m_qualityauditgrade` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Gradeid` int(11) NOT NULL,
   `GradeName` varchar(100) DEFAULT NULL,
@@ -6842,10 +6842,10 @@ CREATE TABLE `m_qualityauditgrade` (
 -- Table structure for table `m_qualityauditoragentmapping`
 --
 
-DROP TABLE IF EXISTS `m_qualityauditoragentmapping`;
+-- DROP TABLE IF EXISTS `m_qualityauditoragentmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_qualityauditoragentmapping` (
+CREATE TABLE IF NOT EXISTS `m_qualityauditoragentmapping` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Roleid` int(11) NOT NULL,
   `Rolename` varchar(100) NOT NULL,
@@ -6868,10 +6868,10 @@ CREATE TABLE `m_qualityauditoragentmapping` (
 -- Table structure for table `m_qualityauditquestionnaire`
 --
 
-DROP TABLE IF EXISTS `m_qualityauditquestionnaire`;
+-- DROP TABLE IF EXISTS `m_qualityauditquestionnaire`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_qualityauditquestionnaire` (
+CREATE TABLE IF NOT EXISTS `m_qualityauditquestionnaire` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Question` varchar(1000) DEFAULT NULL,
   `QuestionDesc` varchar(200) DEFAULT NULL,
@@ -6898,10 +6898,10 @@ CREATE TABLE `m_qualityauditquestionnaire` (
 -- Table structure for table `m_qualityauditquestionnairevalues`
 --
 
-DROP TABLE IF EXISTS `m_qualityauditquestionnairevalues`;
+-- DROP TABLE IF EXISTS `m_qualityauditquestionnairevalues`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_qualityauditquestionnairevalues` (
+CREATE TABLE IF NOT EXISTS `m_qualityauditquestionnairevalues` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `QuestionValues` varchar(500) DEFAULT NULL,
   `QuestionID` int(11) DEFAULT NULL,
@@ -6925,10 +6925,10 @@ CREATE TABLE `m_qualityauditquestionnairevalues` (
 -- Table structure for table `m_qualityauditsection`
 --
 
-DROP TABLE IF EXISTS `m_qualityauditsection`;
+-- DROP TABLE IF EXISTS `m_qualityauditsection`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_qualityauditsection` (
+CREATE TABLE IF NOT EXISTS `m_qualityauditsection` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(30) NOT NULL,
   `SectionDesc` varchar(100) DEFAULT NULL,
@@ -6948,10 +6948,10 @@ CREATE TABLE `m_qualityauditsection` (
 -- Table structure for table `m_questionnaire`
 --
 
-DROP TABLE IF EXISTS `m_questionnaire`;
+-- DROP TABLE IF EXISTS `m_questionnaire`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_questionnaire` (
+CREATE TABLE IF NOT EXISTS `m_questionnaire` (
   `QuestionID` int(11) NOT NULL AUTO_INCREMENT,
   `Question` varchar(1000) DEFAULT NULL,
   `Interaction` varchar(750) DEFAULT NULL,
@@ -6988,10 +6988,10 @@ CREATE TABLE `m_questionnaire` (
 -- Table structure for table `m_questionnairevalues`
 --
 
-DROP TABLE IF EXISTS `m_questionnairevalues`;
+-- DROP TABLE IF EXISTS `m_questionnairevalues`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_questionnairevalues` (
+CREATE TABLE IF NOT EXISTS `m_questionnairevalues` (
   `QuestionValuesID` int(11) NOT NULL AUTO_INCREMENT,
   `QuestionValues` varchar(500) DEFAULT NULL,
   `QuestionID` int(11) DEFAULT NULL,
@@ -7015,10 +7015,10 @@ CREATE TABLE `m_questionnairevalues` (
 -- Table structure for table `m_questiontype`
 --
 
-DROP TABLE IF EXISTS `m_questiontype`;
+-- DROP TABLE IF EXISTS `m_questiontype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_questiontype` (
+CREATE TABLE IF NOT EXISTS `m_questiontype` (
   `QuestionTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `QuestionType` varchar(30) DEFAULT NULL,
   `QuestionTypeDesc` varchar(50) DEFAULT NULL,
@@ -7039,10 +7039,10 @@ CREATE TABLE `m_questiontype` (
 -- Table structure for table `m_quickblox`
 --
 
-DROP TABLE IF EXISTS `m_quickblox`;
+-- DROP TABLE IF EXISTS `m_quickblox`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_quickblox` (
+CREATE TABLE IF NOT EXISTS `m_quickblox` (
   `QuickbloxID` int(11) NOT NULL AUTO_INCREMENT,
   `specialistUserID` int(11) DEFAULT NULL,
   `specialistQuickbloxID` int(11) DEFAULT NULL,
@@ -7064,10 +7064,10 @@ CREATE TABLE `m_quickblox` (
 -- Table structure for table `m_referralreason`
 --
 
-DROP TABLE IF EXISTS `m_referralreason`;
+-- DROP TABLE IF EXISTS `m_referralreason`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_referralreason` (
+CREATE TABLE IF NOT EXISTS `m_referralreason` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `VisitCategoryId` int(11) DEFAULT NULL,
@@ -7085,10 +7085,10 @@ CREATE TABLE `m_referralreason` (
 -- Table structure for table `m_religion`
 --
 
-DROP TABLE IF EXISTS `m_religion`;
+-- DROP TABLE IF EXISTS `m_religion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_religion` (
+CREATE TABLE IF NOT EXISTS `m_religion` (
   `ReligionID` smallint(6) NOT NULL AUTO_INCREMENT,
   `ReligionType` varchar(20) DEFAULT NULL,
   `ReligionDesc` varchar(20) DEFAULT NULL,
@@ -7106,10 +7106,10 @@ CREATE TABLE `m_religion` (
 -- Table structure for table `m_role`
 --
 
-DROP TABLE IF EXISTS `m_role`;
+-- DROP TABLE IF EXISTS `m_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_role` (
+CREATE TABLE IF NOT EXISTS `m_role` (
   `RoleID` int(11) NOT NULL AUTO_INCREMENT,
   `RoleName` varchar(50) NOT NULL,
   `RoleDesc` varchar(100) DEFAULT NULL,
@@ -7134,10 +7134,10 @@ CREATE TABLE `m_role` (
 -- Table structure for table `m_routeofadmin`
 --
 
-DROP TABLE IF EXISTS `m_routeofadmin`;
+-- DROP TABLE IF EXISTS `m_routeofadmin`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_routeofadmin` (
+CREATE TABLE IF NOT EXISTS `m_routeofadmin` (
   `RouteID` int(11) NOT NULL AUTO_INCREMENT,
   `RouteName` varchar(100) DEFAULT NULL,
   `RouteDesc` varchar(100) DEFAULT NULL,
@@ -7160,10 +7160,10 @@ CREATE TABLE `m_routeofadmin` (
 -- Table structure for table `m_sadraftitemmapping`
 --
 
-DROP TABLE IF EXISTS `m_sadraftitemmapping`;
+-- DROP TABLE IF EXISTS `m_sadraftitemmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_sadraftitemmapping` (
+CREATE TABLE IF NOT EXISTS `m_sadraftitemmapping` (
   `SADraftItemMapID` int(11) NOT NULL AUTO_INCREMENT,
   `StockAdjustmentDraftID` int(11) DEFAULT NULL,
   `ItemStockEntryID` int(11) DEFAULT NULL,
@@ -7192,10 +7192,10 @@ CREATE TABLE `m_sadraftitemmapping` (
 -- Table structure for table `m_samplesize`
 --
 
-DROP TABLE IF EXISTS `m_samplesize`;
+-- DROP TABLE IF EXISTS `m_samplesize`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_samplesize` (
+CREATE TABLE IF NOT EXISTS `m_samplesize` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `CycleID` int(11) DEFAULT NULL,
   `Cycle` varchar(50) DEFAULT NULL,
@@ -7221,10 +7221,10 @@ CREATE TABLE `m_samplesize` (
 -- Table structure for table `m_scheme`
 --
 
-DROP TABLE IF EXISTS `m_scheme`;
+-- DROP TABLE IF EXISTS `m_scheme`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_scheme` (
+CREATE TABLE IF NOT EXISTS `m_scheme` (
   `SchemeID` int(11) NOT NULL AUTO_INCREMENT,
   `SchemeName` varchar(100) DEFAULT NULL,
   `SchemeDesc` varchar(300) DEFAULT NULL,
@@ -7246,10 +7246,10 @@ CREATE TABLE `m_scheme` (
 -- Table structure for table `m_screen`
 --
 
-DROP TABLE IF EXISTS `m_screen`;
+-- DROP TABLE IF EXISTS `m_screen`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_screen` (
+CREATE TABLE IF NOT EXISTS `m_screen` (
   `ScreenID` int(11) NOT NULL AUTO_INCREMENT,
   `ScreenName` varchar(45) NOT NULL,
   `ApiUsed` text,
@@ -7273,10 +7273,10 @@ CREATE TABLE `m_screen` (
 -- Table structure for table `m_screen_bkp_15_03_2024`
 --
 
-DROP TABLE IF EXISTS `m_screen_bkp_15_03_2024`;
+-- DROP TABLE IF EXISTS `m_screen_bkp_15_03_2024`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_screen_bkp_15_03_2024` (
+CREATE TABLE IF NOT EXISTS `m_screen_bkp_15_03_2024` (
   `ScreenID` int(11) NOT NULL DEFAULT '0',
   `ScreenName` varchar(45) NOT NULL,
   `ApiUsed` text,
@@ -7297,10 +7297,10 @@ CREATE TABLE `m_screen_bkp_15_03_2024` (
 -- Table structure for table `m_screeningcondition`
 --
 
-DROP TABLE IF EXISTS `m_screeningcondition`;
+-- DROP TABLE IF EXISTS `m_screeningcondition`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_screeningcondition` (
+CREATE TABLE IF NOT EXISTS `m_screeningcondition` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -7317,10 +7317,10 @@ CREATE TABLE `m_screeningcondition` (
 -- Table structure for table `m_section`
 --
 
-DROP TABLE IF EXISTS `m_section`;
+-- DROP TABLE IF EXISTS `m_section`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_section` (
+CREATE TABLE IF NOT EXISTS `m_section` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(300) DEFAULT NULL,
   `SectionDesc` varchar(100) DEFAULT NULL,
@@ -7339,10 +7339,10 @@ CREATE TABLE `m_section` (
 -- Table structure for table `m_sectionqamapping`
 --
 
-DROP TABLE IF EXISTS `m_sectionqamapping`;
+-- DROP TABLE IF EXISTS `m_sectionqamapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_sectionqamapping` (
+CREATE TABLE IF NOT EXISTS `m_sectionqamapping` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Sectionid` int(11) DEFAULT NULL,
   `SectionName` varchar(100) DEFAULT NULL,
@@ -7364,10 +7364,10 @@ CREATE TABLE `m_sectionqamapping` (
 -- Table structure for table `m_servicefacility`
 --
 
-DROP TABLE IF EXISTS `m_servicefacility`;
+-- DROP TABLE IF EXISTS `m_servicefacility`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_servicefacility` (
+CREATE TABLE IF NOT EXISTS `m_servicefacility` (
   `ServiceFacilityID` int(11) NOT NULL AUTO_INCREMENT,
   `FacilityName` varchar(100) DEFAULT NULL,
   `FacilityDesc` varchar(100) DEFAULT NULL,
@@ -7385,10 +7385,10 @@ CREATE TABLE `m_servicefacility` (
 -- Table structure for table `m_servicemaster`
 --
 
-DROP TABLE IF EXISTS `m_servicemaster`;
+-- DROP TABLE IF EXISTS `m_servicemaster`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_servicemaster` (
+CREATE TABLE IF NOT EXISTS `m_servicemaster` (
   `ServiceID` smallint(6) NOT NULL AUTO_INCREMENT,
   `ServiceName` varchar(20) DEFAULT NULL,
   `ServiceDesc` varchar(50) DEFAULT NULL,
@@ -7410,10 +7410,10 @@ CREATE TABLE `m_servicemaster` (
 -- Table structure for table `m_servicemaster_bkp_15_03_2024`
 --
 
-DROP TABLE IF EXISTS `m_servicemaster_bkp_15_03_2024`;
+-- DROP TABLE IF EXISTS `m_servicemaster_bkp_15_03_2024`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_servicemaster_bkp_15_03_2024` (
+CREATE TABLE IF NOT EXISTS `m_servicemaster_bkp_15_03_2024` (
   `ServiceID` smallint(6) NOT NULL DEFAULT '0',
   `ServiceName` varchar(20) DEFAULT NULL,
   `ServiceDesc` varchar(50) DEFAULT NULL,
@@ -7432,10 +7432,10 @@ CREATE TABLE `m_servicemaster_bkp_15_03_2024` (
 -- Table structure for table `m_servicepoint`
 --
 
-DROP TABLE IF EXISTS `m_servicepoint`;
+-- DROP TABLE IF EXISTS `m_servicepoint`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_servicepoint` (
+CREATE TABLE IF NOT EXISTS `m_servicepoint` (
   `ServicePointID` int(11) NOT NULL AUTO_INCREMENT,
   `ServicePointName` varchar(50) DEFAULT NULL,
   `ServicePointDesc` varchar(100) DEFAULT NULL,
@@ -7475,10 +7475,10 @@ CREATE TABLE `m_servicepoint` (
 -- Table structure for table `m_servicepointvillagemap`
 --
 
-DROP TABLE IF EXISTS `m_servicepointvillagemap`;
+-- DROP TABLE IF EXISTS `m_servicepointvillagemap`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_servicepointvillagemap` (
+CREATE TABLE IF NOT EXISTS `m_servicepointvillagemap` (
   `ServicePointVillageMapID` int(11) NOT NULL AUTO_INCREMENT,
   `ServicePointID` int(11) DEFAULT NULL,
   `DistrictBranchID` int(11) DEFAULT NULL,
@@ -7503,10 +7503,10 @@ CREATE TABLE `m_servicepointvillagemap` (
 -- Table structure for table `m_serviceprovider`
 --
 
-DROP TABLE IF EXISTS `m_serviceprovider`;
+-- DROP TABLE IF EXISTS `m_serviceprovider`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_serviceprovider` (
+CREATE TABLE IF NOT EXISTS `m_serviceprovider` (
   `ServiceProviderID` smallint(6) NOT NULL AUTO_INCREMENT,
   `ServiceProviderName` varchar(50) NOT NULL,
   `JoiningDate` datetime DEFAULT NULL,
@@ -7544,10 +7544,10 @@ CREATE TABLE `m_serviceprovider` (
 -- Table structure for table `m_servicerolescreenmapping`
 --
 
-DROP TABLE IF EXISTS `m_servicerolescreenmapping`;
+-- DROP TABLE IF EXISTS `m_servicerolescreenmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_servicerolescreenmapping` (
+CREATE TABLE IF NOT EXISTS `m_servicerolescreenmapping` (
   `SRSMappingID` int(11) NOT NULL AUTO_INCREMENT,
   `ScreenID` int(11) DEFAULT NULL,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -7572,10 +7572,10 @@ CREATE TABLE `m_servicerolescreenmapping` (
 -- Table structure for table `m_severity`
 --
 
-DROP TABLE IF EXISTS `m_severity`;
+-- DROP TABLE IF EXISTS `m_severity`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_severity` (
+CREATE TABLE IF NOT EXISTS `m_severity` (
   `SeverityID` smallint(6) NOT NULL AUTO_INCREMENT,
   `SeverityTypeName` varchar(20) DEFAULT NULL,
   `SeverityDesc` varchar(100) DEFAULT NULL,
@@ -7596,10 +7596,10 @@ CREATE TABLE `m_severity` (
 -- Table structure for table `m_sexualorientation`
 --
 
-DROP TABLE IF EXISTS `m_sexualorientation`;
+-- DROP TABLE IF EXISTS `m_sexualorientation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_sexualorientation` (
+CREATE TABLE IF NOT EXISTS `m_sexualorientation` (
   `SexualOrientationId` smallint(6) NOT NULL AUTO_INCREMENT,
   `SexualOrientation` varchar(20) DEFAULT NULL,
   `SexualOrientationDesc` varchar(50) DEFAULT NULL,
@@ -7617,10 +7617,10 @@ CREATE TABLE `m_sexualorientation` (
 -- Table structure for table `m_siteofinjection`
 --
 
-DROP TABLE IF EXISTS `m_siteofinjection`;
+-- DROP TABLE IF EXISTS `m_siteofinjection`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_siteofinjection` (
+CREATE TABLE IF NOT EXISTS `m_siteofinjection` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `VaccinationID` smallint(6) NOT NULL,
   `VaccinationName` varchar(100) DEFAULT NULL,
@@ -7643,10 +7643,10 @@ CREATE TABLE `m_siteofinjection` (
 -- Table structure for table `m_smsparameter`
 --
 
-DROP TABLE IF EXISTS `m_smsparameter`;
+-- DROP TABLE IF EXISTS `m_smsparameter`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_smsparameter` (
+CREATE TABLE IF NOT EXISTS `m_smsparameter` (
   `SMSParameterID` int(11) NOT NULL AUTO_INCREMENT,
   `SMSParamSource` varchar(250) DEFAULT NULL,
   `SMSParamName` varchar(250) DEFAULT NULL,
@@ -7669,10 +7669,10 @@ CREATE TABLE `m_smsparameter` (
 -- Table structure for table `m_smsparametermapping`
 --
 
-DROP TABLE IF EXISTS `m_smsparametermapping`;
+-- DROP TABLE IF EXISTS `m_smsparametermapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_smsparametermapping` (
+CREATE TABLE IF NOT EXISTS `m_smsparametermapping` (
   `SMSParameterMapID` int(11) NOT NULL AUTO_INCREMENT,
   `SMSTemplateID` int(11) DEFAULT NULL,
   `SMSParameterID` int(11) DEFAULT NULL,
@@ -7698,10 +7698,10 @@ CREATE TABLE `m_smsparametermapping` (
 -- Table structure for table `m_smstemplate`
 --
 
-DROP TABLE IF EXISTS `m_smstemplate`;
+-- DROP TABLE IF EXISTS `m_smstemplate`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_smstemplate` (
+CREATE TABLE IF NOT EXISTS `m_smstemplate` (
   `SMSTemplateID` int(11) NOT NULL AUTO_INCREMENT,
   `SMSTemplateName` varchar(50) DEFAULT NULL,
   `SMSTemplate` text,
@@ -7727,10 +7727,10 @@ CREATE TABLE `m_smstemplate` (
 -- Table structure for table `m_smstype`
 --
 
-DROP TABLE IF EXISTS `m_smstype`;
+-- DROP TABLE IF EXISTS `m_smstype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_smstype` (
+CREATE TABLE IF NOT EXISTS `m_smstype` (
   `SMSTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `SMSType` varchar(50) DEFAULT NULL,
   `SMSTypeDesc` varchar(100) DEFAULT NULL,
@@ -7751,10 +7751,10 @@ CREATE TABLE `m_smstype` (
 -- Table structure for table `m_specialization`
 --
 
-DROP TABLE IF EXISTS `m_specialization`;
+-- DROP TABLE IF EXISTS `m_specialization`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_specialization` (
+CREATE TABLE IF NOT EXISTS `m_specialization` (
   `SpecializationID` int(11) NOT NULL AUTO_INCREMENT,
   `Specialization` varchar(50) DEFAULT NULL,
   `SpecializationDesc` varchar(50) DEFAULT NULL,
@@ -7772,10 +7772,10 @@ CREATE TABLE `m_specialization` (
 -- Table structure for table `m_state`
 --
 
-DROP TABLE IF EXISTS `m_state`;
+-- DROP TABLE IF EXISTS `m_state`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_state` (
+CREATE TABLE IF NOT EXISTS `m_state` (
   `StateID` int(11) NOT NULL AUTO_INCREMENT,
   `StateName` varchar(100) NOT NULL,
   `StateCode` char(4) DEFAULT NULL,
@@ -7798,10 +7798,10 @@ CREATE TABLE `m_state` (
 -- Table structure for table `m_status`
 --
 
-DROP TABLE IF EXISTS `m_status`;
+-- DROP TABLE IF EXISTS `m_status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_status` (
+CREATE TABLE IF NOT EXISTS `m_status` (
   `StatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Status` varchar(20) DEFAULT NULL,
   `StatusDesc` varchar(30) DEFAULT NULL,
@@ -7823,10 +7823,10 @@ CREATE TABLE `m_status` (
 -- Table structure for table `m_stockadjustmentdraft`
 --
 
-DROP TABLE IF EXISTS `m_stockadjustmentdraft`;
+-- DROP TABLE IF EXISTS `m_stockadjustmentdraft`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_stockadjustmentdraft` (
+CREATE TABLE IF NOT EXISTS `m_stockadjustmentdraft` (
   `StockAdjustmentDraftID` int(11) NOT NULL AUTO_INCREMENT,
   `DraftName` varchar(30) DEFAULT NULL,
   `DraftDesc` varchar(50) DEFAULT NULL,
@@ -7853,10 +7853,10 @@ CREATE TABLE `m_stockadjustmentdraft` (
 -- Table structure for table `m_stratum`
 --
 
-DROP TABLE IF EXISTS `m_stratum`;
+-- DROP TABLE IF EXISTS `m_stratum`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_stratum` (
+CREATE TABLE IF NOT EXISTS `m_stratum` (
   `StratumID` int(11) NOT NULL AUTO_INCREMENT,
   `CategoryName` varchar(200) DEFAULT NULL,
   `SeqNo` int(11) DEFAULT NULL,
@@ -7879,10 +7879,10 @@ CREATE TABLE `m_stratum` (
 -- Table structure for table `m_subcategory`
 --
 
-DROP TABLE IF EXISTS `m_subcategory`;
+-- DROP TABLE IF EXISTS `m_subcategory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_subcategory` (
+CREATE TABLE IF NOT EXISTS `m_subcategory` (
   `SubCategoryID` int(11) NOT NULL AUTO_INCREMENT,
   `CategoryID` int(11) DEFAULT NULL,
   `SubCategoryName` varchar(100) DEFAULT NULL,
@@ -7904,10 +7904,10 @@ CREATE TABLE `m_subcategory` (
 -- Table structure for table `m_subcategory_before_trigger_execution`
 --
 
-DROP TABLE IF EXISTS `m_subcategory_before_trigger_execution`;
+-- DROP TABLE IF EXISTS `m_subcategory_before_trigger_execution`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_subcategory_before_trigger_execution` (
+CREATE TABLE IF NOT EXISTS `m_subcategory_before_trigger_execution` (
   `SubCategoryID` int(11) NOT NULL DEFAULT '0',
   `CategoryID` int(11) DEFAULT NULL,
   `SubCategoryName` varchar(100) DEFAULT NULL,
@@ -7926,10 +7926,10 @@ CREATE TABLE `m_subcategory_before_trigger_execution` (
 -- Table structure for table `m_subservice`
 --
 
-DROP TABLE IF EXISTS `m_subservice`;
+-- DROP TABLE IF EXISTS `m_subservice`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_subservice` (
+CREATE TABLE IF NOT EXISTS `m_subservice` (
   `SubServiceID` smallint(6) NOT NULL AUTO_INCREMENT,
   `SubServiceName` varchar(30) DEFAULT NULL,
   `SubServiceDesc` varchar(50) DEFAULT NULL,
@@ -7974,10 +7974,10 @@ DELIMITER ;
 -- Table structure for table `m_subservicemaster`
 --
 
-DROP TABLE IF EXISTS `m_subservicemaster`;
+-- DROP TABLE IF EXISTS `m_subservicemaster`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_subservicemaster` (
+CREATE TABLE IF NOT EXISTS `m_subservicemaster` (
   `SubServiceMasterID` int(11) NOT NULL AUTO_INCREMENT,
   `SubServiceName` varchar(50) DEFAULT NULL,
   `SubServiceDesc` varchar(50) DEFAULT NULL,
@@ -7998,10 +7998,10 @@ CREATE TABLE `m_subservicemaster` (
 -- Table structure for table `m_subvisitcategory`
 --
 
-DROP TABLE IF EXISTS `m_subvisitcategory`;
+-- DROP TABLE IF EXISTS `m_subvisitcategory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_subvisitcategory` (
+CREATE TABLE IF NOT EXISTS `m_subvisitcategory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(500) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -8018,10 +8018,10 @@ CREATE TABLE `m_subvisitcategory` (
 -- Table structure for table `m_supplier`
 --
 
-DROP TABLE IF EXISTS `m_supplier`;
+-- DROP TABLE IF EXISTS `m_supplier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_supplier` (
+CREATE TABLE IF NOT EXISTS `m_supplier` (
   `SupplierID` int(11) NOT NULL AUTO_INCREMENT,
   `SupplierName` varchar(200) DEFAULT NULL,
   `SupplierDesc` varchar(100) DEFAULT NULL,
@@ -8063,10 +8063,10 @@ CREATE TABLE `m_supplier` (
 -- Table structure for table `m_surgery`
 --
 
-DROP TABLE IF EXISTS `m_surgery`;
+-- DROP TABLE IF EXISTS `m_surgery`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_surgery` (
+CREATE TABLE IF NOT EXISTS `m_surgery` (
   `SurgeryID` int(11) NOT NULL AUTO_INCREMENT,
   `SurgeryType` varchar(50) DEFAULT NULL,
   `Gender` varchar(30) DEFAULT NULL,
@@ -8088,10 +8088,10 @@ CREATE TABLE `m_surgery` (
 -- Table structure for table `m_swymeddomain`
 --
 
-DROP TABLE IF EXISTS `m_swymeddomain`;
+-- DROP TABLE IF EXISTS `m_swymeddomain`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_swymeddomain` (
+CREATE TABLE IF NOT EXISTS `m_swymeddomain` (
   `SwymedDomainID` int(11) NOT NULL AUTO_INCREMENT,
   `SwymedDoamin` varchar(100) DEFAULT NULL,
   `ServiceProviderID` smallint(6) DEFAULT NULL,
@@ -8111,10 +8111,10 @@ CREATE TABLE `m_swymeddomain` (
 -- Table structure for table `m_synctabledetail`
 --
 
-DROP TABLE IF EXISTS `m_synctabledetail`;
+-- DROP TABLE IF EXISTS `m_synctabledetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_synctabledetail` (
+CREATE TABLE IF NOT EXISTS `m_synctabledetail` (
   `SyncTableDetailID` int(11) NOT NULL AUTO_INCREMENT,
   `SchemaName` varchar(45) DEFAULT NULL,
   `TableName` varchar(50) DEFAULT NULL,
@@ -8138,10 +8138,10 @@ CREATE TABLE `m_synctabledetail` (
 -- Table structure for table `m_synctablegroup`
 --
 
-DROP TABLE IF EXISTS `m_synctablegroup`;
+-- DROP TABLE IF EXISTS `m_synctablegroup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_synctablegroup` (
+CREATE TABLE IF NOT EXISTS `m_synctablegroup` (
   `SyncTableGroupID` int(11) NOT NULL AUTO_INCREMENT,
   `SyncTableGroupName` varchar(50) DEFAULT NULL,
   `SyncTableGroupDesc` varchar(100) DEFAULT NULL,
@@ -8159,10 +8159,10 @@ CREATE TABLE `m_synctablegroup` (
 -- Table structure for table `m_temporomandibularjoint`
 --
 
-DROP TABLE IF EXISTS `m_temporomandibularjoint`;
+-- DROP TABLE IF EXISTS `m_temporomandibularjoint`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_temporomandibularjoint` (
+CREATE TABLE IF NOT EXISTS `m_temporomandibularjoint` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -8179,10 +8179,10 @@ CREATE TABLE `m_temporomandibularjoint` (
 -- Table structure for table `m_testcomponent`
 --
 
-DROP TABLE IF EXISTS `m_testcomponent`;
+-- DROP TABLE IF EXISTS `m_testcomponent`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_testcomponent` (
+CREATE TABLE IF NOT EXISTS `m_testcomponent` (
   `TestComponentID` int(11) NOT NULL AUTO_INCREMENT,
   `TestComponentName` varchar(100) DEFAULT NULL,
   `TestComponentDesc` varchar(100) DEFAULT NULL,
@@ -8215,10 +8215,10 @@ CREATE TABLE `m_testcomponent` (
 -- Table structure for table `m_title`
 --
 
-DROP TABLE IF EXISTS `m_title`;
+-- DROP TABLE IF EXISTS `m_title`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_title` (
+CREATE TABLE IF NOT EXISTS `m_title` (
   `TitleID` smallint(6) NOT NULL AUTO_INCREMENT,
   `TitleName` char(10) NOT NULL,
   `TitleDesc` varchar(20) DEFAULT NULL,
@@ -8236,10 +8236,10 @@ CREATE TABLE `m_title` (
 -- Table structure for table `m_typeofiucdinserted`
 --
 
-DROP TABLE IF EXISTS `m_typeofiucdinserted`;
+-- DROP TABLE IF EXISTS `m_typeofiucdinserted`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_typeofiucdinserted` (
+CREATE TABLE IF NOT EXISTS `m_typeofiucdinserted` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -8256,10 +8256,10 @@ CREATE TABLE `m_typeofiucdinserted` (
 -- Table structure for table `m_unansweredcallreason`
 --
 
-DROP TABLE IF EXISTS `m_unansweredcallreason`;
+-- DROP TABLE IF EXISTS `m_unansweredcallreason`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_unansweredcallreason` (
+CREATE TABLE IF NOT EXISTS `m_unansweredcallreason` (
   `UnansweredCallReasonID` int(11) NOT NULL AUTO_INCREMENT,
   `UnansweredCallReason` varchar(50) DEFAULT NULL,
   `UnansweredCallReasonDesc` varchar(50) DEFAULT NULL,
@@ -8277,10 +8277,10 @@ CREATE TABLE `m_unansweredcallreason` (
 -- Table structure for table `m_uom`
 --
 
-DROP TABLE IF EXISTS `m_uom`;
+-- DROP TABLE IF EXISTS `m_uom`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_uom` (
+CREATE TABLE IF NOT EXISTS `m_uom` (
   `UOMID` int(11) NOT NULL AUTO_INCREMENT,
   `UOMName` varchar(100) DEFAULT NULL,
   `UOMDesc` varchar(100) DEFAULT NULL,
@@ -8303,10 +8303,10 @@ CREATE TABLE `m_uom` (
 -- Table structure for table `m_user`
 --
 
-DROP TABLE IF EXISTS `m_user`;
+-- DROP TABLE IF EXISTS `m_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_user` (
+CREATE TABLE IF NOT EXISTS `m_user` (
   `UserID` int(11) NOT NULL AUTO_INCREMENT,
   `TitleID` smallint(6) DEFAULT NULL,
   `FirstName` varchar(50) DEFAULT NULL,
@@ -8372,10 +8372,10 @@ CREATE TABLE `m_user` (
 -- Table structure for table `m_user_signature`
 --
 
-DROP TABLE IF EXISTS `m_user_signature`;
+-- DROP TABLE IF EXISTS `m_user_signature`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_user_signature` (
+CREATE TABLE IF NOT EXISTS `m_user_signature` (
   `UserSignatureID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
   `Signature` blob,
@@ -8397,10 +8397,10 @@ CREATE TABLE `m_user_signature` (
 -- Table structure for table `m_userbankaccount`
 --
 
-DROP TABLE IF EXISTS `m_userbankaccount`;
+-- DROP TABLE IF EXISTS `m_userbankaccount`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_userbankaccount` (
+CREATE TABLE IF NOT EXISTS `m_userbankaccount` (
   `BankAccountID` int(11) NOT NULL AUTO_INCREMENT,
   `BankAccountType` varchar(10) DEFAULT NULL,
   `BankAccountNumber` varchar(20) NOT NULL,
@@ -8421,10 +8421,10 @@ CREATE TABLE `m_userbankaccount` (
 -- Table structure for table `m_userbiometricmapping`
 --
 
-DROP TABLE IF EXISTS `m_userbiometricmapping`;
+-- DROP TABLE IF EXISTS `m_userbiometricmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_userbiometricmapping` (
+CREATE TABLE IF NOT EXISTS `m_userbiometricmapping` (
   `UserBiometricMapID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
   `FirstName` varchar(50) DEFAULT NULL,
@@ -8449,10 +8449,10 @@ CREATE TABLE `m_userbiometricmapping` (
 -- Table structure for table `m_userdemographics`
 --
 
-DROP TABLE IF EXISTS `m_userdemographics`;
+-- DROP TABLE IF EXISTS `m_userdemographics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_userdemographics` (
+CREATE TABLE IF NOT EXISTS `m_userdemographics` (
   `DemographicID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) NOT NULL,
   `FathersName` varchar(30) DEFAULT NULL,
@@ -8506,10 +8506,10 @@ CREATE TABLE `m_userdemographics` (
 -- Table structure for table `m_userlangmapping`
 --
 
-DROP TABLE IF EXISTS `m_userlangmapping`;
+-- DROP TABLE IF EXISTS `m_userlangmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_userlangmapping` (
+CREATE TABLE IF NOT EXISTS `m_userlangmapping` (
   `UserLangID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
   `LanguageID` int(11) DEFAULT NULL,
@@ -8541,10 +8541,10 @@ CREATE TABLE `m_userlangmapping` (
 -- Table structure for table `m_userloginmodulemapping`
 --
 
-DROP TABLE IF EXISTS `m_userloginmodulemapping`;
+-- DROP TABLE IF EXISTS `m_userloginmodulemapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_userloginmodulemapping` (
+CREATE TABLE IF NOT EXISTS `m_userloginmodulemapping` (
   `UserLoginModuleID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
   `ModuleID` smallint(6) DEFAULT NULL,
@@ -8566,10 +8566,10 @@ CREATE TABLE `m_userloginmodulemapping` (
 -- Table structure for table `m_usernotificationmap`
 --
 
-DROP TABLE IF EXISTS `m_usernotificationmap`;
+-- DROP TABLE IF EXISTS `m_usernotificationmap`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_usernotificationmap` (
+CREATE TABLE IF NOT EXISTS `m_usernotificationmap` (
   `UserNotificationMapID` int(11) NOT NULL AUTO_INCREMENT,
   `NotificationID` int(11) DEFAULT NULL,
   `UserID` int(11) DEFAULT NULL,
@@ -8603,10 +8603,10 @@ CREATE TABLE `m_usernotificationmap` (
 -- Table structure for table `m_userparkingplacemap`
 --
 
-DROP TABLE IF EXISTS `m_userparkingplacemap`;
+-- DROP TABLE IF EXISTS `m_userparkingplacemap`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_userparkingplacemap` (
+CREATE TABLE IF NOT EXISTS `m_userparkingplacemap` (
   `UserParkingPlaceMapID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
   `ParkingPlaceID` int(11) DEFAULT NULL,
@@ -8637,10 +8637,10 @@ CREATE TABLE `m_userparkingplacemap` (
 -- Table structure for table `m_userqualification`
 --
 
-DROP TABLE IF EXISTS `m_userqualification`;
+-- DROP TABLE IF EXISTS `m_userqualification`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_userqualification` (
+CREATE TABLE IF NOT EXISTS `m_userqualification` (
   `QualificationID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) NOT NULL,
   `UserQualificationDesc` varchar(50) DEFAULT NULL,
@@ -8658,10 +8658,10 @@ CREATE TABLE `m_userqualification` (
 -- Table structure for table `m_usersecurityqamapping`
 --
 
-DROP TABLE IF EXISTS `m_usersecurityqamapping`;
+-- DROP TABLE IF EXISTS `m_usersecurityqamapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_usersecurityqamapping` (
+CREATE TABLE IF NOT EXISTS `m_usersecurityqamapping` (
   `UserSecurityQAID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) NOT NULL,
   `QuestionID` smallint(6) DEFAULT NULL,
@@ -8683,10 +8683,10 @@ CREATE TABLE `m_usersecurityqamapping` (
 -- Table structure for table `m_userservicerolemapping`
 --
 
-DROP TABLE IF EXISTS `m_userservicerolemapping`;
+-- DROP TABLE IF EXISTS `m_userservicerolemapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_userservicerolemapping` (
+CREATE TABLE IF NOT EXISTS `m_userservicerolemapping` (
   `USRMappingID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
   `RoleID` int(11) DEFAULT NULL,
@@ -8729,10 +8729,10 @@ CREATE TABLE `m_userservicerolemapping` (
 -- Table structure for table `m_userspecializationmapping`
 --
 
-DROP TABLE IF EXISTS `m_userspecializationmapping`;
+-- DROP TABLE IF EXISTS `m_userspecializationmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_userspecializationmapping` (
+CREATE TABLE IF NOT EXISTS `m_userspecializationmapping` (
   `UserSpecializationMapID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
   `SpecializationID` int(11) DEFAULT NULL,
@@ -8755,10 +8755,10 @@ CREATE TABLE `m_userspecializationmapping` (
 -- Table structure for table `m_userstatelanguagemapping`
 --
 
-DROP TABLE IF EXISTS `m_userstatelanguagemapping`;
+-- DROP TABLE IF EXISTS `m_userstatelanguagemapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_userstatelanguagemapping` (
+CREATE TABLE IF NOT EXISTS `m_userstatelanguagemapping` (
   `USLMappingID` int(11) NOT NULL AUTO_INCREMENT,
   `USRMappingID` int(11) DEFAULT NULL,
   `LanguageID` int(11) DEFAULT NULL,
@@ -8780,10 +8780,10 @@ CREATE TABLE `m_userstatelanguagemapping` (
 -- Table structure for table `m_userswymedmapping`
 --
 
-DROP TABLE IF EXISTS `m_userswymedmapping`;
+-- DROP TABLE IF EXISTS `m_userswymedmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_userswymedmapping` (
+CREATE TABLE IF NOT EXISTS `m_userswymedmapping` (
   `UserSwymedMapID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
   `SwymedID` int(11) DEFAULT NULL,
@@ -8806,10 +8806,10 @@ CREATE TABLE `m_userswymedmapping` (
 -- Table structure for table `m_uservanmapping`
 --
 
-DROP TABLE IF EXISTS `m_uservanmapping`;
+-- DROP TABLE IF EXISTS `m_uservanmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_uservanmapping` (
+CREATE TABLE IF NOT EXISTS `m_uservanmapping` (
   `UserVanMapID` int(11) NOT NULL AUTO_INCREMENT,
   `UserParkingPlaceMapID` int(11) DEFAULT NULL,
   `VanID` int(11) DEFAULT NULL,
@@ -8834,10 +8834,10 @@ CREATE TABLE `m_uservanmapping` (
 -- Table structure for table `m_usragentmapping`
 --
 
-DROP TABLE IF EXISTS `m_usragentmapping`;
+-- DROP TABLE IF EXISTS `m_usragentmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_usragentmapping` (
+CREATE TABLE IF NOT EXISTS `m_usragentmapping` (
   `USRAgentMappingID` int(11) NOT NULL AUTO_INCREMENT,
   `USRMappingID` int(11) DEFAULT NULL,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -8863,10 +8863,10 @@ CREATE TABLE `m_usragentmapping` (
 -- Table structure for table `m_van`
 --
 
-DROP TABLE IF EXISTS `m_van`;
+-- DROP TABLE IF EXISTS `m_van`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_van` (
+CREATE TABLE IF NOT EXISTS `m_van` (
   `VanID` int(11) NOT NULL AUTO_INCREMENT,
   `VanName` varchar(30) DEFAULT NULL,
   `VehicalNo` varchar(30) DEFAULT NULL,
@@ -8911,10 +8911,10 @@ CREATE TABLE `m_van` (
 -- Table structure for table `m_vanfetosensedeviceidmapping`
 --
 
-DROP TABLE IF EXISTS `m_vanfetosensedeviceidmapping`;
+-- DROP TABLE IF EXISTS `m_vanfetosensedeviceidmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_vanfetosensedeviceidmapping` (
+CREATE TABLE IF NOT EXISTS `m_vanfetosensedeviceidmapping` (
   `VfdID` bigint(20) NOT NULL AUTO_INCREMENT,
   `deviceId` varchar(100) NOT NULL,
   `devicename` varchar(100) DEFAULT NULL,
@@ -8941,10 +8941,10 @@ CREATE TABLE `m_vanfetosensedeviceidmapping` (
 -- Table structure for table `m_vanservicepointmap`
 --
 
-DROP TABLE IF EXISTS `m_vanservicepointmap`;
+-- DROP TABLE IF EXISTS `m_vanservicepointmap`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_vanservicepointmap` (
+CREATE TABLE IF NOT EXISTS `m_vanservicepointmap` (
   `VanServicePointMapID` int(11) NOT NULL AUTO_INCREMENT,
   `VanID` int(11) DEFAULT NULL,
   `ServicePointID` int(11) DEFAULT NULL,
@@ -8970,10 +8970,10 @@ CREATE TABLE `m_vanservicepointmap` (
 -- Table structure for table `m_vanspokemapping`
 --
 
-DROP TABLE IF EXISTS `m_vanspokemapping`;
+-- DROP TABLE IF EXISTS `m_vanspokemapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_vanspokemapping` (
+CREATE TABLE IF NOT EXISTS `m_vanspokemapping` (
   `VanspokeID` int(11) NOT NULL AUTO_INCREMENT,
   `tm_StateID` int(11) DEFAULT NULL,
   `tm_ZoneID` int(11) DEFAULT NULL,
@@ -9019,10 +9019,10 @@ CREATE TABLE `m_vanspokemapping` (
 -- Table structure for table `m_vanspokemapping_bkp_04052022`
 --
 
-DROP TABLE IF EXISTS `m_vanspokemapping_bkp_04052022`;
+-- DROP TABLE IF EXISTS `m_vanspokemapping_bkp_04052022`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_vanspokemapping_bkp_04052022` (
+CREATE TABLE IF NOT EXISTS `m_vanspokemapping_bkp_04052022` (
   `VanspokeID` int(11) NOT NULL DEFAULT '0',
   `tm_StateID` int(11) DEFAULT NULL,
   `tm_ZoneID` int(11) DEFAULT NULL,
@@ -9061,10 +9061,10 @@ CREATE TABLE `m_vanspokemapping_bkp_04052022` (
 -- Table structure for table `m_vantype`
 --
 
-DROP TABLE IF EXISTS `m_vantype`;
+-- DROP TABLE IF EXISTS `m_vantype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_vantype` (
+CREATE TABLE IF NOT EXISTS `m_vantype` (
   `VanTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `VanType` varchar(20) DEFAULT NULL,
   `VanTypeDesc` varchar(30) DEFAULT NULL,
@@ -9082,10 +9082,10 @@ CREATE TABLE `m_vantype` (
 -- Table structure for table `m_visitcategory`
 --
 
-DROP TABLE IF EXISTS `m_visitcategory`;
+-- DROP TABLE IF EXISTS `m_visitcategory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_visitcategory` (
+CREATE TABLE IF NOT EXISTS `m_visitcategory` (
   `VisitCategoryID` int(11) NOT NULL AUTO_INCREMENT,
   `visitcategory` varchar(100) DEFAULT NULL,
   `VisitCategoryDesc` varchar(50) DEFAULT NULL,
@@ -9103,10 +9103,10 @@ CREATE TABLE `m_visitcategory` (
 -- Table structure for table `m_visitreason`
 --
 
-DROP TABLE IF EXISTS `m_visitreason`;
+-- DROP TABLE IF EXISTS `m_visitreason`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_visitreason` (
+CREATE TABLE IF NOT EXISTS `m_visitreason` (
   `VisitReasonID` smallint(6) NOT NULL AUTO_INCREMENT,
   `VisitReason` varchar(20) DEFAULT NULL,
   `VisitReasonDesc` varchar(50) DEFAULT NULL,
@@ -9124,10 +9124,10 @@ CREATE TABLE `m_visitreason` (
 -- Table structure for table `m_visualexaminationvia`
 --
 
-DROP TABLE IF EXISTS `m_visualexaminationvia`;
+-- DROP TABLE IF EXISTS `m_visualexaminationvia`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_visualexaminationvia` (
+CREATE TABLE IF NOT EXISTS `m_visualexaminationvia` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `Deleted` bit(1) DEFAULT b'0',
@@ -9144,10 +9144,10 @@ CREATE TABLE `m_visualexaminationvia` (
 -- Table structure for table `m_zone`
 --
 
-DROP TABLE IF EXISTS `m_zone`;
+-- DROP TABLE IF EXISTS `m_zone`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_zone` (
+CREATE TABLE IF NOT EXISTS `m_zone` (
   `ZoneID` int(11) NOT NULL AUTO_INCREMENT,
   `ZoneName` varchar(50) DEFAULT NULL,
   `ZoneDesc` varchar(100) DEFAULT NULL,
@@ -9184,10 +9184,10 @@ CREATE TABLE `m_zone` (
 -- Table structure for table `m_zonedistrictmap`
 --
 
-DROP TABLE IF EXISTS `m_zonedistrictmap`;
+-- DROP TABLE IF EXISTS `m_zonedistrictmap`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_zonedistrictmap` (
+CREATE TABLE IF NOT EXISTS `m_zonedistrictmap` (
   `ZoneDistrictMapID` int(11) NOT NULL AUTO_INCREMENT,
   `ZoneID` int(11) DEFAULT NULL,
   `DistrictID` int(11) DEFAULT NULL,
@@ -9212,10 +9212,10 @@ CREATE TABLE `m_zonedistrictmap` (
 -- Table structure for table `ndhm_trg_visitdata`
 --
 
-DROP TABLE IF EXISTS `ndhm_trg_visitdata`;
+-- DROP TABLE IF EXISTS `ndhm_trg_visitdata`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ndhm_trg_visitdata` (
+CREATE TABLE IF NOT EXISTS `ndhm_trg_visitdata` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `benflowid` bigint(20) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -9235,10 +9235,10 @@ CREATE TABLE `ndhm_trg_visitdata` (
 -- Table structure for table `non_pregnant_high_risk_assess`
 --
 
-DROP TABLE IF EXISTS `non_pregnant_high_risk_assess`;
+-- DROP TABLE IF EXISTS `non_pregnant_high_risk_assess`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `non_pregnant_high_risk_assess` (
+CREATE TABLE IF NOT EXISTS `non_pregnant_high_risk_assess` (
   `id` bigint(20) NOT NULL,
   `age_check` varchar(255) DEFAULT NULL,
   `ben_id` bigint(20) DEFAULT NULL,
@@ -9260,10 +9260,10 @@ CREATE TABLE `non_pregnant_high_risk_assess` (
 -- Table structure for table `non_pregnant_high_risk_track`
 --
 
-DROP TABLE IF EXISTS `non_pregnant_high_risk_track`;
+-- DROP TABLE IF EXISTS `non_pregnant_high_risk_track`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `non_pregnant_high_risk_track` (
+CREATE TABLE IF NOT EXISTS `non_pregnant_high_risk_track` (
   `id` bigint(20) NOT NULL,
   `anemia_check` varchar(255) DEFAULT NULL,
   `ben_id` bigint(20) DEFAULT NULL,
@@ -9295,10 +9295,10 @@ CREATE TABLE `non_pregnant_high_risk_track` (
 -- Table structure for table `pregnant_high_risk_assess`
 --
 
-DROP TABLE IF EXISTS `pregnant_high_risk_assess`;
+-- DROP TABLE IF EXISTS `pregnant_high_risk_assess`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `pregnant_high_risk_assess` (
+CREATE TABLE IF NOT EXISTS `pregnant_high_risk_assess` (
   `id` bigint(20) NOT NULL,
   `age_check` varchar(255) DEFAULT NULL,
   `bad_obstetric_check` varchar(255) DEFAULT NULL,
@@ -9322,10 +9322,10 @@ CREATE TABLE `pregnant_high_risk_assess` (
 -- Table structure for table `pregnant_high_risk_track`
 --
 
-DROP TABLE IF EXISTS `pregnant_high_risk_track`;
+-- DROP TABLE IF EXISTS `pregnant_high_risk_track`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `pregnant_high_risk_track` (
+CREATE TABLE IF NOT EXISTS `pregnant_high_risk_track` (
   `id` bigint(20) NOT NULL,
   `antepartum_hem` varchar(255) DEFAULT NULL,
   `ben_id` bigint(20) DEFAULT NULL,
@@ -9364,7 +9364,7 @@ CREATE TABLE `pregnant_high_risk_track` (
 -- Temporary view structure for view `question_report`
 --
 
-DROP TABLE IF EXISTS `question_report`;
+-- DROP TABLE IF EXISTS `question_report`;
 /*!50001 DROP VIEW IF EXISTS `question_report`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -9393,7 +9393,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `question_report1`
 --
 
-DROP TABLE IF EXISTS `question_report1`;
+-- DROP TABLE IF EXISTS `question_report1`;
 /*!50001 DROP VIEW IF EXISTS `question_report1`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -9416,10 +9416,10 @@ SET character_set_client = @saved_cs_client;
 -- Table structure for table `replicationtest`
 --
 
-DROP TABLE IF EXISTS `replicationtest`;
+-- DROP TABLE IF EXISTS `replicationtest`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `replicationtest` (
+CREATE TABLE IF NOT EXISTS `replicationtest` (
   `id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -9428,10 +9428,10 @@ CREATE TABLE `replicationtest` (
 -- Table structure for table `sct_description`
 --
 
-DROP TABLE IF EXISTS `sct_description`;
+-- DROP TABLE IF EXISTS `sct_description`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `sct_description` (
+CREATE TABLE IF NOT EXISTS `sct_description` (
   `sctDesID` int(11) NOT NULL AUTO_INCREMENT,
   `sctCode` varchar(30) DEFAULT NULL,
   `EffectiveTime` varchar(30) DEFAULT NULL,
@@ -9457,10 +9457,10 @@ CREATE TABLE `sct_description` (
 -- Table structure for table `sct_description_bkp_31032020`
 --
 
-DROP TABLE IF EXISTS `sct_description_bkp_31032020`;
+-- DROP TABLE IF EXISTS `sct_description_bkp_31032020`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `sct_description_bkp_31032020` (
+CREATE TABLE IF NOT EXISTS `sct_description_bkp_31032020` (
   `sctDesID` int(11) NOT NULL DEFAULT '0',
   `sctCode` varchar(30) DEFAULT NULL,
   `EffectiveTime` varchar(30) DEFAULT NULL,
@@ -9484,7 +9484,7 @@ CREATE TABLE `sct_description_bkp_31032020` (
 -- Temporary view structure for view `showofficedetails`
 --
 
-DROP TABLE IF EXISTS `showofficedetails`;
+-- DROP TABLE IF EXISTS `showofficedetails`;
 /*!50001 DROP VIEW IF EXISTS `showofficedetails`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -9513,7 +9513,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `showuserdetailsfromuserservicerolemapping`
 --
 
-DROP TABLE IF EXISTS `showuserdetailsfromuserservicerolemapping`;
+-- DROP TABLE IF EXISTS `showuserdetailsfromuserservicerolemapping`;
 /*!50001 DROP VIEW IF EXISTS `showuserdetailsfromuserservicerolemapping`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -9594,10 +9594,10 @@ SET character_set_client = @saved_cs_client;
 -- Table structure for table `t_104appointmentdetails`
 --
 
-DROP TABLE IF EXISTS `t_104appointmentdetails`;
+-- DROP TABLE IF EXISTS `t_104appointmentdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_104appointmentdetails` (
+CREATE TABLE IF NOT EXISTS `t_104appointmentdetails` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `BlockName` varchar(100) DEFAULT NULL,
   `FacilityName` varchar(100) DEFAULT NULL,
@@ -9628,10 +9628,10 @@ CREATE TABLE `t_104appointmentdetails` (
 -- Table structure for table `t_104bencdiresponse`
 --
 
-DROP TABLE IF EXISTS `t_104bencdiresponse`;
+-- DROP TABLE IF EXISTS `t_104bencdiresponse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_104bencdiresponse` (
+CREATE TABLE IF NOT EXISTS `t_104bencdiresponse` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenCallID` bigint(20) DEFAULT NULL,
@@ -9665,10 +9665,10 @@ CREATE TABLE `t_104bencdiresponse` (
 -- Table structure for table `t_104benimrmmr`
 --
 
-DROP TABLE IF EXISTS `t_104benimrmmr`;
+-- DROP TABLE IF EXISTS `t_104benimrmmr`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_104benimrmmr` (
+CREATE TABLE IF NOT EXISTS `t_104benimrmmr` (
   `Benimrmmrid` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `Bencallid` bigint(20) NOT NULL,
@@ -9737,10 +9737,10 @@ CREATE TABLE `t_104benimrmmr` (
 -- Table structure for table `t_104benmedhistory`
 --
 
-DROP TABLE IF EXISTS `t_104benmedhistory`;
+-- DROP TABLE IF EXISTS `t_104benmedhistory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_104benmedhistory` (
+CREATE TABLE IF NOT EXISTS `t_104benmedhistory` (
   `BenHistoryID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RequestID` varchar(30) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -9799,10 +9799,10 @@ CREATE TABLE `t_104benmedhistory` (
 -- Table structure for table `t_104benmedqaresponse`
 --
 
-DROP TABLE IF EXISTS `t_104benmedqaresponse`;
+-- DROP TABLE IF EXISTS `t_104benmedqaresponse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_104benmedqaresponse` (
+CREATE TABLE IF NOT EXISTS `t_104benmedqaresponse` (
   `BenMedQAResponseID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenCallID` bigint(20) DEFAULT NULL,
@@ -9837,10 +9837,10 @@ CREATE TABLE `t_104benmedqaresponse` (
 -- Table structure for table `t_104comooutboundcalldetails`
 --
 
-DROP TABLE IF EXISTS `t_104comooutboundcalldetails`;
+-- DROP TABLE IF EXISTS `t_104comooutboundcalldetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_104comooutboundcalldetails` (
+CREATE TABLE IF NOT EXISTS `t_104comooutboundcalldetails` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `USRMappingID` int(11) DEFAULT NULL,
   `CzentrixCallID` varchar(20) DEFAULT NULL,
@@ -9863,10 +9863,10 @@ CREATE TABLE `t_104comooutboundcalldetails` (
 -- Table structure for table `t_104covid19`
 --
 
-DROP TABLE IF EXISTS `t_104covid19`;
+-- DROP TABLE IF EXISTS `t_104covid19`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_104covid19` (
+CREATE TABLE IF NOT EXISTS `t_104covid19` (
   `COVID19_104ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenCallID` bigint(20) NOT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -9931,10 +9931,10 @@ CREATE TABLE `t_104covid19` (
 -- Table structure for table `t_104prescribeddrug`
 --
 
-DROP TABLE IF EXISTS `t_104prescribeddrug`;
+-- DROP TABLE IF EXISTS `t_104prescribeddrug`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_104prescribeddrug` (
+CREATE TABLE IF NOT EXISTS `t_104prescribeddrug` (
   `PrescribedDrugID` bigint(20) NOT NULL AUTO_INCREMENT,
   `PrescriptionID` bigint(20) DEFAULT NULL,
   `DrugMapID` int(11) DEFAULT NULL,
@@ -9964,10 +9964,10 @@ CREATE TABLE `t_104prescribeddrug` (
 -- Table structure for table `t_104prescription`
 --
 
-DROP TABLE IF EXISTS `t_104prescription`;
+-- DROP TABLE IF EXISTS `t_104prescription`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_104prescription` (
+CREATE TABLE IF NOT EXISTS `t_104prescription` (
   `PrescriptionID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenCallID` bigint(20) DEFAULT NULL,
@@ -9993,10 +9993,10 @@ CREATE TABLE `t_104prescription` (
 -- Table structure for table `t_104referredcdssdetails`
 --
 
-DROP TABLE IF EXISTS `t_104referredcdssdetails`;
+-- DROP TABLE IF EXISTS `t_104referredcdssdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_104referredcdssdetails` (
+CREATE TABLE IF NOT EXISTS `t_104referredcdssdetails` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `beneficiaryRegID` bigint(20) DEFAULT NULL,
   `PatientName` varchar(100) DEFAULT NULL,
@@ -10029,10 +10029,10 @@ CREATE TABLE `t_104referredcdssdetails` (
 -- Table structure for table `t_abandonsummary`
 --
 
-DROP TABLE IF EXISTS `t_abandonsummary`;
+-- DROP TABLE IF EXISTS `t_abandonsummary`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_abandonsummary` (
+CREATE TABLE IF NOT EXISTS `t_abandonsummary` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `CustomerPhoneNumber` bigint(20) DEFAULT NULL,
   `UniqueID` bigint(20) DEFAULT NULL,
@@ -10057,10 +10057,10 @@ CREATE TABLE `t_abandonsummary` (
 -- Table structure for table `t_agentsummaryreport`
 --
 
-DROP TABLE IF EXISTS `t_agentsummaryreport`;
+-- DROP TABLE IF EXISTS `t_agentsummaryreport`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_agentsummaryreport` (
+CREATE TABLE IF NOT EXISTS `t_agentsummaryreport` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `AgentName` varchar(100) DEFAULT NULL,
   `AgentID` int(11) DEFAULT NULL,
@@ -10111,10 +10111,10 @@ CREATE TABLE `t_agentsummaryreport` (
 -- Table structure for table `t_anc_visit`
 --
 
-DROP TABLE IF EXISTS `t_anc_visit`;
+-- DROP TABLE IF EXISTS `t_anc_visit`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_anc_visit` (
+CREATE TABLE IF NOT EXISTS `t_anc_visit` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `abortion_date` datetime DEFAULT NULL,
   `abortion_facility` varchar(255) DEFAULT NULL,
@@ -10160,10 +10160,10 @@ CREATE TABLE `t_anc_visit` (
 -- Table structure for table `t_anccare`
 --
 
-DROP TABLE IF EXISTS `t_anccare`;
+-- DROP TABLE IF EXISTS `t_anccare`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_anccare` (
+CREATE TABLE IF NOT EXISTS `t_anccare` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -10215,10 +10215,10 @@ CREATE TABLE `t_anccare` (
 -- Table structure for table `t_ancdiagnosis`
 --
 
-DROP TABLE IF EXISTS `t_ancdiagnosis`;
+-- DROP TABLE IF EXISTS `t_ancdiagnosis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_ancdiagnosis` (
+CREATE TABLE IF NOT EXISTS `t_ancdiagnosis` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -10264,10 +10264,10 @@ CREATE TABLE `t_ancdiagnosis` (
 -- Table structure for table `t_ancwomenvaccinedetail`
 --
 
-DROP TABLE IF EXISTS `t_ancwomenvaccinedetail`;
+-- DROP TABLE IF EXISTS `t_ancwomenvaccinedetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_ancwomenvaccinedetail` (
+CREATE TABLE IF NOT EXISTS `t_ancwomenvaccinedetail` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -10306,10 +10306,10 @@ CREATE TABLE `t_ancwomenvaccinedetail` (
 -- Table structure for table `t_balvivahcomplaints`
 --
 
-DROP TABLE IF EXISTS `t_balvivahcomplaints`;
+-- DROP TABLE IF EXISTS `t_balvivahcomplaints`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_balvivahcomplaints` (
+CREATE TABLE IF NOT EXISTS `t_balvivahcomplaints` (
   `balVivahComplaintID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenCallID` bigint(20) NOT NULL,
@@ -10346,10 +10346,10 @@ CREATE TABLE `t_balvivahcomplaints` (
 -- Table structure for table `t_benadherence`
 --
 
-DROP TABLE IF EXISTS `t_benadherence`;
+-- DROP TABLE IF EXISTS `t_benadherence`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_benadherence` (
+CREATE TABLE IF NOT EXISTS `t_benadherence` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -10389,10 +10389,10 @@ CREATE TABLE `t_benadherence` (
 -- Table structure for table `t_benallergyhistory`
 --
 
-DROP TABLE IF EXISTS `t_benallergyhistory`;
+-- DROP TABLE IF EXISTS `t_benallergyhistory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_benallergyhistory` (
+CREATE TABLE IF NOT EXISTS `t_benallergyhistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -10436,10 +10436,10 @@ CREATE TABLE `t_benallergyhistory` (
 -- Table structure for table `t_bencall`
 --
 
-DROP TABLE IF EXISTS `t_bencall`;
+-- DROP TABLE IF EXISTS `t_bencall`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_bencall` (
+CREATE TABLE IF NOT EXISTS `t_bencall` (
   `BenCallID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `CallID` varchar(30) DEFAULT NULL,
@@ -10516,10 +10516,10 @@ CREATE TABLE `t_bencall` (
 -- Table structure for table `t_bencall_2023_12_01`
 --
 
-DROP TABLE IF EXISTS `t_bencall_2023_12_01`;
+-- DROP TABLE IF EXISTS `t_bencall_2023_12_01`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_bencall_2023_12_01` (
+CREATE TABLE IF NOT EXISTS `t_bencall_2023_12_01` (
   `BenCallID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `CallID` varchar(30) DEFAULT NULL,
@@ -10582,10 +10582,10 @@ CREATE TABLE `t_bencall_2023_12_01` (
 -- Table structure for table `t_bencall_bkp_05_04_2024`
 --
 
-DROP TABLE IF EXISTS `t_bencall_bkp_05_04_2024`;
+-- DROP TABLE IF EXISTS `t_bencall_bkp_05_04_2024`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_bencall_bkp_05_04_2024` (
+CREATE TABLE IF NOT EXISTS `t_bencall_bkp_05_04_2024` (
   `BenCallID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `CallID` varchar(30) DEFAULT NULL,
@@ -10648,10 +10648,10 @@ CREATE TABLE `t_bencall_bkp_05_04_2024` (
 -- Table structure for table `t_bencall_bkp_06122023`
 --
 
-DROP TABLE IF EXISTS `t_bencall_bkp_06122023`;
+-- DROP TABLE IF EXISTS `t_bencall_bkp_06122023`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_bencall_bkp_06122023` (
+CREATE TABLE IF NOT EXISTS `t_bencall_bkp_06122023` (
   `bencallid` bigint(20) NOT NULL DEFAULT '0',
   `CZcallStartTime` datetime DEFAULT NULL,
   `CZcallEndTime` datetime DEFAULT NULL,
@@ -10664,10 +10664,10 @@ CREATE TABLE `t_bencall_bkp_06122023` (
 -- Table structure for table `t_bencall_bkp_21032024`
 --
 
-DROP TABLE IF EXISTS `t_bencall_bkp_21032024`;
+-- DROP TABLE IF EXISTS `t_bencall_bkp_21032024`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_bencall_bkp_21032024` (
+CREATE TABLE IF NOT EXISTS `t_bencall_bkp_21032024` (
   `BenCallID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `CallID` varchar(30) DEFAULT NULL,
@@ -10730,10 +10730,10 @@ CREATE TABLE `t_bencall_bkp_21032024` (
 -- Table structure for table `t_bencall_bkp_24092018`
 --
 
-DROP TABLE IF EXISTS `t_bencall_bkp_24092018`;
+-- DROP TABLE IF EXISTS `t_bencall_bkp_24092018`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_bencall_bkp_24092018` (
+CREATE TABLE IF NOT EXISTS `t_bencall_bkp_24092018` (
   `BenCallID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `CallID` varchar(30) DEFAULT NULL,
@@ -10780,10 +10780,10 @@ CREATE TABLE `t_bencall_bkp_24092018` (
 -- Table structure for table `t_bencall_bkp_before_benregidnullcaseupdation`
 --
 
-DROP TABLE IF EXISTS `t_bencall_bkp_before_benregidnullcaseupdation`;
+-- DROP TABLE IF EXISTS `t_bencall_bkp_before_benregidnullcaseupdation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_bencall_bkp_before_benregidnullcaseupdation` (
+CREATE TABLE IF NOT EXISTS `t_bencall_bkp_before_benregidnullcaseupdation` (
   `BenCallID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `CallID` varchar(30) DEFAULT NULL,
@@ -10833,10 +10833,10 @@ CREATE TABLE `t_bencall_bkp_before_benregidnullcaseupdation` (
 -- Table structure for table `t_bencall_callid_1709277526`
 --
 
-DROP TABLE IF EXISTS `t_bencall_callid_1709277526`;
+-- DROP TABLE IF EXISTS `t_bencall_callid_1709277526`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_bencall_callid_1709277526` (
+CREATE TABLE IF NOT EXISTS `t_bencall_callid_1709277526` (
   `BenCallID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `CallID` varchar(30) DEFAULT NULL,
@@ -10899,10 +10899,10 @@ CREATE TABLE `t_bencall_callid_1709277526` (
 -- Table structure for table `t_bencall_callid_1709983488`
 --
 
-DROP TABLE IF EXISTS `t_bencall_callid_1709983488`;
+-- DROP TABLE IF EXISTS `t_bencall_callid_1709983488`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_bencall_callid_1709983488` (
+CREATE TABLE IF NOT EXISTS `t_bencall_callid_1709983488` (
   `BenCallID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `CallID` varchar(30) DEFAULT NULL,
@@ -10965,10 +10965,10 @@ CREATE TABLE `t_bencall_callid_1709983488` (
 -- Table structure for table `t_bencall_cz_comparision`
 --
 
-DROP TABLE IF EXISTS `t_bencall_cz_comparision`;
+-- DROP TABLE IF EXISTS `t_bencall_cz_comparision`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_bencall_cz_comparision` (
+CREATE TABLE IF NOT EXISTS `t_bencall_cz_comparision` (
   `CallID` varchar(30) DEFAULT NULL,
   `CallEndTime` datetime DEFAULT NULL,
   `CZcallDuration` int(11) DEFAULT NULL,
@@ -10984,10 +10984,10 @@ CREATE TABLE `t_bencall_cz_comparision` (
 -- Table structure for table `t_bencall_cz_comparision1`
 --
 
-DROP TABLE IF EXISTS `t_bencall_cz_comparision1`;
+-- DROP TABLE IF EXISTS `t_bencall_cz_comparision1`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_bencall_cz_comparision1` (
+CREATE TABLE IF NOT EXISTS `t_bencall_cz_comparision1` (
   `SessionID` varchar(30) DEFAULT NULL,
   `CustDisposition` varchar(100) DEFAULT NULL,
   `CustCategory` varchar(100) DEFAULT NULL,
@@ -11002,10 +11002,10 @@ CREATE TABLE `t_bencall_cz_comparision1` (
 -- Table structure for table `t_benchiefcomplaint`
 --
 
-DROP TABLE IF EXISTS `t_benchiefcomplaint`;
+-- DROP TABLE IF EXISTS `t_benchiefcomplaint`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_benchiefcomplaint` (
+CREATE TABLE IF NOT EXISTS `t_benchiefcomplaint` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -11052,10 +11052,10 @@ CREATE TABLE `t_benchiefcomplaint` (
 -- Table structure for table `t_benclinicalobservation`
 --
 
-DROP TABLE IF EXISTS `t_benclinicalobservation`;
+-- DROP TABLE IF EXISTS `t_benclinicalobservation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_benclinicalobservation` (
+CREATE TABLE IF NOT EXISTS `t_benclinicalobservation` (
   `ClinicalObservationID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -11098,10 +11098,10 @@ CREATE TABLE `t_benclinicalobservation` (
 -- Table structure for table `t_bencomorbiditycondition`
 --
 
-DROP TABLE IF EXISTS `t_bencomorbiditycondition`;
+-- DROP TABLE IF EXISTS `t_bencomorbiditycondition`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_bencomorbiditycondition` (
+CREATE TABLE IF NOT EXISTS `t_bencomorbiditycondition` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -11143,10 +11143,10 @@ CREATE TABLE `t_bencomorbiditycondition` (
 -- Table structure for table `t_benfamilyhistory`
 --
 
-DROP TABLE IF EXISTS `t_benfamilyhistory`;
+-- DROP TABLE IF EXISTS `t_benfamilyhistory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_benfamilyhistory` (
+CREATE TABLE IF NOT EXISTS `t_benfamilyhistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -11192,10 +11192,10 @@ CREATE TABLE `t_benfamilyhistory` (
 -- Table structure for table `t_benmedhistory`
 --
 
-DROP TABLE IF EXISTS `t_benmedhistory`;
+-- DROP TABLE IF EXISTS `t_benmedhistory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_benmedhistory` (
+CREATE TABLE IF NOT EXISTS `t_benmedhistory` (
   `BenMedHistoryID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -11245,10 +11245,10 @@ CREATE TABLE `t_benmedhistory` (
 -- Table structure for table `t_benmedicationhistory`
 --
 
-DROP TABLE IF EXISTS `t_benmedicationhistory`;
+-- DROP TABLE IF EXISTS `t_benmedicationhistory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_benmedicationhistory` (
+CREATE TABLE IF NOT EXISTS `t_benmedicationhistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -11285,10 +11285,10 @@ CREATE TABLE `t_benmedicationhistory` (
 -- Table structure for table `t_benmenstrualdetails`
 --
 
-DROP TABLE IF EXISTS `t_benmenstrualdetails`;
+-- DROP TABLE IF EXISTS `t_benmenstrualdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_benmenstrualdetails` (
+CREATE TABLE IF NOT EXISTS `t_benmenstrualdetails` (
   `BenMenstrualID` int(11) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -11337,10 +11337,10 @@ CREATE TABLE `t_benmenstrualdetails` (
 -- Table structure for table `t_benpersonalhabit`
 --
 
-DROP TABLE IF EXISTS `t_benpersonalhabit`;
+-- DROP TABLE IF EXISTS `t_benpersonalhabit`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_benpersonalhabit` (
+CREATE TABLE IF NOT EXISTS `t_benpersonalhabit` (
   `BenPersonalHabitID` int(11) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -11396,10 +11396,10 @@ CREATE TABLE `t_benpersonalhabit` (
 -- Table structure for table `t_benreferdetails`
 --
 
-DROP TABLE IF EXISTS `t_benreferdetails`;
+-- DROP TABLE IF EXISTS `t_benreferdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_benreferdetails` (
+CREATE TABLE IF NOT EXISTS `t_benreferdetails` (
   `benReferID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -11447,10 +11447,10 @@ CREATE TABLE `t_benreferdetails` (
 -- Table structure for table `t_benreferdetails_bkp_15_03_2024`
 --
 
-DROP TABLE IF EXISTS `t_benreferdetails_bkp_15_03_2024`;
+-- DROP TABLE IF EXISTS `t_benreferdetails_bkp_15_03_2024`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_benreferdetails_bkp_15_03_2024` (
+CREATE TABLE IF NOT EXISTS `t_benreferdetails_bkp_15_03_2024` (
   `benReferID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -11484,10 +11484,10 @@ CREATE TABLE `t_benreferdetails_bkp_15_03_2024` (
 -- Table structure for table `t_benvisitdetail`
 --
 
-DROP TABLE IF EXISTS `t_benvisitdetail`;
+-- DROP TABLE IF EXISTS `t_benvisitdetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_benvisitdetail` (
+CREATE TABLE IF NOT EXISTS `t_benvisitdetail` (
   `BenVisitID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -11544,10 +11544,10 @@ CREATE TABLE `t_benvisitdetail` (
 -- Table structure for table `t_bloodoutbounddetails`
 --
 
-DROP TABLE IF EXISTS `t_bloodoutbounddetails`;
+-- DROP TABLE IF EXISTS `t_bloodoutbounddetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_bloodoutbounddetails` (
+CREATE TABLE IF NOT EXISTS `t_bloodoutbounddetails` (
   `BloodOutboundDetailID` bigint(20) NOT NULL AUTO_INCREMENT,
   `CzentrixCallID` varchar(20) DEFAULT NULL,
   `USRMappingID` int(11) DEFAULT NULL,
@@ -11578,10 +11578,10 @@ CREATE TABLE `t_bloodoutbounddetails` (
 -- Table structure for table `t_bloodrequest`
 --
 
-DROP TABLE IF EXISTS `t_bloodrequest`;
+-- DROP TABLE IF EXISTS `t_bloodrequest`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_bloodrequest` (
+CREATE TABLE IF NOT EXISTS `t_bloodrequest` (
   `BloodReqID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RequestID` varchar(30) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -11636,10 +11636,10 @@ CREATE TABLE `t_bloodrequest` (
 -- Table structure for table `t_breastcancerscreening`
 --
 
-DROP TABLE IF EXISTS `t_breastcancerscreening`;
+-- DROP TABLE IF EXISTS `t_breastcancerscreening`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_breastcancerscreening` (
+CREATE TABLE IF NOT EXISTS `t_breastcancerscreening` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegId` bigint(20) DEFAULT NULL,
   `Benvisitid` bigint(20) DEFAULT NULL,
@@ -11677,10 +11677,10 @@ CREATE TABLE `t_breastcancerscreening` (
 -- Table structure for table `t_cancerabdominalexamination`
 --
 
-DROP TABLE IF EXISTS `t_cancerabdominalexamination`;
+-- DROP TABLE IF EXISTS `t_cancerabdominalexamination`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_cancerabdominalexamination` (
+CREATE TABLE IF NOT EXISTS `t_cancerabdominalexamination` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -11731,10 +11731,10 @@ CREATE TABLE `t_cancerabdominalexamination` (
 -- Table structure for table `t_cancerbreastexamination`
 --
 
-DROP TABLE IF EXISTS `t_cancerbreastexamination`;
+-- DROP TABLE IF EXISTS `t_cancerbreastexamination`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_cancerbreastexamination` (
+CREATE TABLE IF NOT EXISTS `t_cancerbreastexamination` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -11786,10 +11786,10 @@ CREATE TABLE `t_cancerbreastexamination` (
 -- Table structure for table `t_cancerdiagnosis`
 --
 
-DROP TABLE IF EXISTS `t_cancerdiagnosis`;
+-- DROP TABLE IF EXISTS `t_cancerdiagnosis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_cancerdiagnosis` (
+CREATE TABLE IF NOT EXISTS `t_cancerdiagnosis` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -11836,10 +11836,10 @@ CREATE TABLE `t_cancerdiagnosis` (
 -- Table structure for table `t_cancerdiethistory`
 --
 
-DROP TABLE IF EXISTS `t_cancerdiethistory`;
+-- DROP TABLE IF EXISTS `t_cancerdiethistory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_cancerdiethistory` (
+CREATE TABLE IF NOT EXISTS `t_cancerdiethistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -11887,10 +11887,10 @@ CREATE TABLE `t_cancerdiethistory` (
 -- Table structure for table `t_cancerfamilyhistory`
 --
 
-DROP TABLE IF EXISTS `t_cancerfamilyhistory`;
+-- DROP TABLE IF EXISTS `t_cancerfamilyhistory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_cancerfamilyhistory` (
+CREATE TABLE IF NOT EXISTS `t_cancerfamilyhistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -11932,10 +11932,10 @@ CREATE TABLE `t_cancerfamilyhistory` (
 -- Table structure for table `t_cancergynecologicalexamination`
 --
 
-DROP TABLE IF EXISTS `t_cancergynecologicalexamination`;
+-- DROP TABLE IF EXISTS `t_cancergynecologicalexamination`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_cancergynecologicalexamination` (
+CREATE TABLE IF NOT EXISTS `t_cancergynecologicalexamination` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -11983,10 +11983,10 @@ CREATE TABLE `t_cancergynecologicalexamination` (
 -- Table structure for table `t_cancerimageannotation`
 --
 
-DROP TABLE IF EXISTS `t_cancerimageannotation`;
+-- DROP TABLE IF EXISTS `t_cancerimageannotation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_cancerimageannotation` (
+CREATE TABLE IF NOT EXISTS `t_cancerimageannotation` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -12031,10 +12031,10 @@ CREATE TABLE `t_cancerimageannotation` (
 -- Table structure for table `t_cancerlymphnode`
 --
 
-DROP TABLE IF EXISTS `t_cancerlymphnode`;
+-- DROP TABLE IF EXISTS `t_cancerlymphnode`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_cancerlymphnode` (
+CREATE TABLE IF NOT EXISTS `t_cancerlymphnode` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -12077,10 +12077,10 @@ CREATE TABLE `t_cancerlymphnode` (
 -- Table structure for table `t_cancerobstetrichistory`
 --
 
-DROP TABLE IF EXISTS `t_cancerobstetrichistory`;
+-- DROP TABLE IF EXISTS `t_cancerobstetrichistory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_cancerobstetrichistory` (
+CREATE TABLE IF NOT EXISTS `t_cancerobstetrichistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -12135,10 +12135,10 @@ CREATE TABLE `t_cancerobstetrichistory` (
 -- Table structure for table `t_canceroralexamination`
 --
 
-DROP TABLE IF EXISTS `t_canceroralexamination`;
+-- DROP TABLE IF EXISTS `t_canceroralexamination`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_canceroralexamination` (
+CREATE TABLE IF NOT EXISTS `t_canceroralexamination` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -12183,10 +12183,10 @@ CREATE TABLE `t_canceroralexamination` (
 -- Table structure for table `t_cancerpersonalhistory`
 --
 
-DROP TABLE IF EXISTS `t_cancerpersonalhistory`;
+-- DROP TABLE IF EXISTS `t_cancerpersonalhistory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_cancerpersonalhistory` (
+CREATE TABLE IF NOT EXISTS `t_cancerpersonalhistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -12236,10 +12236,10 @@ CREATE TABLE `t_cancerpersonalhistory` (
 -- Table structure for table `t_cancersignandsymptoms`
 --
 
-DROP TABLE IF EXISTS `t_cancersignandsymptoms`;
+-- DROP TABLE IF EXISTS `t_cancersignandsymptoms`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_cancersignandsymptoms` (
+CREATE TABLE IF NOT EXISTS `t_cancersignandsymptoms` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -12293,10 +12293,10 @@ CREATE TABLE `t_cancersignandsymptoms` (
 -- Table structure for table `t_cancervitals`
 --
 
-DROP TABLE IF EXISTS `t_cancervitals`;
+-- DROP TABLE IF EXISTS `t_cancervitals`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_cancervitals` (
+CREATE TABLE IF NOT EXISTS `t_cancervitals` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -12351,10 +12351,10 @@ CREATE TABLE `t_cancervitals` (
 -- Table structure for table `t_cbacdetails`
 --
 
-DROP TABLE IF EXISTS `t_cbacdetails`;
+-- DROP TABLE IF EXISTS `t_cbacdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_cbacdetails` (
+CREATE TABLE IF NOT EXISTS `t_cbacdetails` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegId` bigint(20) DEFAULT NULL,
   `Benvisitid` bigint(20) DEFAULT NULL,
@@ -12444,10 +12444,10 @@ CREATE TABLE `t_cbacdetails` (
 -- Table structure for table `t_cdr`
 --
 
-DROP TABLE IF EXISTS `t_cdr`;
+-- DROP TABLE IF EXISTS `t_cdr`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_cdr` (
+CREATE TABLE IF NOT EXISTS `t_cdr` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `address` varchar(255) DEFAULT NULL,
   `ben_id` bigint(20) DEFAULT NULL,
@@ -12478,10 +12478,10 @@ CREATE TABLE `t_cdr` (
 -- Table structure for table `t_cervicalcancerscreening`
 --
 
-DROP TABLE IF EXISTS `t_cervicalcancerscreening`;
+-- DROP TABLE IF EXISTS `t_cervicalcancerscreening`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_cervicalcancerscreening` (
+CREATE TABLE IF NOT EXISTS `t_cervicalcancerscreening` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegId` bigint(20) DEFAULT NULL,
   `Benvisitid` bigint(20) DEFAULT NULL,
@@ -12515,10 +12515,10 @@ CREATE TABLE `t_cervicalcancerscreening` (
 -- Table structure for table `t_child_register`
 --
 
-DROP TABLE IF EXISTS `t_child_register`;
+-- DROP TABLE IF EXISTS `t_child_register`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_child_register` (
+CREATE TABLE IF NOT EXISTS `t_child_register` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `baby_cried_at_birth` bit(1) DEFAULT NULL,
   `baby_name` varchar(255) DEFAULT NULL,
@@ -12549,10 +12549,10 @@ CREATE TABLE `t_child_register` (
 -- Table structure for table `t_childcongenitalanomalies`
 --
 
-DROP TABLE IF EXISTS `t_childcongenitalanomalies`;
+-- DROP TABLE IF EXISTS `t_childcongenitalanomalies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_childcongenitalanomalies` (
+CREATE TABLE IF NOT EXISTS `t_childcongenitalanomalies` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `MotherID` bigint(20) DEFAULT NULL,
@@ -12584,10 +12584,10 @@ CREATE TABLE `t_childcongenitalanomalies` (
 -- Table structure for table `t_childfeedinghistory`
 --
 
-DROP TABLE IF EXISTS `t_childfeedinghistory`;
+-- DROP TABLE IF EXISTS `t_childfeedinghistory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_childfeedinghistory` (
+CREATE TABLE IF NOT EXISTS `t_childfeedinghistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -12631,10 +12631,10 @@ CREATE TABLE `t_childfeedinghistory` (
 -- Table structure for table `t_childinvaliddata`
 --
 
-DROP TABLE IF EXISTS `t_childinvaliddata`;
+-- DROP TABLE IF EXISTS `t_childinvaliddata`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_childinvaliddata` (
+CREATE TABLE IF NOT EXISTS `t_childinvaliddata` (
   `RowID` bigint(20) NOT NULL AUTO_INCREMENT,
   `Date_of_Entry` datetime DEFAULT NULL,
   `Entry_type` smallint(6) DEFAULT NULL,
@@ -12765,10 +12765,10 @@ CREATE TABLE `t_childinvaliddata` (
 -- Table structure for table `t_childoptionalvaccinedetail`
 --
 
-DROP TABLE IF EXISTS `t_childoptionalvaccinedetail`;
+-- DROP TABLE IF EXISTS `t_childoptionalvaccinedetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_childoptionalvaccinedetail` (
+CREATE TABLE IF NOT EXISTS `t_childoptionalvaccinedetail` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -12814,10 +12814,10 @@ CREATE TABLE `t_childoptionalvaccinedetail` (
 -- Table structure for table `t_childvaccinedetail1`
 --
 
-DROP TABLE IF EXISTS `t_childvaccinedetail1`;
+-- DROP TABLE IF EXISTS `t_childvaccinedetail1`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_childvaccinedetail1` (
+CREATE TABLE IF NOT EXISTS `t_childvaccinedetail1` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -12865,10 +12865,10 @@ CREATE TABLE `t_childvaccinedetail1` (
 -- Table structure for table `t_childvaccinedetail2`
 --
 
-DROP TABLE IF EXISTS `t_childvaccinedetail2`;
+-- DROP TABLE IF EXISTS `t_childvaccinedetail2`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_childvaccinedetail2` (
+CREATE TABLE IF NOT EXISTS `t_childvaccinedetail2` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -12909,10 +12909,10 @@ CREATE TABLE `t_childvaccinedetail2` (
 -- Table structure for table `t_childvaliddata`
 --
 
-DROP TABLE IF EXISTS `t_childvaliddata`;
+-- DROP TABLE IF EXISTS `t_childvaliddata`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_childvaliddata` (
+CREATE TABLE IF NOT EXISTS `t_childvaliddata` (
   `RowID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `Date_of_Entry` datetime DEFAULT NULL,
@@ -13055,10 +13055,10 @@ CREATE TABLE `t_childvaliddata` (
 -- Table structure for table `t_covid19`
 --
 
-DROP TABLE IF EXISTS `t_covid19`;
+-- DROP TABLE IF EXISTS `t_covid19`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_covid19` (
+CREATE TABLE IF NOT EXISTS `t_covid19` (
   `COVID19ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenCallID` bigint(20) NOT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -13108,10 +13108,10 @@ CREATE TABLE `t_covid19` (
 -- Table structure for table `t_covidvaccinationstatus`
 --
 
-DROP TABLE IF EXISTS `t_covidvaccinationstatus`;
+-- DROP TABLE IF EXISTS `t_covidvaccinationstatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_covidvaccinationstatus` (
+CREATE TABLE IF NOT EXISTS `t_covidvaccinationstatus` (
   `CovidVSID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) NOT NULL,
   `CovidVaccineTypeID` int(11) DEFAULT NULL,
@@ -13148,10 +13148,10 @@ CREATE TABLE `t_covidvaccinationstatus` (
 -- Table structure for table `t_currentdiagnosis`
 --
 
-DROP TABLE IF EXISTS `t_currentdiagnosis`;
+-- DROP TABLE IF EXISTS `t_currentdiagnosis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_currentdiagnosis` (
+CREATE TABLE IF NOT EXISTS `t_currentdiagnosis` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -13188,10 +13188,10 @@ CREATE TABLE `t_currentdiagnosis` (
 -- Table structure for table `t_delivery_outcome`
 --
 
-DROP TABLE IF EXISTS `t_delivery_outcome`;
+-- DROP TABLE IF EXISTS `t_delivery_outcome`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_delivery_outcome` (
+CREATE TABLE IF NOT EXISTS `t_delivery_outcome` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `ben_id` bigint(20) DEFAULT NULL,
   `death_cause` varchar(255) DEFAULT NULL,
@@ -13222,10 +13222,10 @@ CREATE TABLE `t_delivery_outcome` (
 -- Table structure for table `t_detailedcallreport`
 --
 
-DROP TABLE IF EXISTS `t_detailedcallreport`;
+-- DROP TABLE IF EXISTS `t_detailedcallreport`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_detailedcallreport` (
+CREATE TABLE IF NOT EXISTS `t_detailedcallreport` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `AgentName` varchar(100) DEFAULT NULL,
   `AgentID` int(11) DEFAULT NULL,
@@ -13294,10 +13294,10 @@ CREATE TABLE `t_detailedcallreport` (
 -- Table structure for table `t_detailedcallreport_bkp_12122023`
 --
 
-DROP TABLE IF EXISTS `t_detailedcallreport_bkp_12122023`;
+-- DROP TABLE IF EXISTS `t_detailedcallreport_bkp_12122023`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_detailedcallreport_bkp_12122023` (
+CREATE TABLE IF NOT EXISTS `t_detailedcallreport_bkp_12122023` (
   `id` bigint(20) NOT NULL DEFAULT '0',
   `AgentName` varchar(100) DEFAULT NULL,
   `AgentID` int(11) DEFAULT NULL,
@@ -13363,10 +13363,10 @@ CREATE TABLE `t_detailedcallreport_bkp_12122023` (
 -- Table structure for table `t_developmenthistory`
 --
 
-DROP TABLE IF EXISTS `t_developmenthistory`;
+-- DROP TABLE IF EXISTS `t_developmenthistory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_developmenthistory` (
+CREATE TABLE IF NOT EXISTS `t_developmenthistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -13410,10 +13410,10 @@ CREATE TABLE `t_developmenthistory` (
 -- Table structure for table `t_diabetesscreening`
 --
 
-DROP TABLE IF EXISTS `t_diabetesscreening`;
+-- DROP TABLE IF EXISTS `t_diabetesscreening`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_diabetesscreening` (
+CREATE TABLE IF NOT EXISTS `t_diabetesscreening` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `Benvisitid` bigint(20) DEFAULT NULL,
@@ -13450,10 +13450,10 @@ CREATE TABLE `t_diabetesscreening` (
 -- Table structure for table `t_directoryservice`
 --
 
-DROP TABLE IF EXISTS `t_directoryservice`;
+-- DROP TABLE IF EXISTS `t_directoryservice`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_directoryservice` (
+CREATE TABLE IF NOT EXISTS `t_directoryservice` (
   `DirectoryServiceID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RequestID` varchar(30) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -13488,10 +13488,10 @@ CREATE TABLE `t_directoryservice` (
 -- Table structure for table `t_downloadedcasesheet`
 --
 
-DROP TABLE IF EXISTS `t_downloadedcasesheet`;
+-- DROP TABLE IF EXISTS `t_downloadedcasesheet`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_downloadedcasesheet` (
+CREATE TABLE IF NOT EXISTS `t_downloadedcasesheet` (
   `cid` int(11) NOT NULL AUTO_INCREMENT,
   `tmVisitCode` bigint(20) DEFAULT NULL,
   `mmuVisitCode` bigint(20) DEFAULT NULL,
@@ -13513,10 +13513,10 @@ CREATE TABLE `t_downloadedcasesheet` (
 -- Table structure for table `t_eligible_couple_register`
 --
 
-DROP TABLE IF EXISTS `t_eligible_couple_register`;
+-- DROP TABLE IF EXISTS `t_eligible_couple_register`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_eligible_couple_register` (
+CREATE TABLE IF NOT EXISTS `t_eligible_couple_register` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `aadhaar_number` bigint(20) DEFAULT NULL,
   `age_at_marriage` int(11) DEFAULT NULL,
@@ -13567,10 +13567,10 @@ CREATE TABLE `t_eligible_couple_register` (
 -- Table structure for table `t_emailnotification`
 --
 
-DROP TABLE IF EXISTS `t_emailnotification`;
+-- DROP TABLE IF EXISTS `t_emailnotification`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_emailnotification` (
+CREATE TABLE IF NOT EXISTS `t_emailnotification` (
   `EmailNotificationID` bigint(20) NOT NULL AUTO_INCREMENT,
   `EmailTemplateID` int(11) DEFAULT NULL,
   `SenderID` int(11) DEFAULT NULL,
@@ -13611,10 +13611,10 @@ CREATE TABLE `t_emailnotification` (
 -- Table structure for table `t_epidemicoutbreak`
 --
 
-DROP TABLE IF EXISTS `t_epidemicoutbreak`;
+-- DROP TABLE IF EXISTS `t_epidemicoutbreak`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_epidemicoutbreak` (
+CREATE TABLE IF NOT EXISTS `t_epidemicoutbreak` (
   `OutbreakComplaintID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RequestID` varchar(30) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -13653,10 +13653,10 @@ CREATE TABLE `t_epidemicoutbreak` (
 -- Table structure for table `t_everwellapi`
 --
 
-DROP TABLE IF EXISTS `t_everwellapi`;
+-- DROP TABLE IF EXISTS `t_everwellapi`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_everwellapi` (
+CREATE TABLE IF NOT EXISTS `t_everwellapi` (
   `EAPIID` bigint(20) NOT NULL AUTO_INCREMENT,
   `EverWellID` bigint(20) NOT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -13714,10 +13714,10 @@ CREATE TABLE `t_everwellapi` (
 -- Table structure for table `t_everwellfeedback`
 --
 
-DROP TABLE IF EXISTS `t_everwellfeedback`;
+-- DROP TABLE IF EXISTS `t_everwellfeedback`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_everwellfeedback` (
+CREATE TABLE IF NOT EXISTS `t_everwellfeedback` (
   `EFID` bigint(20) NOT NULL AUTO_INCREMENT,
   `EAPIID` bigint(20) NOT NULL,
   `EverWellID` bigint(20) NOT NULL,
@@ -13751,10 +13751,10 @@ CREATE TABLE `t_everwellfeedback` (
 -- Table structure for table `t_existingproblem`
 --
 
-DROP TABLE IF EXISTS `t_existingproblem`;
+-- DROP TABLE IF EXISTS `t_existingproblem`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_existingproblem` (
+CREATE TABLE IF NOT EXISTS `t_existingproblem` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -13791,10 +13791,10 @@ CREATE TABLE `t_existingproblem` (
 -- Table structure for table `t_facilityconsumption`
 --
 
-DROP TABLE IF EXISTS `t_facilityconsumption`;
+-- DROP TABLE IF EXISTS `t_facilityconsumption`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_facilityconsumption` (
+CREATE TABLE IF NOT EXISTS `t_facilityconsumption` (
   `ConsumptionID` int(11) NOT NULL AUTO_INCREMENT,
   `FacilityID` int(11) DEFAULT NULL,
   `RefNo` varchar(25) DEFAULT NULL,
@@ -13829,10 +13829,10 @@ CREATE TABLE `t_facilityconsumption` (
 -- Table structure for table `t_familyplanningreproductive`
 --
 
-DROP TABLE IF EXISTS `t_familyplanningreproductive`;
+-- DROP TABLE IF EXISTS `t_familyplanningreproductive`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_familyplanningreproductive` (
+CREATE TABLE IF NOT EXISTS `t_familyplanningreproductive` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `Benvisitid` bigint(20) DEFAULT NULL,
@@ -13884,10 +13884,10 @@ CREATE TABLE `t_familyplanningreproductive` (
 -- Table structure for table `t_feedback`
 --
 
-DROP TABLE IF EXISTS `t_feedback`;
+-- DROP TABLE IF EXISTS `t_feedback`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_feedback` (
+CREATE TABLE IF NOT EXISTS `t_feedback` (
   `FeedbackID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RequestID` varchar(30) DEFAULT NULL,
   `BenCallID` bigint(20) DEFAULT NULL,
@@ -13978,10 +13978,10 @@ CREATE TABLE `t_feedback` (
 -- Table structure for table `t_feedbacklog`
 --
 
-DROP TABLE IF EXISTS `t_feedbacklog`;
+-- DROP TABLE IF EXISTS `t_feedbacklog`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_feedbacklog` (
+CREATE TABLE IF NOT EXISTS `t_feedbacklog` (
   `FeedbackLogID` bigint(20) NOT NULL AUTO_INCREMENT,
   `FeedbackID` bigint(20) NOT NULL,
   `FeedbackLogs` longtext,
@@ -14001,10 +14001,10 @@ CREATE TABLE `t_feedbacklog` (
 -- Table structure for table `t_feedbackrequest`
 --
 
-DROP TABLE IF EXISTS `t_feedbackrequest`;
+-- DROP TABLE IF EXISTS `t_feedbackrequest`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_feedbackrequest` (
+CREATE TABLE IF NOT EXISTS `t_feedbackrequest` (
   `FeedbackRequestID` bigint(20) NOT NULL AUTO_INCREMENT,
   `FeedbackID` bigint(20) DEFAULT NULL,
   `FeedbackSupSummary` varchar(5000) DEFAULT NULL,
@@ -14034,10 +14034,10 @@ CREATE TABLE `t_feedbackrequest` (
 -- Table structure for table `t_feedbackresponse`
 --
 
-DROP TABLE IF EXISTS `t_feedbackresponse`;
+-- DROP TABLE IF EXISTS `t_feedbackresponse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_feedbackresponse` (
+CREATE TABLE IF NOT EXISTS `t_feedbackresponse` (
   `FeedbackResponseID` bigint(20) NOT NULL AUTO_INCREMENT,
   `FeedbackRequestID` bigint(20) DEFAULT NULL,
   `FeedbackID` bigint(20) DEFAULT NULL,
@@ -14069,10 +14069,10 @@ CREATE TABLE `t_feedbackresponse` (
 -- Table structure for table `t_feedbacktransaction`
 --
 
-DROP TABLE IF EXISTS `t_feedbacktransaction`;
+-- DROP TABLE IF EXISTS `t_feedbacktransaction`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_feedbacktransaction` (
+CREATE TABLE IF NOT EXISTS `t_feedbacktransaction` (
   `FeedbackTransactionID` bigint(20) NOT NULL AUTO_INCREMENT,
   `FeedbackID` bigint(20) DEFAULT NULL,
   `Comments` varchar(300) DEFAULT NULL,
@@ -14094,10 +14094,10 @@ CREATE TABLE `t_feedbacktransaction` (
 -- Table structure for table `t_femaleobstetrichistory`
 --
 
-DROP TABLE IF EXISTS `t_femaleobstetrichistory`;
+-- DROP TABLE IF EXISTS `t_femaleobstetrichistory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_femaleobstetrichistory` (
+CREATE TABLE IF NOT EXISTS `t_femaleobstetrichistory` (
   `ObstetricHistoryID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -14178,10 +14178,10 @@ CREATE TABLE `t_femaleobstetrichistory` (
 -- Table structure for table `t_fetosensedata`
 --
 
-DROP TABLE IF EXISTS `t_fetosensedata`;
+-- DROP TABLE IF EXISTS `t_fetosensedata`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_fetosensedata` (
+CREATE TABLE IF NOT EXISTS `t_fetosensedata` (
   `fetosenseID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) NOT NULL,
   `visitCode` bigint(20) DEFAULT NULL,
@@ -14240,10 +14240,10 @@ CREATE TABLE `t_fetosensedata` (
 -- Table structure for table `t_filemanager`
 --
 
-DROP TABLE IF EXISTS `t_filemanager`;
+-- DROP TABLE IF EXISTS `t_filemanager`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_filemanager` (
+CREATE TABLE IF NOT EXISTS `t_filemanager` (
   `FileID` int(11) NOT NULL AUTO_INCREMENT,
   `FileTypeID` int(11) DEFAULT NULL,
   `FileType` varchar(50) DEFAULT NULL,
@@ -14283,10 +14283,10 @@ CREATE TABLE `t_filemanager` (
 -- Table structure for table `t_fileprocess`
 --
 
-DROP TABLE IF EXISTS `t_fileprocess`;
+-- DROP TABLE IF EXISTS `t_fileprocess`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_fileprocess` (
+CREATE TABLE IF NOT EXISTS `t_fileprocess` (
   `FileProcessID` int(11) NOT NULL AUTO_INCREMENT,
   `FileID` int(11) DEFAULT NULL,
   `ProcessStatusID` smallint(6) DEFAULT NULL,
@@ -14311,10 +14311,10 @@ CREATE TABLE `t_fileprocess` (
 -- Table structure for table `t_filetask`
 --
 
-DROP TABLE IF EXISTS `t_filetask`;
+-- DROP TABLE IF EXISTS `t_filetask`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_filetask` (
+CREATE TABLE IF NOT EXISTS `t_filetask` (
   `TaskID` int(11) NOT NULL AUTO_INCREMENT,
   `ProcessID` int(11) DEFAULT NULL,
   `TaskStatusID` smallint(6) DEFAULT NULL,
@@ -14342,10 +14342,10 @@ CREATE TABLE `t_filetask` (
 -- Table structure for table `t_followupforimmunization`
 --
 
-DROP TABLE IF EXISTS `t_followupforimmunization`;
+-- DROP TABLE IF EXISTS `t_followupforimmunization`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_followupforimmunization` (
+CREATE TABLE IF NOT EXISTS `t_followupforimmunization` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `Beneficiaryregid` bigint(20) DEFAULT NULL,
   `Benvisitid` bigint(20) DEFAULT NULL,
@@ -14384,10 +14384,10 @@ CREATE TABLE `t_followupforimmunization` (
 -- Table structure for table `t_foodsafetycopmlaint`
 --
 
-DROP TABLE IF EXISTS `t_foodsafetycopmlaint`;
+-- DROP TABLE IF EXISTS `t_foodsafetycopmlaint`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_foodsafetycopmlaint` (
+CREATE TABLE IF NOT EXISTS `t_foodsafetycopmlaint` (
   `FSComplaintID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RequestID` varchar(30) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -14446,10 +14446,10 @@ CREATE TABLE `t_foodsafetycopmlaint` (
 -- Table structure for table `t_fpdispensedetails`
 --
 
-DROP TABLE IF EXISTS `t_fpdispensedetails`;
+-- DROP TABLE IF EXISTS `t_fpdispensedetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_fpdispensedetails` (
+CREATE TABLE IF NOT EXISTS `t_fpdispensedetails` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `Benvisitid` bigint(20) DEFAULT NULL,
@@ -14489,10 +14489,10 @@ CREATE TABLE `t_fpdispensedetails` (
 -- Table structure for table `t_fpieccounsellingdetails`
 --
 
-DROP TABLE IF EXISTS `t_fpieccounsellingdetails`;
+-- DROP TABLE IF EXISTS `t_fpieccounsellingdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_fpieccounsellingdetails` (
+CREATE TABLE IF NOT EXISTS `t_fpieccounsellingdetails` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `Benvisitid` bigint(20) DEFAULT NULL,
@@ -14529,10 +14529,10 @@ CREATE TABLE `t_fpieccounsellingdetails` (
 -- Table structure for table `t_gopdoralexamination`
 --
 
-DROP TABLE IF EXISTS `t_gopdoralexamination`;
+-- DROP TABLE IF EXISTS `t_gopdoralexamination`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_gopdoralexamination` (
+CREATE TABLE IF NOT EXISTS `t_gopdoralexamination` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -14574,10 +14574,10 @@ CREATE TABLE `t_gopdoralexamination` (
 -- Table structure for table `t_hbnc_part1`
 --
 
-DROP TABLE IF EXISTS `t_hbnc_part1`;
+-- DROP TABLE IF EXISTS `t_hbnc_part1`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_hbnc_part1` (
+CREATE TABLE IF NOT EXISTS `t_hbnc_part1` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `baby_alive` bit(1) DEFAULT NULL,
   `baby_first_fed` varchar(255) DEFAULT NULL,
@@ -14615,10 +14615,10 @@ CREATE TABLE `t_hbnc_part1` (
 -- Table structure for table `t_hbnc_part2`
 --
 
-DROP TABLE IF EXISTS `t_hbnc_part2`;
+-- DROP TABLE IF EXISTS `t_hbnc_part2`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_hbnc_part2` (
+CREATE TABLE IF NOT EXISTS `t_hbnc_part2` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `babyAlive` bit(1) DEFAULT NULL,
   `babyFirstFed` varchar(255) DEFAULT NULL,
@@ -14689,10 +14689,10 @@ CREATE TABLE `t_hbnc_part2` (
 -- Table structure for table `t_hbnc_visit`
 --
 
-DROP TABLE IF EXISTS `t_hbnc_visit`;
+-- DROP TABLE IF EXISTS `t_hbnc_visit`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_hbnc_visit` (
+CREATE TABLE IF NOT EXISTS `t_hbnc_visit` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `all_limbs_limp` bit(1) DEFAULT NULL,
   `baby_alive` bit(1) DEFAULT NULL,
@@ -14745,10 +14745,10 @@ CREATE TABLE `t_hbnc_visit` (
 -- Table structure for table `t_hbnc_visit_card`
 --
 
-DROP TABLE IF EXISTS `t_hbnc_visit_card`;
+-- DROP TABLE IF EXISTS `t_hbnc_visit_card`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_hbnc_visit_card` (
+CREATE TABLE IF NOT EXISTS `t_hbnc_visit_card` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `asha_name` varchar(255) DEFAULT NULL,
   `baby_gender` varchar(255) DEFAULT NULL,
@@ -14780,10 +14780,10 @@ CREATE TABLE `t_hbnc_visit_card` (
 -- Table structure for table `t_hbyc`
 --
 
-DROP TABLE IF EXISTS `t_hbyc`;
+-- DROP TABLE IF EXISTS `t_hbyc`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_hbyc` (
+CREATE TABLE IF NOT EXISTS `t_hbyc` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `ben_id` bigint(20) DEFAULT NULL,
   `by_height_length` bit(1) DEFAULT NULL,
@@ -14823,10 +14823,10 @@ CREATE TABLE `t_hbyc` (
 -- Table structure for table `t_healthid`
 --
 
-DROP TABLE IF EXISTS `t_healthid`;
+-- DROP TABLE IF EXISTS `t_healthid`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_healthid` (
+CREATE TABLE IF NOT EXISTS `t_healthid` (
   `HID` int(11) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `HealthIdNumber` varchar(300) DEFAULT NULL,
@@ -14865,10 +14865,10 @@ CREATE TABLE `t_healthid` (
 -- Table structure for table `t_hihlcocasesheet`
 --
 
-DROP TABLE IF EXISTS `t_hihlcocasesheet`;
+-- DROP TABLE IF EXISTS `t_hihlcocasesheet`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_hihlcocasesheet` (
+CREATE TABLE IF NOT EXISTS `t_hihlcocasesheet` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenCallID` bigint(20) NOT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -14891,10 +14891,10 @@ CREATE TABLE `t_hihlcocasesheet` (
 -- Table structure for table `t_hwc_cdss`
 --
 
-DROP TABLE IF EXISTS `t_hwc_cdss`;
+-- DROP TABLE IF EXISTS `t_hwc_cdss`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_hwc_cdss` (
+CREATE TABLE IF NOT EXISTS `t_hwc_cdss` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -14945,10 +14945,10 @@ CREATE TABLE `t_hwc_cdss` (
 -- Table structure for table `t_hwc_cdss_mapping`
 --
 
-DROP TABLE IF EXISTS `t_hwc_cdss_mapping`;
+-- DROP TABLE IF EXISTS `t_hwc_cdss_mapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_hwc_cdss_mapping` (
+CREATE TABLE IF NOT EXISTS `t_hwc_cdss_mapping` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
   `ServiceID` smallint(6) DEFAULT NULL,
@@ -14974,10 +14974,10 @@ CREATE TABLE `t_hwc_cdss_mapping` (
 -- Table structure for table `t_hypertensionscreening`
 --
 
-DROP TABLE IF EXISTS `t_hypertensionscreening`;
+-- DROP TABLE IF EXISTS `t_hypertensionscreening`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_hypertensionscreening` (
+CREATE TABLE IF NOT EXISTS `t_hypertensionscreening` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `Benvisitid` bigint(20) DEFAULT NULL,
@@ -15017,10 +15017,10 @@ CREATE TABLE `t_hypertensionscreening` (
 -- Table structure for table `t_idrsdetails`
 --
 
-DROP TABLE IF EXISTS `t_idrsdetails`;
+-- DROP TABLE IF EXISTS `t_idrsdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_idrsdetails` (
+CREATE TABLE IF NOT EXISTS `t_idrsdetails` (
   `Idrsid` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) NOT NULL,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -15065,10 +15065,10 @@ CREATE TABLE `t_idrsdetails` (
 -- Table structure for table `t_immunizationservices`
 --
 
-DROP TABLE IF EXISTS `t_immunizationservices`;
+-- DROP TABLE IF EXISTS `t_immunizationservices`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_immunizationservices` (
+CREATE TABLE IF NOT EXISTS `t_immunizationservices` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `Beneficiaryregid` bigint(20) DEFAULT NULL,
   `Benvisitid` bigint(20) DEFAULT NULL,
@@ -15111,10 +15111,10 @@ CREATE TABLE `t_immunizationservices` (
 -- Table structure for table `t_indent`
 --
 
-DROP TABLE IF EXISTS `t_indent`;
+-- DROP TABLE IF EXISTS `t_indent`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_indent` (
+CREATE TABLE IF NOT EXISTS `t_indent` (
   `IndentID` int(11) NOT NULL AUTO_INCREMENT,
   `FromFacilityID` int(11) DEFAULT NULL,
   `FromFacilityName` varchar(50) DEFAULT NULL,
@@ -15155,10 +15155,10 @@ CREATE TABLE `t_indent` (
 -- Table structure for table `t_indentissue`
 --
 
-DROP TABLE IF EXISTS `t_indentissue`;
+-- DROP TABLE IF EXISTS `t_indentissue`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_indentissue` (
+CREATE TABLE IF NOT EXISTS `t_indentissue` (
   `IndentIssueID` int(11) NOT NULL AUTO_INCREMENT,
   `IndentOrderID` int(11) DEFAULT NULL,
   `IndentID` int(11) DEFAULT NULL,
@@ -15204,10 +15204,10 @@ CREATE TABLE `t_indentissue` (
 -- Table structure for table `t_indentorder`
 --
 
-DROP TABLE IF EXISTS `t_indentorder`;
+-- DROP TABLE IF EXISTS `t_indentorder`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_indentorder` (
+CREATE TABLE IF NOT EXISTS `t_indentorder` (
   `IndentOrderID` int(11) NOT NULL AUTO_INCREMENT,
   `IndentID` int(11) DEFAULT NULL,
   `FromFacilityID` int(11) DEFAULT NULL,
@@ -15249,10 +15249,10 @@ CREATE TABLE `t_indentorder` (
 -- Table structure for table `t_infant_register`
 --
 
-DROP TABLE IF EXISTS `t_infant_register`;
+-- DROP TABLE IF EXISTS `t_infant_register`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_infant_register` (
+CREATE TABLE IF NOT EXISTS `t_infant_register` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `cried_at_birth` bit(1) DEFAULT NULL,
   `baby_name` varchar(255) DEFAULT NULL,
@@ -15286,10 +15286,10 @@ CREATE TABLE `t_infant_register` (
 -- Table structure for table `t_infantbirthdetails`
 --
 
-DROP TABLE IF EXISTS `t_infantbirthdetails`;
+-- DROP TABLE IF EXISTS `t_infantbirthdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_infantbirthdetails` (
+CREATE TABLE IF NOT EXISTS `t_infantbirthdetails` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `Beneficiaryregid` bigint(20) DEFAULT NULL,
   `Benvisitid` bigint(20) DEFAULT NULL,
@@ -15342,10 +15342,10 @@ CREATE TABLE `t_infantbirthdetails` (
 -- Table structure for table `t_itemstockentry`
 --
 
-DROP TABLE IF EXISTS `t_itemstockentry`;
+-- DROP TABLE IF EXISTS `t_itemstockentry`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_itemstockentry` (
+CREATE TABLE IF NOT EXISTS `t_itemstockentry` (
   `ItemStockEntryID` int(11) NOT NULL AUTO_INCREMENT,
   `FacilityID` int(11) NOT NULL,
   `ItemID` int(11) NOT NULL,
@@ -15387,10 +15387,10 @@ CREATE TABLE `t_itemstockentry` (
 -- Table structure for table `t_itemstockexit`
 --
 
-DROP TABLE IF EXISTS `t_itemstockexit`;
+-- DROP TABLE IF EXISTS `t_itemstockexit`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_itemstockexit` (
+CREATE TABLE IF NOT EXISTS `t_itemstockexit` (
   `ItemStockExitID` int(11) NOT NULL AUTO_INCREMENT,
   `ItemStockEntryID` int(11) NOT NULL,
   `FacilityID` int(11) DEFAULT NULL,
@@ -15428,10 +15428,10 @@ CREATE TABLE `t_itemstockexit` (
 -- Table structure for table `t_kmfilemanager`
 --
 
-DROP TABLE IF EXISTS `t_kmfilemanager`;
+-- DROP TABLE IF EXISTS `t_kmfilemanager`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_kmfilemanager` (
+CREATE TABLE IF NOT EXISTS `t_kmfilemanager` (
   `KmFileManagerID` int(11) NOT NULL AUTO_INCREMENT,
   `FileUID` varchar(100) DEFAULT NULL,
   `FileName` varchar(200) DEFAULT NULL,
@@ -15461,10 +15461,10 @@ CREATE TABLE `t_kmfilemanager` (
 -- Table structure for table `t_lab_microscopy`
 --
 
-DROP TABLE IF EXISTS `t_lab_microscopy`;
+-- DROP TABLE IF EXISTS `t_lab_microscopy`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_lab_microscopy` (
+CREATE TABLE IF NOT EXISTS `t_lab_microscopy` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -15517,10 +15517,10 @@ CREATE TABLE `t_lab_microscopy` (
 -- Table structure for table `t_lab_othertest`
 --
 
-DROP TABLE IF EXISTS `t_lab_othertest`;
+-- DROP TABLE IF EXISTS `t_lab_othertest`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_lab_othertest` (
+CREATE TABLE IF NOT EXISTS `t_lab_othertest` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -15556,10 +15556,10 @@ CREATE TABLE `t_lab_othertest` (
 -- Table structure for table `t_lab_pocdiagnostics`
 --
 
-DROP TABLE IF EXISTS `t_lab_pocdiagnostics`;
+-- DROP TABLE IF EXISTS `t_lab_pocdiagnostics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_lab_pocdiagnostics` (
+CREATE TABLE IF NOT EXISTS `t_lab_pocdiagnostics` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -15600,10 +15600,10 @@ CREATE TABLE `t_lab_pocdiagnostics` (
 -- Table structure for table `t_lab_testorder`
 --
 
-DROP TABLE IF EXISTS `t_lab_testorder`;
+-- DROP TABLE IF EXISTS `t_lab_testorder`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_lab_testorder` (
+CREATE TABLE IF NOT EXISTS `t_lab_testorder` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -15646,10 +15646,10 @@ CREATE TABLE `t_lab_testorder` (
 -- Table structure for table `t_lab_testresult`
 --
 
-DROP TABLE IF EXISTS `t_lab_testresult`;
+-- DROP TABLE IF EXISTS `t_lab_testresult`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_lab_testresult` (
+CREATE TABLE IF NOT EXISTS `t_lab_testresult` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -15702,10 +15702,10 @@ CREATE TABLE `t_lab_testresult` (
 -- Table structure for table `t_lab_testresult_bkp_20072021`
 --
 
-DROP TABLE IF EXISTS `t_lab_testresult_bkp_20072021`;
+-- DROP TABLE IF EXISTS `t_lab_testresult_bkp_20072021`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_lab_testresult_bkp_20072021` (
+CREATE TABLE IF NOT EXISTS `t_lab_testresult_bkp_20072021` (
   `ID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -15739,10 +15739,10 @@ CREATE TABLE `t_lab_testresult_bkp_20072021` (
 -- Table structure for table `t_linecallsummary`
 --
 
-DROP TABLE IF EXISTS `t_linecallsummary`;
+-- DROP TABLE IF EXISTS `t_linecallsummary`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_linecallsummary` (
+CREATE TABLE IF NOT EXISTS `t_linecallsummary` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `LineNumber` varchar(100) DEFAULT NULL,
   `CampaignName` varchar(100) DEFAULT NULL,
@@ -15763,10 +15763,10 @@ CREATE TABLE `t_linecallsummary` (
 -- Table structure for table `t_mctscallresponse`
 --
 
-DROP TABLE IF EXISTS `t_mctscallresponse`;
+-- DROP TABLE IF EXISTS `t_mctscallresponse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_mctscallresponse` (
+CREATE TABLE IF NOT EXISTS `t_mctscallresponse` (
   `MctsCallResponseID` bigint(20) NOT NULL AUTO_INCREMENT,
   `MotherID` bigint(20) DEFAULT NULL,
   `ChildID` bigint(20) DEFAULT NULL,
@@ -15809,10 +15809,10 @@ CREATE TABLE `t_mctscallresponse` (
 -- Table structure for table `t_mctsoutboundcalldeatil`
 --
 
-DROP TABLE IF EXISTS `t_mctsoutboundcalldeatil`;
+-- DROP TABLE IF EXISTS `t_mctsoutboundcalldeatil`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_mctsoutboundcalldeatil` (
+CREATE TABLE IF NOT EXISTS `t_mctsoutboundcalldeatil` (
   `CallDetailID` bigint(20) NOT NULL AUTO_INCREMENT,
   `OBCallID` bigint(20) DEFAULT NULL,
   `AllocatedUserID` int(11) DEFAULT NULL,
@@ -15846,10 +15846,10 @@ CREATE TABLE `t_mctsoutboundcalldeatil` (
 -- Table structure for table `t_mctsoutboundcalls`
 --
 
-DROP TABLE IF EXISTS `t_mctsoutboundcalls`;
+-- DROP TABLE IF EXISTS `t_mctsoutboundcalls`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_mctsoutboundcalls` (
+CREATE TABLE IF NOT EXISTS `t_mctsoutboundcalls` (
   `OBCallID` bigint(20) NOT NULL AUTO_INCREMENT,
   `MotherID` bigint(20) DEFAULT NULL,
   `ChildID` bigint(20) DEFAULT NULL,
@@ -15894,10 +15894,10 @@ CREATE TABLE `t_mctsoutboundcalls` (
 -- Table structure for table `t_mctsoutboundcalls_bkp20240321`
 --
 
-DROP TABLE IF EXISTS `t_mctsoutboundcalls_bkp20240321`;
+-- DROP TABLE IF EXISTS `t_mctsoutboundcalls_bkp20240321`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_mctsoutboundcalls_bkp20240321` (
+CREATE TABLE IF NOT EXISTS `t_mctsoutboundcalls_bkp20240321` (
   `OBCallID` bigint(20) NOT NULL DEFAULT '0',
   `MotherID` bigint(20) DEFAULT NULL,
   `ChildID` bigint(20) DEFAULT NULL,
@@ -15932,10 +15932,10 @@ CREATE TABLE `t_mctsoutboundcalls_bkp20240321` (
 -- Table structure for table `t_mdsr`
 --
 
-DROP TABLE IF EXISTS `t_mdsr`;
+-- DROP TABLE IF EXISTS `t_mdsr`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_mdsr` (
+CREATE TABLE IF NOT EXISTS `t_mdsr` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `action_taken` bit(1) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
@@ -15959,10 +15959,10 @@ CREATE TABLE `t_mdsr` (
 -- Table structure for table `t_motherinvalidrecord`
 --
 
-DROP TABLE IF EXISTS `t_motherinvalidrecord`;
+-- DROP TABLE IF EXISTS `t_motherinvalidrecord`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_motherinvalidrecord` (
+CREATE TABLE IF NOT EXISTS `t_motherinvalidrecord` (
   `MotherInValidRecordID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RowID` bigint(20) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -16118,10 +16118,10 @@ CREATE TABLE `t_motherinvalidrecord` (
 -- Table structure for table `t_mothervalidrecord`
 --
 
-DROP TABLE IF EXISTS `t_mothervalidrecord`;
+-- DROP TABLE IF EXISTS `t_mothervalidrecord`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_mothervalidrecord` (
+CREATE TABLE IF NOT EXISTS `t_mothervalidrecord` (
   `MotherValidRecordID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RowID` bigint(20) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -16292,10 +16292,10 @@ CREATE TABLE `t_mothervalidrecord` (
 -- Table structure for table `t_ncdcare`
 --
 
-DROP TABLE IF EXISTS `t_ncdcare`;
+-- DROP TABLE IF EXISTS `t_ncdcare`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_ncdcare` (
+CREATE TABLE IF NOT EXISTS `t_ncdcare` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -16341,10 +16341,10 @@ CREATE TABLE `t_ncdcare` (
 -- Table structure for table `t_ncddiagnosis`
 --
 
-DROP TABLE IF EXISTS `t_ncddiagnosis`;
+-- DROP TABLE IF EXISTS `t_ncddiagnosis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_ncddiagnosis` (
+CREATE TABLE IF NOT EXISTS `t_ncddiagnosis` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -16386,10 +16386,10 @@ CREATE TABLE `t_ncddiagnosis` (
 -- Table structure for table `t_ncdscreening`
 --
 
-DROP TABLE IF EXISTS `t_ncdscreening`;
+-- DROP TABLE IF EXISTS `t_ncdscreening`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_ncdscreening` (
+CREATE TABLE IF NOT EXISTS `t_ncdscreening` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -16436,10 +16436,10 @@ CREATE TABLE `t_ncdscreening` (
 -- Table structure for table `t_nhmagentrealtimedata`
 --
 
-DROP TABLE IF EXISTS `t_nhmagentrealtimedata`;
+-- DROP TABLE IF EXISTS `t_nhmagentrealtimedata`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_nhmagentrealtimedata` (
+CREATE TABLE IF NOT EXISTS `t_nhmagentrealtimedata` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `CampaignName` varchar(100) NOT NULL,
   `Loggedin` int(11) DEFAULT NULL,
@@ -16463,10 +16463,10 @@ CREATE TABLE `t_nhmagentrealtimedata` (
 -- Table structure for table `t_oralcancerscreening`
 --
 
-DROP TABLE IF EXISTS `t_oralcancerscreening`;
+-- DROP TABLE IF EXISTS `t_oralcancerscreening`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_oralcancerscreening` (
+CREATE TABLE IF NOT EXISTS `t_oralcancerscreening` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegId` bigint(20) DEFAULT NULL,
   `Benvisitid` bigint(20) DEFAULT NULL,
@@ -16510,10 +16510,10 @@ CREATE TABLE `t_oralcancerscreening` (
 -- Table structure for table `t_oralvitaminprophylaxis`
 --
 
-DROP TABLE IF EXISTS `t_oralvitaminprophylaxis`;
+-- DROP TABLE IF EXISTS `t_oralvitaminprophylaxis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_oralvitaminprophylaxis` (
+CREATE TABLE IF NOT EXISTS `t_oralvitaminprophylaxis` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `Beneficiaryregid` bigint(20) DEFAULT NULL,
   `Benvisitid` bigint(20) DEFAULT NULL,
@@ -16553,10 +16553,10 @@ CREATE TABLE `t_oralvitaminprophylaxis` (
 -- Table structure for table `t_organdonation`
 --
 
-DROP TABLE IF EXISTS `t_organdonation`;
+-- DROP TABLE IF EXISTS `t_organdonation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_organdonation` (
+CREATE TABLE IF NOT EXISTS `t_organdonation` (
   `OrganDonationID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RequestID` varchar(30) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -16596,10 +16596,10 @@ CREATE TABLE `t_organdonation` (
 -- Table structure for table `t_outboundcallrequest`
 --
 
-DROP TABLE IF EXISTS `t_outboundcallrequest`;
+-- DROP TABLE IF EXISTS `t_outboundcallrequest`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_outboundcallrequest` (
+CREATE TABLE IF NOT EXISTS `t_outboundcallrequest` (
   `OutboundCallReqID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `RequestNo` varchar(30) DEFAULT NULL,
@@ -16639,10 +16639,10 @@ CREATE TABLE `t_outboundcallrequest` (
 -- Table structure for table `t_patientissue`
 --
 
-DROP TABLE IF EXISTS `t_patientissue`;
+-- DROP TABLE IF EXISTS `t_patientissue`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_patientissue` (
+CREATE TABLE IF NOT EXISTS `t_patientissue` (
   `PatientIssueID` int(11) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -16690,10 +16690,10 @@ CREATE TABLE `t_patientissue` (
 -- Table structure for table `t_patientreturn`
 --
 
-DROP TABLE IF EXISTS `t_patientreturn`;
+-- DROP TABLE IF EXISTS `t_patientreturn`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_patientreturn` (
+CREATE TABLE IF NOT EXISTS `t_patientreturn` (
   `PatientReturnID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenneficiaryRegID` bigint(20) DEFAULT NULL,
   `VisitID` int(11) DEFAULT NULL,
@@ -16729,10 +16729,10 @@ CREATE TABLE `t_patientreturn` (
 -- Table structure for table `t_perinatalhistory`
 --
 
-DROP TABLE IF EXISTS `t_perinatalhistory`;
+-- DROP TABLE IF EXISTS `t_perinatalhistory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_perinatalhistory` (
+CREATE TABLE IF NOT EXISTS `t_perinatalhistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -16784,10 +16784,10 @@ CREATE TABLE `t_perinatalhistory` (
 -- Table structure for table `t_phoneblock`
 --
 
-DROP TABLE IF EXISTS `t_phoneblock`;
+-- DROP TABLE IF EXISTS `t_phoneblock`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_phoneblock` (
+CREATE TABLE IF NOT EXISTS `t_phoneblock` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `phoneNo` varchar(15) DEFAULT NULL,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -16815,10 +16815,10 @@ CREATE TABLE `t_phoneblock` (
 -- Table structure for table `t_phy_anthropometry`
 --
 
-DROP TABLE IF EXISTS `t_phy_anthropometry`;
+-- DROP TABLE IF EXISTS `t_phy_anthropometry`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_phy_anthropometry` (
+CREATE TABLE IF NOT EXISTS `t_phy_anthropometry` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -16862,10 +16862,10 @@ CREATE TABLE `t_phy_anthropometry` (
 -- Table structure for table `t_phy_generalexam`
 --
 
-DROP TABLE IF EXISTS `t_phy_generalexam`;
+-- DROP TABLE IF EXISTS `t_phy_generalexam`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_phy_generalexam` (
+CREATE TABLE IF NOT EXISTS `t_phy_generalexam` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -16920,10 +16920,10 @@ CREATE TABLE `t_phy_generalexam` (
 -- Table structure for table `t_phy_headtotoe`
 --
 
-DROP TABLE IF EXISTS `t_phy_headtotoe`;
+-- DROP TABLE IF EXISTS `t_phy_headtotoe`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_phy_headtotoe` (
+CREATE TABLE IF NOT EXISTS `t_phy_headtotoe` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -16973,10 +16973,10 @@ CREATE TABLE `t_phy_headtotoe` (
 -- Table structure for table `t_phy_vitals`
 --
 
-DROP TABLE IF EXISTS `t_phy_vitals`;
+-- DROP TABLE IF EXISTS `t_phy_vitals`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_phy_vitals` (
+CREATE TABLE IF NOT EXISTS `t_phy_vitals` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -17040,10 +17040,10 @@ CREATE TABLE `t_phy_vitals` (
 -- Table structure for table `t_physicalactivity`
 --
 
-DROP TABLE IF EXISTS `t_physicalactivity`;
+-- DROP TABLE IF EXISTS `t_physicalactivity`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_physicalactivity` (
+CREATE TABLE IF NOT EXISTS `t_physicalactivity` (
   `tPaid` bigint(20) NOT NULL AUTO_INCREMENT,
   `PAID` int(11) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) NOT NULL,
@@ -17081,10 +17081,10 @@ CREATE TABLE `t_physicalactivity` (
 -- Table structure for table `t_physicalstockentry`
 --
 
-DROP TABLE IF EXISTS `t_physicalstockentry`;
+-- DROP TABLE IF EXISTS `t_physicalstockentry`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_physicalstockentry` (
+CREATE TABLE IF NOT EXISTS `t_physicalstockentry` (
   `PhyEntryID` int(11) NOT NULL AUTO_INCREMENT,
   `RefNo` varchar(20) DEFAULT NULL,
   `EntryDate` datetime DEFAULT NULL,
@@ -17119,10 +17119,10 @@ CREATE TABLE `t_physicalstockentry` (
 -- Table structure for table `t_pmsma`
 --
 
-DROP TABLE IF EXISTS `t_pmsma`;
+-- DROP TABLE IF EXISTS `t_pmsma`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_pmsma` (
+CREATE TABLE IF NOT EXISTS `t_pmsma` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `abdominal_check_up` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
@@ -17172,10 +17172,10 @@ CREATE TABLE `t_pmsma` (
 -- Table structure for table `t_pnc_visit`
 --
 
-DROP TABLE IF EXISTS `t_pnc_visit`;
+-- DROP TABLE IF EXISTS `t_pnc_visit`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_pnc_visit` (
+CREATE TABLE IF NOT EXISTS `t_pnc_visit` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `ben_id` bigint(20) DEFAULT NULL,
   `created_by` varchar(255) DEFAULT NULL,
@@ -17207,10 +17207,10 @@ CREATE TABLE `t_pnc_visit` (
 -- Table structure for table `t_pnccare`
 --
 
-DROP TABLE IF EXISTS `t_pnccare`;
+-- DROP TABLE IF EXISTS `t_pnccare`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_pnccare` (
+CREATE TABLE IF NOT EXISTS `t_pnccare` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -17270,10 +17270,10 @@ CREATE TABLE `t_pnccare` (
 -- Table structure for table `t_pncdiagnosis`
 --
 
-DROP TABLE IF EXISTS `t_pncdiagnosis`;
+-- DROP TABLE IF EXISTS `t_pncdiagnosis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_pncdiagnosis` (
+CREATE TABLE IF NOT EXISTS `t_pncdiagnosis` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -17321,10 +17321,10 @@ CREATE TABLE `t_pncdiagnosis` (
 -- Table structure for table `t_pregnant_woman_register`
 --
 
-DROP TABLE IF EXISTS `t_pregnant_woman_register`;
+-- DROP TABLE IF EXISTS `t_pregnant_woman_register`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_pregnant_woman_register` (
+CREATE TABLE IF NOT EXISTS `t_pregnant_woman_register` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `assigned_hrp_by` varchar(255) DEFAULT NULL,
   `bad_obstetric_check` varchar(255) DEFAULT NULL,
@@ -17368,10 +17368,10 @@ CREATE TABLE `t_pregnant_woman_register` (
 -- Table structure for table `t_prescribeddrug`
 --
 
-DROP TABLE IF EXISTS `t_prescribeddrug`;
+-- DROP TABLE IF EXISTS `t_prescribeddrug`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_prescribeddrug` (
+CREATE TABLE IF NOT EXISTS `t_prescribeddrug` (
   `PrescribedDrugID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -17425,10 +17425,10 @@ CREATE TABLE `t_prescribeddrug` (
 -- Table structure for table `t_prescription`
 --
 
-DROP TABLE IF EXISTS `t_prescription`;
+-- DROP TABLE IF EXISTS `t_prescription`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_prescription` (
+CREATE TABLE IF NOT EXISTS `t_prescription` (
   `PrescriptionID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -17476,10 +17476,10 @@ CREATE TABLE `t_prescription` (
 -- Table structure for table `t_providerservicemappingdetail`
 --
 
-DROP TABLE IF EXISTS `t_providerservicemappingdetail`;
+-- DROP TABLE IF EXISTS `t_providerservicemappingdetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_providerservicemappingdetail` (
+CREATE TABLE IF NOT EXISTS `t_providerservicemappingdetail` (
   `PSMDetailID` int(11) NOT NULL AUTO_INCREMENT,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
   `ServiceProviderID` smallint(6) DEFAULT NULL,
@@ -17519,10 +17519,10 @@ CREATE TABLE `t_providerservicemappingdetail` (
 -- Table structure for table `t_providerservicemappingdetail_bkp_15_03_2024`
 --
 
-DROP TABLE IF EXISTS `t_providerservicemappingdetail_bkp_15_03_2024`;
+-- DROP TABLE IF EXISTS `t_providerservicemappingdetail_bkp_15_03_2024`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_providerservicemappingdetail_bkp_15_03_2024` (
+CREATE TABLE IF NOT EXISTS `t_providerservicemappingdetail_bkp_15_03_2024` (
   `PSMDetailID` int(11) NOT NULL DEFAULT '0',
   `ProviderServiceMapID` int(11) DEFAULT NULL,
   `ServiceProviderID` smallint(6) DEFAULT NULL,
@@ -17551,10 +17551,10 @@ CREATE TABLE `t_providerservicemappingdetail_bkp_15_03_2024` (
 -- Table structure for table `t_qualityauditorcallresponse`
 --
 
-DROP TABLE IF EXISTS `t_qualityauditorcallresponse`;
+-- DROP TABLE IF EXISTS `t_qualityauditorcallresponse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_qualityauditorcallresponse` (
+CREATE TABLE IF NOT EXISTS `t_qualityauditorcallresponse` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `Bencallid` bigint(20) NOT NULL,
   `outboundCallType` varchar(255) NOT NULL,
@@ -17582,10 +17582,10 @@ CREATE TABLE `t_qualityauditorcallresponse` (
 -- Table structure for table `t_qualityauditorrating`
 --
 
-DROP TABLE IF EXISTS `t_qualityauditorrating`;
+-- DROP TABLE IF EXISTS `t_qualityauditorrating`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_qualityauditorrating` (
+CREATE TABLE IF NOT EXISTS `t_qualityauditorrating` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenCallID` bigint(20) NOT NULL,
   `Agentid` int(11) NOT NULL,
@@ -17616,10 +17616,10 @@ CREATE TABLE `t_qualityauditorrating` (
 -- Table structure for table `t_requestedbloodbank`
 --
 
-DROP TABLE IF EXISTS `t_requestedbloodbank`;
+-- DROP TABLE IF EXISTS `t_requestedbloodbank`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_requestedbloodbank` (
+CREATE TABLE IF NOT EXISTS `t_requestedbloodbank` (
   `RequestedBloodBankID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BloodReqID` bigint(20) DEFAULT NULL,
   `BloodBankAddress` varchar(300) DEFAULT NULL,
@@ -17646,10 +17646,10 @@ CREATE TABLE `t_requestedbloodbank` (
 -- Table structure for table `t_requestedinstitution`
 --
 
-DROP TABLE IF EXISTS `t_requestedinstitution`;
+-- DROP TABLE IF EXISTS `t_requestedinstitution`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_requestedinstitution` (
+CREATE TABLE IF NOT EXISTS `t_requestedinstitution` (
   `RequestedInstitutionID` bigint(20) NOT NULL AUTO_INCREMENT,
   `OrganDonationID` bigint(20) DEFAULT NULL,
   `BenCallID` bigint(20) DEFAULT NULL,
@@ -17681,10 +17681,10 @@ CREATE TABLE `t_requestedinstitution` (
 -- Table structure for table `t_saitemmapping`
 --
 
-DROP TABLE IF EXISTS `t_saitemmapping`;
+-- DROP TABLE IF EXISTS `t_saitemmapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_saitemmapping` (
+CREATE TABLE IF NOT EXISTS `t_saitemmapping` (
   `SAItemMapID` int(11) NOT NULL AUTO_INCREMENT,
   `StockAdjustmentID` int(11) DEFAULT NULL,
   `ItemStockEntryID` int(11) DEFAULT NULL,
@@ -17722,10 +17722,10 @@ CREATE TABLE `t_saitemmapping` (
 -- Table structure for table `t_schemeservice`
 --
 
-DROP TABLE IF EXISTS `t_schemeservice`;
+-- DROP TABLE IF EXISTS `t_schemeservice`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_schemeservice` (
+CREATE TABLE IF NOT EXISTS `t_schemeservice` (
   `SchemeServiceID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RequestID` varchar(30) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -17754,10 +17754,10 @@ CREATE TABLE `t_schemeservice` (
 -- Table structure for table `t_serviceproviderdetail`
 --
 
-DROP TABLE IF EXISTS `t_serviceproviderdetail`;
+-- DROP TABLE IF EXISTS `t_serviceproviderdetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_serviceproviderdetail` (
+CREATE TABLE IF NOT EXISTS `t_serviceproviderdetail` (
   `ServiceProviderDetailID` int(11) NOT NULL AUTO_INCREMENT,
   `ServiceProviderID` smallint(6) DEFAULT NULL,
   `ServiceProviderName` varchar(50) DEFAULT NULL,
@@ -17799,10 +17799,10 @@ CREATE TABLE `t_serviceproviderdetail` (
 -- Table structure for table `t_smsnotification`
 --
 
-DROP TABLE IF EXISTS `t_smsnotification`;
+-- DROP TABLE IF EXISTS `t_smsnotification`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_smsnotification` (
+CREATE TABLE IF NOT EXISTS `t_smsnotification` (
   `SMSNotificationID` bigint(20) NOT NULL AUTO_INCREMENT,
   `SMSTemplateID` int(11) DEFAULT NULL,
   `SenderID` int(11) DEFAULT NULL,
@@ -17842,10 +17842,10 @@ CREATE TABLE `t_smsnotification` (
 -- Table structure for table `t_smsnotificationdetail`
 --
 
-DROP TABLE IF EXISTS `t_smsnotificationdetail`;
+-- DROP TABLE IF EXISTS `t_smsnotificationdetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_smsnotificationdetail` (
+CREATE TABLE IF NOT EXISTS `t_smsnotificationdetail` (
   `SMSNotificationDetailID` bigint(20) NOT NULL AUTO_INCREMENT,
   `SMSNotificationID` bigint(20) DEFAULT NULL,
   `SMSTemplateID` int(11) DEFAULT NULL,
@@ -17878,10 +17878,10 @@ CREATE TABLE `t_smsnotificationdetail` (
 -- Table structure for table `t_specialistavailability`
 --
 
-DROP TABLE IF EXISTS `t_specialistavailability`;
+-- DROP TABLE IF EXISTS `t_specialistavailability`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_specialistavailability` (
+CREATE TABLE IF NOT EXISTS `t_specialistavailability` (
   `SpecialistAvailabilityID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
   `ConfiguredDate` date DEFAULT NULL,
@@ -17903,10 +17903,10 @@ CREATE TABLE `t_specialistavailability` (
 -- Table structure for table `t_specialistavailabilitydetail`
 --
 
-DROP TABLE IF EXISTS `t_specialistavailabilitydetail`;
+-- DROP TABLE IF EXISTS `t_specialistavailabilitydetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_specialistavailabilitydetail` (
+CREATE TABLE IF NOT EXISTS `t_specialistavailabilitydetail` (
   `SpecialistAvailabilityDetailID` bigint(20) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
   `ConfiguredFromDate` date DEFAULT NULL,
@@ -17931,10 +17931,10 @@ CREATE TABLE `t_specialistavailabilitydetail` (
 -- Table structure for table `t_stockadjustment`
 --
 
-DROP TABLE IF EXISTS `t_stockadjustment`;
+-- DROP TABLE IF EXISTS `t_stockadjustment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_stockadjustment` (
+CREATE TABLE IF NOT EXISTS `t_stockadjustment` (
   `StockAdjustmentID` int(11) NOT NULL AUTO_INCREMENT,
   `RefNo` varchar(30) DEFAULT NULL,
   `FacilityID` int(11) DEFAULT NULL,
@@ -17968,10 +17968,10 @@ CREATE TABLE `t_stockadjustment` (
 -- Table structure for table `t_stocktransfer`
 --
 
-DROP TABLE IF EXISTS `t_stocktransfer`;
+-- DROP TABLE IF EXISTS `t_stocktransfer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_stocktransfer` (
+CREATE TABLE IF NOT EXISTS `t_stocktransfer` (
   `StockTransferID` int(11) NOT NULL AUTO_INCREMENT,
   `TransferFromFacilityID` int(11) DEFAULT NULL,
   `TransferToFacilityID` int(11) DEFAULT NULL,
@@ -18013,10 +18013,10 @@ CREATE TABLE `t_stocktransfer` (
 -- Table structure for table `t_swaasa`
 --
 
-DROP TABLE IF EXISTS `t_swaasa`;
+-- DROP TABLE IF EXISTS `t_swaasa`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_swaasa` (
+CREATE TABLE IF NOT EXISTS `t_swaasa` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `Beneficiaryregid` bigint(20) NOT NULL,
   `AssessmentId` varchar(100) NOT NULL,
@@ -18051,10 +18051,10 @@ CREATE TABLE `t_swaasa` (
 -- Table structure for table `t_sys_cardiovascular`
 --
 
-DROP TABLE IF EXISTS `t_sys_cardiovascular`;
+-- DROP TABLE IF EXISTS `t_sys_cardiovascular`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_sys_cardiovascular` (
+CREATE TABLE IF NOT EXISTS `t_sys_cardiovascular` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -18097,10 +18097,10 @@ CREATE TABLE `t_sys_cardiovascular` (
 -- Table structure for table `t_sys_centralnervous`
 --
 
-DROP TABLE IF EXISTS `t_sys_centralnervous`;
+-- DROP TABLE IF EXISTS `t_sys_centralnervous`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_sys_centralnervous` (
+CREATE TABLE IF NOT EXISTS `t_sys_centralnervous` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -18143,10 +18143,10 @@ CREATE TABLE `t_sys_centralnervous` (
 -- Table structure for table `t_sys_gastrointestinal`
 --
 
-DROP TABLE IF EXISTS `t_sys_gastrointestinal`;
+-- DROP TABLE IF EXISTS `t_sys_gastrointestinal`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_sys_gastrointestinal` (
+CREATE TABLE IF NOT EXISTS `t_sys_gastrointestinal` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -18191,10 +18191,10 @@ CREATE TABLE `t_sys_gastrointestinal` (
 -- Table structure for table `t_sys_genitourinarysystem`
 --
 
-DROP TABLE IF EXISTS `t_sys_genitourinarysystem`;
+-- DROP TABLE IF EXISTS `t_sys_genitourinarysystem`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_sys_genitourinarysystem` (
+CREATE TABLE IF NOT EXISTS `t_sys_genitourinarysystem` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -18232,10 +18232,10 @@ CREATE TABLE `t_sys_genitourinarysystem` (
 -- Table structure for table `t_sys_musculoskeletalsystem`
 --
 
-DROP TABLE IF EXISTS `t_sys_musculoskeletalsystem`;
+-- DROP TABLE IF EXISTS `t_sys_musculoskeletalsystem`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_sys_musculoskeletalsystem` (
+CREATE TABLE IF NOT EXISTS `t_sys_musculoskeletalsystem` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -18279,10 +18279,10 @@ CREATE TABLE `t_sys_musculoskeletalsystem` (
 -- Table structure for table `t_sys_obstetric`
 --
 
-DROP TABLE IF EXISTS `t_sys_obstetric`;
+-- DROP TABLE IF EXISTS `t_sys_obstetric`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_sys_obstetric` (
+CREATE TABLE IF NOT EXISTS `t_sys_obstetric` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -18332,10 +18332,10 @@ CREATE TABLE `t_sys_obstetric` (
 -- Table structure for table `t_sys_respiratory`
 --
 
-DROP TABLE IF EXISTS `t_sys_respiratory`;
+-- DROP TABLE IF EXISTS `t_sys_respiratory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_sys_respiratory` (
+CREATE TABLE IF NOT EXISTS `t_sys_respiratory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -18382,10 +18382,10 @@ CREATE TABLE `t_sys_respiratory` (
 -- Table structure for table `t_tmrequest`
 --
 
-DROP TABLE IF EXISTS `t_tmrequest`;
+-- DROP TABLE IF EXISTS `t_tmrequest`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_tmrequest` (
+CREATE TABLE IF NOT EXISTS `t_tmrequest` (
   `TMRequestID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -18428,10 +18428,10 @@ CREATE TABLE `t_tmrequest` (
 -- Table structure for table `t_tmstats`
 --
 
-DROP TABLE IF EXISTS `t_tmstats`;
+-- DROP TABLE IF EXISTS `t_tmstats`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_tmstats` (
+CREATE TABLE IF NOT EXISTS `t_tmstats` (
   `TMStatsID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -18457,10 +18457,10 @@ CREATE TABLE `t_tmstats` (
 -- Table structure for table `t_treatment`
 --
 
-DROP TABLE IF EXISTS `t_treatment`;
+-- DROP TABLE IF EXISTS `t_treatment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_treatment` (
+CREATE TABLE IF NOT EXISTS `t_treatment` (
   `TreatmentID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -18503,10 +18503,10 @@ CREATE TABLE `t_treatment` (
 -- Table structure for table `t_userattendance`
 --
 
-DROP TABLE IF EXISTS `t_userattendance`;
+-- DROP TABLE IF EXISTS `t_userattendance`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_userattendance` (
+CREATE TABLE IF NOT EXISTS `t_userattendance` (
   `UserAttendanceID` bigint(20) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
   `UserName` varchar(50) DEFAULT NULL,
@@ -18542,10 +18542,10 @@ CREATE TABLE `t_userattendance` (
 -- Table structure for table `t_userdetail`
 --
 
-DROP TABLE IF EXISTS `t_userdetail`;
+-- DROP TABLE IF EXISTS `t_userdetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_userdetail` (
+CREATE TABLE IF NOT EXISTS `t_userdetail` (
   `UserDetailID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
   `UserName` varchar(20) DEFAULT NULL,
@@ -18580,10 +18580,10 @@ CREATE TABLE `t_userdetail` (
 -- Table structure for table `t_userlogindetails`
 --
 
-DROP TABLE IF EXISTS `t_userlogindetails`;
+-- DROP TABLE IF EXISTS `t_userlogindetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_userlogindetails` (
+CREATE TABLE IF NOT EXISTS `t_userlogindetails` (
   `LoginDetailID` bigint(20) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
   `LoginTime` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -18615,10 +18615,10 @@ CREATE TABLE `t_userlogindetails` (
 -- Table structure for table `tb_screening`
 --
 
-DROP TABLE IF EXISTS `tb_screening`;
+-- DROP TABLE IF EXISTS `tb_screening`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tb_screening` (
+CREATE TABLE IF NOT EXISTS `tb_screening` (
   `id` bigint(20) NOT NULL,
   `ben_id` bigint(20) DEFAULT NULL,
   `blood_check` bit(1) DEFAULT NULL,
@@ -18639,10 +18639,10 @@ CREATE TABLE `tb_screening` (
 -- Table structure for table `tb_suspected`
 --
 
-DROP TABLE IF EXISTS `tb_suspected`;
+-- DROP TABLE IF EXISTS `tb_suspected`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tb_suspected` (
+CREATE TABLE IF NOT EXISTS `tb_suspected` (
   `id` bigint(20) NOT NULL,
   `ben_id` bigint(20) DEFAULT NULL,
   `followups` varchar(255) DEFAULT NULL,
@@ -18661,10 +18661,10 @@ CREATE TABLE `tb_suspected` (
 -- Table structure for table `tbencalllog`
 --
 
-DROP TABLE IF EXISTS `tbencalllog`;
+-- DROP TABLE IF EXISTS `tbencalllog`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tbencalllog` (
+CREATE TABLE IF NOT EXISTS `tbencalllog` (
   `tbencalllogid` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenCallID` bigint(20) DEFAULT NULL,
   `CallID` varchar(30) DEFAULT NULL,
@@ -18693,10 +18693,10 @@ CREATE TABLE `tbencalllog` (
 -- Table structure for table `temp_masterdrug`
 --
 
-DROP TABLE IF EXISTS `temp_masterdrug`;
+-- DROP TABLE IF EXISTS `temp_masterdrug`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `temp_masterdrug` (
+CREATE TABLE IF NOT EXISTS `temp_masterdrug` (
   `DrugID` int(11) NOT NULL AUTO_INCREMENT,
   `DrugName` varchar(200) DEFAULT NULL,
   `DrugDisplayName` varchar(200) DEFAULT NULL,
@@ -18716,10 +18716,10 @@ CREATE TABLE `temp_masterdrug` (
 -- Table structure for table `temp_van`
 --
 
-DROP TABLE IF EXISTS `temp_van`;
+-- DROP TABLE IF EXISTS `temp_van`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `temp_van` (
+CREATE TABLE IF NOT EXISTS `temp_van` (
   `TempVanID` int(11) NOT NULL AUTO_INCREMENT,
   `VanID` int(11) DEFAULT NULL,
   `VanName` varchar(30) DEFAULT NULL,
@@ -18740,7 +18740,7 @@ CREATE TABLE `temp_van` (
 -- Temporary view structure for view `v_104benmedhistory`
 --
 
-DROP TABLE IF EXISTS `v_104benmedhistory`;
+-- DROP TABLE IF EXISTS `v_104benmedhistory`;
 /*!50001 DROP VIEW IF EXISTS `v_104benmedhistory`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -18784,7 +18784,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_benprocedurecomponentdetails`
 --
 
-DROP TABLE IF EXISTS `v_benprocedurecomponentdetails`;
+-- DROP TABLE IF EXISTS `v_benprocedurecomponentdetails`;
 /*!50001 DROP VIEW IF EXISTS `v_benprocedurecomponentdetails`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -18830,7 +18830,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_doortodooruserdetails`
 --
 
-DROP TABLE IF EXISTS `v_doortodooruserdetails`;
+-- DROP TABLE IF EXISTS `v_doortodooruserdetails`;
 /*!50001 DROP VIEW IF EXISTS `v_doortodooruserdetails`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -18859,7 +18859,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_drugforprescription`
 --
 
-DROP TABLE IF EXISTS `v_drugforprescription`;
+-- DROP TABLE IF EXISTS `v_drugforprescription`;
 /*!50001 DROP VIEW IF EXISTS `v_drugforprescription`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -18883,7 +18883,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_emailstockalert`
 --
 
-DROP TABLE IF EXISTS `v_emailstockalert`;
+-- DROP TABLE IF EXISTS `v_emailstockalert`;
 /*!50001 DROP VIEW IF EXISTS `v_emailstockalert`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -18905,7 +18905,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_fetchfacility`
 --
 
-DROP TABLE IF EXISTS `v_fetchfacility`;
+-- DROP TABLE IF EXISTS `v_fetchfacility`;
 /*!50001 DROP VIEW IF EXISTS `v_fetchfacility`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -18944,7 +18944,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_fetchitemfacilitymap`
 --
 
-DROP TABLE IF EXISTS `v_fetchitemfacilitymap`;
+-- DROP TABLE IF EXISTS `v_fetchitemfacilitymap`;
 /*!50001 DROP VIEW IF EXISTS `v_fetchitemfacilitymap`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -18994,7 +18994,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_fetchnotification`
 --
 
-DROP TABLE IF EXISTS `v_fetchnotification`;
+-- DROP TABLE IF EXISTS `v_fetchnotification`;
 /*!50001 DROP VIEW IF EXISTS `v_fetchnotification`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19020,7 +19020,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_get_call_section_mapping`
 --
 
-DROP TABLE IF EXISTS `v_get_call_section_mapping`;
+-- DROP TABLE IF EXISTS `v_get_call_section_mapping`;
 /*!50001 DROP VIEW IF EXISTS `v_get_call_section_mapping`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19039,7 +19039,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_get_prkngplc_blok_dist_zone_state`
 --
 
-DROP TABLE IF EXISTS `v_get_prkngplc_blok_dist_zone_state`;
+-- DROP TABLE IF EXISTS `v_get_prkngplc_blok_dist_zone_state`;
 /*!50001 DROP VIEW IF EXISTS `v_get_prkngplc_blok_dist_zone_state`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19064,7 +19064,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_get_prkngplc_dist_zone_state_from_spid`
 --
 
-DROP TABLE IF EXISTS `v_get_prkngplc_dist_zone_state_from_spid`;
+-- DROP TABLE IF EXISTS `v_get_prkngplc_dist_zone_state_from_spid`;
 /*!50001 DROP VIEW IF EXISTS `v_get_prkngplc_dist_zone_state_from_spid`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19085,7 +19085,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_get_qualityaudit_sectionquestionairevalues`
 --
 
-DROP TABLE IF EXISTS `v_get_qualityaudit_sectionquestionairevalues`;
+-- DROP TABLE IF EXISTS `v_get_qualityaudit_sectionquestionairevalues`;
 /*!50001 DROP VIEW IF EXISTS `v_get_qualityaudit_sectionquestionairevalues`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19108,7 +19108,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_get_section_question_mapping`
 --
 
-DROP TABLE IF EXISTS `v_get_section_question_mapping`;
+-- DROP TABLE IF EXISTS `v_get_section_question_mapping`;
 /*!50001 DROP VIEW IF EXISTS `v_get_section_question_mapping`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19131,7 +19131,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_get_section_question_mapping_associate`
 --
 
-DROP TABLE IF EXISTS `v_get_section_question_mapping_associate`;
+-- DROP TABLE IF EXISTS `v_get_section_question_mapping_associate`;
 /*!50001 DROP VIEW IF EXISTS `v_get_section_question_mapping_associate`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19160,7 +19160,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_get_userlangmapping`
 --
 
-DROP TABLE IF EXISTS `v_get_userlangmapping`;
+-- DROP TABLE IF EXISTS `v_get_userlangmapping`;
 /*!50001 DROP VIEW IF EXISTS `v_get_userlangmapping`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19175,7 +19175,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_getagentsbyroleid`
 --
 
-DROP TABLE IF EXISTS `v_getagentsbyroleid`;
+-- DROP TABLE IF EXISTS `v_getagentsbyroleid`;
 /*!50001 DROP VIEW IF EXISTS `v_getagentsbyroleid`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19193,7 +19193,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_getdialpreference`
 --
 
-DROP TABLE IF EXISTS `v_getdialpreference`;
+-- DROP TABLE IF EXISTS `v_getdialpreference`;
 /*!50001 DROP VIEW IF EXISTS `v_getdialpreference`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19214,7 +19214,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_getprescribeddrugswithdetails`
 --
 
-DROP TABLE IF EXISTS `v_getprescribeddrugswithdetails`;
+-- DROP TABLE IF EXISTS `v_getprescribeddrugswithdetails`;
 /*!50001 DROP VIEW IF EXISTS `v_getprescribeddrugswithdetails`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19250,7 +19250,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_getvanlocdetails`
 --
 
-DROP TABLE IF EXISTS `v_getvanlocdetails`;
+-- DROP TABLE IF EXISTS `v_getvanlocdetails`;
 /*!50001 DROP VIEW IF EXISTS `v_getvanlocdetails`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19273,7 +19273,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_mother_child_feedback_report`
 --
 
-DROP TABLE IF EXISTS `v_mother_child_feedback_report`;
+-- DROP TABLE IF EXISTS `v_mother_child_feedback_report`;
 /*!50001 DROP VIEW IF EXISTS `v_mother_child_feedback_report`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19540,7 +19540,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_showprovideradmin`
 --
 
-DROP TABLE IF EXISTS `v_showprovideradmin`;
+-- DROP TABLE IF EXISTS `v_showprovideradmin`;
 /*!50001 DROP VIEW IF EXISTS `v_showprovideradmin`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19581,7 +19581,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_showproviderservicemapping`
 --
 
-DROP TABLE IF EXISTS `v_showproviderservicemapping`;
+-- DROP TABLE IF EXISTS `v_showproviderservicemapping`;
 /*!50001 DROP VIEW IF EXISTS `v_showproviderservicemapping`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19617,7 +19617,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_showsubcategory`
 --
 
-DROP TABLE IF EXISTS `v_showsubcategory`;
+-- DROP TABLE IF EXISTS `v_showsubcategory`;
 /*!50001 DROP VIEW IF EXISTS `v_showsubcategory`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19640,7 +19640,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_showuser`
 --
 
-DROP TABLE IF EXISTS `v_showuser`;
+-- DROP TABLE IF EXISTS `v_showuser`;
 /*!50001 DROP VIEW IF EXISTS `v_showuser`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19720,7 +19720,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_temp`
 --
 
-DROP TABLE IF EXISTS `v_temp`;
+-- DROP TABLE IF EXISTS `v_temp`;
 /*!50001 DROP VIEW IF EXISTS `v_temp`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19750,7 +19750,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_userprkngplacvanspstatedisblok`
 --
 
-DROP TABLE IF EXISTS `v_userprkngplacvanspstatedisblok`;
+-- DROP TABLE IF EXISTS `v_userprkngplacvanspstatedisblok`;
 /*!50001 DROP VIEW IF EXISTS `v_userprkngplacvanspstatedisblok`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19771,7 +19771,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary view structure for view `v_userservicerolemapping`
 --
 
-DROP TABLE IF EXISTS `v_userservicerolemapping`;
+-- DROP TABLE IF EXISTS `v_userservicerolemapping`;
 /*!50001 DROP VIEW IF EXISTS `v_userservicerolemapping`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -19928,7 +19928,7 @@ distinct BCC.BeneficiaryRegID , 'OldDiabetic' OldDiabetic
 from t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 2
-	and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     and date(BCC.Year) < date(BM.CreatedDate)
     
@@ -19947,7 +19947,7 @@ inner join t_prescription Rx
     and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
 WHERE DATE(Rx.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND Rx.providerServiceMapID = PSMID
-	AND Rx.Deleted = 0b0
+  AND Rx.Deleted = 0b0
     and Rx.DiagnosisProvided like '%Diabetes Mellitus%'
 
 union
@@ -19962,7 +19962,7 @@ inner join t_pncdiagnosis PNCD
     and (BVD.VisitCategory = 'PNC')
 WHERE DATE(PNCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PNCD.providerServiceMapID = PSMID
-	AND PNCD.Deleted = 0b0
+  AND PNCD.Deleted = 0b0
     AND PNCD.ProvisionalDiagnosis like '%Diabetes Mellitus%' ) A
 /* 
 union
@@ -19984,7 +19984,7 @@ inner join t_ancdiagnosis ANCD
     and (BVD.VisitCategory = 'ANC')
  WHERE DATE(ANCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND ANCD.providerServiceMapID = PSMID
-	AND ANCD.Deleted = 0b0
+  AND ANCD.Deleted = 0b0
 union
 
 select 
@@ -20004,34 +20004,34 @@ inner join t_ncdscreening NCDS
     and (BVD.VisitCategory = 'NCD screening')
 WHERE DATE(NCDS.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND NCDS.providerServiceMapID = PSMID
-	AND NCDS.Deleted = 0b0
+  AND NCDS.Deleted = 0b0
 */
 inner join t_prescribeddrug PD 
-	on A.BeneficiaryRegID = PD.BeneficiaryRegID
+  on A.BeneficiaryRegID = PD.BeneficiaryRegID
     and A.VisitCode = PD.VisitCode
 WHERE DATE(PD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PD.providerServiceMapID = PSMID
-	AND PD.Deleted = 0b0
+  AND PD.Deleted = 0b0
     AND PD.GenericDrugName in ("%%");
 
 
 select count(distinct BeneficiaryRegID) from AllDiabeticTemp into v_AllDiabetic;
 
 select count(distinct ADT.BeneficiaryRegID) from AllDiabeticTemp ADT
-	inner join t_benreferdetails BRD on ADT.BeneficiaryRegID = BRD.BeneficiaryRegID
-	into v_AllDiaRef; 
+  inner join t_benreferdetails BRD on ADT.BeneficiaryRegID = BRD.BeneficiaryRegID
+  into v_AllDiaRef; 
     
 select count(distinct ADT.BeneficiaryRegID) from AllDiabeticTemp ADT
-	inner join t_Lab_TestResult LTR on ADT.BeneficiaryRegID = LTR.BeneficiaryRegID
+  inner join t_Lab_TestResult LTR on ADT.BeneficiaryRegID = LTR.BeneficiaryRegID
     where (LTR.TestResultValue < 160 and LTR.ProcedureID = "% %") 
-		and  (LTR.TestResultValue < 7 and LTR.ProcedureID = "% %")
-	into v_AllDiaControl; 
+    and  (LTR.TestResultValue < 7 and LTR.ProcedureID = "% %")
+  into v_AllDiaControl; 
     
 select count(distinct ADT.BeneficiaryRegID) from AllDiabeticTemp ADT
-	inner join db_identity.i_beneficiarymapping BM on ADT.BeneficiaryRegID = BM.BenRegID
+  inner join db_identity.i_beneficiarymapping BM on ADT.BeneficiaryRegID = BM.BenRegID
     inner join db_identity.i_beneficiarydetails BD on BM.BenDetailsID = BD.BeneficiaryDetailsID
     where BD.GenderID = 2
-	into v_AllDiaFemale; 
+  into v_AllDiaFemale; 
     
 select  v_AllDiabetic,v_AllDiaRef,v_AllDiaControl,v_AllDiaFemale;
 END ;;
@@ -20064,8 +20064,8 @@ distinct BCC.BeneficiaryRegID , 'OldDiaHTN' OldDiaHTN
 from t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 2
-	and BCC.ComorbidConditionID = 3
-	and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and BCC.ComorbidConditionID = 3
+  and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     and date(BCC.Year) < date(BM.CreatedDate)
     
@@ -20084,7 +20084,7 @@ inner join t_prescription Rx
     and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
 WHERE DATE(Rx.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND Rx.providerServiceMapID = PSMID
-	AND Rx.Deleted = 0b0
+  AND Rx.Deleted = 0b0
     and Rx.DiagnosisProvided like '%Diabetes Mellitus%'
     and Rx.DiagnosisProvided like '%Hypertension%'
 
@@ -20100,7 +20100,7 @@ inner join t_pncdiagnosis PNCD
     and (BVD.VisitCategory = 'PNC')
 WHERE DATE(PNCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PNCD.providerServiceMapID = PSMID
-	AND PNCD.Deleted = 0b0
+  AND PNCD.Deleted = 0b0
     AND PNCD.ProvisionalDiagnosis like '%Diabetes Mellitus%'
     AND PNCD.ProvisionalDiagnosis like '%Hypertension%') A
 /* 
@@ -20123,7 +20123,7 @@ inner join t_ancdiagnosis ANCD
     and (BVD.VisitCategory = 'ANC')
  WHERE DATE(ANCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND ANCD.providerServiceMapID = PSMID
-	AND ANCD.Deleted = 0b0
+  AND ANCD.Deleted = 0b0
 union
 
 select 
@@ -20143,14 +20143,14 @@ inner join t_ncdscreening NCDS
     and (BVD.VisitCategory = 'NCD screening')
 WHERE DATE(NCDS.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND NCDS.providerServiceMapID = PSMID
-	AND NCDS.Deleted = 0b0
+  AND NCDS.Deleted = 0b0
 */
 inner join t_prescribeddrug PD 
-	on A.BeneficiaryRegID = PD.BeneficiaryRegID
+  on A.BeneficiaryRegID = PD.BeneficiaryRegID
     and A.VisitCode = PD.VisitCode
 WHERE DATE(PD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PD.providerServiceMapID = PSMID
-	AND PD.Deleted = 0b0
+  AND PD.Deleted = 0b0
     AND PD.GenericDrugName in ("%%")
     AND PD.GenericDrugName in ("%%");
 
@@ -20241,7 +20241,7 @@ distinct BCC.BeneficiaryRegID , 'OldHTN' OldHTN
 from t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 3
-	and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     and date(BCC.Year) < date(BM.CreatedDate)
     
@@ -20260,7 +20260,7 @@ inner join t_prescription Rx
     and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
 WHERE DATE(Rx.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND Rx.providerServiceMapID = PSMID
-	AND Rx.Deleted = 0b0
+  AND Rx.Deleted = 0b0
     and Rx.DiagnosisProvided like '%Hypertension%'
 
 union
@@ -20275,7 +20275,7 @@ inner join t_pncdiagnosis PNCD
     and (BVD.VisitCategory = 'PNC')
 WHERE DATE(PNCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PNCD.providerServiceMapID = PSMID
-	AND PNCD.Deleted = 0b0
+  AND PNCD.Deleted = 0b0
     AND PNCD.ProvisionalDiagnosis like '%Hypertension%' ) A
 /* 
 union
@@ -20297,7 +20297,7 @@ inner join t_ancdiagnosis ANCD
     and (BVD.VisitCategory = 'ANC')
  WHERE DATE(ANCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND ANCD.providerServiceMapID = PSMID
-	AND ANCD.Deleted = 0b0
+  AND ANCD.Deleted = 0b0
 union
 
 select 
@@ -20317,36 +20317,36 @@ inner join t_ncdscreening NCDS
     and (BVD.VisitCategory = 'NCD screening')
 WHERE DATE(NCDS.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND NCDS.providerServiceMapID = PSMID
-	AND NCDS.Deleted = 0b0
+  AND NCDS.Deleted = 0b0
 */
 inner join t_prescribeddrug PD 
-	on A.BeneficiaryRegID = PD.BeneficiaryRegID
+  on A.BeneficiaryRegID = PD.BeneficiaryRegID
     and A.VisitCode = PD.VisitCode
 WHERE DATE(PD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PD.providerServiceMapID = PSMID
-	AND PD.Deleted = 0b0
+  AND PD.Deleted = 0b0
     AND PD.GenericDrugName in ("%%");
 
 
 select count(distinct BeneficiaryRegID) from AllHTNTemp into v_AllHTN;
 
 select count(distinct AHT.BeneficiaryRegID) from AllHTNTemp AHT
-	inner join t_benreferdetails BRD on AHT.BeneficiaryRegID = BRD.BeneficiaryRegID
-	into v_AllHTNRef; 
+  inner join t_benreferdetails BRD on AHT.BeneficiaryRegID = BRD.BeneficiaryRegID
+  into v_AllHTNRef; 
     
 /*  
 select count(distinct BeneficiaryRegID) from AllDiabeticTemp ADT
-	inner join t_Lab_TestResult LTR on ADT.BefeficiaryRegID = LTR.BeneficiaryRegID
+  inner join t_Lab_TestResult LTR on ADT.BefeficiaryRegID = LTR.BeneficiaryRegID
     where (LTR.ResultValue < 160 and LTR.ProcedureID = "% %") 
-		and  (LTR.ResultValue < 7 and LTR.ProcedureID = "% %")
-	into v_AllDiaControl; 
+    and  (LTR.ResultValue < 7 and LTR.ProcedureID = "% %")
+  into v_AllDiaControl; 
 */    
 
 select count(distinct AHT.BeneficiaryRegID) from AllHTNTemp AHT
-	inner join db_identity.i_beneficiarymapping BM on AHT.BeneficiaryRegID = BM.BenRegID
+  inner join db_identity.i_beneficiarymapping BM on AHT.BeneficiaryRegID = BM.BenRegID
     inner join db_identity.i_beneficiarydetails BD on BM.BenDetailsID = BD.BeneficiaryDetailsID
     where BD.GenderID = 2
-	into v_AllHTNFemale; 
+  into v_AllHTNFemale; 
     
 select v_AllHTN,v_AllHTNRef,v_AllHTNFemale;
     
@@ -20526,7 +20526,7 @@ inner join t_prescription Rx
     and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
 WHERE DATE(Rx.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND Rx.providerServiceMapID = PSMID
-	AND Rx.Deleted = 0b0
+  AND Rx.Deleted = 0b0
     and Rx.DiagnosisProvided like '%Diabetes Mellitus%'
 
 union
@@ -20541,7 +20541,7 @@ inner join t_pncdiagnosis PNCD
     and (BVD.VisitCategory = 'PNC')
 WHERE DATE(PNCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PNCD.providerServiceMapID = PSMID
-	AND PNCD.Deleted = 0b0
+  AND PNCD.Deleted = 0b0
     AND PNCD.ProvisionalDiagnosis like '%Diabetes Mellitus%' ) A
 /* 
 union
@@ -20563,7 +20563,7 @@ inner join t_ancdiagnosis ANCD
     and (BVD.VisitCategory = 'ANC')
  WHERE DATE(ANCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND ANCD.providerServiceMapID = PSMID
-	AND ANCD.Deleted = 0b0
+  AND ANCD.Deleted = 0b0
 union
 
 select 
@@ -20583,14 +20583,14 @@ inner join t_ncdscreening NCDS
     and (BVD.VisitCategory = 'NCD screening')
 WHERE DATE(NCDS.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND NCDS.providerServiceMapID = PSMID
-	AND NCDS.Deleted = 0b0
+  AND NCDS.Deleted = 0b0
 */
 inner join t_prescribeddrug PD 
-	on A.BeneficiaryRegID = PD.BenefciaryRegID
+  on A.BeneficiaryRegID = PD.BenefciaryRegID
     and A.VisitCode = PD.VisitCode
 WHERE DATE(PD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PD.providerServiceMapID = PSMID
-	AND PD.Deleted = 0b0
+  AND PD.Deleted = 0b0
     AND PD.GenericDrugName in ("%%");
 
 select v_NewDiabetic;
@@ -20712,7 +20712,7 @@ inner join t_prescription Rx
     and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
 WHERE DATE(Rx.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND Rx.providerServiceMapID = PSMID
-	AND Rx.Deleted = 0b0
+  AND Rx.Deleted = 0b0
     and Rx.DiagnosisProvided like '%Hypertension%'
 
 union
@@ -20727,7 +20727,7 @@ inner join t_pncdiagnosis PNCD
     and (BVD.VisitCategory = 'PNC')
 WHERE DATE(PNCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PNCD.providerServiceMapID = PSMID
-	AND PNCD.Deleted = 0b0
+  AND PNCD.Deleted = 0b0
     AND PNCD.ProvisionalDiagnosis like '%Hypertension%' ) A
 /* 
 union
@@ -20749,7 +20749,7 @@ inner join t_ancdiagnosis ANCD
     and (BVD.VisitCategory = 'ANC')
  WHERE DATE(ANCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND ANCD.providerServiceMapID = PSMID
-	AND ANCD.Deleted = 0b0
+  AND ANCD.Deleted = 0b0
 union
 
 select 
@@ -20769,14 +20769,14 @@ inner join t_ncdscreening NCDS
     and (BVD.VisitCategory = 'NCD screening')
 WHERE DATE(NCDS.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND NCDS.providerServiceMapID = PSMID
-	AND NCDS.Deleted = 0b0
+  AND NCDS.Deleted = 0b0
 */
 inner join t_prescribeddrug PD 
-	on A.BeneficiaryRegID = PD.BenefciaryRegID
+  on A.BeneficiaryRegID = PD.BenefciaryRegID
     and A.VisitCode = PD.VisitCode
 WHERE DATE(PD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PD.providerServiceMapID = PSMID
-	AND PD.Deleted = 0b0
+  AND PD.Deleted = 0b0
     AND PD.GenericDrugName in ("%%");
 
 select v_NewHTN;
@@ -20807,7 +20807,7 @@ count(distinct BCC.BeneficiaryRegID) into v_OldDiabetic
 from t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 2
-	and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     and date(BCC.Year) < date(BM.CreatedDate);
 
@@ -20840,7 +20840,7 @@ from t_BenVisitDetail BVD
 inner join  t_bencomorbiditycondition BCC on BVD.BeneficiaryRegID = BCC.BeneficiaryRegID
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 2
-	and DATE(BVD.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and DATE(BVD.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     and date(BCC.Year) < date(BM.CreatedDate)
     AND VisitReason = "Follow Up";
@@ -20875,12 +20875,12 @@ select
 count(distinct BCC.BeneficiaryRegID) into v_OldRBS
 from t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
-join t_lab_testresult LTR on BCC.BeneficiaryRegID = LTR.BeneficiaryRegID 	
-	and BCC.VisitCode = LTR.VisitCode
+join t_lab_testresult LTR on BCC.BeneficiaryRegID = LTR.BeneficiaryRegID  
+  and BCC.VisitCode = LTR.VisitCode
 inner join m_procedure PR on LTR.ProcedureID = PR.ProcedureID
 where BCC.ComorbidConditionID = 2
-	and BCC.Year < BM.CreatedDate 
-	and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and BCC.Year < BM.CreatedDate 
+  and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     AND PR.ProcedureName like "%%";
     
@@ -20888,12 +20888,12 @@ select
 count(distinct BCC.BeneficiaryRegID) into v_OldHbA1C
 from t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
-join t_lab_testresult LTR on BCC.BeneficiaryRegID = LTR.BeneficiaryRegID 	
-	and BCC.VisitCode = LTR.VisitCode
+join t_lab_testresult LTR on BCC.BeneficiaryRegID = LTR.BeneficiaryRegID  
+  and BCC.VisitCode = LTR.VisitCode
 inner join m_procedure PR on LTR.ProcedureID = PR.ProcedureID
 where BCC.ComorbidConditionID = 2
-	and BCC.Year < BM.CreatedDate 
-	and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and BCC.Year < BM.CreatedDate 
+  and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     AND PR.ProcedureName like "%%";
     
@@ -20901,12 +20901,12 @@ select
 count(distinct BCC.BeneficiaryRegID) into v_OldUrineSugar
 from t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
-join t_lab_testresult LTR on BCC.BeneficiaryRegID = LTR.BeneficiaryRegID 	
-	and BCC.VisitCode = LTR.VisitCode
+join t_lab_testresult LTR on BCC.BeneficiaryRegID = LTR.BeneficiaryRegID  
+  and BCC.VisitCode = LTR.VisitCode
 inner join m_procedure PR on LTR.ProcedureID = PR.ProcedureID
 where BCC.ComorbidConditionID = 2
-	and BCC.Year < BM.CreatedDate 
-	and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and BCC.Year < BM.CreatedDate 
+  and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     AND PR.ProcedureName like "%%";
     
@@ -20938,7 +20938,7 @@ count(distinct BCC.BeneficiaryRegID) into v_OldHTN
 from t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 3
-	and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     and date(BCC.Year) < date(BM.CreatedDate);
 
@@ -20971,7 +20971,7 @@ from t_BenVisitDetail BVD
 inner join  t_bencomorbiditycondition BCC on BVD.BeneficiaryRegID = BCC.BeneficiaryRegID
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 3
-	and DATE(BVD.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and DATE(BVD.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     and date(BCC.Year) < date(BM.CreatedDate)
     AND VisitReason = "Follow Up";
@@ -21617,23 +21617,23 @@ CREATE  PROCEDURE `Pr_104HAOReport`(v_starttime datetime,v_endtime datetime,v_Ag
 begin
 
 select t.benHistoryID, t.requestID, t.beneficiaryRegID, t.benCallID, t.patientName, t.patientAge, t.patientGenderName, t.algorithm, 
-			t.diseaseSummaryID, t.diseaseSummary, t.allergies, t.selecteDiagnosisID, t.selecteDiagnosis, t.addedAdvice,
+      t.diseaseSummaryID, t.diseaseSummary, t.allergies, t.selecteDiagnosisID, t.selecteDiagnosis, t.addedAdvice,
             t.prescriptionID, t.actionByHAO, t.remarks, t.isSelf, t.createdDate, b.beneficiaryID, b.firstName,
             b.lastName, b.healthCareWorker, b.gender, b.dob, b.permVillage, b.permSubDistrict, b.permDistrict, 
-			c.callTypeName, c.callSubTypeName, c.phoneNo, c.callReceivedUserID, c.callEndUserID, c.ReceivedAgentID,
+      c.callTypeName, c.callSubTypeName, c.phoneNo, c.callReceivedUserID, c.callEndUserID, c.ReceivedAgentID,
             user.firstName,
-			t.travel_14days,t.travel_type,
-			t.symptoms,t.COVID19_contact_history,t.medical_consultation,
-			t.Suspected_COVID19,t.recommendation  
-			from fact_104benmedhistory t 
-			LEFT JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
+      t.travel_14days,t.travel_type,
+      t.symptoms,t.COVID19_contact_history,t.medical_consultation,
+      t.Suspected_COVID19,t.recommendation  
+      from fact_104benmedhistory t 
+      LEFT JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
             LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID
-			left join dim_user user on user.userid=c.CallReceivedUserID			
-			where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID)
+      left join dim_user user on user.userid=c.CallReceivedUserID     
+      where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID)
              and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID)
-			and t.actionByHAO IS NOT NULL  
+      and t.actionByHAO IS NOT NULL  
              and t.createddate>=v_starttime and t.createddate<=v_endtime
-			order by t.createdDate desc;
+      order by t.createdDate desc;
             
             end ;;
 DELIMITER ;
@@ -22119,7 +22119,7 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is true -- and callendtime is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime 
+      and fb.createdDate >=v_starttime 
             and fb.createdDate <=v_endtime and fb.CallEndTime is not null
            union all
 select distinct fo.allocateduserid, fb.ReceivedAgentID "User ID",-- 'OUTGOING'CampaignID,
@@ -22157,7 +22157,7 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is false -- and callendtime is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  and fb.CallEndTime is not null
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  and fb.CallEndTime is not null
             )a;
      
         
@@ -23359,22 +23359,22 @@ BEGIN
  D.LastModDate*/
  from 
  (SELECT MIN(A.OutboundCallType) OutboundCallType,A.motherID 
- 	FROM 
+  FROM 
  (select mctsoutbou0_.motherID,mctsoutbou0_.OutboundCallType 
- 	from t_MCTSOutboundCalls mctsoutbou0_
- 		inner join t_mothervalidrecord mother on mctsoutbou0_.motherID=mother.MCTSID_no
- 		where mctsoutbou0_.CallStatus!='Completed'
- 			-- and ((mctsoutbou0_.CallDateFrom>=P_CallDateFrom and mctsoutbou0_.CallDateFrom<=P_CallDateTo ) 
- 			-- or (mctsoutbou0_.CallDateTo<=P_CallDateTo and mctsoutbou0_.CallDateTo>=P_CallDateFrom))
+  from t_MCTSOutboundCalls mctsoutbou0_
+    inner join t_mothervalidrecord mother on mctsoutbou0_.motherID=mother.MCTSID_no
+    where mctsoutbou0_.CallStatus!='Completed'
+      -- and ((mctsoutbou0_.CallDateFrom>=P_CallDateFrom and mctsoutbou0_.CallDateFrom<=P_CallDateTo ) 
+      -- or (mctsoutbou0_.CallDateTo<=P_CallDateTo and mctsoutbou0_.CallDateTo>=P_CallDateFrom))
           and  ((P_CallDateFrom between mctsoutbou0_.CallDateFrom and mctsoutbou0_.CallDateTo)
           and (P_CallDateTo between mctsoutbou0_.CallDateFrom and mctsoutbou0_.CallDateTo))
- 			and mctsoutbou0_.ProviderServiceMapID = P_ProviderServiceMapID 
+      and mctsoutbou0_.ProviderServiceMapID = P_ProviderServiceMapID 
  ) A group by A.motherID 
  )B inner join t_MCTSOutboundCalls C
- 		on C.motherid=B.motherid and C.OutboundCallType=B.OutboundCallType
- 	inner join t_mothervalidrecord D
- 		on B.motherID=D.MCTSID_no ;
- 	-- order by  CallDateFrom;
+    on C.motherid=B.motherid and C.OutboundCallType=B.OutboundCallType
+  inner join t_mothervalidrecord D
+    on B.motherID=D.MCTSID_no ;
+  -- order by  CallDateFrom;
  
  
  END ;;
@@ -23737,19 +23737,19 @@ from
 FROM 
 (select mctsoutbou0_.childID,mctsoutbou0_.OutboundCallType 
 from t_MCTSOutboundCalls mctsoutbou0_
-	inner join t_childvaliddata childvalid1_ on mctsoutbou0_.childID=childvalid1_.MCTSID_no_Child_ID
-	where mctsoutbou0_.CallStatus!='Completed'
+  inner join t_childvaliddata childvalid1_ on mctsoutbou0_.childID=childvalid1_.MCTSID_no_Child_ID
+  where mctsoutbou0_.CallStatus!='Completed'
 -- and ((mctsoutbou0_.CallDateFrom>=P_CallDateFrom and mctsoutbou0_.CallDateFrom<=P_CallDateTo ) 
-	-- or (mctsoutbou0_.CallDateTo<=P_CallDateTo and mctsoutbou0_.CallDateTo>=P_CallDateFrom))
+  -- or (mctsoutbou0_.CallDateTo<=P_CallDateTo and mctsoutbou0_.CallDateTo>=P_CallDateFrom))
      and  ((P_CallDateFrom between mctsoutbou0_.CallDateFrom and mctsoutbou0_.CallDateTo)
           and ( P_CallDateTo between mctsoutbou0_.CallDateFrom and mctsoutbou0_.CallDateTo))
-		and mctsoutbou0_.ProviderServiceMapID=P_ProviderServiceMapID
+    and mctsoutbou0_.ProviderServiceMapID=P_ProviderServiceMapID
 ) A group by A.childID 
 )B inner join t_MCTSOutboundCalls C 
-		on C.childID=B.childID and C.OutboundCallType=B.OutboundCallType
-	inner join t_childvaliddata D
-		on B.childID=D.MCTSID_no_Child_ID ;
-	-- order by CallDateFrom;
+    on C.childID=B.childID and C.OutboundCallType=B.OutboundCallType
+  inner join t_childvaliddata D
+    on B.childID=D.MCTSID_no_Child_ID ;
+  -- order by CallDateFrom;
 
 END ;;
 DELIMITER ;
@@ -23996,7 +23996,7 @@ BEGIN
 
  
 
-	select 
+  select 
 USRMappingID,
 ProviderServiceMapID,
 UserID,
@@ -24261,7 +24261,7 @@ insert into m_subcategory
 (SubCategoryName, 
 SubCategoryDesc,
  CreatedBy)
-	values
+  values
 ("Blood Document", 
 concat("Blood Document Upload For - ", v_ProviderServiceMapID),
 "Trigger-Insert104BRCategory");
@@ -24561,7 +24561,7 @@ SET SQL_SAFE_UPDATES = 0;
 
      drop temporary table if exists temp;
     
-	create temporary table temp (jsondata longtext);
+  create temporary table temp (jsondata longtext);
     
      drop temporary table if exists temp_institution;
     CREATE temporary TABLE `temp_institution` (
@@ -24592,15 +24592,15 @@ SET SQL_SAFE_UPDATES = 0;
   PRIMARY KEY (`InstitutionID`)
 ) ;
 
-	select  JSON_LENGTH(json_extract(IN_InstDet,"$.InstitutionDetails")) into ReCount;
+  select  JSON_LENGTH(json_extract(IN_InstDet,"$.InstitutionDetails")) into ReCount;
    
       set count=0;
- 	WHILE count  <= ReCount DO
+  WHILE count  <= ReCount DO
     SET @sql_text:=CONCAT(' insert into temp select json_extract(''',IN_InstDet, ''',"$.InstitutionDetails[',count,']");');  
-	PREPARE stmt from @sql_text; 
-	EXECUTE stmt;
-	 SET  count = count + 1; 
-	 
+  PREPARE stmt from @sql_text; 
+  EXECUTE stmt;
+   SET  count = count + 1; 
+   
 insert into temp_institution(  Serviceline,state,district,taluk,InstitutionName, 
  Address, ContactPerson1, ContactPerson1_Email, ContactNo1, 
 ContactPerson2, ContactPerson2_Email, ContactNo2, ContactPerson3, ContactPerson3_Email, 
@@ -24610,7 +24610,7 @@ ContactNo3, Website, InstitutionType)
         replace(JSON_EXTRACT(jsondata, '$.State'),'"','') as State,
         replace(JSON_EXTRACT(jsondata, '$.District'),'"','') as District,
         replace(JSON_EXTRACT(jsondata, '$.Taluk'),'"','') as Taluk,
-		replace(JSON_EXTRACT(jsondata, '$.InstitutionName'),'"','') as InstitutionName,
+    replace(JSON_EXTRACT(jsondata, '$.InstitutionName'),'"','') as InstitutionName,
         replace(JSON_EXTRACT(jsondata, '$.Address'),'"','') as Address,
           replace(JSON_EXTRACT(jsondata, '$.PrimaryContactPerson'),'"','') as ContactPerson1,
             replace(JSON_EXTRACT(jsondata, '$.PrimaryEmailID'),'"','') as ContactPerson1_Email,
@@ -24625,8 +24625,8 @@ ContactNo3, Website, InstitutionType)
                 replace(JSON_EXTRACT(jsondata, '$.InstituteType'),'"','') as InstitutionType
         
              from temp;
-	  delete from temp;
-	 END WHILE;
+    delete from temp;
+   END WHILE;
      
      
      update temp_institution t
@@ -24672,8 +24672,8 @@ ContactNo3, Website, InstitutionType)
      and t.providerservicemapid=s.ProviderServiceMapID
      set t.institutiontypeid=s.institutiontypeid;
      
-    /*drop table if exists temp_institution_check;
-     create table temp_institution_check as
+    /*-- DROP TABLE if exists temp_institution_check;
+     CREATE TABLE IF NOT EXISTS temp_institution_check as
      select * from temp_institution;*/
      
      select count(1) into v_recordcount 
@@ -25364,7 +25364,7 @@ BEGIN
   ) C left join t_saitemmapping SAItm 
                  on SAItm.ItemStockEntryID=C.Vanserialno and C.Vanid=SAItm.vanid
                  and date(SAItm.CreatedDate) >=   v_FromDate
- 				and date(SAItm.CreatedDate) <=   v_ToDate
+        and date(SAItm.CreatedDate) <=   v_ToDate
          
          Inner Join m_Item ITM on C.ItemID = ITM.ItemID
          Inner Join m_Facility FAC on C.FacilityID = FAC.FacilityID
@@ -25584,53 +25584,53 @@ where t1.Question='Any High Risk Pregnancy (HRP)' AND t1.Answer ='Yes' and t1.Be
 update `t_mctscallresponse` t1
 inner join m_mapquestion t2 on t1.QuestionID=t2.parentQuestionID
 inner join t_mctscallresponse t3 on t3.questionid=t2.childQuestionID and t3.BenCallID=t1.BenCallID and t3.obcallid=t1.obcallid
-set	t1.ReasonsforHrni = t3.Answer 
+set t1.ReasonsforHrni = t3.Answer 
 where t1.Question='Any High Risk New Born/ Infant' AND t1.Answer not in('Other','No High Risk found','Not Applicable') 
 and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
   
-	/*					
+  /*          
 update `t_mctscallresponse` t1
 inner join m_mapquestion t2 on t1.QuestionID=t2.parentQuestionID
 inner join t_mctscallresponse t3 on t3.questionid=t2.childQuestionID and t3.BenCallID=t1.BenCallID and t3.obcallid=t1.obcallid
-set	t1.CongentialAnomalies =t3.Answer 
+set t1.CongentialAnomalies =t3.Answer 
 where t1.Question='Reasons for Congential Anomalies'  and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
                        
 update `t_mctscallresponse` t1
 inner join m_mapquestion t2 on t1.QuestionID=t2.parentQuestionID
 inner join t_mctscallresponse t3 on t3.questionid=t2.childQuestionID and t3.BenCallID=t1.BenCallID and t3.obcallid=t1.obcallid
-set	t1.ProbableCauseOfDefect = t3.Answer 
+set t1.ProbableCauseOfDefect = t3.Answer 
 where t1.Question='Probable Defect Cause'  and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 */
 
 update `t_mctscallresponse` t1
-set	t1.CongentialAnomalies =t1.Answer 
+set t1.CongentialAnomalies =t1.Answer 
 where t1.Question='Reasons for Congenital Anomalies' and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
 /*update `t_mctscallresponse` t1
-set	t1.ProbableCauseOfDefect =t1.Answer 
+set t1.ProbableCauseOfDefect =t1.Answer 
 where t1.Question='Probable Defect Cause' and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;*/
 
 update `t_mctscallresponse` t1
 inner join  t_mctscallresponse t2 on t1.BenCallID=t2.BenCallID and t1.obcallid=t2.obcallid
-set	t1.ProbableCauseOfDefect = t2.Remarks 
+set t1.ProbableCauseOfDefect = t2.Remarks 
 where t2.Answer='Probable Defect Cause' and t1.Question='Reasons for Congenital Anomalies' 
 and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
 update `t_mctscallresponse` t1
 inner join  t_mctscallresponse t2 on t1.BenCallID=t2.BenCallID and t1.obcallid=t2.obcallid
-set	t1.OtherHrpReason = t2.Answer 
+set t1.OtherHrpReason = t2.Answer 
 where t2.Question='Other' and t1.Question='Any High Risk Pregnancy (HRP)' AND t1.Answer ='Yes'
 and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
 update `t_mctscallresponse` t1
 inner join  t_mctscallresponse t2 on t1.BenCallID=t2.BenCallID and t1.obcallid=t2.obcallid
-set	t1.OtherHrni = t2.Answer 
+set t1.OtherHrni = t2.Answer 
 where t2.Question='Other' and t1.Question='Any High Risk New Born/ Infant' AND t1.Answer not in('No High Risk found','Not Applicable') 
 and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
 update `t_mctscallresponse` t1
 inner join  t_mctscallresponse t2 on t1.BenCallID=t2.BenCallID and t1.obcallid=t2.obcallid
-set	t1.OtherCongentialAnomalies = t2.Answer 
+set t1.OtherCongentialAnomalies = t2.Answer 
 where t2.Question='Other Reason for Congenital Anomalies' and t1.Question='Reasons for Congenital Anomalies' 
 and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
@@ -25670,46 +25670,46 @@ where t1.Question='Any High Risk Pregnancy (HRP)' AND t1.Answer ='Yes' and t1.Be
 update `t_mctscallresponse` t1
 inner join m_mapquestion t2 on t1.QuestionID=t2.parentQuestionID
 inner join t_mctscallresponse t3 on t3.questionid=t2.childQuestionID and t3.BenCallID=t1.BenCallID and t3.obcallid=t1.obcallid
-set	t1.ReasonsforHrni = t3.Answer 
+set t1.ReasonsforHrni = t3.Answer 
 where t1.Question='Any High Risk New Born/ Infant' AND t1.Answer ='Yes'  and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
   
-	/*					
+  /*          
 update `t_mctscallresponse` t1
 inner join m_mapquestion t2 on t1.QuestionID=t2.parentQuestionID
 inner join t_mctscallresponse t3 on t3.questionid=t2.childQuestionID and t3.BenCallID=t1.BenCallID and t3.obcallid=t1.obcallid
-set	t1.CongentialAnomalies =t3.Answer 
+set t1.CongentialAnomalies =t3.Answer 
 where t1.Question='Reasons for Congential Anomalies'  and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
                        
 update `t_mctscallresponse` t1
 inner join m_mapquestion t2 on t1.QuestionID=t2.parentQuestionID
 inner join t_mctscallresponse t3 on t3.questionid=t2.childQuestionID and t3.BenCallID=t1.BenCallID and t3.obcallid=t1.obcallid
-set	t1.ProbableCauseOfDefect = t3.Answer 
+set t1.ProbableCauseOfDefect = t3.Answer 
 where t1.Question='Probable Defect Cause'  and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 */
 
 update `t_mctscallresponse` t1
-set	t1.CongentialAnomalies =t1.Answer 
+set t1.CongentialAnomalies =t1.Answer 
 where t1.Question='Reasons for Congential Anomalies' and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
 update `t_mctscallresponse` t1
-set	t1.ProbableCauseOfDefect =t1.Answer 
+set t1.ProbableCauseOfDefect =t1.Answer 
 where t1.Question='Probable Defect Cause' and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
 update `t_mctscallresponse` t1
 inner join  t_mctscallresponse t2 on t1.BenCallID=t2.BenCallID and t1.obcallid=t2.obcallid
-set	t1.OtherHrpReason = t2.Answer 
+set t1.OtherHrpReason = t2.Answer 
 where t2.Question='Other HRP Reason' and t1.Question='Any High Risk Pregnancy (HRP)' AND t1.Answer ='Yes'
 and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
 update `t_mctscallresponse` t1
 inner join  t_mctscallresponse t2 on t1.BenCallID=t2.BenCallID and t1.obcallid=t2.obcallid
-set	t1.OtherHrni = t2.Answer 
+set t1.OtherHrni = t2.Answer 
 where t2.Question='Other HRNI Reason' and t1.Question='Any High Risk New Born/ Infant' AND t1.Answer ='Yes'
 and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
 update `t_mctscallresponse` t1
 inner join  t_mctscallresponse t2 on t1.BenCallID=t2.BenCallID and t1.obcallid=t2.obcallid
-set	t1.OtherCongentialAnomalies = t2.Answer 
+set t1.OtherCongentialAnomalies = t2.Answer 
 where t2.Question='Other Congential Anomalie' and t1.Question='Reasons for Congential Anomalies' 
 and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
@@ -25749,46 +25749,46 @@ where t1.Question='Any High Risk Pregnancy (HRP)?' AND t1.Answer ='Yes' and t1.B
 update `t_mctscallresponse` t1
 inner join m_mapquestion t2 on t1.QuestionID=t2.parentQuestionID
 inner join t_mctscallresponse t3 on t3.questionid=t2.childQuestionID and t3.BenCallID=t1.BenCallID and t3.obcallid=t1.obcallid
-set	t1.ReasonsforHrni = t3.Answer 
+set t1.ReasonsforHrni = t3.Answer 
 where t1.Question='Any High Risk Newborn/Infant?' AND t1.Answer ='Yes'  and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
   
-	/*					
+  /*          
 update `t_mctscallresponse` t1
 inner join m_mapquestion t2 on t1.QuestionID=t2.parentQuestionID
 inner join t_mctscallresponse t3 on t3.questionid=t2.childQuestionID and t3.BenCallID=t1.BenCallID and t3.obcallid=t1.obcallid
-set	t1.CongentialAnomalies =t3.Answer 
+set t1.CongentialAnomalies =t3.Answer 
 where t1.Question='Reasons for Congential Anomalies'  and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
                        
 update `t_mctscallresponse` t1
 inner join m_mapquestion t2 on t1.QuestionID=t2.parentQuestionID
 inner join t_mctscallresponse t3 on t3.questionid=t2.childQuestionID and t3.BenCallID=t1.BenCallID and t3.obcallid=t1.obcallid
-set	t1.ProbableCauseOfDefect = t3.Answer 
+set t1.ProbableCauseOfDefect = t3.Answer 
 where t1.Question='Probable Defect Cause'  and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 */
 
 update `t_mctscallresponse` t1
-set	t1.CongentialAnomalies =t1.Answer 
+set t1.CongentialAnomalies =t1.Answer 
 where t1.Question='Reasons for Congential Anomalies' and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
 update `t_mctscallresponse` t1
-set	t1.ProbableCauseOfDefect =t1.Answer 
+set t1.ProbableCauseOfDefect =t1.Answer 
 where t1.Question='Probable Defect Cause' and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
 update `t_mctscallresponse` t1
 inner join  t_mctscallresponse t2 on t1.BenCallID=t2.BenCallID and t1.obcallid=t2.obcallid
-set	t1.OtherHrpReason = t2.Answer 
+set t1.OtherHrpReason = t2.Answer 
 where t2.Question='Other HRP Reason' and t1.Question='Any High Risk Pregnancy (HRP)?' AND t1.Answer ='Yes'
 and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
 update `t_mctscallresponse` t1
 inner join  t_mctscallresponse t2 on t1.BenCallID=t2.BenCallID and t1.obcallid=t2.obcallid
-set	t1.OtherHrni = t2.Answer 
+set t1.OtherHrni = t2.Answer 
 where t2.Question='Other HRNI Reason' and t1.Question='Any High Risk Newborn/Infant?' AND t1.Answer ='Yes'
 and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
 update `t_mctscallresponse` t1
 inner join  t_mctscallresponse t2 on t1.BenCallID=t2.BenCallID and t1.obcallid=t2.obcallid
-set	t1.OtherCongentialAnomalies = t2.Answer 
+set t1.OtherCongentialAnomalies = t2.Answer 
 where t2.Question='Other Congential Anomalie' and t1.Question='Reasons for Congential Anomalies' 
 and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
@@ -25970,7 +25970,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To Load fact_104benmedhistory (reporting)
                                                 from  t_104benmedhistory(db_iemr)
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------

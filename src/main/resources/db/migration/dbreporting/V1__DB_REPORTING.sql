@@ -1,7 +1,7 @@
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 -- Host: 192.168.5.5    Database: db_reporting
 -- ------------------------------------------------------
--- Server version	5.7.19-log
+-- Server version 5.7.19-log
 use db_reporting;
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -18,7 +18,7 @@ use db_reporting;
 -- Temporary view structure for view `assam_104`
 --
 
-DROP TABLE IF EXISTS `assam_104`;
+-- DROP TABLE IF EXISTS `assam_104`;
 /*!50001 DROP VIEW IF EXISTS `assam_104`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -36,10 +36,10 @@ SET character_set_client = @saved_cs_client;
 -- Table structure for table `dim_1097beneficiary`
 --
 
-DROP TABLE IF EXISTS `dim_1097beneficiary`;
+-- DROP TABLE IF EXISTS `dim_1097beneficiary`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `dim_1097beneficiary` (
+CREATE TABLE IF NOT EXISTS `dim_1097beneficiary` (
   `Dim_1097BeneficiaryID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenficiaryDetailsID` bigint(20) DEFAULT NULL,
@@ -89,10 +89,10 @@ CREATE TABLE `dim_1097beneficiary` (
 -- Table structure for table `dim_beneficiary`
 --
 
-DROP TABLE IF EXISTS `dim_beneficiary`;
+-- DROP TABLE IF EXISTS `dim_beneficiary`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `dim_beneficiary` (
+CREATE TABLE IF NOT EXISTS `dim_beneficiary` (
   `Dim_BeneficiaryID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryDetailsId` bigint(20) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -250,10 +250,10 @@ CREATE TABLE `dim_beneficiary` (
 -- Table structure for table `dim_date`
 --
 
-DROP TABLE IF EXISTS `dim_date`;
+-- DROP TABLE IF EXISTS `dim_date`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `dim_date` (
+CREATE TABLE IF NOT EXISTS `dim_date` (
   `date_key` int(11) NOT NULL,
   `full_date` date DEFAULT NULL,
   `date_name` char(11) NOT NULL,
@@ -285,10 +285,10 @@ CREATE TABLE `dim_date` (
 -- Table structure for table `dim_user`
 --
 
-DROP TABLE IF EXISTS `dim_user`;
+-- DROP TABLE IF EXISTS `dim_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `dim_user` (
+CREATE TABLE IF NOT EXISTS `dim_user` (
   `Dim_USERID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
   `TitleID` smallint(6) DEFAULT NULL,
@@ -357,7 +357,7 @@ CREATE TABLE `dim_user` (
 -- Temporary view structure for view `fac_bencall`
 --
 
-DROP TABLE IF EXISTS `fac_bencall`;
+-- DROP TABLE IF EXISTS `fac_bencall`;
 /*!50001 DROP VIEW IF EXISTS `fac_bencall`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -371,10 +371,10 @@ SET character_set_client = @saved_cs_client;
 -- Table structure for table `fact_104bencdiresponse`
 --
 
-DROP TABLE IF EXISTS `fact_104bencdiresponse`;
+-- DROP TABLE IF EXISTS `fact_104bencdiresponse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_104bencdiresponse` (
+CREATE TABLE IF NOT EXISTS `fact_104bencdiresponse` (
   `Fact_104BenCDIResponseID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ID` bigint(20) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -405,10 +405,10 @@ CREATE TABLE `fact_104bencdiresponse` (
 -- Table structure for table `fact_104benmedhistory`
 --
 
-DROP TABLE IF EXISTS `fact_104benmedhistory`;
+-- DROP TABLE IF EXISTS `fact_104benmedhistory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_104benmedhistory` (
+CREATE TABLE IF NOT EXISTS `fact_104benmedhistory` (
   `Fact_104BenMedHistoryID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenHistoryID` bigint(20) DEFAULT NULL,
   `RequestID` varchar(30) DEFAULT NULL,
@@ -474,10 +474,10 @@ CREATE TABLE `fact_104benmedhistory` (
 -- Table structure for table `fact_104prescription`
 --
 
-DROP TABLE IF EXISTS `fact_104prescription`;
+-- DROP TABLE IF EXISTS `fact_104prescription`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_104prescription` (
+CREATE TABLE IF NOT EXISTS `fact_104prescription` (
   `Fact_104prescriptionID` bigint(20) NOT NULL AUTO_INCREMENT,
   `PrescriptionID` bigint(20) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -518,10 +518,10 @@ CREATE TABLE `fact_104prescription` (
 -- Table structure for table `fact_1097callsummary`
 --
 
-DROP TABLE IF EXISTS `fact_1097callsummary`;
+-- DROP TABLE IF EXISTS `fact_1097callsummary`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_1097callsummary` (
+CREATE TABLE IF NOT EXISTS `fact_1097callsummary` (
   `Fact_1097CallSummaryID` bigint(20) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
   `CallStartTime` datetime DEFAULT NULL,
@@ -563,10 +563,10 @@ CREATE TABLE `fact_1097callsummary` (
 -- Table structure for table `fact_anccare`
 --
 
-DROP TABLE IF EXISTS `fact_anccare`;
+-- DROP TABLE IF EXISTS `fact_anccare`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_anccare` (
+CREATE TABLE IF NOT EXISTS `fact_anccare` (
   `Fact_ANCCareID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ID` bigint(20) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -611,10 +611,10 @@ CREATE TABLE `fact_anccare` (
 -- Table structure for table `fact_ancdiagnosis`
 --
 
-DROP TABLE IF EXISTS `fact_ancdiagnosis`;
+-- DROP TABLE IF EXISTS `fact_ancdiagnosis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_ancdiagnosis` (
+CREATE TABLE IF NOT EXISTS `fact_ancdiagnosis` (
   `Fact_ANCDiagnosisID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ID` bigint(20) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -657,10 +657,10 @@ CREATE TABLE `fact_ancdiagnosis` (
 -- Table structure for table `fact_bencall`
 --
 
-DROP TABLE IF EXISTS `fact_bencall`;
+-- DROP TABLE IF EXISTS `fact_bencall`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_bencall` (
+CREATE TABLE IF NOT EXISTS `fact_bencall` (
   `Fact_BenCallID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenCallID` bigint(20) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -746,10 +746,10 @@ CREATE TABLE `fact_bencall` (
 -- Table structure for table `fact_benchiefcomplaint`
 --
 
-DROP TABLE IF EXISTS `fact_benchiefcomplaint`;
+-- DROP TABLE IF EXISTS `fact_benchiefcomplaint`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_benchiefcomplaint` (
+CREATE TABLE IF NOT EXISTS `fact_benchiefcomplaint` (
   `Fact_BenChiefComplaintID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ID` bigint(20) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -789,10 +789,10 @@ CREATE TABLE `fact_benchiefcomplaint` (
 -- Table structure for table `fact_bendisease`
 --
 
-DROP TABLE IF EXISTS `fact_bendisease`;
+-- DROP TABLE IF EXISTS `fact_bendisease`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_bendisease` (
+CREATE TABLE IF NOT EXISTS `fact_bendisease` (
   `FactBenDiseaseID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `VisitCode` bigint(20) DEFAULT NULL,
@@ -823,10 +823,10 @@ CREATE TABLE `fact_bendisease` (
 -- Table structure for table `fact_benreferdetails`
 --
 
-DROP TABLE IF EXISTS `fact_benreferdetails`;
+-- DROP TABLE IF EXISTS `fact_benreferdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_benreferdetails` (
+CREATE TABLE IF NOT EXISTS `fact_benreferdetails` (
   `FactBenReferID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -857,10 +857,10 @@ CREATE TABLE `fact_benreferdetails` (
 -- Table structure for table `fact_benvisitdetail`
 --
 
-DROP TABLE IF EXISTS `fact_benvisitdetail`;
+-- DROP TABLE IF EXISTS `fact_benvisitdetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_benvisitdetail` (
+CREATE TABLE IF NOT EXISTS `fact_benvisitdetail` (
   `Fact_BenVisitDetailID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenVisitID` bigint(20) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -904,10 +904,10 @@ CREATE TABLE `fact_benvisitdetail` (
 -- Table structure for table `fact_bloodrequest`
 --
 
-DROP TABLE IF EXISTS `fact_bloodrequest`;
+-- DROP TABLE IF EXISTS `fact_bloodrequest`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_bloodrequest` (
+CREATE TABLE IF NOT EXISTS `fact_bloodrequest` (
   `Fact_BloodRequestID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BloodReqID` bigint(20) DEFAULT NULL,
   `RequestID` varchar(30) DEFAULT NULL,
@@ -958,10 +958,10 @@ CREATE TABLE `fact_bloodrequest` (
 -- Table structure for table `fact_childcongenitalanomalies`
 --
 
-DROP TABLE IF EXISTS `fact_childcongenitalanomalies`;
+-- DROP TABLE IF EXISTS `fact_childcongenitalanomalies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_childcongenitalanomalies` (
+CREATE TABLE IF NOT EXISTS `fact_childcongenitalanomalies` (
   `Fact_ChildCongenitalAnomaliesID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ChildCongenitalAnomaliesID` bigint(20) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -990,10 +990,10 @@ CREATE TABLE `fact_childcongenitalanomalies` (
 -- Table structure for table `fact_childinvalidrecord`
 --
 
-DROP TABLE IF EXISTS `fact_childinvalidrecord`;
+-- DROP TABLE IF EXISTS `fact_childinvalidrecord`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_childinvalidrecord` (
+CREATE TABLE IF NOT EXISTS `fact_childinvalidrecord` (
   `Fact_ChildInValidRecordID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RowID` bigint(20) DEFAULT NULL,
   `Date_of_Entry` datetime DEFAULT NULL,
@@ -1128,10 +1128,10 @@ CREATE TABLE `fact_childinvalidrecord` (
 -- Table structure for table `fact_childvalidrecord`
 --
 
-DROP TABLE IF EXISTS `fact_childvalidrecord`;
+-- DROP TABLE IF EXISTS `fact_childvalidrecord`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_childvalidrecord` (
+CREATE TABLE IF NOT EXISTS `fact_childvalidrecord` (
   `Fact_ChildValidRecordID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RowID` bigint(20) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -1278,10 +1278,10 @@ CREATE TABLE `fact_childvalidrecord` (
 -- Table structure for table `fact_diahypercase`
 --
 
-DROP TABLE IF EXISTS `fact_diahypercase`;
+-- DROP TABLE IF EXISTS `fact_diahypercase`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_diahypercase` (
+CREATE TABLE IF NOT EXISTS `fact_diahypercase` (
   `FactDiaHyperCaseID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `VisitCode` bigint(20) DEFAULT NULL,
@@ -1313,10 +1313,10 @@ CREATE TABLE `fact_diahypercase` (
 -- Table structure for table `fact_directoryservice`
 --
 
-DROP TABLE IF EXISTS `fact_directoryservice`;
+-- DROP TABLE IF EXISTS `fact_directoryservice`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_directoryservice` (
+CREATE TABLE IF NOT EXISTS `fact_directoryservice` (
   `Fact_DirectoryServiceID` bigint(20) NOT NULL AUTO_INCREMENT,
   `DirectoryServiceID` bigint(20) DEFAULT NULL,
   `RequestID` varchar(30) DEFAULT NULL,
@@ -1352,10 +1352,10 @@ CREATE TABLE `fact_directoryservice` (
 -- Table structure for table `fact_epidemicoutbreak`
 --
 
-DROP TABLE IF EXISTS `fact_epidemicoutbreak`;
+-- DROP TABLE IF EXISTS `fact_epidemicoutbreak`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_epidemicoutbreak` (
+CREATE TABLE IF NOT EXISTS `fact_epidemicoutbreak` (
   `Fact_EpidemicOutbreakID` bigint(20) NOT NULL AUTO_INCREMENT,
   `OutbreakComplaintID` bigint(20) DEFAULT NULL,
   `RequestID` varchar(30) DEFAULT NULL,
@@ -1390,10 +1390,10 @@ CREATE TABLE `fact_epidemicoutbreak` (
 -- Table structure for table `fact_feedback`
 --
 
-DROP TABLE IF EXISTS `fact_feedback`;
+-- DROP TABLE IF EXISTS `fact_feedback`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_feedback` (
+CREATE TABLE IF NOT EXISTS `fact_feedback` (
   `Fact_FeedbackID` bigint(20) NOT NULL AUTO_INCREMENT,
   `FeedbackID` bigint(20) DEFAULT NULL,
   `BenCallID` bigint(20) DEFAULT NULL,
@@ -1451,10 +1451,10 @@ CREATE TABLE `fact_feedback` (
 -- Table structure for table `fact_foodsafetycopmlaint`
 --
 
-DROP TABLE IF EXISTS `fact_foodsafetycopmlaint`;
+-- DROP TABLE IF EXISTS `fact_foodsafetycopmlaint`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_foodsafetycopmlaint` (
+CREATE TABLE IF NOT EXISTS `fact_foodsafetycopmlaint` (
   `Fact_FSComplaintID` bigint(20) NOT NULL AUTO_INCREMENT,
   `FSComplaintID` bigint(20) DEFAULT NULL,
   `RequestID` varchar(30) DEFAULT NULL,
@@ -1508,10 +1508,10 @@ CREATE TABLE `fact_foodsafetycopmlaint` (
 -- Table structure for table `fact_itemstockentry`
 --
 
-DROP TABLE IF EXISTS `fact_itemstockentry`;
+-- DROP TABLE IF EXISTS `fact_itemstockentry`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_itemstockentry` (
+CREATE TABLE IF NOT EXISTS `fact_itemstockentry` (
   `Fact_ItemStockEntryID` int(11) NOT NULL AUTO_INCREMENT,
   `ItemStockEntryID` int(11) DEFAULT NULL,
   `FacilityID` int(11) DEFAULT NULL,
@@ -1555,10 +1555,10 @@ CREATE TABLE `fact_itemstockentry` (
 -- Table structure for table `fact_itemstockexit`
 --
 
-DROP TABLE IF EXISTS `fact_itemstockexit`;
+-- DROP TABLE IF EXISTS `fact_itemstockexit`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_itemstockexit` (
+CREATE TABLE IF NOT EXISTS `fact_itemstockexit` (
   `Fact_ItemStockExitID` int(11) NOT NULL AUTO_INCREMENT,
   `ItemStockExitID` int(11) DEFAULT NULL,
   `ItemStockEntryID` int(11) DEFAULT NULL,
@@ -1605,10 +1605,10 @@ CREATE TABLE `fact_itemstockexit` (
 -- Table structure for table `fact_labtestorder`
 --
 
-DROP TABLE IF EXISTS `fact_labtestorder`;
+-- DROP TABLE IF EXISTS `fact_labtestorder`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_labtestorder` (
+CREATE TABLE IF NOT EXISTS `fact_labtestorder` (
   `Fact_LabTestOrderID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ID` bigint(20) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -1648,10 +1648,10 @@ CREATE TABLE `fact_labtestorder` (
 -- Table structure for table `fact_labtestresult`
 --
 
-DROP TABLE IF EXISTS `fact_labtestresult`;
+-- DROP TABLE IF EXISTS `fact_labtestresult`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_labtestresult` (
+CREATE TABLE IF NOT EXISTS `fact_labtestresult` (
   `Fact_LabTestresult` bigint(20) NOT NULL AUTO_INCREMENT,
   `ID` bigint(20) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -1693,10 +1693,10 @@ CREATE TABLE `fact_labtestresult` (
 -- Table structure for table `fact_mctscallresponse`
 --
 
-DROP TABLE IF EXISTS `fact_mctscallresponse`;
+-- DROP TABLE IF EXISTS `fact_mctscallresponse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_mctscallresponse` (
+CREATE TABLE IF NOT EXISTS `fact_mctscallresponse` (
   `Fact_MctsCallResponseID` bigint(20) NOT NULL AUTO_INCREMENT,
   `MctsCallResponseID` bigint(20) DEFAULT NULL,
   `MotherID` bigint(20) DEFAULT NULL,
@@ -1737,10 +1737,10 @@ CREATE TABLE `fact_mctscallresponse` (
 -- Table structure for table `fact_mctsoutboundcall`
 --
 
-DROP TABLE IF EXISTS `fact_mctsoutboundcall`;
+-- DROP TABLE IF EXISTS `fact_mctsoutboundcall`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_mctsoutboundcall` (
+CREATE TABLE IF NOT EXISTS `fact_mctsoutboundcall` (
   `Fact_MctsOutboundCallID` bigint(20) NOT NULL AUTO_INCREMENT,
   `OBCallID` bigint(20) DEFAULT NULL,
   `MotherID` bigint(20) DEFAULT NULL,
@@ -1789,10 +1789,10 @@ CREATE TABLE `fact_mctsoutboundcall` (
 -- Table structure for table `fact_motherinvalidrecord`
 --
 
-DROP TABLE IF EXISTS `fact_motherinvalidrecord`;
+-- DROP TABLE IF EXISTS `fact_motherinvalidrecord`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_motherinvalidrecord` (
+CREATE TABLE IF NOT EXISTS `fact_motherinvalidrecord` (
   `Fact_MotherInValidRecordID` bigint(20) NOT NULL AUTO_INCREMENT,
   `MotherInValidRecordID` bigint(20) DEFAULT NULL,
   `RowID` bigint(20) DEFAULT NULL,
@@ -1953,10 +1953,10 @@ CREATE TABLE `fact_motherinvalidrecord` (
 -- Table structure for table `fact_mothervalidrecord`
 --
 
-DROP TABLE IF EXISTS `fact_mothervalidrecord`;
+-- DROP TABLE IF EXISTS `fact_mothervalidrecord`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_mothervalidrecord` (
+CREATE TABLE IF NOT EXISTS `fact_mothervalidrecord` (
   `Fact_MotherValidRecordID` bigint(20) NOT NULL AUTO_INCREMENT,
   `MotherValidRecordID` bigint(20) DEFAULT NULL,
   `RowID` bigint(20) DEFAULT NULL,
@@ -2131,10 +2131,10 @@ CREATE TABLE `fact_mothervalidrecord` (
 -- Table structure for table `fact_organdonation`
 --
 
-DROP TABLE IF EXISTS `fact_organdonation`;
+-- DROP TABLE IF EXISTS `fact_organdonation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_organdonation` (
+CREATE TABLE IF NOT EXISTS `fact_organdonation` (
   `Fact_OrganDonationID` bigint(20) NOT NULL AUTO_INCREMENT,
   `OrganDonationID` bigint(20) DEFAULT NULL,
   `RequestID` varchar(30) DEFAULT NULL,
@@ -2175,10 +2175,10 @@ CREATE TABLE `fact_organdonation` (
 -- Table structure for table `fact_patientissueexit`
 --
 
-DROP TABLE IF EXISTS `fact_patientissueexit`;
+-- DROP TABLE IF EXISTS `fact_patientissueexit`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_patientissueexit` (
+CREATE TABLE IF NOT EXISTS `fact_patientissueexit` (
   `Fact_PatientIssueExitID` int(11) NOT NULL AUTO_INCREMENT,
   `ItemStockExitID` int(11) DEFAULT NULL,
   `ItemStockEntryID` int(11) DEFAULT NULL,
@@ -2228,10 +2228,10 @@ CREATE TABLE `fact_patientissueexit` (
 -- Table structure for table `fact_phoneblock`
 --
 
-DROP TABLE IF EXISTS `fact_phoneblock`;
+-- DROP TABLE IF EXISTS `fact_phoneblock`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_phoneblock` (
+CREATE TABLE IF NOT EXISTS `fact_phoneblock` (
   `Fact_PhoneBlockID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ID` bigint(20) DEFAULT NULL,
   `phoneNo` varchar(15) DEFAULT NULL,
@@ -2254,10 +2254,10 @@ CREATE TABLE `fact_phoneblock` (
 -- Table structure for table `fact_phyvitals`
 --
 
-DROP TABLE IF EXISTS `fact_phyvitals`;
+-- DROP TABLE IF EXISTS `fact_phyvitals`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_phyvitals` (
+CREATE TABLE IF NOT EXISTS `fact_phyvitals` (
   `fact_PhyVitalsid` bigint(11) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -2302,10 +2302,10 @@ CREATE TABLE `fact_phyvitals` (
 -- Table structure for table `fact_pnccare`
 --
 
-DROP TABLE IF EXISTS `fact_pnccare`;
+-- DROP TABLE IF EXISTS `fact_pnccare`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_pnccare` (
+CREATE TABLE IF NOT EXISTS `fact_pnccare` (
   `Fact_PNCCareID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ID` bigint(20) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -2358,10 +2358,10 @@ CREATE TABLE `fact_pnccare` (
 -- Table structure for table `fact_pncdiagnosis`
 --
 
-DROP TABLE IF EXISTS `fact_pncdiagnosis`;
+-- DROP TABLE IF EXISTS `fact_pncdiagnosis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_pncdiagnosis` (
+CREATE TABLE IF NOT EXISTS `fact_pncdiagnosis` (
   `FactPNCDiagnosisID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `VisitCode` bigint(20) DEFAULT NULL,
@@ -2393,10 +2393,10 @@ CREATE TABLE `fact_pncdiagnosis` (
 -- Table structure for table `fact_prescribeddrug`
 --
 
-DROP TABLE IF EXISTS `fact_prescribeddrug`;
+-- DROP TABLE IF EXISTS `fact_prescribeddrug`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_prescribeddrug` (
+CREATE TABLE IF NOT EXISTS `fact_prescribeddrug` (
   `Fact_PrescribedDrugID` bigint(20) NOT NULL AUTO_INCREMENT,
   `PrescribedDrugID` bigint(20) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -2440,10 +2440,10 @@ CREATE TABLE `fact_prescribeddrug` (
 -- Table structure for table `fact_prescription`
 --
 
-DROP TABLE IF EXISTS `fact_prescription`;
+-- DROP TABLE IF EXISTS `fact_prescription`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_prescription` (
+CREATE TABLE IF NOT EXISTS `fact_prescription` (
   `Fact_PrescriptionID` bigint(20) NOT NULL AUTO_INCREMENT,
   `PrescriptionID` bigint(20) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -2483,10 +2483,10 @@ CREATE TABLE `fact_prescription` (
 -- Table structure for table `fact_schemeservice`
 --
 
-DROP TABLE IF EXISTS `fact_schemeservice`;
+-- DROP TABLE IF EXISTS `fact_schemeservice`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_schemeservice` (
+CREATE TABLE IF NOT EXISTS `fact_schemeservice` (
   `Fact_SchemeServiceID` bigint(20) NOT NULL AUTO_INCREMENT,
   `SchemeServiceID` bigint(20) DEFAULT NULL,
   `RequestID` varchar(30) DEFAULT NULL,
@@ -2514,10 +2514,10 @@ CREATE TABLE `fact_schemeservice` (
 -- Table structure for table `fact_tmanc`
 --
 
-DROP TABLE IF EXISTS `fact_tmanc`;
+-- DROP TABLE IF EXISTS `fact_tmanc`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_tmanc` (
+CREATE TABLE IF NOT EXISTS `fact_tmanc` (
   `Fact_TMANC` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
   `VisitCode` bigint(20) DEFAULT NULL,
@@ -2558,10 +2558,10 @@ CREATE TABLE `fact_tmanc` (
 -- Table structure for table `fact_tmrequest`
 --
 
-DROP TABLE IF EXISTS `fact_tmrequest`;
+-- DROP TABLE IF EXISTS `fact_tmrequest`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fact_tmrequest` (
+CREATE TABLE IF NOT EXISTS `fact_tmrequest` (
   `Fact_TMRequestID` bigint(20) NOT NULL AUTO_INCREMENT,
   `TMRequestID` bigint(20) DEFAULT NULL,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -2602,10 +2602,10 @@ CREATE TABLE `fact_tmrequest` (
 -- Table structure for table `m_report`
 --
 
-DROP TABLE IF EXISTS `m_report`;
+-- DROP TABLE IF EXISTS `m_report`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `m_report` (
+CREATE TABLE IF NOT EXISTS `m_report` (
   `ReportID` int(11) NOT NULL AUTO_INCREMENT,
   `ReportName` varchar(50) DEFAULT NULL,
   `SPName` varchar(50) DEFAULT NULL,
@@ -2624,10 +2624,10 @@ CREATE TABLE `m_report` (
 -- Table structure for table `replicationtest`
 --
 
-DROP TABLE IF EXISTS `replicationtest`;
+-- DROP TABLE IF EXISTS `replicationtest`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `replicationtest` (
+CREATE TABLE IF NOT EXISTS `replicationtest` (
   `id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2636,7 +2636,7 @@ CREATE TABLE `replicationtest` (
 -- Temporary view structure for view `sanjeevani_dashboard`
 --
 
-DROP TABLE IF EXISTS `sanjeevani_dashboard`;
+-- DROP TABLE IF EXISTS `sanjeevani_dashboard`;
 /*!50001 DROP VIEW IF EXISTS `sanjeevani_dashboard`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -2737,10 +2737,10 @@ SET character_set_client = @saved_cs_client;
 -- Table structure for table `scheduler_status`
 --
 
-DROP TABLE IF EXISTS `scheduler_status`;
+-- DROP TABLE IF EXISTS `scheduler_status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `scheduler_status` (
+CREATE TABLE IF NOT EXISTS `scheduler_status` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `proc_name` varchar(45) DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
@@ -2753,10 +2753,10 @@ CREATE TABLE `scheduler_status` (
 -- Table structure for table `t_itemstockentry`
 --
 
-DROP TABLE IF EXISTS `t_itemstockentry`;
+-- DROP TABLE IF EXISTS `t_itemstockentry`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_itemstockentry` (
+CREATE TABLE IF NOT EXISTS `t_itemstockentry` (
   `ItemStockEntryID` int(11) NOT NULL AUTO_INCREMENT,
   `FacilityID` int(11) NOT NULL,
   `ItemID` int(11) NOT NULL,
@@ -3011,7 +3011,7 @@ distinct BCC.BeneficiaryRegID , 'OldDiabetic' OldDiabetic
 from db_iemr.t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 2
-	and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     and date(BCC.Year) < date(BM.CreatedDate)
     
@@ -3030,7 +3030,7 @@ inner join db_iemr.t_prescription Rx
     and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
 WHERE DATE(Rx.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND Rx.providerServiceMapID = PSMID
-	AND Rx.Deleted = 0b0
+  AND Rx.Deleted = 0b0
     and Rx.DiagnosisProvided like '%Diabetes Mellitus%'
 
 union
@@ -3045,7 +3045,7 @@ inner join db_iemr.t_pncdiagnosis PNCD
     and (BVD.VisitCategory = 'PNC')
 WHERE DATE(PNCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PNCD.providerServiceMapID = PSMID
-	AND PNCD.Deleted = 0b0
+  AND PNCD.Deleted = 0b0
     AND PNCD.ProvisionalDiagnosis like '%Diabetes Mellitus%' ) A
 /* 
 union
@@ -3067,7 +3067,7 @@ inner join db_iemr.t_ancdiagnosis ANCD
     and (BVD.VisitCategory = 'ANC')
  WHERE DATE(ANCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND ANCD.providerServiceMapID = PSMID
-	AND ANCD.Deleted = 0b0
+  AND ANCD.Deleted = 0b0
 union
 
 select 
@@ -3087,34 +3087,34 @@ inner join db_iemr.t_ncdscreening NCDS
     and (BVD.VisitCategory = 'NCD screening')
 WHERE DATE(NCDS.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND NCDS.providerServiceMapID = PSMID
-	AND NCDS.Deleted = 0b0
+  AND NCDS.Deleted = 0b0
 */
 inner join db_iemr.t_prescribeddrug PD 
-	on A.BeneficiaryRegID = PD.BeneficiaryRegID
+  on A.BeneficiaryRegID = PD.BeneficiaryRegID
     and A.VisitCode = PD.VisitCode
 WHERE DATE(PD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PD.providerServiceMapID = PSMID
-	AND PD.Deleted = 0b0
+  AND PD.Deleted = 0b0
     AND PD.GenericDrugName in ("%%");
 
 
 select count(distinct BeneficiaryRegID) from AllDiabeticTemp into v_AllDiabetic;
 
 select count(distinct ADT.BeneficiaryRegID) from AllDiabeticTemp ADT
-	inner join db_iemr.t_benreferdetails BRD on ADT.BeneficiaryRegID = BRD.BeneficiaryRegID
-	into v_AllDiaRef; 
+  inner join db_iemr.t_benreferdetails BRD on ADT.BeneficiaryRegID = BRD.BeneficiaryRegID
+  into v_AllDiaRef; 
     
 select count(distinct ADT.BeneficiaryRegID) from AllDiabeticTemp ADT
-	inner join db_iemr.t_Lab_TestResult LTR on ADT.BeneficiaryRegID = LTR.BeneficiaryRegID
+  inner join db_iemr.t_Lab_TestResult LTR on ADT.BeneficiaryRegID = LTR.BeneficiaryRegID
     where (LTR.TestResultValue < 160 and LTR.ProcedureID = "% %") 
-		and  (LTR.TestResultValue < 7 and LTR.ProcedureID = "% %")
-	into v_AllDiaControl; 
+    and  (LTR.TestResultValue < 7 and LTR.ProcedureID = "% %")
+  into v_AllDiaControl; 
     
 select count(distinct ADT.BeneficiaryRegID) from AllDiabeticTemp ADT
-	inner join db_identity.i_beneficiarymapping BM on ADT.BeneficiaryRegID = BM.BenRegID
+  inner join db_identity.i_beneficiarymapping BM on ADT.BeneficiaryRegID = BM.BenRegID
     inner join db_identity.i_beneficiarydetails BD on BM.BenDetailsID = BD.BeneficiaryDetailsID
     where BD.GenderID = 2
-	into v_AllDiaFemale; 
+  into v_AllDiaFemale; 
     
 select  v_AllDiabetic,v_AllDiaRef,v_AllDiaControl,v_AllDiaFemale;
 END ;;
@@ -3147,8 +3147,8 @@ distinct BCC.BeneficiaryRegID , 'OldDiaHTN' OldDiaHTN
 from db_iemr.t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 2
-	and BCC.ComorbidConditionID = 3
-	and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and BCC.ComorbidConditionID = 3
+  and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     and date(BCC.Year) < date(BM.CreatedDate)
     
@@ -3167,7 +3167,7 @@ inner join db_iemr.t_prescription Rx
     and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
 WHERE DATE(Rx.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND Rx.providerServiceMapID = PSMID
-	AND Rx.Deleted = 0b0
+  AND Rx.Deleted = 0b0
     and Rx.DiagnosisProvided like '%Diabetes Mellitus%'
     and Rx.DiagnosisProvided like '%Hypertension%'
 
@@ -3183,7 +3183,7 @@ inner join db_iemr.t_pncdiagnosis PNCD
     and (BVD.VisitCategory = 'PNC')
 WHERE DATE(PNCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PNCD.providerServiceMapID = PSMID
-	AND PNCD.Deleted = 0b0
+  AND PNCD.Deleted = 0b0
     AND PNCD.ProvisionalDiagnosis like '%Diabetes Mellitus%'
     AND PNCD.ProvisionalDiagnosis like '%Hypertension%') A
 /* 
@@ -3206,7 +3206,7 @@ inner join db_iemr.t_ancdiagnosis ANCD
     and (BVD.VisitCategory = 'ANC')
  WHERE DATE(ANCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND ANCD.providerServiceMapID = PSMID
-	AND ANCD.Deleted = 0b0
+  AND ANCD.Deleted = 0b0
 union
 
 select 
@@ -3226,14 +3226,14 @@ inner join db_iemr.t_ncdscreening NCDS
     and (BVD.VisitCategory = 'NCD screening')
 WHERE DATE(NCDS.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND NCDS.providerServiceMapID = PSMID
-	AND NCDS.Deleted = 0b0
+  AND NCDS.Deleted = 0b0
 */
 inner join db_iemr.t_prescribeddrug PD 
-	on A.BeneficiaryRegID = PD.BeneficiaryRegID
+  on A.BeneficiaryRegID = PD.BeneficiaryRegID
     and A.VisitCode = PD.VisitCode
 WHERE DATE(PD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PD.providerServiceMapID = PSMID
-	AND PD.Deleted = 0b0
+  AND PD.Deleted = 0b0
     AND PD.GenericDrugName in ("%%")
     AND PD.GenericDrugName in ("%%");
 
@@ -3324,7 +3324,7 @@ distinct BCC.BeneficiaryRegID , 'OldHTN' OldHTN
 from db_iemr.t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 3
-	and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     and date(BCC.Year) < date(BM.CreatedDate)
     
@@ -3343,7 +3343,7 @@ inner join db_iemr.t_prescription Rx
     and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
 WHERE DATE(Rx.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND Rx.providerServiceMapID = PSMID
-	AND Rx.Deleted = 0b0
+  AND Rx.Deleted = 0b0
     and Rx.DiagnosisProvided like '%Hypertension%'
 
 union
@@ -3358,7 +3358,7 @@ inner join db_iemr.t_pncdiagnosis PNCD
     and (BVD.VisitCategory = 'PNC')
 WHERE DATE(PNCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PNCD.providerServiceMapID = PSMID
-	AND PNCD.Deleted = 0b0
+  AND PNCD.Deleted = 0b0
     AND PNCD.ProvisionalDiagnosis like '%Hypertension%' ) A
 /* 
 union
@@ -3380,7 +3380,7 @@ inner join db_iemr.t_ancdiagnosis ANCD
     and (BVD.VisitCategory = 'ANC')
  WHERE DATE(ANCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND ANCD.providerServiceMapID = PSMID
-	AND ANCD.Deleted = 0b0
+  AND ANCD.Deleted = 0b0
 union
 
 select 
@@ -3400,36 +3400,36 @@ inner join db_iemr.t_ncdscreening NCDS
     and (BVD.VisitCategory = 'NCD screening')
 WHERE DATE(NCDS.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND NCDS.providerServiceMapID = PSMID
-	AND NCDS.Deleted = 0b0
+  AND NCDS.Deleted = 0b0
 */
 inner join db_iemr.t_prescribeddrug PD 
-	on A.BeneficiaryRegID = PD.BeneficiaryRegID
+  on A.BeneficiaryRegID = PD.BeneficiaryRegID
     and A.VisitCode = PD.VisitCode
 WHERE DATE(PD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PD.providerServiceMapID = PSMID
-	AND PD.Deleted = 0b0
+  AND PD.Deleted = 0b0
     AND PD.GenericDrugName in ("%%");
 
 
 select count(distinct BeneficiaryRegID) from AllHTNTemp into v_AllHTN;
 
 select count(distinct AHT.BeneficiaryRegID) from AllHTNTemp AHT
-	inner join db_iemr.t_benreferdetails BRD on AHT.BeneficiaryRegID = BRD.BeneficiaryRegID
-	into v_AllHTNRef; 
+  inner join db_iemr.t_benreferdetails BRD on AHT.BeneficiaryRegID = BRD.BeneficiaryRegID
+  into v_AllHTNRef; 
     
 /*  
 select count(distinct BeneficiaryRegID) from AllDiabeticTemp ADT
-	inner join db_iemr.t_Lab_TestResult LTR on ADT.BefeficiaryRegID = LTR.BeneficiaryRegID
+  inner join db_iemr.t_Lab_TestResult LTR on ADT.BefeficiaryRegID = LTR.BeneficiaryRegID
     where (LTR.ResultValue < 160 and LTR.ProcedureID = "% %") 
-		and  (LTR.ResultValue < 7 and LTR.ProcedureID = "% %")
-	into v_AllDiaControl; 
+    and  (LTR.ResultValue < 7 and LTR.ProcedureID = "% %")
+  into v_AllDiaControl; 
 */    
 
 select count(distinct AHT.BeneficiaryRegID) from AllHTNTemp AHT
-	inner join db_identity.i_beneficiarymapping BM on AHT.BeneficiaryRegID = BM.BenRegID
+  inner join db_identity.i_beneficiarymapping BM on AHT.BeneficiaryRegID = BM.BenRegID
     inner join db_identity.i_beneficiarydetails BD on BM.BenDetailsID = BD.BeneficiaryDetailsID
     where BD.GenderID = 2
-	into v_AllHTNFemale; 
+  into v_AllHTNFemale; 
     
 select v_AllHTN,v_AllHTNRef,v_AllHTNFemale;
     
@@ -3609,7 +3609,7 @@ inner join db_iemr.t_prescription Rx
     and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
 WHERE DATE(Rx.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND Rx.providerServiceMapID = PSMID
-	AND Rx.Deleted = 0b0
+  AND Rx.Deleted = 0b0
     and Rx.DiagnosisProvided like '%Diabetes Mellitus%'
 
 union
@@ -3624,7 +3624,7 @@ inner join db_iemr.t_pncdiagnosis PNCD
     and (BVD.VisitCategory = 'PNC')
 WHERE DATE(PNCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PNCD.providerServiceMapID = PSMID
-	AND PNCD.Deleted = 0b0
+  AND PNCD.Deleted = 0b0
     AND PNCD.ProvisionalDiagnosis like '%Diabetes Mellitus%' ) A
 /* 
 union
@@ -3646,7 +3646,7 @@ inner join db_iemr.t_ancdiagnosis ANCD
     and (BVD.VisitCategory = 'ANC')
  WHERE DATE(ANCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND ANCD.providerServiceMapID = PSMID
-	AND ANCD.Deleted = 0b0
+  AND ANCD.Deleted = 0b0
 union
 
 select 
@@ -3666,14 +3666,14 @@ inner join db_iemr.t_ncdscreening NCDS
     and (BVD.VisitCategory = 'NCD screening')
 WHERE DATE(NCDS.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND NCDS.providerServiceMapID = PSMID
-	AND NCDS.Deleted = 0b0
+  AND NCDS.Deleted = 0b0
 */
 inner join db_iemr.t_prescribeddrug PD 
-	on A.BeneficiaryRegID = PD.BenefciaryRegID
+  on A.BeneficiaryRegID = PD.BenefciaryRegID
     and A.VisitCode = PD.VisitCode
 WHERE DATE(PD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PD.providerServiceMapID = PSMID
-	AND PD.Deleted = 0b0
+  AND PD.Deleted = 0b0
     AND PD.GenericDrugName in ("%%");
 
 select v_NewDiabetic;
@@ -3795,7 +3795,7 @@ inner join db_iemr.t_prescription Rx
     and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
 WHERE DATE(Rx.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND Rx.providerServiceMapID = PSMID
-	AND Rx.Deleted = 0b0
+  AND Rx.Deleted = 0b0
     and Rx.DiagnosisProvided like '%Hypertension%'
 
 union
@@ -3810,7 +3810,7 @@ inner join db_iemr.t_pncdiagnosis PNCD
     and (BVD.VisitCategory = 'PNC')
 WHERE DATE(PNCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PNCD.providerServiceMapID = PSMID
-	AND PNCD.Deleted = 0b0
+  AND PNCD.Deleted = 0b0
     AND PNCD.ProvisionalDiagnosis like '%Hypertension%' ) A
 /* 
 union
@@ -3832,7 +3832,7 @@ inner join db_iemr.t_ancdiagnosis ANCD
     and (BVD.VisitCategory = 'ANC')
  WHERE DATE(ANCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND ANCD.providerServiceMapID = PSMID
-	AND ANCD.Deleted = 0b0
+  AND ANCD.Deleted = 0b0
 union
 
 select 
@@ -3852,14 +3852,14 @@ inner join db_iemr.t_ncdscreening NCDS
     and (BVD.VisitCategory = 'NCD screening')
 WHERE DATE(NCDS.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND NCDS.providerServiceMapID = PSMID
-	AND NCDS.Deleted = 0b0
+  AND NCDS.Deleted = 0b0
 */
 inner join db_iemr.t_prescribeddrug PD 
-	on A.BeneficiaryRegID = PD.BenefciaryRegID
+  on A.BeneficiaryRegID = PD.BenefciaryRegID
     and A.VisitCode = PD.VisitCode
 WHERE DATE(PD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND PD.providerServiceMapID = PSMID
-	AND PD.Deleted = 0b0
+  AND PD.Deleted = 0b0
     AND PD.GenericDrugName in ("%%");
 
 select v_NewHTN;
@@ -3890,7 +3890,7 @@ count(distinct BCC.BeneficiaryRegID) into v_OldDiabetic
 from db_iemr.t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 2
-	and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     and date(BCC.Year) < date(BM.CreatedDate);
 
@@ -3923,7 +3923,7 @@ from db_iemr.t_BenVisitDetail BVD
 inner join  db_iemr.t_bencomorbiditycondition BCC on BVD.BeneficiaryRegID = BCC.BeneficiaryRegID
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 2
-	and DATE(BVD.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and DATE(BVD.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     and date(BCC.Year) < date(BM.CreatedDate)
     AND VisitReason = "Follow Up";
@@ -3958,12 +3958,12 @@ select
 count(distinct BCC.BeneficiaryRegID) into v_OldRBS
 from db_iemr.t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
-join db_iemr.t_lab_testresult LTR on BCC.BeneficiaryRegID = LTR.BeneficiaryRegID 	
-	and BCC.VisitCode = LTR.VisitCode
+join db_iemr.t_lab_testresult LTR on BCC.BeneficiaryRegID = LTR.BeneficiaryRegID  
+  and BCC.VisitCode = LTR.VisitCode
 inner join m_procedure PR on LTR.ProcedureID = PR.ProcedureID
 where BCC.ComorbidConditionID = 2
-	and BCC.Year < BM.CreatedDate 
-	and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and BCC.Year < BM.CreatedDate 
+  and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     AND PR.ProcedureName like "%%";
     
@@ -3971,12 +3971,12 @@ select
 count(distinct BCC.BeneficiaryRegID) into v_OldHbA1C
 from db_iemr.t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
-join db_iemr.t_lab_testresult LTR on BCC.BeneficiaryRegID = LTR.BeneficiaryRegID 	
-	and BCC.VisitCode = LTR.VisitCode
+join db_iemr.t_lab_testresult LTR on BCC.BeneficiaryRegID = LTR.BeneficiaryRegID  
+  and BCC.VisitCode = LTR.VisitCode
 inner join m_procedure PR on LTR.ProcedureID = PR.ProcedureID
 where BCC.ComorbidConditionID = 2
-	and BCC.Year < BM.CreatedDate 
-	and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and BCC.Year < BM.CreatedDate 
+  and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     AND PR.ProcedureName like "%%";
     
@@ -3984,12 +3984,12 @@ select
 count(distinct BCC.BeneficiaryRegID) into v_OldUrineSugar
 from db_iemr.t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
-join db_iemr.t_lab_testresult LTR on BCC.BeneficiaryRegID = LTR.BeneficiaryRegID 	
-	and BCC.VisitCode = LTR.VisitCode
+join db_iemr.t_lab_testresult LTR on BCC.BeneficiaryRegID = LTR.BeneficiaryRegID  
+  and BCC.VisitCode = LTR.VisitCode
 inner join m_procedure PR on LTR.ProcedureID = PR.ProcedureID
 where BCC.ComorbidConditionID = 2
-	and BCC.Year < BM.CreatedDate 
-	and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and BCC.Year < BM.CreatedDate 
+  and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     AND PR.ProcedureName like "%%";
     
@@ -4021,7 +4021,7 @@ count(distinct BCC.BeneficiaryRegID) into v_OldHTN
 from db_iemr.t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 3
-	and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     and date(BCC.Year) < date(BM.CreatedDate);
 
@@ -4054,7 +4054,7 @@ from db_iemr.t_BenVisitDetail BVD
 inner join  db_iemr.t_bencomorbiditycondition BCC on BVD.BeneficiaryRegID = BCC.BeneficiaryRegID
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 3
-	and DATE(BVD.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
+  and DATE(BVD.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
     AND BCC.providerServiceMapID = PSMID
     and date(BCC.Year) < date(BM.CreatedDate)
     AND VisitReason = "Follow Up";
@@ -4313,16 +4313,16 @@ select b.beneficiaryID "Beneficiary ID", b.title "Title",
     c.callReceivedUserID "Call Received User ID",
     c.callEndUserID "Call End User ID",
      b.createdDate "Date",
---	b.occupation,  b.emailId,
+--  b.occupation,  b.emailId,
 
             c.ReceivedAgentID "Agent ID", user.firstName "Agent Name"
-			from fact_bencall c
-			LEFT JOIN dim_beneficiary b on c.beneficiaryRegID=b.beneficiaryRegID
-			left join dim_user user on  c.CallReceivedUserID=user.UserID
-			where c.providerServiceMapID=ifnull(v_psmid,c.providerServiceMapID) and 
+      from fact_bencall c
+      LEFT JOIN dim_beneficiary b on c.beneficiaryRegID=b.beneficiaryRegID
+      left join dim_user user on  c.CallReceivedUserID=user.UserID
+      where c.providerServiceMapID=ifnull(v_psmid,c.providerServiceMapID) and 
             c.isCalledEarlier is false and c.beneficiaryRegID IS NOT NULL
              and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID)
-			and b.createdDate >=v_starttime and b.createdDate <=v_endtime
+      and b.createdDate >=v_starttime and b.createdDate <=v_endtime
              and c.isoutbound is false
             group by b.beneficiaryID order by b.beneficiaryID desc;
             
@@ -4373,20 +4373,20 @@ c.callTypeName "Call Type", c.callSubTypeName "Call Sub Type",
 c.callReceivedUserID "Call Received User ID",c.callEndUserID "Call End User ID",
 t.OutboundDate "Outbound Date", 
 c.ReceivedAgentID "Agent ID", user.firstName "Agent Name"
- --	 t.componentName
+ --  t.componentName
          
              
-			  
+        
             
-			from db_reporting.fact_bloodrequest t
-			 LEFT JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
+      from db_reporting.fact_bloodrequest t
+       LEFT JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
             LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID
-			left join dim_user user on user.userid=c.CallReceivedUserID		 			
-			 where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID) 	 
-			    and t.createdDate >=v_starttime
+      left join dim_user user on user.userid=c.CallReceivedUserID         
+       where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID)   
+          and t.createdDate >=v_starttime
              and t.createdDate <=v_endtime
               and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID)
-			 order by t.createdDate desc; 
+       order by t.createdDate desc; 
  end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -4414,18 +4414,18 @@ t.componenttypename "Component Type",
 -- t.componentTypeName "Component Type Name", 
 count(1) count
 
-		from db_reporting.fact_bloodrequest t
-			 inner JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
-         --   LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID left join dim_user user on user.userid=c.CallReceivedUserID		 			
-			 where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID) 	 
-			    and t.createdDate >=v_starttime
+    from db_reporting.fact_bloodrequest t
+       inner JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
+         --   LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID left join dim_user user on user.userid=c.CallReceivedUserID         
+       where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID)   
+          and t.createdDate >=v_starttime
              and t.createdDate <=v_endtime
               and b.PermDistrictId=ifnull(v_districtid,b.PermDistrictId)
                and b.PermSubDistrictId=ifnull(v_talukid,b.PermSubDistrictId)
                and b.PermVillageId=ifnull(v_villageid,b.PermVillageId)
            --   and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID)
       
-			 group by t.componenttypeid,t.componenttypename)t on t.componenttypeid=bg.componenttypeid
+       group by t.componenttypeid,t.componenttypename)t on t.componenttypeid=bg.componenttypeid
              where bg.deleted is false
               and    bg.ComponentType in('Red Blood Cells','White Blood Cells') 
        union
@@ -4437,20 +4437,20 @@ t.componenttypename ,
 -- t.componentTypeName "Component Type Name", 
 count(1) count
 
-		from db_reporting.fact_bloodrequest t
-			 inner JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
-         --   LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID left join dim_user user on user.userid=c.CallReceivedUserID		 			
-			 where 
+    from db_reporting.fact_bloodrequest t
+       inner JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
+         --   LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID left join dim_user user on user.userid=c.CallReceivedUserID         
+       where 
              componenttypename not in('Red Blood Cells','White Blood Cells') and
-             t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID) 	 
-			    and t.createdDate >=v_starttime
+             t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID)   
+          and t.createdDate >=v_starttime
              and t.createdDate <=v_endtime
               and b.PermDistrictId=ifnull(v_districtid,b.PermDistrictId)
                and b.PermSubDistrictId=ifnull(v_talukid,b.PermSubDistrictId)
                and b.PermVillageId=ifnull(v_villageid,b.PermVillageId)
            --   and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID)
       
-			 group by t.componenttypeid,t.componenttypename)t on t.componenttypeid=bg.componenttypeid
+       group by t.componenttypeid,t.componenttypename)t on t.componenttypeid=bg.componenttypeid
              where bg.deleted is false
               and    bg.ComponentType not in('Red Blood Cells','White Blood Cells') ;
          
@@ -4479,9 +4479,9 @@ select stateid into v_stateid from db_iemr.m_providerservicemapping
 where providerservicemapid=v_psmid;
 
 create temporary table temp_report(
-Districtid int(11),DistrictName varchar(100),	TotalCount int(11) default 0,
-	RBC int(11)default 0,	WBC int(11) default 0,
-	Others int(11) default 0);
+Districtid int(11),DistrictName varchar(100), TotalCount int(11) default 0,
+  RBC int(11)default 0, WBC int(11) default 0,
+  Others int(11) default 0);
     
      insert into temp_report(Districtid,DistrictName)
     select Districtid,DistrictName from db_iemr.m_district 
@@ -4495,18 +4495,18 @@ t.componenttypename "Component Type",
 -- t.componentTypeName "Component Type Name", 
 count(1) count
 
-		from db_reporting.fact_bloodrequest t
-			 inner JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
-         --   LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID left join dim_user user on user.userid=c.CallReceivedUserID		 			
-			 where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID) 	 
-			    and t.createdDate >=v_starttime
+    from db_reporting.fact_bloodrequest t
+       inner JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
+         --   LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID left join dim_user user on user.userid=c.CallReceivedUserID         
+       where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID)   
+          and t.createdDate >=v_starttime
              and t.createdDate <=v_endtime
               and b.PermDistrictId=ifnull(v_districtid,b.PermDistrictId)
                and b.PermSubDistrictId=ifnull(v_talukid,b.PermSubDistrictId)
                and b.PermVillageId=ifnull(v_villageid,b.PermVillageId)
            --   and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID)
       
-			 group by b.PermDistrictId,t.componenttypeid,t.componenttypename)t on t.componenttypeid=bg.componenttypeid
+       group by b.PermDistrictId,t.componenttypeid,t.componenttypename)t on t.componenttypeid=bg.componenttypeid
              where bg.deleted is false
              and    bg.ComponentType in('Red Blood Cells','White Blood Cells') 
        union
@@ -4518,20 +4518,20 @@ t.componenttypename ,
 -- t.componentTypeName "Component Type Name", 
 count(1) count
 
-		from db_reporting.fact_bloodrequest t
-			 inner JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
-         --   LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID left join dim_user user on user.userid=c.CallReceivedUserID		 			
-			 where 
+    from db_reporting.fact_bloodrequest t
+       inner JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
+         --   LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID left join dim_user user on user.userid=c.CallReceivedUserID         
+       where 
              componenttypename not in('Red Blood Cells','White Blood Cells') and
-             t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID) 	 
-			    and t.createdDate >=v_starttime
+             t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID)   
+          and t.createdDate >=v_starttime
              and t.createdDate <=v_endtime
               and b.PermDistrictId=ifnull(v_districtid,b.PermDistrictId)
                and b.PermSubDistrictId=ifnull(v_talukid,b.PermSubDistrictId)
                and b.PermVillageId=ifnull(v_villageid,b.PermVillageId)
            --   and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID)
       
-			 group by b.PermDistrictId,t.componenttypeid,t.componenttypename)t on t.componenttypeid=bg.componenttypeid
+       group by b.PermDistrictId,t.componenttypeid,t.componenttypename)t on t.componenttypeid=bg.componenttypeid
              where bg.deleted is false
               and    bg.ComponentType not in('Red Blood Cells','White Blood Cells') ;
 
@@ -4589,17 +4589,17 @@ t.BloodGroupName "Blood Group Name",
 -- t.componentTypeName "Component Type Name", 
 count(1) count
 
-		from db_reporting.fact_bloodrequest t
-			 left JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
-         --   LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID left join dim_user user on user.userid=c.CallReceivedUserID		 			
-			 where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID) 	 
-			    and t.createdDate >=v_starttime
+    from db_reporting.fact_bloodrequest t
+       left JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
+         --   LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID left join dim_user user on user.userid=c.CallReceivedUserID         
+       where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID)   
+          and t.createdDate >=v_starttime
              and t.createdDate <=v_endtime
               and b.PermDistrictId=ifnull(v_districtid,b.PermDistrictId)
                and b.PermSubDistrictId=ifnull(v_talukid,b.PermSubDistrictId)
                and b.PermVillageId=ifnull(v_villageid,b.PermVillageId)
            --   and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID)
-			 group by t.bloodgroupid,t.bloodGroupName)t on t.bloodgroupid=bg.bloodgroupid
+       group by t.bloodgroupid,t.bloodGroupName)t on t.bloodgroupid=bg.bloodgroupid
              where bg.deleted is false;
              -- ,t.componentTypeName;
  end ;;
@@ -4633,17 +4633,17 @@ t.BloodGroupName ,
 -- t.componentTypeName "Component Type Name", 
 count(1) count
 
-		from db_reporting.fact_bloodrequest t
-			 left JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
-         --   LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID left join dim_user user on user.userid=c.CallReceivedUserID		 			
-			 where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID) 	 
-			    and t.createdDate >=v_starttime
+    from db_reporting.fact_bloodrequest t
+       left JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
+         --   LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID left join dim_user user on user.userid=c.CallReceivedUserID         
+       where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID)   
+          and t.createdDate >=v_starttime
              and t.createdDate <=v_endtime
               and b.PermDistrictId=ifnull(v_districtid,b.PermDistrictId)
                and b.PermSubDistrictId=ifnull(v_talukid,b.PermSubDistrictId)
                and b.PermVillageId=ifnull(v_villageid,b.PermVillageId)
            --   and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID)
-			 group by b.permdistrict,t.bloodgroupid,t.bloodGroupName;
+       group by b.permdistrict,t.bloodgroupid,t.bloodGroupName;
              
           create temporary table temp3 as
    select  permdistrict,
@@ -4917,12 +4917,12 @@ begin
 select distinct  t1.CreatedDate "Date Of Call",t1.phoneno "Caller Phone Number"
 ,ReceivedAgentID "Agent ID",t2.FirstName "Agent Name",
 ReceivedRoleName "Skill Set",
-			t1.CallTypeName "Call Type",
+      t1.CallTypeName "Call Type",
             t1.callsubtypename "Call Sub Type",
             t1.providerservicemapid "Provider Service Map ID",
             t1.remarks "Closure Remark"
  from db_reporting.fact_bencall t1
-			LEFT JOIN db_reporting.dim_user t2 ON t1.CallReceivedUserID=t2.UserID 
+      LEFT JOIN db_reporting.dim_user t2 ON t1.CallReceivedUserID=t2.UserID 
           --  LEFT JOIN db_reporting.fact_104benmedhistory t3 ON t1.BenCallID=t3.BenCallID 
 
 where ( t1.createdDate between v_starttime and v_endtime ) 
@@ -5042,15 +5042,15 @@ t.subCategoryName "Sub Category",
 -- t.beneficiaryRegID,
 --  t.patientGenderName, 
  -- t.algorithm
-			from fact_104benmedhistory t 
-			LEFT JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
+      from fact_104benmedhistory t 
+      LEFT JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
             LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID
-			left join dim_user user on user.userid=c.CallReceivedUserID		 			
-			 where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID) 	 
-			 and t.treatmentrecommendation IS NOT NULL   and t.createdDate >=v_starttime
+      left join dim_user user on user.userid=c.CallReceivedUserID         
+       where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID)   
+       and t.treatmentrecommendation IS NOT NULL   and t.createdDate >=v_starttime
              and t.createdDate <=v_endtime
               and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID)
-			 order by t.createdDate asc;
+       order by t.createdDate asc;
 end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -5119,23 +5119,23 @@ v_Agentid int(11),v_psmid int(11))
 begin
 /*select t1.CreatedDate,CallID,ReceivedAgentID,t2.FirstName,ReceivedRoleName,
 t3.DiseaseSummary,t3.SelecteDiagnosis,
-			CallTypeName,CZCallDuration,RecordingFilePath*/
+      CallTypeName,CZCallDuration,RecordingFilePath*/
             
             select t1.CreatedDate "Date Of Call",CallID"Call ID",
 ReceivedAgentID "Agent ID",
 t2.FirstName "Agent Name",ReceivedRoleName "Skill Set",
 t3.DiseaseSummary "Symptom",t3.SelecteDiagnosis
  "Disease Summary Provided",
-			CallTypeName "Call Type",CZCallDuration "Call Duration",
+      CallTypeName "Call Type",CZCallDuration "Call Duration",
             RecordingFilePath "Recording File Path"
             
             
-			 from db_reporting.fact_bencall t1
-			LEFT JOIN db_reporting.dim_user t2 ON t1.CallReceivedUserID=t2.UserID 
+       from db_reporting.fact_bencall t1
+      LEFT JOIN db_reporting.dim_user t2 ON t1.CallReceivedUserID=t2.UserID 
             LEFT JOIN db_reporting.fact_104benmedhistory t3 ON t1.BenCallID=t3.BenCallID 
             where ReceivedRoleName=ifnull(v_receivedRoleName,receivedRoleName)
-			 and t1.CreatedDate >=v_starttime and t1.CreatedDate <=v_endtime
-			and t1.CallTypeName= ifnull(v_callTypeName,t1.CallTypeName)
+       and t1.CreatedDate >=v_starttime and t1.CreatedDate <=v_endtime
+      and t1.CallTypeName= ifnull(v_callTypeName,t1.CallTypeName)
             and (t1.CallReceivedUserID=t1.CallEndUserID) 
             and t1.ReceivedAgentID=ifnull(v_Agentid,t1.ReceivedAgentID)
             and  t1.providerServiceMapID=ifnull(v_psmid,t1.providerServiceMapID)
@@ -5173,12 +5173,12 @@ c.CallReceivedUserID "Call Received User ID",c.CallEndUserID "Call End User ID",
 c.ReceivedagentID "Agent ID", user.firstName "Agent Name"
 
 
-			from db_reporting.fact_epidemicoutbreak t
-			LEFT JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
+      from db_reporting.fact_epidemicoutbreak t
+      LEFT JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
             LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID
-			left join dim_user user on user.userid=c.CallReceivedUserID		 			
-			 where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID) 	 
-	        and t.createdDate >=v_starttime
+      left join dim_user user on user.userid=c.CallReceivedUserID         
+       where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID)   
+          and t.createdDate >=v_starttime
              and t.createdDate <=v_endtime
               and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID)
               order by t.createddate desc;
@@ -5218,12 +5218,12 @@ t.BenCallID "Ben Call ID",c.CallTypeName "Call Type",c.CallSubTypeName "Call Sub
 c.CallReceivedUserID "Call Received User ID",c.CallEndUserID "Call End User ID",
 t.FromWhen "From When Date",t.PatientGenderName "Patient Gender",
 c.ReceivedagentID "Agent ID", user.firstName "Agent Name"
-			from fact_foodsafetycopmlaint t
-			LEFT JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
+      from fact_foodsafetycopmlaint t
+      LEFT JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
             LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID
-			left join dim_user user on user.userid=c.CallReceivedUserID		 			
-			 where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID) 	 
-	        and t.createdDate >=v_starttime
+      left join dim_user user on user.userid=c.CallReceivedUserID         
+       where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID)   
+          and t.createdDate >=v_starttime
              and t.createdDate <=v_endtime
               and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID)
               order by t.createddate desc;
@@ -5247,10 +5247,10 @@ CREATE  PROCEDURE `Pr_104GrievanceDetailsReport`(v_starttime datetime,v_endtime 
 v_feedbacktypeid int(11),
 v_feedbacktypename varchar(100),v_psmid int(11))
 begin
-	SELECT feedbackReport.feedbacktypename "Type Of Request"
+  SELECT feedbackReport.feedbacktypename "Type Of Request"
     ,COUNT(feedbackReport.FeedbackID) "Count Of Grievance"   FROM fact_feedback feedbackReport 
-			 where feedbackReport.createdDate >= v_starttime and feedbackReport.createdDate <= v_endtime
-			 and feedbackReport.providerServiceMapID = ifnull(v_psmid,feedbackReport.providerServiceMapID)
+       where feedbackReport.createdDate >= v_starttime and feedbackReport.createdDate <= v_endtime
+       and feedbackReport.providerServiceMapID = ifnull(v_psmid,feedbackReport.providerServiceMapID)
              and feedbackReport.feedbackNatureID = ifnull(v_feedbackNatureID,feedbackReport.feedbackNatureID)
              and feedbackReport.feedbacktypeid=ifnull(v_feedbacktypeid,feedbackReport.feedbacktypeid)
              and feedbackReport.feedbacktypename=ifnull(v_feedbacktypename,feedbackReport.feedbacktypename)
@@ -5274,21 +5274,21 @@ DELIMITER ;;
 CREATE  PROCEDURE `Pr_104GrievanceReport`(v_starttime datetime,v_endtime datetime,v_feedbackTypeID int(11),v_Agentid int(11),v_psmid int(11))
 begin
 
-	select b.beneficiaryID, t.feedbackAgainst, t.feedbackID, t.feedbackNatureName, 
+  select b.beneficiaryID, t.feedbackAgainst, t.feedbackID, t.feedbackNatureName, 
 t.feedbackStatusName, t.EmailStatusID , t.feedbackTypeName,t.feedback, t.DesignationName,
 t.requestID, t.serviceAvailDate, t.severityName, t.smsPhoneNo, t.userID,t.instituteTypeName,  t.institutionName,
 t.districtBranchName,t.districtName,t.blockName,t.createdDate,b.firstName "First Name",b.lastName,
 b.dob,b.gender, b.healthCareWorker,c.phoneNo,t.stateName,b.permDistrict,
 b.permSubDistrict,b.permVillage,t.benCallID,c.callTypeName,c.callSubTypeName,c.callReceivedUserID,
 c.callEndUserID, c.ReceivedAgentID, user.firstName "Agent name"
-			 from fact_feedback t 
-			 LEFT JOIN dim_beneficiary  b    on b.beneficiaryregid=t.beneficiaryregid
+       from fact_feedback t 
+       LEFT JOIN dim_beneficiary  b    on b.beneficiaryregid=t.beneficiaryregid
              LEFT JOIN fact_bencall c on c.bencallid=t.bencallid
-			 left join dim_user user 	on user.userid=c.callreceiveduserid
-			 where t.providerServiceMapID=ifnull(v_psmid ,t.providerServiceMapID)
+       left join dim_user user  on user.userid=c.callreceiveduserid
+       where t.providerServiceMapID=ifnull(v_psmid ,t.providerServiceMapID)
               and t.feedbackTypeID=ifnull(v_feedbackTypeID,t.feedbackTypeID)
               and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID)
-			 and t.createdDate >= v_starttime  and t.createdDate <=v_endtime   order by t.createdDate desc;
+       and t.createdDate >= v_starttime  and t.createdDate <=v_endtime   order by t.createdDate desc;
              
  end ;;
 DELIMITER ;
@@ -5312,21 +5312,21 @@ v_Agentid int(11),v_psmid int(11))
 begin
 
 /*select t1.CreatedDate,CallID,ReceivedAgentID,t2.FirstName,ReceivedRoleName,t3.DiseaseSummary,t3.SelecteDiagnosis,
-			CallTypeName,max(CZCallDuration) CZCallDuration,RecordingFilePath*/
+      CallTypeName,max(CZCallDuration) CZCallDuration,RecordingFilePath*/
   select t1.CreatedDate "Date Of Call",CallID"Call ID",
 ReceivedAgentID "Agent ID",
 t2.FirstName "Agent Name",ReceivedRoleName "Skill Set",
 t3.DiseaseSummary "Symptom",t3.SelecteDiagnosis
  "Disease Summary Provided",
-			CallTypeName "Call Type",max(CZCallDuration) "Call Duration",
+      CallTypeName "Call Type",max(CZCallDuration) "Call Duration",
             RecordingFilePath "Recording File Path"          
             
-			 from db_reporting.fact_bencall t1
-			LEFT JOIN db_reporting.dim_user t2 ON t1.CallReceivedUserID=t2.UserID 
+       from db_reporting.fact_bencall t1
+      LEFT JOIN db_reporting.dim_user t2 ON t1.CallReceivedUserID=t2.UserID 
             LEFT JOIN db_reporting.fact_104benmedhistory t3 ON t1.BenCallID=t3.BenCallID 
             where ReceivedRoleName= ifnull(v_receivedRoleName,receivedRoleName)
-			 and t1.CreatedDate >=v_starttime and t1.CreatedDate <=v_endtime
-			and t1.CallTypeName=ifnull(v_callTypeName,t1.CallTypeName) 
+       and t1.CreatedDate >=v_starttime and t1.CreatedDate <=v_endtime
+      and t1.CallTypeName=ifnull(v_callTypeName,t1.CallTypeName) 
             and t1.CallSubTypeName like '%Disconnected%'
             and t1.ReceivedAgentID=ifnull(v_Agentid,t1.ReceivedAgentID)
             and  t1.providerServiceMapID=ifnull(v_psmid,t1.providerServiceMapID)
@@ -5355,21 +5355,21 @@ v_Agentid int(11),v_psmid int(11))
 begin
 
 /*select t1.CreatedDate,CallID,ReceivedAgentID,t2.FirstName,ReceivedRoleName,t3.DiseaseSummary,t3.SelecteDiagnosis,
-			CallTypeName,max(CZCallDuration)CZCallDuration,RecordingFilePath
+      CallTypeName,max(CZCallDuration)CZCallDuration,RecordingFilePath
   */          
    select t1.CreatedDate "Date Of Call",CallID"Call ID",
 ReceivedAgentID "Agent ID",
 t2.FirstName "Agent Name",ReceivedRoleName "Skill Set",
 t3.DiseaseSummary "Symptom",t3.SelecteDiagnosis
  "Disease Summary Provided",
-			CallTypeName "Call Type",max(CZCallDuration) "Call Duration",
+      CallTypeName "Call Type",max(CZCallDuration) "Call Duration",
             RecordingFilePath "Recording File Path"          
-			 from db_reporting.fact_bencall t1
-			LEFT JOIN db_reporting.dim_user t2 ON t1.CallReceivedUserID=t2.UserID 
+       from db_reporting.fact_bencall t1
+      LEFT JOIN db_reporting.dim_user t2 ON t1.CallReceivedUserID=t2.UserID 
             LEFT JOIN db_reporting.fact_104benmedhistory t3 ON t1.BenCallID=t3.BenCallID 
             where ReceivedRoleName=ifnull(v_receivedRoleName,ReceivedRoleName)
-			 and t1.CreatedDate >=v_starttime and t1.CreatedDate <=v_endtime
-			and t1.CallTypeName=ifnull(v_callTypeName,t1.CallTypeName) and t1.CZCallDuration is not null 
+       and t1.CreatedDate >=v_starttime and t1.CreatedDate <=v_endtime
+      and t1.CallTypeName=ifnull(v_callTypeName,t1.CallTypeName) and t1.CZCallDuration is not null 
              and t1.ReceivedAgentID=ifnull(v_Agentid,t1.ReceivedAgentID)
             and  t1.providerServiceMapID=ifnull(v_psmid,t1.providerServiceMapID)
 and (t1.CallReceivedUserID=t1.CallEndUserID)
@@ -5393,7 +5393,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104HAOReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
-#SNo	Action By HAO	Action By P D	Allergies	Selected Diagnosis	Selected Diagnosis ID	Added Advice	Disease Summary ID	Prescription ID	Request ID	Ben History ID	First Name	Last Name	Patient Name	Is Self	Date Of birth	Patient Age	Gender	Health Care Worker	Phone Number	District	Sub District	Village	Ben Call ID	Call Type	Call Sub Type	Call Received User ID	Call End User ID	Symptom ID	Action By C O	Action By M O	Date	Beneficiary ID	Agent ID	Agent Name	Have You Travelled In Last14 Days	Travel Type	Symptom	Covid19 Contact History	Did You Seek Medical Consultation	Suspected Covid19	Recommendation	
+#SNo  Action By HAO Action By P D Allergies Selected Diagnosis  Selected Diagnosis ID Added Advice  Disease Summary ID  Prescription ID Request ID  Ben History ID  First Name  Last Name Patient Name  Is Self Date Of birth Patient Age Gender  Health Care Worker  Phone Number  District  Sub District  Village Ben Call ID Call Type Call Sub Type Call Received User ID Call End User ID  Symptom ID  Action By C O Action By M O Date  Beneficiary ID  Agent ID  Agent Name  Have You Travelled In Last14 Days Travel Type Symptom Covid19 Contact History Did You Seek Medical Consultation Suspected Covid19 Recommendation  
 
 select 
 t.ActionByHAO "Action By HAO",
@@ -5442,24 +5442,24 @@ c.ReceivedAgentID "Agent ID",
 
 /*t.benHistoryID, t.requestID, t.beneficiaryRegID, t.benCallID, t.patientName, t.patientAge, t.patientGenderName, 
 -- t.algorithm, 
-			t.diseaseSummaryID, t.diseaseSummary, t.allergies, t.selecteDiagnosisID, t.selecteDiagnosis, t.addedAdvice,
+      t.diseaseSummaryID, t.diseaseSummary, t.allergies, t.selecteDiagnosisID, t.selecteDiagnosis, t.addedAdvice,
             t.prescriptionID, t.actionByHAO, t.remarks, t.isSelf, t.createdDate, b.beneficiaryID, b.firstName,
             b.lastName, b.healthCareWorker, b.gender, b.dob, b.permVillage, b.permSubDistrict, b.permDistrict, 
-			c.callTypeName, c.callSubTypeName, c.phoneNo, c.callReceivedUserID, c.callEndUserID, c.ReceivedAgentID,
+      c.callTypeName, c.callSubTypeName, c.phoneNo, c.callReceivedUserID, c.callEndUserID, c.ReceivedAgentID,
             user.firstName,
-			t.travel_14days,t.travel_type,
-			t.symptoms,t.COVID19_contact_history,t.medical_consultation,
-			t.Suspected_COVID19,t.recommendation */
+      t.travel_14days,t.travel_type,
+      t.symptoms,t.COVID19_contact_history,t.medical_consultation,
+      t.Suspected_COVID19,t.recommendation */
             
-			from fact_104benmedhistory t 
-			LEFT JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
+      from fact_104benmedhistory t 
+      LEFT JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
             LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID
-			left join dim_user user on user.userid=c.CallReceivedUserID			
-			where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID)
+      left join dim_user user on user.userid=c.CallReceivedUserID     
+      where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID)
              and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID)
-			and t.actionByHAO IS NOT NULL  
+      and t.actionByHAO IS NOT NULL  
              and t.createddate>=v_starttime and t.createddate<=v_endtime
-			order by t.createdDate desc;
+      order by t.createdDate desc;
             
             end ;;
 DELIMITER ;
@@ -5490,14 +5490,14 @@ t.schemeServiceID "Scheme Service ID",
              b.healthCareWorker "Health Care Worker",c.phoneNo "Phone Number",
              b.permDistrict "District",b.permSubDistrict "Sub District", b.permVillage "Village", 
    c.callTypeName "Call Type", c.callSubTypeName "Call Sub Type", t.benCallID "Ben Call ID", 
-			  c.callReceivedUserID "Call Received User ID", 
+        c.callReceivedUserID "Call Received User ID", 
             c.callEndUserID "Call End User ID", c.ReceivedAgentID "Agent ID",
             user.firstName "Agent Name"
-			from fact_schemeservice t
-			left join fact_bencall c on t.bencallid=c.bencallid
-			LEFT JOIN dim_beneficiary b on c.beneficiaryRegID=b.beneficiaryRegID
-			left join dim_user user on  c.CallReceivedUserID=user.UserID
-			where c.providerServiceMapID=ifnull(v_psmid,c.providerServiceMapID)  
+      from fact_schemeservice t
+      left join fact_bencall c on t.bencallid=c.bencallid
+      LEFT JOIN dim_beneficiary b on c.beneficiaryRegID=b.beneficiaryRegID
+      left join dim_user user on  c.CallReceivedUserID=user.UserID
+      where c.providerServiceMapID=ifnull(v_psmid,c.providerServiceMapID)  
              and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID) and
              t.createdDate >=v_starttime and t.createdDate <=v_endtime;
 end ;;
@@ -5523,14 +5523,14 @@ begin
 select t1.CreatedDate "Date Of Call",CallID"Call ID",ReceivedAgentID "Agent ID",
 t2.FirstName "Agent Name",ReceivedRoleName "Skill Set",t3.DiseaseSummary "Symptom",t3.SelecteDiagnosis
  "Disease Summary Provided",
-			CallTypeName "Call Type",min(CZCallDuration) "Call Duration",
+      CallTypeName "Call Type",min(CZCallDuration) "Call Duration",
             RecordingFilePath "Recording File Path"
-			 from db_reporting.fact_bencall t1
-			LEFT JOIN db_reporting.dim_user t2 ON t1.CallReceivedUserID=t2.UserID 
+       from db_reporting.fact_bencall t1
+      LEFT JOIN db_reporting.dim_user t2 ON t1.CallReceivedUserID=t2.UserID 
             LEFT JOIN db_reporting.fact_104benmedhistory t3 ON t1.BenCallID=t3.BenCallID 
             where ReceivedRoleName= ifnull(v_receivedRoleName,ReceivedRoleName)
-			 and t1.CreatedDate >=v_starttime and t1.CreatedDate <=v_endtime
-			and t1.CallTypeName=ifnull(v_callTypeName,t1.CallTypeName) and t3.DiseaseSummary is not null
+       and t1.CreatedDate >=v_starttime and t1.CreatedDate <=v_endtime
+      and t1.CallTypeName=ifnull(v_callTypeName,t1.CallTypeName) and t3.DiseaseSummary is not null
             and t1.ReceivedAgentID=ifnull(v_Agentid,t1.ReceivedAgentID)
             and  t1.providerServiceMapID=ifnull(v_psmid,t1.providerServiceMapID)
             and t1.CZCallDuration is not null  group by ReceivedRoleName,ReceivedAgentID;
@@ -5556,21 +5556,21 @@ v_callTypeName varchar(100),v_receivedRoleName varchar(100),
 v_Agentid int(11),v_psmid int(11))
 begin
 /* select t1.CreatedDate,CallID,ReceivedAgentID,t2.FirstName,ReceivedRoleName,t3.DiseaseSummary,t3.SelecteDiagnosis,
-			CallTypeName,min(CZCallDuration) CZCallDuration,RecordingFilePath
+      CallTypeName,min(CZCallDuration) CZCallDuration,RecordingFilePath
         */    
    select t1.CreatedDate "Date Of Call",CallID"Call ID",ReceivedAgentID "Agent ID",
 t2.FirstName "Agent Name",ReceivedRoleName "Skill Set",t3.DiseaseSummary "Symptom",t3.SelecteDiagnosis
  "Disease Summary Provided",
-			CallTypeName "Call Type",min(CZCallDuration) "Call Duration",
+      CallTypeName "Call Type",min(CZCallDuration) "Call Duration",
             RecordingFilePath "Recording File Path"         
-			 from db_reporting.fact_bencall t1
-			LEFT JOIN db_reporting.dim_user t2 ON t1.CallReceivedUserID=t2.UserID 
+       from db_reporting.fact_bencall t1
+      LEFT JOIN db_reporting.dim_user t2 ON t1.CallReceivedUserID=t2.UserID 
             LEFT JOIN db_reporting.fact_104benmedhistory t3 ON t1.BenCallID=t3.BenCallID
-			LEFT JOIN db_iemr.m_userservicerolemapping t4 ON t1.CallEndUserID=t4.UserID 
-			 LEFT JOIN db_iemr.m_role t5 ON t5.RoleID=t4.RoleID where 
+      LEFT JOIN db_iemr.m_userservicerolemapping t4 ON t1.CallEndUserID=t4.UserID 
+       LEFT JOIN db_iemr.m_role t5 ON t5.RoleID=t4.RoleID where 
             ReceivedRoleName=ifnull(v_receivedRoleName,ReceivedRoleName)
-			 and t1.CreatedDate >=v_starttime and t1.CreatedDate <=v_endtime
-			and t1.CallTypeName=ifnull(v_callTypeName,t1.CallTypeName) 
+       and t1.CreatedDate >=v_starttime and t1.CreatedDate <=v_endtime
+      and t1.CallTypeName=ifnull(v_callTypeName,t1.CallTypeName) 
             and t5.RoleName='MO' 
             and t1.CZCallDuration is not null 
               and t1.ReceivedAgentID=ifnull(v_Agentid,t1.ReceivedAgentID)
@@ -5695,7 +5695,7 @@ t.patientAge, t.patientGenderName, t.algorithm,
             where          t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID) 
             and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID)  and
              t.actionByMO IS NOT NULL   and t.createddate>=v_starttime and t.createddate<=v_endtime
-			order by t.createdDate desc;
+      order by t.createdDate desc;
   end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -5731,12 +5731,12 @@ c.CallReceivedUserID "Call Received User ID",c.CallEndUserID "Call End User ID",
 t.CreatedDate "Date",
 c.ReceivedagentID "Agent ID", user.firstName "Agent Name"
 
-			from db_reporting.fact_organdonation t
-			LEFT JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
+      from db_reporting.fact_organdonation t
+      LEFT JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
             LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID
-			left join dim_user user on user.userid=c.CallReceivedUserID		 			
-			 where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID) 	 
-	        and t.createdDate >=v_starttime
+      left join dim_user user on user.userid=c.CallReceivedUserID         
+       where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID)   
+          and t.createdDate >=v_starttime
              and t.createdDate <=v_endtime
               and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID)
               order by t.createddate desc;
@@ -5761,14 +5761,14 @@ v_callTypeName varchar(100),v_receivedRoleName varchar(100),
 v_Agentid int(11),v_psmid int(11))
 begin
 select t1.CreatedDate,CallID,ReceivedAgentID,t2.FirstName,ReceivedRoleName,t3.DiseaseSummary,t3.SelecteDiagnosis,
-			CallTypeName,CZCallDuration,t3.ActionByHAO,RecordingFilePath
-			 from db_reporting.fact_bencall t1
-			LEFT JOIN db_reporting.dim_user t2 ON t1.CallReceivedUserID=t2.UserID 
+      CallTypeName,CZCallDuration,t3.ActionByHAO,RecordingFilePath
+       from db_reporting.fact_bencall t1
+      LEFT JOIN db_reporting.dim_user t2 ON t1.CallReceivedUserID=t2.UserID 
             LEFT JOIN db_reporting.fact_104benmedhistory t3 ON t1.BenCallID=t3.BenCallID 
             LEFT JOIN db_identity.i_beneficiarymapping t4 ON t1.BeneficiaryRegID=t4.BenRegId 
             where ReceivedRoleName= ifnull(v_receivedRoleName,ReceivedRoleName)
-			 and t1.CreatedDate >=v_starttime and t1.CreatedDate <=v_endtime
-			and t1.CallTypeName= ifnull(v_callTypeName,t1.CallTypeName) and (t1.CZcallStartTime <= t4.CreatedDate 
+       and t1.CreatedDate >=v_starttime and t1.CreatedDate <=v_endtime
+      and t1.CallTypeName= ifnull(v_callTypeName,t1.CallTypeName) and (t1.CZcallStartTime <= t4.CreatedDate 
             and t1.CZcallEndTime >= t4.CreatedDate) and (t1.CallReceivedUserID=t1.CallEndUserID) 
              and t1.ReceivedAgentID=ifnull(v_Agentid,t1.ReceivedAgentID)
             and  t1.providerServiceMapID=ifnull(v_psmid,t1.providerServiceMapID)
@@ -5839,17 +5839,17 @@ c.CallEndUserID "Call End User ID",t.SymptomID "Symptom ID",t.ActionByHAO "Actio
 t.ActionByCO "Action By C O",t.createddate "Date",b.BeneficiaryID "Beneficiary ID",
 c.ReceivedAgentID "Agent ID",user.firstname "Agent Name"
 
-			from fact_104benmedhistory t 
-			LEFT JOIN dim_beneficiary b  on t.BeneficiaryRegID=b.BeneficiaryRegID
+      from fact_104benmedhistory t 
+      LEFT JOIN dim_beneficiary b  on t.BeneficiaryRegID=b.BeneficiaryRegID
             LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID
-			left join dim_user user 	on user.userid=c.CallReceivedUserID		
-			 where 
+      left join dim_user user   on user.userid=c.CallReceivedUserID   
+       where 
              t.actionbyPD  is not null and
-             t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID) 	 
-			    and t.createdDate >=v_starttime
+             t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID)   
+          and t.createdDate >=v_starttime
              and t.createdDate <=v_endtime
               and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID)
-			 order by t.createdDate desc; 
+       order by t.createdDate desc; 
              
 end ;;
 DELIMITER ;
@@ -5884,16 +5884,16 @@ select  t1.CreatedDate "Date Of Call",t1.phoneno "Caller Phone Number"
 ReceivedRoleName "Skill Set",t3.DiseaseSummary "Symptom",
 t3.SelecteDiagnosis "Disease Summary Provided",
 t1.remarks "Closure Remark",
-			t1.CallTypeName "Call Type",
+      t1.CallTypeName "Call Type",
             t1.callsubtypename "Call Sub Type",
             t1.CZCallDuration "Call Duration"
             ,t1.RecordingFilePath "Recording File Path"
  from db_reporting.fact_bencall t1
-			LEFT JOIN db_reporting.dim_user t2 ON t1.CallReceivedUserID=t2.UserID 
+      LEFT JOIN db_reporting.dim_user t2 ON t1.CallReceivedUserID=t2.UserID 
             LEFT JOIN db_reporting.fact_104benmedhistory t3 ON t1.BenCallID=t3.BenCallID 
             where ReceivedRoleName= ifnull(v_receivedRoleName,ReceivedRoleName)
-			 and t1.CreatedDate >=v_starttime and t1.CreatedDate <=v_endtime
-			-- and t1.CallTypeName=ifnull(v_callTypeName,t1.CallTypeName) 
+       and t1.CreatedDate >=v_starttime and t1.CreatedDate <=v_endtime
+      -- and t1.CallTypeName=ifnull(v_callTypeName,t1.CallTypeName) 
             and t1.ReceivedAgentID=ifnull(v_Agentid,t1.ReceivedAgentID)
             and  t1.providerServiceMapID=ifnull(v_psmid,t1.providerServiceMapID)
             group by ReceivedRoleName,ReceivedAgentID;
@@ -5918,19 +5918,19 @@ v_callTypeName varchar(100),v_receivedRoleName varchar(100),
 v_Agentid int(11),v_psmid int(11))
 begin
 /*select t1.CreatedDate,CallID,ReceivedAgentID,t2.FirstName,ReceivedRoleName,t3.DiseaseSummary,t3.SelecteDiagnosis,
-			CallTypeName,CZCallDuration,RecordingFilePath*/
+      CallTypeName,CZCallDuration,RecordingFilePath*/
             
             select t1.CreatedDate "Date Of Call",CallID"Call ID",ReceivedAgentID "Agent ID",
 t2.FirstName "Agent Name",ReceivedRoleName "Skill Set",t3.DiseaseSummary "Symptom",t3.SelecteDiagnosis
  "Disease Summary Provided",
-			CallTypeName "Call Type",CZCallDuration "Call Duration",
+      CallTypeName "Call Type",CZCallDuration "Call Duration",
             RecordingFilePath "Recording File Path"         
-			 from db_reporting.fact_bencall t1
-			LEFT JOIN db_reporting.dim_user t2 ON t1.CallReceivedUserID=t2.UserID 
+       from db_reporting.fact_bencall t1
+      LEFT JOIN db_reporting.dim_user t2 ON t1.CallReceivedUserID=t2.UserID 
             LEFT JOIN db_reporting.fact_104benmedhistory t3 ON t1.BenCallID=t3.BenCallID 
             where ReceivedRoleName= ifnull(v_receivedRoleName,ReceivedRoleName)
-			 and t1.CreatedDate >=v_starttime and t1.CreatedDate <=v_endtime
-			and t1.CallTypeName=ifnull(v_callTypeName,t1.CallTypeName) and (t1.CallReceivedUserID=t1.CallEndUserID) 
+       and t1.CreatedDate >=v_starttime and t1.CreatedDate <=v_endtime
+      and t1.CallTypeName=ifnull(v_callTypeName,t1.CallTypeName) and (t1.CallReceivedUserID=t1.CallEndUserID) 
             and (t3.DiseaseSummary is not null or t3.SelecteDiagnosis is not null) 
             and t1.ReceivedAgentID=ifnull(v_Agentid,t1.ReceivedAgentID)
             and  t1.providerServiceMapID=ifnull(v_psmid,t1.providerServiceMapID)
@@ -5958,17 +5958,17 @@ begin
 select  distinct  t.question "Question", t.answer "Answer", t.score "Score",
  b.beneficiaryID "Beneficiary ID", b.firstName "First Name",
  b.lastName "Last Name", b.healthCareWorker "Health Care Worker",
-			b.gender "Gender", b.dob "Date Of Birth", 
+      b.gender "Gender", b.dob "Date Of Birth", 
             b.permVillage "Village", b.permSubDistrict "Sub District"
             , b.permDistrict "District", c.callTypeName "Call Type", 
             c.callSubTypeName "Call Sub Type", c.phoneNo "Phone Number",
             c.ReceivedagentID "Agent ID", user.firstName "Agent Name"
-			from fact_104bencdiresponse t
-			LEFT JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
+      from fact_104bencdiresponse t
+      LEFT JOIN dim_beneficiary b  on b.BeneficiaryRegID=t.BeneficiaryRegID
             LEFT JOIN fact_bencall c on c.BenCallID=t.BenCallID
-			left join dim_user user on user.userid=c.CallReceivedUserID		 			
-			 where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID) 	 
-	        and t.createdDate >=v_starttime
+      left join dim_user user on user.userid=c.CallReceivedUserID         
+       where t.providerServiceMapID=ifnull(v_psmid,t.providerServiceMapID)   
+          and t.createdDate >=v_starttime
              and t.createdDate <=v_endtime
               and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID)
               order by t.createddate desc;
@@ -5993,7 +5993,7 @@ v_psmid int(11))
 begin
 select phoneNo "Phone Number",createddate "Entry Date" from db_reporting.fact_phoneblock phoneBlock
 where  phoneBlock.lastModDate >= v_starttime and phoneBlock.lastModDate <=v_endtime 
-			 and phoneBlock.providerServiceMapID = ifnull(v_psmid,phoneBlock.providerServiceMapID) 
+       and phoneBlock.providerServiceMapID = ifnull(v_psmid,phoneBlock.providerServiceMapID) 
              and phoneBlock.isBlocked is false ;
 end ;;
 DELIMITER ;
@@ -6046,46 +6046,46 @@ Set v_maxage = Case When v_maxage Is null then 150 Else v_maxage End;
  
 Create temporary table Temp_RawData as
 Select
-	AgeGroupID,MinAge,MaxAge
+  AgeGroupID,MinAge,MaxAge
 From 
 (
 Select 
-	AgegroupID,
-	Case 
-		When AgegroupID = 1 Then 0
+  AgegroupID,
+  Case 
+    When AgegroupID = 1 Then 0
         When AgegroupID = 2 Then 15
         When AgegroupID = 3 Then 25
         When AgegroupID = 4 Then 40
         When AgegroupID = 5 Then 59
-	End MinAge,
-	Case 
-		When AgegroupID = 1 Then 15
+  End MinAge,
+  Case 
+    When AgegroupID = 1 Then 15
         When AgegroupID = 2 Then 24
         When AgegroupID = 3 Then 39
         When AgegroupID = 4 Then 59
         When AgegroupID = 5 Then 150
-	End MaxAge
+  End MaxAge
 From
 ( 
-	Select 
-		Case when TIMESTAMPDIFF(year,DOB, now()) < 15 then 1
-			when TIMESTAMPDIFF(year,DOB, now()) between 15 and 24 then 2
-			when TIMESTAMPDIFF(year,DOB, now()) between 25 and 39 then 3
-			when TIMESTAMPDIFF(year,DOB, now()) between 40 and 59 then 4
-			else 5 
-		End AgegroupID
-	From db_reporting.fact_1097callsummary Cal
-	inner join db_reporting.dim_1097beneficiary Ben on Cal.beneficiaryregid=Ben.beneficiaryregid
-	where 
-		Cal.createddate between v_starttime and v_endtime
-		and Ben.permstate=ifnull(v_statename,Ben.permstate) 
-		and Ben.permdistrict=ifnull(v_districtname,Ben.permdistrict)
-		/*and Ben.Agegroup=ifnull(v_Agegroup,Ben.Agegroup)*/
-		and Cal.ProviderServiceMapID=ifnull(v_psmrid,Cal.ProviderServiceMapID)
+  Select 
+    Case when TIMESTAMPDIFF(year,DOB, now()) < 15 then 1
+      when TIMESTAMPDIFF(year,DOB, now()) between 15 and 24 then 2
+      when TIMESTAMPDIFF(year,DOB, now()) between 25 and 39 then 3
+      when TIMESTAMPDIFF(year,DOB, now()) between 40 and 59 then 4
+      else 5 
+    End AgegroupID
+  From db_reporting.fact_1097callsummary Cal
+  inner join db_reporting.dim_1097beneficiary Ben on Cal.beneficiaryregid=Ben.beneficiaryregid
+  where 
+    Cal.createddate between v_starttime and v_endtime
+    and Ben.permstate=ifnull(v_statename,Ben.permstate) 
+    and Ben.permdistrict=ifnull(v_districtname,Ben.permdistrict)
+    /*and Ben.Agegroup=ifnull(v_Agegroup,Ben.Agegroup)*/
+    and Cal.ProviderServiceMapID=ifnull(v_psmrid,Cal.ProviderServiceMapID)
 )OBJ)OBJ
 Where 
-	MinAge >= v_minage 
-	And MaxAge <= v_maxage;
+  MinAge >= v_minage 
+  And MaxAge <= v_maxage;
  
 Select Count(1) Into v_totalcount From Temp_RawData;
 
@@ -6093,7 +6093,7 @@ Create Temporary Table Temp_Output
 Select AgegroupID,MinAge,MaxAge,(Ifnull(Count(1),0) / v_totalcount) * 100.0 ServiceProvidedRatio,Count(1) Count 
 From Temp_RawData
 Group by 
-	Concat(MinAge,' To ',MaxAge);
+  Concat(MinAge,' To ',MaxAge);
     
 Insert into Temp_Output
 (AgegroupID,MinAge,MaxAge,ServiceProvidedRatio,Count)
@@ -6101,7 +6101,7 @@ Select 6 AgegroupID,0,150,(Ifnull(Count(1),0) / v_totalcount ) * 100.0 ServicePr
 From Temp_RawData;
 
 Select 
-	Temp_Agegroup.Agegroup,
+  Temp_Agegroup.Agegroup,
     Temp_Agegroup.MinAge minage,
     Temp_Agegroup.MaxAge maxage,
     Ifnull(Round(Temp_Output.ServiceProvidedRatio,2),0)ServiceProvidedRatio,
@@ -6109,9 +6109,9 @@ Select
 from Temp_Agegroup
 Left join Temp_Output on Temp_Output.AgeGroupID = Temp_Agegroup.AgeGroupID
 Where 
-	IsReq = 1
+  IsReq = 1
 Order by 
-	Temp_Agegroup.AgeGroupID;
+  Temp_Agegroup.AgeGroupID;
 
 Drop Temporary table if exists Temp_Output;
 Drop Temporary table if exists Temp_RawData;
@@ -6677,7 +6677,7 @@ inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Still birth'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
        and fr.questionid in(304) and  fr.answer='NO'
 union 
 select distinct  
@@ -6701,7 +6701,7 @@ and fr.bencallid=fb.bencallid-- new join required
 where fb.IsMother is false -- and reasonForNoFurtherCalls='Still birth'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr.questionid in(304) and fr.answer='NO';
 end ;;
 DELIMITER ;
@@ -6741,7 +6741,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid -- and fr.benca
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
         and fr2.questionid in(283,284) and fr2.answer is not null
 union 
 select distinct  
@@ -6764,7 +6764,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid -- and fr.benca
 where fb.IsMother is false  -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.questionid in(283,284) and fr2.answer is not null;
 end ;;
 DELIMITER ;
@@ -6804,7 +6804,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid -- and fr.benca
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
         and fr2.questionid in(283,284) and fr2.answer is not null
 union 
 select distinct  
@@ -6827,7 +6827,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid -- and fr.benca
 where fb.IsMother is false  -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.questionid in(283,284) and fr2.answer is not null;
 end ;;
 DELIMITER ;
@@ -6875,7 +6875,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid -- and fr.benca
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
         and fr2.questionid in(283,284) and fr2.answer is not null
 union 
 select distinct  
@@ -6899,7 +6899,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid -- and fr.benca
 where fb.IsMother is false  -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.questionid in(283,284) and fr2.answer is not null)a;
              
                  drop temporary table if exists temp_ECDAbortionReport_2;
@@ -6956,7 +6956,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
      and fr2.questionid in(310) and fr2.answer is not null
 union 
 select distinct  
@@ -6981,7 +6981,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.questionid in(310) and fr2.answer is not null;
 end ;;
 DELIMITER ;
@@ -7020,7 +7020,7 @@ inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
      and fr.questionid in(310) and fr.answer is not null
 union 
 select distinct  
@@ -7045,7 +7045,7 @@ and fr.bencallid=fb.bencallid-- new join required
 where fb.IsMother is false -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr.questionid in(310) and fr.answer is not null;
 end ;;
 DELIMITER ;
@@ -7086,7 +7086,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Baby Died'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             and fr2.questionid in(283,284) and fr2.answer is not null
             union 
 select distinct  
@@ -7110,7 +7110,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false -- and reasonForNoFurtherCalls='Baby Died '
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.questionid in(283,284) and fr2.answer is not null;
             
             
@@ -7153,7 +7153,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Baby Died'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             and fr2.questionid in(283,284) and fr2.answer is not null
             union 
 select distinct  
@@ -7177,7 +7177,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false -- and reasonForNoFurtherCalls='Baby Died '
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.questionid in(283,284) and fr2.answer is not null;
             
             
@@ -7226,7 +7226,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Baby Died'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             and fr2.questionid in(283,284) and fr2.answer is not null
             union 
 select distinct  
@@ -7253,7 +7253,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false -- and reasonForNoFurtherCalls='Baby Died '
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.questionid in(283,284) and fr2.answer is not null)a;
              
              drop temporary table if exists temp_ECDBabyDeathReport_2;
@@ -7355,7 +7355,7 @@ inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
              and fb.CallEndTime is not null
             union all
  select distinct 
@@ -7408,7 +7408,7 @@ inner join fact_childvalidrecord  fm on fm.MCTSID_no_Child_ID=fo.childid
 where fb.IsMother is false 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime 
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime 
             and fb.CallEndTime is not null
             
  )a 
@@ -7502,7 +7502,7 @@ inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
              and fb.CallEndTime is not null
             union all
  select distinct 
@@ -7555,7 +7555,7 @@ inner join fact_childvalidrecord  fm on fm.MCTSID_no_Child_ID=fo.childid
 where fb.IsMother is false 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime 
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime 
             and fb.CallEndTime is not null
             
  )a 
@@ -7610,7 +7610,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true -- and fr.congentialanomalies is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
        and fr2.questionid in(388) and fr2.answer is not null
 union 
 select distinct  
@@ -7634,7 +7634,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false -- and fr.congentialanomalies is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.questionid in(388) and fr2.answer is not null;
 end ;;
 DELIMITER ;
@@ -7678,7 +7678,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true -- and fr.congentialanomalies is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
        and fr2.questionid in(388) and fr2.answer is not null
 union 
 select distinct  
@@ -7702,7 +7702,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false -- and fr.congentialanomalies is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.questionid in(388) and fr2.answer is not null;
 end ;;
 DELIMITER ;
@@ -7742,7 +7742,7 @@ inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
        and fr.questionid in(335,334) and fr.answer='No'
 union 
 select distinct  
@@ -7766,7 +7766,7 @@ and fr.bencallid=fb.bencallid-- new join required
 where fb.IsMother is false -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
               and fr.questionid in(335,334)and fr.answer='No';
 end ;;
 DELIMITER ;
@@ -7829,7 +7829,7 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is true -- and callendtime is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime 
+      and fb.createdDate >=v_starttime 
             and fb.createdDate <=v_endtime and fb.CallEndTime is not null
            union all
 select distinct fb.ReceivedAgentID "User ID",-- 'OUTGOING'CampaignID,
@@ -7867,7 +7867,7 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is false -- and callendtime is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  and fb.CallEndTime is not null
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  and fb.CallEndTime is not null
             )a;
      
         
@@ -7937,7 +7937,7 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is true -- and callendtime is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime 
+      and fb.createdDate >=v_starttime 
             and fb.createdDate <=v_endtime and fb.CallEndTime is not null
            union all
 select distinct fo.allocateduserid,r.rolename,fo.OutboundCallType "CallCategory2",
@@ -7979,7 +7979,7 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is false -- and callendtime is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  and fb.CallEndTime is not null
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  and fb.CallEndTime is not null
             )a where rolename='ANM' and CallCategory2='introductory';
      
         
@@ -8005,7 +8005,7 @@ v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
 
- drop table if exists temp_UniqueDetailsReport;
+ -- DROP TABLE if exists temp_UniqueDetailsReport;
  create temporary table temp_UniqueDetailsReport as
 select * from (
 select distinct fb.bencallid,
@@ -8046,7 +8046,7 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is true -- and callendtime is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime 
+      and fb.createdDate >=v_starttime 
             and fb.createdDate <=v_endtime and fb.CallEndTime is not null
            union all
 select distinct fb.bencallid, fb.ReceivedAgentID "User ID",-- 'OUTGOING'CampaignID,
@@ -8084,13 +8084,13 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is false -- and callendtime is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  and fb.CallEndTime is not null
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  and fb.CallEndTime is not null
             )a;
      
      -- select * from temp_UniqueDetailsReport;   
      
        drop temporary table if exists temp_UniqueDetailsReport2;
-	create temporary table temp_UniqueDetailsReport2 as
+  create temporary table temp_UniqueDetailsReport2 as
 select * from temp_UniqueDetailsReport;    
 
  -- select * from temp_UniqueDetailsReport2; 
@@ -8164,7 +8164,7 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is true -- and callendtime is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime 
+      and fb.createdDate >=v_starttime 
             and fb.createdDate <=v_endtime and fb.CallEndTime is not null
            union all
 select distinct fb.ReceivedAgentID "User ID",-- 'OUTGOING'CampaignID,
@@ -8197,7 +8197,7 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is false -- and callendtime is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  and fb.CallEndTime is not null
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  and fb.CallEndTime is not null
             )a;
      
         
@@ -8266,7 +8266,7 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is true -- and callendtime is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime 
+      and fb.createdDate >=v_starttime 
             and fb.createdDate <=v_endtime and fb.CallEndTime is not null
            union all
 select distinct fb.ReceivedAgentID "User ID",-- 'OUTGOING'CampaignID,
@@ -8307,7 +8307,7 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is false -- and callendtime is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  and fb.CallEndTime is not null
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  and fb.CallEndTime is not null
             )a;
      
         
@@ -8352,9 +8352,9 @@ case when fb.isCallAnswered is true then (case when fb.IsVerified is true then 1
 case when fb.isCallAnswered is true then 1 else 0 end as "Answeredcalls",
 
 case when fb.reasonForCallNotAnswered in('Number busy','No reply','Out of Reach','Switched off','Call not connected')
-and fb.isCallAnswered is not true	 then 1 else 0 end "Number Busy/No reply/Out of Reach/Switched off/Not Connnected",
+and fb.isCallAnswered is not true  then 1 else 0 end "Number Busy/No reply/Out of Reach/Switched off/Not Connnected",
 case when fb.reasonForCallNotAnswered in('Invalid number','Out of service')
-	and fb.isCallAnswered is not true then 1 else 0 end "Invalid Number/Out of order/Wrong number/Other Numbers",
+  and fb.isCallAnswered is not true then 1 else 0 end "Invalid Number/Out of order/Wrong number/Other Numbers",
 -- case when fo.outboundcalltype='Introductory' and fo.callstatus='completed' then  1 else 0 end "ECD-0",
 case when fo.outboundcalltype='ECD1'  and fo.callstatus='completed' and fb.isverified is true then  1 else 0 end "ECD-1",
 case when fo.outboundcalltype='ECD2'  and fo.callstatus='completed'  and fb.isverified is true  then  1 else 0 end "ECD-2",
@@ -8379,15 +8379,15 @@ case when fo.outboundcalltype='ECD16'  and fo.callstatus='completed'  and fb.isv
 -- case when fo.outboundcalltype='ECD21' then  1 else 0  end "ECD-21",
 
 case when fb.reasonForNoFurtherCalls in('Mother has abortion','Still birth','Dead','Reallocate to different state')
-	 then 1 else 0 end "Miscarriage/Abortion/still birth/Baby died etc"
+   then 1 else 0 end "Miscarriage/Abortion/still birth/Baby died etc"
  
 from fact_bencall fb
 inner join fact_mctsoutboundcall fo on fo.OBCallID=fb.OBCallID
 inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true -- and callendtime is not null
-	and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
-	and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-	and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+  and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
+  and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
+  and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
     and fb.ReceivedRoleName=v_role  and fb.CallEndTime is not null
   union all
 select 
@@ -8399,9 +8399,9 @@ case when fb.isCallAnswered is true then (case when fb.IsVerified is true then 1
 case when fb.isCallAnswered is true then 1 else 0 end as "Answeredcalls",
 
 case when fb.reasonForCallNotAnswered in('Number busy','No reply','Out of Reach','Switched off','Call not connected')
-	 then 1 else 0 end "Number Busy/No reply/Out of Reach/Switched off/Not Connnected",
+   then 1 else 0 end "Number Busy/No reply/Out of Reach/Switched off/Not Connnected",
 case when fb.reasonForCallNotAnswered in('Invalid number','Out of service')
-	 then 1 else 0 end "Invalid Number/Out of order/Wrong number/Other Numbers",
+   then 1 else 0 end "Invalid Number/Out of order/Wrong number/Other Numbers",
 -- case when fo.outboundcalltype='Introductory' and fo.callstatus='completed' then  1 else 0 end "ECD-0",
 case when fo.outboundcalltype='ECD1'  and  fo.callstatus='completed'   and fb.isverified is true   then  1 else 0 end "ECD-1",
 case when fo.outboundcalltype='ECD2'  and  fo.callstatus='completed'   and fb.isverified is true    then  1 else 0 end "ECD-2",
@@ -8427,7 +8427,7 @@ case when fo.outboundcalltype='ECD16'  and  fo.callstatus='completed'   and fb.i
 -- case when fo.outboundcalltype='ECD21' then  1 else 0  end "ECD-21",
 
 case when fb.reasonForNoFurtherCalls in('Mother has abortion','Still birth','Dead','Reallocate to different state')
-	 then 1 else 0 end "Miscarriage/Abortion/still birth/Baby died etc"
+   then 1 else 0 end "Miscarriage/Abortion/still birth/Baby died etc"
 
   from fact_bencall fb
 inner join fact_mctsoutboundcall fo on fo.OBCallID=fb.OBCallID
@@ -8435,7 +8435,7 @@ inner join fact_childvalidrecord  fm on fm.MCTSID_no_Child_ID=fo.childid
 where fb.IsMother is false -- and callendtime is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             and fb.ReceivedRoleName=v_role and fb.CallEndTime is not null)a group by `Date`;
 end ;;
 DELIMITER ;
@@ -8477,9 +8477,9 @@ case when fb.isCallAnswered is true then (case when fb.IsVerified is true then 1
 case when fb.isCallAnswered is true then 1 else 0 end as "Answeredcalls",
 
 case when fb.reasonForCallNotAnswered in('Number busy','No reply','Out of Reach','Switched off','Call not connected')
-	 then 1 else 0 end "Number Busy/No reply/Out of Reach/Switched off/Not Connnected",
+   then 1 else 0 end "Number Busy/No reply/Out of Reach/Switched off/Not Connnected",
 case when fb.reasonForCallNotAnswered in('Invalid number','Out of service')
-	 then 1 else 0 end "Invalid Number/Out of order/Wrong number/Other Numbers",
+   then 1 else 0 end "Invalid Number/Out of order/Wrong number/Other Numbers",
 -- case when fo.outboundcalltype='Introductory' and fo.callstatus='completed' then  1 else 0 end "ECD-0",
 case when fo.outboundcalltype='ECD1'  and fo.callstatus='completed' and fb.isverified is true then  1 else 0 end "ECD-1",
 case when fo.outboundcalltype='ECD2'  and fo.callstatus='completed'  and fb.isverified is true  then  1 else 0 end "ECD-2",
@@ -8504,15 +8504,15 @@ case when fo.outboundcalltype='ECD16'  and fo.callstatus='completed'  and fb.isv
 -- case when fo.outboundcalltype='ECD21' then  1 else 0  end "ECD-21",
 
 case when fb.reasonForNoFurtherCalls in('Mother has abortion','Still birth','Dead','Reallocate to different state')
-	 then 1 else 0 end "Miscarriage/Abortion/still birth/Baby died etc"
+   then 1 else 0 end "Miscarriage/Abortion/still birth/Baby died etc"
  
 from fact_bencall fb
 inner join fact_mctsoutboundcall fo on fo.OBCallID=fb.OBCallID
 inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true -- and callendtime is not null
-	and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
-	and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-	and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+  and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
+  and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
+  and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
     and fb.ReceivedRoleName=v_role  and fb.CallEndTime is not null
   union all
 select 
@@ -8524,9 +8524,9 @@ case when fb.isCallAnswered is true then (case when fb.IsVerified is true then 1
 case when fb.isCallAnswered is true then 1 else 0 end as "Answeredcalls",
 
 case when fb.reasonForCallNotAnswered in('Number busy','No reply','Out of Reach','Switched off','Call not connected')
-	 then 1 else 0 end "Number Busy/No reply/Out of Reach/Switched off/Not Connnected",
+   then 1 else 0 end "Number Busy/No reply/Out of Reach/Switched off/Not Connnected",
 case when fb.reasonForCallNotAnswered in('Invalid number','Out of service')
-	 then 1 else 0 end "Invalid Number/Out of order/Wrong number/Other Numbers",
+   then 1 else 0 end "Invalid Number/Out of order/Wrong number/Other Numbers",
 -- case when fo.outboundcalltype='Introductory' and fo.callstatus='completed' then  1 else 0 end "ECD-0",
 case when fo.outboundcalltype='ECD1'  and  fo.callstatus='completed'   and fb.isverified is true   then  1 else 0 end "ECD-1",
 case when fo.outboundcalltype='ECD2'  and  fo.callstatus='completed'   and fb.isverified is true    then  1 else 0 end "ECD-2",
@@ -8552,7 +8552,7 @@ case when fo.outboundcalltype='ECD16'  and  fo.callstatus='completed'   and fb.i
 -- case when fo.outboundcalltype='ECD21' then  1 else 0  end "ECD-21",
 
 case when fb.reasonForNoFurtherCalls in('Mother has abortion','Still birth','Dead','Reallocate to different state')
-	 then 1 else 0 end "Miscarriage/Abortion/still birth/Baby died etc"
+   then 1 else 0 end "Miscarriage/Abortion/still birth/Baby died etc"
 
   from fact_bencall fb
 inner join fact_mctsoutboundcall fo on fo.OBCallID=fb.OBCallID
@@ -8560,7 +8560,7 @@ inner join fact_childvalidrecord  fm on fm.MCTSID_no_Child_ID=fo.childid
 where fb.IsMother is false -- and callendtime is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             and fb.ReceivedRoleName=v_role and fb.CallEndTime is not null)a group by `Date`;
 end ;;
 DELIMITER ;
@@ -8583,7 +8583,7 @@ v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
 
- drop table if exists temp_UniqueDetailsReport;
+ -- DROP TABLE if exists temp_UniqueDetailsReport;
  create temporary table temp_UniqueDetailsReport as
 select * from (
 select distinct fb.bencallid,
@@ -8624,7 +8624,7 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is true -- and callendtime is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime 
+      and fb.createdDate >=v_starttime 
             and fb.createdDate <=v_endtime and fb.CallEndTime is not null
            union all
 select distinct fb.bencallid, fb.ReceivedAgentID "User ID",-- 'OUTGOING'CampaignID,
@@ -8662,13 +8662,13 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is false -- and callendtime is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  and fb.CallEndTime is not null
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  and fb.CallEndTime is not null
             )a;
      
      -- select * from temp_UniqueDetailsReport;   
      
        drop temporary table if exists temp_UniqueDetailsReport2;
-	create temporary table temp_UniqueDetailsReport2 as
+  create temporary table temp_UniqueDetailsReport2 as
 select * from temp_UniqueDetailsReport;    
 
  -- select * from temp_UniqueDetailsReport2; 
@@ -8706,7 +8706,7 @@ CREATE  PROCEDURE `Pr_ECDCallUniqueDetailsReport_03052024`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
- drop table if exists temp_UniqueDetailsReport;
+ -- DROP TABLE if exists temp_UniqueDetailsReport;
  create temporary table temp_UniqueDetailsReport as
 select distinct a.bencallid,`User ID`,`Call Time`,`Mother District`,
  `Health Block Name`,`PHC Name`,`Sub Center Name`,
@@ -8751,7 +8751,7 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is true -- and fo.callstatus='completed'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime 
+      and fb.createdDate >=v_starttime 
             and fb.createdDate <=v_endtime and fb.CallEndTime is not null
             group by 
         fb.ReceivedAgentID ,
@@ -8809,7 +8809,7 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is false 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
              and fb.CallEndTime is not null
           group by   
 fb.ReceivedAgentID ,
@@ -8834,7 +8834,7 @@ fb.CZcallDuration ,fb.Remarks
   --   alter table temp_UniqueDetailsReport add status int(11);
      
      drop temporary table if exists temp_UniqueDetailsReport2;
-	create temporary table temp_UniqueDetailsReport2 as
+  create temporary table temp_UniqueDetailsReport2 as
 select * from temp_UniqueDetailsReport;    
 
 select * from temp_UniqueDetailsReport2; 
@@ -8871,7 +8871,7 @@ CREATE  PROCEDURE `Pr_ECDCallUniqueDetailsReport_bkp_09052024`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
- drop table if exists temp_UniqueDetailsReport;
+ -- DROP TABLE if exists temp_UniqueDetailsReport;
  create temporary table temp_UniqueDetailsReport as
 select distinct a.bencallid,`User ID`,`Call Time`,`Mother District`,
  `Health Block Name`,`PHC Name`,`Sub Center Name`,
@@ -8916,7 +8916,7 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is true -- and fo.callstatus='completed'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime 
+      and fb.createdDate >=v_starttime 
             and fb.createdDate <=v_endtime and fb.CallEndTime is not null
             group by 
         fb.ReceivedAgentID ,
@@ -8974,7 +8974,7 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is false 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
              and fb.CallEndTime is not null
           group by   
 fb.ReceivedAgentID ,
@@ -8999,7 +8999,7 @@ fb.CZcallDuration ,fb.Remarks
   --   alter table temp_UniqueDetailsReport add status int(11);
      
      drop temporary table if exists temp_UniqueDetailsReport2;
-	create temporary table temp_UniqueDetailsReport2 as
+  create temporary table temp_UniqueDetailsReport2 as
 select * from temp_UniqueDetailsReport;    
 
 -- select * from temp_UniqueDetailsReport2; 
@@ -9036,7 +9036,7 @@ CREATE  PROCEDURE `Pr_ECDCallUniqueDetailsReport_bkp_09112023`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
- drop table if exists temp_UniqueDetailsReport;
+ -- DROP TABLE if exists temp_UniqueDetailsReport;
  create temporary table temp_UniqueDetailsReport as
 select distinct a.bencallid,`User ID`,`Call Time`,`Mother District`,
  `Health Block Name`,`PHC Name`,`Sub Center Name`,
@@ -9081,7 +9081,7 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is true -- and fo.callstatus='completed'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime 
+      and fb.createdDate >=v_starttime 
             and fb.createdDate <=v_endtime and fb.CallEndTime is not null
             group by 
         fb.ReceivedAgentID ,
@@ -9139,7 +9139,7 @@ on fb.BeneficiaryRegID=bmc.BenRegId
 where fb.IsMother is false 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
              and fb.CallEndTime is not null
           group by   
 fb.ReceivedAgentID ,
@@ -9164,7 +9164,7 @@ fb.CZcallDuration ,fb.Remarks
   --   alter table temp_UniqueDetailsReport add status int(11);
      
      drop temporary table if exists temp_UniqueDetailsReport2;
-	create temporary table temp_UniqueDetailsReport2 as
+  create temporary table temp_UniqueDetailsReport2 as
 select * from temp_UniqueDetailsReport;    
 
 -- select * from temp_UniqueDetailsReport2; 
@@ -9255,7 +9255,7 @@ inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             and fb.ReceivedRoleName=v_role and fb.CallEndTime is not null
             union all
 select distinct 
@@ -9301,7 +9301,7 @@ inner join fact_childvalidrecord  fm on fm.MCTSID_no_Child_ID=fo.childid
 where fb.IsMother is false 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             and fb.ReceivedRoleName=v_role and fb.CallEndTime is not null
             )a group by District;
             
@@ -9381,7 +9381,7 @@ inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             and fb.ReceivedRoleName=v_role and fb.CallEndTime is not null
             union all
 select distinct 
@@ -9427,7 +9427,7 @@ inner join fact_childvalidrecord  fm on fm.MCTSID_no_Child_ID=fo.childid
 where fb.IsMother is false 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             and fb.ReceivedRoleName=v_role and fb.CallEndTime is not null
             )a group by District;
             
@@ -9507,7 +9507,7 @@ inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             and fb.ReceivedRoleName=v_role and fb.CallEndTime is not null
             union all
 select distinct 
@@ -9553,7 +9553,7 @@ inner join fact_childvalidrecord  fm on fm.MCTSID_no_Child_ID=fo.childid
 where fb.IsMother is false 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             and fb.ReceivedRoleName=v_role and fb.CallEndTime is not null
             )a group by District;
             
@@ -9596,7 +9596,7 @@ inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
        and fr.questionid in(372) and fr.answer is not null
 union 
 select distinct  
@@ -9619,7 +9619,7 @@ and fr.bencallid=fb.bencallid-- new join required
 where fb.IsMother is false 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr.questionid in(372) and fr.answer is not null;
 end ;;
 DELIMITER ;
@@ -9665,7 +9665,7 @@ inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
        and fr.questionid in(372,373) and fr.answer is not null
 union 
 select distinct  
@@ -9691,7 +9691,7 @@ and fr.bencallid=fb.bencallid-- new join required
 where fb.IsMother is false 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr.questionid in(372,373) and fr.answer is not null)a;
              
              drop temporary table if exists temp_ECDDeliveryStatusReport_2;
@@ -9747,7 +9747,7 @@ inner join fact_childvalidrecord  fc on fc.MCTSID_no_Child_ID=fo.childid
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
        and fr.questionid in(396,397,398,409,408,407,406,405,404,403,402,401,400,399) and fr.answer='NO'
 union 
 select distinct  
@@ -9770,7 +9770,7 @@ and fr.bencallid=fb.bencallid-- new join required
 where fb.IsMother is false -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             and fr.questionid in(396,397,398,409,408,407,406,405,404,403,402,401,400,399) and fr.answer='NO';
 end ;;
 DELIMITER ;
@@ -9814,7 +9814,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true -- and fr.ReasonsforHRP  is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
        and fr2.questionid in(308) and fr2.answer<>"Don't know/Not stated"
 union 
 select distinct  
@@ -9838,7 +9838,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false -- and fr.ReasonsforHRP  is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             and fr2.questionid in(308) and  fr2.answer<>"Don't know/Not stated";
 end ;;
 DELIMITER ;
@@ -9882,7 +9882,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true -- and fr.ReasonsforHRP  is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
        and fr2.questionid in(308) and fr2.answer<>"Don't know/Not stated"
 union 
 select distinct  
@@ -9906,7 +9906,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false -- and fr.ReasonsforHRP  is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             and fr2.questionid in(308) and  fr2.answer<>"Don't know/Not stated";
 end ;;
 DELIMITER ;
@@ -9948,7 +9948,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true -- and fr.ReasonsforHrni   is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             and fr2.questionid in(388) and fr2.answer is not null
        -- where fr.questionid in()
 union 
@@ -9974,7 +9974,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true -- and fr.ReasonsforHrni   is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.answer in(select name from db_iemr.m_hrni
  where name not in("Don't know/Not stated",'Newborn with Congenital Anomalies'))
  union
@@ -9999,7 +9999,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false -- and fr.ReasonsforHrni   is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.questionid in(388) and fr2.answer is not null
              union
              select distinct  
@@ -10024,7 +10024,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false -- and fr.ReasonsforHrni   is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.answer in(select name from db_iemr.m_hrni
  where name not in("Don't know/Not stated",'Newborn with Congenital Anomalies'));
              -- where fr.questionid in();
@@ -10068,7 +10068,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true -- and fr.ReasonsforHrni   is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             and fr2.questionid in(388) and fr2.answer is not null
        -- where fr.questionid in()
 union 
@@ -10094,7 +10094,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true -- and fr.ReasonsforHrni   is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.answer in(select name from db_iemr.m_hrni
  where name not in("Don't know/Not stated",'Newborn with Congenital Anomalies'))
  union
@@ -10119,7 +10119,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false -- and fr.ReasonsforHrni   is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.questionid in(388) and fr2.answer is not null
              union
              select distinct  
@@ -10144,7 +10144,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false -- and fr.ReasonsforHrni   is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.answer in(select name from db_iemr.m_hrni
  where name not in("Don't know/Not stated",'Newborn with Congenital Anomalies'));
              -- where fr.questionid in();
@@ -10185,7 +10185,7 @@ inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
         and fr.questionid in(376) and fr.answer='Delay in Process'
 union 
 select distinct  
@@ -10208,7 +10208,7 @@ and fr.bencallid=fb.bencallid-- new join required
 where fb.IsMother is false 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr.questionid in(376)and  fr.answer='Delay in Process';
 end ;;
 DELIMITER ;
@@ -10247,7 +10247,7 @@ inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
         and fr.questionid in(376) and fr.answer='Delay in Process'
 union 
 select distinct  
@@ -10270,7 +10270,7 @@ and fr.bencallid=fb.bencallid-- new join required
 where fb.IsMother is false 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr.questionid in(376)and  fr.answer='Delay in Process';
 end ;;
 DELIMITER ;
@@ -10311,7 +10311,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Dead'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             and fr.questionid in(282) and fr.answer is not null
             union 
 select distinct  
@@ -10335,7 +10335,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false -- and reasonForNoFurtherCalls='Dead'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr.questionid in(284) and fr.answer is not null;
             
             
@@ -10378,7 +10378,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Dead'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             and fr.questionid in(282) and fr.answer is not null
             union 
 select distinct  
@@ -10402,7 +10402,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false -- and reasonForNoFurtherCalls='Dead'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr.questionid in(284) and fr.answer is not null;
             
             
@@ -10445,7 +10445,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
        and fr2.questionid in(281,284) and fr2.answer is not null
 union 
 select distinct  
@@ -10469,7 +10469,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.questionid in(281,284) and fr2.answer is not null;
 end ;;
 DELIMITER ;
@@ -10510,7 +10510,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
        and fr2.questionid in(281,284) and fr2.answer is not null
 union 
 select distinct  
@@ -10534,7 +10534,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.questionid in(281,284) and fr2.answer is not null;
 end ;;
 DELIMITER ;
@@ -10581,7 +10581,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
        and fr2.questionid in(281,284) and fr2.answer is not null
 union 
 select distinct  
@@ -10608,7 +10608,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.questionid in(281,284) and fr2.answer is not null)a;
              
                  drop temporary table if exists temp_ECDMiscarriageReport_2;
@@ -10662,7 +10662,7 @@ inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
         and fr.questionid in(303) and fr.answer is not null
 union 
 select distinct  
@@ -10686,7 +10686,7 @@ and fr.bencallid=fb.bencallid-- new join required
 where fb.IsMother is false -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime 
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime 
               and fr.questionid in(303) and fr.answer is not null;
 end ;;
 DELIMITER ;
@@ -10734,7 +10734,7 @@ inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true -- and reasonForCallNotAnswered='Call not connected'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             and ((fb.IsVerified is false) or(fb.isWrongNumber is true)) 
             union all
 select distinct 
@@ -10764,7 +10764,7 @@ inner join fact_childvalidrecord  fm on fm.MCTSID_no_Child_ID=fo.childid
 where fb.IsMother is false -- and reasonForCallNotAnswered='Call not connected'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             and ((fb.IsVerified is false) or(fb.isWrongNumber is true)) ;
 end ;;
 DELIMITER ;
@@ -10812,7 +10812,7 @@ inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true -- and reasonForCallNotAnswered='Call not connected'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             and ((fb.IsVerified is false) or(fb.isWrongNumber is true)) 
             union all
 select distinct 
@@ -10842,7 +10842,7 @@ inner join fact_childvalidrecord  fm on fm.MCTSID_no_Child_ID=fo.childid
 where fb.IsMother is false -- and reasonForCallNotAnswered='Call not connected'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             and ((fb.IsVerified is false) or(fb.isWrongNumber is true)) ;
 end ;;
 DELIMITER ;
@@ -10891,7 +10891,7 @@ inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true -- and reasonForCallNotAnswered='Call not connected'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             and ((fb.IsVerified is false))-- or(fb.isWrongNumber is true)) 
             union all
 select distinct 
@@ -10922,7 +10922,7 @@ inner join fact_childvalidrecord  fm on fm.MCTSID_no_Child_ID=fo.childid
 where fb.IsMother is false -- and reasonForCallNotAnswered='Call not connected'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             and ((fb.IsVerified is false));-- or(fb.isWrongNumber is true)) ;
 end ;;
 DELIMITER ;
@@ -10970,7 +10970,7 @@ inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true -- and reasonForCallNotAnswered='Call not connected'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             and ((fb.IsVerified is false))-- or(fb.isWrongNumber is true)) 
             union all
 select distinct 
@@ -11000,7 +11000,7 @@ inner join fact_childvalidrecord  fm on fm.MCTSID_no_Child_ID=fo.childid
 where fb.IsMother is false -- and reasonForCallNotAnswered='Call not connected'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             and ((fb.IsVerified is false));-- or(fb.isWrongNumber is true)) ;
 end ;;
 DELIMITER ;
@@ -11041,7 +11041,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Still birth '
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
               and fr2.questionid in(283,284) and fr2.answer is not null
             union 
 select distinct  
@@ -11065,7 +11065,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false  -- and reasonForNoFurtherCalls='Still birth '
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.questionid in(283,284) and fr2.answer is not null;
             
             
@@ -11108,7 +11108,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Still birth '
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
               and fr2.questionid in(283,284) and fr2.answer is not null
             union 
 select distinct  
@@ -11132,7 +11132,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false  -- and reasonForNoFurtherCalls='Still birth '
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.questionid in(283,284) and fr2.answer is not null;
             
             
@@ -11185,7 +11185,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Still birth '
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
               and fr2.questionid in(283,284) and fr2.answer is not null
             union 
 select distinct  
@@ -11212,7 +11212,7 @@ inner join fact_mctscallresponse fr2 on fr.obcallid=fr2.obcallid
 where fb.IsMother is false  -- and reasonForNoFurtherCalls='Still birth '
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr2.questionid in(283,284) and fr2.answer is not null)a ;
           --   where (`Reason of incident` is not null and `Period of occurrence` is not null)
    --     group by `CALL Date`,`Registration No`,`PhoneNo of Beneficiary`,
@@ -11277,7 +11277,7 @@ inner join fact_childvalidrecord  fc on fc.MCTSID_no_Child_ID=fo.childid
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
        and fr.questionid in(378) and  fr.answer<>'Not Applicable'
 union 
 select distinct  
@@ -11300,7 +11300,7 @@ and fr.bencallid=fb.bencallid-- new join required
 where fb.IsMother is false -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr.questionid in(378) and fr.answer<>'Not Applicable';
 end ;;
 DELIMITER ;
@@ -11343,7 +11343,7 @@ inner join fact_childvalidrecord  fc on fc.MCTSID_no_Child_ID=fo.childid
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
        and fr.questionid in(378) and  fr.answer<>'Not Applicable'
 union 
 select distinct  
@@ -11366,7 +11366,7 @@ and fr.bencallid=fb.bencallid-- new join required
 where fb.IsMother is false -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
              and fr.questionid in(378) and fr.answer<>'Not Applicable';
 end ;;
 DELIMITER ;
@@ -11408,7 +11408,7 @@ inner join fact_childvalidrecord  fc on fc.MCTSID_no_Child_ID=fo.childid
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
         and fr.questionid in(379) and  fr.answer<>'Not Applicable'
 union 
 select distinct  
@@ -11431,7 +11431,7 @@ and fr.bencallid=fb.bencallid-- new join required
 where fb.IsMother is false -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
               and fr.questionid in(379) and   fr.answer<>'Not Applicable';
 end ;;
 DELIMITER ;
@@ -11473,7 +11473,7 @@ inner join fact_childvalidrecord  fc on fc.MCTSID_no_Child_ID=fo.childid
 where fb.IsMother is true  -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
         and fr.questionid in(379) and  fr.answer<>'Not Applicable'
 union 
 select distinct  
@@ -11496,7 +11496,7 @@ and fr.bencallid=fb.bencallid-- new join required
 where fb.IsMother is false -- and reasonForNoFurtherCalls='Mother has abortion'
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
               and fr.questionid in(379) and   fr.answer<>'Not Applicable';
 end ;;
 DELIMITER ;
@@ -11974,20 +11974,20 @@ D.ModifiedBy,
 D.LastModDate
 from 
 (SELECT MIN(A.OutboundCallType) OutboundCallType,A.motherID 
-	FROM 
+  FROM 
 (select mctsoutbou0_.motherID,mctsoutbou0_.OutboundCallType 
-	from t_MCTSOutboundCalls mctsoutbou0_
-		inner join t_mothervalidrecord mother on mctsoutbou0_.motherID=mother.MCTSID_no
-		where mctsoutbou0_.CallStatus!='Completed'
-			and ((mctsoutbou0_.CallDateFrom>=P_CallDateFrom and mctsoutbou0_.CallDateFrom<=P_CallDateTo ) 
-			or (mctsoutbou0_.CallDateTo<=P_CallDateTo and mctsoutbou0_.CallDateTo>=P_CallDateFrom))
-			and mctsoutbou0_.ProviderServiceMapID = P_ProviderServiceMapID 
+  from t_MCTSOutboundCalls mctsoutbou0_
+    inner join t_mothervalidrecord mother on mctsoutbou0_.motherID=mother.MCTSID_no
+    where mctsoutbou0_.CallStatus!='Completed'
+      and ((mctsoutbou0_.CallDateFrom>=P_CallDateFrom and mctsoutbou0_.CallDateFrom<=P_CallDateTo ) 
+      or (mctsoutbou0_.CallDateTo<=P_CallDateTo and mctsoutbou0_.CallDateTo>=P_CallDateFrom))
+      and mctsoutbou0_.ProviderServiceMapID = P_ProviderServiceMapID 
 ) A group by A.motherID 
 )B inner join t_MCTSOutboundCalls C
-		on C.motherid=B.motherid and C.OutboundCallType=B.OutboundCallType
-	inner join t_mothervalidrecord D
-		on B.motherID=D.MCTSID_no 
-	order by CallDateFrom;
+    on C.motherid=B.motherid and C.OutboundCallType=B.OutboundCallType
+  inner join t_mothervalidrecord D
+    on B.motherID=D.MCTSID_no 
+  order by CallDateFrom;
 
 
 END ;;
@@ -12333,17 +12333,17 @@ from
 FROM 
 (select mctsoutbou0_.childID,mctsoutbou0_.OutboundCallType 
 from t_MCTSOutboundCalls mctsoutbou0_
-	inner join t_childvaliddata childvalid1_ on mctsoutbou0_.childID=childvalid1_.MCTSID_no_Child_ID
-	where mctsoutbou0_.CallStatus!='Completed'
-		and ((mctsoutbou0_.CallDateFrom>=P_CallDateFrom and mctsoutbou0_.CallDateFrom<=P_CallDateTo ) 
-		or (mctsoutbou0_.CallDateTo<=P_CallDateTo and mctsoutbou0_.CallDateTo>=P_CallDateFrom))
-		and mctsoutbou0_.ProviderServiceMapID=P_ProviderServiceMapID
+  inner join t_childvaliddata childvalid1_ on mctsoutbou0_.childID=childvalid1_.MCTSID_no_Child_ID
+  where mctsoutbou0_.CallStatus!='Completed'
+    and ((mctsoutbou0_.CallDateFrom>=P_CallDateFrom and mctsoutbou0_.CallDateFrom<=P_CallDateTo ) 
+    or (mctsoutbou0_.CallDateTo<=P_CallDateTo and mctsoutbou0_.CallDateTo>=P_CallDateFrom))
+    and mctsoutbou0_.ProviderServiceMapID=P_ProviderServiceMapID
 ) A group by A.childID 
 )B inner join t_MCTSOutboundCalls C 
-		on C.childID=B.childID and C.OutboundCallType=B.OutboundCallType
-	inner join t_childvaliddata D
-		on B.childID=D.MCTSID_no_Child_ID 
-	order by CallDateFrom;
+    on C.childID=B.childID and C.OutboundCallType=B.OutboundCallType
+  inner join t_childvaliddata D
+    on B.childID=D.MCTSID_no_Child_ID 
+  order by CallDateFrom;
 
 END ;;
 DELIMITER ;
@@ -12608,7 +12608,7 @@ BEGIN
 
  
 
-	select 
+  select 
 USRMappingID,
 ProviderServiceMapID,
 UserID,
@@ -12727,7 +12727,7 @@ insert into db_iemr.m_subcategory
 (SubCategoryName, 
 SubCategoryDesc,
  CreatedBy)
-	values
+  values
 ("Blood Document", 
 concat("Blood Document Upload For - ", v_ProviderServiceMapID),
 "Trigger-Insert104BRCategory");
@@ -13027,7 +13027,7 @@ SET SQL_SAFE_UPDATES = 0;
 
      drop temporary table if exists temp;
     
-	create temporary table temp (jsondata longtext);
+  create temporary table temp (jsondata longtext);
     
      drop temporary table if exists temp_institution;
     CREATE temporary TABLE `temp_institution` (
@@ -13058,15 +13058,15 @@ SET SQL_SAFE_UPDATES = 0;
   PRIMARY KEY (`InstitutionID`)
 ) ;
 
-	select  JSON_LENGTH(json_extract(IN_InstDet,"$.InstitutionDetails")) into ReCount;
+  select  JSON_LENGTH(json_extract(IN_InstDet,"$.InstitutionDetails")) into ReCount;
    
       set count=0;
- 	WHILE count  <= ReCount DO
+  WHILE count  <= ReCount DO
     SET @sql_text:=CONCAT(' insert into temp select json_extract(''',IN_InstDet, ''',"$.InstitutionDetails[',count,']");');  
-	PREPARE stmt from @sql_text; 
-	EXECUTE stmt;
-	 SET  count = count + 1; 
-	 
+  PREPARE stmt from @sql_text; 
+  EXECUTE stmt;
+   SET  count = count + 1; 
+   
 insert into temp_institution(  Serviceline,state,district,taluk,InstitutionName, 
  Address, ContactPerson1, ContactPerson1_Email, ContactNo1, 
 ContactPerson2, ContactPerson2_Email, ContactNo2, ContactPerson3, ContactPerson3_Email, 
@@ -13076,7 +13076,7 @@ ContactNo3, Website, InstitutionType)
         replace(JSON_EXTRACT(jsondata, '$.State'),'"','') as State,
         replace(JSON_EXTRACT(jsondata, '$.District'),'"','') as District,
         replace(JSON_EXTRACT(jsondata, '$.Taluk'),'"','') as Taluk,
-		replace(JSON_EXTRACT(jsondata, '$.InstitutionName'),'"','') as InstitutionName,
+    replace(JSON_EXTRACT(jsondata, '$.InstitutionName'),'"','') as InstitutionName,
         replace(JSON_EXTRACT(jsondata, '$.Address'),'"','') as Address,
           replace(JSON_EXTRACT(jsondata, '$.PrimaryContactPerson'),'"','') as ContactPerson1,
             replace(JSON_EXTRACT(jsondata, '$.PrimaryEmailID'),'"','') as ContactPerson1_Email,
@@ -13091,8 +13091,8 @@ ContactNo3, Website, InstitutionType)
                 replace(JSON_EXTRACT(jsondata, '$.InstituteType'),'"','') as InstitutionType
         
              from temp;
-	  delete from temp;
-	 END WHILE;
+    delete from temp;
+   END WHILE;
      
      
      update temp_institution t
@@ -13138,8 +13138,8 @@ ContactNo3, Website, InstitutionType)
      and t.providerservicemapid=s.ProviderServiceMapID
      set t.institutiontypeid=s.institutiontypeid;
      
-    /*drop table if exists temp_institution_check;
-     create table temp_institution_check as
+    /*-- DROP TABLE if exists temp_institution_check;
+     CREATE TABLE IF NOT EXISTS temp_institution_check as
      select * from temp_institution;*/
      
      select count(1) into v_recordcount 
@@ -13272,9 +13272,9 @@ CREATE  PROCEDURE `Pr_MCTSCallAnsweredReport_Pivot`(
  v_VerifiedData varchar(10),
  v_Agentid int(11),v_psmid int(11))
 begin
- -- Mother ID	Mother Name	Child ID	Child Name	Phone No	Anm Name	
- -- Asha Name	Phc Name	Address	District Name	Block Name	Sub Center Name	
- -- Outbound Call Type	Display Call Type	Call Date And Time	Remark;
+ -- Mother ID Mother Name Child ID  Child Name  Phone No  Anm Name  
+ -- Asha Name Phc Name  Address District Name Block Name  Sub Center Name 
+ -- Outbound Call Type  Display Call Type Call Date And Time  Remark;
  
  /*drop temporary table if exists temp_MctsQAMapping;
  create temporary table temp_MctsQAMapping 
@@ -13521,8 +13521,8 @@ CREATE  PROCEDURE `Pr_MCTSCallDetailsReport`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
 
--- Call Time	Mother District	Child District	Phone Number	
--- Mother ID	Child ID	Status	Remarks
+-- Call Time  Mother District Child District  Phone Number  
+-- Mother ID  Child ID  Status  Remarks
 
 drop temporary table if exists temp_CDR;
 create temporary table temp_CDR as
@@ -13539,7 +13539,7 @@ inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             union all
 select distinct fb.ReceivedAgentID "User ID",'OUTGOING'CampaignID,
 fb.calltime "Call Time",
@@ -13555,7 +13555,7 @@ inner join fact_childvalidrecord  fm on fm.MCTSID_no_Child_ID=fo.childid
 where fb.IsMother is false 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  ;
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  ;
             
             alter table temp_CDR add count_verified int(11) default 0;
             
@@ -13565,7 +13565,7 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
              where obcallid is not null and isverified is true
              and providerServiceMapID=ifnull(v_psmid,providerServiceMapID)  
              and ReceivedAgentID=ifnull(v_Agentid,ReceivedAgentID)
-			and createdDate >=v_starttime and createdDate <=v_endtime 
+      and createdDate >=v_starttime and createdDate <=v_endtime 
              group by obcallid)a 
              on a.obcallid=t.obcallid
               set count_verified=ifnull(a.count,0);
@@ -13592,7 +13592,7 @@ DELIMITER ;;
 CREATE  PROCEDURE `Pr_MCTSCallDetailsUniqueReport`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
--- User ID	Call Time	Mother ID	Status	Remarks
+-- User ID  Call Time Mother ID Status  Remarks
 select fb.ReceivedAgentID "User ID",
 fb.calltime "Call Time",
 fm.MCTSID_no "Mother ID",fb.CallSubTypeName "status",
@@ -13603,7 +13603,7 @@ inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 where fb.IsMother is true 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime;
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime;
             
 end ;;
 DELIMITER ;
@@ -13625,9 +13625,9 @@ CREATE  PROCEDURE `Pr_MCTSCallNotAnsweredReport`(
 v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
 begin
--- /*Mother ID	Mother Name	Child ID	Child Name	Phone No	Anm Name	
--- AshaName	Phc Name	Outbound Call Type	Display Call Type	Call Date And Time	
--- Address	District Name	Block Name	Sub Center Name	Remark	Reason
+-- /*Mother ID  Mother Name Child ID  Child Name  Phone No  Anm Name  
+-- AshaName Phc Name  Outbound Call Type  Display Call Type Call Date And Time  
+-- Address  District Name Block Name  Sub Center Name Remark  Reason
 -- */
 select fm.MCTSID_no "Mother ID",fm.name "Mother Name",fm.Child1_ID "Child ID"
 ,fm.Child1_Name "Child Name",fm.Whom_PhoneNo "Phone No",
@@ -13707,7 +13707,7 @@ inner join fact_mctsoutboundcall fo on fo.OBCallID=fb.OBCallID
 inner join fact_childvalidrecord  fm on fm.MCTSID_no_Child_ID=fo.childid
 where  fb.ismother is false and ff.providerServiceMapID=ifnull(v_psmid,ff.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and ff.createdDate >=v_starttime and ff.createdDate <=v_endtime  ;
+      and ff.createdDate >=v_starttime and ff.createdDate <=v_endtime  ;
 
 
 end ;;
@@ -13749,7 +13749,7 @@ begin
  inner join fact_mothervalidrecord  fm on fm.MCTSID_no=fo.MotherID
  where  fb.ismother is true and ff.providerServiceMapID=ifnull(v_psmid,ff.providerServiceMapID)  
               and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
- 			and ff.createdDate >=v_starttime and ff.createdDate <=v_endtime  ;
+      and ff.createdDate >=v_starttime and ff.createdDate <=v_endtime  ;
  
  
  end ;;
@@ -13782,7 +13782,7 @@ inner join fact_childvalidrecord  fm on fm.MCTSID_no_Child_ID=fo.childid
 inner join  fact_childcongenitalanomalies c on c.childid=fm.MCTSID_no_Child_ID
 where c.providerServiceMapID=ifnull(v_psmid,c.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and c.createdDate >=v_starttime and c.createdDate <=v_endtime  ;
+      and c.createdDate >=v_starttime and c.createdDate <=v_endtime  ;
 
 
 end ;;
@@ -13812,10 +13812,10 @@ where ProviderServiceMapID=v_psmid;
 
 drop temporary table if exists temp_dailyReport;
 create temporary table temp_dailyReport(
-Date datetime,	Districtid int(11),Districts varchar(100),	TotalCalls int(11),
-	TotalUniqueCalls int(11),	TotalSelfNoCalls int(11),
-	TotalOtherNoCalls int(11),	TotalAnsweredCalls int(11),
-	TotalVerifiedCalls	int(11),TotalUnVerifiedCalls int(11));
+Date datetime,  Districtid int(11),Districts varchar(100),  TotalCalls int(11),
+  TotalUniqueCalls int(11), TotalSelfNoCalls int(11),
+  TotalOtherNoCalls int(11),  TotalAnsweredCalls int(11),
+  TotalVerifiedCalls  int(11),TotalUnVerifiedCalls int(11));
     
      insert into temp_dailyReport(Date,Districtid,Districts)
     select v_starttime,Districtid,DistrictName from db_iemr.m_district 
@@ -13857,7 +13857,7 @@ where
 fb.ismother is true 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             group by b.permdistrictid)a on a.permdistrictid=t.Districtid
              and  date(a.createdDate)=date(t.date)
             set t.TotalCalls=a.TotalCalls;
@@ -13870,7 +13870,7 @@ where
 fb.ismother is true 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             group by b.permdistrictid)a on a.permdistrictid=t.Districtid
              and  date(a.createdDate)=date(t.date)
             set t.TotalUniqueCalls=a.TotalUniqueCalls;      
@@ -13885,7 +13885,7 @@ where
 fb.ismother is true  and fm.IsSelfNo is true and 
  fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             group by b.permdistrictid)a on a.permdistrictid=t.Districtid
              and  date(a.createdDate)=date(t.date)
             set t.TotalSelfNoCalls=a.TotalSelfNoCalls;   
@@ -13900,7 +13900,7 @@ where
 fb.ismother is true  and fm.IsSelfNo is false and 
  fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             group by b.permdistrictid)a on a.permdistrictid=t.Districtid
              and  date(a.createdDate)=date(t.date)
             set t.TotalOtherNoCalls=a.TotalOtherNoCalls;       
@@ -13916,7 +13916,7 @@ and   fb.CallTypeid
              where callgrouptype='Answered' and calltype='Answered')
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             group by b.permdistrictid)a on a.permdistrictid=t.Districtid
              and  date(a.createdDate)=date(t.date)
             set t.TotalAnsweredCalls=a.TotalAnsweredCalls;            
@@ -13931,7 +13931,7 @@ where
 fb.ismother is true and fb.IsVerified is true
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             group by b.permdistrictid)a on a.permdistrictid=t.Districtid
              and  date(a.createdDate)=date(t.date)
             set t.TotalVerifiedCalls=a.TotalVerifiedCalls;       
@@ -13944,7 +13944,7 @@ where
 fb.ismother is true and fb.IsVerified is false
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             group by b.permdistrictid)a on a.permdistrictid=t.Districtid
              and  date(a.createdDate)=date(t.date)
             set t.TotalUnVerifiedCalls=a.TotalUnVerifiedCalls;                
@@ -13964,7 +13964,7 @@ where
 fb.ismother is false 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             group by b.permdistrictid)a on a.permdistrictid=t.Districtid
              and  date(a.createdDate)=date(t.date)
             set t.TotalCalls=a.TotalCalls;
@@ -13977,7 +13977,7 @@ where
 fb.ismother is false 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             group by b.permdistrictid)a on a.permdistrictid=t.Districtid
              and  date(a.createdDate)=date(t.date)
             set t.TotalUniqueCalls=a.TotalUniqueCalls;      
@@ -13992,7 +13992,7 @@ where
 fb.ismother is false  and fm.IsSelfNo is true and 
  fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             group by b.permdistrictid)a on a.permdistrictid=t.Districtid
              and  date(a.createdDate)=date(t.date)
             set t.TotalSelfNoCalls=a.TotalSelfNoCalls;   
@@ -14007,7 +14007,7 @@ where
 fb.ismother is false  and fm.IsSelfNo is false and 
  fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             group by b.permdistrictid)a on a.permdistrictid=t.Districtid
              and  date(a.createdDate)=date(t.date)
             set t.TotalOtherNoCalls=a.TotalOtherNoCalls;       
@@ -14023,7 +14023,7 @@ and   fb.CallTypeid
              where callgrouptype='Answered' and calltype='Answered')
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             group by b.permdistrictid)a on a.permdistrictid=t.Districtid
              and  date(a.createdDate)=date(t.date)
             set t.TotalAnsweredCalls=a.TotalAnsweredCalls;            
@@ -14038,7 +14038,7 @@ where
 fb.ismother is false and fb.IsVerified is true
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             group by b.permdistrictid)a on a.permdistrictid=t.Districtid
              and  date(a.createdDate)=date(t.date)
             set t.TotalVerifiedCalls=a.TotalVerifiedCalls;       
@@ -14051,7 +14051,7 @@ where
 fb.ismother is false and fb.IsVerified is false
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
             group by b.permdistrictid)a on a.permdistrictid=t.Districtid
              and  date(a.createdDate)=date(t.date)
             set t.TotalUnVerifiedCalls=a.TotalUnVerifiedCalls;                
@@ -14082,7 +14082,7 @@ CREATE  PROCEDURE `Pr_MCTSDataReport_Child`(v_starttime datetime,v_endtime datet
 v_psmid int(11)
 )
 begin
-select State_ID "State ID",	District_ID "District ID",District_Name "District Name",
+select State_ID "State ID", District_ID "District ID",District_Name "District Name",
 Taluka_ID "Taluka ID",Taluka_Name "Taluka Name",Block_ID "Health Block ID",
 Block_Name "Health Block Name",PHC_ID "PHC ID",PHC_Name "PHC Name",
 SubCenter_ID "Sub Center ID",SubCenter_Name "Sub Center Name",City "City Maholla",
@@ -14154,7 +14154,7 @@ MDDS_Village_ID "MDDS Village ID"
  from db_reporting.fact_childvalidrecord
  where providerServiceMapID=ifnull(v_psmid,providerServiceMapID)  
            --  and ReceivedAgentID=ifnull(v_Agentid,ReceivedAgentID)
-			and createdDate >=v_starttime and createdDate <=v_endtime;
+      and createdDate >=v_starttime and createdDate <=v_endtime;
  
  end ;;
 DELIMITER ;
@@ -14177,7 +14177,7 @@ CREATE  PROCEDURE `Pr_MCTSDataReport_Mother`(v_starttime datetime,v_endtime date
 v_psmid int(11)
 )
 begin
-select State_ID "State ID",	District_ID "District ID",District_Name "District Name",
+select State_ID "State ID", District_ID "District ID",District_Name "District Name",
 Taluka_ID "Taluka ID",Taluka_Name "Taluka Name",Block_ID "Health Block ID",
 Block_Name "Health Block Name",PHC_ID "PHC ID",PHC_Name "PHC Name",
 SubCenter_ID "Sub Center ID",SubCenter_Name "Sub Center Name",
@@ -14247,7 +14247,7 @@ Aadhar_no "Aadhar No",
  from db_reporting.fact_mothervalidrecord
  where providerServiceMapID=ifnull(v_psmid,providerServiceMapID)  
            --  and ReceivedAgentID=ifnull(v_Agentid,ReceivedAgentID)
-			and createdDate >=v_starttime and createdDate <=v_endtime;
+      and createdDate >=v_starttime and createdDate <=v_endtime;
  
  end ;;
 DELIMITER ;
@@ -14283,7 +14283,7 @@ inner join fact_mctsoutboundcall fo on fm.MCTSID_no=fo.MotherID
 inner join fact_bencall fb  on fo.OBCallID=fb.OBCallID
 where  fm.High_Risk is true and  fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime;
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime;
 end if;
 
 
@@ -14302,7 +14302,7 @@ inner join fact_mctsoutboundcall fo on fm.MCTSID_no=fo.MotherID
 where  fm.High_Risk is true and  fo.MotherID is null
 and fm.providerServiceMapID=ifnull(v_psmid,fm.providerServiceMapID)  
           --   and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fm.createdDate >=v_starttime and fm.createdDate <=v_endtime
+      and fm.createdDate >=v_starttime and fm.createdDate <=v_endtime
  union all
  select distinct fm.MCTSID_no "Mcts ID No",fm.Name "Name",fm.Husband_Name "Husband Name",
 fm.Age "Age",fm.District_Name "District Name",fm.Taluka_Name "Taluka Name",
@@ -14317,7 +14317,7 @@ inner join fact_mctsoutboundcall fo on fm.MCTSID_no=fo.MotherID
 inner join fact_bencall fb  on fo.OBCallID=fb.OBCallID
 where  fm.High_Risk is true and  fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime;
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime;
 
 end if;
 end ;;
@@ -14386,7 +14386,7 @@ createdBy "Updated By"
  from db_reporting.fact_childinvalidrecord
   where providerServiceMapID=ifnull(v_psmid,providerServiceMapID)  
             --  and ReceivedAgentID=ifnull(v_Agentid,ReceivedAgentID)
- 			and createdDate >=v_starttime and createdDate <=v_endtime;
+      and createdDate >=v_starttime and createdDate <=v_endtime;
   
   end ;;
 DELIMITER ;
@@ -14413,7 +14413,7 @@ select distinct
 MCTSID_no "M C T S ID",  Name "Name",Husband_Name "Husband  Name",
 PhoneNo_Of_Whom "Phone No  Of  Whom",  Whom_PhoneNo "Whom  Phone No",
 Birth_Date "Birth Date",Age "Age", Caste "Caste" , Aadhar_no "Aadhar no" ,
-State_ID "State ID",	District_ID "District ID",District_Name "District Name",
+State_ID "State ID",  District_ID "District ID",District_Name "District Name",
 Taluka_Name "Taluka Name",Taluka_ID "Taluka ID",Block_ID "Block  ID",
 Block_Name "Block  Name",
 SubCenter_ID "Sub Center ID",SubCenter_Name "Sub Center Name",
@@ -14509,7 +14509,7 @@ InValid_Reason "In Valid  Reason"
 from db_reporting.fact_motherinvalidrecord
  where providerServiceMapID=ifnull(v_psmid,providerServiceMapID)  
            --  and ReceivedAgentID=ifnull(v_Agentid,ReceivedAgentID)
-			and createdDate >=v_starttime and createdDate <=v_endtime;
+      and createdDate >=v_starttime and createdDate <=v_endtime;
  
  end ;;
 DELIMITER ;
@@ -14530,8 +14530,8 @@ DELIMITER ;;
 CREATE  PROCEDURE `Pr_MCTSNHMReport`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
--- Date	District	Beneficiary ID	Name	Health Block	Phc	Sub Center Name	Facility 
--- Name	Category	Display Call Type	Phone Number	Call Duration	Remark
+-- Date District  Beneficiary ID  Name  Health Block  Phc Sub Center Name Facility 
+-- Name Category  Display Call Type Phone Number  Call Duration Remark
 
 select 
 fb.createdDate "Date",b.PermDistrict "District",
@@ -14549,7 +14549,7 @@ inner join dim_beneficiary b on b.BeneficiaryRegID=fm.BeneficiaryRegID
 where fb.IsMother is true 
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
-			and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
+      and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime
             union all
 select 
 fb.createdDate "Date",b.PermDistrict "District",
@@ -15842,46 +15842,46 @@ where t1.Question='Any High Risk Pregnancy (HRP)?' AND t1.Answer ='Yes' and t1.B
 update `db_iemr`.`t_mctscallresponse` t1
 inner join m_mapquestion t2 on t1.QuestionID=t2.parentQuestionID
 inner join t_mctscallresponse t3 on t3.questionid=t2.childQuestionID and t3.BenCallID=t1.BenCallID and t3.obcallid=t1.obcallid
-set	t1.ReasonsforHrni = t3.Answer 
+set t1.ReasonsforHrni = t3.Answer 
 where t1.Question='Any High Risk Newborn/Infant?' AND t1.Answer ='Yes'  and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
   
-	/*					
+  /*          
 update `db_iemr`.`t_mctscallresponse` t1
 inner join m_mapquestion t2 on t1.QuestionID=t2.parentQuestionID
 inner join t_mctscallresponse t3 on t3.questionid=t2.childQuestionID and t3.BenCallID=t1.BenCallID and t3.obcallid=t1.obcallid
-set	t1.CongentialAnomalies =t3.Answer 
+set t1.CongentialAnomalies =t3.Answer 
 where t1.Question='Reasons for Congential Anomalies'  and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
                        
 update `db_iemr`.`t_mctscallresponse` t1
 inner join m_mapquestion t2 on t1.QuestionID=t2.parentQuestionID
 inner join t_mctscallresponse t3 on t3.questionid=t2.childQuestionID and t3.BenCallID=t1.BenCallID and t3.obcallid=t1.obcallid
-set	t1.ProbableCauseOfDefect = t3.Answer 
+set t1.ProbableCauseOfDefect = t3.Answer 
 where t1.Question='Probable Defect Cause'  and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 */
 
 update `db_iemr`.`t_mctscallresponse` t1
-set	t1.CongentialAnomalies =t1.Answer 
+set t1.CongentialAnomalies =t1.Answer 
 where t1.Question='Reasons for Congential Anomalies' and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
 update `db_iemr`.`t_mctscallresponse` t1
-set	t1.ProbableCauseOfDefect =t1.Answer 
+set t1.ProbableCauseOfDefect =t1.Answer 
 where t1.Question='Probable Defect Cause' and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
 update `db_iemr`.`t_mctscallresponse` t1
 inner join  t_mctscallresponse t2 on t1.BenCallID=t2.BenCallID and t1.obcallid=t2.obcallid
-set	t1.OtherHrpReason = t2.Answer 
+set t1.OtherHrpReason = t2.Answer 
 where t2.Question='Other HRP Reason' and t1.Question='Any High Risk Pregnancy (HRP)?' AND t1.Answer ='Yes'
 and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
 update `db_iemr`.`t_mctscallresponse` t1
 inner join  t_mctscallresponse t2 on t1.BenCallID=t2.BenCallID and t1.obcallid=t2.obcallid
-set	t1.OtherHrni = t2.Answer 
+set t1.OtherHrni = t2.Answer 
 where t2.Question='Other HRNI Reason' and t1.Question='Any High Risk Newborn/Infant?' AND t1.Answer ='Yes'
 and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
 update `db_iemr`.`t_mctscallresponse` t1
 inner join  t_mctscallresponse t2 on t1.BenCallID=t2.BenCallID and t1.obcallid=t2.obcallid
-set	t1.OtherCongentialAnomalies = t2.Answer 
+set t1.OtherCongentialAnomalies = t2.Answer 
 where t2.Question='Other Congential Anomalie' and t1.Question='Reasons for Congential Anomalies' 
 and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
@@ -15968,11 +15968,11 @@ BRD.referredToInstituteName,
 BRD.ServiceName,
 AD.CreatedDate
  FROM db_reporting.fact_ancdiagnosis AD
-	left join db_reporting.dim_beneficiary BEN on AD.BeneficiaryRegID = BEN.BeneficiaryRegID
-	left join db_reporting.fact_benreferdetails BRD on AD.BeneficiaryRegID = BRD.BeneficiaryRegID 
-		and AD.VisitCode = BRD.VisitCode
+  left join db_reporting.dim_beneficiary BEN on AD.BeneficiaryRegID = BEN.BeneficiaryRegID
+  left join db_reporting.fact_benreferdetails BRD on AD.BeneficiaryRegID = BRD.BeneficiaryRegID 
+    and AD.VisitCode = BRD.VisitCode
 where date(AD.VisitDate) between date(P_CallDateFrom) and date(P_CallDateTo) 
-	and AD.ProviderServiceMApID = P_ProviderServiceMapID
+  and AD.ProviderServiceMApID = P_ProviderServiceMapID
     and (P_VanID is null or AD.VanID = P_VanID);
 
 
@@ -16021,13 +16021,13 @@ BRD.referredToInstituteName,
 BRD.ServiceName,
 AD.CreatedDate
  FROM db_reporting.fact_ancdiagnosis AD
-	left join db_reporting.dim_beneficiary BEN on AD.BeneficiaryRegID = BEN.BeneficiaryRegID
-	left join db_reporting.fact_benreferdetails BRD on AD.BeneficiaryRegID = BRD.BeneficiaryRegID 
-		and AD.VisitCode = BRD.VisitCode
+  left join db_reporting.dim_beneficiary BEN on AD.BeneficiaryRegID = BEN.BeneficiaryRegID
+  left join db_reporting.fact_benreferdetails BRD on AD.BeneficiaryRegID = BRD.BeneficiaryRegID 
+    and AD.VisitCode = BRD.VisitCode
 where date(AD.VisitDate) between date(P_CallDateFrom) and date(P_CallDateTo) 
-	and AD.ProviderServiceMApID = P_ProviderServiceMapID
+  and AD.ProviderServiceMApID = P_ProviderServiceMapID
     and (P_VanID is null or AD.VanID = P_VanID)
-	and AD.IshighRisk is true;
+  and AD.IshighRisk is true;
 
 
 END ;;
@@ -16071,9 +16071,9 @@ BEND.VehicalNo,
 BEND.ParkingPlaceID,
 BEND.CreatedDate
  FROM db_reporting.fact_bendisease BEND
-	left join db_reporting.dim_beneficiary BEN on BEND.BeneficiaryRegID = BEN.BeneficiaryRegID
+  left join db_reporting.dim_beneficiary BEN on BEND.BeneficiaryRegID = BEN.BeneficiaryRegID
 where date(BEND.VisitDate) between date(P_CallDateFrom) and date(P_CallDateTo) 
-	and BEND.ProviderServiceMApID = P_ProviderServiceMapID
+  and BEND.ProviderServiceMApID = P_ProviderServiceMapID
     and (P_VanID is null or BEND.VanID = P_VanID);
 
 END ;;
@@ -16108,7 +16108,7 @@ count(case when GenderID=3 then 1 end ) TransGender
 FROM db_reporting.fact_benchiefcomplaint  bencom
 left join db_reporting.dim_beneficiary dim on bencom.BeneficiaryRegID=dim.BeneficiaryRegID
 where date(bencom.createddate) between date(P_CallDateFrom) and date(P_CallDateTo) 
-	and ParkingPlaceID = P_ParkingPlaceID
+  and ParkingPlaceID = P_ParkingPlaceID
 group by ChiefComplaintID,VanID;
 
 
@@ -16160,7 +16160,7 @@ BVD.VehicalNo
 from db_reporting.fact_benvisitdetail BVD
 left join db_reporting.dim_beneficiary BEN on BVD.BeneficiaryRegID = BEN.BeneficiaryRegID
 where date(BVD.createddate) between date(P_CallDateFrom) and date(P_CallDateTo) 
-	and BVD.ProviderServiceMApID = P_ProviderServiceMapID
+  and BVD.ProviderServiceMApID = P_ProviderServiceMapID
     and (P_VanID is null or BVD.VanID = P_VanID)
     having Age <= 12;
 
@@ -16309,9 +16309,9 @@ DHC.VehicalNo,
 DHC.ParkingPlaceID,
 DHC.CreatedDate
  FROM db_reporting.fact_diahypercase DHC
-	left join db_reporting.dim_beneficiary BEN on DHC.BeneficiaryRegID = BEN.BeneficiaryRegID
+  left join db_reporting.dim_beneficiary BEN on DHC.BeneficiaryRegID = BEN.BeneficiaryRegID
 where date(DHC.VisitDate) between date(P_CallDateFrom) and date(P_CallDateTo) 
-	and DHC.ProviderServiceMApID = P_ProviderServiceMapID
+  and DHC.ProviderServiceMApID = P_ProviderServiceMapID
     and (P_VanID is null or DHC.VanID = P_VanID);
 
 END ;;
@@ -16358,9 +16358,9 @@ LTR.VehicalNo,
 LTR.ParkingPlaceID,
 LTR.CreatedDate
  FROM db_reporting.fact_labtestresult LTR
-	left join db_reporting.dim_beneficiary BEN on LTR.BeneficiaryRegID = BEN.BeneficiaryRegID
+  left join db_reporting.dim_beneficiary BEN on LTR.BeneficiaryRegID = BEN.BeneficiaryRegID
 where date(LTR.VisitDate) between date(P_CallDateFrom) and date(P_CallDateTo) 
-	and LTR.ProviderServiceMApID = P_ProviderServiceMapID
+  and LTR.ProviderServiceMApID = P_ProviderServiceMapID
     and (P_VanID is null or LTR.VanID = P_VanID);
 
 
@@ -16398,9 +16398,9 @@ LTR.VanID,
 -- LTR.CreatedDate,
 LTR.VanSerialNo
  FROM db_reporting.fact_labtestresult LTR
-	left join db_reporting.dim_beneficiary BEN on LTR.BeneficiaryRegID = BEN.BeneficiaryRegID
+  left join db_reporting.dim_beneficiary BEN on LTR.BeneficiaryRegID = BEN.BeneficiaryRegID
 where date(LTR.VisitDate) between date(P_CallDateFrom) and date(P_CallDateTo) 
-	and LTR.ProviderServiceMApID = P_ProviderServiceMapID
+  and LTR.ProviderServiceMApID = P_ProviderServiceMapID
     and (P_VanID is null or LTR.VanID = P_VanID);
 
 
@@ -16587,7 +16587,7 @@ WHERE DB.CreatedDate< CURDATE() - INTERVAL 1 DAY
 
 INSERT INTO db_reporting.scheduler_status (proc_name, status, time)
   VALUES ('SP_Load_Dim_1097Beneficiary', 'completed', now());
-		
+    
 
 
 end ;;
@@ -17104,7 +17104,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To fetch User details
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -17372,7 +17372,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To Load fact_104benmedhistory (reporting)
                                                 from  t_104benmedhistory(db_iemr)
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -17533,7 +17533,7 @@ BEGIN
 --    Version#          TFS_ID#           Modified By       Modified Date                 Purpose
 ---------------------------------------------------------------------------------------------------------------------
       1.0         - Initial Write         - XYZ             -  DD-MMM-YYYY             Initial Write
-	  1.1                               
+    1.1                               
 *********************************************************************************************************************/
 insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_Load_Fact_104prescription','started',now());
 
@@ -17637,7 +17637,7 @@ BEGIN
 --    Version#          TFS_ID#           Modified By       Modified Date                 Purpose
 ---------------------------------------------------------------------------------------------------------------------
     1.0         - Initial Write         - XYZ             -  DD-MMM-YYYY             Initial Write
-	  1.1                               
+    1.1                               
 *********************************************************************************************************************/
 insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_Load_Fact_1097CallSummary','started',now());
 
@@ -17741,7 +17741,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_anccare(db_reporting)
                                                  from  t_anccare  (db_iemr)
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -17863,7 +17863,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_ancdiagnosis(db_reporting)
                                                  from  t_ancdiagnosis  (db_iemr)
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -17952,7 +17952,7 @@ AD.SyncedDate,
  FROM db_iemr.t_ancdiagnosis AD
         left join db_iemr.m_van VAN on AD.VanID = VAN.VanID 
         inner join db_iemr.t_benvisitdetail BVD on AD.VisitCode = BVD.VisitCode 
-			and AD.BeneficiaryRegID = BVD.BeneficiaryRegID
+      and AD.BeneficiaryRegID = BVD.BeneficiaryRegID
  WHERE DATE(AD.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
  -- WHERE DATE(AD.CreatedDate)<CURDATE();
 
@@ -18120,7 +18120,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load Fact_BenChiefComplaint(db_reporting)
                                                  from  t_BenChiefComplaint  (db_iemr)
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -18252,7 +18252,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_bendisease(db_reporting)
                                                  from  db_iemr (db_iemr)
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -18313,11 +18313,11 @@ Replace(DATE(Rx.CreatedDate),'-','')AS dim_create_date,
 NOW()
  from db_iemr.t_benvisitdetail BVD
 inner join db_iemr.t_prescription Rx 
-	on BVD.BeneficiaryRegID = Rx.BeneficiaryRegID
-		and BVD.VisitCode = Rx.VisitCode
-		and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
+  on BVD.BeneficiaryRegID = Rx.BeneficiaryRegID
+    and BVD.VisitCode = Rx.VisitCode
+    and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
 inner join db_iemr.m_van VAN 
-	on BVD.VanID = Van.VanID
+  on BVD.VanID = Van.VanID
 WHERE DATE(Rx.CreatedDate)=CURDATE() - INTERVAL 1 DAY
 -- WHERE DATE(Rx.CreatedDate)<CURDATE()
 
@@ -18348,11 +18348,11 @@ Replace(DATE(PNCD.CreatedDate),'-','')AS dim_create_date,
 NOW()
  from db_iemr.t_benvisitdetail BVD
 inner join db_iemr.t_pncdiagnosis PNCD
-	on BVD.BeneficiaryRegID = PNCD.BeneficiaryRegID
-		and BVD.VisitCode = PNCD.VisitCode
-		and (BVD.VisitCategory = 'PNC')
+  on BVD.BeneficiaryRegID = PNCD.BeneficiaryRegID
+    and BVD.VisitCode = PNCD.VisitCode
+    and (BVD.VisitCategory = 'PNC')
 inner join db_iemr.m_van VAN 
-	on BVD.VanID = Van.VanID
+  on BVD.VanID = Van.VanID
 WHERE DATE(PNCD.CreatedDate)=CURDATE() - INTERVAL 1 DAY
 -- WHERE DATE(PNCD.CreatedDate)<CURDATE();
 
@@ -18382,11 +18382,11 @@ Replace(DATE(ANCD.CreatedDate),'-','')AS dim_create_date,
 NOW()
  from db_iemr.t_benvisitdetail BVD
 inner join db_iemr.t_ancdiagnosis ANCD
-	on BVD.BeneficiaryRegID = ANCD.BeneficiaryRegID
-		and BVD.VisitCode = ANCD.VisitCode
-		and (BVD.VisitCategory = 'ANC')
+  on BVD.BeneficiaryRegID = ANCD.BeneficiaryRegID
+    and BVD.VisitCode = ANCD.VisitCode
+    and (BVD.VisitCategory = 'ANC')
 inner join db_iemr.m_van VAN 
-	on BVD.VanID = Van.VanID
+  on BVD.VanID = Van.VanID
 WHERE DATE(ANCD.CreatedDate)=CURDATE() - INTERVAL 1 DAY
 -- WHERE DATE(ANCD.CreatedDate)<CURDATE();
 
@@ -18416,11 +18416,11 @@ Replace(DATE(NCDS.CreatedDate),'-','')AS dim_create_date,
 NOW()
  from db_iemr.t_benvisitdetail BVD
 inner join db_iemr.t_ncdscreening NCDS
-	on BVD.BeneficiaryRegID = NCDS.BeneficiaryRegID
-		and BVD.VisitCode = NCDS.VisitCode
-		and (BVD.VisitCategory = 'NCD screening')
+  on BVD.BeneficiaryRegID = NCDS.BeneficiaryRegID
+    and BVD.VisitCode = NCDS.VisitCode
+    and (BVD.VisitCategory = 'NCD screening')
 inner join db_iemr.m_van VAN 
-	on BVD.VanID = Van.VanID
+  on BVD.VanID = Van.VanID
 WHERE DATE(NCDS.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
 -- WHERE DATE(NCDS.CreatedDate)<CURDATE();
 
@@ -18455,7 +18455,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load Fact_BenReferDetails(db_reporting)
                                                  from  t_BenReferDetails (db_iemr)
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -18551,7 +18551,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_BenvisitDetail(db_reporting)
                                                  from  t_benvisitdetail  (db_iemr)
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -18769,7 +18769,7 @@ SELECT
 
 -- UPDATE
 
-	update db_reporting.Fact_Bloodrequest FBR
+  update db_reporting.Fact_Bloodrequest FBR
    Left JOIN db_iemr.t_Bloodrequest TBR on FBR.BloodReqID  =  TBR.BloodReqID
    LEFT JOIN db_iemr.m_bloodgroup MB ON MB.BloodGroupID  =  TBR.BloodGroupID
    LEFT JOIN db_iemr.m_component MC ON MC.ComponentID  =  TBR.ComponentID
@@ -19549,7 +19549,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_diahypercase(db_reporting)
                                                  from  db_iemr (db_iemr)
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -19632,10 +19632,10 @@ NOW()
 FROM db_iemr.t_bencomorbiditycondition BCC
 group by BeneficiaryRegID, VisitCode) CC 
 inner join db_iemr.t_benvisitdetail BVD 
-	on BVD.BeneficiaryRegID = CC.BeneficiaryRegID
-		and BVD.VisitCode = CC.VisitCode
+  on BVD.BeneficiaryRegID = CC.BeneficiaryRegID
+    and BVD.VisitCode = CC.VisitCode
 inner join db_iemr.m_van VAN 
-	on BVD.VanID = Van.VanID
+  on BVD.VanID = Van.VanID
 WHERE DATE(CC.CreatedDate)=CURDATE() - INTERVAL 1 DAY
 -- WHERE DATE(CC.CreatedDate)<CURDATE();
 
@@ -19672,14 +19672,14 @@ Replace(DATE(Rx.CreatedDate),'-','')AS dim_create_date,
 NOW()
  from db_iemr.t_benvisitdetail BVD
 inner join db_iemr.t_prescription Rx 
-	on BVD.BeneficiaryRegID = Rx.BeneficiaryRegID
-		and BVD.VisitCode = Rx.VisitCode
-		and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
+  on BVD.BeneficiaryRegID = Rx.BeneficiaryRegID
+    and BVD.VisitCode = Rx.VisitCode
+    and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
 inner join db_iemr.m_van VAN 
-	on BVD.VanID = Van.VanID
+  on BVD.VanID = Van.VanID
 WHERE DATE(Rx.CreatedDate)=CURDATE() - INTERVAL 1 DAY
 -- WHERE DATE(Rx.CreatedDate)<CURDATE();
-	
+  
 
 union
 
@@ -19714,11 +19714,11 @@ Replace(DATE(PNCD.CreatedDate),'-','')AS dim_create_date,
 NOW()
  from db_iemr.t_benvisitdetail BVD
 inner join db_iemr.t_pncdiagnosis PNCD
-	on BVD.BeneficiaryRegID = PNCD.BeneficiaryRegID
-		and BVD.VisitCode = PNCD.VisitCode
-		and (BVD.VisitCategory = 'PNC')
+  on BVD.BeneficiaryRegID = PNCD.BeneficiaryRegID
+    and BVD.VisitCode = PNCD.VisitCode
+    and (BVD.VisitCategory = 'PNC')
 inner join db_iemr.m_van VAN 
-	on BVD.VanID = Van.VanID
+  on BVD.VanID = Van.VanID
 WHERE DATE(PNCD.CreatedDate)=CURDATE() - INTERVAL 1 DAY
 -- WHERE DATE(PNCD.CreatedDate)<CURDATE();
 
@@ -19755,11 +19755,11 @@ Replace(DATE(ANCD.CreatedDate),'-','')AS dim_create_date,
 NOW()
  from db_iemr.t_benvisitdetail BVD
 inner join db_iemr.t_ancdiagnosis ANCD
-	on BVD.BeneficiaryRegID = ANCD.BeneficiaryRegID
-		and BVD.VisitCode = ANCD.VisitCode
-		and (BVD.VisitCategory = 'ANC')
+  on BVD.BeneficiaryRegID = ANCD.BeneficiaryRegID
+    and BVD.VisitCode = ANCD.VisitCode
+    and (BVD.VisitCategory = 'ANC')
 inner join db_iemr.m_van VAN 
-	on BVD.VanID = Van.VanID
+  on BVD.VanID = Van.VanID
 WHERE DATE(ANCD.CreatedDate)=CURDATE() - INTERVAL 1 DAY
 -- WHERE DATE(ANCD.CreatedDate)<CURDATE();
 
@@ -19796,11 +19796,11 @@ Replace(DATE(NCDS.CreatedDate),'-','')AS dim_create_date,
 NOW()
  from db_iemr.t_benvisitdetail BVD
 inner join db_iemr.t_ncdscreening NCDS
-	on BVD.BeneficiaryRegID = NCDS.BeneficiaryRegID
-		and BVD.VisitCode = NCDS.VisitCode
-		and (BVD.VisitCategory = 'NCD screening')
+  on BVD.BeneficiaryRegID = NCDS.BeneficiaryRegID
+    and BVD.VisitCode = NCDS.VisitCode
+    and (BVD.VisitCategory = 'NCD screening')
 inner join db_iemr.m_van VAN 
-	on BVD.VanID = Van.VanID
+  on BVD.VanID = Van.VanID
 WHERE DATE(NCDS.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
 -- WHERE DATE(NCDS.CreatedDate)<CURDATE();
 
@@ -19837,7 +19837,7 @@ BEGIN
                                                 from db_iemr t_DirectoryService
 
 
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -19941,7 +19941,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To Load fact_EpidemicOutbreak
                                                 from t_EpidemicOutbreak
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -20038,7 +20038,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To Load fact_feedback table 
                                                 from t_Feedback
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -20405,7 +20405,7 @@ ISE.LastModDate,
  inner join db_iemr.m_facility FAC on ISE.FacilityID = FAC.FacilityID
  inner join db_iemr.m_itemcategory ITMC on ITM.ItemCategoryID = ITMC.ItemCategoryID
  
-	WHERE DATE(ISE.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
+  WHERE DATE(ISE.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
   -- WHERE DATE(ISE.CreatedDate)<CURDATE();
   
   set sql_safe_updates=0;
@@ -20524,7 +20524,7 @@ ISEx.LastModDate,
  inner join db_iemr.m_facility FAC on ISE.FacilityID = FAC.FacilityID
  inner join db_iemr.m_itemcategory ITMC on ITM.ItemCategoryID = ITMC.ItemCategoryID
  
-	WHERE DATE(ISEx.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
+  WHERE DATE(ISEx.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
   -- WHERE DATE(ISEx.CreatedDate)<CURDATE();
 
  insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_Load_Fact_ItemStockExit','completed',now());
@@ -20558,7 +20558,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_labtestorder(db_reporting)
                                                  from  t_lab_testorder  (db_iemr)
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -20666,7 +20666,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_LabTestResult(db_reporting)
                                                  from  t_LabTestResult  (db_iemr)
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -20746,11 +20746,11 @@ Replace(DATE(LTR.CreatedDate),'-','')AS fact_CreatedDate,
 'SP_Load_Fact_LabTestResult',
 NOW()
 from db_iemr.t_lab_testresult LTR
-		left join db_iemr.m_testcomponent TC on LTR.TestComponentID = TC.TestComponentID
+    left join db_iemr.m_testcomponent TC on LTR.TestComponentID = TC.TestComponentID
         left join db_iemr.m_procedure PRO on LTR.ProcedureID = PRO.ProcedureID
         left join db_iemr.m_van VAN on LTR.VanID = VAN.VanID 
         inner join db_iemr.t_benvisitdetail BVD on LTR.VisitCode = BVD.VisitCode 
-			and LTR.BeneficiaryRegID = BVD.BeneficiaryRegID
+      and LTR.BeneficiaryRegID = BVD.BeneficiaryRegID
  WHERE DATE(LTR.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
 -- WHERE DATE(LTR.CreatedDate)<CURDATE();
 
@@ -22136,7 +22136,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_patientissueexit(db_reporting)
                                                  from  t_patientissue and t_itemstockexit  (db_iemr)
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -22235,18 +22235,18 @@ ISEx.LastModDate,
   NOW()
  FROM db_iemr.t_itemstockexit ISEx
 inner join db_iemr.t_PatientIssue PI 
-			on ISEx.ExitTypeID = PI.VanSerialNo
-			and ISEx.VanID = PI.VanID 
+      on ISEx.ExitTypeID = PI.VanSerialNo
+      and ISEx.VanID = PI.VanID 
             and ISEx.ExitType = 'T_PatientIssue'
 inner join db_iemr.t_itemstockentry ISE
-			on ISEx.ItemStockEntryID = ISE.VanSerialNo
+      on ISEx.ItemStockEntryID = ISE.VanSerialNo
             and ISEx.VanID = ISE.VanID
 inner join db_iemr.m_item ITM 
-			on ISE.ItemID = ITM.ItemID
+      on ISE.ItemID = ITM.ItemID
 inner join db_iemr.m_itemcategory ITMC
-			on ITM.ItemCategoryID = ITMC.ItemCategoryID
+      on ITM.ItemCategoryID = ITMC.ItemCategoryID
  
-	WHERE DATE(ISEx.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
+  WHERE DATE(ISEx.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
   -- WHERE DATE(ISEx.CreatedDate)<CURDATE();
 
  insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_Load_Fact_PatientIssueExit','completed',now());
@@ -22463,7 +22463,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_pnccare(db_reporting)
                                                  from  t_pnccare  (db_iemr)
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -22601,7 +22601,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_pncdiagnosis(db_reporting)
                                                  from  t_pncdiagnosis  (db_iemr)
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -22664,10 +22664,10 @@ Replace(DATE(PNCD.CreatedDate),'-','')AS dim_create_date,
 NOW()
  from db_iemr.t_pncdiagnosis PNCD
 inner join db_iemr.t_benvisitdetail BVD
-	on BVD.BeneficiaryRegID = PNCD.BeneficiaryRegID
-		and BVD.VisitCode = PNCD.VisitCode
+  on BVD.BeneficiaryRegID = PNCD.BeneficiaryRegID
+    and BVD.VisitCode = PNCD.VisitCode
 inner join db_iemr.m_van VAN 
-	on BVD.VanID = Van.VanID
+  on BVD.VanID = Van.VanID
 WHERE DATE(PNCD.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
 -- WHERE DATE(PNCD.CreatedDate)<CURDATE();
 
@@ -22702,7 +22702,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_prescribeddrug(db_reporting)
                                                  from  t_prescribeddrug  (db_iemr)
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -22822,7 +22822,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_Prescription(db_reporting)
                                                  from  t_Prescription  (db_iemr)
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -23021,7 +23021,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_TMRequest(db_reporting)
                                                  from  t_TMRequest  (db_iemr)
-												
+                        
 
 --    Version History               :
 ---------------------------------------------------------------------------------------------------------------------
@@ -23165,7 +23165,7 @@ BVD.VehicalNo
 from db_reporting.fact_benvisitdetail BVD
 left join db_reporting.dim_beneficiary BEN on BVD.BeneficiaryRegID = BEN.BeneficiaryRegID
 where date(BVD.createddate) between date(P_CallDateFrom) and date(P_CallDateTo) 
-	and BVD.ProviderServiceMApID = P_ProviderServiceMapID
+  and BVD.ProviderServiceMApID = P_ProviderServiceMapID
     and (P_VanID is null or BVD.VanID = P_VanID);
 
 
@@ -23214,7 +23214,7 @@ BVD.VehicalNo
 from db_reporting.fact_benvisitdetail BVD
 left join db_reporting.dim_beneficiary BEN on BVD.BeneficiaryRegID = BEN.BeneficiaryRegID
 where date(BVD.createddate) between date(P_CallDateFrom) and date(P_CallDateTo) 
-	and BVD.ProviderServiceMApID = P_ProviderServiceMapID
+  and BVD.ProviderServiceMApID = P_ProviderServiceMapID
     and (P_VanID is null or BVD.VanID = P_VanID);
 
 END ;;
@@ -23331,7 +23331,7 @@ SELECT
  left join db_reporting.fact_benchiefcomplaint CC on CC.visitcode=RxD.visitcode
  and Rxd.BeneficiaryRegid=CC.BeneficiaryRegid
 where date(RxD.CreatedDate) between date(P_CallDateFrom) and date(P_CallDateTo) 
-	and rxd.ProviderServiceMApID = P_ProviderServiceMapID
+  and rxd.ProviderServiceMApID = P_ProviderServiceMapID
     and (P_VanID is null or RxD.VanID = P_VanID);
 
  
@@ -23380,11 +23380,11 @@ BRD.referredToInstituteName,
 BRD.ServiceName,
 PNCD.CreatedDate
  FROM db_reporting.fact_pncdiagnosis PNCD
-	left join db_reporting.dim_beneficiary BEN on PNCD.BeneficiaryRegID = BEN.BeneficiaryRegID
-	left join db_reporting.fact_benreferdetails BRD on PNCD.BeneficiaryRegID = BRD.BeneficiaryRegID 
-		and PNCD.VisitCode = BRD.VisitCode
+  left join db_reporting.dim_beneficiary BEN on PNCD.BeneficiaryRegID = BEN.BeneficiaryRegID
+  left join db_reporting.fact_benreferdetails BRD on PNCD.BeneficiaryRegID = BRD.BeneficiaryRegID 
+    and PNCD.VisitCode = BRD.VisitCode
 where date(PNCD.VisitDate) between date(P_CallDateFrom) and date(P_CallDateTo) 
-	and PNCD.ProviderServiceMApID = P_ProviderServiceMapID
+  and PNCD.ProviderServiceMApID = P_ProviderServiceMapID
     and (P_VanID is null or PNCD.VanID = P_VanID);
 
 
@@ -23428,7 +23428,7 @@ P.DiagnosisProvided,P.ReferredToInstituteID,P.ReferredToInstitute
  left join db_reporting.fact_prescription P on p.PrescriptionID=RxD.PrescriptionID
   and p.benvisitid=RxD.benvisitid
 where date(RxD.CreatedDate) between date(P_CallDateFrom) and date(P_CallDateTo) 
-	and RxD.ProviderServiceMApID = P_ProviderServiceMapID
+  and RxD.ProviderServiceMApID = P_ProviderServiceMapID
     and (P_VanID is null or RxD.VanID = P_VanID);
 
  
@@ -23497,7 +23497,7 @@ LTO.VehicalNo
 from db_reporting.fact_labtestorder LTO
 left join db_reporting.dim_beneficiary BEN on LTO.BeneficiaryRegID = BEN.BeneficiaryRegID
 where date(LTO.VisitDate) between date(P_CallDateFrom) and date(P_CallDateTo) 
-	and LTO.ProviderServiceMApID = P_ProviderServiceMapID
+  and LTO.ProviderServiceMApID = P_ProviderServiceMapID
     and (P_VanID is null or LTO.VanID = P_VanID);
 
 END ;;
