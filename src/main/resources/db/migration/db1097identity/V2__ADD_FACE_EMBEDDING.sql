@@ -1,8 +1,56 @@
 use db_1097_identity;
 
-alter table i_beneficiarydetails add ExtraFields JSON after `Others`;
- 
-alter table i_beneficiarydetails add faceEmbedding longtext after Others;
+-- ALTER TABLE i_beneficiarydetails ADD COLUMN IF NOT EXISTS ExtraFields JSON AFTER `Others`;
+
+-- ALTER TABLE i_beneficiarydetails ADD COLUMN IF NOT EXISTS faceEmbedding LONGTEXT AFTER `Others`;
+
+USE db_1097_identity;
+
+-- ================================
+-- Add ExtraFields (JSON)
+-- ================================
+SET @col_exists := (
+    SELECT COUNT(*)
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = 'db_1097_identity'
+      AND TABLE_NAME = 'i_beneficiarydetails'
+      AND COLUMN_NAME = 'ExtraFields'
+);
+
+SET @sql := IF(
+    @col_exists = 0,
+    'ALTER TABLE db_1097_identity.i_beneficiarydetails ADD COLUMN ExtraFields JSON AFTER `Others`;',
+    'SELECT "Column ExtraFields already exists";'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+-- ================================
+-- Add faceEmbedding (LONGTEXT)
+-- ================================
+SET @col_exists := (
+    SELECT COUNT(*)
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = 'db_1097_identity'
+      AND TABLE_NAME = 'i_beneficiarydetails'
+      AND COLUMN_NAME = 'faceEmbedding'
+);
+
+SET @sql := IF(
+    @col_exists = 0,
+    'ALTER TABLE db_1097_identity.i_beneficiarydetails ADD COLUMN faceEmbedding LONGTEXT AFTER `Others`;',
+    'SELECT "Column faceEmbedding already exists";'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+
 
 CREATE 
 OR REPLACE VIEW `db_1097_identity`.`v_benadvancesearch` AS

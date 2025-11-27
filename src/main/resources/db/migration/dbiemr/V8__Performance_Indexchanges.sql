@@ -2,10 +2,10 @@
 use db_iemr;
 
 
-create index inx_IsHighRisk on t_mctsoutboundcalls(IsHighRisk);
-create index inx_isFurtherCallRequired on t_mctsoutboundcalls(isFurtherCallRequired);
-create index inx_DisplayOBCallType on t_mctsoutboundcalls(DisplayOBCallType);
-create index inx_iszerocall on t_bencall(iszerocall);
+create index  inx_IsHighRisk on t_mctsoutboundcalls(IsHighRisk);
+create index  inx_isFurtherCallRequired on t_mctsoutboundcalls(isFurtherCallRequired);
+create index  inx_DisplayOBCallType on t_mctsoutboundcalls(DisplayOBCallType);
+create index  inx_iszerocall on t_bencall(iszerocall);
 
 
 use db_iemr;
@@ -76,8 +76,7 @@ CREATE TABLE if not exists `t_grievancetransaction` (
    CONSTRAINT `t_grievancetransaction_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`)
  ) ;
 
-USE `db_iemr`;
-DROP procedure IF EXISTS `Pr_Grievanceworklist`;
+
 
 USE `db_iemr`;
 DROP procedure IF EXISTS `db_iemr`.`Pr_Grievanceworklist`;
@@ -116,8 +115,7 @@ end$$
 DELIMITER ;
 ;
 
-USE `db_iemr`;
-DROP procedure IF EXISTS `Pr_QualityAuditorWorklist`;
+
 
 USE `db_iemr`;
 DROP procedure IF EXISTS `db_iemr`.`Pr_QualityAuditorWorklist`;

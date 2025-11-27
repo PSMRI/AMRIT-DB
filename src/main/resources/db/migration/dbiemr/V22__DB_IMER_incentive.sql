@@ -3,7 +3,7 @@ USE db_iemr;
 -- ===============================================
 -- 1️⃣ Parent Table: m_incentive_activity
 -- ===============================================
-CREATE TABLE `m_incentive_activity` (
+CREATE TABLE if not exists `m_incentive_activity` (
    `id` BIGINT NOT NULL AUTO_INCREMENT,
    `created_by` VARCHAR(255) DEFAULT NULL,
    `created_date` DATETIME DEFAULT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE `m_incentive_activity` (
 -- ===============================================
 -- 2️⃣ Language Mapping Table
 -- ===============================================
-CREATE TABLE `m_incentive_activity_lang_mapping` (
+CREATE TABLE if not exists `m_incentive_activity_lang_mapping` (
    `id` BIGINT NOT NULL AUTO_INCREMENT,
    `created_date` DATETIME DEFAULT NULL,
    `activity_description` VARCHAR(255) DEFAULT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE `m_incentive_activity_lang_mapping` (
 -- ===============================================
 -- 3️⃣ Rank Mapping Table
 -- ===============================================
-CREATE TABLE `m_incentive_activity_rank_mapping` (
+CREATE TABLE if not exists `m_incentive_activity_rank_mapping` (
    `id` BIGINT NOT NULL AUTO_INCREMENT,
    `activity_id` BIGINT NOT NULL,
    `state_code` INT NOT NULL,
