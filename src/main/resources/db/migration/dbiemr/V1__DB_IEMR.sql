@@ -6079,41 +6079,54 @@ CREATE TABLE IF NOT EXISTS `m_notification` (
   CONSTRAINT `FK_Notification_Role` FOREIGN KEY (`RoleID`) REFERENCES `m_role` (`RoleID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Notification_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 */ /*!50003 trigger InsertNotificationMapping after insert on m_notification
-for each row
-begin
-call PR_InsertInNotificationMap(new.RoleID, new.NotificationID, new.ProviderServiceMapID,new.NotificationTypeID,new.CreatedBy,new.ValidFrom, new.WorkingLocationID);
-end */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 */ /*!50003 trigger UpdateNotificationMapping after update on m_notification
-for each row
-begin
-call PR_UpdateNotificationMap(new.NotificationID, new.ModifiedBy,new.ValidFrom, new.Deleted);
-end */;;
-DELIMITER ;
+
+
+
+
+-- /*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- DELIMITER ;;
+-- /*!50003 CREATE*/ /*!50017 */ /*!50003 trigger InsertNotificationMapping after insert on m_notification
+-- for each row
+-- begin
+-- call PR_InsertInNotificationMap(new.RoleID, new.NotificationID, new.ProviderServiceMapID,new.NotificationTypeID,new.CreatedBy,new.ValidFrom, new.WorkingLocationID);
+-- end */;;
+-- DELIMITER ;
+
+
+
+
+
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- DELIMITER ;;
+-- /*!50003 CREATE*/ /*!50017 */ /*!50003 trigger UpdateNotificationMapping after update on m_notification
+-- for each row
+-- begin
+-- call PR_UpdateNotificationMap(new.NotificationID, new.ModifiedBy,new.ValidFrom, new.Deleted);
+-- end */;;
+-- DELIMITER ;
+
+
+
+
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
@@ -26665,5 +26678,45 @@ DELIMITER ;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+
+DROP TRIGGER IF EXISTS InsertNotificationMapping;
+DELIMITER $$
+CREATE TRIGGER InsertNotificationMapping
+AFTER INSERT ON m_notification
+FOR EACH ROW
+BEGIN
+    CALL PR_InsertInNotificationMap(
+        NEW.RoleID,
+        NEW.NotificationID,
+        NEW.ProviderServiceMapID,
+        NEW.NotificationTypeID,
+        NEW.CreatedBy,
+        NEW.ValidFrom,
+        NEW.WorkingLocationID
+    );
+END$$
+DELIMITER ;
+
+
+
+
+DROP TRIGGER IF EXISTS UpdateNotificationMapping;
+DELIMITER $$
+CREATE TRIGGER UpdateNotificationMapping
+AFTER UPDATE ON m_notification
+FOR EACH ROW
+BEGIN
+    CALL PR_UpdateNotificationMap(
+        NEW.NotificationID,
+        NEW.ModifiedBy,
+        NEW.ValidFrom,
+        NEW.Deleted
+    );
+END$$
+DELIMITER ;
+
+
+
 
 -- Dump completed on 2024-08-09 10:55:46
