@@ -25762,14 +25762,14 @@ where t1.Question='Any High Risk Pregnancy (HRP)?' AND t1.Answer ='Yes' and t1.B
 update `t_mctscallresponse` t1
 inner join m_mapquestion t2 on t1.QuestionID=t2.parentQuestionID
 inner join t_mctscallresponse t3 on t3.questionid=t2.childQuestionID and t3.BenCallID=t1.BenCallID and t3.obcallid=t1.obcallid
-set	t1.ReasonsforHrni = t3.Answer 
+set t1.ReasonsforHrni = t3.Answer 
 where t1.Question='Any High Risk Newborn/Infant?' AND t1.Answer ='Yes'  and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
   
   /*          
 update `t_mctscallresponse` t1
 inner join m_mapquestion t2 on t1.QuestionID=t2.parentQuestionID
 inner join t_mctscallresponse t3 on t3.questionid=t2.childQuestionID and t3.BenCallID=t1.BenCallID and t3.obcallid=t1.obcallid
-set	t1.CongentialAnomalies =t3.Answer 
+set t1.CongentialAnomalies =t3.Answer 
 where t1.Question='Reasons for Congential Anomalies'  and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
                        
 update `t_mctscallresponse` t1
