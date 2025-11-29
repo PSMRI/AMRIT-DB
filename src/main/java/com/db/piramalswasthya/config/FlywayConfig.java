@@ -15,6 +15,7 @@ public class FlywayConfig {
 	                .dataSource(dataSource)
 	                .locations("classpath:db/migration/dbiemr")
 	                .baselineOnMigrate(true)
+	                .validateOnMigrate(false)
 	                .load();
 	    }
 
@@ -24,6 +25,7 @@ public class FlywayConfig {
 	                .dataSource(dataSource)
 	                .locations("classpath:db/migration/dbidentity")
 	                .baselineOnMigrate(true)
+	                .validateOnMigrate(false)
 	                .load();
 	    }
 
@@ -33,6 +35,7 @@ public class FlywayConfig {
 	                .dataSource(dataSource)
 	                .locations("classpath:db/migration/dbreporting")
 	                .baselineOnMigrate(true)
+	                .validateOnMigrate(false)
 	                .load();
 	    }
 
@@ -42,6 +45,7 @@ public class FlywayConfig {
 	                .dataSource(dataSource)
 	                .locations("classpath:db/migration/db1097identity")
 	                .baselineOnMigrate(true)
+	                .validateOnMigrate(false)
 	                .load();
 	    }
 

@@ -818,16 +818,13 @@ USE db_iemr;
 
 USE db_iemr;
 
----------------------------------------------------------------
 -- 1) Add preferredLanguage to t_mothervalidrecord
----------------------------------------------------------------
 SET @exists := (
     SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
     WHERE TABLE_SCHEMA='db_iemr'
       AND TABLE_NAME='t_mothervalidrecord'
       AND COLUMN_NAME='preferredLanguage'
 );
-
 SET @sql := IF(
     @exists = 0,
     'ALTER TABLE t_mothervalidrecord ADD COLUMN preferredLanguage VARCHAR(30) AFTER IsAllocated;',
@@ -837,16 +834,13 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
----------------------------------------------------------------
 -- 2) Add preferredLanguage to t_childvaliddata
----------------------------------------------------------------
 SET @exists := (
     SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
     WHERE TABLE_SCHEMA='db_iemr'
       AND TABLE_NAME='t_childvaliddata'
       AND COLUMN_NAME='preferredLanguage'
 );
-
 SET @sql := IF(
     @exists = 0,
     'ALTER TABLE t_childvaliddata ADD COLUMN preferredLanguage VARCHAR(30) AFTER SMS_Status;',
@@ -856,16 +850,13 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
----------------------------------------------------------------
 -- 3) Add ProjectID to t_registrationfields
----------------------------------------------------------------
 SET @exists := (
     SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
     WHERE TABLE_SCHEMA='db_iemr'
       AND TABLE_NAME='t_registrationfields'
       AND COLUMN_NAME='ProjectID'
 );
-
 SET @sql := IF(
     @exists = 0,
     'ALTER TABLE t_registrationfields ADD COLUMN ProjectID INT(11) NOT NULL;',
@@ -875,16 +866,13 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
----------------------------------------------------------------
 -- 4) Add BeneficiaryConsent to t_feedback
----------------------------------------------------------------
 SET @exists := (
     SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
     WHERE TABLE_SCHEMA='db_iemr'
       AND TABLE_NAME='t_feedback'
       AND COLUMN_NAME='BeneficiaryConsent'
 );
-
 SET @sql := IF(
     @exists = 0,
     'ALTER TABLE t_feedback ADD COLUMN BeneficiaryConsent BIT(1) NULL;',
