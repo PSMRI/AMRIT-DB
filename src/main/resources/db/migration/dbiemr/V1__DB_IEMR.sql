@@ -447,35 +447,35 @@ CREATE TABLE IF NOT EXISTS `i_ben_flow_outreach` (
   KEY `inx_Processed` (`Processed`),
   KEY `inx_VanSerialNo` (`VanSerialNo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2981523 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 */ /*!50003 TRIGGER TRG_VisitData
- AFTER UPDATE
- ON i_ben_flow_outreach FOR EACH ROW
- BEGIN
+-- /*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- DELIMITER ;;
+-- /*!50003 CREATE*/ /*!50017 */ /*!50003 TRIGGER TRG_VisitData
+--  AFTER UPDATE
+--  ON i_ben_flow_outreach FOR EACH ROW
+--  BEGIN
  
- if not exists (select 1 from NDHM_TRG_VisitData where benflowid=new.ben_flow_id) then
+--  if not exists (select 1 from NDHM_TRG_VisitData where benflowid=new.ben_flow_id) then
  
- if(  (new.specialist_flag=9) or (new.doctor_flag=9 and new.specialist_flag in(0,9))
- or (new.visit_category='Cancer Screening' and (new.nurse_flag=9 and new.doctor_flag in(0,9))
- )
-   ) then
- insert ignore into NDHM_TRG_VisitData(benflowid,BeneficiaryRegID,beneficiary_id,visit_reason,visit_category,
- visitid,VisitCode,visitdate,created_date)
- values(new.ben_flow_id,new.beneficiary_reg_id,new.beneficiary_id,new.visit_reason,new.visit_category,
- new.beneficiary_visit_id,new.beneficiary_visit_code,new.visitdate,new.created_date);
- end if;
- end if;
- END */;;
-DELIMITER ;
+--  if(  (new.specialist_flag=9) or (new.doctor_flag=9 and new.specialist_flag in(0,9))
+--  or (new.visit_category='Cancer Screening' and (new.nurse_flag=9 and new.doctor_flag in(0,9))
+--  )
+--    ) then
+--  insert ignore into NDHM_TRG_VisitData(benflowid,BeneficiaryRegID,beneficiary_id,visit_reason,visit_category,
+--  visitid,VisitCode,visitdate,created_date)
+--  values(new.ben_flow_id,new.beneficiary_reg_id,new.beneficiary_id,new.visit_reason,new.visit_category,
+--  new.beneficiary_visit_id,new.beneficiary_visit_code,new.visitdate,new.created_date);
+--  end if;
+--  end if;
+--  END */;;
+-- DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
@@ -6725,43 +6725,43 @@ CREATE TABLE IF NOT EXISTS `m_providerservicemapping` (
   CONSTRAINT `FK_ProviderServiceMapping__State` FOREIGN KEY (`StateID`) REFERENCES `m_state` (`StateID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_providerservicemapping_ServiceProvider` FOREIGN KEY (`ServiceProviderID`) REFERENCES `m_serviceprovider` (`ServiceProviderID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1718 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 */ /*!50003 trigger MCTSExcelMapping after insert on m_providerservicemapping
-for each row
-begin
-call PR_InsertMCTSFieldsStatewise(new.ProviderServiceMapID);
-end */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 */ /*!50003 trigger InsertCallType after insert on m_providerservicemapping
-for each row
-begin
+-- /*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- DELIMITER ;;
+-- /*!50003 CREATE*/ /*!50017 */ /*!50003 trigger MCTSExcelMapping after insert on m_providerservicemapping
+-- for each row
+-- begin
+-- call PR_InsertMCTSFieldsStatewise(new.ProviderServiceMapID);
+-- end */;;
+-- DELIMITER ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- DELIMITER ;;
+-- /*!50003 CREATE*/ /*!50017 */ /*!50003 trigger InsertCallType after insert on m_providerservicemapping
+-- for each row
+-- begin
 
-call PR_InsertCallType(new.ProviderServiceMapID);
+-- call PR_InsertCallType(new.ProviderServiceMapID);
 
-end */;;
-DELIMITER ;
+-- end */;;
+-- DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
@@ -7957,27 +7957,27 @@ CREATE TABLE IF NOT EXISTS `m_subservice` (
   KEY `FK_SubService_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_SubService_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 */ /*!50003 trigger Insert104BRCategory after insert on m_subservice
-for each row
-begin
-if(new.SubServiceName = "Blood Request")
-THEN
+-- /*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- DELIMITER ;;
+-- /*!50003 CREATE*/ /*!50017 */ /*!50003 trigger Insert104BRCategory after insert on m_subservice
+-- for each row
+-- begin
+-- if(new.SubServiceName = "Blood Request")
+-- THEN
 
-call PR_Insert104BRCategory(new.SubServiceID, new.ProviderServiceMapID);
-end if;
+-- call PR_Insert104BRCategory(new.SubServiceID, new.ProviderServiceMapID);
+-- end if;
 
-end */;;
-DELIMITER ;
+-- end */;;
+-- DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
@@ -19785,44 +19785,44 @@ SET character_set_client = @saved_cs_client;
 --
 
 -- DROP TABLE IF EXISTS `v_userservicerolemapping`;
-/*!50001 DROP VIEW IF EXISTS `v_userservicerolemapping`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
-/*!50001 CREATE VIEW `v_userservicerolemapping` AS SELECT 
- 1 AS `UserID`,
- 1 AS `USRMappingID`,
- 1 AS `Name`,
- 1 AS `UserName`,
- 1 AS `ServiceID`,
- 1 AS `ServiceName`,
- 1 AS `IsNational`,
- 1 AS `StateID`,
- 1 AS `StateName`,
- 1 AS `WorkingDistrictID`,
- 1 AS `WorkingDistrictName`,
- 1 AS `WorkingLocationID`,
- 1 AS `ServiceProviderID`,
- 1 AS `LocationName`,
- 1 AS `WorkingLocationAddress`,
- 1 AS `RoleID`,
- 1 AS `RoleName`,
- 1 AS `ProviderServiceMapID`,
- 1 AS `AgentID`,
- 1 AS `PSMStatusID`,
- 1 AS `PSMStatus`,
- 1 AS `UserServciceRoleDeleted`,
- 1 AS `UserDeleted`,
- 1 AS `ServiceProviderDeleted`,
- 1 AS `RoleDeleted`,
- 1 AS `ProviderServiceMappingDeleted`,
- 1 AS `isInbound`,
- 1 AS `isOutbound`,
- 1 AS `blockid`,
- 1 AS `blockname`,
- 1 AS `villageid`,
- 1 AS `villagename`,
- 1 AS `isSanjeevani`*/;
-SET character_set_client = @saved_cs_client;
+-- /*!50001 DROP VIEW IF EXISTS `v_userservicerolemapping`*/;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
+-- /*!50001 CREATE VIEW `v_userservicerolemapping` AS SELECT 
+--  1 AS `UserID`,
+--  1 AS `USRMappingID`,
+--  1 AS `Name`,
+--  1 AS `UserName`,
+--  1 AS `ServiceID`,
+--  1 AS `ServiceName`,
+--  1 AS `IsNational`,
+--  1 AS `StateID`,
+--  1 AS `StateName`,
+--  1 AS `WorkingDistrictID`,
+--  1 AS `WorkingDistrictName`,
+--  1 AS `WorkingLocationID`,
+--  1 AS `ServiceProviderID`,
+--  1 AS `LocationName`,
+--  1 AS `WorkingLocationAddress`,
+--  1 AS `RoleID`,
+--  1 AS `RoleName`,
+--  1 AS `ProviderServiceMapID`,
+--  1 AS `AgentID`,
+--  1 AS `PSMStatusID`,
+--  1 AS `PSMStatus`,
+--  1 AS `UserServciceRoleDeleted`,
+--  1 AS `UserDeleted`,
+--  1 AS `ServiceProviderDeleted`,
+--  1 AS `RoleDeleted`,
+--  1 AS `ProviderServiceMappingDeleted`,
+--  1 AS `isInbound`,
+--  1 AS `isOutbound`,
+--  1 AS `blockid`,
+--  1 AS `blockname`,
+--  1 AS `villageid`,
+--  1 AS `villagename`,
+--  1 AS `isSanjeevani`*/;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Dumping events for database 'db_iemr'
@@ -26652,32 +26652,32 @@ DELIMITER ;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
---
--- Final view structure for view `v_userservicerolemapping`
---
+-- --
+-- -- Final view structure for view `v_userservicerolemapping`
+-- --
 
-/*!50001 DROP VIEW IF EXISTS `v_userservicerolemapping`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013  SQL SECURITY DEFINER */
-/*!50001 VIEW `v_userservicerolemapping` AS select `usr`.`UserID` AS `UserID`,`usrm`.`USRMappingID` AS `USRMappingID`,concat(coalesce(`usr`.`FirstName`,''),' ',coalesce(`usr`.`MiddleName`,''),' ',coalesce(`usr`.`LastName`,'')) AS `Name`,`usr`.`UserName` AS `UserName`,`psm`.`ServiceID` AS `ServiceID`,`sm`.`ServiceName` AS `ServiceName`,`sm`.`IsNational` AS `IsNational`,`psm`.`StateID` AS `StateID`,`st`.`StateName` AS `StateName`,`psam`.`DistrictID` AS `WorkingDistrictID`,`dist`.`DistrictName` AS `WorkingDistrictName`,`usrm`.`WorkingLocationID` AS `WorkingLocationID`,`usrm`.`ServiceProviderID` AS `ServiceProviderID`,`psam`.`LocationName` AS `LocationName`,`psam`.`Address` AS `WorkingLocationAddress`,`usrm`.`RoleID` AS `RoleID`,`rol`.`RoleName` AS `RoleName`,`usrm`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`usrm`.`AgentID` AS `AgentID`,`psm`.`StatusID` AS `PSMStatusID`,`sta`.`Status` AS `PSMStatus`,`usrm`.`Deleted` AS `UserServciceRoleDeleted`,`usr`.`Deleted` AS `UserDeleted`,`sp`.`Deleted` AS `ServiceProviderDeleted`,`rol`.`Deleted` AS `RoleDeleted`,`psm`.`Deleted` AS `ProviderServiceMappingDeleted`,`usrm`.`isInbound` AS `isInbound`,`usrm`.`isOutbound` AS `isOutbound`,`usrm`.`Blockid` AS `blockid`,`usrm`.`BlockName` AS `blockname`,`usrm`.`Villageid` AS `villageid`,`usrm`.`VillageName` AS `villagename`,`usrm`.`isSanjeevani` AS `isSanjeevani` from (((((((((`m_userservicerolemapping` `usrm` left join `m_user` `usr` on((`usrm`.`UserID` = `usr`.`UserID`))) left join `m_role` `rol` on((`usrm`.`RoleID` = `rol`.`RoleID`))) left join `m_providerservicemapping` `psm` on((`usrm`.`ProviderServiceMapID` = `psm`.`ProviderServiceMapID`))) left join `m_providerserviceaddmapping` `psam` on((`usrm`.`WorkingLocationID` = `psam`.`PSAddMapID`))) left join `m_district` `dist` on((`psam`.`DistrictID` = `dist`.`DistrictID`))) left join `m_state` `st` on((`psm`.`StateID` = `st`.`StateID`))) left join `m_serviceprovider` `sp` on((`psm`.`ServiceProviderID` = `sp`.`ServiceProviderID`))) left join `m_servicemaster` `sm` on((`psm`.`ServiceID` = `sm`.`ServiceID`))) left join `m_status` `sta` on((`psm`.`StatusID` = `sta`.`StatusID`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+-- /*!50001 DROP VIEW IF EXISTS `v_userservicerolemapping`*/;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 CREATE ALGORITHM=UNDEFINED */
+-- /*!50013  SQL SECURITY DEFINER */
+-- /*!50001 VIEW `v_userservicerolemapping` AS select `usr`.`UserID` AS `UserID`,`usrm`.`USRMappingID` AS `USRMappingID`,concat(coalesce(`usr`.`FirstName`,''),' ',coalesce(`usr`.`MiddleName`,''),' ',coalesce(`usr`.`LastName`,'')) AS `Name`,`usr`.`UserName` AS `UserName`,`psm`.`ServiceID` AS `ServiceID`,`sm`.`ServiceName` AS `ServiceName`,`sm`.`IsNational` AS `IsNational`,`psm`.`StateID` AS `StateID`,`st`.`StateName` AS `StateName`,`psam`.`DistrictID` AS `WorkingDistrictID`,`dist`.`DistrictName` AS `WorkingDistrictName`,`usrm`.`WorkingLocationID` AS `WorkingLocationID`,`usrm`.`ServiceProviderID` AS `ServiceProviderID`,`psam`.`LocationName` AS `LocationName`,`psam`.`Address` AS `WorkingLocationAddress`,`usrm`.`RoleID` AS `RoleID`,`rol`.`RoleName` AS `RoleName`,`usrm`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`usrm`.`AgentID` AS `AgentID`,`psm`.`StatusID` AS `PSMStatusID`,`sta`.`Status` AS `PSMStatus`,`usrm`.`Deleted` AS `UserServciceRoleDeleted`,`usr`.`Deleted` AS `UserDeleted`,`sp`.`Deleted` AS `ServiceProviderDeleted`,`rol`.`Deleted` AS `RoleDeleted`,`psm`.`Deleted` AS `ProviderServiceMappingDeleted`,`usrm`.`isInbound` AS `isInbound`,`usrm`.`isOutbound` AS `isOutbound`,`usrm`.`Blockid` AS `blockid`,`usrm`.`BlockName` AS `blockname`,`usrm`.`Villageid` AS `villageid`,`usrm`.`VillageName` AS `villagename`,`usrm`.`isSanjeevani` AS `isSanjeevani` from (((((((((`m_userservicerolemapping` `usrm` left join `m_user` `usr` on((`usrm`.`UserID` = `usr`.`UserID`))) left join `m_role` `rol` on((`usrm`.`RoleID` = `rol`.`RoleID`))) left join `m_providerservicemapping` `psm` on((`usrm`.`ProviderServiceMapID` = `psm`.`ProviderServiceMapID`))) left join `m_providerserviceaddmapping` `psam` on((`usrm`.`WorkingLocationID` = `psam`.`PSAddMapID`))) left join `m_district` `dist` on((`psam`.`DistrictID` = `dist`.`DistrictID`))) left join `m_state` `st` on((`psm`.`StateID` = `st`.`StateID`))) left join `m_serviceprovider` `sp` on((`psm`.`ServiceProviderID` = `sp`.`ServiceProviderID`))) left join `m_servicemaster` `sm` on((`psm`.`ServiceID` = `sm`.`ServiceID`))) left join `m_status` `sta` on((`psm`.`StatusID` = `sta`.`StatusID`))) */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+-- /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+-- /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+-- /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+-- /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+-- /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+-- /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 
 DROP TRIGGER IF EXISTS InsertNotificationMapping;
@@ -26715,6 +26715,96 @@ BEGIN
     );
 END$$
 DELIMITER ;
+
+DROP TRIGGER IF EXISTS TRG_VisitData;
+
+DELIMITER $$
+
+CREATE TRIGGER TRG_VisitData
+AFTER UPDATE ON i_ben_flow_outreach
+FOR EACH ROW
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM NDHM_TRG_VisitData
+        WHERE benflowid = NEW.ben_flow_id
+    ) THEN
+
+        IF  ( NEW.specialist_flag = 9 )
+            OR ( NEW.doctor_flag = 9 AND NEW.specialist_flag IN (0, 9) )
+            OR ( NEW.visit_category = 'Cancer Screening'
+                 AND NEW.nurse_flag = 9
+                 AND NEW.doctor_flag IN (0, 9)
+               )
+        THEN
+            INSERT IGNORE INTO NDHM_TRG_VisitData
+            (
+                benflowid, BeneficiaryRegID, beneficiary_id,
+                visit_reason, visit_category,
+                visitid, VisitCode, visitdate, created_date
+            )
+            VALUES
+            (
+                NEW.ben_flow_id, NEW.beneficiary_reg_id, NEW.beneficiary_id,
+                NEW.visit_reason, NEW.visit_category,
+                NEW.beneficiary_visit_id, NEW.beneficiary_visit_code,
+                NEW.visitdate, NEW.created_date
+            );
+        END IF;
+
+    END IF;
+END $$
+
+DELIMITER ;
+
+
+DROP TRIGGER IF EXISTS MCTSExcelMapping;
+
+DELIMITER $$
+
+CREATE TRIGGER MCTSExcelMapping
+AFTER INSERT ON m_providerservicemapping
+FOR EACH ROW
+BEGIN
+    CALL PR_InsertMCTSFieldsStatewise(NEW.ProviderServiceMapID);
+END $$
+
+DELIMITER ;
+
+
+
+
+DROP TRIGGER IF EXISTS InsertCallType;
+
+DELIMITER $$
+
+CREATE TRIGGER InsertCallType
+AFTER INSERT ON m_providerservicemapping
+FOR EACH ROW
+BEGIN
+    CALL PR_InsertCallType(NEW.ProviderServiceMapID);
+END $$
+
+DELIMITER ;
+
+
+
+DROP TRIGGER IF EXISTS Insert104BRCategory;
+
+DELIMITER $$
+
+CREATE TRIGGER Insert104BRCategory
+AFTER INSERT ON m_subservice
+FOR EACH ROW
+BEGIN
+    IF NEW.SubServiceName = 'Blood Request' THEN
+        CALL PR_Insert104BRCategory(NEW.SubServiceID, NEW.ProviderServiceMapID);
+    END IF;
+END $$
+
+DELIMITER ;
+
+
 
 
 
