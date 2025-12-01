@@ -2,10 +2,103 @@
 use db_iemr;
 
 
-create index  inx_IsHighRisk on t_mctsoutboundcalls(IsHighRisk);
-create index  inx_isFurtherCallRequired on t_mctsoutboundcalls(isFurtherCallRequired);
-create index  inx_DisplayOBCallType on t_mctsoutboundcalls(DisplayOBCallType);
-create index  inx_iszerocall on t_bencall(iszerocall);
+-- create index  inx_IsHighRisk on t_mctsoutboundcalls(IsHighRisk);
+-- create index  inx_isFurtherCallRequired on t_mctsoutboundcalls(isFurtherCallRequired);
+-- create index  inx_DisplayOBCallType on t_mctsoutboundcalls(DisplayOBCallType);
+-- create index  inx_iszerocall on t_bencall(iszerocall);
+
+USE db_iemr;
+
+-----------------------------------------------------------
+-- 1️⃣ Index: inx_IsHighRisk ON t_mctsoutboundcalls(IsHighRisk)
+-----------------------------------------------------------
+SET @idx1 := (
+    SELECT COUNT(*)
+    FROM INFORMATION_SCHEMA.STATISTICS
+    WHERE TABLE_SCHEMA = 'db_iemr'
+      AND TABLE_NAME = 't_mctsoutboundcalls'
+      AND INDEX_NAME = 'inx_IsHighRisk'
+);
+
+SET @sql1 := IF(
+    @idx1 = 0,
+    'ALTER TABLE t_mctsoutboundcalls ADD INDEX inx_IsHighRisk (IsHighRisk);',
+    'SELECT "Index inx_IsHighRisk already exists";'
+);
+
+PREPARE stmt1 FROM @sql1;
+EXECUTE stmt1;
+DEALLOCATE PREPARE stmt1;
+
+
+-----------------------------------------------------------
+-- 2️⃣ Index: inx_isFurtherCallRequired (isFurtherCallRequired)
+-----------------------------------------------------------
+SET @idx2 := (
+    SELECT COUNT(*)
+    FROM INFORMATION_SCHEMA.STATISTICS
+    WHERE TABLE_SCHEMA = 'db_iemr'
+      AND TABLE_NAME = 't_mctsoutboundcalls'
+      AND INDEX_NAME = 'inx_isFurtherCallRequired'
+);
+
+SET @sql2 := IF(
+    @idx2 = 0,
+    'ALTER TABLE t_mctsoutboundcalls ADD INDEX inx_isFurtherCallRequired (isFurtherCallRequired);',
+    'SELECT "Index inx_isFurtherCallRequired already exists";'
+);
+
+PREPARE stmt2 FROM @sql2;
+EXECUTE stmt2;
+DEALLOCATE PREPARE stmt2;
+
+
+-----------------------------------------------------------
+-- 3️⃣ Index: inx_DisplayOBCallType (DisplayOBCallType)
+-----------------------------------------------------------
+SET @idx3 := (
+    SELECT COUNT(*)
+    FROM INFORMATION_SCHEMA.STATISTICS
+    WHERE TABLE_SCHEMA = 'db_iemr'
+      AND TABLE_NAME = 't_mctsoutboundcalls'
+      AND INDEX_NAME = 'inx_DisplayOBCallType'
+);
+
+SET @sql3 := IF(
+    @idx3 = 0,
+    'ALTER TABLE t_mctsoutboundcalls ADD INDEX inx_DisplayOBCallType (DisplayOBCallType);',
+    'SELECT "Index inx_DisplayOBCallType already exists";'
+);
+
+PREPARE stmt3 FROM @sql3;
+EXECUTE stmt3;
+DEALLOCATE PREPARE stmt3;
+
+
+-----------------------------------------------------------
+-- 4️⃣ Index: inx_iszerocall ON t_bencall(iszerocall)
+-----------------------------------------------------------
+SET @idx4 := (
+    SELECT COUNT(*)
+    FROM INFORMATION_SCHEMA.STATISTICS
+    WHERE TABLE_SCHEMA = 'db_iemr'
+      AND TABLE_NAME = 't_bencall'
+      AND INDEX_NAME = 'inx_iszerocall'
+);
+
+SET @sql4 := IF(
+    @idx4 = 0,
+    'ALTER TABLE t_bencall ADD INDEX inx_iszerocall (iszerocall);',
+    'SELECT "Index inx_iszerocall already exists";'
+);
+
+PREPARE stmt4 FROM @sql4;
+EXECUTE stmt4;
+DEALLOCATE PREPARE stmt4;
+
+
+
+
 
 
 use db_iemr;

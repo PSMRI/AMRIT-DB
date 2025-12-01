@@ -45,6 +45,68 @@ CREATE TABLE if not EXISTS  m_platform_feedback (
 -- ================================================================
 -- Helpful indexes
 -- ================================================================
-CREATE INDEX  ix_feedback_ServiceLine ON m_platform_feedback (ServiceLine);
-CREATE INDEX  ix_feedback_CategoryID  ON m_platform_feedback (CategoryID);
-CREATE INDEX  ix_feedback_IsAnonymous ON m_platform_feedback (IsAnonymous);
+-- CREATE INDEX  ix_feedback_ServiceLine ON m_platform_feedback (ServiceLine);
+-- CREATE INDEX  ix_feedback_CategoryID  ON m_platform_feedback (CategoryID);
+-- CREATE INDEX  ix_feedback_IsAnonymous ON m_platform_feedback (IsAnonymous);
+
+USE db_iemr;
+
+SET @idx_exists := (
+    SELECT COUNT(*)
+    FROM INFORMATION_SCHEMA.STATISTICS
+    WHERE TABLE_SCHEMA = DATABASE()
+      AND TABLE_NAME = 'm_platform_feedback'
+      AND INDEX_NAME = 'ix_feedback_ServiceLine'
+);
+
+SET @sql := IF(
+    @idx_exists = 0,
+    'ALTER TABLE m_platform_feedback ADD INDEX ix_feedback_ServiceLine (ServiceLine);',
+    'SELECT "Index ix_feedback_ServiceLine already exists";'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+
+
+SET @idx_exists := (
+    SELECT COUNT(*)
+    FROM INFORMATION_SCHEMA.STATISTICS
+    WHERE TABLE_SCHEMA = DATABASE()
+      AND TABLE_NAME = 'm_platform_feedback'
+      AND INDEX_NAME = 'ix_feedback_CategoryID'
+);
+
+SET @sql := IF(
+    @idx_exists = 0,
+    'ALTER TABLE m_platform_feedback ADD INDEX ix_feedback_CategoryID (CategoryID);',
+    'SELECT "Index ix_feedback_CategoryID already exists";'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+
+SET @idx_exists := (
+    SELECT COUNT(*)
+    FROM INFORMATION_SCHEMA.STATISTICS
+    WHERE TABLE_SCHEMA = DATABASE()
+      AND TABLE_NAME = 'm_platform_feedback'
+      AND INDEX_NAME = 'ix_feedback_IsAnonymous'
+);
+
+SET @sql := IF(
+    @idx_exists = 0,
+    'ALTER TABLE m_platform_feedback ADD INDEX ix_feedback_IsAnonymous (IsAnonymous);',
+    'SELECT "Index ix_feedback_IsAnonymous already exists";'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
