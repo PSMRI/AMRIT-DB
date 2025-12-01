@@ -3,7 +3,7 @@
 -- Host: 192.168.5.5    Database: db_identity
 -- ------------------------------------------------------
 -- Server version	5.7.19-log
---use db_identity;
+-- use db_identity;
 
 --
 -- Table structure for table 'i_beneficiarydetails'

@@ -1,5 +1,8 @@
 
+use db_iemr;
 
+-- ALTER TABLE m_userservicerolemapping
+-- CHANGE COLUMN isSanjeevani teleConsultation VARCHAR(100);
 
 -- Check if old column exists
 SET @col_exists := (
@@ -20,10 +23,6 @@ SET @sql := IF(
 PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
-
-
-
-
 
 USE `db_iemr`;
 CREATE 
