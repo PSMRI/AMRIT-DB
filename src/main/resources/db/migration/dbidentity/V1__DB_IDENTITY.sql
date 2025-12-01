@@ -1528,9 +1528,9 @@ CREATE TABLE IF NOT EXISTS `t_bendataaccess` (
 -- DROP TABLE IF EXISTS `v_benadvancesearch`;
 /*!50001 DROP VIEW IF EXISTS `v_benadvancesearch`*/;
 -- SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_benadvancesearch` AS SELECT 
- 1 AS `BenMapId`,
+ 1 AS `BenMapId`,333
  1 AS `BenRegId`,
  1 AS `BenDetailsId`,
  1 AS `BenAddressId`,
