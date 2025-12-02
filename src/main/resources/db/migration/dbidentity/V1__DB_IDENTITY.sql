@@ -1530,7 +1530,7 @@ CREATE TABLE IF NOT EXISTS `t_bendataaccess` (
 -- SET @saved_cs_client     = @@character_set_client;
 -- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_benadvancesearch` AS SELECT 
- 1 AS `BenMapId`,333
+ 1 AS `BenMapId`,
  1 AS `BenRegId`,
  1 AS `BenDetailsId`,
  1 AS `BenAddressId`,
