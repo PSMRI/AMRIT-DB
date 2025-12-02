@@ -9,9 +9,9 @@ use db_iemr;
 
   USE db_iemr;
 
----------------------------------------------
+
 -- 1) ADD COLUMN IF NOT EXISTS
----------------------------------------------
+
 SELECT COUNT(*) INTO @col_exists
 FROM information_schema.columns
 WHERE table_schema = 'db_iemr'
@@ -29,9 +29,9 @@ EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
 
----------------------------------------------
+
 -- 2) ADD FOREIGN KEY IF NOT EXISTS
----------------------------------------------
+
 SELECT COUNT(*) INTO @fk_exists
 FROM information_schema.table_constraints
 WHERE table_schema = 'db_iemr'

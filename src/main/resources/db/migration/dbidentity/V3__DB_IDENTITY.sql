@@ -20,9 +20,8 @@
 
 USE db_identity;
 
------------------------------------------------
 -- Add column: i_beneficiarydetails.isConsent
------------------------------------------------
+
 SET @col_exists := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.COLUMNS
@@ -43,9 +42,9 @@ DEALLOCATE PREPARE stmt;
 
 
 
-------------------------------------------------------------
+
 -- Add column: i_bornbirthdeatils.birthCertificateFileFrontView
-------------------------------------------------------------
+
 SET @col_exists := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.COLUMNS
@@ -66,9 +65,9 @@ DEALLOCATE PREPARE stmt;
 
 
 
-------------------------------------------------------------
+
 -- Add column: i_bornbirthdeatils.birthCertificateFileBackView
-------------------------------------------------------------
+
 SET @col_exists := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.COLUMNS
