@@ -19,7 +19,11 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
+
+
+
 -- Add column: i_bornbirthdeatils.birthCertificateFileFrontView
+
 SET @col_exists := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.COLUMNS
@@ -38,7 +42,11 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
+
+
+
 -- Add column: i_bornbirthdeatils.birthCertificateFileBackView
+
 SET @col_exists := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.COLUMNS
