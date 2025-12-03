@@ -4,16 +4,16 @@
 -- ------------------------------------------------------
 -- Server version 5.7.19-log
  
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+-- -- /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+-- -- /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+-- -- /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+-- /*!50503 SET NAMES utf8 */;
+-- /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+-- /*!40103 SET TIME_ZONE='+00:00' */;
+-- /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+-- /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+-- -- /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+-- /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `amrit_bkptable`
@@ -21,8 +21,8 @@
 
 use db_iemr;
 -- DROP TABLE IF EXISTS `amrit_bkptable`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `amrit_bkptable` (
   `BenCallID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -82,15 +82,15 @@ CREATE TABLE IF NOT EXISTS `amrit_bkptable` (
   `amrit_status` int(11) DEFAULT NULL,
   KEY `inx_1` (`CallID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `chirag_old_bkp`
 --
 
 -- DROP TABLE IF EXISTS `chirag_old_bkp`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `chirag_old_bkp` (
   `BeneficiaryDetailsId` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -155,15 +155,15 @@ CREATE TABLE IF NOT EXISTS `chirag_old_bkp` (
   `SyncedDate` datetime DEFAULT NULL,
   `ReservedForChange` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `czentriclog`
 --
 
 -- DROP TABLE IF EXISTS `czentriclog`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `czentriclog` (
   `CZentricLogid` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenCallID` bigint(20) DEFAULT NULL,
@@ -180,15 +180,15 @@ CREATE TABLE IF NOT EXISTS `czentriclog` (
   KEY `inx_BenCallID` (`BenCallID`),
   KEY `inx_BeneficiaryRegID` (`BeneficiaryRegID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=174587892 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `czentrix_bkptable`
 --
 
 -- DROP TABLE IF EXISTS `czentrix_bkptable`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `czentrix_bkptable` (
   `id` bigint(20) NOT NULL DEFAULT '0',
   `AgentName` varchar(100) DEFAULT NULL,
@@ -251,15 +251,15 @@ CREATE TABLE IF NOT EXISTS `czentrix_bkptable` (
   `Czentrix_status` int(11) DEFAULT NULL,
   KEY `inx_1` (`SessionID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `dataporting2`
 --
 
 -- DROP TABLE IF EXISTS `dataporting2`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `dataporting2` (
   `created_date` varchar(300) DEFAULT NULL,
   `ben_phone_no` varchar(300) DEFAULT NULL,
@@ -275,15 +275,15 @@ CREATE TABLE IF NOT EXISTS `dataporting2` (
   `DistrictBranchId` varchar(300) DEFAULT NULL,
   `VillageName` varchar(300) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `eaushadilogger`
 --
 
 -- DROP TABLE IF EXISTS `eaushadilogger`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `eaushadilogger` (
   `ELID` int(11) NOT NULL AUTO_INCREMENT,
   `Amrith_Facilityid` int(11) NOT NULL,
@@ -302,15 +302,15 @@ CREATE TABLE IF NOT EXISTS `eaushadilogger` (
   KEY `inx_Amrith_Facilityid` (`Amrith_Facilityid`),
   KEY `inx_Eaushadi_Facilityid` (`Eaushadi_Facilityid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `eligible_couple_tracking`
 --
 
 -- DROP TABLE IF EXISTS `eligible_couple_tracking`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `eligible_couple_tracking` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `ben_id` bigint(20) DEFAULT NULL,
@@ -327,27 +327,27 @@ CREATE TABLE IF NOT EXISTS `eligible_couple_tracking` (
   `is_active` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6730 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `hibernate_sequence`
 --
 
 -- DROP TABLE IF EXISTS `hibernate_sequence`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
   `next_val` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `high_risk_assess`
 --
 
 -- DROP TABLE IF EXISTS `high_risk_assess`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `high_risk_assess` (
   `id` bigint(20) NOT NULL,
   `age_check` varchar(255) DEFAULT NULL,
@@ -362,15 +362,15 @@ CREATE TABLE IF NOT EXISTS `high_risk_assess` (
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `i_ben_flow_outreach`
 --
 
 -- DROP TABLE IF EXISTS `i_ben_flow_outreach`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_ben_flow_outreach` (
   `ben_flow_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `beneficiary_reg_id` bigint(20) DEFAULT NULL,
@@ -447,7 +447,7 @@ CREATE TABLE IF NOT EXISTS `i_ben_flow_outreach` (
   KEY `inx_Processed` (`Processed`),
   KEY `inx_VanSerialNo` (`VanSerialNo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2981523 DEFAULT CHARSET=utf8;
--- /*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 -- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 -- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 -- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -476,18 +476,18 @@ CREATE TABLE IF NOT EXISTS `i_ben_flow_outreach` (
 --  end if;
 --  END */;;
 -- DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `i_ben_flow_outreach_bkp_04052022`
 --
 
 -- DROP TABLE IF EXISTS `i_ben_flow_outreach_bkp_04052022`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_ben_flow_outreach_bkp_04052022` (
   `ben_flow_id` bigint(20) NOT NULL DEFAULT '0',
   `beneficiary_reg_id` bigint(20) DEFAULT NULL,
@@ -549,15 +549,15 @@ CREATE TABLE IF NOT EXISTS `i_ben_flow_outreach_bkp_04052022` (
   `referred_visit_id` bigint(20) DEFAULT NULL,
   `isCaseSheetdownloaded` bit(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `i_ben_flow_outreach_bkp_13042022`
 --
 
 -- DROP TABLE IF EXISTS `i_ben_flow_outreach_bkp_13042022`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_ben_flow_outreach_bkp_13042022` (
   `ben_flow_id` bigint(20) NOT NULL DEFAULT '0',
   `beneficiary_reg_id` bigint(20) DEFAULT NULL,
@@ -619,15 +619,15 @@ CREATE TABLE IF NOT EXISTS `i_ben_flow_outreach_bkp_13042022` (
   `referred_visit_id` bigint(20) DEFAULT NULL,
   `isCaseSheetdownloaded` bit(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `i_ben_flow_outreach_bkp_20042022`
 --
 
 -- DROP TABLE IF EXISTS `i_ben_flow_outreach_bkp_20042022`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_ben_flow_outreach_bkp_20042022` (
   `ben_flow_id` bigint(20) NOT NULL DEFAULT '0',
   `beneficiary_reg_id` bigint(20) DEFAULT NULL,
@@ -689,15 +689,15 @@ CREATE TABLE IF NOT EXISTS `i_ben_flow_outreach_bkp_20042022` (
   `referred_visit_id` bigint(20) DEFAULT NULL,
   `isCaseSheetdownloaded` bit(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `i_beneficiaryaddress_bkp_02122021`
 --
 
 -- DROP TABLE IF EXISTS `i_beneficiaryaddress_bkp_02122021`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_beneficiaryaddress_bkp_02122021` (
   `BenAddressID` bigint(20) NOT NULL DEFAULT '0',
   `PermAddrLine1` varchar(50) DEFAULT NULL,
@@ -787,15 +787,15 @@ CREATE TABLE IF NOT EXISTS `i_beneficiaryaddress_bkp_02122021` (
   `SyncedDate` datetime DEFAULT NULL,
   `ReservedForChange` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `i_benphonemap`
 --
 
 -- DROP TABLE IF EXISTS `i_benphonemap`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_benphonemap` (
   `BenPhMapID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenificiaryRegID` bigint(20) DEFAULT NULL,
@@ -816,15 +816,15 @@ CREATE TABLE IF NOT EXISTS `i_benphonemap` (
   CONSTRAINT `FK_BenPhoneMap_BenRelationshipType` FOREIGN KEY (`BenRelationshipID`) REFERENCES `m_benrelationshiptype` (`BenRelationshipID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_BenPhoneMap_PhoneType` FOREIGN KEY (`PhoneTypeID`) REFERENCES `m_phonetype` (`PhoneTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `incentive_activity`
 --
 
 -- DROP TABLE IF EXISTS `incentive_activity`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `incentive_activity` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `created_by` varchar(255) DEFAULT NULL,
@@ -843,15 +843,15 @@ CREATE TABLE IF NOT EXISTS `incentive_activity` (
   `fmr_code_old` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `incentive_activity_record`
 --
 
 -- DROP TABLE IF EXISTS `incentive_activity_record`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `incentive_activity_record` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `activity_id` bigint(20) DEFAULT NULL,
@@ -867,15 +867,15 @@ CREATE TABLE IF NOT EXISTS `incentive_activity_record` (
   `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_104actionmaster`
 --
 
 -- DROP TABLE IF EXISTS `m_104actionmaster`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104actionmaster` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(300) DEFAULT NULL,
@@ -887,15 +887,15 @@ CREATE TABLE IF NOT EXISTS `m_104actionmaster` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_104appetite`
 --
 
 -- DROP TABLE IF EXISTS `m_104appetite`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104appetite` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(20) DEFAULT NULL,
@@ -908,15 +908,15 @@ CREATE TABLE IF NOT EXISTS `m_104appetite` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104bladder`
---
+-- --
+-- -- Table structure for table `m_104bladder`
+-- --
 
--- DROP TABLE IF EXISTS `m_104bladder`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104bladder`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104bladder` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -929,15 +929,15 @@ CREATE TABLE IF NOT EXISTS `m_104bladder` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104bowel`
---
+-- --
+-- -- Table structure for table `m_104bowel`
+-- --
 
--- DROP TABLE IF EXISTS `m_104bowel`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104bowel`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104bowel` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -950,15 +950,15 @@ CREATE TABLE IF NOT EXISTS `m_104bowel` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104course`
---
+-- --
+-- -- Table structure for table `m_104course`
+-- --
 
--- DROP TABLE IF EXISTS `m_104course`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104course`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104course` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -971,15 +971,15 @@ CREATE TABLE IF NOT EXISTS `m_104course` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104diseasesummary`
---
+-- --
+-- -- Table structure for table `m_104diseasesummary`
+-- --
 
--- DROP TABLE IF EXISTS `m_104diseasesummary`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104diseasesummary`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104diseasesummary` (
   `DiseasesummaryID` int(11) NOT NULL AUTO_INCREMENT,
   `DiseaseName` varchar(300) DEFAULT NULL,
@@ -1001,15 +1001,15 @@ CREATE TABLE IF NOT EXISTS `m_104diseasesummary` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`DiseasesummaryID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=660 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104druggroup`
---
+-- --
+-- -- Table structure for table `m_104druggroup`
+-- --
 
--- DROP TABLE IF EXISTS `m_104druggroup`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104druggroup`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104druggroup` (
   `DrugGroupID` int(11) NOT NULL AUTO_INCREMENT,
   `DrugGroup` varchar(100) DEFAULT NULL,
@@ -1025,15 +1025,15 @@ CREATE TABLE IF NOT EXISTS `m_104druggroup` (
   KEY `FK_104DrugDroup_ServiceProvider_idx` (`ServiceProviderID`),
   CONSTRAINT `FK_104DrugDroup_ServiceProvider` FOREIGN KEY (`ServiceProviderID`) REFERENCES `m_serviceprovider` (`ServiceProviderID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104druglist`
---
+-- --
+-- -- Table structure for table `m_104druglist`
+-- --
 
--- DROP TABLE IF EXISTS `m_104druglist`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104druglist`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104druglist` (
   `DrugID` int(11) NOT NULL AUTO_INCREMENT,
   `DrugName` varchar(100) DEFAULT NULL,
@@ -1050,15 +1050,15 @@ CREATE TABLE IF NOT EXISTS `m_104druglist` (
   KEY `FK_104DrugList_ServiceProvider_idx` (`ServiceProviderID`),
   CONSTRAINT `FK_104DrugList_ServiceProvider` FOREIGN KEY (`ServiceProviderID`) REFERENCES `m_serviceprovider` (`ServiceProviderID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104drugmapping`
---
+-- --
+-- -- Table structure for table `m_104drugmapping`
+-- --
 
--- DROP TABLE IF EXISTS `m_104drugmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104drugmapping`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104drugmapping` (
   `DrugMapID` int(11) NOT NULL AUTO_INCREMENT,
   `DrugId` int(11) DEFAULT NULL,
@@ -1081,15 +1081,15 @@ CREATE TABLE IF NOT EXISTS `m_104drugmapping` (
   CONSTRAINT `FK_104DrugMapping_DrugList` FOREIGN KEY (`DrugId`) REFERENCES `m_104druglist` (`DrugID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_104DrugMapping_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104drugstrength`
---
+-- --
+-- -- Table structure for table `m_104drugstrength`
+-- --
 
--- DROP TABLE IF EXISTS `m_104drugstrength`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104drugstrength`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104drugstrength` (
   `DrugStrengthID` int(11) NOT NULL AUTO_INCREMENT,
   `DrugStrength` varchar(50) DEFAULT NULL,
@@ -1105,15 +1105,15 @@ CREATE TABLE IF NOT EXISTS `m_104drugstrength` (
   KEY `FK_104DrugStrength_ServiceProvider_idx` (`ServiceProviderID`),
   CONSTRAINT `FK_104DrugStrength_ServiceProvider` FOREIGN KEY (`ServiceProviderID`) REFERENCES `m_serviceprovider` (`ServiceProviderID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104familycondition`
---
+-- --
+-- -- Table structure for table `m_104familycondition`
+-- --
 
--- DROP TABLE IF EXISTS `m_104familycondition`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104familycondition`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104familycondition` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -1126,15 +1126,15 @@ CREATE TABLE IF NOT EXISTS `m_104familycondition` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104gettingwithfamily`
---
+-- --
+-- -- Table structure for table `m_104gettingwithfamily`
+-- --
 
--- DROP TABLE IF EXISTS `m_104gettingwithfamily`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104gettingwithfamily`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104gettingwithfamily` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -1147,15 +1147,15 @@ CREATE TABLE IF NOT EXISTS `m_104gettingwithfamily` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104householdwork`
---
+-- --
+-- -- Table structure for table `m_104householdwork`
+-- --
 
--- DROP TABLE IF EXISTS `m_104householdwork`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104householdwork`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104householdwork` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -1168,15 +1168,15 @@ CREATE TABLE IF NOT EXISTS `m_104householdwork` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104hygieneselfcare`
---
+-- --
+-- -- Table structure for table `m_104hygieneselfcare`
+-- --
 
--- DROP TABLE IF EXISTS `m_104hygieneselfcare`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104hygieneselfcare`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104hygieneselfcare` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -1189,15 +1189,15 @@ CREATE TABLE IF NOT EXISTS `m_104hygieneselfcare` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104issuesatworkplace`
---
+-- --
+-- -- Table structure for table `m_104issuesatworkplace`
+-- --
 
--- DROP TABLE IF EXISTS `m_104issuesatworkplace`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104issuesatworkplace`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104issuesatworkplace` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -1210,15 +1210,15 @@ CREATE TABLE IF NOT EXISTS `m_104issuesatworkplace` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104libido`
---
+-- --
+-- -- Table structure for table `m_104libido`
+-- --
 
--- DROP TABLE IF EXISTS `m_104libido`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104libido`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104libido` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -1231,15 +1231,15 @@ CREATE TABLE IF NOT EXISTS `m_104libido` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104pastmedicalcondition`
---
+-- --
+-- -- Table structure for table `m_104pastmedicalcondition`
+-- --
 
--- DROP TABLE IF EXISTS `m_104pastmedicalcondition`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104pastmedicalcondition`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104pastmedicalcondition` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -1252,15 +1252,15 @@ CREATE TABLE IF NOT EXISTS `m_104pastmedicalcondition` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104pastpsychiatriccondition`
---
+-- --
+-- -- Table structure for table `m_104pastpsychiatriccondition`
+-- --
 
--- DROP TABLE IF EXISTS `m_104pastpsychiatriccondition`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104pastpsychiatriccondition`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104pastpsychiatriccondition` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -1273,15 +1273,15 @@ CREATE TABLE IF NOT EXISTS `m_104pastpsychiatriccondition` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104precipitatingfactor`
---
+-- --
+-- -- Table structure for table `m_104precipitatingfactor`
+-- --
 
--- DROP TABLE IF EXISTS `m_104precipitatingfactor`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104precipitatingfactor`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104precipitatingfactor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -1294,15 +1294,15 @@ CREATE TABLE IF NOT EXISTS `m_104precipitatingfactor` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104progress`
---
+-- --
+-- -- Table structure for table `m_104progress`
+-- --
 
--- DROP TABLE IF EXISTS `m_104progress`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104progress`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104progress` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -1315,15 +1315,15 @@ CREATE TABLE IF NOT EXISTS `m_104progress` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104psychiatricchiefcomplaints`
---
+-- --
+-- -- Table structure for table `m_104psychiatricchiefcomplaints`
+-- --
 
--- DROP TABLE IF EXISTS `m_104psychiatricchiefcomplaints`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104psychiatricchiefcomplaints`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104psychiatricchiefcomplaints` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -1336,15 +1336,15 @@ CREATE TABLE IF NOT EXISTS `m_104psychiatricchiefcomplaints` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104questionscore`
---
+-- --
+-- -- Table structure for table `m_104questionscore`
+-- --
 
--- DROP TABLE IF EXISTS `m_104questionscore`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104questionscore`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104questionscore` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `QuestionID` int(11) DEFAULT NULL,
@@ -1361,15 +1361,15 @@ CREATE TABLE IF NOT EXISTS `m_104questionscore` (
   KEY `FK_104QuestionScore_Questionnaire_idx` (`QuestionID`),
   CONSTRAINT `FK_104QuestionScore_Questionnaire` FOREIGN KEY (`QuestionID`) REFERENCES `m_questionnaire` (`QuestionID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104regularworok`
---
+-- --
+-- -- Table structure for table `m_104regularworok`
+-- --
 
--- DROP TABLE IF EXISTS `m_104regularworok`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104regularworok`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104regularworok` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -1382,15 +1382,15 @@ CREATE TABLE IF NOT EXISTS `m_104regularworok` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104relationship`
---
+-- --
+-- -- Table structure for table `m_104relationship`
+-- --
 
--- DROP TABLE IF EXISTS `m_104relationship`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104relationship`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104relationship` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -1403,15 +1403,15 @@ CREATE TABLE IF NOT EXISTS `m_104relationship` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104sleep`
---
+-- --
+-- -- Table structure for table `m_104sleep`
+-- --
 
--- DROP TABLE IF EXISTS `m_104sleep`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104sleep`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104sleep` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -1424,15 +1424,15 @@ CREATE TABLE IF NOT EXISTS `m_104sleep` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_104treatmenttype`
---
+-- --
+-- -- Table structure for table `m_104treatmenttype`
+-- --
 
--- DROP TABLE IF EXISTS `m_104treatmenttype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_104treatmenttype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_104treatmenttype` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -1445,15 +1445,15 @@ CREATE TABLE IF NOT EXISTS `m_104treatmenttype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_agegroup`
---
+-- --
+-- -- Table structure for table `m_agegroup`
+-- --
 
--- DROP TABLE IF EXISTS `m_agegroup`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_agegroup`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_agegroup` (
   `AgeGroupID` smallint(6) NOT NULL AUTO_INCREMENT,
   `AgeGroup` varchar(20) DEFAULT NULL,
@@ -1466,15 +1466,15 @@ CREATE TABLE IF NOT EXISTS `m_agegroup` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`AgeGroupID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_ageunits`
---
+-- --
+-- -- Table structure for table `m_ageunits`
+-- --
 
--- DROP TABLE IF EXISTS `m_ageunits`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_ageunits`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_ageunits` (
   `Ageunitid` smallint(6) NOT NULL AUTO_INCREMENT,
   `AgeUnit` varchar(20) DEFAULT NULL,
@@ -1486,15 +1486,15 @@ CREATE TABLE IF NOT EXISTS `m_ageunits` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`Ageunitid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_allergicreactiontype`
---
+-- --
+-- -- Table structure for table `m_allergicreactiontype`
+-- --
 
--- DROP TABLE IF EXISTS `m_allergicreactiontype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_allergicreactiontype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_allergicreactiontype` (
   `AllergicReactionTypeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(20) DEFAULT NULL,
@@ -1507,15 +1507,15 @@ CREATE TABLE IF NOT EXISTS `m_allergicreactiontype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`AllergicReactionTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_allergystatus`
---
+-- --
+-- -- Table structure for table `m_allergystatus`
+-- --
 
--- DROP TABLE IF EXISTS `m_allergystatus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_allergystatus`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_allergystatus` (
   `AllergyStatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(20) DEFAULT NULL,
@@ -1528,15 +1528,15 @@ CREATE TABLE IF NOT EXISTS `m_allergystatus` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`AllergyStatusID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_allergytype`
---
+-- --
+-- -- Table structure for table `m_allergytype`
+-- --
 
--- DROP TABLE IF EXISTS `m_allergytype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_allergytype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_allergytype` (
   `AllergyTypeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(20) DEFAULT NULL,
@@ -1549,15 +1549,15 @@ CREATE TABLE IF NOT EXISTS `m_allergytype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`AllergyTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_answertype`
---
+-- --
+-- -- Table structure for table `m_answertype`
+-- --
 
--- DROP TABLE IF EXISTS `m_answertype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_answertype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_answertype` (
   `AnswerTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `AnswerType` varchar(30) DEFAULT NULL,
@@ -1570,15 +1570,15 @@ CREATE TABLE IF NOT EXISTS `m_answertype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`AnswerTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_areasubdistrictmap`
---
+-- --
+-- -- Table structure for table `m_areasubdistrictmap`
+-- --
 
--- DROP TABLE IF EXISTS `m_areasubdistrictmap`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_areasubdistrictmap`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_areasubdistrictmap` (
   `AreaSubDistrictMapID` int(11) NOT NULL AUTO_INCREMENT,
   `AreaID` int(11) DEFAULT NULL,
@@ -1598,15 +1598,15 @@ CREATE TABLE IF NOT EXISTS `m_areasubdistrictmap` (
   CONSTRAINT `FK_AreaSubDistrictMap_DistrictBlock` FOREIGN KEY (`DistrictBlockID`) REFERENCES `m_districtblock` (`BlockID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_AreaSubDistrictMap_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_authorityemail`
---
+-- --
+-- -- Table structure for table `m_authorityemail`
+-- --
 
--- DROP TABLE IF EXISTS `m_authorityemail`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_authorityemail`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_authorityemail` (
   `AuthorityEmailID` int(11) NOT NULL AUTO_INCREMENT,
   `StateID` int(11) DEFAULT NULL,
@@ -1638,15 +1638,15 @@ CREATE TABLE IF NOT EXISTS `m_authorityemail` (
   CONSTRAINT `FK_AuthorityEmail_ProviderServiceMap` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_AuthorityEmail_State` FOREIGN KEY (`StateID`) REFERENCES `m_state` (`StateID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_bencall104servicesmapping`
---
+-- --
+-- -- Table structure for table `m_bencall104servicesmapping`
+-- --
 
--- DROP TABLE IF EXISTS `m_bencall104servicesmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_bencall104servicesmapping`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_bencall104servicesmapping` (
   `BenCall104ServiceMapID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -1664,15 +1664,15 @@ CREATE TABLE IF NOT EXISTS `m_bencall104servicesmapping` (
   CONSTRAINT `FK_BenCall104ServicesMapping_BenCall` FOREIGN KEY (`BenCallID`) REFERENCES `t_bencall` (`BenCallID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_BenCall104ServicesMapping_SubService` FOREIGN KEY (`SubServiceID`) REFERENCES `m_subservice` (`SubServiceID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_bencall1097servicesmapping`
---
+-- --
+-- -- Table structure for table `m_bencall1097servicesmapping`
+-- --
 
--- DROP TABLE IF EXISTS `m_bencall1097servicesmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_bencall1097servicesmapping`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_bencall1097servicesmapping` (
   `BenCall97ServiceMapID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -1710,15 +1710,15 @@ CREATE TABLE IF NOT EXISTS `m_bencall1097servicesmapping` (
   CONSTRAINT `FK_BenCall1097ServicesMapping_SubService` FOREIGN KEY (`SubServiceID`) REFERENCES `m_subservice` (`SubServiceID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_BenCall1097ServicessMapping_InstituteDirectoryMapping` FOREIGN KEY (`InstituteDirMapID`) REFERENCES `m_institutedirectorymapping` (`InstituteDirMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_beneficiaryeducation`
---
+-- --
+-- -- Table structure for table `m_beneficiaryeducation`
+-- --
 
--- DROP TABLE IF EXISTS `m_beneficiaryeducation`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_beneficiaryeducation`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_beneficiaryeducation` (
   `EducationID` smallint(6) NOT NULL AUTO_INCREMENT,
   `EducationType` varchar(50) DEFAULT NULL,
@@ -1730,15 +1730,15 @@ CREATE TABLE IF NOT EXISTS `m_beneficiaryeducation` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`EducationID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_beneficiaryincomestatus`
---
+-- --
+-- -- Table structure for table `m_beneficiaryincomestatus`
+-- --
 
--- DROP TABLE IF EXISTS `m_beneficiaryincomestatus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_beneficiaryincomestatus`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_beneficiaryincomestatus` (
   `IncomeStatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `IncomeStatus` varchar(10) DEFAULT NULL,
@@ -1750,15 +1750,15 @@ CREATE TABLE IF NOT EXISTS `m_beneficiaryincomestatus` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`IncomeStatusID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_beneficiaryoccupation`
---
+-- --
+-- -- Table structure for table `m_beneficiaryoccupation`
+-- --
 
--- DROP TABLE IF EXISTS `m_beneficiaryoccupation`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_beneficiaryoccupation`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_beneficiaryoccupation` (
   `OccupationID` smallint(6) NOT NULL AUTO_INCREMENT,
   `OccupationType` varchar(50) DEFAULT NULL,
@@ -1773,15 +1773,15 @@ CREATE TABLE IF NOT EXISTS `m_beneficiaryoccupation` (
   KEY `FK_BenQccupation_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_BenQccupation_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_benhealthidmapping`
---
+-- --
+-- -- Table structure for table `m_benhealthidmapping`
+-- --
 
--- DROP TABLE IF EXISTS `m_benhealthidmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_benhealthidmapping`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_benhealthidmapping` (
   `benHealthID` int(11) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -1800,15 +1800,15 @@ CREATE TABLE IF NOT EXISTS `m_benhealthidmapping` (
   KEY `healthid_idx` (`HealthID`),
   KEY `healthidno_idx` (`HealthIDNumber`)
 ) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_benrelationshiptype`
---
+-- --
+-- -- Table structure for table `m_benrelationshiptype`
+-- --
 
--- DROP TABLE IF EXISTS `m_benrelationshiptype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_benrelationshiptype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_benrelationshiptype` (
   `BenRelationshipID` smallint(6) NOT NULL AUTO_INCREMENT,
   `BenRelationshipType` varchar(20) DEFAULT NULL,
@@ -1821,15 +1821,15 @@ CREATE TABLE IF NOT EXISTS `m_benrelationshiptype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`BenRelationshipID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_birthdosevaccinationreceivedat`
---
+-- --
+-- -- Table structure for table `m_birthdosevaccinationreceivedat`
+-- --
 
--- DROP TABLE IF EXISTS `m_birthdosevaccinationreceivedat`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_birthdosevaccinationreceivedat`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_birthdosevaccinationreceivedat` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -1841,15 +1841,15 @@ CREATE TABLE IF NOT EXISTS `m_birthdosevaccinationreceivedat` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_blocksubcentermapping`
---
+-- --
+-- -- Table structure for table `m_blocksubcentermapping`
+-- --
 
--- DROP TABLE IF EXISTS `m_blocksubcentermapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_blocksubcentermapping`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_blocksubcentermapping` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Employee_Code` varchar(50) DEFAULT NULL,
@@ -1901,15 +1901,15 @@ CREATE TABLE IF NOT EXISTS `m_blocksubcentermapping` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_bloodglucosetype`
---
+-- --
+-- -- Table structure for table `m_bloodglucosetype`
+-- --
 
--- DROP TABLE IF EXISTS `m_bloodglucosetype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_bloodglucosetype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_bloodglucosetype` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) DEFAULT NULL,
@@ -1921,15 +1921,15 @@ CREATE TABLE IF NOT EXISTS `m_bloodglucosetype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_bloodgroup`
---
+-- --
+-- -- Table structure for table `m_bloodgroup`
+-- --
 
--- DROP TABLE IF EXISTS `m_bloodgroup`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_bloodgroup`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_bloodgroup` (
   `BloodGroupID` int(11) NOT NULL AUTO_INCREMENT,
   `BloodGroup` varchar(10) DEFAULT NULL,
@@ -1942,15 +1942,15 @@ CREATE TABLE IF NOT EXISTS `m_bloodgroup` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`BloodGroupID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_bmicalculation`
---
+-- --
+-- -- Table structure for table `m_bmicalculation`
+-- --
 
--- DROP TABLE IF EXISTS `m_bmicalculation`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_bmicalculation`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_bmicalculation` (
   `Bmiid` int(11) NOT NULL AUTO_INCREMENT,
   `YearMonth` varchar(10) DEFAULT NULL,
@@ -1970,15 +1970,15 @@ CREATE TABLE IF NOT EXISTS `m_bmicalculation` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`Bmiid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=337 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_bpanddiabeticstatus`
---
+-- --
+-- -- Table structure for table `m_bpanddiabeticstatus`
+-- --
 
--- DROP TABLE IF EXISTS `m_bpanddiabeticstatus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_bpanddiabeticstatus`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_bpanddiabeticstatus` (
   `BPAndDiabeticStatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `BPAndDiabeticStatus` varchar(50) DEFAULT NULL,
@@ -1992,15 +1992,15 @@ CREATE TABLE IF NOT EXISTS `m_bpanddiabeticstatus` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`BPAndDiabeticStatusID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_breaktype`
---
+-- --
+-- -- Table structure for table `m_breaktype`
+-- --
 
--- DROP TABLE IF EXISTS `m_breaktype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_breaktype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_breaktype` (
   `BreakID` int(11) NOT NULL AUTO_INCREMENT,
   `BreakType` varchar(50) DEFAULT NULL,
@@ -2017,15 +2017,15 @@ CREATE TABLE IF NOT EXISTS `m_breaktype` (
   KEY `FK_Break_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_Break_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_calibration`
---
+-- --
+-- -- Table structure for table `m_calibration`
+-- --
 
--- DROP TABLE IF EXISTS `m_calibration`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_calibration`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_calibration` (
   `calibrationID` bigint(20) NOT NULL AUTO_INCREMENT,
   `CalibrationStartAPI` varchar(300) NOT NULL,
@@ -2042,15 +2042,15 @@ CREATE TABLE IF NOT EXISTS `m_calibration` (
   KEY `FK_m_calibration_ProviderServiceMapID` (`ProviderServiceMapID`),
   CONSTRAINT `FK_m_calibration_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_calibrationstrips`
---
+-- --
+-- -- Table structure for table `m_calibrationstrips`
+-- --
 
--- DROP TABLE IF EXISTS `m_calibrationstrips`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_calibrationstrips`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_calibrationstrips` (
   `calibrationStripID` bigint(20) NOT NULL AUTO_INCREMENT,
   `StripCode` varchar(50) NOT NULL,
@@ -2066,15 +2066,15 @@ CREATE TABLE IF NOT EXISTS `m_calibrationstrips` (
   KEY `inx_providerservicemapid` (`ProviderServiceMapID`),
   CONSTRAINT `FK_m_calibrationStrips_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_callnotansweredreasons`
---
+-- --
+-- -- Table structure for table `m_callnotansweredreasons`
+-- --
 
--- DROP TABLE IF EXISTS `m_callnotansweredreasons`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_callnotansweredreasons`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_callnotansweredreasons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) DEFAULT NULL,
@@ -2086,15 +2086,15 @@ CREATE TABLE IF NOT EXISTS `m_callnotansweredreasons` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_callsectionmapping`
---
+-- --
+-- -- Table structure for table `m_callsectionmapping`
+-- --
 
--- DROP TABLE IF EXISTS `m_callsectionmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_callsectionmapping`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_callsectionmapping` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `callConfigId` int(11) DEFAULT NULL,
@@ -2117,15 +2117,15 @@ CREATE TABLE IF NOT EXISTS `m_callsectionmapping` (
   CONSTRAINT `FK_CSectionid` FOREIGN KEY (`SectionID`) REFERENCES `m_section` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Ccqamapping_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_callstatus`
---
+-- --
+-- -- Table structure for table `m_callstatus`
+-- --
 
--- DROP TABLE IF EXISTS `m_callstatus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_callstatus`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_callstatus` (
   `CallStatusID` int(11) NOT NULL AUTO_INCREMENT,
   `CallStatus` varchar(30) DEFAULT NULL,
@@ -2141,15 +2141,15 @@ CREATE TABLE IF NOT EXISTS `m_callstatus` (
   KEY `FK_CallStatus_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_CallStatus_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_calltype`
---
+-- --
+-- -- Table structure for table `m_calltype`
+-- --
 
--- DROP TABLE IF EXISTS `m_calltype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_calltype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_calltype` (
   `CallTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `CallGroupType` varchar(30) DEFAULT NULL,
@@ -2171,15 +2171,15 @@ CREATE TABLE IF NOT EXISTS `m_calltype` (
   KEY `FK_CallType_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_CallType_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=502 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_calltype_before_execute_triggers`
---
+-- --
+-- -- Table structure for table `m_calltype_before_execute_triggers`
+-- --
 
--- DROP TABLE IF EXISTS `m_calltype_before_execute_triggers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_calltype_before_execute_triggers`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_calltype_before_execute_triggers` (
   `CallTypeID` int(11) NOT NULL DEFAULT '0',
   `CallGroupType` varchar(30) DEFAULT NULL,
@@ -2198,15 +2198,15 @@ CREATE TABLE IF NOT EXISTS `m_calltype_before_execute_triggers` (
   `ModifiedBy` varchar(50) DEFAULT NULL,
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_cancerdiseasetype`
---
+-- --
+-- -- Table structure for table `m_cancerdiseasetype`
+-- --
 
--- DROP TABLE IF EXISTS `m_cancerdiseasetype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_cancerdiseasetype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_cancerdiseasetype` (
   `CancerDiseaseTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `CancerDiseaseType` varchar(30) DEFAULT NULL,
@@ -2222,15 +2222,15 @@ CREATE TABLE IF NOT EXISTS `m_cancerdiseasetype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`CancerDiseaseTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_cancerimage`
---
+-- --
+-- -- Table structure for table `m_cancerimage`
+-- --
 
--- DROP TABLE IF EXISTS `m_cancerimage`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_cancerimage`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_cancerimage` (
   `CancerImageID` smallint(6) NOT NULL AUTO_INCREMENT,
   `CancerImage` blob,
@@ -2244,15 +2244,15 @@ CREATE TABLE IF NOT EXISTS `m_cancerimage` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`CancerImageID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_cancerpersonalhabittype`
---
+-- --
+-- -- Table structure for table `m_cancerpersonalhabittype`
+-- --
 
--- DROP TABLE IF EXISTS `m_cancerpersonalhabittype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_cancerpersonalhabittype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_cancerpersonalhabittype` (
   `CancerPersonalHabitID` int(11) NOT NULL AUTO_INCREMENT,
   `HabitType` varchar(50) DEFAULT NULL,
@@ -2265,15 +2265,15 @@ CREATE TABLE IF NOT EXISTS `m_cancerpersonalhabittype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`CancerPersonalHabitID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_category`
---
+-- --
+-- -- Table structure for table `m_category`
+-- --
 
--- DROP TABLE IF EXISTS `m_category`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_category`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_category` (
   `CategoryID` int(11) NOT NULL AUTO_INCREMENT,
   `CategoryName` varchar(100) DEFAULT NULL,
@@ -2296,15 +2296,15 @@ CREATE TABLE IF NOT EXISTS `m_category` (
   CONSTRAINT `FK_Category_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Category_SubService` FOREIGN KEY (`SubServiceID`) REFERENCES `m_subservice` (`SubServiceID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_category_before_trigger_execution`
---
+-- --
+-- -- Table structure for table `m_category_before_trigger_execution`
+-- --
 
--- DROP TABLE IF EXISTS `m_category_before_trigger_execution`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_category_before_trigger_execution`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_category_before_trigger_execution` (
   `CategoryID` int(11) NOT NULL DEFAULT '0',
   `CategoryName` varchar(100) DEFAULT NULL,
@@ -2320,15 +2320,15 @@ CREATE TABLE IF NOT EXISTS `m_category_before_trigger_execution` (
   `ModifiedBy` varchar(50) DEFAULT NULL,
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_cbacquestions`
---
+-- --
+-- -- Table structure for table `m_cbacquestions`
+-- --
 
--- DROP TABLE IF EXISTS `m_cbacquestions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_cbacquestions`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_cbacquestions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(300) DEFAULT NULL,
@@ -2346,15 +2346,15 @@ CREATE TABLE IF NOT EXISTS `m_cbacquestions` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_cdssdata`
---
+-- --
+-- -- Table structure for table `m_cdssdata`
+-- --
 
--- DROP TABLE IF EXISTS `m_cdssdata`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_cdssdata`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_cdssdata` (
   `SymptomId` int(11) NOT NULL AUTO_INCREMENT,
   `Symptom` varchar(100) NOT NULL,
@@ -2371,15 +2371,15 @@ CREATE TABLE IF NOT EXISTS `m_cdssdata` (
   PRIMARY KEY (`Symptom`,`Gender`,`AgeFrom`,`AgeTo`),
   UNIQUE KEY `SymptomId_UNIQUE` (`SymptomId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_cervicallymphnodes`
---
+-- --
+-- -- Table structure for table `m_cervicallymphnodes`
+-- --
 
--- DROP TABLE IF EXISTS `m_cervicallymphnodes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_cervicallymphnodes`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_cervicallymphnodes` (
   `id` int(11) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
@@ -2391,15 +2391,15 @@ CREATE TABLE IF NOT EXISTS `m_cervicallymphnodes` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_chiefcomplaint`
---
+-- --
+-- -- Table structure for table `m_chiefcomplaint`
+-- --
 
--- DROP TABLE IF EXISTS `m_chiefcomplaint`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_chiefcomplaint`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_chiefcomplaint` (
   `ChiefComplaintID` int(11) NOT NULL AUTO_INCREMENT,
   `ChiefComplaint` varchar(100) DEFAULT NULL,
@@ -2412,15 +2412,15 @@ CREATE TABLE IF NOT EXISTS `m_chiefcomplaint` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ChiefComplaintID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=440 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_childstagging`
---
+-- --
+-- -- Table structure for table `m_childstagging`
+-- --
 
--- DROP TABLE IF EXISTS `m_childstagging`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_childstagging`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_childstagging` (
   `RowID` bigint(20) NOT NULL AUTO_INCREMENT,
   `Date_of_Entry` datetime DEFAULT NULL,
@@ -2540,15 +2540,15 @@ CREATE TABLE IF NOT EXISTS `m_childstagging` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`RowID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_childvaccination`
---
+-- --
+-- -- Table structure for table `m_childvaccination`
+-- --
 
--- DROP TABLE IF EXISTS `m_childvaccination`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_childvaccination`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_childvaccination` (
   `VaccinationID` smallint(6) NOT NULL AUTO_INCREMENT,
   `VaccinationTime` varchar(20) DEFAULT NULL,
@@ -2563,15 +2563,15 @@ CREATE TABLE IF NOT EXISTS `m_childvaccination` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`VaccinationID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_city`
---
+-- --
+-- -- Table structure for table `m_city`
+-- --
 
--- DROP TABLE IF EXISTS `m_city`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_city`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_city` (
   `CityID` int(11) NOT NULL AUTO_INCREMENT,
   `CityName` varchar(30) NOT NULL,
@@ -2589,15 +2589,15 @@ CREATE TABLE IF NOT EXISTS `m_city` (
   CONSTRAINT `FK_City_District` FOREIGN KEY (`DistrictID`) REFERENCES `m_district` (`DistrictID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `Fk_City_State` FOREIGN KEY (`StateID`) REFERENCES `m_state` (`StateID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_community`
---
+-- --
+-- -- Table structure for table `m_community`
+-- --
 
--- DROP TABLE IF EXISTS `m_community`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_community`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_community` (
   `CommunityID` smallint(6) NOT NULL AUTO_INCREMENT,
   `CommunityType` varchar(10) DEFAULT NULL,
@@ -2610,15 +2610,15 @@ CREATE TABLE IF NOT EXISTS `m_community` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`CommunityID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_comorbidcondition`
---
+-- --
+-- -- Table structure for table `m_comorbidcondition`
+-- --
 
--- DROP TABLE IF EXISTS `m_comorbidcondition`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_comorbidcondition`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_comorbidcondition` (
   `ComorbidConditionID` smallint(6) NOT NULL AUTO_INCREMENT,
   `ComorbidCondition` varchar(30) DEFAULT NULL,
@@ -2634,15 +2634,15 @@ CREATE TABLE IF NOT EXISTS `m_comorbidcondition` (
   KEY `FK_ComorbidCondition_VisitCategory_idx` (`VisitCategoryID`),
   CONSTRAINT `FK_ComorbidCondition_VisitCategory` FOREIGN KEY (`VisitCategoryID`) REFERENCES `m_visitcategory` (`VisitCategoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_compfeeds`
---
+-- --
+-- -- Table structure for table `m_compfeeds`
+-- --
 
--- DROP TABLE IF EXISTS `m_compfeeds`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_compfeeds`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_compfeeds` (
   `FeedID` int(11) NOT NULL AUTO_INCREMENT,
   `Type` varchar(20) DEFAULT NULL,
@@ -2655,15 +2655,15 @@ CREATE TABLE IF NOT EXISTS `m_compfeeds` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`FeedID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_complaint`
---
+-- --
+-- -- Table structure for table `m_complaint`
+-- --
 
--- DROP TABLE IF EXISTS `m_complaint`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_complaint`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_complaint` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) DEFAULT NULL,
@@ -2675,15 +2675,15 @@ CREATE TABLE IF NOT EXISTS `m_complaint` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_complication`
---
+-- --
+-- -- Table structure for table `m_complication`
+-- --
 
--- DROP TABLE IF EXISTS `m_complication`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_complication`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_complication` (
   `ComplicationID` smallint(6) NOT NULL AUTO_INCREMENT,
   `ComplicationValue` varchar(50) DEFAULT NULL,
@@ -2697,15 +2697,15 @@ CREATE TABLE IF NOT EXISTS `m_complication` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ComplicationID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_component`
---
+-- --
+-- -- Table structure for table `m_component`
+-- --
 
--- DROP TABLE IF EXISTS `m_component`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_component`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_component` (
   `ComponentID` int(11) NOT NULL AUTO_INCREMENT,
   `Component` varchar(50) DEFAULT NULL,
@@ -2718,15 +2718,15 @@ CREATE TABLE IF NOT EXISTS `m_component` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ComponentID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_componentresultmap`
---
+-- --
+-- -- Table structure for table `m_componentresultmap`
+-- --
 
--- DROP TABLE IF EXISTS `m_componentresultmap`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_componentresultmap`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_componentresultmap` (
   `ComponentResultMapID` int(11) NOT NULL AUTO_INCREMENT,
   `TestComponentID` int(11) DEFAULT NULL,
@@ -2744,15 +2744,15 @@ CREATE TABLE IF NOT EXISTS `m_componentresultmap` (
   CONSTRAINT `FK_ComponentResultMap_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ComponentResultMap_TestComponent` FOREIGN KEY (`TestComponentID`) REFERENCES `m_testcomponent` (`TestComponentID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=185 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_componenttype`
---
+-- --
+-- -- Table structure for table `m_componenttype`
+-- --
 
--- DROP TABLE IF EXISTS `m_componenttype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_componenttype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_componenttype` (
   `ComponentTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `ComponentType` varchar(50) DEFAULT NULL,
@@ -2765,15 +2765,15 @@ CREATE TABLE IF NOT EXISTS `m_componenttype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ComponentTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_congenitalanomalies`
---
+-- --
+-- -- Table structure for table `m_congenitalanomalies`
+-- --
 
--- DROP TABLE IF EXISTS `m_congenitalanomalies`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_congenitalanomalies`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_congenitalanomalies` (
   `CongenitalAnomaliesID` int(11) NOT NULL AUTO_INCREMENT,
   `CongenitalAnomalies` varchar(30) DEFAULT NULL,
@@ -2789,15 +2789,15 @@ CREATE TABLE IF NOT EXISTS `m_congenitalanomalies` (
   KEY `FK_CongenitalAnomalies_ServiceMaster_idx` (`ServiceID`),
   CONSTRAINT `FK_CongenitalAnomalies_ServiceMaster` FOREIGN KEY (`ServiceID`) REFERENCES `m_servicemaster` (`ServiceID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_congenitalanomaliessubcategory`
---
+-- --
+-- -- Table structure for table `m_congenitalanomaliessubcategory`
+-- --
 
--- DROP TABLE IF EXISTS `m_congenitalanomaliessubcategory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_congenitalanomaliessubcategory`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_congenitalanomaliessubcategory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(300) DEFAULT NULL,
@@ -2809,15 +2809,15 @@ CREATE TABLE IF NOT EXISTS `m_congenitalanomaliessubcategory` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_counsellingprovided`
---
+-- --
+-- -- Table structure for table `m_counsellingprovided`
+-- --
 
--- DROP TABLE IF EXISTS `m_counsellingprovided`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_counsellingprovided`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_counsellingprovided` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -2830,15 +2830,15 @@ CREATE TABLE IF NOT EXISTS `m_counsellingprovided` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_counsellingtype`
---
+-- --
+-- -- Table structure for table `m_counsellingtype`
+-- --
 
--- DROP TABLE IF EXISTS `m_counsellingtype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_counsellingtype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_counsellingtype` (
   `CounsellingTypeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `CounsellingType` varchar(30) DEFAULT NULL,
@@ -2851,15 +2851,15 @@ CREATE TABLE IF NOT EXISTS `m_counsellingtype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`CounsellingTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_country`
---
+-- --
+-- -- Table structure for table `m_country`
+-- --
 
--- DROP TABLE IF EXISTS `m_country`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_country`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_country` (
   `CountryID` int(11) NOT NULL AUTO_INCREMENT,
   `CountryName` varchar(100) NOT NULL,
@@ -2873,15 +2873,15 @@ CREATE TABLE IF NOT EXISTS `m_country` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`CountryID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=224 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_countrycity`
---
+-- --
+-- -- Table structure for table `m_countrycity`
+-- --
 
--- DROP TABLE IF EXISTS `m_countrycity`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_countrycity`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_countrycity` (
   `CityID` int(11) NOT NULL AUTO_INCREMENT,
   `cityname` varchar(100) DEFAULT NULL,
@@ -2896,29 +2896,29 @@ CREATE TABLE IF NOT EXISTS `m_countrycity` (
   KEY `FK_City_CountryId_idx` (`CountryId`),
   CONSTRAINT `FK_City_Country` FOREIGN KEY (`CountryId`) REFERENCES `m_country` (`CountryID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=13878 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_countrycity_temp`
---
+-- --
+-- -- Table structure for table `m_countrycity_temp`
+-- --
 
--- DROP TABLE IF EXISTS `m_countrycity_temp`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_countrycity_temp`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_countrycity_temp` (
   `Countryid` int(11) DEFAULT NULL,
   `CityName` varchar(100) DEFAULT NULL,
   `CountryName` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_covidcontacthistory`
---
+-- --
+-- -- Table structure for table `m_covidcontacthistory`
+-- --
 
--- DROP TABLE IF EXISTS `m_covidcontacthistory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_covidcontacthistory`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_covidcontacthistory` (
   `CovidcontacthistoryID` int(11) NOT NULL AUTO_INCREMENT,
   `ContactHistory` varchar(500) DEFAULT NULL,
@@ -2930,15 +2930,15 @@ CREATE TABLE IF NOT EXISTS `m_covidcontacthistory` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`CovidcontacthistoryID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_coviddosetype`
---
+-- --
+-- -- Table structure for table `m_coviddosetype`
+-- --
 
--- DROP TABLE IF EXISTS `m_coviddosetype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_coviddosetype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_coviddosetype` (
   `CovidDoseTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `DoseType` varchar(50) DEFAULT NULL,
@@ -2953,15 +2953,15 @@ CREATE TABLE IF NOT EXISTS `m_coviddosetype` (
   KEY `FK_CovidDose_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_CovidDose_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_covidmaster`
---
+-- --
+-- -- Table structure for table `m_covidmaster`
+-- --
 
--- DROP TABLE IF EXISTS `m_covidmaster`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_covidmaster`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_covidmaster` (
   `CovidmasterID` int(11) NOT NULL AUTO_INCREMENT,
   `MasterType` varchar(100) DEFAULT NULL,
@@ -2977,15 +2977,15 @@ CREATE TABLE IF NOT EXISTS `m_covidmaster` (
   KEY `FK_m_covidmaster_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_m_covidmaster_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_covidrecommendation`
---
+-- --
+-- -- Table structure for table `m_covidrecommendation`
+-- --
 
--- DROP TABLE IF EXISTS `m_covidrecommendation`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_covidrecommendation`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_covidrecommendation` (
   `CovidrecommendationID` int(11) NOT NULL AUTO_INCREMENT,
   `Recommendation` varchar(500) DEFAULT NULL,
@@ -2997,15 +2997,15 @@ CREATE TABLE IF NOT EXISTS `m_covidrecommendation` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`CovidrecommendationID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_covidsymptoms`
---
+-- --
+-- -- Table structure for table `m_covidsymptoms`
+-- --
 
--- DROP TABLE IF EXISTS `m_covidsymptoms`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_covidsymptoms`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_covidsymptoms` (
   `CovidsymptomID` int(11) NOT NULL AUTO_INCREMENT,
   `Symptoms` varchar(300) DEFAULT NULL,
@@ -3017,15 +3017,15 @@ CREATE TABLE IF NOT EXISTS `m_covidsymptoms` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`CovidsymptomID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_covidvaccinetype`
---
+-- --
+-- -- Table structure for table `m_covidvaccinetype`
+-- --
 
--- DROP TABLE IF EXISTS `m_covidvaccinetype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_covidvaccinetype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_covidvaccinetype` (
   `CovidVaccineTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `VaccineType` varchar(50) DEFAULT NULL,
@@ -3040,15 +3040,15 @@ CREATE TABLE IF NOT EXISTS `m_covidvaccinetype` (
   KEY `FK_CovidVaccineType_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_CovidVaccineType_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_currentimmunizationservice`
---
+-- --
+-- -- Table structure for table `m_currentimmunizationservice`
+-- --
 
--- DROP TABLE IF EXISTS `m_currentimmunizationservice`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_currentimmunizationservice`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_currentimmunizationservice` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -3061,15 +3061,15 @@ CREATE TABLE IF NOT EXISTS `m_currentimmunizationservice` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_cycle`
---
+-- --
+-- -- Table structure for table `m_cycle`
+-- --
 
--- DROP TABLE IF EXISTS `m_cycle`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_cycle`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_cycle` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) DEFAULT NULL,
@@ -3081,15 +3081,15 @@ CREATE TABLE IF NOT EXISTS `m_cycle` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_dashboardurl`
---
+-- --
+-- -- Table structure for table `m_dashboardurl`
+-- --
 
--- DROP TABLE IF EXISTS `m_dashboardurl`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_dashboardurl`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_dashboardurl` (
   `DashboardURLID` int(11) NOT NULL AUTO_INCREMENT,
   `StateID` int(11) DEFAULT NULL,
@@ -3106,15 +3106,15 @@ CREATE TABLE IF NOT EXISTS `m_dashboardurl` (
   KEY `FK_DashboardURL_State_idx` (`StateID`),
   CONSTRAINT `FK_DashboardURL_State` FOREIGN KEY (`StateID`) REFERENCES `m_state` (`StateID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_deliveryconductedby`
---
+-- --
+-- -- Table structure for table `m_deliveryconductedby`
+-- --
 
--- DROP TABLE IF EXISTS `m_deliveryconductedby`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_deliveryconductedby`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_deliveryconductedby` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -3126,15 +3126,15 @@ CREATE TABLE IF NOT EXISTS `m_deliveryconductedby` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_deliveryplace`
---
+-- --
+-- -- Table structure for table `m_deliveryplace`
+-- --
 
--- DROP TABLE IF EXISTS `m_deliveryplace`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_deliveryplace`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_deliveryplace` (
   `DeliveryPlaceID` smallint(6) NOT NULL AUTO_INCREMENT,
   `DeliveryPlace` varchar(20) DEFAULT NULL,
@@ -3146,15 +3146,15 @@ CREATE TABLE IF NOT EXISTS `m_deliveryplace` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`DeliveryPlaceID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_deliverytype`
---
+-- --
+-- -- Table structure for table `m_deliverytype`
+-- --
 
--- DROP TABLE IF EXISTS `m_deliverytype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_deliverytype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_deliverytype` (
   `DeliveryTypeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `DeliveryType` varchar(50) DEFAULT NULL,
@@ -3166,15 +3166,15 @@ CREATE TABLE IF NOT EXISTS `m_deliverytype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`DeliveryTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_designation`
---
+-- --
+-- -- Table structure for table `m_designation`
+-- --
 
--- DROP TABLE IF EXISTS `m_designation`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_designation`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_designation` (
   `DesignationID` int(11) NOT NULL AUTO_INCREMENT,
   `DesignationName` varchar(50) DEFAULT NULL,
@@ -3187,15 +3187,15 @@ CREATE TABLE IF NOT EXISTS `m_designation` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`DesignationID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_developmentproblem`
---
+-- --
+-- -- Table structure for table `m_developmentproblem`
+-- --
 
--- DROP TABLE IF EXISTS `m_developmentproblem`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_developmentproblem`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_developmentproblem` (
   `ID` smallint(6) NOT NULL AUTO_INCREMENT,
   `DevelopmentProblem` varchar(50) DEFAULT NULL,
@@ -3208,15 +3208,15 @@ CREATE TABLE IF NOT EXISTS `m_developmentproblem` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_diseasetype`
---
+-- --
+-- -- Table structure for table `m_diseasetype`
+-- --
 
--- DROP TABLE IF EXISTS `m_diseasetype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_diseasetype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_diseasetype` (
   `DiseaseTypeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `DiseaseType` varchar(30) DEFAULT NULL,
@@ -3232,15 +3232,15 @@ CREATE TABLE IF NOT EXISTS `m_diseasetype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`DiseaseTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_dispositionstatus`
---
+-- --
+-- -- Table structure for table `m_dispositionstatus`
+-- --
 
--- DROP TABLE IF EXISTS `m_dispositionstatus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_dispositionstatus`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_dispositionstatus` (
   `DispositionStatusID` int(11) NOT NULL AUTO_INCREMENT,
   `DispositionStatus` varchar(15) DEFAULT NULL,
@@ -3253,15 +3253,15 @@ CREATE TABLE IF NOT EXISTS `m_dispositionstatus` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`DispositionStatusID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_district`
---
+-- --
+-- -- Table structure for table `m_district`
+-- --
 
--- DROP TABLE IF EXISTS `m_district`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_district`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_district` (
   `DistrictID` int(11) NOT NULL AUTO_INCREMENT,
   `DistrictName` varchar(50) NOT NULL,
@@ -3278,15 +3278,15 @@ CREATE TABLE IF NOT EXISTS `m_district` (
   KEY `FK_StateId_district_state_idx` (`StateID`),
   CONSTRAINT `FK_StateId_district_state` FOREIGN KEY (`StateID`) REFERENCES `m_state` (`StateID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=711 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_districtblock`
---
+-- --
+-- -- Table structure for table `m_districtblock`
+-- --
 
--- DROP TABLE IF EXISTS `m_districtblock`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_districtblock`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_districtblock` (
   `BlockID` int(11) NOT NULL AUTO_INCREMENT,
   `DistrictID` int(11) DEFAULT NULL,
@@ -3306,15 +3306,15 @@ CREATE TABLE IF NOT EXISTS `m_districtblock` (
   CONSTRAINT `FK_DistrictBlock_District` FOREIGN KEY (`DistrictID`) REFERENCES `m_district` (`DistrictID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_DistrictBlock_State` FOREIGN KEY (`StateID`) REFERENCES `m_state` (`StateID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6525 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_districtbranchmapping`
---
+-- --
+-- -- Table structure for table `m_districtbranchmapping`
+-- --
 
--- DROP TABLE IF EXISTS `m_districtbranchmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_districtbranchmapping`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_districtbranchmapping` (
   `DistrictBranchID` int(11) NOT NULL AUTO_INCREMENT,
   `BlockID` int(11) DEFAULT NULL,
@@ -3342,15 +3342,15 @@ CREATE TABLE IF NOT EXISTS `m_districtbranchmapping` (
   KEY `inx_ISRural` (`Isrural`),
   CONSTRAINT `FK_DistrictBMapping_DistrictBlock` FOREIGN KEY (`BlockID`) REFERENCES `m_districtblock` (`BlockID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=660363 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_districtbranchmapping_bkp_02122021`
---
+-- --
+-- -- Table structure for table `m_districtbranchmapping_bkp_02122021`
+-- --
 
--- DROP TABLE IF EXISTS `m_districtbranchmapping_bkp_02122021`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_districtbranchmapping_bkp_02122021`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_districtbranchmapping_bkp_02122021` (
   `DistrictBranchID` int(11) NOT NULL DEFAULT '0',
   `BlockID` int(11) DEFAULT NULL,
@@ -3368,15 +3368,15 @@ CREATE TABLE IF NOT EXISTS `m_districtbranchmapping_bkp_02122021` (
   `ModifiedBy` varchar(50) DEFAULT NULL,
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_donatableorgan`
---
+-- --
+-- -- Table structure for table `m_donatableorgan`
+-- --
 
--- DROP TABLE IF EXISTS `m_donatableorgan`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_donatableorgan`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_donatableorgan` (
   `DonatableOrganID` int(11) NOT NULL AUTO_INCREMENT,
   `DonatableOrgan` varchar(50) DEFAULT NULL,
@@ -3389,15 +3389,15 @@ CREATE TABLE IF NOT EXISTS `m_donatableorgan` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`DonatableOrganID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_donationtype`
---
+-- --
+-- -- Table structure for table `m_donationtype`
+-- --
 
--- DROP TABLE IF EXISTS `m_donationtype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_donationtype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_donationtype` (
   `DonationTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `DonationType` varchar(20) DEFAULT NULL,
@@ -3410,15 +3410,15 @@ CREATE TABLE IF NOT EXISTS `m_donationtype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`DonationTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_downloadmastertable`
---
+-- --
+-- -- Table structure for table `m_downloadmastertable`
+-- --
 
--- DROP TABLE IF EXISTS `m_downloadmastertable`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_downloadmastertable`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_downloadmastertable` (
   `DownloadMasterTableID` int(11) NOT NULL AUTO_INCREMENT,
   `SchemaName` varchar(50) DEFAULT NULL,
@@ -3436,15 +3436,15 @@ CREATE TABLE IF NOT EXISTS `m_downloadmastertable` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`DownloadMasterTableID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_downloadmastertable_bkp_20052021`
---
+-- --
+-- -- Table structure for table `m_downloadmastertable_bkp_20052021`
+-- --
 
--- DROP TABLE IF EXISTS `m_downloadmastertable_bkp_20052021`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_downloadmastertable_bkp_20052021`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_downloadmastertable_bkp_20052021` (
   `DownloadMasterTableID` int(11) NOT NULL DEFAULT '0',
   `SchemaName` varchar(50) DEFAULT NULL,
@@ -3461,15 +3461,15 @@ CREATE TABLE IF NOT EXISTS `m_downloadmastertable_bkp_20052021` (
   `ModifiedBy` varchar(50) DEFAULT NULL,
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_downloadmastertable_bkp_25102019`
---
+-- --
+-- -- Table structure for table `m_downloadmastertable_bkp_25102019`
+-- --
 
--- DROP TABLE IF EXISTS `m_downloadmastertable_bkp_25102019`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_downloadmastertable_bkp_25102019`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_downloadmastertable_bkp_25102019` (
   `DownloadMasterTableID` int(11) NOT NULL DEFAULT '0',
   `SchemaName` varchar(50) DEFAULT NULL,
@@ -3486,15 +3486,15 @@ CREATE TABLE IF NOT EXISTS `m_downloadmastertable_bkp_25102019` (
   `ModifiedBy` varchar(50) DEFAULT NULL,
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_drugcompliance`
---
+-- --
+-- -- Table structure for table `m_drugcompliance`
+-- --
 
--- DROP TABLE IF EXISTS `m_drugcompliance`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_drugcompliance`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_drugcompliance` (
   `DrugComplianceID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(20) DEFAULT NULL,
@@ -3507,15 +3507,15 @@ CREATE TABLE IF NOT EXISTS `m_drugcompliance` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`DrugComplianceID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_drugdose`
---
+-- --
+-- -- Table structure for table `m_drugdose`
+-- --
 
--- DROP TABLE IF EXISTS `m_drugdose`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_drugdose`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_drugdose` (
   `DrugDoseID` int(11) NOT NULL AUTO_INCREMENT,
   `DrugDose` varchar(30) DEFAULT NULL,
@@ -3531,15 +3531,15 @@ CREATE TABLE IF NOT EXISTS `m_drugdose` (
   KEY `FK_DrugDose_ItemForm_idx` (`ItemFormID`),
   CONSTRAINT `FK_DrugDose_ItemForm` FOREIGN KEY (`ItemFormID`) REFERENCES `m_itemform` (`ItemFormID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_drugduration`
---
+-- --
+-- -- Table structure for table `m_drugduration`
+-- --
 
--- DROP TABLE IF EXISTS `m_drugduration`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_drugduration`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_drugduration` (
   `DrugDurationID` int(11) NOT NULL AUTO_INCREMENT,
   `DrugDuration` varchar(30) DEFAULT NULL,
@@ -3552,15 +3552,15 @@ CREATE TABLE IF NOT EXISTS `m_drugduration` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`DrugDurationID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_drugform`
---
+-- --
+-- -- Table structure for table `m_drugform`
+-- --
 
--- DROP TABLE IF EXISTS `m_drugform`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_drugform`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_drugform` (
   `DrugFormID` int(11) NOT NULL AUTO_INCREMENT,
   `DrugForm` varchar(30) DEFAULT NULL,
@@ -3573,15 +3573,15 @@ CREATE TABLE IF NOT EXISTS `m_drugform` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`DrugFormID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_drugfrequency`
---
+-- --
+-- -- Table structure for table `m_drugfrequency`
+-- --
 
--- DROP TABLE IF EXISTS `m_drugfrequency`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_drugfrequency`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_drugfrequency` (
   `DrugFrequencyID` int(11) NOT NULL AUTO_INCREMENT,
   `Frequency` varchar(30) DEFAULT NULL,
@@ -3594,15 +3594,15 @@ CREATE TABLE IF NOT EXISTS `m_drugfrequency` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`DrugFrequencyID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_drugroute`
---
+-- --
+-- -- Table structure for table `m_drugroute`
+-- --
 
--- DROP TABLE IF EXISTS `m_drugroute`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_drugroute`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_drugroute` (
   `DrugRouteID` int(11) NOT NULL AUTO_INCREMENT,
   `DrugRoute` varchar(30) DEFAULT NULL,
@@ -3615,15 +3615,15 @@ CREATE TABLE IF NOT EXISTS `m_drugroute` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`DrugRouteID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_ecgabnormalities`
---
+-- --
+-- -- Table structure for table `m_ecgabnormalities`
+-- --
 
--- DROP TABLE IF EXISTS `m_ecgabnormalities`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_ecgabnormalities`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_ecgabnormalities` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(300) DEFAULT NULL,
@@ -3635,15 +3635,15 @@ CREATE TABLE IF NOT EXISTS `m_ecgabnormalities` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_emailparameter`
---
+-- --
+-- -- Table structure for table `m_emailparameter`
+-- --
 
--- DROP TABLE IF EXISTS `m_emailparameter`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_emailparameter`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_emailparameter` (
   `EmailParameterID` int(11) NOT NULL AUTO_INCREMENT,
   `EmailParamSource` varchar(250) DEFAULT NULL,
@@ -3658,15 +3658,15 @@ CREATE TABLE IF NOT EXISTS `m_emailparameter` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`EmailParameterID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_emailparametermapping`
---
+-- --
+-- -- Table structure for table `m_emailparametermapping`
+-- --
 
--- DROP TABLE IF EXISTS `m_emailparametermapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_emailparametermapping`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_emailparametermapping` (
   `EmailParameterMapID` int(11) NOT NULL AUTO_INCREMENT,
   `EmailTemplateID` int(11) DEFAULT NULL,
@@ -3687,15 +3687,15 @@ CREATE TABLE IF NOT EXISTS `m_emailparametermapping` (
   CONSTRAINT `FK_EmailParamMap_EmailTemplate` FOREIGN KEY (`EmailTemplateID`) REFERENCES `m_emailtemplate` (`EmailTemplateID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_EmailParamMap_EmailType` FOREIGN KEY (`EmailTypeID`) REFERENCES `m_emailtype` (`EmailTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_emailstatus`
---
+-- --
+-- -- Table structure for table `m_emailstatus`
+-- --
 
--- DROP TABLE IF EXISTS `m_emailstatus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_emailstatus`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_emailstatus` (
   `EmailStatusID` int(11) NOT NULL AUTO_INCREMENT,
   `EmailStatus` varchar(20) DEFAULT NULL,
@@ -3708,15 +3708,15 @@ CREATE TABLE IF NOT EXISTS `m_emailstatus` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`EmailStatusID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_emailtemplate`
---
+-- --
+-- -- Table structure for table `m_emailtemplate`
+-- --
 
--- DROP TABLE IF EXISTS `m_emailtemplate`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_emailtemplate`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_emailtemplate` (
   `EmailTemplateID` int(11) NOT NULL AUTO_INCREMENT,
   `EmailTemplateName` varchar(50) DEFAULT NULL,
@@ -3736,15 +3736,15 @@ CREATE TABLE IF NOT EXISTS `m_emailtemplate` (
   CONSTRAINT `FK_EmailTemplate_EmailType` FOREIGN KEY (`EmailTypeID`) REFERENCES `m_emailtype` (`EmailTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_EmailTemplate_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_emailtype`
---
+-- --
+-- -- Table structure for table `m_emailtype`
+-- --
 
--- DROP TABLE IF EXISTS `m_emailtype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_emailtype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_emailtype` (
   `EmailTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `EmailType` varchar(50) DEFAULT NULL,
@@ -3760,15 +3760,15 @@ CREATE TABLE IF NOT EXISTS `m_emailtype` (
   KEY `FK_EmailType_ServiceMaster_idx` (`ServiceID`),
   CONSTRAINT `FK_EmailType_ServiceMaster` FOREIGN KEY (`ServiceID`) REFERENCES `m_servicemaster` (`ServiceID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_emergencycontacts`
---
+-- --
+-- -- Table structure for table `m_emergencycontacts`
+-- --
 
--- DROP TABLE IF EXISTS `m_emergencycontacts`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_emergencycontacts`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_emergencycontacts` (
   `EmergContactID` int(11) NOT NULL AUTO_INCREMENT,
   `EmergContactName` varchar(50) DEFAULT NULL,
@@ -3792,15 +3792,15 @@ CREATE TABLE IF NOT EXISTS `m_emergencycontacts` (
   CONSTRAINT `FK_EmergencyContacts_NotificationType` FOREIGN KEY (`NotificationTypeID`) REFERENCES `m_notificationtype` (`NotificationTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_EmergencyContacts_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_everwellguidelines`
---
+-- --
+-- -- Table structure for table `m_everwellguidelines`
+-- --
 
--- DROP TABLE IF EXISTS `m_everwellguidelines`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_everwellguidelines`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_everwellguidelines` (
   `egid` int(11) NOT NULL AUTO_INCREMENT,
   `GuidelineName` varchar(200) NOT NULL,
@@ -3823,15 +3823,15 @@ CREATE TABLE IF NOT EXISTS `m_everwellguidelines` (
   KEY `inx_providerservicemapid` (`providerServiceMapID`),
   KEY `inx_deleted` (`Deleted`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_facility`
---
+-- --
+-- -- Table structure for table `m_facility`
+-- --
 
--- DROP TABLE IF EXISTS `m_facility`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_facility`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_facility` (
   `FacilityID` int(11) NOT NULL AUTO_INCREMENT,
   `FacilityName` varchar(100) DEFAULT NULL,
@@ -3861,15 +3861,15 @@ CREATE TABLE IF NOT EXISTS `m_facility` (
   CONSTRAINT `FK_Facility_FacilityType` FOREIGN KEY (`FacilityTypeID`) REFERENCES `m_facilitytype` (`FacilityTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Facility_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=280 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_facility_bkp_10012022`
---
+-- --
+-- -- Table structure for table `m_facility_bkp_10012022`
+-- --
 
--- DROP TABLE IF EXISTS `m_facility_bkp_10012022`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_facility_bkp_10012022`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_facility_bkp_10012022` (
   `FacilityID` int(11) NOT NULL DEFAULT '0',
   `FacilityName` varchar(100) DEFAULT NULL,
@@ -3890,15 +3890,15 @@ CREATE TABLE IF NOT EXISTS `m_facility_bkp_10012022` (
   `ModifiedBy` varchar(50) DEFAULT NULL,
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_facilitytype`
---
+-- --
+-- -- Table structure for table `m_facilitytype`
+-- --
 
--- DROP TABLE IF EXISTS `m_facilitytype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_facilitytype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_facilitytype` (
   `FacilityTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `FacilityTypeName` varchar(100) DEFAULT NULL,
@@ -3916,15 +3916,15 @@ CREATE TABLE IF NOT EXISTS `m_facilitytype` (
   KEY `FK_FacilityType_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_FacilityType_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_feedbacknature`
---
+-- --
+-- -- Table structure for table `m_feedbacknature`
+-- --
 
--- DROP TABLE IF EXISTS `m_feedbacknature`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_feedbacknature`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_feedbacknature` (
   `FeedbackNatureID` int(11) NOT NULL AUTO_INCREMENT,
   `FeedbackNature` varchar(50) DEFAULT NULL,
@@ -3941,15 +3941,15 @@ CREATE TABLE IF NOT EXISTS `m_feedbacknature` (
   KEY `FK_FeedbackNature_FeedbackType_idx` (`FeedbackTypeID`),
   CONSTRAINT `FK_FeedbackNature_FeedbackType` FOREIGN KEY (`FeedbackTypeID`) REFERENCES `m_feedbacktype` (`FeedbackTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_feedbackstatus`
---
+-- --
+-- -- Table structure for table `m_feedbackstatus`
+-- --
 
--- DROP TABLE IF EXISTS `m_feedbackstatus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_feedbackstatus`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_feedbackstatus` (
   `FeedbackStatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `FeedbackStatus` varchar(20) DEFAULT NULL,
@@ -3965,15 +3965,15 @@ CREATE TABLE IF NOT EXISTS `m_feedbackstatus` (
   KEY `FK_FeedbackStatus_ProviderServiceMapID_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_FeedbackStatus_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=684 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_feedbacktype`
---
+-- --
+-- -- Table structure for table `m_feedbacktype`
+-- --
 
--- DROP TABLE IF EXISTS `m_feedbacktype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_feedbacktype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_feedbacktype` (
   `FeedbackTypeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `FeedbackTypeName` varchar(50) DEFAULT NULL,
@@ -3990,15 +3990,15 @@ CREATE TABLE IF NOT EXISTS `m_feedbacktype` (
   KEY `FK_FeedbackType_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_FeedbackType_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_fertilitystatus`
---
+-- --
+-- -- Table structure for table `m_fertilitystatus`
+-- --
 
--- DROP TABLE IF EXISTS `m_fertilitystatus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_fertilitystatus`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_fertilitystatus` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -4010,15 +4010,15 @@ CREATE TABLE IF NOT EXISTS `m_fertilitystatus` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_fetosensetests`
---
+-- --
+-- -- Table structure for table `m_fetosensetests`
+-- --
 
--- DROP TABLE IF EXISTS `m_fetosensetests`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_fetosensetests`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_fetosensetests` (
   `fetosensetestid` int(11) NOT NULL AUTO_INCREMENT,
   `TestName` varchar(100) DEFAULT NULL,
@@ -4034,15 +4034,15 @@ CREATE TABLE IF NOT EXISTS `m_fetosensetests` (
   KEY `Inx_ProviderServiceMapID` (`ProviderServiceMapID`),
   CONSTRAINT `FK_fetosensetests_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_fileeventseq`
---
+-- --
+-- -- Table structure for table `m_fileeventseq`
+-- --
 
--- DROP TABLE IF EXISTS `m_fileeventseq`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_fileeventseq`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_fileeventseq` (
   `FileEventSeqID` int(11) NOT NULL AUTO_INCREMENT,
   `FileTypeID` int(11) DEFAULT NULL,
@@ -4059,15 +4059,15 @@ CREATE TABLE IF NOT EXISTS `m_fileeventseq` (
   KEY `FK_FileEventSeq_FileType_idx` (`FileTypeID`),
   CONSTRAINT `FK_FileEventSeq_FileType` FOREIGN KEY (`FileTypeID`) REFERENCES `m_filetype` (`FileTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_fileprocessstatus`
---
+-- --
+-- -- Table structure for table `m_fileprocessstatus`
+-- --
 
--- DROP TABLE IF EXISTS `m_fileprocessstatus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_fileprocessstatus`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_fileprocessstatus` (
   `FileProcessStatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `ProcessStatus` varchar(15) DEFAULT NULL,
@@ -4079,15 +4079,15 @@ CREATE TABLE IF NOT EXISTS `m_fileprocessstatus` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`FileProcessStatusID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_filestatus`
---
+-- --
+-- -- Table structure for table `m_filestatus`
+-- --
 
--- DROP TABLE IF EXISTS `m_filestatus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_filestatus`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_filestatus` (
   `FileStatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `FileStatus` varchar(20) DEFAULT NULL,
@@ -4100,15 +4100,15 @@ CREATE TABLE IF NOT EXISTS `m_filestatus` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`FileStatusID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_filetaskstatus`
---
+-- --
+-- -- Table structure for table `m_filetaskstatus`
+-- --
 
--- DROP TABLE IF EXISTS `m_filetaskstatus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_filetaskstatus`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_filetaskstatus` (
   `FileTaskStatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `TaskStatus` varchar(15) DEFAULT NULL,
@@ -4120,15 +4120,15 @@ CREATE TABLE IF NOT EXISTS `m_filetaskstatus` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`FileTaskStatusID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_filetype`
---
+-- --
+-- -- Table structure for table `m_filetype`
+-- --
 
--- DROP TABLE IF EXISTS `m_filetype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_filetype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_filetype` (
   `FileTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `FileTypeName` varchar(30) DEFAULT NULL,
@@ -4143,15 +4143,15 @@ CREATE TABLE IF NOT EXISTS `m_filetype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`FileTypeID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_foodintolerancestatus`
---
+-- --
+-- -- Table structure for table `m_foodintolerancestatus`
+-- --
 
--- DROP TABLE IF EXISTS `m_foodintolerancestatus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_foodintolerancestatus`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_foodintolerancestatus` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `IntoleranceStatus` varchar(100) DEFAULT NULL,
@@ -4163,15 +4163,15 @@ CREATE TABLE IF NOT EXISTS `m_foodintolerancestatus` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_fpcounselledon`
---
+-- --
+-- -- Table structure for table `m_fpcounselledon`
+-- --
 
--- DROP TABLE IF EXISTS `m_fpcounselledon`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_fpcounselledon`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_fpcounselledon` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
@@ -4183,15 +4183,15 @@ CREATE TABLE IF NOT EXISTS `m_fpcounselledon` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_fpmethodfollowup`
---
+-- --
+-- -- Table structure for table `m_fpmethodfollowup`
+-- --
 
--- DROP TABLE IF EXISTS `m_fpmethodfollowup`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_fpmethodfollowup`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_fpmethodfollowup` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
@@ -4204,15 +4204,15 @@ CREATE TABLE IF NOT EXISTS `m_fpmethodfollowup` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_fpsideeffects`
---
+-- --
+-- -- Table structure for table `m_fpsideeffects`
+-- --
 
--- DROP TABLE IF EXISTS `m_fpsideeffects`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_fpsideeffects`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_fpsideeffects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
@@ -4224,15 +4224,15 @@ CREATE TABLE IF NOT EXISTS `m_fpsideeffects` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_frequency`
---
+-- --
+-- -- Table structure for table `m_frequency`
+-- --
 
--- DROP TABLE IF EXISTS `m_frequency`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_frequency`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_frequency` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) DEFAULT NULL,
@@ -4244,15 +4244,15 @@ CREATE TABLE IF NOT EXISTS `m_frequency` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_fundalheight`
---
+-- --
+-- -- Table structure for table `m_fundalheight`
+-- --
 
--- DROP TABLE IF EXISTS `m_fundalheight`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_fundalheight`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_fundalheight` (
   `FundalHeightID` smallint(6) NOT NULL AUTO_INCREMENT,
   `FundalHeight` varchar(30) DEFAULT NULL,
@@ -4265,15 +4265,15 @@ CREATE TABLE IF NOT EXISTS `m_fundalheight` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`FundalHeightID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_gender`
---
+-- --
+-- -- Table structure for table `m_gender`
+-- --
 
--- DROP TABLE IF EXISTS `m_gender`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_gender`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_gender` (
   `GenderID` smallint(6) NOT NULL AUTO_INCREMENT,
   `GenderName` char(15) NOT NULL,
@@ -4285,15 +4285,15 @@ CREATE TABLE IF NOT EXISTS `m_gender` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`GenderID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_gestation`
---
+-- --
+-- -- Table structure for table `m_gestation`
+-- --
 
--- DROP TABLE IF EXISTS `m_gestation`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_gestation`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_gestation` (
   `GestationID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(20) DEFAULT NULL,
@@ -4306,15 +4306,15 @@ CREATE TABLE IF NOT EXISTS `m_gestation` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`GestationID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_govtidentitytype`
---
+-- --
+-- -- Table structure for table `m_govtidentitytype`
+-- --
 
--- DROP TABLE IF EXISTS `m_govtidentitytype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_govtidentitytype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_govtidentitytype` (
   `GovtIdentityTypeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `IdentityType` varchar(50) DEFAULT NULL,
@@ -4327,15 +4327,15 @@ CREATE TABLE IF NOT EXISTS `m_govtidentitytype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`GovtIdentityTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_grade`
---
+-- --
+-- -- Table structure for table `m_grade`
+-- --
 
--- DROP TABLE IF EXISTS `m_grade`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_grade`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_grade` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(20) DEFAULT NULL,
@@ -4348,15 +4348,15 @@ CREATE TABLE IF NOT EXISTS `m_grade` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_grossmotormilestone`
---
+-- --
+-- -- Table structure for table `m_grossmotormilestone`
+-- --
 
--- DROP TABLE IF EXISTS `m_grossmotormilestone`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_grossmotormilestone`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_grossmotormilestone` (
   `GMMilestoneID` smallint(6) NOT NULL AUTO_INCREMENT,
   `GMMilestone` varchar(30) DEFAULT NULL,
@@ -4369,15 +4369,15 @@ CREATE TABLE IF NOT EXISTS `m_grossmotormilestone` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`GMMilestoneID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_healthcareworker`
---
+-- --
+-- -- Table structure for table `m_healthcareworker`
+-- --
 
--- DROP TABLE IF EXISTS `m_healthcareworker`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_healthcareworker`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_healthcareworker` (
   `HealthCareWorkerID` smallint(6) NOT NULL AUTO_INCREMENT,
   `HealthCareWorkerType` varchar(30) DEFAULT NULL,
@@ -4390,15 +4390,15 @@ CREATE TABLE IF NOT EXISTS `m_healthcareworker` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`HealthCareWorkerID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_highriskpregreason`
---
+-- --
+-- -- Table structure for table `m_highriskpregreason`
+-- --
 
--- DROP TABLE IF EXISTS `m_highriskpregreason`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_highriskpregreason`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_highriskpregreason` (
   `HighRiskPregReasonID` smallint(6) NOT NULL AUTO_INCREMENT,
   `HighRiskPregReason` varchar(50) DEFAULT NULL,
@@ -4411,15 +4411,15 @@ CREATE TABLE IF NOT EXISTS `m_highriskpregreason` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`HighRiskPregReasonID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_hrni`
---
+-- --
+-- -- Table structure for table `m_hrni`
+-- --
 
--- DROP TABLE IF EXISTS `m_hrni`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_hrni`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_hrni` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(300) DEFAULT NULL,
@@ -4431,15 +4431,15 @@ CREATE TABLE IF NOT EXISTS `m_hrni` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_hrp`
---
+-- --
+-- -- Table structure for table `m_hrp`
+-- --
 
--- DROP TABLE IF EXISTS `m_hrp`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_hrp`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_hrp` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(300) DEFAULT NULL,
@@ -4452,15 +4452,15 @@ CREATE TABLE IF NOT EXISTS `m_hrp` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_idrsscreenquestions`
---
+-- --
+-- -- Table structure for table `m_idrsscreenquestions`
+-- --
 
--- DROP TABLE IF EXISTS `m_idrsscreenquestions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_idrsscreenquestions`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_idrsscreenquestions` (
   `IDRSQuestionID` int(11) NOT NULL AUTO_INCREMENT,
   `Question` varchar(500) DEFAULT NULL,
@@ -4477,15 +4477,15 @@ CREATE TABLE IF NOT EXISTS `m_idrsscreenquestions` (
   KEY `FK_Questionnaire_ProviderServicewMapID_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_m_IDRSscreenQuestions_ProviderServicewMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_illness`
---
+-- --
+-- -- Table structure for table `m_illness`
+-- --
 
--- DROP TABLE IF EXISTS `m_illness`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_illness`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_illness` (
   `IllnessID` int(11) NOT NULL AUTO_INCREMENT,
   `IllnessType` varchar(30) DEFAULT NULL,
@@ -4502,15 +4502,15 @@ CREATE TABLE IF NOT EXISTS `m_illness` (
   KEY `FK_Illness_VisitCategory_idx` (`VisitCategoryID`),
   CONSTRAINT `FK_Illness_VisitCategory` FOREIGN KEY (`VisitCategoryID`) REFERENCES `m_visitcategory` (`VisitCategoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_immunizationservicedose`
---
+-- --
+-- -- Table structure for table `m_immunizationservicedose`
+-- --
 
--- DROP TABLE IF EXISTS `m_immunizationservicedose`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_immunizationservicedose`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_immunizationservicedose` (
   `Doseid` smallint(6) NOT NULL AUTO_INCREMENT,
   `VaccinationID` smallint(6) NOT NULL,
@@ -4526,15 +4526,15 @@ CREATE TABLE IF NOT EXISTS `m_immunizationservicedose` (
   KEY `FK_isd` (`VaccinationID`),
   CONSTRAINT `FK_isd` FOREIGN KEY (`VaccinationID`) REFERENCES `m_immunizationservicevaccination` (`VaccinationID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_immunizationserviceroute`
---
+-- --
+-- -- Table structure for table `m_immunizationserviceroute`
+-- --
 
--- DROP TABLE IF EXISTS `m_immunizationserviceroute`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_immunizationserviceroute`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_immunizationserviceroute` (
   `Routeid` smallint(6) NOT NULL AUTO_INCREMENT,
   `VaccinationID` smallint(6) NOT NULL,
@@ -4552,15 +4552,15 @@ CREATE TABLE IF NOT EXISTS `m_immunizationserviceroute` (
   KEY `FK_isr` (`VaccinationID`),
   CONSTRAINT `FK_isr` FOREIGN KEY (`VaccinationID`) REFERENCES `m_immunizationservicevaccination` (`VaccinationID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_immunizationservicestype`
---
+-- --
+-- -- Table structure for table `m_immunizationservicestype`
+-- --
 
--- DROP TABLE IF EXISTS `m_immunizationservicestype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_immunizationservicestype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_immunizationservicestype` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -4572,15 +4572,15 @@ CREATE TABLE IF NOT EXISTS `m_immunizationservicestype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_immunizationservicevaccination`
---
+-- --
+-- -- Table structure for table `m_immunizationservicevaccination`
+-- --
 
--- DROP TABLE IF EXISTS `m_immunizationservicevaccination`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_immunizationservicevaccination`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_immunizationservicevaccination` (
   `VaccinationID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Currentimmunizationserviceid` smallint(6) NOT NULL,
@@ -4605,15 +4605,15 @@ CREATE TABLE IF NOT EXISTS `m_immunizationservicevaccination` (
   KEY `FK_csid` (`Currentimmunizationserviceid`),
   CONSTRAINT `FK_csid` FOREIGN KEY (`Currentimmunizationserviceid`) REFERENCES `m_currentimmunizationservice` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_imrmmrbasecommunity`
---
+-- --
+-- -- Table structure for table `m_imrmmrbasecommunity`
+-- --
 
--- DROP TABLE IF EXISTS `m_imrmmrbasecommunity`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_imrmmrbasecommunity`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_imrmmrbasecommunity` (
   `imrmmrcommunityID` int(11) NOT NULL AUTO_INCREMENT,
   `CommunityType` varchar(100) DEFAULT NULL,
@@ -4628,15 +4628,15 @@ CREATE TABLE IF NOT EXISTS `m_imrmmrbasecommunity` (
   KEY `FK_m_imrmmrbasecommunity_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_m_imrmmrbasecommunity_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_imrmmrfacility`
---
+-- --
+-- -- Table structure for table `m_imrmmrfacility`
+-- --
 
--- DROP TABLE IF EXISTS `m_imrmmrfacility`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_imrmmrfacility`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_imrmmrfacility` (
   `ImrmmrfacilityID` int(11) NOT NULL AUTO_INCREMENT,
   `facilityName` varchar(100) DEFAULT NULL,
@@ -4651,15 +4651,15 @@ CREATE TABLE IF NOT EXISTS `m_imrmmrfacility` (
   KEY `FK_m_imrmmrFacility_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_m_imrmmrFacility_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_imrmmrhealthworker`
---
+-- --
+-- -- Table structure for table `m_imrmmrhealthworker`
+-- --
 
--- DROP TABLE IF EXISTS `m_imrmmrhealthworker`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_imrmmrhealthworker`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_imrmmrhealthworker` (
   `imrmmrhwID` int(11) NOT NULL AUTO_INCREMENT,
   `HealthWorkerType` varchar(100) DEFAULT NULL,
@@ -4674,15 +4674,15 @@ CREATE TABLE IF NOT EXISTS `m_imrmmrhealthworker` (
   KEY `FK_m_imrmmrhealthworker_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_m_imrmmrhealthworker_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_imrmmrsupportservices`
---
+-- --
+-- -- Table structure for table `m_imrmmrsupportservices`
+-- --
 
--- DROP TABLE IF EXISTS `m_imrmmrsupportservices`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_imrmmrsupportservices`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_imrmmrsupportservices` (
   `supportServiceID` int(11) NOT NULL AUTO_INCREMENT,
   `supportServiceName` varchar(100) DEFAULT NULL,
@@ -4697,15 +4697,15 @@ CREATE TABLE IF NOT EXISTS `m_imrmmrsupportservices` (
   KEY `FK_m_imrmmrSupportServices_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_m_imrmmrSupportServices_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_imrmmrtransittype`
---
+-- --
+-- -- Table structure for table `m_imrmmrtransittype`
+-- --
 
--- DROP TABLE IF EXISTS `m_imrmmrtransittype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_imrmmrtransittype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_imrmmrtransittype` (
   `imrmmrtransitID` int(11) NOT NULL AUTO_INCREMENT,
   `TransitType` varchar(100) DEFAULT NULL,
@@ -4720,15 +4720,15 @@ CREATE TABLE IF NOT EXISTS `m_imrmmrtransittype` (
   KEY `FK_m_imrmmrduringtransit_ProviderServiceMapping_idx1` (`ProviderServiceMapID`),
   CONSTRAINT `FK_m_imrmmrduringtransit_ProviderServiceMapping1` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_inspectionbreasts`
---
+-- --
+-- -- Table structure for table `m_inspectionbreasts`
+-- --
 
--- DROP TABLE IF EXISTS `m_inspectionbreasts`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_inspectionbreasts`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_inspectionbreasts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -4740,15 +4740,15 @@ CREATE TABLE IF NOT EXISTS `m_inspectionbreasts` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_institutedirectory`
---
+-- --
+-- -- Table structure for table `m_institutedirectory`
+-- --
 
--- DROP TABLE IF EXISTS `m_institutedirectory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_institutedirectory`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_institutedirectory` (
   `InstituteDirectoryID` int(11) NOT NULL AUTO_INCREMENT,
   `InstituteDirectoryName` varchar(50) DEFAULT NULL,
@@ -4764,15 +4764,15 @@ CREATE TABLE IF NOT EXISTS `m_institutedirectory` (
   KEY `FK_InstituteDirectory_ProviderServiceMapping_idx` (`ProviderServiceMapId`),
   CONSTRAINT `FK_InstituteDirectory_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapId`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_institutedirectorymapping`
---
+-- --
+-- -- Table structure for table `m_institutedirectorymapping`
+-- --
 
--- DROP TABLE IF EXISTS `m_institutedirectorymapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_institutedirectorymapping`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_institutedirectorymapping` (
   `InstituteDirMapID` bigint(20) NOT NULL AUTO_INCREMENT,
   `InstitutionID` int(11) DEFAULT NULL,
@@ -4798,15 +4798,15 @@ CREATE TABLE IF NOT EXISTS `m_institutedirectorymapping` (
   CONSTRAINT `FK_InstituteDirectoryMapping_Institution` FOREIGN KEY (`InstitutionID`) REFERENCES `m_institution` (`InstitutionID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_InstituteDirectoryMapping_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_instituteroutedirectory`
---
+-- --
+-- -- Table structure for table `m_instituteroutedirectory`
+-- --
 
--- DROP TABLE IF EXISTS `m_instituteroutedirectory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_instituteroutedirectory`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_instituteroutedirectory` (
   `InstituteRouteDirectoryID` int(11) NOT NULL AUTO_INCREMENT,
   `InstituteSubDirectoryID` int(11) DEFAULT NULL,
@@ -4824,15 +4824,15 @@ CREATE TABLE IF NOT EXISTS `m_instituteroutedirectory` (
   KEY `FK_InstituteRouteDirectory_ProviderServiceMapping_idx` (`ProviderServiceMapId`),
   CONSTRAINT `FK_InstituteRouteDirectory_InstituteSubDirectory` FOREIGN KEY (`InstituteSubDirectoryID`) REFERENCES `m_institutesubdirectory` (`InstituteSubDirectoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_institutesubdirectory`
---
+-- --
+-- -- Table structure for table `m_institutesubdirectory`
+-- --
 
--- DROP TABLE IF EXISTS `m_institutesubdirectory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_institutesubdirectory`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_institutesubdirectory` (
   `InstituteSubDirectoryID` int(11) NOT NULL AUTO_INCREMENT,
   `InstituteDirectoryID` int(11) DEFAULT NULL,
@@ -4851,15 +4851,15 @@ CREATE TABLE IF NOT EXISTS `m_institutesubdirectory` (
   KEY `FK_InstituteSubDirectory_ProviderServiceMapping_idx` (`ProviderServiceMapId`),
   CONSTRAINT `FK_InstituteSubDirectory_InstituteDirectory` FOREIGN KEY (`InstituteDirectoryID`) REFERENCES `m_institutedirectory` (`InstituteDirectoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_institution`
---
+-- --
+-- -- Table structure for table `m_institution`
+-- --
 
--- DROP TABLE IF EXISTS `m_institution`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_institution`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_institution` (
   `InstitutionID` int(11) NOT NULL AUTO_INCREMENT,
   `GovtInstituteID` varchar(20) DEFAULT NULL,
@@ -4900,15 +4900,15 @@ CREATE TABLE IF NOT EXISTS `m_institution` (
   CONSTRAINT `FK_Institution_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Institution_State` FOREIGN KEY (`StateID`) REFERENCES `m_state` (`StateID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=727 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_institutiontype`
---
+-- --
+-- -- Table structure for table `m_institutiontype`
+-- --
 
--- DROP TABLE IF EXISTS `m_institutiontype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_institutiontype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_institutiontype` (
   `InstitutionTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `InstitutionType` varchar(300) DEFAULT NULL,
@@ -4927,15 +4927,15 @@ CREATE TABLE IF NOT EXISTS `m_institutiontype` (
   KEY `FK_InstitutionType_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_InstitutionType_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_interaction`
---
+-- --
+-- -- Table structure for table `m_interaction`
+-- --
 
--- DROP TABLE IF EXISTS `m_interaction`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_interaction`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_interaction` (
   `InteractionID` int(11) NOT NULL AUTO_INCREMENT,
   `Interaction` text,
@@ -4955,15 +4955,15 @@ CREATE TABLE IF NOT EXISTS `m_interaction` (
   CONSTRAINT `FK_Interaction_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Interaction_SubService` FOREIGN KEY (`SubServiceID`) REFERENCES `m_subservice` (`SubServiceID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_iotcomponent`
---
+-- --
+-- -- Table structure for table `m_iotcomponent`
+-- --
 
--- DROP TABLE IF EXISTS `m_iotcomponent`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_iotcomponent`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_iotcomponent` (
   `IOTComponentId` int(11) NOT NULL AUTO_INCREMENT,
   `ComponentName` varchar(50) DEFAULT NULL,
@@ -4983,15 +4983,15 @@ CREATE TABLE IF NOT EXISTS `m_iotcomponent` (
   KEY `FK_IOTComponent_IOTProcedure_idx` (`IOTProcedureID`),
   CONSTRAINT `FK_IOTComponent_IOTProcedure` FOREIGN KEY (`IOTProcedureID`) REFERENCES `m_iotprocedure` (`IOTProcedureID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_iotprocedure`
---
+-- --
+-- -- Table structure for table `m_iotprocedure`
+-- --
 
--- DROP TABLE IF EXISTS `m_iotprocedure`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_iotprocedure`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_iotprocedure` (
   `IOTProcedureID` int(11) NOT NULL AUTO_INCREMENT,
   `ProcedureName` varchar(50) DEFAULT NULL,
@@ -5013,15 +5013,15 @@ CREATE TABLE IF NOT EXISTS `m_iotprocedure` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`IOTProcedureID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_item`
---
+-- --
+-- -- Table structure for table `m_item`
+-- --
 
--- DROP TABLE IF EXISTS `m_item`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_item`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_item` (
   `ItemID` int(11) NOT NULL AUTO_INCREMENT,
   `ItemName` varchar(100) DEFAULT NULL,
@@ -5069,15 +5069,15 @@ CREATE TABLE IF NOT EXISTS `m_item` (
   CONSTRAINT `FK_Item_RouteOfAdmin` FOREIGN KEY (`RouteID`) REFERENCES `m_routeofadmin` (`RouteID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Item_UOM` FOREIGN KEY (`UOMID`) REFERENCES `m_uom` (`UOMID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1341 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_itemcategory`
---
+-- --
+-- -- Table structure for table `m_itemcategory`
+-- --
 
--- DROP TABLE IF EXISTS `m_itemcategory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_itemcategory`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_itemcategory` (
   `ItemCategoryID` int(11) NOT NULL AUTO_INCREMENT,
   `ItemCategoryName` varchar(100) DEFAULT NULL,
@@ -5097,15 +5097,15 @@ CREATE TABLE IF NOT EXISTS `m_itemcategory` (
   KEY `FK_ItemCategory_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_ItemCategory_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_itemfacilitymapping`
---
+-- --
+-- -- Table structure for table `m_itemfacilitymapping`
+-- --
 
--- DROP TABLE IF EXISTS `m_itemfacilitymapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_itemfacilitymapping`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_itemfacilitymapping` (
   `ItemFacilityMapID` int(11) NOT NULL AUTO_INCREMENT,
   `FacilityID` int(11) DEFAULT NULL,
@@ -5125,15 +5125,15 @@ CREATE TABLE IF NOT EXISTS `m_itemfacilitymapping` (
   CONSTRAINT `FK_ItemStoreMapping_Item` FOREIGN KEY (`ItemID`) REFERENCES `m_item` (`ItemID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ItemStoreMapping_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=31998 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_itemfacilitymapping_bkp_10012022`
---
+-- --
+-- -- Table structure for table `m_itemfacilitymapping_bkp_10012022`
+-- --
 
--- DROP TABLE IF EXISTS `m_itemfacilitymapping_bkp_10012022`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_itemfacilitymapping_bkp_10012022`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_itemfacilitymapping_bkp_10012022` (
   `ItemFacilityMapID` int(11) NOT NULL DEFAULT '0',
   `FacilityID` int(11) DEFAULT NULL,
@@ -5148,15 +5148,15 @@ CREATE TABLE IF NOT EXISTS `m_itemfacilitymapping_bkp_10012022` (
   `ModifiedBy` varchar(50) DEFAULT NULL,
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_itemform`
---
+-- --
+-- -- Table structure for table `m_itemform`
+-- --
 
--- DROP TABLE IF EXISTS `m_itemform`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_itemform`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_itemform` (
   `ItemFormID` int(11) NOT NULL AUTO_INCREMENT,
   `ItemFormName` varchar(100) DEFAULT NULL,
@@ -5173,15 +5173,15 @@ CREATE TABLE IF NOT EXISTS `m_itemform` (
   PRIMARY KEY (`ItemFormID`),
   KEY `FK_DrugType_ProviderServiceMapping_idx` (`ProviderServiceMapID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_itemissueconfig`
---
+-- --
+-- -- Table structure for table `m_itemissueconfig`
+-- --
 
--- DROP TABLE IF EXISTS `m_itemissueconfig`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_itemissueconfig`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_itemissueconfig` (
   `ItemIssueConfigID` int(11) NOT NULL AUTO_INCREMENT,
   `ItemCategoryID` int(11) DEFAULT NULL,
@@ -5200,15 +5200,15 @@ CREATE TABLE IF NOT EXISTS `m_itemissueconfig` (
   CONSTRAINT `FK_ItemIssueConfig_ItemCategory` FOREIGN KEY (`ItemCategoryID`) REFERENCES `m_itemcategory` (`ItemCategoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ItemIssueConfig_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_iucdinsertiondoneby`
---
+-- --
+-- -- Table structure for table `m_iucdinsertiondoneby`
+-- --
 
--- DROP TABLE IF EXISTS `m_iucdinsertiondoneby`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_iucdinsertiondoneby`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_iucdinsertiondoneby` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -5220,15 +5220,15 @@ CREATE TABLE IF NOT EXISTS `m_iucdinsertiondoneby` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_jointtype`
---
+-- --
+-- -- Table structure for table `m_jointtype`
+-- --
 
--- DROP TABLE IF EXISTS `m_jointtype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_jointtype`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_jointtype` (
   `JointID` smallint(6) NOT NULL AUTO_INCREMENT,
   `JointType` varchar(30) DEFAULT NULL,
@@ -5241,15 +5241,15 @@ CREATE TABLE IF NOT EXISTS `m_jointtype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`JointID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_labtests`
---
+-- --
+-- -- Table structure for table `m_labtests`
+-- --
 
--- DROP TABLE IF EXISTS `m_labtests`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_labtests`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_labtests` (
   `TestID` int(11) NOT NULL AUTO_INCREMENT,
   `TestName` varchar(50) DEFAULT NULL,
@@ -5264,15 +5264,15 @@ CREATE TABLE IF NOT EXISTS `m_labtests` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`TestID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_language`
---
+-- --
+-- -- Table structure for table `m_language`
+-- --
 
--- DROP TABLE IF EXISTS `m_language`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_language`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_language` (
   `LanguageID` int(11) NOT NULL AUTO_INCREMENT,
   `LanguageName` varchar(15) DEFAULT NULL,
@@ -5287,15 +5287,15 @@ CREATE TABLE IF NOT EXISTS `m_language` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`LanguageID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_literacystatus`
---
+-- --
+-- -- Table structure for table `m_literacystatus`
+-- --
 
--- DROP TABLE IF EXISTS `m_literacystatus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_literacystatus`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_literacystatus` (
   `LiteracystatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Literacystatus` varchar(50) DEFAULT NULL,
@@ -5307,15 +5307,15 @@ CREATE TABLE IF NOT EXISTS `m_literacystatus` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`LiteracystatusID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_locationofnextimmunization`
---
+-- --
+-- -- Table structure for table `m_locationofnextimmunization`
+-- --
 
--- DROP TABLE IF EXISTS `m_locationofnextimmunization`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_locationofnextimmunization`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_locationofnextimmunization` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -5327,15 +5327,15 @@ CREATE TABLE IF NOT EXISTS `m_locationofnextimmunization` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_loginsecurityquestions`
---
+-- --
+-- -- Table structure for table `m_loginsecurityquestions`
+-- --
 
--- DROP TABLE IF EXISTS `m_loginsecurityquestions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_loginsecurityquestions`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_loginsecurityquestions` (
   `QuestionID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Question` varchar(100) NOT NULL,
@@ -5347,15 +5347,15 @@ CREATE TABLE IF NOT EXISTS `m_loginsecurityquestions` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`QuestionID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_loinc`
---
+-- --
+-- -- Table structure for table `m_loinc`
+-- --
 
--- DROP TABLE IF EXISTS `m_loinc`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_loinc`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_loinc` (
   `loinc_num` varchar(10) NOT NULL,
   `component` varchar(255) DEFAULT NULL,
@@ -5410,15 +5410,15 @@ CREATE TABLE IF NOT EXISTS `m_loinc` (
   KEY `inx_LONG_COMMON_NAME` (`long_common_name`),
   KEY `inx_LOINC_NUM` (`loinc_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_manufacturer`
---
+-- --
+-- -- Table structure for table `m_manufacturer`
+-- --
 
--- DROP TABLE IF EXISTS `m_manufacturer`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_manufacturer`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_manufacturer` (
   `ManufacturerID` int(11) NOT NULL AUTO_INCREMENT,
   `ManufacturerName` varchar(100) DEFAULT NULL,
@@ -5450,15 +5450,15 @@ CREATE TABLE IF NOT EXISTS `m_manufacturer` (
   CONSTRAINT `FK_Manufacturer_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Manufacturer_State` FOREIGN KEY (`StateID`) REFERENCES `m_state` (`StateID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_mapquestion`
---
+-- --
+-- -- Table structure for table `m_mapquestion`
+-- --
 
--- DROP TABLE IF EXISTS `m_mapquestion`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_mapquestion`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_mapquestion` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `parentQuestionID` int(11) DEFAULT NULL,
@@ -5477,15 +5477,15 @@ CREATE TABLE IF NOT EXISTS `m_mapquestion` (
   CONSTRAINT `FK_m_questionnairevalues_childQuestionID` FOREIGN KEY (`childQuestionID`) REFERENCES `m_questionnaire` (`QuestionID`),
   CONSTRAINT `FK_m_questionnairevalues_parentQuestionID` FOREIGN KEY (`parentQuestionID`) REFERENCES `m_questionnaire` (`QuestionID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_maritalstatus`
---
+-- --
+-- -- Table structure for table `m_maritalstatus`
+-- --
 
--- DROP TABLE IF EXISTS `m_maritalstatus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_maritalstatus`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_maritalstatus` (
   `MaritalStatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Status` varchar(15) DEFAULT NULL,
@@ -5498,15 +5498,15 @@ CREATE TABLE IF NOT EXISTS `m_maritalstatus` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`MaritalStatusID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_mctscallconfiguration`
 --
 
 -- DROP TABLE IF EXISTS `m_mctscallconfiguration`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_mctscallconfiguration` (
   `MCTSCallConfigID` int(11) NOT NULL AUTO_INCREMENT,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -5534,15 +5534,15 @@ CREATE TABLE IF NOT EXISTS `m_mctscallconfiguration` (
   KEY `FK_MCTSCallConfiguration_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_MCTSCallConfiguration_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_mctsfieldsstatewise`
 --
 
 -- DROP TABLE IF EXISTS `m_mctsfieldsstatewise`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_mctsfieldsstatewise` (
   `SlNo` int(11) NOT NULL AUTO_INCREMENT,
   `StateID` int(11) DEFAULT NULL,
@@ -5561,15 +5561,15 @@ CREATE TABLE IF NOT EXISTS `m_mctsfieldsstatewise` (
   CONSTRAINT `FK_MctsFieldsStatewise_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_MctsFieldsStatewise_State` FOREIGN KEY (`StateID`) REFERENCES `m_state` (`StateID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_mctsqamapping`
 --
 
 -- DROP TABLE IF EXISTS `m_mctsqamapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_mctsqamapping` (
   `MctsQAMapID` int(11) NOT NULL AUTO_INCREMENT,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -5593,15 +5593,15 @@ CREATE TABLE IF NOT EXISTS `m_mctsqamapping` (
   CONSTRAINT `FK_MctsQAMapping_MctsQuestioner` FOREIGN KEY (`QuestionID`) REFERENCES `m_questionnaire` (`QuestionID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_MctsQAMapping_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=222 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_menstrualcyclerange`
 --
 
 -- DROP TABLE IF EXISTS `m_menstrualcyclerange`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_menstrualcyclerange` (
   `MenstrualRangeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `RangeType` varchar(20) DEFAULT NULL,
@@ -5615,15 +5615,15 @@ CREATE TABLE IF NOT EXISTS `m_menstrualcyclerange` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`MenstrualRangeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_menstrualcyclestatus`
 --
 
 -- DROP TABLE IF EXISTS `m_menstrualcyclestatus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_menstrualcyclestatus` (
   `MenstrualCycleStatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) DEFAULT NULL,
@@ -5639,15 +5639,15 @@ CREATE TABLE IF NOT EXISTS `m_menstrualcyclestatus` (
   KEY `FK_MenstrualCycleStatus_VisitCategory_idx` (`VisitCategoryID`),
   CONSTRAINT `FK_MenstrualCycleStatus_VisitCategory` FOREIGN KEY (`VisitCategoryID`) REFERENCES `m_visitcategory` (`VisitCategoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_menstrualproblem`
 --
 
 -- DROP TABLE IF EXISTS `m_menstrualproblem`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_menstrualproblem` (
   `MenstrualProblemID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) DEFAULT NULL,
@@ -5660,15 +5660,15 @@ CREATE TABLE IF NOT EXISTS `m_menstrualproblem` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`MenstrualProblemID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_module`
 --
 
 -- DROP TABLE IF EXISTS `m_module`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_module` (
   `ModuleID` smallint(6) NOT NULL AUTO_INCREMENT,
   `ModuleName` varchar(30) DEFAULT NULL,
@@ -5682,15 +5682,15 @@ CREATE TABLE IF NOT EXISTS `m_module` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ModuleID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_motherdatastatewise`
 --
 
 -- DROP TABLE IF EXISTS `m_motherdatastatewise`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_motherdatastatewise` (
   `SlNo` int(11) NOT NULL AUTO_INCREMENT,
   `MasterFields` varchar(30) DEFAULT NULL,
@@ -5708,15 +5708,15 @@ CREATE TABLE IF NOT EXISTS `m_motherdatastatewise` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`SlNo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_motherstaging`
 --
 
 -- DROP TABLE IF EXISTS `m_motherstaging`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_motherstaging` (
   `RowID` bigint(20) NOT NULL AUTO_INCREMENT,
   `Date_of_Entry` datetime DEFAULT NULL,
@@ -5866,15 +5866,15 @@ CREATE TABLE IF NOT EXISTS `m_motherstaging` (
   KEY `FK_MotherStaging_FileManager_idx` (`FileID`),
   CONSTRAINT `FK_MotherStaging_FileManager` FOREIGN KEY (`FileID`) REFERENCES `t_filemanager` (`FileID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_mouthopening`
 --
 
 -- DROP TABLE IF EXISTS `m_mouthopening`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_mouthopening` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -5886,15 +5886,15 @@ CREATE TABLE IF NOT EXISTS `m_mouthopening` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_musculoskeletal`
 --
 
 -- DROP TABLE IF EXISTS `m_musculoskeletal`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_musculoskeletal` (
   `ID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Type` varchar(15) DEFAULT NULL,
@@ -5907,15 +5907,15 @@ CREATE TABLE IF NOT EXISTS `m_musculoskeletal` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_ncdcaretype`
 --
 
 -- DROP TABLE IF EXISTS `m_ncdcaretype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_ncdcaretype` (
   `NCDCareTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `NCDCareType` varchar(50) DEFAULT NULL,
@@ -5928,15 +5928,15 @@ CREATE TABLE IF NOT EXISTS `m_ncdcaretype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`NCDCareTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_ncdscreeningcondition`
 --
 
 -- DROP TABLE IF EXISTS `m_ncdscreeningcondition`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_ncdscreeningcondition` (
   `NCDScreeningConditionID` int(11) NOT NULL AUTO_INCREMENT,
   `NCDScreeningCondition` varchar(100) DEFAULT NULL,
@@ -5949,15 +5949,15 @@ CREATE TABLE IF NOT EXISTS `m_ncdscreeningcondition` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`NCDScreeningConditionID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_ncdscreeningreason`
 --
 
 -- DROP TABLE IF EXISTS `m_ncdscreeningreason`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_ncdscreeningreason` (
   `NCDScreeningReasonID` int(11) NOT NULL AUTO_INCREMENT,
   `NCDScreeningReason` varchar(30) DEFAULT NULL,
@@ -5973,15 +5973,15 @@ CREATE TABLE IF NOT EXISTS `m_ncdscreeningreason` (
   KEY `FK_NCDScreeningReason_NCDScreeingCondition_idx` (`NCDScreeningConditionID`),
   CONSTRAINT `FK_NCDScreeningReason_NCDScreeingCondition` FOREIGN KEY (`NCDScreeningConditionID`) REFERENCES `m_ncdscreeningcondition` (`NCDScreeningConditionID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_newbornhealthstatus`
 --
 
 -- DROP TABLE IF EXISTS `m_newbornhealthstatus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_newbornhealthstatus` (
   `NewBornHealthStatusID` int(11) NOT NULL AUTO_INCREMENT,
   `NewBornHealthStatus` varchar(30) DEFAULT NULL,
@@ -5994,15 +5994,15 @@ CREATE TABLE IF NOT EXISTS `m_newbornhealthstatus` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`NewBornHealthStatusID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_nextduevaccines`
 --
 
 -- DROP TABLE IF EXISTS `m_nextduevaccines`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_nextduevaccines` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -6014,15 +6014,15 @@ CREATE TABLE IF NOT EXISTS `m_nextduevaccines` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_nofurthercallrequired`
 --
 
 -- DROP TABLE IF EXISTS `m_nofurthercallrequired`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_nofurthercallrequired` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) DEFAULT NULL,
@@ -6034,15 +6034,15 @@ CREATE TABLE IF NOT EXISTS `m_nofurthercallrequired` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_notification`
 --
 
 -- DROP TABLE IF EXISTS `m_notification`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_notification` (
   `NotificationID` int(11) NOT NULL AUTO_INCREMENT,
   `Notification` varchar(300) DEFAULT NULL,
@@ -6083,7 +6083,7 @@ CREATE TABLE IF NOT EXISTS `m_notification` (
 
 
 
--- /*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 -- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 -- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 -- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -6127,18 +6127,18 @@ CREATE TABLE IF NOT EXISTS `m_notification` (
 
 
 
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `m_notificationtype`
 --
 
 -- DROP TABLE IF EXISTS `m_notificationtype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_notificationtype` (
   `NotificationTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `NotificationType` varchar(100) DEFAULT NULL,
@@ -6154,15 +6154,15 @@ CREATE TABLE IF NOT EXISTS `m_notificationtype` (
   KEY `FK_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_optionalvaccination`
 --
 
 -- DROP TABLE IF EXISTS `m_optionalvaccination`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_optionalvaccination` (
   `OptionalVaccinationID` smallint(6) NOT NULL AUTO_INCREMENT,
   `OptionalVaccinationTime` varchar(20) DEFAULT NULL,
@@ -6178,15 +6178,15 @@ CREATE TABLE IF NOT EXISTS `m_optionalvaccination` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`OptionalVaccinationID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_oralcavityfinding`
 --
 
 -- DROP TABLE IF EXISTS `m_oralcavityfinding`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_oralcavityfinding` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -6198,15 +6198,15 @@ CREATE TABLE IF NOT EXISTS `m_oralcavityfinding` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_oralvitaminnumberofdose`
 --
 
 -- DROP TABLE IF EXISTS `m_oralvitaminnumberofdose`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_oralvitaminnumberofdose` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
@@ -6218,15 +6218,15 @@ CREATE TABLE IF NOT EXISTS `m_oralvitaminnumberofdose` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_outreachfeature`
 --
 
 -- DROP TABLE IF EXISTS `m_outreachfeature`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_outreachfeature` (
   `OutreachFeatureID` int(11) NOT NULL AUTO_INCREMENT,
   `Type` varchar(50) DEFAULT NULL,
@@ -6247,15 +6247,15 @@ CREATE TABLE IF NOT EXISTS `m_outreachfeature` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`OutreachFeatureID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=164 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_palpationbreasts`
 --
 
 -- DROP TABLE IF EXISTS `m_palpationbreasts`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_palpationbreasts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -6267,15 +6267,15 @@ CREATE TABLE IF NOT EXISTS `m_palpationbreasts` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_palpationlymphnodes`
 --
 
 -- DROP TABLE IF EXISTS `m_palpationlymphnodes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_palpationlymphnodes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -6287,15 +6287,15 @@ CREATE TABLE IF NOT EXISTS `m_palpationlymphnodes` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_palpationoforalcavity`
 --
 
 -- DROP TABLE IF EXISTS `m_palpationoforalcavity`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_palpationoforalcavity` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -6307,15 +6307,15 @@ CREATE TABLE IF NOT EXISTS `m_palpationoforalcavity` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_parkingplace`
 --
 
 -- DROP TABLE IF EXISTS `m_parkingplace`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_parkingplace` (
   `ParkingPlaceID` int(11) NOT NULL AUTO_INCREMENT,
   `ParkingPlaceName` varchar(50) DEFAULT NULL,
@@ -6354,15 +6354,15 @@ CREATE TABLE IF NOT EXISTS `m_parkingplace` (
   CONSTRAINT `FK_ParkingPlace_Facility` FOREIGN KEY (`FacilityID`) REFERENCES `m_facility` (`FacilityID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ParkingPlace_Zone` FOREIGN KEY (`ZoneID`) REFERENCES `m_zone` (`ZoneID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_parkingplacesubdistrictmap`
 --
 
 -- DROP TABLE IF EXISTS `m_parkingplacesubdistrictmap`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_parkingplacesubdistrictmap` (
   `PPSubDistrictMapID` int(11) NOT NULL AUTO_INCREMENT,
   `ParkingPlaceID` int(11) DEFAULT NULL,
@@ -6385,15 +6385,15 @@ CREATE TABLE IF NOT EXISTS `m_parkingplacesubdistrictmap` (
   CONSTRAINT `FK_PPSubDistMap_ParkingPlace` FOREIGN KEY (`ParkingPlaceID`) REFERENCES `m_parkingplace` (`ParkingPlaceID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_PPSubDistMap_ProviderServiceMap` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=921 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_personalhabittype`
 --
 
 -- DROP TABLE IF EXISTS `m_personalhabittype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_personalhabittype` (
   `PersonalHabitTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `HabitType` varchar(50) DEFAULT NULL,
@@ -6406,15 +6406,15 @@ CREATE TABLE IF NOT EXISTS `m_personalhabittype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`PersonalHabitTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_pharmacologicalcategory`
 --
 
 -- DROP TABLE IF EXISTS `m_pharmacologicalcategory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_pharmacologicalcategory` (
   `PharmCategoryID` int(11) NOT NULL AUTO_INCREMENT,
   `PharmCategoryName` varchar(100) DEFAULT NULL,
@@ -6432,15 +6432,15 @@ CREATE TABLE IF NOT EXISTS `m_pharmacologicalcategory` (
   KEY `FK_PharmacologicalCategory_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_PharmacologicalCategory_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_phonetype`
 --
 
 -- DROP TABLE IF EXISTS `m_phonetype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_phonetype` (
   `PhoneTypeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `PhoneType` varchar(20) DEFAULT NULL,
@@ -6452,15 +6452,15 @@ CREATE TABLE IF NOT EXISTS `m_phonetype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`PhoneTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_physicalactivity`
 --
 
 -- DROP TABLE IF EXISTS `m_physicalactivity`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_physicalactivity` (
   `PAID` int(11) NOT NULL AUTO_INCREMENT,
   `ActivityType` varchar(200) DEFAULT NULL,
@@ -6476,15 +6476,15 @@ CREATE TABLE IF NOT EXISTS `m_physicalactivity` (
   KEY `FK_m_physicalactivity_ProviderServicewMapID` (`ProviderServiceMapID`),
   CONSTRAINT `FK_m_physicalactivity_ProviderServicewMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_pregduration`
 --
 
 -- DROP TABLE IF EXISTS `m_pregduration`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_pregduration` (
   `PregDurationID` smallint(6) NOT NULL AUTO_INCREMENT,
   `DurationType` varchar(20) DEFAULT NULL,
@@ -6496,15 +6496,15 @@ CREATE TABLE IF NOT EXISTS `m_pregduration` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`PregDurationID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_pregoutcome`
 --
 
 -- DROP TABLE IF EXISTS `m_pregoutcome`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_pregoutcome` (
   `PregOutcomeID` smallint(6) NOT NULL AUTO_INCREMENT,
   `PregOutcome` varchar(20) DEFAULT NULL,
@@ -6516,15 +6516,15 @@ CREATE TABLE IF NOT EXISTS `m_pregoutcome` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`PregOutcomeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_premalignantlesion`
 --
 
 -- DROP TABLE IF EXISTS `m_premalignantlesion`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_premalignantlesion` (
   `PreMalignantLesionID` int(11) NOT NULL AUTO_INCREMENT,
   `PreMalignantLesionType` varchar(50) DEFAULT NULL,
@@ -6537,15 +6537,15 @@ CREATE TABLE IF NOT EXISTS `m_premalignantlesion` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`PreMalignantLesionID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_procedure`
 --
 
 -- DROP TABLE IF EXISTS `m_procedure`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_procedure` (
   `ProcedureID` int(11) NOT NULL AUTO_INCREMENT,
   `ProcedureName` varchar(100) DEFAULT NULL,
@@ -6568,15 +6568,15 @@ CREATE TABLE IF NOT EXISTS `m_procedure` (
   CONSTRAINT `FK_Procedure_IOTProcedure` FOREIGN KEY (`IOTProcedureID`) REFERENCES `m_iotprocedure` (`IOTProcedureID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Procedure_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_procedurecomponentmap`
 --
 
 -- DROP TABLE IF EXISTS `m_procedurecomponentmap`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_procedurecomponentmap` (
   `ProcedureComponentMapID` int(11) NOT NULL AUTO_INCREMENT,
   `ProcedureID` int(11) DEFAULT NULL,
@@ -6596,15 +6596,15 @@ CREATE TABLE IF NOT EXISTS `m_procedurecomponentmap` (
   CONSTRAINT `FK_ProcedureComponentMap_Proceduer` FOREIGN KEY (`ProcedureID`) REFERENCES `m_procedure` (`ProcedureID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ProcedureCoponentMap_TestComponent` FOREIGN KEY (`TestComponentID`) REFERENCES `m_testcomponent` (`TestComponentID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_providerconfiguration`
 --
 
 -- DROP TABLE IF EXISTS `m_providerconfiguration`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_providerconfiguration` (
   `ConfigurationID` int(11) NOT NULL AUTO_INCREMENT,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -6622,15 +6622,15 @@ CREATE TABLE IF NOT EXISTS `m_providerconfiguration` (
   KEY `FK_ProviderConfiguration_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_ProviderConfiguration_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_providerserviceaddmapping`
 --
 
 -- DROP TABLE IF EXISTS `m_providerserviceaddmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_providerserviceaddmapping` (
   `PSAddMapID` int(11) NOT NULL AUTO_INCREMENT,
   `LocationName` varchar(45) DEFAULT NULL,
@@ -6649,15 +6649,15 @@ CREATE TABLE IF NOT EXISTS `m_providerserviceaddmapping` (
   CONSTRAINT `FK_PSAddMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_PSAddMapping_District` FOREIGN KEY (`DistrictID`) REFERENCES `m_district` (`DistrictID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_providerservicelangmapping`
 --
 
 -- DROP TABLE IF EXISTS `m_providerservicelangmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_providerservicelangmapping` (
   `PSLangMapID` int(11) NOT NULL AUTO_INCREMENT,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -6674,15 +6674,15 @@ CREATE TABLE IF NOT EXISTS `m_providerservicelangmapping` (
   CONSTRAINT `FK_ProviderServiceLangMapping_Language` FOREIGN KEY (`LanguageID`) REFERENCES `m_language` (`LanguageID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ProviderServiceLangMapping_PSMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_providerservicemapping`
 --
 
 -- DROP TABLE IF EXISTS `m_providerservicemapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_providerservicemapping` (
   `ProviderServiceMapID` int(11) NOT NULL AUTO_INCREMENT,
   `ServiceProviderID` smallint(6) DEFAULT NULL,
@@ -6725,7 +6725,7 @@ CREATE TABLE IF NOT EXISTS `m_providerservicemapping` (
   CONSTRAINT `FK_ProviderServiceMapping__State` FOREIGN KEY (`StateID`) REFERENCES `m_state` (`StateID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_providerservicemapping_ServiceProvider` FOREIGN KEY (`ServiceProviderID`) REFERENCES `m_serviceprovider` (`ServiceProviderID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1718 DEFAULT CHARSET=utf8;
--- /*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 -- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 -- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 -- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -6762,18 +6762,18 @@ CREATE TABLE IF NOT EXISTS `m_providerservicemapping` (
 
 -- end */;;
 -- DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
---
--- Table structure for table `m_providerservicemapping_bkp_15_03_2024`
---
+-- --
+-- -- Table structure for table `m_providerservicemapping_bkp_15_03_2024`
+-- --
 
--- DROP TABLE IF EXISTS `m_providerservicemapping_bkp_15_03_2024`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_providerservicemapping_bkp_15_03_2024`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_providerservicemapping_bkp_15_03_2024` (
   `ProviderServiceMapID` int(11) NOT NULL DEFAULT '0',
   `ServiceProviderID` smallint(6) DEFAULT NULL,
@@ -6799,15 +6799,15 @@ CREATE TABLE IF NOT EXISTS `m_providerservicemapping_bkp_15_03_2024` (
   `ModifiedBy` varchar(50) DEFAULT NULL,
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_qareporttype`
 --
 
 -- DROP TABLE IF EXISTS `m_qareporttype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_qareporttype` (
   `QAreportTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `ReportType` varchar(100) DEFAULT NULL,
@@ -6823,15 +6823,15 @@ CREATE TABLE IF NOT EXISTS `m_qareporttype` (
   KEY `FK_QAreportType_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_QAreportType_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_qualityauditgrade`
 --
 
 -- DROP TABLE IF EXISTS `m_qualityauditgrade`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_qualityauditgrade` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Gradeid` int(11) NOT NULL,
@@ -6849,15 +6849,15 @@ CREATE TABLE IF NOT EXISTS `m_qualityauditgrade` (
   KEY `FK_QAGrade_Gradeid` (`Gradeid`),
   CONSTRAINT `FK_QAGrade_Gradeid` FOREIGN KEY (`Gradeid`) REFERENCES `m_grade` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_qualityauditoragentmapping`
 --
 
 -- DROP TABLE IF EXISTS `m_qualityauditoragentmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_qualityauditoragentmapping` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Roleid` int(11) NOT NULL,
@@ -6875,15 +6875,15 @@ CREATE TABLE IF NOT EXISTS `m_qualityauditoragentmapping` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_qualityauditquestionnaire`
 --
 
 -- DROP TABLE IF EXISTS `m_qualityauditquestionnaire`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_qualityauditquestionnaire` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Question` varchar(1000) DEFAULT NULL,
@@ -6905,15 +6905,15 @@ CREATE TABLE IF NOT EXISTS `m_qualityauditquestionnaire` (
   KEY `FK_QAQuestionnaire_ProviderServicewMapID_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_QAQuestionnaire_ProviderServicewMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_qualityauditquestionnairevalues`
 --
 
 -- DROP TABLE IF EXISTS `m_qualityauditquestionnairevalues`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_qualityauditquestionnairevalues` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `QuestionValues` varchar(500) DEFAULT NULL,
@@ -6932,15 +6932,15 @@ CREATE TABLE IF NOT EXISTS `m_qualityauditquestionnairevalues` (
   CONSTRAINT `FK_m_qaquestionnaireValues_ProviderServicewMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_m_qaquestionnairevalues_QuestionID` FOREIGN KEY (`QuestionID`) REFERENCES `m_qualityauditquestionnaire` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_qualityauditsection`
 --
 
 -- DROP TABLE IF EXISTS `m_qualityauditsection`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_qualityauditsection` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(30) NOT NULL,
@@ -6955,15 +6955,15 @@ CREATE TABLE IF NOT EXISTS `m_qualityauditsection` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_questionnaire`
 --
 
 -- DROP TABLE IF EXISTS `m_questionnaire`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_questionnaire` (
   `QuestionID` int(11) NOT NULL AUTO_INCREMENT,
   `Question` varchar(1000) DEFAULT NULL,
@@ -6995,15 +6995,15 @@ CREATE TABLE IF NOT EXISTS `m_questionnaire` (
   CONSTRAINT `FK_Questionnaire_ProviderServicewMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Questionnaire_QuestionType` FOREIGN KEY (`QuestionTypeID`) REFERENCES `m_questiontype` (`QuestionTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=453 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_questionnairevalues`
 --
 
 -- DROP TABLE IF EXISTS `m_questionnairevalues`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_questionnairevalues` (
   `QuestionValuesID` int(11) NOT NULL AUTO_INCREMENT,
   `QuestionValues` varchar(500) DEFAULT NULL,
@@ -7022,15 +7022,15 @@ CREATE TABLE IF NOT EXISTS `m_questionnairevalues` (
   CONSTRAINT `FK_m_questionnaireValues_ProviderServicewMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_m_questionnairevalues_QuestionID` FOREIGN KEY (`QuestionID`) REFERENCES `m_questionnaire` (`QuestionID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=754 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_questiontype`
 --
 
 -- DROP TABLE IF EXISTS `m_questiontype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_questiontype` (
   `QuestionTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `QuestionType` varchar(30) DEFAULT NULL,
@@ -7046,15 +7046,15 @@ CREATE TABLE IF NOT EXISTS `m_questiontype` (
   KEY `FK_QuestionType_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_QuestionType_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_quickblox`
 --
 
 -- DROP TABLE IF EXISTS `m_quickblox`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_quickblox` (
   `QuickbloxID` int(11) NOT NULL AUTO_INCREMENT,
   `specialistUserID` int(11) DEFAULT NULL,
@@ -7071,15 +7071,15 @@ CREATE TABLE IF NOT EXISTS `m_quickblox` (
   `specialistQuickbloxpass` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`QuickbloxID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_referralreason`
 --
 
 -- DROP TABLE IF EXISTS `m_referralreason`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_referralreason` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
@@ -7092,15 +7092,15 @@ CREATE TABLE IF NOT EXISTS `m_referralreason` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_religion`
 --
 
 -- DROP TABLE IF EXISTS `m_religion`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_religion` (
   `ReligionID` smallint(6) NOT NULL AUTO_INCREMENT,
   `ReligionType` varchar(20) DEFAULT NULL,
@@ -7113,15 +7113,15 @@ CREATE TABLE IF NOT EXISTS `m_religion` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ReligionID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_role`
 --
 
 -- DROP TABLE IF EXISTS `m_role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_role` (
   `RoleID` int(11) NOT NULL AUTO_INCREMENT,
   `RoleName` varchar(50) NOT NULL,
@@ -7141,15 +7141,15 @@ CREATE TABLE IF NOT EXISTS `m_role` (
   KEY `FK_Role_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_Role_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_routeofadmin`
 --
 
 -- DROP TABLE IF EXISTS `m_routeofadmin`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_routeofadmin` (
   `RouteID` int(11) NOT NULL AUTO_INCREMENT,
   `RouteName` varchar(100) DEFAULT NULL,
@@ -7167,15 +7167,15 @@ CREATE TABLE IF NOT EXISTS `m_routeofadmin` (
   KEY `Fk_RouteOfAdmin_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `Fk_RouteOfAdmin_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_sadraftitemmapping`
 --
 
 -- DROP TABLE IF EXISTS `m_sadraftitemmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_sadraftitemmapping` (
   `SADraftItemMapID` int(11) NOT NULL AUTO_INCREMENT,
   `StockAdjustmentDraftID` int(11) DEFAULT NULL,
@@ -7199,15 +7199,15 @@ CREATE TABLE IF NOT EXISTS `m_sadraftitemmapping` (
   CONSTRAINT `FK_SADraftItemMap_ProviderServiceMap` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_SADraftItemMap_StockAdjDraft` FOREIGN KEY (`StockAdjustmentDraftID`) REFERENCES `m_stockadjustmentdraft` (`StockAdjustmentDraftID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_samplesize`
 --
 
 -- DROP TABLE IF EXISTS `m_samplesize`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_samplesize` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `CycleID` int(11) DEFAULT NULL,
@@ -7228,15 +7228,15 @@ CREATE TABLE IF NOT EXISTS `m_samplesize` (
   KEY `FK_samplesize_cycleid` (`CycleID`),
   CONSTRAINT `FK_samplesize_cycleid` FOREIGN KEY (`CycleID`) REFERENCES `m_cycle` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_scheme`
 --
 
 -- DROP TABLE IF EXISTS `m_scheme`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_scheme` (
   `SchemeID` int(11) NOT NULL AUTO_INCREMENT,
   `SchemeName` varchar(100) DEFAULT NULL,
@@ -7253,15 +7253,15 @@ CREATE TABLE IF NOT EXISTS `m_scheme` (
   KEY `FK_Scheme_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_Scheme_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_screen`
 --
 
 -- DROP TABLE IF EXISTS `m_screen`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_screen` (
   `ScreenID` int(11) NOT NULL AUTO_INCREMENT,
   `ScreenName` varchar(45) NOT NULL,
@@ -7280,15 +7280,15 @@ CREATE TABLE IF NOT EXISTS `m_screen` (
   KEY `FK_Screen_ServiceMaster_idx` (`ServiceID`),
   CONSTRAINT `FK_Screen_ServiceMaster` FOREIGN KEY (`ServiceID`) REFERENCES `m_servicemaster` (`ServiceID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_screen_bkp_15_03_2024`
 --
 
 -- DROP TABLE IF EXISTS `m_screen_bkp_15_03_2024`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_screen_bkp_15_03_2024` (
   `ScreenID` int(11) NOT NULL DEFAULT '0',
   `ScreenName` varchar(45) NOT NULL,
@@ -7304,15 +7304,15 @@ CREATE TABLE IF NOT EXISTS `m_screen_bkp_15_03_2024` (
   `ModifiedBy` varchar(50) DEFAULT NULL,
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_screeningcondition`
 --
 
 -- DROP TABLE IF EXISTS `m_screeningcondition`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_screeningcondition` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) DEFAULT NULL,
@@ -7324,15 +7324,15 @@ CREATE TABLE IF NOT EXISTS `m_screeningcondition` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_section`
 --
 
 -- DROP TABLE IF EXISTS `m_section`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_section` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(300) DEFAULT NULL,
@@ -7346,15 +7346,15 @@ CREATE TABLE IF NOT EXISTS `m_section` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_sectionqamapping`
 --
 
 -- DROP TABLE IF EXISTS `m_sectionqamapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_sectionqamapping` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Sectionid` int(11) DEFAULT NULL,
@@ -7371,15 +7371,15 @@ CREATE TABLE IF NOT EXISTS `m_sectionqamapping` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=257 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_servicefacility`
 --
 
 -- DROP TABLE IF EXISTS `m_servicefacility`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_servicefacility` (
   `ServiceFacilityID` int(11) NOT NULL AUTO_INCREMENT,
   `FacilityName` varchar(100) DEFAULT NULL,
@@ -7392,15 +7392,15 @@ CREATE TABLE IF NOT EXISTS `m_servicefacility` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ServiceFacilityID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_servicemaster`
 --
 
 -- DROP TABLE IF EXISTS `m_servicemaster`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_servicemaster` (
   `ServiceID` smallint(6) NOT NULL AUTO_INCREMENT,
   `ServiceName` varchar(20) DEFAULT NULL,
@@ -7417,15 +7417,15 @@ CREATE TABLE IF NOT EXISTS `m_servicemaster` (
   KEY `FK_ServiceMaster_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_ServiceMaster_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_servicemaster_bkp_15_03_2024`
 --
 
 -- DROP TABLE IF EXISTS `m_servicemaster_bkp_15_03_2024`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_servicemaster_bkp_15_03_2024` (
   `ServiceID` smallint(6) NOT NULL DEFAULT '0',
   `ServiceName` varchar(20) DEFAULT NULL,
@@ -7439,15 +7439,15 @@ CREATE TABLE IF NOT EXISTS `m_servicemaster_bkp_15_03_2024` (
   `ModifiedBy` varchar(50) DEFAULT NULL,
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_servicepoint`
 --
 
 -- DROP TABLE IF EXISTS `m_servicepoint`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_servicepoint` (
   `ServicePointID` int(11) NOT NULL AUTO_INCREMENT,
   `ServicePointName` varchar(50) DEFAULT NULL,
@@ -7482,15 +7482,15 @@ CREATE TABLE IF NOT EXISTS `m_servicepoint` (
   CONSTRAINT `FK_ServicePoint_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ServicePoint_State` FOREIGN KEY (`StateID`) REFERENCES `m_state` (`StateID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4027 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_servicepointvillagemap`
 --
 
 -- DROP TABLE IF EXISTS `m_servicepointvillagemap`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_servicepointvillagemap` (
   `ServicePointVillageMapID` int(11) NOT NULL AUTO_INCREMENT,
   `ServicePointID` int(11) DEFAULT NULL,
@@ -7510,15 +7510,15 @@ CREATE TABLE IF NOT EXISTS `m_servicepointvillagemap` (
   CONSTRAINT `FK_ServicePointVillageMap_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ServicePointVillageMap_ServicePoint` FOREIGN KEY (`ServicePointID`) REFERENCES `m_servicepoint` (`ServicePointID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=9224 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_serviceprovider`
 --
 
 -- DROP TABLE IF EXISTS `m_serviceprovider`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_serviceprovider` (
   `ServiceProviderID` smallint(6) NOT NULL AUTO_INCREMENT,
   `ServiceProviderName` varchar(50) NOT NULL,
@@ -7551,15 +7551,15 @@ CREATE TABLE IF NOT EXISTS `m_serviceprovider` (
   CONSTRAINT `FK_ServiceProvider_State` FOREIGN KEY (`StateID`) REFERENCES `m_state` (`StateID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ServiceProvider_Status` FOREIGN KEY (`StatusID`) REFERENCES `m_status` (`StatusID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_servicerolescreenmapping`
 --
 
 -- DROP TABLE IF EXISTS `m_servicerolescreenmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_servicerolescreenmapping` (
   `SRSMappingID` int(11) NOT NULL AUTO_INCREMENT,
   `ScreenID` int(11) DEFAULT NULL,
@@ -7579,15 +7579,15 @@ CREATE TABLE IF NOT EXISTS `m_servicerolescreenmapping` (
   CONSTRAINT `FK_ServiceRoleScreenMapping_Role` FOREIGN KEY (`RoleID`) REFERENCES `m_role` (`RoleID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ServiceRoleScreenMapping_Screen` FOREIGN KEY (`ScreenID`) REFERENCES `m_screen` (`ScreenID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=136 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_severity`
 --
 
 -- DROP TABLE IF EXISTS `m_severity`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_severity` (
   `SeverityID` smallint(6) NOT NULL AUTO_INCREMENT,
   `SeverityTypeName` varchar(20) DEFAULT NULL,
@@ -7603,15 +7603,15 @@ CREATE TABLE IF NOT EXISTS `m_severity` (
   KEY `FK_Severity_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_Severity_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_sexualorientation`
 --
 
 -- DROP TABLE IF EXISTS `m_sexualorientation`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_sexualorientation` (
   `SexualOrientationId` smallint(6) NOT NULL AUTO_INCREMENT,
   `SexualOrientation` varchar(20) DEFAULT NULL,
@@ -7624,15 +7624,15 @@ CREATE TABLE IF NOT EXISTS `m_sexualorientation` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`SexualOrientationId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_siteofinjection`
 --
 
 -- DROP TABLE IF EXISTS `m_siteofinjection`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_siteofinjection` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `VaccinationID` smallint(6) NOT NULL,
@@ -7650,15 +7650,15 @@ CREATE TABLE IF NOT EXISTS `m_siteofinjection` (
   KEY `FK_issi` (`VaccinationID`),
   CONSTRAINT `FK_issi` FOREIGN KEY (`VaccinationID`) REFERENCES `m_immunizationservicevaccination` (`VaccinationID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_smsparameter`
 --
 
 -- DROP TABLE IF EXISTS `m_smsparameter`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_smsparameter` (
   `SMSParameterID` int(11) NOT NULL AUTO_INCREMENT,
   `SMSParamSource` varchar(250) DEFAULT NULL,
@@ -7676,15 +7676,15 @@ CREATE TABLE IF NOT EXISTS `m_smsparameter` (
   KEY `FK_SMSParameter_ServiceMaster_idx` (`ServiceID`),
   CONSTRAINT `FK_SMSParameter_ServiceMaster` FOREIGN KEY (`ServiceID`) REFERENCES `m_servicemaster` (`ServiceID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_smsparametermapping`
 --
 
 -- DROP TABLE IF EXISTS `m_smsparametermapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_smsparametermapping` (
   `SMSParameterMapID` int(11) NOT NULL AUTO_INCREMENT,
   `SMSTemplateID` int(11) DEFAULT NULL,
@@ -7705,15 +7705,15 @@ CREATE TABLE IF NOT EXISTS `m_smsparametermapping` (
   CONSTRAINT `FK_SMSParamMap_SMSTemplate` FOREIGN KEY (`SMSTemplateID`) REFERENCES `m_smstemplate` (`SMSTemplateID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_SMSParamMap_SMSType` FOREIGN KEY (`SMSTypeID`) REFERENCES `m_smstype` (`SMSTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_smstemplate`
 --
 
 -- DROP TABLE IF EXISTS `m_smstemplate`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_smstemplate` (
   `SMSTemplateID` int(11) NOT NULL AUTO_INCREMENT,
   `SMSTemplateName` varchar(50) DEFAULT NULL,
@@ -7734,15 +7734,15 @@ CREATE TABLE IF NOT EXISTS `m_smstemplate` (
   CONSTRAINT `FK_SMSTemplate_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_SMSTemplate_SMSType` FOREIGN KEY (`SMSTypeID`) REFERENCES `m_smstype` (`SMSTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_smstype`
 --
 
 -- DROP TABLE IF EXISTS `m_smstype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_smstype` (
   `SMSTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `SMSType` varchar(50) DEFAULT NULL,
@@ -7758,15 +7758,15 @@ CREATE TABLE IF NOT EXISTS `m_smstype` (
   KEY `FK_SMSType_ServiceMaster_idx` (`ServiceID`),
   CONSTRAINT `FK_SMSType_ServiceMaster` FOREIGN KEY (`ServiceID`) REFERENCES `m_servicemaster` (`ServiceID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_specialization`
 --
 
 -- DROP TABLE IF EXISTS `m_specialization`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_specialization` (
   `SpecializationID` int(11) NOT NULL AUTO_INCREMENT,
   `Specialization` varchar(50) DEFAULT NULL,
@@ -7779,15 +7779,15 @@ CREATE TABLE IF NOT EXISTS `m_specialization` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`SpecializationID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_state`
 --
 
 -- DROP TABLE IF EXISTS `m_state`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_state` (
   `StateID` int(11) NOT NULL AUTO_INCREMENT,
   `StateName` varchar(100) NOT NULL,
@@ -7805,15 +7805,15 @@ CREATE TABLE IF NOT EXISTS `m_state` (
   KEY `FK_State_Country_idx` (`CountryID`),
   CONSTRAINT `FK_State_Country` FOREIGN KEY (`CountryID`) REFERENCES `m_country` (`CountryID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_status`
 --
 
 -- DROP TABLE IF EXISTS `m_status`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_status` (
   `StatusID` smallint(6) NOT NULL AUTO_INCREMENT,
   `Status` varchar(20) DEFAULT NULL,
@@ -7830,15 +7830,15 @@ CREATE TABLE IF NOT EXISTS `m_status` (
   KEY `FK_Status_ProviderServiceMapID_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_Status_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_stockadjustmentdraft`
 --
 
 -- DROP TABLE IF EXISTS `m_stockadjustmentdraft`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_stockadjustmentdraft` (
   `StockAdjustmentDraftID` int(11) NOT NULL AUTO_INCREMENT,
   `DraftName` varchar(30) DEFAULT NULL,
@@ -7860,15 +7860,15 @@ CREATE TABLE IF NOT EXISTS `m_stockadjustmentdraft` (
   CONSTRAINT `FK_StockAdjustmentDraft_Facility` FOREIGN KEY (`FacilityID`) REFERENCES `m_facility` (`FacilityID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_StockAdjustmentDraft_ProviderServiceMap` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_stratum`
 --
 
 -- DROP TABLE IF EXISTS `m_stratum`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_stratum` (
   `StratumID` int(11) NOT NULL AUTO_INCREMENT,
   `CategoryName` varchar(200) DEFAULT NULL,
@@ -7886,15 +7886,15 @@ CREATE TABLE IF NOT EXISTS `m_stratum` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`StratumID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_subcategory`
 --
 
 -- DROP TABLE IF EXISTS `m_subcategory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_subcategory` (
   `SubCategoryID` int(11) NOT NULL AUTO_INCREMENT,
   `CategoryID` int(11) DEFAULT NULL,
@@ -7911,15 +7911,15 @@ CREATE TABLE IF NOT EXISTS `m_subcategory` (
   KEY `FK_SubCategory_Category_idx` (`CategoryID`),
   CONSTRAINT `FK_SubCategory_Category` FOREIGN KEY (`CategoryID`) REFERENCES `m_category` (`CategoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=250 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_subcategory_before_trigger_execution`
 --
 
 -- DROP TABLE IF EXISTS `m_subcategory_before_trigger_execution`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_subcategory_before_trigger_execution` (
   `SubCategoryID` int(11) NOT NULL DEFAULT '0',
   `CategoryID` int(11) DEFAULT NULL,
@@ -7933,15 +7933,15 @@ CREATE TABLE IF NOT EXISTS `m_subcategory_before_trigger_execution` (
   `ModifiedBy` varchar(50) DEFAULT NULL,
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_subservice`
 --
 
 -- DROP TABLE IF EXISTS `m_subservice`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_subservice` (
   `SubServiceID` smallint(6) NOT NULL AUTO_INCREMENT,
   `SubServiceName` varchar(30) DEFAULT NULL,
@@ -7957,7 +7957,7 @@ CREATE TABLE IF NOT EXISTS `m_subservice` (
   KEY `FK_SubService_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_SubService_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
--- /*!40101 SET character_set_client = @saved_cs_client */;
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
 -- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 -- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 -- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -7978,18 +7978,18 @@ CREATE TABLE IF NOT EXISTS `m_subservice` (
 
 -- end */;;
 -- DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `m_subservicemaster`
 --
 
 -- DROP TABLE IF EXISTS `m_subservicemaster`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_subservicemaster` (
   `SubServiceMasterID` int(11) NOT NULL AUTO_INCREMENT,
   `SubServiceName` varchar(50) DEFAULT NULL,
@@ -8005,15 +8005,15 @@ CREATE TABLE IF NOT EXISTS `m_subservicemaster` (
   KEY `FK_SubServiceMaster_ServiceMaster_idx` (`ServiceID`),
   CONSTRAINT `FK_SubServiceMaster_ServiceMaster` FOREIGN KEY (`ServiceID`) REFERENCES `m_servicemaster` (`ServiceID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_subvisitcategory`
 --
 
 -- DROP TABLE IF EXISTS `m_subvisitcategory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_subvisitcategory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(500) DEFAULT NULL,
@@ -8025,15 +8025,15 @@ CREATE TABLE IF NOT EXISTS `m_subvisitcategory` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_supplier`
 --
 
 -- DROP TABLE IF EXISTS `m_supplier`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_supplier` (
   `SupplierID` int(11) NOT NULL AUTO_INCREMENT,
   `SupplierName` varchar(200) DEFAULT NULL,
@@ -8070,15 +8070,15 @@ CREATE TABLE IF NOT EXISTS `m_supplier` (
   CONSTRAINT `FK_Supplier_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Supplier_State` FOREIGN KEY (`StateID`) REFERENCES `m_state` (`StateID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_surgery`
 --
 
 -- DROP TABLE IF EXISTS `m_surgery`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_surgery` (
   `SurgeryID` int(11) NOT NULL AUTO_INCREMENT,
   `SurgeryType` varchar(50) DEFAULT NULL,
@@ -8095,15 +8095,15 @@ CREATE TABLE IF NOT EXISTS `m_surgery` (
   KEY `FK_Surgery_VisitCategory_idx` (`VisitCategoryID`),
   CONSTRAINT `FK_Surgery_VisitCategory` FOREIGN KEY (`VisitCategoryID`) REFERENCES `m_visitcategory` (`VisitCategoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_swymeddomain`
 --
 
 -- DROP TABLE IF EXISTS `m_swymeddomain`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_swymeddomain` (
   `SwymedDomainID` int(11) NOT NULL AUTO_INCREMENT,
   `SwymedDoamin` varchar(100) DEFAULT NULL,
@@ -8118,15 +8118,15 @@ CREATE TABLE IF NOT EXISTS `m_swymeddomain` (
   KEY `FK_SwymedDomain_ServiceProvider_idx` (`ServiceProviderID`),
   CONSTRAINT `FK_SwymedDomain_ServiceProvider` FOREIGN KEY (`ServiceProviderID`) REFERENCES `m_serviceprovider` (`ServiceProviderID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_synctabledetail`
 --
 
 -- DROP TABLE IF EXISTS `m_synctabledetail`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_synctabledetail` (
   `SyncTableDetailID` int(11) NOT NULL AUTO_INCREMENT,
   `SchemaName` varchar(45) DEFAULT NULL,
@@ -8145,15 +8145,15 @@ CREATE TABLE IF NOT EXISTS `m_synctabledetail` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`SyncTableDetailID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_synctablegroup`
 --
 
 -- DROP TABLE IF EXISTS `m_synctablegroup`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_synctablegroup` (
   `SyncTableGroupID` int(11) NOT NULL AUTO_INCREMENT,
   `SyncTableGroupName` varchar(50) DEFAULT NULL,
@@ -8166,15 +8166,15 @@ CREATE TABLE IF NOT EXISTS `m_synctablegroup` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`SyncTableGroupID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_temporomandibularjoint`
 --
 
 -- DROP TABLE IF EXISTS `m_temporomandibularjoint`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_temporomandibularjoint` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -8186,15 +8186,15 @@ CREATE TABLE IF NOT EXISTS `m_temporomandibularjoint` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_testcomponent`
 --
 
 -- DROP TABLE IF EXISTS `m_testcomponent`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_testcomponent` (
   `TestComponentID` int(11) NOT NULL AUTO_INCREMENT,
   `TestComponentName` varchar(100) DEFAULT NULL,
@@ -8222,15 +8222,15 @@ CREATE TABLE IF NOT EXISTS `m_testcomponent` (
   CONSTRAINT `FK_TestComponent_IOTComponent` FOREIGN KEY (`IOTComponentID`) REFERENCES `m_iotcomponent` (`IOTComponentId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_TestComponent_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_title`
 --
 
 -- DROP TABLE IF EXISTS `m_title`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_title` (
   `TitleID` smallint(6) NOT NULL AUTO_INCREMENT,
   `TitleName` char(10) NOT NULL,
@@ -8243,15 +8243,15 @@ CREATE TABLE IF NOT EXISTS `m_title` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`TitleID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_typeofiucdinserted`
 --
 
 -- DROP TABLE IF EXISTS `m_typeofiucdinserted`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_typeofiucdinserted` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -8263,15 +8263,15 @@ CREATE TABLE IF NOT EXISTS `m_typeofiucdinserted` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_unansweredcallreason`
 --
 
 -- DROP TABLE IF EXISTS `m_unansweredcallreason`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_unansweredcallreason` (
   `UnansweredCallReasonID` int(11) NOT NULL AUTO_INCREMENT,
   `UnansweredCallReason` varchar(50) DEFAULT NULL,
@@ -8284,15 +8284,15 @@ CREATE TABLE IF NOT EXISTS `m_unansweredcallreason` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`UnansweredCallReasonID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_uom`
 --
 
 -- DROP TABLE IF EXISTS `m_uom`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_uom` (
   `UOMID` int(11) NOT NULL AUTO_INCREMENT,
   `UOMName` varchar(100) DEFAULT NULL,
@@ -8310,15 +8310,15 @@ CREATE TABLE IF NOT EXISTS `m_uom` (
   KEY `FK_UOM_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
   CONSTRAINT `FK_UOM_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_user`
 --
 
 -- DROP TABLE IF EXISTS `m_user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_user` (
   `UserID` int(11) NOT NULL AUTO_INCREMENT,
   `TitleID` smallint(6) DEFAULT NULL,
@@ -8379,15 +8379,15 @@ CREATE TABLE IF NOT EXISTS `m_user` (
   CONSTRAINT `FK_User_Title` FOREIGN KEY (`TitleID`) REFERENCES `m_title` (`TitleID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_User_UserQualification` FOREIGN KEY (`QualificationID`) REFERENCES `m_userqualification` (`QualificationID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2024 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_user_signature`
 --
 
 -- DROP TABLE IF EXISTS `m_user_signature`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_user_signature` (
   `UserSignatureID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
@@ -8404,15 +8404,15 @@ CREATE TABLE IF NOT EXISTS `m_user_signature` (
   KEY `UserID` (`UserID`),
   CONSTRAINT `m_user_signature_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_userbankaccount`
 --
 
 -- DROP TABLE IF EXISTS `m_userbankaccount`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_userbankaccount` (
   `BankAccountID` int(11) NOT NULL AUTO_INCREMENT,
   `BankAccountType` varchar(10) DEFAULT NULL,
@@ -8428,15 +8428,15 @@ CREATE TABLE IF NOT EXISTS `m_userbankaccount` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`BankAccountID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_userbiometricmapping`
 --
 
 -- DROP TABLE IF EXISTS `m_userbiometricmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_userbiometricmapping` (
   `UserBiometricMapID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
@@ -8456,15 +8456,15 @@ CREATE TABLE IF NOT EXISTS `m_userbiometricmapping` (
   UNIQUE KEY `FK_UserBiometricMapping_User_idx` (`UserID`),
   CONSTRAINT `FK_UserBiometricMapping_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_userdemographics`
 --
 
 -- DROP TABLE IF EXISTS `m_userdemographics`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_userdemographics` (
   `DemographicID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) NOT NULL,
@@ -8513,15 +8513,15 @@ CREATE TABLE IF NOT EXISTS `m_userdemographics` (
   CONSTRAINT `FK_UserDemographics_State1` FOREIGN KEY (`PermStateID`) REFERENCES `m_state` (`StateID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_UserDemographics_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1926 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_userlangmapping`
 --
 
 -- DROP TABLE IF EXISTS `m_userlangmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_userlangmapping` (
   `UserLangID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
@@ -8548,15 +8548,15 @@ CREATE TABLE IF NOT EXISTS `m_userlangmapping` (
   CONSTRAINT `FK_UserLangMapping_Language` FOREIGN KEY (`LanguageID`) REFERENCES `m_language` (`LanguageID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_UserLangMapping_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=302 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_userloginmodulemapping`
 --
 
 -- DROP TABLE IF EXISTS `m_userloginmodulemapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_userloginmodulemapping` (
   `UserLoginModuleID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
@@ -8573,15 +8573,15 @@ CREATE TABLE IF NOT EXISTS `m_userloginmodulemapping` (
   CONSTRAINT `FK_UserLoginModuleMapping_Module` FOREIGN KEY (`ModuleID`) REFERENCES `m_module` (`ModuleID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_UserLoginModuleMapping_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_usernotificationmap`
 --
 
 -- DROP TABLE IF EXISTS `m_usernotificationmap`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_usernotificationmap` (
   `UserNotificationMapID` int(11) NOT NULL AUTO_INCREMENT,
   `NotificationID` int(11) DEFAULT NULL,
@@ -8610,15 +8610,15 @@ CREATE TABLE IF NOT EXISTS `m_usernotificationmap` (
   CONSTRAINT `FK_UserNotificationMap_Role` FOREIGN KEY (`RoleID`) REFERENCES `m_role` (`RoleID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_UserNotificationMap_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_userparkingplacemap`
 --
 
 -- DROP TABLE IF EXISTS `m_userparkingplacemap`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_userparkingplacemap` (
   `UserParkingPlaceMapID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
@@ -8644,15 +8644,15 @@ CREATE TABLE IF NOT EXISTS `m_userparkingplacemap` (
   CONSTRAINT `FK_UserParkingPlaceMap_StateID` FOREIGN KEY (`StateID`) REFERENCES `m_state` (`StateID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_UserParkingPlaceMap_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=638 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_userqualification`
 --
 
 -- DROP TABLE IF EXISTS `m_userqualification`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_userqualification` (
   `QualificationID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) NOT NULL,
@@ -8665,15 +8665,15 @@ CREATE TABLE IF NOT EXISTS `m_userqualification` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`QualificationID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_usersecurityqamapping`
 --
 
 -- DROP TABLE IF EXISTS `m_usersecurityqamapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_usersecurityqamapping` (
   `UserSecurityQAID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) NOT NULL,
@@ -8690,15 +8690,15 @@ CREATE TABLE IF NOT EXISTS `m_usersecurityqamapping` (
   KEY `FK_QuestionId_usersecurityqamapping_loginsecurityquestions_idx` (`QuestionID`),
   CONSTRAINT `FK_QuestionId_usersecurityqamapping_loginsecurityquestions` FOREIGN KEY (`QuestionID`) REFERENCES `m_loginsecurityquestions` (`QuestionID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3001 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_userservicerolemapping`
 --
 
 -- DROP TABLE IF EXISTS `m_userservicerolemapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_userservicerolemapping` (
   `USRMappingID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
@@ -8736,15 +8736,15 @@ CREATE TABLE IF NOT EXISTS `m_userservicerolemapping` (
   CONSTRAINT `FK_UserServiceRoleMapping_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_UserServiceRoleMapping__Role` FOREIGN KEY (`RoleID`) REFERENCES `m_role` (`RoleID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3349 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_userspecializationmapping`
 --
 
 -- DROP TABLE IF EXISTS `m_userspecializationmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_userspecializationmapping` (
   `UserSpecializationMapID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
@@ -8762,15 +8762,15 @@ CREATE TABLE IF NOT EXISTS `m_userspecializationmapping` (
   CONSTRAINT `FK_UserSpecializationMap_Specialization` FOREIGN KEY (`SpecializationID`) REFERENCES `m_specialization` (`SpecializationID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_UserSpecializationMap_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_userstatelanguagemapping`
 --
 
 -- DROP TABLE IF EXISTS `m_userstatelanguagemapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_userstatelanguagemapping` (
   `USLMappingID` int(11) NOT NULL AUTO_INCREMENT,
   `USRMappingID` int(11) DEFAULT NULL,
@@ -8787,15 +8787,15 @@ CREATE TABLE IF NOT EXISTS `m_userstatelanguagemapping` (
   CONSTRAINT `FK_UserStateLanguageMapping_Language` FOREIGN KEY (`LanguageID`) REFERENCES `m_language` (`LanguageID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_UserStateLanguageMapping_USR` FOREIGN KEY (`USRMappingID`) REFERENCES `m_userservicerolemapping` (`USRMappingID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_userswymedmapping`
 --
 
 -- DROP TABLE IF EXISTS `m_userswymedmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_userswymedmapping` (
   `UserSwymedMapID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
@@ -8813,15 +8813,15 @@ CREATE TABLE IF NOT EXISTS `m_userswymedmapping` (
   UNIQUE KEY `UserID_UNIQUE` (`UserID`),
   CONSTRAINT `FK_USRSwymedMap_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=324 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_uservanmapping`
 --
 
 -- DROP TABLE IF EXISTS `m_uservanmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_uservanmapping` (
   `UserVanMapID` int(11) NOT NULL AUTO_INCREMENT,
   `UserParkingPlaceMapID` int(11) DEFAULT NULL,
@@ -8841,15 +8841,15 @@ CREATE TABLE IF NOT EXISTS `m_uservanmapping` (
   CONSTRAINT `FK_UserVanMap_UserParkMap` FOREIGN KEY (`UserParkingPlaceMapID`) REFERENCES `m_userparkingplacemap` (`UserParkingPlaceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_UserVanMap_Van` FOREIGN KEY (`VanID`) REFERENCES `m_van` (`VanID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=689 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_usragentmapping`
 --
 
 -- DROP TABLE IF EXISTS `m_usragentmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_usragentmapping` (
   `USRAgentMappingID` int(11) NOT NULL AUTO_INCREMENT,
   `USRMappingID` int(11) DEFAULT NULL,
@@ -8870,15 +8870,15 @@ CREATE TABLE IF NOT EXISTS `m_usragentmapping` (
   CONSTRAINT `FK_USRAgentMapping_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_USRAgentMapping_UserServiceRoleMapping` FOREIGN KEY (`USRMappingID`) REFERENCES `m_userservicerolemapping` (`USRMappingID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=647 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_van`
 --
 
 -- DROP TABLE IF EXISTS `m_van`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_van` (
   `VanID` int(11) NOT NULL AUTO_INCREMENT,
   `VanName` varchar(30) DEFAULT NULL,
@@ -8918,15 +8918,15 @@ CREATE TABLE IF NOT EXISTS `m_van` (
   CONSTRAINT `FK_Van_State` FOREIGN KEY (`StateID`) REFERENCES `m_state` (`StateID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Van_VanType` FOREIGN KEY (`VanTypeID`) REFERENCES `m_vantype` (`VanTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=297 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_vanfetosensedeviceidmapping`
 --
 
 -- DROP TABLE IF EXISTS `m_vanfetosensedeviceidmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_vanfetosensedeviceidmapping` (
   `VfdID` bigint(20) NOT NULL AUTO_INCREMENT,
   `deviceId` varchar(100) NOT NULL,
@@ -8948,15 +8948,15 @@ CREATE TABLE IF NOT EXISTS `m_vanfetosensedeviceidmapping` (
   KEY `inx_providerservicemapid` (`ProviderServiceMapID`),
   CONSTRAINT `FK_Vfdidmapping_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_vanservicepointmap`
 --
 
 -- DROP TABLE IF EXISTS `m_vanservicepointmap`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_vanservicepointmap` (
   `VanServicePointMapID` int(11) NOT NULL AUTO_INCREMENT,
   `VanID` int(11) DEFAULT NULL,
@@ -8977,15 +8977,15 @@ CREATE TABLE IF NOT EXISTS `m_vanservicepointmap` (
   CONSTRAINT `FK_VanServicePointMap_ServicePoint` FOREIGN KEY (`ServicePointID`) REFERENCES `m_servicepoint` (`ServicePointID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_VanServicePointMap_Van` FOREIGN KEY (`VanID`) REFERENCES `m_van` (`VanID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=311549 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_vanspokemapping`
 --
 
 -- DROP TABLE IF EXISTS `m_vanspokemapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_vanspokemapping` (
   `VanspokeID` int(11) NOT NULL AUTO_INCREMENT,
   `tm_StateID` int(11) DEFAULT NULL,
@@ -9026,15 +9026,15 @@ CREATE TABLE IF NOT EXISTS `m_vanspokemapping` (
   CONSTRAINT `fk_mmu_providerservicemapid` FOREIGN KEY (`mmu_ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`),
   CONSTRAINT `fk_tm_providerservicemapid` FOREIGN KEY (`tm_ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_vanspokemapping_bkp_04052022`
 --
 
 -- DROP TABLE IF EXISTS `m_vanspokemapping_bkp_04052022`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_vanspokemapping_bkp_04052022` (
   `VanspokeID` int(11) NOT NULL DEFAULT '0',
   `tm_StateID` int(11) DEFAULT NULL,
@@ -9068,15 +9068,15 @@ CREATE TABLE IF NOT EXISTS `m_vanspokemapping_bkp_04052022` (
   `ModifiedBy` varchar(50) DEFAULT NULL,
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_vantype`
 --
 
 -- DROP TABLE IF EXISTS `m_vantype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_vantype` (
   `VanTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `VanType` varchar(20) DEFAULT NULL,
@@ -9089,15 +9089,15 @@ CREATE TABLE IF NOT EXISTS `m_vantype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`VanTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_visitcategory`
 --
 
 -- DROP TABLE IF EXISTS `m_visitcategory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_visitcategory` (
   `VisitCategoryID` int(11) NOT NULL AUTO_INCREMENT,
   `visitcategory` varchar(100) DEFAULT NULL,
@@ -9110,15 +9110,15 @@ CREATE TABLE IF NOT EXISTS `m_visitcategory` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`VisitCategoryID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_visitreason`
 --
 
 -- DROP TABLE IF EXISTS `m_visitreason`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_visitreason` (
   `VisitReasonID` smallint(6) NOT NULL AUTO_INCREMENT,
   `VisitReason` varchar(20) DEFAULT NULL,
@@ -9131,15 +9131,15 @@ CREATE TABLE IF NOT EXISTS `m_visitreason` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`VisitReasonID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_visualexaminationvia`
 --
 
 -- DROP TABLE IF EXISTS `m_visualexaminationvia`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_visualexaminationvia` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
@@ -9151,15 +9151,15 @@ CREATE TABLE IF NOT EXISTS `m_visualexaminationvia` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_zone`
 --
 
 -- DROP TABLE IF EXISTS `m_zone`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_zone` (
   `ZoneID` int(11) NOT NULL AUTO_INCREMENT,
   `ZoneName` varchar(50) DEFAULT NULL,
@@ -9191,15 +9191,15 @@ CREATE TABLE IF NOT EXISTS `m_zone` (
   CONSTRAINT `FK_Zone_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Zone_State` FOREIGN KEY (`StateID`) REFERENCES `m_state` (`StateID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_zonedistrictmap`
 --
 
 -- DROP TABLE IF EXISTS `m_zonedistrictmap`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_zonedistrictmap` (
   `ZoneDistrictMapID` int(11) NOT NULL AUTO_INCREMENT,
   `ZoneID` int(11) DEFAULT NULL,
@@ -9219,15 +9219,15 @@ CREATE TABLE IF NOT EXISTS `m_zonedistrictmap` (
   CONSTRAINT `FK_ZoneDistrictMap_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ZoneDistrictMap_ZoneMaster` FOREIGN KEY (`ZoneID`) REFERENCES `m_zone` (`ZoneID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `ndhm_trg_visitdata`
 --
 
 -- DROP TABLE IF EXISTS `ndhm_trg_visitdata`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `ndhm_trg_visitdata` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `benflowid` bigint(20) DEFAULT NULL,
@@ -9242,15 +9242,15 @@ CREATE TABLE IF NOT EXISTS `ndhm_trg_visitdata` (
   `Processed_Flag` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=61324 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `non_pregnant_high_risk_assess`
 --
 
 -- DROP TABLE IF EXISTS `non_pregnant_high_risk_assess`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `non_pregnant_high_risk_assess` (
   `id` bigint(20) NOT NULL,
   `age_check` varchar(255) DEFAULT NULL,
@@ -9267,15 +9267,15 @@ CREATE TABLE IF NOT EXISTS `non_pregnant_high_risk_assess` (
   `visit_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `non_pregnant_high_risk_track`
 --
 
 -- DROP TABLE IF EXISTS `non_pregnant_high_risk_track`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `non_pregnant_high_risk_track` (
   `id` bigint(20) NOT NULL,
   `anemia_check` varchar(255) DEFAULT NULL,
@@ -9302,15 +9302,15 @@ CREATE TABLE IF NOT EXISTS `non_pregnant_high_risk_track` (
   `ifa_quantity` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `pregnant_high_risk_assess`
 --
 
 -- DROP TABLE IF EXISTS `pregnant_high_risk_assess`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `pregnant_high_risk_assess` (
   `id` bigint(20) NOT NULL,
   `age_check` varchar(255) DEFAULT NULL,
@@ -9329,15 +9329,15 @@ CREATE TABLE IF NOT EXISTS `pregnant_high_risk_assess` (
   `visit_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `pregnant_high_risk_track`
 --
 
 -- DROP TABLE IF EXISTS `pregnant_high_risk_track`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `pregnant_high_risk_track` (
   `id` bigint(20) NOT NULL,
   `antepartum_hem` varchar(255) DEFAULT NULL,
@@ -9371,7 +9371,7 @@ CREATE TABLE IF NOT EXISTS `pregnant_high_risk_track` (
   `ifa_quantity` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Temporary view structure for view `question_report`
@@ -9380,7 +9380,7 @@ CREATE TABLE IF NOT EXISTS `pregnant_high_risk_track` (
 -- DROP TABLE IF EXISTS `question_report`;
 /*!50001 DROP VIEW IF EXISTS `question_report`*/;
 SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `question_report` AS SELECT 
  1 AS `MotherID`,
  1 AS `CreatedDate`,
@@ -9409,7 +9409,7 @@ SET character_set_client = @saved_cs_client;
 -- DROP TABLE IF EXISTS `question_report1`;
 /*!50001 DROP VIEW IF EXISTS `question_report1`*/;
 SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `question_report1` AS SELECT 
  1 AS `ChildID`,
  1 AS `CreatedDate`,
@@ -9430,20 +9430,20 @@ SET character_set_client = @saved_cs_client;
 --
 
 -- DROP TABLE IF EXISTS `replicationtest`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `replicationtest` (
   `id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `sct_description`
 --
 
 -- DROP TABLE IF EXISTS `sct_description`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `sct_description` (
   `sctDesID` int(11) NOT NULL AUTO_INCREMENT,
   `sctCode` varchar(30) DEFAULT NULL,
@@ -9464,15 +9464,15 @@ CREATE TABLE IF NOT EXISTS `sct_description` (
   PRIMARY KEY (`sctDesID`),
   KEY `IX_Term_Search` (`Term`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2414579 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `sct_description_bkp_31032020`
 --
 
 -- DROP TABLE IF EXISTS `sct_description_bkp_31032020`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `sct_description_bkp_31032020` (
   `sctDesID` int(11) NOT NULL DEFAULT '0',
   `sctCode` varchar(30) DEFAULT NULL,
@@ -9491,7 +9491,7 @@ CREATE TABLE IF NOT EXISTS `sct_description_bkp_31032020` (
   `ModifiedBy` varchar(45) DEFAULT NULL,
   `LastModDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Temporary view structure for view `showofficedetails`
@@ -9500,7 +9500,7 @@ CREATE TABLE IF NOT EXISTS `sct_description_bkp_31032020` (
 -- DROP TABLE IF EXISTS `showofficedetails`;
 /*!50001 DROP VIEW IF EXISTS `showofficedetails`*/;
 SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `showofficedetails` AS SELECT 
  1 AS `PSAddMapID`,
  1 AS `ProviderServiceMapID`,
@@ -9529,7 +9529,7 @@ SET character_set_client = @saved_cs_client;
 -- DROP TABLE IF EXISTS `showuserdetailsfromuserservicerolemapping`;
 /*!50001 DROP VIEW IF EXISTS `showuserdetailsfromuserservicerolemapping`*/;
 SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `showuserdetailsfromuserservicerolemapping` AS SELECT 
  1 AS `USRMappingID`,
  1 AS `ProviderServiceMapID`,
@@ -9608,8 +9608,8 @@ SET character_set_client = @saved_cs_client;
 --
 
 -- DROP TABLE IF EXISTS `t_104appointmentdetails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_104appointmentdetails` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `BlockName` varchar(100) DEFAULT NULL,
@@ -9635,15 +9635,15 @@ CREATE TABLE IF NOT EXISTS `t_104appointmentdetails` (
   KEY `FK_104appointmentdetails_BenCall` (`BenCallID`),
   CONSTRAINT `FK_104appointmentdetails_BenCall` FOREIGN KEY (`BenCallID`) REFERENCES `t_bencall` (`BenCallID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_104bencdiresponse`
 --
 
 -- DROP TABLE IF EXISTS `t_104bencdiresponse`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_104bencdiresponse` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -9672,15 +9672,15 @@ CREATE TABLE IF NOT EXISTS `t_104bencdiresponse` (
   CONSTRAINT `FK_104bencdiresponse_BenCall` FOREIGN KEY (`BenCallID`) REFERENCES `t_bencall` (`BenCallID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_104bencdiresponse_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=14929 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_104benimrmmr`
 --
 
 -- DROP TABLE IF EXISTS `t_104benimrmmr`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_104benimrmmr` (
   `Benimrmmrid` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -9744,15 +9744,15 @@ CREATE TABLE IF NOT EXISTS `t_104benimrmmr` (
   CONSTRAINT `t_104benimrmmr_ibfk_2` FOREIGN KEY (`victimTalukid`) REFERENCES `m_districtblock` (`BlockID`),
   CONSTRAINT `t_104benimrmmr_ibfk_3` FOREIGN KEY (`victimVillageid`) REFERENCES `m_districtbranchmapping` (`DistrictBranchID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_104benmedhistory`
 --
 
 -- DROP TABLE IF EXISTS `t_104benmedhistory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_104benmedhistory` (
   `BenHistoryID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RequestID` varchar(30) DEFAULT NULL,
@@ -9806,15 +9806,15 @@ CREATE TABLE IF NOT EXISTS `t_104benmedhistory` (
   CONSTRAINT `FK_SampleBenHistory_104Prescription` FOREIGN KEY (`PrescriptionID`) REFERENCES `t_104prescription` (`PrescriptionID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_SampleBenHistory_Gender` FOREIGN KEY (`PatientGenderID`) REFERENCES `m_gender` (`GenderID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1036402 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_104benmedqaresponse`
 --
 
 -- DROP TABLE IF EXISTS `t_104benmedqaresponse`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_104benmedqaresponse` (
   `BenMedQAResponseID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -9844,15 +9844,15 @@ CREATE TABLE IF NOT EXISTS `t_104benmedqaresponse` (
   CONSTRAINT `FK_104BMQAMap_QuestionType` FOREIGN KEY (`QuestionTypeID`) REFERENCES `m_questiontype` (`QuestionTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_104BMQAMap_Questionnaire` FOREIGN KEY (`QuestionID`) REFERENCES `m_questionnaire` (`QuestionID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_104comooutboundcalldetails`
 --
 
 -- DROP TABLE IF EXISTS `t_104comooutboundcalldetails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_104comooutboundcalldetails` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `USRMappingID` int(11) DEFAULT NULL,
@@ -9870,15 +9870,15 @@ CREATE TABLE IF NOT EXISTS `t_104comooutboundcalldetails` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_104covid19`
 --
 
 -- DROP TABLE IF EXISTS `t_104covid19`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_104covid19` (
   `COVID19_104ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenCallID` bigint(20) NOT NULL,
@@ -9938,15 +9938,15 @@ CREATE TABLE IF NOT EXISTS `t_104covid19` (
   CONSTRAINT `FK_104covid19_CallType` FOREIGN KEY (`callTypeID`) REFERENCES `m_calltype` (`CallTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_104covid19_ProviderServicewMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_104prescribeddrug`
 --
 
 -- DROP TABLE IF EXISTS `t_104prescribeddrug`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_104prescribeddrug` (
   `PrescribedDrugID` bigint(20) NOT NULL AUTO_INCREMENT,
   `PrescriptionID` bigint(20) DEFAULT NULL,
@@ -9971,15 +9971,15 @@ CREATE TABLE IF NOT EXISTS `t_104prescribeddrug` (
   CONSTRAINT `FK_104PrescribedDrug_104DrugMapping` FOREIGN KEY (`DrugMapID`) REFERENCES `m_104drugmapping` (`DrugMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_104PrescribedDrug_104Prescription` FOREIGN KEY (`PrescriptionID`) REFERENCES `t_104prescription` (`PrescriptionID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=125513 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_104prescription`
 --
 
 -- DROP TABLE IF EXISTS `t_104prescription`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_104prescription` (
   `PrescriptionID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -10000,15 +10000,15 @@ CREATE TABLE IF NOT EXISTS `t_104prescription` (
   CONSTRAINT `FK_104prescription_BenCall` FOREIGN KEY (`BenCallID`) REFERENCES `t_bencall` (`BenCallID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_104prescription_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=105205 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_104referredcdssdetails`
 --
 
 -- DROP TABLE IF EXISTS `t_104referredcdssdetails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_104referredcdssdetails` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `beneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -10036,15 +10036,15 @@ CREATE TABLE IF NOT EXISTS `t_104referredcdssdetails` (
   KEY `FK_104referredcdssdetails_BenCall` (`BenCallID`),
   CONSTRAINT `FK_104referredcdssdetails_BenCall` FOREIGN KEY (`BenCallID`) REFERENCES `t_bencall` (`BenCallID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_abandonsummary`
 --
 
 -- DROP TABLE IF EXISTS `t_abandonsummary`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_abandonsummary` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `CustomerPhoneNumber` bigint(20) DEFAULT NULL,
@@ -10064,15 +10064,15 @@ CREATE TABLE IF NOT EXISTS `t_abandonsummary` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7409790 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_agentsummaryreport`
 --
 
 -- DROP TABLE IF EXISTS `t_agentsummaryreport`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_agentsummaryreport` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `AgentName` varchar(100) DEFAULT NULL,
@@ -10118,15 +10118,15 @@ CREATE TABLE IF NOT EXISTS `t_agentsummaryreport` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7397971 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_anc_visit`
 --
 
 -- DROP TABLE IF EXISTS `t_anc_visit`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_anc_visit` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `abortion_date` datetime DEFAULT NULL,
@@ -10167,15 +10167,15 @@ CREATE TABLE IF NOT EXISTS `t_anc_visit` (
   `is_active` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4334 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_anccare`
 --
 
 -- DROP TABLE IF EXISTS `t_anccare`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_anccare` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -10222,15 +10222,15 @@ CREATE TABLE IF NOT EXISTS `t_anccare` (
   CONSTRAINT `FK_ANCCare_BenvisitDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ANCCare_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=137527 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_ancdiagnosis`
 --
 
 -- DROP TABLE IF EXISTS `t_ancdiagnosis`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_ancdiagnosis` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -10271,15 +10271,15 @@ CREATE TABLE IF NOT EXISTS `t_ancdiagnosis` (
   CONSTRAINT `FK_ANCDiagnosis_Prescription` FOREIGN KEY (`PrescriptionID`) REFERENCES `t_prescription` (`PrescriptionID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ANCDiagnosis_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=129979 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_ancwomenvaccinedetail`
 --
 
 -- DROP TABLE IF EXISTS `t_ancwomenvaccinedetail`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_ancwomenvaccinedetail` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -10313,15 +10313,15 @@ CREATE TABLE IF NOT EXISTS `t_ancwomenvaccinedetail` (
   CONSTRAINT `FK_ANCWomenVacDetail_BenVisitDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ANCWomenVacDetail_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=398759 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_balvivahcomplaints`
 --
 
 -- DROP TABLE IF EXISTS `t_balvivahcomplaints`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_balvivahcomplaints` (
   `balVivahComplaintID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -10353,15 +10353,15 @@ CREATE TABLE IF NOT EXISTS `t_balvivahcomplaints` (
   KEY `FK_balVivahComplaints_BenCall` (`BenCallID`),
   CONSTRAINT `FK_balVivahComplaints_BenCall` FOREIGN KEY (`BenCallID`) REFERENCES `t_bencall` (`BenCallID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_benadherence`
 --
 
 -- DROP TABLE IF EXISTS `t_benadherence`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_benadherence` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -10396,15 +10396,15 @@ CREATE TABLE IF NOT EXISTS `t_benadherence` (
   CONSTRAINT `FK_BenAdherence_BenvisitDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_BenAdherence_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=355263 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_benallergyhistory`
 --
 
 -- DROP TABLE IF EXISTS `t_benallergyhistory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_benallergyhistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -10443,15 +10443,15 @@ CREATE TABLE IF NOT EXISTS `t_benallergyhistory` (
   CONSTRAINT `FK_BenAllergyHistory_BenvisitDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_BenAllergyHistory_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2011215 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_bencall`
 --
 
 -- DROP TABLE IF EXISTS `t_bencall`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_bencall` (
   `BenCallID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -10523,15 +10523,15 @@ CREATE TABLE IF NOT EXISTS `t_bencall` (
   CONSTRAINT `FK_BenCall_MCTSOutboundCalls` FOREIGN KEY (`OBCallID`) REFERENCES `t_mctsoutboundcalls` (`OBCallID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_BenCall_ServiceMaster` FOREIGN KEY (`CalledServiceID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=12488116 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_bencall_2023_12_01`
 --
 
 -- DROP TABLE IF EXISTS `t_bencall_2023_12_01`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_bencall_2023_12_01` (
   `BenCallID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -10589,15 +10589,15 @@ CREATE TABLE IF NOT EXISTS `t_bencall_2023_12_01` (
   `isWrongNumber` bit(1) DEFAULT NULL,
   `isZeroCall` bit(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_bencall_bkp_05_04_2024`
 --
 
 -- DROP TABLE IF EXISTS `t_bencall_bkp_05_04_2024`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_bencall_bkp_05_04_2024` (
   `BenCallID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -10655,15 +10655,15 @@ CREATE TABLE IF NOT EXISTS `t_bencall_bkp_05_04_2024` (
   `isWrongNumber` bit(1) DEFAULT NULL,
   `isZeroCall` bit(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_bencall_bkp_06122023`
 --
 
 -- DROP TABLE IF EXISTS `t_bencall_bkp_06122023`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_bencall_bkp_06122023` (
   `bencallid` bigint(20) NOT NULL DEFAULT '0',
   `CZcallStartTime` datetime DEFAULT NULL,
@@ -10671,15 +10671,15 @@ CREATE TABLE IF NOT EXISTS `t_bencall_bkp_06122023` (
   `CZcallDuration` int(11) DEFAULT NULL,
   `recordingfilepath` varchar(300) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_bencall_bkp_21032024`
 --
 
 -- DROP TABLE IF EXISTS `t_bencall_bkp_21032024`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_bencall_bkp_21032024` (
   `BenCallID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -10737,15 +10737,15 @@ CREATE TABLE IF NOT EXISTS `t_bencall_bkp_21032024` (
   `isWrongNumber` bit(1) DEFAULT NULL,
   `isZeroCall` bit(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_bencall_bkp_24092018`
 --
 
 -- DROP TABLE IF EXISTS `t_bencall_bkp_24092018`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_bencall_bkp_24092018` (
   `BenCallID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -10787,15 +10787,15 @@ CREATE TABLE IF NOT EXISTS `t_bencall_bkp_24092018` (
   `ModifiedBy` varchar(50) DEFAULT NULL,
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_bencall_bkp_before_benregidnullcaseupdation`
 --
 
 -- DROP TABLE IF EXISTS `t_bencall_bkp_before_benregidnullcaseupdation`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_bencall_bkp_before_benregidnullcaseupdation` (
   `BenCallID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -10840,15 +10840,15 @@ CREATE TABLE IF NOT EXISTS `t_bencall_bkp_before_benregidnullcaseupdation` (
   `CZcallEndTime` datetime DEFAULT NULL,
   `CZcallDuration` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_bencall_callid_1709277526`
 --
 
 -- DROP TABLE IF EXISTS `t_bencall_callid_1709277526`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_bencall_callid_1709277526` (
   `BenCallID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -10906,15 +10906,15 @@ CREATE TABLE IF NOT EXISTS `t_bencall_callid_1709277526` (
   `isWrongNumber` bit(1) DEFAULT NULL,
   `isZeroCall` bit(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_bencall_callid_1709983488`
 --
 
 -- DROP TABLE IF EXISTS `t_bencall_callid_1709983488`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_bencall_callid_1709983488` (
   `BenCallID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -10972,15 +10972,15 @@ CREATE TABLE IF NOT EXISTS `t_bencall_callid_1709983488` (
   `isWrongNumber` bit(1) DEFAULT NULL,
   `isZeroCall` bit(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_bencall_cz_comparision`
 --
 
 -- DROP TABLE IF EXISTS `t_bencall_cz_comparision`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_bencall_cz_comparision` (
   `CallID` varchar(30) DEFAULT NULL,
   `CallEndTime` datetime DEFAULT NULL,
@@ -10991,15 +10991,15 @@ CREATE TABLE IF NOT EXISTS `t_bencall_cz_comparision` (
   KEY `call_id_index` (`CallID`),
   KEY `session_id_index` (`SessionID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_bencall_cz_comparision1`
 --
 
 -- DROP TABLE IF EXISTS `t_bencall_cz_comparision1`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_bencall_cz_comparision1` (
   `SessionID` varchar(30) DEFAULT NULL,
   `CustDisposition` varchar(100) DEFAULT NULL,
@@ -11009,15 +11009,15 @@ CREATE TABLE IF NOT EXISTS `t_bencall_cz_comparision1` (
   `updatestatus2` int(11) DEFAULT '0',
   KEY `session_id_index` (`SessionID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_benchiefcomplaint`
 --
 
 -- DROP TABLE IF EXISTS `t_benchiefcomplaint`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_benchiefcomplaint` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -11059,15 +11059,15 @@ CREATE TABLE IF NOT EXISTS `t_benchiefcomplaint` (
   CONSTRAINT `FK_BenChiefComplaint_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_BenChiefComplaint_SctDescription` FOREIGN KEY (`SCTDesID`) REFERENCES `sct_description` (`sctDesID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=960188 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_benclinicalobservation`
 --
 
 -- DROP TABLE IF EXISTS `t_benclinicalobservation`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_benclinicalobservation` (
   `ClinicalObservationID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -11105,15 +11105,15 @@ CREATE TABLE IF NOT EXISTS `t_benclinicalobservation` (
   CONSTRAINT `FK_BenClinicalObservation_BenvisitDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_BenClinicalObservation_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2510988 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_bencomorbiditycondition`
 --
 
 -- DROP TABLE IF EXISTS `t_bencomorbiditycondition`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_bencomorbiditycondition` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -11150,15 +11150,15 @@ CREATE TABLE IF NOT EXISTS `t_bencomorbiditycondition` (
   CONSTRAINT `FK_BenComorCond_ComorCond` FOREIGN KEY (`ComorbidConditionID`) REFERENCES `m_comorbidcondition` (`ComorbidConditionID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_BenComorCond_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3580 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_benfamilyhistory`
 --
 
 -- DROP TABLE IF EXISTS `t_benfamilyhistory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_benfamilyhistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -11199,15 +11199,15 @@ CREATE TABLE IF NOT EXISTS `t_benfamilyhistory` (
   CONSTRAINT `FK_BenFamilyHistory_DiseaseType` FOREIGN KEY (`DiseaseTypeID`) REFERENCES `m_diseasetype` (`DiseaseTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_BenFamilyHistory_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2674341 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_benmedhistory`
 --
 
 -- DROP TABLE IF EXISTS `t_benmedhistory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_benmedhistory` (
   `BenMedHistoryID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -11252,15 +11252,15 @@ CREATE TABLE IF NOT EXISTS `t_benmedhistory` (
   CONSTRAINT `FK_BenMedRecord_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_BenMedRecord_Surgary` FOREIGN KEY (`SurgeryID`) REFERENCES `m_surgery` (`SurgeryID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3931 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_benmedicationhistory`
 --
 
 -- DROP TABLE IF EXISTS `t_benmedicationhistory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_benmedicationhistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -11292,15 +11292,15 @@ CREATE TABLE IF NOT EXISTS `t_benmedicationhistory` (
   CONSTRAINT `FK_BenMedicationHist_BenVisitDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_BenMedicationHist_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3674 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_benmenstrualdetails`
 --
 
 -- DROP TABLE IF EXISTS `t_benmenstrualdetails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_benmenstrualdetails` (
   `BenMenstrualID` int(11) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -11344,15 +11344,15 @@ CREATE TABLE IF NOT EXISTS `t_benmenstrualdetails` (
   CONSTRAINT `FK_BenMenstrualDetails_MenstrualCycleRange1` FOREIGN KEY (`MenstrualFlowDurationID`) REFERENCES `m_menstrualcyclerange` (`MenstrualRangeID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_BenMenstrualDetails_MenstrualCycleStatus` FOREIGN KEY (`MenstrualCycleStatusID`) REFERENCES `m_menstrualcyclestatus` (`MenstrualCycleStatusID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1803689 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_benpersonalhabit`
 --
 
 -- DROP TABLE IF EXISTS `t_benpersonalhabit`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_benpersonalhabit` (
   `BenPersonalHabitID` int(11) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -11403,15 +11403,15 @@ CREATE TABLE IF NOT EXISTS `t_benpersonalhabit` (
   CONSTRAINT `FK_BenPersonalHabit_PersonalHabitType1` FOREIGN KEY (`AlcoholTypeID`) REFERENCES `m_personalhabittype` (`PersonalHabitTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_BenPersonalHabit_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2120752 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_benreferdetails`
 --
 
 -- DROP TABLE IF EXISTS `t_benreferdetails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_benreferdetails` (
   `benReferID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -11454,15 +11454,15 @@ CREATE TABLE IF NOT EXISTS `t_benreferdetails` (
   CONSTRAINT `FK_BenReferDetails_ServiceMaster` FOREIGN KEY (`serviceID`) REFERENCES `m_servicemaster` (`ServiceID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_BenReferDetails_benVisitDetails` FOREIGN KEY (`BenVisitID`) REFERENCES `t_benvisitdetail` (`BenVisitID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=349007 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_benreferdetails_bkp_15_03_2024`
 --
 
 -- DROP TABLE IF EXISTS `t_benreferdetails_bkp_15_03_2024`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_benreferdetails_bkp_15_03_2024` (
   `benReferID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -11491,15 +11491,15 @@ CREATE TABLE IF NOT EXISTS `t_benreferdetails_bkp_15_03_2024` (
   `referralreason` varchar(800) DEFAULT NULL,
   `OtherReferralReason` varchar(300) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_benvisitdetail`
 --
 
 -- DROP TABLE IF EXISTS `t_benvisitdetail`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_benvisitdetail` (
   `BenVisitID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -11551,15 +11551,15 @@ CREATE TABLE IF NOT EXISTS `t_benvisitdetail` (
   CONSTRAINT `FK_BenVisitDetail_VisitCategory` FOREIGN KEY (`VisitCategoryID`) REFERENCES `m_visitcategory` (`VisitCategoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_BenVisitDetail_VisitReason` FOREIGN KEY (`VisitReasonID`) REFERENCES `m_visitreason` (`VisitReasonID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2688943 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_bloodoutbounddetails`
 --
 
 -- DROP TABLE IF EXISTS `t_bloodoutbounddetails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_bloodoutbounddetails` (
   `BloodOutboundDetailID` bigint(20) NOT NULL AUTO_INCREMENT,
   `CzentrixCallID` varchar(20) DEFAULT NULL,
@@ -11585,15 +11585,15 @@ CREATE TABLE IF NOT EXISTS `t_bloodoutbounddetails` (
   KEY `FK_BloodOutboundDetails_BloodRequest_idx` (`BloodReqID`),
   CONSTRAINT `FK_BloodOutboundDetails_BloodRequest` FOREIGN KEY (`BloodReqID`) REFERENCES `t_bloodrequest` (`BloodReqID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_bloodrequest`
 --
 
 -- DROP TABLE IF EXISTS `t_bloodrequest`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_bloodrequest` (
   `BloodReqID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RequestID` varchar(30) DEFAULT NULL,
@@ -11643,15 +11643,15 @@ CREATE TABLE IF NOT EXISTS `t_bloodrequest` (
   CONSTRAINT `FK_BloodRequest_Gender` FOREIGN KEY (`RecipientGenderID`) REFERENCES `m_gender` (`GenderID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_BloodRequest_ProviderServiceMap` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_breastcancerscreening`
 --
 
 -- DROP TABLE IF EXISTS `t_breastcancerscreening`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_breastcancerscreening` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegId` bigint(20) DEFAULT NULL,
@@ -11684,15 +11684,15 @@ CREATE TABLE IF NOT EXISTS `t_breastcancerscreening` (
   CONSTRAINT `FK_t_bcs_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_t_bcs_visitcode` FOREIGN KEY (`Visitcode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_cancerabdominalexamination`
 --
 
 -- DROP TABLE IF EXISTS `t_cancerabdominalexamination`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_cancerabdominalexamination` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -11738,15 +11738,15 @@ CREATE TABLE IF NOT EXISTS `t_cancerabdominalexamination` (
   CONSTRAINT `FK_CancerAbdominalExamination_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_CancerAbdominalExamination_VisitCode` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_cancerbreastexamination`
 --
 
 -- DROP TABLE IF EXISTS `t_cancerbreastexamination`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_cancerbreastexamination` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -11793,15 +11793,15 @@ CREATE TABLE IF NOT EXISTS `t_cancerbreastexamination` (
   CONSTRAINT `FK_CancerBreastExamination_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_CancerBreastExamination_VisitCode` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_cancerdiagnosis`
 --
 
 -- DROP TABLE IF EXISTS `t_cancerdiagnosis`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_cancerdiagnosis` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -11843,15 +11843,15 @@ CREATE TABLE IF NOT EXISTS `t_cancerdiagnosis` (
   CONSTRAINT `FK_CancerDiagnosis_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_CancerDiagnosis_VisitCode` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_cancerdiethistory`
 --
 
 -- DROP TABLE IF EXISTS `t_cancerdiethistory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_cancerdiethistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -11894,15 +11894,15 @@ CREATE TABLE IF NOT EXISTS `t_cancerdiethistory` (
   CONSTRAINT `FK_CancerDietHistory_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_CancerDietHistory_VisitCode` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_cancerfamilyhistory`
 --
 
 -- DROP TABLE IF EXISTS `t_cancerfamilyhistory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_cancerfamilyhistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -11939,15 +11939,15 @@ CREATE TABLE IF NOT EXISTS `t_cancerfamilyhistory` (
   CONSTRAINT `FK_CancerFamilyHistory_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_CancerFamilyHistory_VisitCode` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_cancergynecologicalexamination`
 --
 
 -- DROP TABLE IF EXISTS `t_cancergynecologicalexamination`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_cancergynecologicalexamination` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -11990,15 +11990,15 @@ CREATE TABLE IF NOT EXISTS `t_cancergynecologicalexamination` (
   CONSTRAINT `FK_CancerGynecologicalExamination_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_CancerGynecologicalExamination_VisitCode` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_cancerimageannotation`
 --
 
 -- DROP TABLE IF EXISTS `t_cancerimageannotation`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_cancerimageannotation` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -12038,15 +12038,15 @@ CREATE TABLE IF NOT EXISTS `t_cancerimageannotation` (
   CONSTRAINT `FK_CancerImageAnnotation_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_CancerImageAnnotation_VisitCode` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_cancerlymphnode`
 --
 
 -- DROP TABLE IF EXISTS `t_cancerlymphnode`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_cancerlymphnode` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -12084,15 +12084,15 @@ CREATE TABLE IF NOT EXISTS `t_cancerlymphnode` (
   CONSTRAINT `FK_CancerLymphNode_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_CancerLymphNode_VisitCode` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_cancerobstetrichistory`
 --
 
 -- DROP TABLE IF EXISTS `t_cancerobstetrichistory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_cancerobstetrichistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -12142,15 +12142,15 @@ CREATE TABLE IF NOT EXISTS `t_cancerobstetrichistory` (
   CONSTRAINT `FK_CancerObstetricHistory_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_CancerObstetricHistory_VisitCode` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_canceroralexamination`
 --
 
 -- DROP TABLE IF EXISTS `t_canceroralexamination`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_canceroralexamination` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -12190,15 +12190,15 @@ CREATE TABLE IF NOT EXISTS `t_canceroralexamination` (
   CONSTRAINT `FK_CancerOralExamination_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_CancerOralExamination_VisitCode` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_cancerpersonalhistory`
 --
 
 -- DROP TABLE IF EXISTS `t_cancerpersonalhistory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_cancerpersonalhistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -12243,15 +12243,15 @@ CREATE TABLE IF NOT EXISTS `t_cancerpersonalhistory` (
   CONSTRAINT `FK_CancerPersonalHistory_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_CancerPersonalHistory_VisitCode` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_cancersignandsymptoms`
 --
 
 -- DROP TABLE IF EXISTS `t_cancersignandsymptoms`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_cancersignandsymptoms` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -12300,15 +12300,15 @@ CREATE TABLE IF NOT EXISTS `t_cancersignandsymptoms` (
   CONSTRAINT `FK_CancerSignAndSymptoms_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_CancerSignAndSymptoms_VisitCode` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_cancervitals`
 --
 
 -- DROP TABLE IF EXISTS `t_cancervitals`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_cancervitals` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -12358,15 +12358,15 @@ CREATE TABLE IF NOT EXISTS `t_cancervitals` (
   CONSTRAINT `FK_CancerVitals_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_CancerVitals_VisitCode` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_cbacdetails`
 --
 
 -- DROP TABLE IF EXISTS `t_cbacdetails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_cbacdetails` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegId` bigint(20) DEFAULT NULL,
@@ -12451,15 +12451,15 @@ CREATE TABLE IF NOT EXISTS `t_cbacdetails` (
   CONSTRAINT `FK_t_cbacdetails_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_t_cbacdetails_visitcode` FOREIGN KEY (`Visitcode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_cdr`
 --
 
 -- DROP TABLE IF EXISTS `t_cdr`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_cdr` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `address` varchar(255) DEFAULT NULL,
@@ -12485,15 +12485,15 @@ CREATE TABLE IF NOT EXISTS `t_cdr` (
   `visit_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_cervicalcancerscreening`
 --
 
 -- DROP TABLE IF EXISTS `t_cervicalcancerscreening`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_cervicalcancerscreening` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegId` bigint(20) DEFAULT NULL,
@@ -12522,15 +12522,15 @@ CREATE TABLE IF NOT EXISTS `t_cervicalcancerscreening` (
   CONSTRAINT `FK_t_ccs_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_t_ccs_visitcode` FOREIGN KEY (`Visitcode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_child_register`
 --
 
 -- DROP TABLE IF EXISTS `t_child_register`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_child_register` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `baby_cried_at_birth` bit(1) DEFAULT NULL,
@@ -12556,15 +12556,15 @@ CREATE TABLE IF NOT EXISTS `t_child_register` (
   `weight` double DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_childcongenitalanomalies`
 --
 
 -- DROP TABLE IF EXISTS `t_childcongenitalanomalies`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_childcongenitalanomalies` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -12591,15 +12591,15 @@ CREATE TABLE IF NOT EXISTS `t_childcongenitalanomalies` (
   CONSTRAINT `FK_ChildCongenitalAnomalies_BenCall` FOREIGN KEY (`BenCallID`) REFERENCES `t_bencall` (`BenCallID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ChildCongenitalAnomalies_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_childfeedinghistory`
 --
 
 -- DROP TABLE IF EXISTS `t_childfeedinghistory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_childfeedinghistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -12638,15 +12638,15 @@ CREATE TABLE IF NOT EXISTS `t_childfeedinghistory` (
   CONSTRAINT `FK_ChildFeedingDetails_BenVisitDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ChildFeedingDetails_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1733128 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_childinvaliddata`
 --
 
 -- DROP TABLE IF EXISTS `t_childinvaliddata`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_childinvaliddata` (
   `RowID` bigint(20) NOT NULL AUTO_INCREMENT,
   `Date_of_Entry` datetime DEFAULT NULL,
@@ -12772,15 +12772,15 @@ CREATE TABLE IF NOT EXISTS `t_childinvaliddata` (
   KEY `IX_CreatedDate` (`CreatedDate`),
   CONSTRAINT `FK_ChildInValidData_FileManager` FOREIGN KEY (`FileID`) REFERENCES `t_filemanager` (`FileID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_childoptionalvaccinedetail`
 --
 
 -- DROP TABLE IF EXISTS `t_childoptionalvaccinedetail`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_childoptionalvaccinedetail` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -12821,15 +12821,15 @@ CREATE TABLE IF NOT EXISTS `t_childoptionalvaccinedetail` (
   CONSTRAINT `FK_ChildOptVaccineDetail_BenVisitDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ChildOptVaccineDetail_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_childvaccinedetail1`
 --
 
 -- DROP TABLE IF EXISTS `t_childvaccinedetail1`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_childvaccinedetail1` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -12872,15 +12872,15 @@ CREATE TABLE IF NOT EXISTS `t_childvaccinedetail1` (
   CONSTRAINT `FK_ChildVaccineDetail1_BenVisitDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ChildVaccineDetail1_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=12183909 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_childvaccinedetail2`
 --
 
 -- DROP TABLE IF EXISTS `t_childvaccinedetail2`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_childvaccinedetail2` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -12916,15 +12916,15 @@ CREATE TABLE IF NOT EXISTS `t_childvaccinedetail2` (
   CONSTRAINT `FK_ChildVaccineDetail2_BenVisitDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ChildVaccineDetail2_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_childvaliddata`
 --
 
 -- DROP TABLE IF EXISTS `t_childvaliddata`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_childvaliddata` (
   `RowID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -13062,15 +13062,15 @@ CREATE TABLE IF NOT EXISTS `t_childvaliddata` (
   KEY `IX_CreatedDate` (`CreatedDate`),
   CONSTRAINT `FK_ChildValidData_FileManager` FOREIGN KEY (`FileID`) REFERENCES `t_filemanager` (`FileID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=98838 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_covid19`
 --
 
 -- DROP TABLE IF EXISTS `t_covid19`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_covid19` (
   `COVID19ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenCallID` bigint(20) NOT NULL,
@@ -13115,15 +13115,15 @@ CREATE TABLE IF NOT EXISTS `t_covid19` (
   KEY `inx_BeneficiaryRegID` (`BeneficiaryRegID`),
   KEY `inx_visitcode` (`visitcode`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2923 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_covidvaccinationstatus`
 --
 
 -- DROP TABLE IF EXISTS `t_covidvaccinationstatus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_covidvaccinationstatus` (
   `CovidVSID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) NOT NULL,
@@ -13155,15 +13155,15 @@ CREATE TABLE IF NOT EXISTS `t_covidvaccinationstatus` (
   CONSTRAINT `FK_CVS_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `t_covidvaccinationstatus_ibfk_1` FOREIGN KEY (`Dosetypeid`) REFERENCES `m_coviddosetype` (`CovidDoseTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_currentdiagnosis`
 --
 
 -- DROP TABLE IF EXISTS `t_currentdiagnosis`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_currentdiagnosis` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -13195,15 +13195,15 @@ CREATE TABLE IF NOT EXISTS `t_currentdiagnosis` (
   CONSTRAINT `FK_CurrentDiagnosis_BenVisiyDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_CurrentDiagnosis_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_delivery_outcome`
 --
 
 -- DROP TABLE IF EXISTS `t_delivery_outcome`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_delivery_outcome` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `ben_id` bigint(20) DEFAULT NULL,
@@ -13229,15 +13229,15 @@ CREATE TABLE IF NOT EXISTS `t_delivery_outcome` (
   `is_active` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=188 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_detailedcallreport`
 --
 
 -- DROP TABLE IF EXISTS `t_detailedcallreport`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_detailedcallreport` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `AgentName` varchar(100) DEFAULT NULL,
@@ -13301,15 +13301,15 @@ CREATE TABLE IF NOT EXISTS `t_detailedcallreport` (
   KEY `inx_1` (`SessionID`),
   KEY `inx_phone` (`PHONE`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7405023 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_detailedcallreport_bkp_12122023`
 --
 
 -- DROP TABLE IF EXISTS `t_detailedcallreport_bkp_12122023`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_detailedcallreport_bkp_12122023` (
   `id` bigint(20) NOT NULL DEFAULT '0',
   `AgentName` varchar(100) DEFAULT NULL,
@@ -13370,15 +13370,15 @@ CREATE TABLE IF NOT EXISTS `t_detailedcallreport_bkp_12122023` (
   `ModifiedBy` varchar(50) DEFAULT NULL,
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_developmenthistory`
 --
 
 -- DROP TABLE IF EXISTS `t_developmenthistory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_developmenthistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -13417,15 +13417,15 @@ CREATE TABLE IF NOT EXISTS `t_developmenthistory` (
   CONSTRAINT `FK_DevelopmentHistory_BenVisitDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_DevelopmentHistory_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1723072 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_diabetesscreening`
 --
 
 -- DROP TABLE IF EXISTS `t_diabetesscreening`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_diabetesscreening` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -13457,15 +13457,15 @@ CREATE TABLE IF NOT EXISTS `t_diabetesscreening` (
   CONSTRAINT `FK_t_diabetesscreening_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_t_diabetesscreening_visitcode` FOREIGN KEY (`Visitcode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_directoryservice`
 --
 
 -- DROP TABLE IF EXISTS `t_directoryservice`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_directoryservice` (
   `DirectoryServiceID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RequestID` varchar(30) DEFAULT NULL,
@@ -13495,15 +13495,15 @@ CREATE TABLE IF NOT EXISTS `t_directoryservice` (
   CONSTRAINT `FK_DirectoryService_Institution` FOREIGN KEY (`InstitutionID`) REFERENCES `m_institution` (`InstitutionID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_DirectoryService_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_downloadedcasesheet`
 --
 
 -- DROP TABLE IF EXISTS `t_downloadedcasesheet`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_downloadedcasesheet` (
   `cid` int(11) NOT NULL AUTO_INCREMENT,
   `tmVisitCode` bigint(20) DEFAULT NULL,
@@ -13520,15 +13520,15 @@ CREATE TABLE IF NOT EXISTS `t_downloadedcasesheet` (
   KEY `FK_dct_ProviderServiceMapID` (`ProviderServiceMapID`),
   CONSTRAINT `FK_dct_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_eligible_couple_register`
 --
 
 -- DROP TABLE IF EXISTS `t_eligible_couple_register`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_eligible_couple_register` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `aadhaar_number` bigint(20) DEFAULT NULL,
@@ -13574,15 +13574,15 @@ CREATE TABLE IF NOT EXISTS `t_eligible_couple_register` (
   `marriage_and_first_child_gap` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=58419 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_emailnotification`
 --
 
 -- DROP TABLE IF EXISTS `t_emailnotification`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_emailnotification` (
   `EmailNotificationID` bigint(20) NOT NULL AUTO_INCREMENT,
   `EmailTemplateID` int(11) DEFAULT NULL,
@@ -13618,15 +13618,15 @@ CREATE TABLE IF NOT EXISTS `t_emailnotification` (
   CONSTRAINT `FK_EmailNotification_User` FOREIGN KEY (`SenderID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_EmailNotification_User1` FOREIGN KEY (`ReceivingUserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_epidemicoutbreak`
 --
 
 -- DROP TABLE IF EXISTS `t_epidemicoutbreak`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_epidemicoutbreak` (
   `OutbreakComplaintID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RequestID` varchar(30) DEFAULT NULL,
@@ -13660,15 +13660,15 @@ CREATE TABLE IF NOT EXISTS `t_epidemicoutbreak` (
   CONSTRAINT `FK_EpidemicOutbreak_DistrictBranchMapping` FOREIGN KEY (`AffectedVillageID`) REFERENCES `m_districtbranchmapping` (`DistrictBranchID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_EpidemicOutbreak_ProviderServiceMap` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1884 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_everwellapi`
 --
 
 -- DROP TABLE IF EXISTS `t_everwellapi`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_everwellapi` (
   `EAPIID` bigint(20) NOT NULL AUTO_INCREMENT,
   `EverWellID` bigint(20) NOT NULL,
@@ -13721,15 +13721,15 @@ CREATE TABLE IF NOT EXISTS `t_everwellapi` (
   KEY `inx_BeneficiaryID` (`BeneficiaryID`),
   KEY `inx_ProviderServiceMapID` (`ProviderServiceMapID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_everwellfeedback`
 --
 
 -- DROP TABLE IF EXISTS `t_everwellfeedback`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_everwellfeedback` (
   `EFID` bigint(20) NOT NULL AUTO_INCREMENT,
   `EAPIID` bigint(20) NOT NULL,
@@ -13758,15 +13758,15 @@ CREATE TABLE IF NOT EXISTS `t_everwellfeedback` (
   CONSTRAINT `t_everwellFeedback_EAPIID` FOREIGN KEY (`EAPIID`) REFERENCES `t_everwellapi` (`EAPIID`),
   CONSTRAINT `t_everwellFeedback_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_existingproblem`
 --
 
 -- DROP TABLE IF EXISTS `t_existingproblem`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_existingproblem` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -13798,15 +13798,15 @@ CREATE TABLE IF NOT EXISTS `t_existingproblem` (
   CONSTRAINT `FK_ExistingProblem_BenVisiyDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ExistingProblem_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_facilityconsumption`
 --
 
 -- DROP TABLE IF EXISTS `t_facilityconsumption`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_facilityconsumption` (
   `ConsumptionID` int(11) NOT NULL AUTO_INCREMENT,
   `FacilityID` int(11) DEFAULT NULL,
@@ -13836,15 +13836,15 @@ CREATE TABLE IF NOT EXISTS `t_facilityconsumption` (
   CONSTRAINT `FK_FacilityConsumption_Facility` FOREIGN KEY (`FacilityID`) REFERENCES `m_facility` (`FacilityID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_FacilityConsumption_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_familyplanningreproductive`
 --
 
 -- DROP TABLE IF EXISTS `t_familyplanningreproductive`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_familyplanningreproductive` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -13891,15 +13891,15 @@ CREATE TABLE IF NOT EXISTS `t_familyplanningreproductive` (
   CONSTRAINT `FK_t_FPR_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_t_FPR_visitcode` FOREIGN KEY (`Visitcode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_feedback`
 --
 
 -- DROP TABLE IF EXISTS `t_feedback`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_feedback` (
   `FeedbackID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RequestID` varchar(30) DEFAULT NULL,
@@ -13985,15 +13985,15 @@ CREATE TABLE IF NOT EXISTS `t_feedback` (
   CONSTRAINT `FK_Feedback_UserS` FOREIGN KEY (`SupUserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Feedback__FeedbackStatus` FOREIGN KEY (`FeedbackStatusID`) REFERENCES `m_feedbackstatus` (`FeedbackStatusID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3132 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_feedbacklog`
 --
 
 -- DROP TABLE IF EXISTS `t_feedbacklog`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_feedbacklog` (
   `FeedbackLogID` bigint(20) NOT NULL AUTO_INCREMENT,
   `FeedbackID` bigint(20) NOT NULL,
@@ -14008,15 +14008,15 @@ CREATE TABLE IF NOT EXISTS `t_feedbacklog` (
   KEY `FK_t_feedbacklog_FeedbackID_idx` (`FeedbackID`),
   CONSTRAINT `FK_feedbacklog_FeedbackID` FOREIGN KEY (`FeedbackID`) REFERENCES `t_feedback` (`FeedbackID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_feedbackrequest`
 --
 
 -- DROP TABLE IF EXISTS `t_feedbackrequest`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_feedbackrequest` (
   `FeedbackRequestID` bigint(20) NOT NULL AUTO_INCREMENT,
   `FeedbackID` bigint(20) DEFAULT NULL,
@@ -14041,15 +14041,15 @@ CREATE TABLE IF NOT EXISTS `t_feedbackrequest` (
   CONSTRAINT `FK_FeedbackRequest_User` FOREIGN KEY (`SupUserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Feedbackrequest_EmailNotification` FOREIGN KEY (`EmailNotificationID`) REFERENCES `t_emailnotification` (`EmailNotificationID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_feedbackresponse`
 --
 
 -- DROP TABLE IF EXISTS `t_feedbackresponse`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_feedbackresponse` (
   `FeedbackResponseID` bigint(20) NOT NULL AUTO_INCREMENT,
   `FeedbackRequestID` bigint(20) DEFAULT NULL,
@@ -14076,15 +14076,15 @@ CREATE TABLE IF NOT EXISTS `t_feedbackresponse` (
   CONSTRAINT `FK_FeedbackResponse_KMFileManager` FOREIGN KEY (`KmFileManagerID`) REFERENCES `t_kmfilemanager` (`KmFileManagerID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_FeedbackResponse_User` FOREIGN KEY (`AuthUserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_feedbacktransaction`
 --
 
 -- DROP TABLE IF EXISTS `t_feedbacktransaction`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_feedbacktransaction` (
   `FeedbackTransactionID` bigint(20) NOT NULL AUTO_INCREMENT,
   `FeedbackID` bigint(20) DEFAULT NULL,
@@ -14101,15 +14101,15 @@ CREATE TABLE IF NOT EXISTS `t_feedbacktransaction` (
   KEY `FK_FeedbackTransaction_User_idx` (`UserID`),
   CONSTRAINT `FK_FeedbackTransaction_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_femaleobstetrichistory`
 --
 
 -- DROP TABLE IF EXISTS `t_femaleobstetrichistory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_femaleobstetrichistory` (
   `ObstetricHistoryID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -14185,15 +14185,15 @@ CREATE TABLE IF NOT EXISTS `t_femaleobstetrichistory` (
   CONSTRAINT `FK_FemaleObstetricHistory_PregDuration` FOREIGN KEY (`PregDurationID`) REFERENCES `m_pregduration` (`PregDurationID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_FemaleObstetricHistory_PregOutcome` FOREIGN KEY (`PregOutcomeID`) REFERENCES `m_pregoutcome` (`PregOutcomeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=532 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_fetosensedata`
 --
 
 -- DROP TABLE IF EXISTS `t_fetosensedata`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_fetosensedata` (
   `fetosenseID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) NOT NULL,
@@ -14247,15 +14247,15 @@ CREATE TABLE IF NOT EXISTS `t_fetosensedata` (
   CONSTRAINT `FK_fetosensedata_fetosensetestid` FOREIGN KEY (`fetosensetestid`) REFERENCES `m_fetosensetests` (`fetosensetestid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `t_fetosensedata_ibfk_1` FOREIGN KEY (`benFlowID`) REFERENCES `i_ben_flow_outreach` (`ben_flow_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=246 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_filemanager`
 --
 
 -- DROP TABLE IF EXISTS `t_filemanager`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_filemanager` (
   `FileID` int(11) NOT NULL AUTO_INCREMENT,
   `FileTypeID` int(11) DEFAULT NULL,
@@ -14290,15 +14290,15 @@ CREATE TABLE IF NOT EXISTS `t_filemanager` (
   CONSTRAINT `FK_FileManager_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_FileManager_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_fileprocess`
 --
 
 -- DROP TABLE IF EXISTS `t_fileprocess`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_fileprocess` (
   `FileProcessID` int(11) NOT NULL AUTO_INCREMENT,
   `FileID` int(11) DEFAULT NULL,
@@ -14318,15 +14318,15 @@ CREATE TABLE IF NOT EXISTS `t_fileprocess` (
   CONSTRAINT `FK_FileProcess_FileProcessStatus` FOREIGN KEY (`ProcessStatusID`) REFERENCES `m_fileprocessstatus` (`FileProcessStatusID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_FileProcessing_FileManager` FOREIGN KEY (`FileID`) REFERENCES `t_filemanager` (`FileID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_filetask`
 --
 
 -- DROP TABLE IF EXISTS `t_filetask`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_filetask` (
   `TaskID` int(11) NOT NULL AUTO_INCREMENT,
   `ProcessID` int(11) DEFAULT NULL,
@@ -14349,15 +14349,15 @@ CREATE TABLE IF NOT EXISTS `t_filetask` (
   CONSTRAINT `FK_FileTask_FileProcess` FOREIGN KEY (`ProcessID`) REFERENCES `t_fileprocess` (`FileProcessID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_FileTask_FileTaskStatus` FOREIGN KEY (`TaskStatusID`) REFERENCES `m_filetaskstatus` (`FileTaskStatusID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_followupforimmunization`
 --
 
 -- DROP TABLE IF EXISTS `t_followupforimmunization`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_followupforimmunization` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `Beneficiaryregid` bigint(20) DEFAULT NULL,
@@ -14391,15 +14391,15 @@ CREATE TABLE IF NOT EXISTS `t_followupforimmunization` (
   CONSTRAINT `FK_t_fv_nvid` FOREIGN KEY (`Nextduevaccinesid`) REFERENCES `m_nextduevaccines` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_t_fv_visitcode` FOREIGN KEY (`Visitcode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_foodsafetycopmlaint`
 --
 
 -- DROP TABLE IF EXISTS `t_foodsafetycopmlaint`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_foodsafetycopmlaint` (
   `FSComplaintID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RequestID` varchar(30) DEFAULT NULL,
@@ -14453,15 +14453,15 @@ CREATE TABLE IF NOT EXISTS `t_foodsafetycopmlaint` (
   CONSTRAINT `FK_FoodSafetyCopmlaint_Gender` FOREIGN KEY (`PatientGenderID`) REFERENCES `m_gender` (`GenderID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_FoodSafetyCopmlaint_ProviderServiceMap` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_fpdispensedetails`
 --
 
 -- DROP TABLE IF EXISTS `t_fpdispensedetails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_fpdispensedetails` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -14496,15 +14496,15 @@ CREATE TABLE IF NOT EXISTS `t_fpdispensedetails` (
   CONSTRAINT `FK_t_FPD_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_t_FPD_visitcode` FOREIGN KEY (`Visitcode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_fpieccounsellingdetails`
 --
 
 -- DROP TABLE IF EXISTS `t_fpieccounsellingdetails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_fpieccounsellingdetails` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -14536,15 +14536,15 @@ CREATE TABLE IF NOT EXISTS `t_fpieccounsellingdetails` (
   CONSTRAINT `FK_t_FPID_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_t_FPID_visitcode` FOREIGN KEY (`Visitcode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_gopdoralexamination`
 --
 
 -- DROP TABLE IF EXISTS `t_gopdoralexamination`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_gopdoralexamination` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -14581,15 +14581,15 @@ CREATE TABLE IF NOT EXISTS `t_gopdoralexamination` (
   CONSTRAINT `FK_gopdOralExamination_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_gopdOralExamination_VisitCode` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_hbnc_part1`
 --
 
 -- DROP TABLE IF EXISTS `t_hbnc_part1`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_hbnc_part1` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `baby_alive` bit(1) DEFAULT NULL,
@@ -14622,15 +14622,15 @@ CREATE TABLE IF NOT EXISTS `t_hbnc_part1` (
   `visit_no` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_hbnc_part2`
 --
 
 -- DROP TABLE IF EXISTS `t_hbnc_part2`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_hbnc_part2` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `babyAlive` bit(1) DEFAULT NULL,
@@ -14696,15 +14696,15 @@ CREATE TABLE IF NOT EXISTS `t_hbnc_part2` (
   `wrap_cloth_close_to_mother` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_hbnc_visit`
 --
 
 -- DROP TABLE IF EXISTS `t_hbnc_visit`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_hbnc_visit` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `all_limbs_limp` bit(1) DEFAULT NULL,
@@ -14752,15 +14752,15 @@ CREATE TABLE IF NOT EXISTS `t_hbnc_visit` (
   `visit_no` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_hbnc_visit_card`
 --
 
 -- DROP TABLE IF EXISTS `t_hbnc_visit_card`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_hbnc_visit_card` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `asha_name` varchar(255) DEFAULT NULL,
@@ -14787,15 +14787,15 @@ CREATE TABLE IF NOT EXISTS `t_hbnc_visit_card` (
   `weight` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_hbyc`
 --
 
 -- DROP TABLE IF EXISTS `t_hbyc`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_hbyc` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `ben_id` bigint(20) DEFAULT NULL,
@@ -14830,15 +14830,15 @@ CREATE TABLE IF NOT EXISTS `t_hbyc` (
   `weight_according_to_age` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_healthid`
 --
 
 -- DROP TABLE IF EXISTS `t_healthid`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_healthid` (
   `HID` int(11) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -14872,15 +14872,15 @@ CREATE TABLE IF NOT EXISTS `t_healthid` (
   `TxnID` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`HID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_hihlcocasesheet`
 --
 
 -- DROP TABLE IF EXISTS `t_hihlcocasesheet`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_hihlcocasesheet` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenCallID` bigint(20) NOT NULL,
@@ -14898,15 +14898,15 @@ CREATE TABLE IF NOT EXISTS `t_hihlcocasesheet` (
   KEY `inx_bencallid` (`BenCallID`),
   CONSTRAINT `FK_COCasesheet_bencallid` FOREIGN KEY (`BenCallID`) REFERENCES `t_bencall` (`BenCallID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_hwc_cdss`
 --
 
 -- DROP TABLE IF EXISTS `t_hwc_cdss`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_hwc_cdss` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -14952,15 +14952,15 @@ CREATE TABLE IF NOT EXISTS `t_hwc_cdss` (
   CONSTRAINT `FK_hwc_cdss_Diseasesummary` FOREIGN KEY (`DiseasesummaryID`) REFERENCES `m_104diseasesummary` (`DiseasesummaryID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_hwc_cdss_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_hwc_cdss_mapping`
 --
 
 -- DROP TABLE IF EXISTS `t_hwc_cdss_mapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_hwc_cdss_mapping` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -14981,15 +14981,15 @@ CREATE TABLE IF NOT EXISTS `t_hwc_cdss_mapping` (
   CONSTRAINT `FK_hwc_cdss_mapping_servicemaster` FOREIGN KEY (`ServiceID`) REFERENCES `m_servicemaster` (`ServiceID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_hwc_cdss_mapping_state` FOREIGN KEY (`StateID`) REFERENCES `m_state` (`StateID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_hypertensionscreening`
 --
 
 -- DROP TABLE IF EXISTS `t_hypertensionscreening`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_hypertensionscreening` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -15024,15 +15024,15 @@ CREATE TABLE IF NOT EXISTS `t_hypertensionscreening` (
   CONSTRAINT `FK_t_hypertensionscreening_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_t_hypertensionscreening_visitcode` FOREIGN KEY (`Visitcode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_idrsdetails`
 --
 
 -- DROP TABLE IF EXISTS `t_idrsdetails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_idrsdetails` (
   `Idrsid` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) NOT NULL,
@@ -15072,15 +15072,15 @@ CREATE TABLE IF NOT EXISTS `t_idrsdetails` (
   CONSTRAINT `FK_t_idrsdetails_IDRSQuestionID` FOREIGN KEY (`IDRSQuestionID`) REFERENCES `m_idrsscreenquestions` (`IDRSQuestionID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_t_idrsdetails_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=9248872 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_immunizationservices`
 --
 
 -- DROP TABLE IF EXISTS `t_immunizationservices`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_immunizationservices` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `Beneficiaryregid` bigint(20) DEFAULT NULL,
@@ -15118,15 +15118,15 @@ CREATE TABLE IF NOT EXISTS `t_immunizationservices` (
   CONSTRAINT `FK_t_isd_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_t_isd_visitcode` FOREIGN KEY (`Visitcode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_indent`
 --
 
 -- DROP TABLE IF EXISTS `t_indent`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_indent` (
   `IndentID` int(11) NOT NULL AUTO_INCREMENT,
   `FromFacilityID` int(11) DEFAULT NULL,
@@ -15162,15 +15162,15 @@ CREATE TABLE IF NOT EXISTS `t_indent` (
   CONSTRAINT `FK_Indent_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Indent_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_indentissue`
 --
 
 -- DROP TABLE IF EXISTS `t_indentissue`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_indentissue` (
   `IndentIssueID` int(11) NOT NULL AUTO_INCREMENT,
   `IndentOrderID` int(11) DEFAULT NULL,
@@ -15211,15 +15211,15 @@ CREATE TABLE IF NOT EXISTS `t_indentissue` (
   CONSTRAINT `FK_IndentIssue_Item` FOREIGN KEY (`ItemID`) REFERENCES `m_item` (`ItemID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_IndentIssue_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_indentorder`
 --
 
 -- DROP TABLE IF EXISTS `t_indentorder`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_indentorder` (
   `IndentOrderID` int(11) NOT NULL AUTO_INCREMENT,
   `IndentID` int(11) DEFAULT NULL,
@@ -15256,15 +15256,15 @@ CREATE TABLE IF NOT EXISTS `t_indentorder` (
   CONSTRAINT `FK_IndentOrder_Item` FOREIGN KEY (`ItemID`) REFERENCES `m_item` (`ItemID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_IndentOrder_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_infant_register`
 --
 
 -- DROP TABLE IF EXISTS `t_infant_register`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_infant_register` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `cried_at_birth` bit(1) DEFAULT NULL,
@@ -15293,15 +15293,15 @@ CREATE TABLE IF NOT EXISTS `t_infant_register` (
   `is_active` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_infantbirthdetails`
 --
 
 -- DROP TABLE IF EXISTS `t_infantbirthdetails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_infantbirthdetails` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `Beneficiaryregid` bigint(20) DEFAULT NULL,
@@ -15349,15 +15349,15 @@ CREATE TABLE IF NOT EXISTS `t_infantbirthdetails` (
   CONSTRAINT `FK_t_ibd_dcb` FOREIGN KEY (`Deliveryconductedbyid`) REFERENCES `m_deliveryconductedby` (`id`),
   CONSTRAINT `FK_t_ibd_visitcode` FOREIGN KEY (`Visitcode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_itemstockentry`
 --
 
 -- DROP TABLE IF EXISTS `t_itemstockentry`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_itemstockentry` (
   `ItemStockEntryID` int(11) NOT NULL AUTO_INCREMENT,
   `FacilityID` int(11) NOT NULL,
@@ -15394,15 +15394,15 @@ CREATE TABLE IF NOT EXISTS `t_itemstockentry` (
   CONSTRAINT `FK_ItemStockEntry_Item` FOREIGN KEY (`ItemID`) REFERENCES `m_item` (`ItemID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ItemStockEntry_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=26522 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_itemstockexit`
 --
 
 -- DROP TABLE IF EXISTS `t_itemstockexit`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_itemstockexit` (
   `ItemStockExitID` int(11) NOT NULL AUTO_INCREMENT,
   `ItemStockEntryID` int(11) NOT NULL,
@@ -15435,15 +15435,15 @@ CREATE TABLE IF NOT EXISTS `t_itemstockexit` (
   CONSTRAINT `FK_ItemStockExit_Facility` FOREIGN KEY (`FacilityID`) REFERENCES `m_facility` (`FacilityID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ItemStockExit_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=954650 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_kmfilemanager`
 --
 
 -- DROP TABLE IF EXISTS `t_kmfilemanager`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_kmfilemanager` (
   `KmFileManagerID` int(11) NOT NULL AUTO_INCREMENT,
   `FileUID` varchar(100) DEFAULT NULL,
@@ -15468,15 +15468,15 @@ CREATE TABLE IF NOT EXISTS `t_kmfilemanager` (
   CONSTRAINT `FK_KmFileManager_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_KmFileManager_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_lab_microscopy`
 --
 
 -- DROP TABLE IF EXISTS `t_lab_microscopy`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_lab_microscopy` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -15524,15 +15524,15 @@ CREATE TABLE IF NOT EXISTS `t_lab_microscopy` (
   CONSTRAINT `FK_LabMicroscopy_BenVisiyDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_LabMicroscopy_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_lab_othertest`
 --
 
 -- DROP TABLE IF EXISTS `t_lab_othertest`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_lab_othertest` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -15563,15 +15563,15 @@ CREATE TABLE IF NOT EXISTS `t_lab_othertest` (
   CONSTRAINT `FK_LabOtherTest_BenVisiyDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_LabOtherTest_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_lab_pocdiagnostics`
 --
 
 -- DROP TABLE IF EXISTS `t_lab_pocdiagnostics`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_lab_pocdiagnostics` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -15607,15 +15607,15 @@ CREATE TABLE IF NOT EXISTS `t_lab_pocdiagnostics` (
   CONSTRAINT `FK_LabPoCDiagnostics_BenvisitDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Lab_PoCDiagnostics_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_lab_testorder`
 --
 
 -- DROP TABLE IF EXISTS `t_lab_testorder`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_lab_testorder` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -15653,15 +15653,15 @@ CREATE TABLE IF NOT EXISTS `t_lab_testorder` (
   CONSTRAINT `FK_Lab_TestOrder_Procedure` FOREIGN KEY (`ProcedureID`) REFERENCES `m_procedure` (`ProcedureID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Lab_TestOrder_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=949662 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_lab_testresult`
 --
 
 -- DROP TABLE IF EXISTS `t_lab_testresult`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_lab_testresult` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -15709,15 +15709,15 @@ CREATE TABLE IF NOT EXISTS `t_lab_testresult` (
   CONSTRAINT `FK_LabTestResult_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_LabTestResult_TestComponent` FOREIGN KEY (`TestComponentID`) REFERENCES `m_testcomponent` (`TestComponentID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=917708 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_lab_testresult_bkp_20072021`
 --
 
 -- DROP TABLE IF EXISTS `t_lab_testresult_bkp_20072021`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_lab_testresult_bkp_20072021` (
   `ID` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -15746,15 +15746,15 @@ CREATE TABLE IF NOT EXISTS `t_lab_testresult_bkp_20072021` (
   `SyncedDate` datetime DEFAULT NULL,
   `ReservedForChange` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_linecallsummary`
 --
 
 -- DROP TABLE IF EXISTS `t_linecallsummary`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_linecallsummary` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `LineNumber` varchar(100) DEFAULT NULL,
@@ -15770,15 +15770,15 @@ CREATE TABLE IF NOT EXISTS `t_linecallsummary` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_mctscallresponse`
 --
 
 -- DROP TABLE IF EXISTS `t_mctscallresponse`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_mctscallresponse` (
   `MctsCallResponseID` bigint(20) NOT NULL AUTO_INCREMENT,
   `MotherID` bigint(20) DEFAULT NULL,
@@ -15816,15 +15816,15 @@ CREATE TABLE IF NOT EXISTS `t_mctscallresponse` (
   CONSTRAINT `FK_MCTSCallResponse_MCTSOutboundCallDetail` FOREIGN KEY (`CallDetailID`) REFERENCES `t_mctsoutboundcalldeatil` (`CallDetailID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_MCTSCallResponse_Questionnaire` FOREIGN KEY (`QuestionID`) REFERENCES `m_questionnaire` (`QuestionID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2746529 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_mctsoutboundcalldeatil`
 --
 
 -- DROP TABLE IF EXISTS `t_mctsoutboundcalldeatil`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_mctsoutboundcalldeatil` (
   `CallDetailID` bigint(20) NOT NULL AUTO_INCREMENT,
   `OBCallID` bigint(20) DEFAULT NULL,
@@ -15853,15 +15853,15 @@ CREATE TABLE IF NOT EXISTS `t_mctsoutboundcalldeatil` (
   CONSTRAINT `FK_tMCTSOutboundCallDeatil_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_tMCTSOutboundCallDeatil_User` FOREIGN KEY (`AllocatedUserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_mctsoutboundcalls`
 --
 
 -- DROP TABLE IF EXISTS `t_mctsoutboundcalls`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_mctsoutboundcalls` (
   `OBCallID` bigint(20) NOT NULL AUTO_INCREMENT,
   `MotherID` bigint(20) DEFAULT NULL,
@@ -15901,15 +15901,15 @@ CREATE TABLE IF NOT EXISTS `t_mctsoutboundcalls` (
   CONSTRAINT `FK_tMCTSOutboundCalls_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE SET NULL,
   CONSTRAINT `FK_tMCTSOutboundCalls_User` FOREIGN KEY (`AllocatedUserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1419612 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_mctsoutboundcalls_bkp20240321`
 --
 
 -- DROP TABLE IF EXISTS `t_mctsoutboundcalls_bkp20240321`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_mctsoutboundcalls_bkp20240321` (
   `OBCallID` bigint(20) NOT NULL DEFAULT '0',
   `MotherID` bigint(20) DEFAULT NULL,
@@ -15939,15 +15939,15 @@ CREATE TABLE IF NOT EXISTS `t_mctsoutboundcalls_bkp20240321` (
   `ModifiedBy` varchar(50) DEFAULT NULL,
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_mdsr`
 --
 
 -- DROP TABLE IF EXISTS `t_mdsr`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_mdsr` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `action_taken` bit(1) DEFAULT NULL,
@@ -15966,15 +15966,15 @@ CREATE TABLE IF NOT EXISTS `t_mdsr` (
   `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_motherinvalidrecord`
 --
 
 -- DROP TABLE IF EXISTS `t_motherinvalidrecord`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_motherinvalidrecord` (
   `MotherInValidRecordID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RowID` bigint(20) DEFAULT NULL,
@@ -16125,15 +16125,15 @@ CREATE TABLE IF NOT EXISTS `t_motherinvalidrecord` (
   KEY `FK_MotherInValidRecord_FileManager_idx` (`FileID`),
   KEY `IX_CreatedDate` (`CreatedDate`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18436 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_mothervalidrecord`
 --
 
 -- DROP TABLE IF EXISTS `t_mothervalidrecord`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_mothervalidrecord` (
   `MotherValidRecordID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RowID` bigint(20) DEFAULT NULL,
@@ -16299,15 +16299,15 @@ CREATE TABLE IF NOT EXISTS `t_mothervalidrecord` (
   KEY `IX_CreatedDate` (`CreatedDate`),
   CONSTRAINT `FK_MotherValidRecord_FileManager` FOREIGN KEY (`FileID`) REFERENCES `t_filemanager` (`FileID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=112295 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_ncdcare`
 --
 
 -- DROP TABLE IF EXISTS `t_ncdcare`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_ncdcare` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -16348,15 +16348,15 @@ CREATE TABLE IF NOT EXISTS `t_ncdcare` (
   CONSTRAINT `FK_NCDCare_BenVisiyDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_NCDCare_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_ncddiagnosis`
 --
 
 -- DROP TABLE IF EXISTS `t_ncddiagnosis`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_ncddiagnosis` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -16393,15 +16393,15 @@ CREATE TABLE IF NOT EXISTS `t_ncddiagnosis` (
   CONSTRAINT `FK_NCDDiagnosis_Prescription` FOREIGN KEY (`PrescriptionID`) REFERENCES `t_prescription` (`PrescriptionID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_NCDDiagnosis_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=172698 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_ncdscreening`
 --
 
 -- DROP TABLE IF EXISTS `t_ncdscreening`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_ncdscreening` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -16443,15 +16443,15 @@ CREATE TABLE IF NOT EXISTS `t_ncdscreening` (
   CONSTRAINT `FK_NCDScreening_NCDScrReason` FOREIGN KEY (`NCDScreeningReasonID`) REFERENCES `m_ncdscreeningreason` (`NCDScreeningReasonID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_NCDScreening_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=424 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_nhmagentrealtimedata`
 --
 
 -- DROP TABLE IF EXISTS `t_nhmagentrealtimedata`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_nhmagentrealtimedata` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `CampaignName` varchar(100) NOT NULL,
@@ -16470,15 +16470,15 @@ CREATE TABLE IF NOT EXISTS `t_nhmagentrealtimedata` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7409869 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_oralcancerscreening`
 --
 
 -- DROP TABLE IF EXISTS `t_oralcancerscreening`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_oralcancerscreening` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegId` bigint(20) DEFAULT NULL,
@@ -16517,15 +16517,15 @@ CREATE TABLE IF NOT EXISTS `t_oralcancerscreening` (
   CONSTRAINT `FK_t_ocs_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_t_ocs_visitcode` FOREIGN KEY (`Visitcode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_oralvitaminprophylaxis`
 --
 
 -- DROP TABLE IF EXISTS `t_oralvitaminprophylaxis`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_oralvitaminprophylaxis` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `Beneficiaryregid` bigint(20) DEFAULT NULL,
@@ -16560,15 +16560,15 @@ CREATE TABLE IF NOT EXISTS `t_oralvitaminprophylaxis` (
   CONSTRAINT `FK_t_ovp_ProviderServiceMapID` FOREIGN KEY (`Providerservicemapid`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_t_ovp_visitcode` FOREIGN KEY (`Visitcode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_organdonation`
 --
 
 -- DROP TABLE IF EXISTS `t_organdonation`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_organdonation` (
   `OrganDonationID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RequestID` varchar(30) DEFAULT NULL,
@@ -16603,15 +16603,15 @@ CREATE TABLE IF NOT EXISTS `t_organdonation` (
   CONSTRAINT `FK_OrganDonation_DonationType` FOREIGN KEY (`DonationTypeID`) REFERENCES `m_donationtype` (`DonationTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_OrganDonation_Gender` FOREIGN KEY (`DonarGenderID`) REFERENCES `m_gender` (`GenderID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_outboundcallrequest`
 --
 
 -- DROP TABLE IF EXISTS `t_outboundcallrequest`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_outboundcallrequest` (
   `OutboundCallReqID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -16646,15 +16646,15 @@ CREATE TABLE IF NOT EXISTS `t_outboundcallrequest` (
   CONSTRAINT `FK_OutboundCallRequest_SubService` FOREIGN KEY (`SubServiceID`) REFERENCES `m_subservice` (`SubServiceID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_OutboundCallRequest_User` FOREIGN KEY (`AssignedUserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=173 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_patientissue`
 --
 
 -- DROP TABLE IF EXISTS `t_patientissue`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_patientissue` (
   `PatientIssueID` int(11) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -16697,15 +16697,15 @@ CREATE TABLE IF NOT EXISTS `t_patientissue` (
   CONSTRAINT `FK_PatientIssue_Facility` FOREIGN KEY (`FacilityID`) REFERENCES `m_facility` (`FacilityID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_PatientIssue_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=885181 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_patientreturn`
 --
 
 -- DROP TABLE IF EXISTS `t_patientreturn`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_patientreturn` (
   `PatientReturnID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -16736,15 +16736,15 @@ CREATE TABLE IF NOT EXISTS `t_patientreturn` (
   KEY `inx_VanSerialNo` (`VanSerialNo`),
   CONSTRAINT `FK_PatientReturn_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_perinatalhistory`
 --
 
 -- DROP TABLE IF EXISTS `t_perinatalhistory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_perinatalhistory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -16791,15 +16791,15 @@ CREATE TABLE IF NOT EXISTS `t_perinatalhistory` (
   CONSTRAINT `FK_PerinatalHistory_DeliveryType` FOREIGN KEY (`DeliveryTypeID`) REFERENCES `m_deliverytype` (`DeliveryTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_PerinatalHistory_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1724400 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_phoneblock`
 --
 
 -- DROP TABLE IF EXISTS `t_phoneblock`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_phoneblock` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `phoneNo` varchar(15) DEFAULT NULL,
@@ -16822,15 +16822,15 @@ CREATE TABLE IF NOT EXISTS `t_phoneblock` (
   KEY `inx_noOfNuisanceCall` (`NoOfNuisanceCall`),
   CONSTRAINT `FK_PhoneBlock_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2241 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_phy_anthropometry`
 --
 
 -- DROP TABLE IF EXISTS `t_phy_anthropometry`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_phy_anthropometry` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -16869,15 +16869,15 @@ CREATE TABLE IF NOT EXISTS `t_phy_anthropometry` (
   CONSTRAINT `FK_Phy_Anthropometry_BenVisitDetail` FOREIGN KEY (`BenVisitID`) REFERENCES `t_benvisitdetail` (`BenVisitID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Phy_Anthropometry_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2666353 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_phy_generalexam`
 --
 
 -- DROP TABLE IF EXISTS `t_phy_generalexam`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_phy_generalexam` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -16927,15 +16927,15 @@ CREATE TABLE IF NOT EXISTS `t_phy_generalexam` (
   CONSTRAINT `FK_PhyGeneralExam_BenVisiyDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_PhyGeneralExam_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1895378 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_phy_headtotoe`
 --
 
 -- DROP TABLE IF EXISTS `t_phy_headtotoe`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_phy_headtotoe` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -16980,15 +16980,15 @@ CREATE TABLE IF NOT EXISTS `t_phy_headtotoe` (
   CONSTRAINT `FK_PhyHeadToToe_BenVisiyDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_PhyHeadToToe_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1882049 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_phy_vitals`
 --
 
 -- DROP TABLE IF EXISTS `t_phy_vitals`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_phy_vitals` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -17047,15 +17047,15 @@ CREATE TABLE IF NOT EXISTS `t_phy_vitals` (
   CONSTRAINT `FK_Phy_Vitals_BPAndDiaStatus1` FOREIGN KEY (`DiabeticStatusID`) REFERENCES `m_bpanddiabeticstatus` (`BPAndDiabeticStatusID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Phy_Vitals_BenVisitDetail` FOREIGN KEY (`BenVisitID`) REFERENCES `t_benvisitdetail` (`BenVisitID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2666601 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_physicalactivity`
 --
 
 -- DROP TABLE IF EXISTS `t_physicalactivity`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_physicalactivity` (
   `tPaid` bigint(20) NOT NULL AUTO_INCREMENT,
   `PAID` int(11) DEFAULT NULL,
@@ -17088,15 +17088,15 @@ CREATE TABLE IF NOT EXISTS `t_physicalactivity` (
   CONSTRAINT `FK_t_physicalactivity_PAID` FOREIGN KEY (`PAID`) REFERENCES `m_physicalactivity` (`PAID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_t_physicalactivity_ProviderServiceMapID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=813960 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_physicalstockentry`
 --
 
 -- DROP TABLE IF EXISTS `t_physicalstockentry`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_physicalstockentry` (
   `PhyEntryID` int(11) NOT NULL AUTO_INCREMENT,
   `RefNo` varchar(20) DEFAULT NULL,
@@ -17126,15 +17126,15 @@ CREATE TABLE IF NOT EXISTS `t_physicalstockentry` (
   CONSTRAINT `FK_PhysicalStockEntry_Facility` FOREIGN KEY (`FacilityID`) REFERENCES `m_facility` (`FacilityID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_PhysicalStockEntry_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=9352 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_pmsma`
 --
 
 -- DROP TABLE IF EXISTS `t_pmsma`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_pmsma` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `abdominal_check_up` varchar(255) DEFAULT NULL,
@@ -17179,15 +17179,15 @@ CREATE TABLE IF NOT EXISTS `t_pmsma` (
   `is_active` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=193 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_pnc_visit`
 --
 
 -- DROP TABLE IF EXISTS `t_pnc_visit`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_pnc_visit` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `ben_id` bigint(20) DEFAULT NULL,
@@ -17214,15 +17214,15 @@ CREATE TABLE IF NOT EXISTS `t_pnc_visit` (
   `is_active` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_pnccare`
 --
 
 -- DROP TABLE IF EXISTS `t_pnccare`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_pnccare` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -17277,15 +17277,15 @@ CREATE TABLE IF NOT EXISTS `t_pnccare` (
   CONSTRAINT `FK_PNCCare_BenvisitDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_PNCCare_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2477 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_pncdiagnosis`
 --
 
 -- DROP TABLE IF EXISTS `t_pncdiagnosis`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_pncdiagnosis` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -17328,15 +17328,15 @@ CREATE TABLE IF NOT EXISTS `t_pncdiagnosis` (
   CONSTRAINT `FK_PNCDiagnosis_Prescription` FOREIGN KEY (`PrescriptionID`) REFERENCES `t_prescription` (`PrescriptionID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_PNCDiagnosis_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2366 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_pregnant_woman_register`
 --
 
 -- DROP TABLE IF EXISTS `t_pregnant_woman_register`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_pregnant_woman_register` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `assigned_hrp_by` varchar(255) DEFAULT NULL,
@@ -17375,15 +17375,15 @@ CREATE TABLE IF NOT EXISTS `t_pregnant_woman_register` (
   `td_dose_booster_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5427 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_prescribeddrug`
 --
 
 -- DROP TABLE IF EXISTS `t_prescribeddrug`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_prescribeddrug` (
   `PrescribedDrugID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -17432,15 +17432,15 @@ CREATE TABLE IF NOT EXISTS `t_prescribeddrug` (
   CONSTRAINT `FK_PrescribedDrug_Prescription` FOREIGN KEY (`PrescriptionID`) REFERENCES `t_prescription` (`PrescriptionID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_PrescribedDrug_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2317236 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_prescription`
 --
 
 -- DROP TABLE IF EXISTS `t_prescription`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_prescription` (
   `PrescriptionID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -17483,15 +17483,15 @@ CREATE TABLE IF NOT EXISTS `t_prescription` (
   CONSTRAINT `FK_Prescription_BenvisitDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Prescription_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2799760 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_providerservicemappingdetail`
 --
 
 -- DROP TABLE IF EXISTS `t_providerservicemappingdetail`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_providerservicemappingdetail` (
   `PSMDetailID` int(11) NOT NULL AUTO_INCREMENT,
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -17526,15 +17526,15 @@ CREATE TABLE IF NOT EXISTS `t_providerservicemappingdetail` (
   CONSTRAINT `FK_PSMappingDetail_Status1` FOREIGN KEY (`PreviousStatusID`) REFERENCES `m_status` (`StatusID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_PSMappingDetail_Status2` FOREIGN KEY (`UpdatedStatusID`) REFERENCES `m_status` (`StatusID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_providerservicemappingdetail_bkp_15_03_2024`
 --
 
 -- DROP TABLE IF EXISTS `t_providerservicemappingdetail_bkp_15_03_2024`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_providerservicemappingdetail_bkp_15_03_2024` (
   `PSMDetailID` int(11) NOT NULL DEFAULT '0',
   `ProviderServiceMapID` int(11) DEFAULT NULL,
@@ -17558,15 +17558,15 @@ CREATE TABLE IF NOT EXISTS `t_providerservicemappingdetail_bkp_15_03_2024` (
   `ModifiedBy` varchar(50) DEFAULT NULL,
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_qualityauditorcallresponse`
 --
 
 -- DROP TABLE IF EXISTS `t_qualityauditorcallresponse`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_qualityauditorcallresponse` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `Bencallid` bigint(20) NOT NULL,
@@ -17589,15 +17589,15 @@ CREATE TABLE IF NOT EXISTS `t_qualityauditorcallresponse` (
   CONSTRAINT `FK_QACallRespons_PSMID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_QACallResponse_BenCall` FOREIGN KEY (`Bencallid`) REFERENCES `t_bencall` (`BenCallID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_qualityauditorrating`
 --
 
 -- DROP TABLE IF EXISTS `t_qualityauditorrating`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_qualityauditorrating` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenCallID` bigint(20) NOT NULL,
@@ -17623,15 +17623,15 @@ CREATE TABLE IF NOT EXISTS `t_qualityauditorrating` (
   CONSTRAINT `FK_QARating_Gradeid` FOREIGN KEY (`Gradeid`) REFERENCES `m_qualityauditgrade` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_QARating_PSMID` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_requestedbloodbank`
 --
 
 -- DROP TABLE IF EXISTS `t_requestedbloodbank`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_requestedbloodbank` (
   `RequestedBloodBankID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BloodReqID` bigint(20) DEFAULT NULL,
@@ -17653,15 +17653,15 @@ CREATE TABLE IF NOT EXISTS `t_requestedbloodbank` (
   CONSTRAINT `FK_RequestedBB_BloodRequest` FOREIGN KEY (`BloodReqID`) REFERENCES `t_bloodrequest` (`BloodReqID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_RequestedBB_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_requestedinstitution`
 --
 
 -- DROP TABLE IF EXISTS `t_requestedinstitution`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_requestedinstitution` (
   `RequestedInstitutionID` bigint(20) NOT NULL AUTO_INCREMENT,
   `OrganDonationID` bigint(20) DEFAULT NULL,
@@ -17688,15 +17688,15 @@ CREATE TABLE IF NOT EXISTS `t_requestedinstitution` (
   CONSTRAINT `FK_RequestedInstitution_OrganDonation` FOREIGN KEY (`OrganDonationID`) REFERENCES `t_organdonation` (`OrganDonationID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_RequestedInstitution_ProviderServiceMap` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_saitemmapping`
 --
 
 -- DROP TABLE IF EXISTS `t_saitemmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_saitemmapping` (
   `SAItemMapID` int(11) NOT NULL AUTO_INCREMENT,
   `StockAdjustmentID` int(11) DEFAULT NULL,
@@ -17729,15 +17729,15 @@ CREATE TABLE IF NOT EXISTS `t_saitemmapping` (
   KEY `inx_VanSerialNo` (`VanSerialNo`),
   CONSTRAINT `FK_SAItemMapping_ProviderServiceMap` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_schemeservice`
 --
 
 -- DROP TABLE IF EXISTS `t_schemeservice`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_schemeservice` (
   `SchemeServiceID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RequestID` varchar(30) DEFAULT NULL,
@@ -17761,15 +17761,15 @@ CREATE TABLE IF NOT EXISTS `t_schemeservice` (
   CONSTRAINT `FK_SchemeService_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_SchemeService_Scheme` FOREIGN KEY (`SchemeID`) REFERENCES `m_scheme` (`SchemeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_serviceproviderdetail`
 --
 
 -- DROP TABLE IF EXISTS `t_serviceproviderdetail`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_serviceproviderdetail` (
   `ServiceProviderDetailID` int(11) NOT NULL AUTO_INCREMENT,
   `ServiceProviderID` smallint(6) DEFAULT NULL,
@@ -17806,15 +17806,15 @@ CREATE TABLE IF NOT EXISTS `t_serviceproviderdetail` (
   CONSTRAINT `FK_ServiceProviderDetails_ServiceProvider` FOREIGN KEY (`ServiceProviderID`) REFERENCES `m_serviceprovider` (`ServiceProviderID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ServiceProviderDetails_Status` FOREIGN KEY (`PreviousStatusID`) REFERENCES `m_status` (`StatusID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_smsnotification`
 --
 
 -- DROP TABLE IF EXISTS `t_smsnotification`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_smsnotification` (
   `SMSNotificationID` bigint(20) NOT NULL AUTO_INCREMENT,
   `SMSTemplateID` int(11) DEFAULT NULL,
@@ -17849,15 +17849,15 @@ CREATE TABLE IF NOT EXISTS `t_smsnotification` (
   CONSTRAINT `FK_SMSNotification_User` FOREIGN KEY (`SenderID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_SMSNotification_User1` FOREIGN KEY (`ReceivingUserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=882609 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_smsnotificationdetail`
 --
 
 -- DROP TABLE IF EXISTS `t_smsnotificationdetail`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_smsnotificationdetail` (
   `SMSNotificationDetailID` bigint(20) NOT NULL AUTO_INCREMENT,
   `SMSNotificationID` bigint(20) DEFAULT NULL,
@@ -17885,15 +17885,15 @@ CREATE TABLE IF NOT EXISTS `t_smsnotificationdetail` (
   CONSTRAINT `FK_SMSNotDetail_SMSTemplate` FOREIGN KEY (`SMSTemplateID`) REFERENCES `m_smstemplate` (`SMSTemplateID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_SMSNotDetail_User` FOREIGN KEY (`SenderID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_specialistavailability`
 --
 
 -- DROP TABLE IF EXISTS `t_specialistavailability`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_specialistavailability` (
   `SpecialistAvailabilityID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
@@ -17910,15 +17910,15 @@ CREATE TABLE IF NOT EXISTS `t_specialistavailability` (
   KEY `FK_SprcialistAvailability_User_idx` (`UserID`),
   CONSTRAINT `FK_SprcialistAvailability_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=8891 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_specialistavailabilitydetail`
 --
 
 -- DROP TABLE IF EXISTS `t_specialistavailabilitydetail`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_specialistavailabilitydetail` (
   `SpecialistAvailabilityDetailID` bigint(20) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
@@ -17938,15 +17938,15 @@ CREATE TABLE IF NOT EXISTS `t_specialistavailabilitydetail` (
   KEY `FK_SpecialistAvailabilityDetail_User_idx` (`UserID`),
   CONSTRAINT `FK_SpecialistAvailabilityDetail_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1009 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_stockadjustment`
 --
 
 -- DROP TABLE IF EXISTS `t_stockadjustment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_stockadjustment` (
   `StockAdjustmentID` int(11) NOT NULL AUTO_INCREMENT,
   `RefNo` varchar(30) DEFAULT NULL,
@@ -17975,15 +17975,15 @@ CREATE TABLE IF NOT EXISTS `t_stockadjustment` (
   CONSTRAINT `FK_StockAdjustment_Facility` FOREIGN KEY (`FacilityID`) REFERENCES `m_facility` (`FacilityID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_StockAdjustment_ProviderServiceMap` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_stocktransfer`
 --
 
 -- DROP TABLE IF EXISTS `t_stocktransfer`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_stocktransfer` (
   `StockTransferID` int(11) NOT NULL AUTO_INCREMENT,
   `TransferFromFacilityID` int(11) DEFAULT NULL,
@@ -18020,15 +18020,15 @@ CREATE TABLE IF NOT EXISTS `t_stocktransfer` (
   CONSTRAINT `FK_StockTransfer_Facility1` FOREIGN KEY (`TransferToFacilityID`) REFERENCES `m_facility` (`FacilityID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_StockTransfer_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_swaasa`
 --
 
 -- DROP TABLE IF EXISTS `t_swaasa`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_swaasa` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `Beneficiaryregid` bigint(20) NOT NULL,
@@ -18058,15 +18058,15 @@ CREATE TABLE IF NOT EXISTS `t_swaasa` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_sys_cardiovascular`
 --
 
 -- DROP TABLE IF EXISTS `t_sys_cardiovascular`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_sys_cardiovascular` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -18104,15 +18104,15 @@ CREATE TABLE IF NOT EXISTS `t_sys_cardiovascular` (
   CONSTRAINT `FK_SysCardiovascular_BenVisiyDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_SysCardiovascular_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1832110 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_sys_centralnervous`
 --
 
 -- DROP TABLE IF EXISTS `t_sys_centralnervous`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_sys_centralnervous` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -18150,15 +18150,15 @@ CREATE TABLE IF NOT EXISTS `t_sys_centralnervous` (
   CONSTRAINT `FK_SysCentralNervous_BenVisiyDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_SysCentralNervous_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1739425 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_sys_gastrointestinal`
 --
 
 -- DROP TABLE IF EXISTS `t_sys_gastrointestinal`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_sys_gastrointestinal` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -18198,15 +18198,15 @@ CREATE TABLE IF NOT EXISTS `t_sys_gastrointestinal` (
   CONSTRAINT `FK_SysGastrointestinal_BenVisiyDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_SysGastrointestinal_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1739923 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_sys_genitourinarysystem`
 --
 
 -- DROP TABLE IF EXISTS `t_sys_genitourinarysystem`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_sys_genitourinarysystem` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -18239,15 +18239,15 @@ CREATE TABLE IF NOT EXISTS `t_sys_genitourinarysystem` (
   CONSTRAINT `FK_SysGenitourinarySystem_BenVisiyDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_SysGenitourinarySystem_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1681287 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_sys_musculoskeletalsystem`
 --
 
 -- DROP TABLE IF EXISTS `t_sys_musculoskeletalsystem`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_sys_musculoskeletalsystem` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -18286,15 +18286,15 @@ CREATE TABLE IF NOT EXISTS `t_sys_musculoskeletalsystem` (
   CONSTRAINT `FK_SysMusculoskeletalSystem_BenVisiyDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_SysMusculoskeletalSystem_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1709729 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_sys_obstetric`
 --
 
 -- DROP TABLE IF EXISTS `t_sys_obstetric`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_sys_obstetric` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -18339,15 +18339,15 @@ CREATE TABLE IF NOT EXISTS `t_sys_obstetric` (
   CONSTRAINT `FK_SysObstetric_BenVisiyDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_SysObstetric_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=132982 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_sys_respiratory`
 --
 
 -- DROP TABLE IF EXISTS `t_sys_respiratory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_sys_respiratory` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -18389,15 +18389,15 @@ CREATE TABLE IF NOT EXISTS `t_sys_respiratory` (
   CONSTRAINT `FK_SysRespiratory_BenVisiyDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_SysRespiratory_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1786973 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_tmrequest`
 --
 
 -- DROP TABLE IF EXISTS `t_tmrequest`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_tmrequest` (
   `TMRequestID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -18435,15 +18435,15 @@ CREATE TABLE IF NOT EXISTS `t_tmrequest` (
   CONSTRAINT `FK_TMRequest_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_TMRequest_Van` FOREIGN KEY (`VanID`) REFERENCES `m_van` (`VanID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=98851 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_tmstats`
 --
 
 -- DROP TABLE IF EXISTS `t_tmstats`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_tmstats` (
   `TMStatsID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -18464,15 +18464,15 @@ CREATE TABLE IF NOT EXISTS `t_tmstats` (
   KEY `regid` (`BeneficiaryRegID`),
   KEY `visitCode` (`VisitCode`)
 ) ENGINE=InnoDB AUTO_INCREMENT=85801 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_treatment`
 --
 
 -- DROP TABLE IF EXISTS `t_treatment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_treatment` (
   `TreatmentID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -18510,15 +18510,15 @@ CREATE TABLE IF NOT EXISTS `t_treatment` (
   CONSTRAINT `FK_Treatment_BenVisiyDetail1` FOREIGN KEY (`VisitCode`) REFERENCES `t_benvisitdetail` (`VisitCode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Treatment_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_userattendance`
 --
 
 -- DROP TABLE IF EXISTS `t_userattendance`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_userattendance` (
   `UserAttendanceID` bigint(20) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
@@ -18549,15 +18549,15 @@ CREATE TABLE IF NOT EXISTS `t_userattendance` (
   CONSTRAINT `FK_UserAttendance_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_UserAttendance_Van` FOREIGN KEY (`VanID`) REFERENCES `m_van` (`VanID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_userdetail`
 --
 
 -- DROP TABLE IF EXISTS `t_userdetail`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_userdetail` (
   `UserDetailID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
@@ -18587,15 +18587,15 @@ CREATE TABLE IF NOT EXISTS `t_userdetail` (
   CONSTRAINT `FK_UserDetail_Status1` FOREIGN KEY (`UpdatedStatusID`) REFERENCES `m_status` (`StatusID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_UserDetails_User` FOREIGN KEY (`UserID`) REFERENCES `m_user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_userlogindetails`
 --
 
 -- DROP TABLE IF EXISTS `t_userlogindetails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_userlogindetails` (
   `LoginDetailID` bigint(20) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
@@ -18622,15 +18622,15 @@ CREATE TABLE IF NOT EXISTS `t_userlogindetails` (
   CONSTRAINT `FK_UserLoginDetails_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_UserLoginDetails_ServiceMaster` FOREIGN KEY (`LoginServiceID`) REFERENCES `m_servicemaster` (`ServiceID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `tb_screening`
 --
 
 -- DROP TABLE IF EXISTS `tb_screening`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `tb_screening` (
   `id` bigint(20) NOT NULL,
   `ben_id` bigint(20) DEFAULT NULL,
@@ -18646,15 +18646,15 @@ CREATE TABLE IF NOT EXISTS `tb_screening` (
   `visit_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `tb_suspected`
 --
 
 -- DROP TABLE IF EXISTS `tb_suspected`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `tb_suspected` (
   `id` bigint(20) NOT NULL,
   `ben_id` bigint(20) DEFAULT NULL,
@@ -18668,15 +18668,15 @@ CREATE TABLE IF NOT EXISTS `tb_suspected` (
   `visit_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `tbencalllog`
 --
 
 -- DROP TABLE IF EXISTS `tbencalllog`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `tbencalllog` (
   `tbencalllogid` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenCallID` bigint(20) DEFAULT NULL,
@@ -18700,15 +18700,15 @@ CREATE TABLE IF NOT EXISTS `tbencalllog` (
   KEY `inx_BenCallID` (`BenCallID`),
   KEY `inx_BeneficiaryRegID` (`BeneficiaryRegID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3431282 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `temp_masterdrug`
 --
 
 -- DROP TABLE IF EXISTS `temp_masterdrug`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `temp_masterdrug` (
   `DrugID` int(11) NOT NULL AUTO_INCREMENT,
   `DrugName` varchar(200) DEFAULT NULL,
@@ -18723,15 +18723,15 @@ CREATE TABLE IF NOT EXISTS `temp_masterdrug` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`DrugID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `temp_van`
 --
 
 -- DROP TABLE IF EXISTS `temp_van`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `temp_van` (
   `TempVanID` int(11) NOT NULL AUTO_INCREMENT,
   `VanID` int(11) DEFAULT NULL,
@@ -18747,7 +18747,7 @@ CREATE TABLE IF NOT EXISTS `temp_van` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`TempVanID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Temporary view structure for view `v_104benmedhistory`
@@ -18755,8 +18755,8 @@ CREATE TABLE IF NOT EXISTS `temp_van` (
 
 -- DROP TABLE IF EXISTS `v_104benmedhistory`;
 /*!50001 DROP VIEW IF EXISTS `v_104benmedhistory`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_104benmedhistory` AS SELECT 
  1 AS `BenHistoryID`,
  1 AS `RequestID`,
@@ -18791,7 +18791,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `ModifiedBy`,
  1 AS `LastModDate`,
  1 AS `IsChiefComplaint`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_benprocedurecomponentdetails`
@@ -18799,8 +18799,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_benprocedurecomponentdetails`;
 /*!50001 DROP VIEW IF EXISTS `v_benprocedurecomponentdetails`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_benprocedurecomponentdetails` AS SELECT 
  1 AS `id`,
  1 AS `BeneficiaryRegID`,
@@ -18837,7 +18837,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `ResultValue`,
  1 AS `isDecimal`,
  1 AS `isMandatory`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_doortodooruserdetails`
@@ -18845,8 +18845,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_doortodooruserdetails`;
 /*!50001 DROP VIEW IF EXISTS `v_doortodooruserdetails`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_doortodooruserdetails` AS SELECT 
  1 AS `id`,
  1 AS `UserID`,
@@ -18866,7 +18866,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `VillageName`,
  1 AS `designationid`,
  1 AS `designationname`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_drugforprescription`
@@ -18874,8 +18874,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_drugforprescription`;
 /*!50001 DROP VIEW IF EXISTS `v_drugforprescription`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_drugforprescription` AS SELECT 
  1 AS `id`,
  1 AS `itemID`,
@@ -18890,7 +18890,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `SctTerm`,
  1 AS `composition`,
  1 AS `isedl`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_emailstockalert`
@@ -18898,8 +18898,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_emailstockalert`;
 /*!50001 DROP VIEW IF EXISTS `v_emailstockalert`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_emailstockalert` AS SELECT 
  1 AS `uuid`,
  1 AS `facilityId`,
@@ -18912,7 +18912,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `emailid`,
  1 AS `DistrictName`,
  1 AS `QuantityConsumedPercent`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_fetchfacility`
@@ -18920,8 +18920,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_fetchfacility`;
 /*!50001 DROP VIEW IF EXISTS `v_fetchfacility`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_fetchfacility` AS SELECT 
  1 AS `FacilityID`,
  1 AS `FacilityName`,
@@ -18951,7 +18951,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `VanTypeID`,
  1 AS `VanParkingPlaceID`,
  1 AS `VanDeleted`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_fetchitemfacilitymap`
@@ -18959,8 +18959,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_fetchitemfacilitymap`;
 /*!50001 DROP VIEW IF EXISTS `v_fetchitemfacilitymap`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_fetchitemfacilitymap` AS SELECT 
  1 AS `ItemFacilityMapID`,
  1 AS `ProviderServiceMapID`,
@@ -19001,7 +19001,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `IsScheduledDrug`,
  1 AS `RouteID`,
  1 AS `ItemDeleted`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_fetchnotification`
@@ -19009,8 +19009,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_fetchnotification`;
 /*!50001 DROP VIEW IF EXISTS `v_fetchnotification`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_fetchnotification` AS SELECT 
  1 AS `UserNotificationMapID`,
  1 AS `NotificationID`,
@@ -19027,7 +19027,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `CreatedDate`,
  1 AS `ModifiedBy`,
  1 AS `LastModDate`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_get_call_section_mapping`
@@ -19035,8 +19035,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_get_call_section_mapping`;
 /*!50001 DROP VIEW IF EXISTS `v_get_call_section_mapping`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_get_call_section_mapping` AS SELECT 
  1 AS `id`,
  1 AS `callconfigid`,
@@ -19046,7 +19046,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `callsectionrank`,
  1 AS `providerservicemapid`,
  1 AS `deleted`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_get_prkngplc_blok_dist_zone_state`
@@ -19054,8 +19054,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_get_prkngplc_blok_dist_zone_state`;
 /*!50001 DROP VIEW IF EXISTS `v_get_prkngplc_blok_dist_zone_state`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_get_prkngplc_blok_dist_zone_state` AS SELECT 
  1 AS `Servicepointid`,
  1 AS `ParkingPlaceID`,
@@ -19071,7 +19071,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `SPproviderservicemapid`,
  1 AS `PPproviderservicemapid`,
  1 AS `ZDMproviderservicemapid`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_get_prkngplc_dist_zone_state_from_spid`
@@ -19079,8 +19079,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_get_prkngplc_dist_zone_state_from_spid`;
 /*!50001 DROP VIEW IF EXISTS `v_get_prkngplc_dist_zone_state_from_spid`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_get_prkngplc_dist_zone_state_from_spid` AS SELECT 
  1 AS `ProviderServiceMapID`,
  1 AS `ServicePointID`,
@@ -19092,7 +19092,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `ZoneName`,
  1 AS `StateID`,
  1 AS `StateName`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_get_qualityaudit_sectionquestionairevalues`
@@ -19100,8 +19100,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_get_qualityaudit_sectionquestionairevalues`;
 /*!50001 DROP VIEW IF EXISTS `v_get_qualityaudit_sectionquestionairevalues`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_get_qualityaudit_sectionquestionairevalues` AS SELECT 
  1 AS `id`,
  1 AS `sectionId`,
@@ -19115,7 +19115,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `Score`,
  1 AS `ProviderServiceMapID`,
  1 AS `isFatalQuestion`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_get_section_question_mapping`
@@ -19123,8 +19123,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_get_section_question_mapping`;
 /*!50001 DROP VIEW IF EXISTS `v_get_section_question_mapping`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_get_section_question_mapping` AS SELECT 
  1 AS `id`,
  1 AS `ProviderServiceMapID`,
@@ -19138,7 +19138,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `Role`,
  1 AS `QuestionType`,
  1 AS `deleted`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_get_section_question_mapping_associate`
@@ -19146,8 +19146,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_get_section_question_mapping_associate`;
 /*!50001 DROP VIEW IF EXISTS `v_get_section_question_mapping_associate`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_get_section_question_mapping_associate` AS SELECT 
  1 AS `id`,
  1 AS `ProviderServiceMapID`,
@@ -19167,7 +19167,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `parentQuestion`,
  1 AS `parentAnswer`,
  1 AS `Role`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_get_userlangmapping`
@@ -19175,14 +19175,14 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_get_userlangmapping`;
 /*!50001 DROP VIEW IF EXISTS `v_get_userlangmapping`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_get_userlangmapping` AS SELECT 
  1 AS `userlangid`,
  1 AS `userid`,
  1 AS `languageid`,
  1 AS `LanguageName`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_getagentsbyroleid`
@@ -19190,8 +19190,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_getagentsbyroleid`;
 /*!50001 DROP VIEW IF EXISTS `v_getagentsbyroleid`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_getagentsbyroleid` AS SELECT 
  1 AS `USRMappingID`,
  1 AS `UserID`,
@@ -19200,7 +19200,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `LastName`,
  1 AS `RoleID`,
  1 AS `AgentID`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_getdialpreference`
@@ -19208,8 +19208,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_getdialpreference`;
 /*!50001 DROP VIEW IF EXISTS `v_getdialpreference`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_getdialpreference` AS SELECT 
  1 AS `USRMappingID`,
  1 AS `UserID`,
@@ -19221,7 +19221,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `isAutoPreviewDial`,
  1 AS `PreviewWindowTime`,
  1 AS `ProviderServiceMapID`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_getprescribeddrugswithdetails`
@@ -19229,8 +19229,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_getprescribeddrugswithdetails`;
 /*!50001 DROP VIEW IF EXISTS `v_getprescribeddrugswithdetails`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_getprescribeddrugswithdetails` AS SELECT 
  1 AS `PrescribedDrugID`,
  1 AS `BeneficiaryRegID`,
@@ -19257,7 +19257,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `QuantityInHand`,
  1 AS `ExpiryDate`,
  1 AS `isEDL`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_getvanlocdetails`
@@ -19265,8 +19265,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_getvanlocdetails`;
 /*!50001 DROP VIEW IF EXISTS `v_getvanlocdetails`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_getvanlocdetails` AS SELECT 
  1 AS `VanID`,
  1 AS `ParkingPlaceID`,
@@ -19280,7 +19280,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `District_LGDCode`,
  1 AS `State_LGDCode`,
  1 AS `ProviderServiceMapID`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_mother_child_feedback_report`
@@ -19288,8 +19288,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_mother_child_feedback_report`;
 /*!50001 DROP VIEW IF EXISTS `v_mother_child_feedback_report`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_mother_child_feedback_report` AS SELECT 
  1 AS `FeedbackID`,
  1 AS `RequestID`,
@@ -19547,7 +19547,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `DueServices`,
  1 AS `OverDueServices`,
  1 AS `GivenServices`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_showprovideradmin`
@@ -19555,8 +19555,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_showprovideradmin`;
 /*!50001 DROP VIEW IF EXISTS `v_showprovideradmin`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_showprovideradmin` AS SELECT 
  1 AS `USRMappingID`,
  1 AS `UserID`,
@@ -19588,7 +19588,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `ServiceDeleted`,
  1 AS `StateID`,
  1 AS `StateName`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_showproviderservicemapping`
@@ -19596,8 +19596,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_showproviderservicemapping`;
 /*!50001 DROP VIEW IF EXISTS `v_showproviderservicemapping`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_showproviderservicemapping` AS SELECT 
  1 AS `ProviderServiceMapID`,
  1 AS `ServiceProviderID`,
@@ -19624,7 +19624,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `CreatedDate`,
  1 AS `ModifiedBy`,
  1 AS `LastModDate`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_showsubcategory`
@@ -19632,8 +19632,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_showsubcategory`;
 /*!50001 DROP VIEW IF EXISTS `v_showsubcategory`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_showsubcategory` AS SELECT 
  1 AS `CategoryID`,
  1 AS `CategoryName`,
@@ -19647,7 +19647,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `SubServiceName`,
  1 AS `ProviderServiceMapID`,
  1 AS `CategoryDeleted`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_showuser`
@@ -19655,8 +19655,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_showuser`;
 /*!50001 DROP VIEW IF EXISTS `v_showuser`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_showuser` AS SELECT 
  1 AS `UserID`,
  1 AS `TitleID`,
@@ -19727,7 +19727,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `IsPermanent`,
  1 AS `DemographicDeleted`,
  1 AS `HealthProfessionalID`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_temp`
@@ -19735,8 +19735,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_temp`;
 /*!50001 DROP VIEW IF EXISTS `v_temp`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_temp` AS SELECT 
  1 AS `id`,
  1 AS `Bencallid`,
@@ -19757,7 +19757,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `SectionRank`,
  1 AS `Question`,
  1 AS `QuestionRank`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_userprkngplacvanspstatedisblok`
@@ -19765,8 +19765,8 @@ SET character_set_client = @saved_cs_client;
 
 -- DROP TABLE IF EXISTS `v_userprkngplacvanspstatedisblok`;
 /*!50001 DROP VIEW IF EXISTS `v_userprkngplacvanspstatedisblok`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_userprkngplacvanspstatedisblok` AS SELECT 
  1 AS `userid`,
  1 AS `VanID`,
@@ -19778,7 +19778,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `ProviderServiceMapID`,
  1 AS `IsFacility`,
  1 AS `FacilityID`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_userservicerolemapping`
@@ -19827,64 +19827,64 @@ SET character_set_client = @saved_cs_client;
 --
 -- Dumping events for database 'db_iemr'
 --
-/*!50106 SET @save_time_zone= @@TIME_ZONE */ ;
+-- /*!50106 SET @save_time_zone= @@TIME_ZONE */ ;
 /*!50106 DROP EVENT IF EXISTS `Event_TMSaveWorkList` */;
 DELIMITER ;;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;;
-/*!50003 SET character_set_client  = utf8 */ ;;
-/*!50003 SET character_set_results = utf8 */ ;;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
-/*!50003 SET @saved_time_zone      = @@time_zone */ ;;
-/*!50003 SET time_zone             = 'SYSTEM' */ ;;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;;
+-- /*!50003 SET character_set_client  = utf8 */ ;;
+-- /*!50003 SET character_set_results = utf8 */ ;;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
+-- /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
+-- /*!50003 SET time_zone             = 'SYSTEM' */ ;;
 /*!50106 CREATE*/ /*!50117 */ /*!50106 EVENT `Event_TMSaveWorkList` ON SCHEDULE EVERY 30 MINUTE STARTS '2021-02-23 11:15:10' ON COMPLETION NOT PRESERVE DISABLE DO begin
 CALL Pr_TMSaveWorkList();
 
 end */ ;;
-/*!50003 SET time_zone             = @saved_time_zone */ ;;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;;
-/*!50003 SET character_set_results = @saved_cs_results */ ;;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;;
+-- /*!50003 SET time_zone             = @saved_time_zone */ ;;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;;
 /*!50106 DROP EVENT IF EXISTS `Event_UpdateIsOutboundnullData` */;;
 DELIMITER ;;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;;
-/*!50003 SET character_set_client  = utf8mb4 */ ;;
-/*!50003 SET character_set_results = utf8mb4 */ ;;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
-/*!50003 SET @saved_time_zone      = @@time_zone */ ;;
-/*!50003 SET time_zone             = 'SYSTEM' */ ;;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
+-- /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
+-- /*!50003 SET time_zone             = 'SYSTEM' */ ;;
 /*!50106 CREATE*/ /*!50117 */ /*!50106 EVENT `Event_UpdateIsOutboundnullData` ON SCHEDULE EVERY 1 DAY STARTS '2023-12-20 03:00:00' ON COMPLETION NOT PRESERVE ENABLE DO begin
 CALL Pr_UpdateIsOutboundnull_Data();
 
 end */ ;;
-/*!50003 SET time_zone             = @saved_time_zone */ ;;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;;
-/*!50003 SET character_set_results = @saved_cs_results */ ;;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;;
+-- /*!50003 SET time_zone             = @saved_time_zone */ ;;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;;
 DELIMITER ;
-/*!50106 SET TIME_ZONE= @save_time_zone */ ;
+-- /*!50106 SET TIME_ZONE= @save_time_zone */ ;
 
 --
 -- Dumping routines for database 'db_iemr'
 --
 /*!50003 DROP PROCEDURE IF EXISTS `D_mmu_adolescent` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_mmu_adolescent`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -19910,19 +19910,19 @@ SELECT totalPatient, totalAdolescents, newAdolescents, femaleAdolescents;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_AllDiabetic` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_AllDiabetic`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -20049,19 +20049,19 @@ select count(distinct ADT.BeneficiaryRegID) from AllDiabeticTemp ADT
 select  v_AllDiabetic,v_AllDiaRef,v_AllDiaControl,v_AllDiaFemale;
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_AllDiaHTN` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_AllDiaHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -20174,19 +20174,19 @@ select count(distinct BeneficiaryRegID) from AllDiaHTNTemp into v_AllDIaHTN;
 select  v_AllDiaHTN;
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_AllDiaTest` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_AllDiaTest`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -20223,19 +20223,19 @@ where DATE(LTR.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate)
 select v_AllRBS, v_AllHbA1C, v_AllUrineSugar;
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_AllHTN` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_AllHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -20365,19 +20365,19 @@ select v_AllHTN,v_AllHTNRef,v_AllHTNFemale;
     
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_mmu_anc` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_mmu_anc`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -20424,19 +20424,19 @@ SELECT totalANC, newANC, oldANC, trimester1, trimester2, trimester3, highRiskANC
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_mmu_below_5` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_mmu_below_5`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -20471,19 +20471,19 @@ SELECT totalBelow5, newBelow5, oldBelow5, femaleBelow5, referredBelow5, totalPat
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_mmu_common` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_mmu_common`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -20508,19 +20508,19 @@ SELECT COUNT(Distinct beneficiary_reg_id) FROM i_ben_flow_outreach WHERE DATE(vi
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_NewDiabetic` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_NewDiabetic`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -20610,19 +20610,19 @@ select v_NewDiabetic;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_NewDiaDetected` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_NewDiaDetected`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -20694,19 +20694,19 @@ select v_NewDiaDetected, v_NewDiaTreatment;
     
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_NewHTN` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_NewHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -20796,19 +20796,19 @@ select v_NewHTN;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_OldDiabetic` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_OldDiabetic`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -20828,19 +20828,19 @@ select v_OldDiabetic;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_OldDiaFollowUp` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_OldDiaFollowUp`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -20862,19 +20862,19 @@ select v_OldDiaFollowUp;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_OldDiaTest` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_OldDiaTest`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -20927,19 +20927,19 @@ select v_OldRBS, v_OldHbA1C , v_OldUrineSugar;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_OldHTN` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_OldHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -20959,19 +20959,19 @@ select v_OldHTN;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_OldHTNFollowUp` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_OldHTNFollowUp`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -20993,19 +20993,19 @@ select v_OldHTNFollowUp;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_mmu_pnc` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_mmu_pnc`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -21032,19 +21032,19 @@ SELECT COUNT(Distinct t.BeneficiaryRegID) FROM t_benvisitdetail t WHERE DATE(t.C
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `FHIR_R_AllergyIntolerance` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `FHIR_R_AllergyIntolerance`(
 # IN parameter
@@ -21066,19 +21066,19 @@ SELECT ID, beneficiaryRegID , visitCode, providerServiceMapID, vanID, allergySta
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `FHIR_R_Appointment` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `FHIR_R_Appointment`(
 # IN parameter
@@ -21102,19 +21102,19 @@ WHERE t1.BeneficiaryRegID = beneficiaryRegID_IN AND t1.VisitCode = visitCode_IN;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `FHIR_R_ChiefComplaints` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `FHIR_R_ChiefComplaints`(
 # IN parameter
@@ -21137,19 +21137,19 @@ ChiefComplaint is not null AND length(ChiefComplaint) > 0
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `FHIR_R_Diagnosis` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `FHIR_R_Diagnosis`(
 # IN parameter
@@ -21214,19 +21214,19 @@ AND length(ProvisionalDiagnosisPrimaryDoctor) > 0
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `FHIR_R_DiagnosticReportLab` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `FHIR_R_DiagnosticReportLab`(
 # IN parameter
@@ -21254,19 +21254,19 @@ t.Deleted IS NOT TRUE ;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `FHIR_R_Encounter` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `FHIR_R_Encounter`(
 # IN parameter
@@ -21295,19 +21295,19 @@ WHERE beneficiary_reg_id = beneficiaryRegID_IN AND beneficiary_visit_code = visi
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `FHIR_R_FamilyMemberHistory` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `FHIR_R_FamilyMemberHistory`(
 # IN parameter
@@ -21330,19 +21330,19 @@ Deleted IS NOT TRUE AND FamilyMember IS NOT NULL AND length(FamilyMember) > 0 AN
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `FHIR_R_Immunization` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `FHIR_R_Immunization`(
 # IN parameter
@@ -21369,19 +21369,19 @@ Deleted IS NOT TRUE   AND
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `FHIR_R_MedicationStatement` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `FHIR_R_MedicationStatement`(
 # IN parameter
@@ -21410,19 +21410,19 @@ Deleted IS NOT TRUE ;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `FHIR_R_PatientDemographic` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `FHIR_R_PatientDemographic`(
 # IN parameter
@@ -21482,19 +21482,19 @@ LEFT JOIN m_benhealthidmapping BH ON BM.BenRegId=BH.BeneficiaryRegID
  
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `FHIR_R_Vitals_Anthropometry` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `FHIR_R_Vitals_Anthropometry`(
 # IN parameter
@@ -21566,19 +21566,19 @@ v.Weight_Kg ,
  
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `getANCRecIFATab` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `getANCRecIFATab`(fromDate DATETIME, toDate DATETIME, PSMID int)
 BEGIN
@@ -21591,19 +21591,19 @@ INNER JOIN m_item MI on ISEN.ItemID = MI.ItemID AND MI.ItemName IN ('IFA', 'iron
 
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `getANCRefCount` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `getANCRefCount`(fromDate DATETIME, toDate DATETIME, PSMID int)
 BEGIN
@@ -21612,19 +21612,19 @@ INNER JOIN t_benreferdetails BRD ON BVD.BeneficiaryRegID = BRD.BeneficiaryRegID 
 WHERE BVD.VisitCategory = 'ANC' AND date(BRD.LastModDate) between date(fromDate) and date(toDate) and BVD.ProviderServiceMapID = PSMID;
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104HAOReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104HAOReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
@@ -21650,19 +21650,19 @@ select t.benHistoryID, t.requestID, t.beneficiaryRegID, t.benCallID, t.patientNa
             
             end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104IntegrationBhayaData` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104IntegrationBhayaData`(v_fromdate datetime,v_todate datetime)
 begin
@@ -21777,19 +21777,19 @@ where t1.createddate between v_fromdate and v_todate and
 
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_actor_wise_quality_rating` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_actor_wise_quality_rating`(v_psmrid int(11),v_rolename varchar(100),v_monthname varchar(50))
 begin
@@ -21804,19 +21804,19 @@ inner join m_user u on u.userid=t2.CallReceivedUserID
  group by t2.ReceivedAgentID;
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_BenChiefcomplaint_Diagnosis` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_BenChiefcomplaint_Diagnosis`(
 
@@ -21897,19 +21897,19 @@ WHERE t.BeneficiaryRegID = beneficiaryRegID_IN -- AND t.VisitCode = visitCode_IN
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_BeneficiaryCallResponse` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_BeneficiaryCallResponse`(v_bencallid bigint(20))
 begin
@@ -21920,19 +21920,19 @@ inner join m_questionnaire mq on mq.QuestionID=t2.QuestionID
 where t1.bencallid=v_bencallid;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_BeneficiaryCasesheet` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_BeneficiaryCasesheet`(v_bencallid bigint(20))
 begin
@@ -21974,19 +21974,19 @@ inner join t_bencall t3 on t3.obcallid=t1.obcallid
 where t3.bencallid=v_bencallid;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_BeneficiaryDetails` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_BeneficiaryDetails`(v_BenRegid bigint(20))
 begin
@@ -22016,19 +22016,19 @@ left join m_districtbranchmapping md on md.DistrictBranchID=BA.PermVillageID
  
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ConfirmatoryScreening` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ConfirmatoryScreening`(v_benregid bigint(20))
 begin
@@ -22072,19 +22072,19 @@ group by BeneficiaryRegID;
 
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDCallDetailsReport_16042024` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDCallDetailsReport_16042024`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
@@ -22177,19 +22177,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDMapQuestions` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDMapQuestions`(
 v_psmid int(11))
@@ -22216,19 +22216,19 @@ order by mq.LastModDate desc
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchChildOutboundWorklist` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchChildOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
@@ -22296,19 +22296,19 @@ AND(current_date() between mctsoutbou0_.CallDateFrom AND mctsoutbou0_.CallDateTo
 group by A.childID)B;
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchECDChildOutboundWorklist` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchECDChildOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
@@ -22553,19 +22553,19 @@ AND  case when ((v_NextAttemptPeriod=0) or ( NoOfTrials=0))   then (current_time
 group by A.childID)B;
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchECDChildOutboundWorklist_test190224` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchECDChildOutboundWorklist_test190224`(v_AllocatedUserID int)
 BEGIN
@@ -22810,19 +22810,19 @@ AND  case when ((v_NextAttemptPeriod=0) or ( NoOfTrials=0))   then (current_time
 group by A.childID)B;
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchECDMotherOutboundWorklist` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchECDMotherOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
@@ -22956,236 +22956,240 @@ B
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `PR_FetchMCTS_1` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `PR_FetchMCTS_1` */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+
 DELIMITER ;;
-CREATE  PROCEDURE `PR_FetchMCTS_1`( IN P_ProviderServiceMapID INT)
+CREATE PROCEDURE `PR_FetchMCTS_1`(IN P_ProviderServiceMapID INT)
 BEGIN
-select * from (
-select 
-
-C.OBCallID,
-C.OutboundCallType,
-C.DisplayOBCallType,
-C.CallDateFrom,
-C.AllocationStatus,
-D.PhoneNo_Of_Whom,
-D.High_Risk
-/*
-B.OutboundCallType,
-B.motherID,
-C.OBCallID,
-C.MotherID,
-C.ChildID,
-C.BeneficiaryRegID,
-C.AllocatedUserID,
-C.ProviderServiceMapID,
-C.OutboundCallType,
-C.DisplayOBCallType,
-C.CallDateFrom,
-C.CallDateTo,
-C.PrefferedCallDate,
-C.CallStatus,
-C.NoOfTrials,
-C.AllocationStatus,
-C.IsSMSSent,
-C.Deleted,
-C.Processed,
-C.CreatedBy,
-C.CreatedDate,
-C.ModifiedBy,
-C.LastModDate,
-D.MotherValidRecordID,
-D.RowID,
-D.BeneficiaryRegID,
-D.Date_of_Entry,
-D.Entry_type,
-D.MCTSID_no,
-D.Name,
-D.Husband_Name,
-D.PhoneNo_Of_Whom,
-D.Whom_PhoneNo,
-D.Birth_Date,
-D.Age,
-D.Blood_Group,
-D.Caste,
-D.Aadhar_no,
-D.State_ID,
-D.State_Name,
-D.District_ID,
-D.District_Name,
-D.Taluka_Name,
-D.Taluka_ID,
-D.Block_ID,
-D.Block_Name,
-D.SubCenter_ID,
-D.SubCenter_Name,
-D.Village_ID,
-D.Village_Name,
-D.City_ID,
-D.City_Name,
-D.SubCenter_Name1,
-D.ANM_ID,
-D.ANM_Name,
-D.ANM_Ph,
-D.ASHA_ID,
-D.ASHA_Name,
-D.ASHA_Ph,
-D.PHC_ID,
-D.PHC_Name,
-D.SUBPHC_ID,
-D.SUBPHC_Name,
-D.YR,
-D.GP_Village,
-D.Address,
-D.LMP_Date,
-D.ANC1_Date,
-D.ANC2_Date,
-D.ANC3_Date,
-D.ANC4_Date,
-D.ANC_Complication,
-D.TT1_Date,
-D.TT2_Date,
-D.TTBooster_Date,
-D.IFA100_Given_Date,
-D.EDD,
-D.Anemia,
-D.RTI_STI,
-D.Delivery_Lnk_Facility,
-D.Facility_Name,
-D.Delivery_Date,
-D.Delivery_Place_home_type,
-D.Delivery_Place_Public,
-D.Delivery_Place_Private,
-D.Delivery_type,
-D.Delivery_Complications,
-D.Discharge_Date,
-D.Abortion,
-D.PNC_Home_Visit,
-D.PNC_Complication,
-D.PPC_Method,
-D.PNC_Checkup,
-D.Outcome_Nos,
-D.Child1_ID,
-D.Child1_Name,
-D.Child1_Gender,
-D.Child1_Weight,
-D.Child1_BreastFeeding,
-D.Child2_ID,
-D.Child2_Name,
-D.Child2_Gender,
-D.Child2_weight,
-D.Child2_Breastfeeding,
-D.Child3_ID,
-D.Child3_Name,
-D.Child3_Gender,
-D.Child3_Weight,
-D.Child3_Breastfeeding,
-D.Child4_ID,
-D.Child4_Name,
-D.Child4_Gender,
-D.Child4_Weight,
-D.Child4_Breastfeeding,
-D.Mother_Reg_Date,
-D.Last_Update_Date,
-D.EID,
-D.EID_time,
-D.CPSMS_Flag,
-D.JSY_Beneficiary,
-D.JSY_Paid_Date,
-D.Bank_Name,
-D.Bank_Branch_Name,
-D.Acc_No,
-D.IFSC_Code,
-D.Remarks,
-D.Referred_By_Telecaller,
-D.Referred_Date,
-D.No_of_Try,
-D.Call_Answered,
-D.Status,
-D.High_Risk,
-D.High_Risk_Reason,
-D.Call_Verified,
-D.Associate,
-D.Call_Date,
-D.Due_Services,
-D.Due_Services_Response,
-D.Overdue_Services,
-D.Overdue_Services_Response,
-D.Given_Services,
-D.Given_Services_Response,
-D.Miscarriage,
-D.Baby_Died,
-D.Call_No,
-D.Questions_Asked,
-D.Asnwer_Given_by_Benificary,
-D.Source,
-D.NoCall_Reason,
-D.NoPhone_Reason,
-D.Created_By,
-D.Updated_By,
-D.BPL_APL,
-D.MDDS_StateID,
-D.MDDS_District_ID,
-D.MDDS_Taluka_ID,
-D.MDDS_Village_ID,
-D.Is_Valid,
-D.InValid_Reason,
-D.Is_Error,
-D.Error_Reason,
-D.FileID,
-D.IsAllocated,
-D.Deleted,
-D.Processed,
-D.CreatedBy,
-D.CreatedDate,
-D.ModifiedBy,
-D.LastModDate*/
- from (
-SELECT MIN(A.OutboundCallType) OutboundCallType,A.motherID FROM (
-select mctsoutbou0_.motherID,mctsoutbou0_.OutboundCallType from t_MCTSOutboundCalls mctsoutbou0_
-inner join t_mothervalidrecord mother on mctsoutbou0_.motherID=mother.MCTSID_no
-where mctsoutbou0_.CallStatus!='Completed'
- and  mctsoutbou0_.CallDateTo>=current_date
--- and (mctsoutbou0_.CallDateFrom>=current_date or mctsoutbou0_.CallDateTo>=current_date)
-and mctsoutbou0_.ProviderServiceMapID = P_ProviderServiceMapID ) A
-group by A.motherID )B
-inner join t_MCTSOutboundCalls C on C.motherid=B.motherid and C.OutboundCallType=B.OutboundCallType
-inner join t_mothervalidrecord D
-on B.motherID=D.MCTSID_no
-where c.outboundcalltype like 'ANC%' 
-and c.motherid is not null and c.childid is null)a limit 10000;
- -- order by OBCallID;
-
-
-
-
+    SELECT * FROM (
+        SELECT 
+            C.OBCallID,
+            C.OutboundCallType,
+            C.DisplayOBCallType,
+            C.CallDateFrom,
+            C.AllocationStatus,
+            D.PhoneNo_Of_Whom,
+            D.High_Risk
+            /*
+            B.OutboundCallType,
+            B.motherID,
+            C.OBCallID,
+            C.MotherID,
+            C.ChildID,
+            C.BeneficiaryRegID,
+            C.AllocatedUserID,
+            C.ProviderServiceMapID,
+            C.OutboundCallType,
+            C.DisplayOBCallType,
+            C.CallDateFrom,
+            C.CallDateTo,
+            C.PrefferedCallDate,
+            C.CallStatus,
+            C.NoOfTrials,
+            C.AllocationStatus,
+            C.IsSMSSent,
+            C.Deleted,
+            C.Processed,
+            C.CreatedBy,
+            C.CreatedDate,
+            C.ModifiedBy,
+            C.LastModDate,
+            D.MotherValidRecordID,
+            D.RowID,
+            D.BeneficiaryRegID,
+            D.Date_of_Entry,
+            D.Entry_type,
+            D.MCTSID_no,
+            D.Name,
+            D.Husband_Name,
+            D.PhoneNo_Of_Whom,
+            D.Whom_PhoneNo,
+            D.Birth_Date,
+            D.Age,
+            D.Blood_Group,
+            D.Caste,
+            D.Aadhar_no,
+            D.State_ID,
+            D.State_Name,
+            D.District_ID,
+            D.District_Name,
+            D.Taluka_Name,
+            D.Taluka_ID,
+            D.Block_ID,
+            D.Block_Name,
+            D.SubCenter_ID,
+            D.SubCenter_Name,
+            D.Village_ID,
+            D.Village_Name,
+            D.City_ID,
+            D.City_Name,
+            D.SubCenter_Name1,
+            D.ANM_ID,
+            D.ANM_Name,
+            D.ANM_Ph,
+            D.ASHA_ID,
+            D.ASHA_Name,
+            D.ASHA_Ph,
+            D.PHC_ID,
+            D.PHC_Name,
+            D.SUBPHC_ID,
+            D.SUBPHC_Name,
+            D.YR,
+            D.GP_Village,
+            D.Address,
+            D.LMP_Date,
+            D.ANC1_Date,
+            D.ANC2_Date,
+            D.ANC3_Date,
+            D.ANC4_Date,
+            D.ANC_Complication,
+            D.TT1_Date,
+            D.TT2_Date,
+            D.TTBooster_Date,
+            D.IFA100_Given_Date,
+            D.EDD,
+            D.Anemia,
+            D.RTI_STI,
+            D.Delivery_Lnk_Facility,
+            D.Facility_Name,
+            D.Delivery_Date,
+            D.Delivery_Place_home_type,
+            D.Delivery_Place_Public,
+            D.Delivery_Place_Private,
+            D.Delivery_type,
+            D.Delivery_Complications,
+            D.Discharge_Date,
+            D.Abortion,
+            D.PNC_Home_Visit,
+            D.PNC_Complication,
+            D.PPC_Method,
+            D.PNC_Checkup,
+            D.Outcome_Nos,
+            D.Child1_ID,
+            D.Child1_Name,
+            D.Child1_Gender,
+            D.Child1_Weight,
+            D.Child1_BreastFeeding,
+            D.Child2_ID,
+            D.Child2_Name,
+            D.Child2_Gender,
+            D.Child2_weight,
+            D.Child2_Breastfeeding,
+            D.Child3_ID,
+            D.Child3_Name,
+            D.Child3_Gender,
+            D.Child3_Weight,
+            D.Child3_Breastfeeding,
+            D.Child4_ID,
+            D.Child4_Name,
+            D.Child4_Gender,
+            D.Child4_Weight,
+            D.Child4_Breastfeeding,
+            D.Mother_Reg_Date,
+            D.Last_Update_Date,
+            D.EID,
+            D.EID_time,
+            D.CPSMS_Flag,
+            D.JSY_Beneficiary,
+            D.JSY_Paid_Date,
+            D.Bank_Name,
+            D.Bank_Branch_Name,
+            D.Acc_No,
+            D.IFSC_Code,
+            D.Remarks,
+            D.Referred_By_Telecaller,
+            D.Referred_Date,
+            D.No_of_Try,
+            D.Call_Answered,
+            D.Status,
+            D.High_Risk,
+            D.High_Risk_Reason,
+            D.Call_Verified,
+            D.Associate,
+            D.Call_Date,
+            D.Due_Services,
+            D.Due_Services_Response,
+            D.Overdue_Services,
+            D.Overdue_Services_Response,
+            D.Given_Services,
+            D.Given_Services_Response,
+            D.Miscarriage,
+            D.Baby_Died,
+            D.Call_No,
+            D.Questions_Asked,
+            D.Asnwer_Given_by_Benificary,
+            D.Source,
+            D.NoCall_Reason,
+            D.NoPhone_Reason,
+            D.Created_By,
+            D.Updated_By,
+            D.BPL_APL,
+            D.MDDS_StateID,
+            D.MDDS_District_ID,
+            D.MDDS_Taluka_ID,
+            D.MDDS_Village_ID,
+            D.Is_Valid,
+            D.InValid_Reason,
+            D.Is_Error,
+            D.Error_Reason,
+            D.FileID,
+            D.IsAllocated,
+            D.Deleted,
+            D.Processed,
+            D.CreatedBy,
+            D.CreatedDate,
+            D.ModifiedBy,
+            D.LastModDate
+            */
+        FROM (
+            SELECT MIN(A.OutboundCallType) OutboundCallType, A.motherID
+            FROM (
+                SELECT mctsoutbou0_.motherID, mctsoutbou0_.OutboundCallType
+                FROM t_MCTSOutboundCalls mctsoutbou0_
+                INNER JOIN t_mothervalidrecord mother ON mctsoutbou0_.motherID = mother.MCTSID_no
+                WHERE mctsoutbou0_.CallStatus != 'Completed'
+                  AND mctsoutbou0_.CallDateTo >= CURRENT_DATE
+                  -- AND (mctsoutbou0_.CallDateFrom >= CURRENT_DATE OR mctsoutbou0_.CallDateTo >= CURRENT_DATE)
+                  AND mctsoutbou0_.ProviderServiceMapID = P_ProviderServiceMapID
+            ) A
+            GROUP BY A.motherID
+        ) B
+        INNER JOIN t_MCTSOutboundCalls C ON C.motherid = B.motherid AND C.OutboundCallType = B.OutboundCallType
+        INNER JOIN t_mothervalidrecord D ON B.motherID = D.MCTSID_no
+        WHERE C.OutboundCallType LIKE 'ANC%'
+          AND C.motherid IS NOT NULL
+          AND C.childid IS NULL
+    ) a
+    LIMIT 10000;
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+DELIMITER ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchMCTS_2` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchMCTS_2`(IN P_ProviderServiceMapID INT, 
  IN P_CallDateFrom DATETIME,IN P_CallDateTo DATETIME)
@@ -23392,19 +23396,19 @@ BEGIN
  
  END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchMCTS_3` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchMCTS_3`(IN P_ProviderServiceMapID INT)
 BEGIN
@@ -23576,19 +23580,19 @@ where c.outboundcalltype like 'PNC%' and c.childid is not null)a limit 10000 ;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchMCTS_4` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchMCTS_4`(IN P_ProviderServiceMapID INT, IN P_CallDateFrom DATETIME,IN P_CallDateTo DATETIME )
 BEGIN
@@ -23766,19 +23770,19 @@ from t_MCTSOutboundCalls mctsoutbou0_
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchMotherChildOutboundWorklist` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchMotherChildOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
@@ -23838,19 +23842,19 @@ group by A.motherID)B where OutboundCallType like 'PNC%';
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchMotherOutboundWorklist` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchMotherOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
@@ -23931,19 +23935,19 @@ B where OutboundCallType like 'ANC%'
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchSpecialist` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchSpecialist`(specializationid int,parkingplaceid int)
 BEGIN
@@ -23964,19 +23968,19 @@ left join m_specialization spec on spec.SpecializationID=usm.SpecializationID or
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchUnregisteredUser` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchUnregisteredUser`(v_ParkingPlace int)
 BEGIN
@@ -23990,19 +23994,19 @@ uspm.UserID not in (select UserID from m_userbiometricmapping where IsCompleted 
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchUserDetails` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchUserDetails`(v_ServiceProviderID int, v_PSMStateID int, v_ServiceID int, v_RoleID int, v_Name_User varchar(50), v_UserID int)
 BEGIN
@@ -24090,19 +24094,19 @@ USRMDeleted
     and UserDeleted != 0b1;
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_GetCallHistory` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_GetCallHistory`(v_obcallid int(11))
 begin
@@ -24123,19 +24127,19 @@ inner join t_childvaliddata t3 on t2.childID=t3.MCTSID_no_Child_ID
 where t1.obcallid=ifnull(v_obcallid,t1.obcallid);
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_GetHRPDetails` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_GetHRPDetails`(v_motherid bigint(20), v_childid bigint(20))
 begin
@@ -24162,19 +24166,19 @@ select obcallid into v_obcallid_mother from t_mctsoutboundcalls
  end if;
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_grade_wise_agent_count` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_grade_wise_agent_count`(v_psmrid int(11),
 v_type varchar(50),v_month varchar(30))
@@ -24236,19 +24240,19 @@ group by case when Quarter(CreatedDate)=1 then 'Jan-March'
 end if;*/
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_Insert104BRCategory` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_Insert104BRCategory`(v_SubServiceID smallint, v_ProviderServiceMapID int)
 BEGIN
@@ -24290,19 +24294,19 @@ and (cat.CategoryName = "Blood Document");
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_InsertCallType` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_InsertCallType`(v_ProviderServiceMapID int)
 BEGIN
@@ -24363,19 +24367,19 @@ end if;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_InsertInNotificationMap` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_InsertInNotificationMap`(v_RoleID int, v_NotificationID int, v_ProviderServiceMapID int,v_NotificationTypeID int, v_CreatedBy varchar(50), v_ValidFrom datetime, v_WorkingLocationID int)
 BEGIN
@@ -24480,19 +24484,19 @@ end if;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_InsertMCTSFieldsStatewise` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_InsertMCTSFieldsStatewise`(v_ProviderServiceMapID int)
 BEGIN
@@ -24541,19 +24545,19 @@ end if;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_InstituteBulkUpload` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_InstituteBulkUpload`(
 IN_InstDet longtext,v_Created_by varchar(50),v_userid int(11),v_serviceproviderid int(11)
@@ -24799,19 +24803,19 @@ m.CreatedBy= replace(v_Created_by, '"',''),m.InstituteTypeId=t.InstitutionTypeId
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_Locationdetails` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_Locationdetails`(v_villageid int(11))
 begin
@@ -24829,19 +24833,19 @@ and dbm.DistrictBranchID=v_villageid;
 
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_QualityAuditorSectionQuestionaire` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_QualityAuditorSectionQuestionaire`(v_psmrid int(11))
 begin
@@ -24863,19 +24867,19 @@ where s.providerservicemapid=ifnull(v_psmrid,s.providerservicemapid)
 
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_QualityAuditorWorklist` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_QualityAuditorWorklist`(v_fromdate datetime,v_todate datetime,v_psmrid int(11),
 v_languageid int(11),v_agentid int(11),v_roleid int(11),v_isvalid bit(1),
@@ -25126,19 +25130,19 @@ t.CalledServiceID=ifnull(v_psmrid,t.CalledServiceID)
 end if;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_QualityAuditorWorklistDatewise` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_QualityAuditorWorklistDatewise`(v_fromdate datetime,v_todate datetime,v_psmrid int(11),
 v_languageid int(11),v_agentid int(11),v_roleid int(11),v_isvalid bit(1))
@@ -25193,19 +25197,19 @@ t.CalledServiceID=ifnull(v_psmrid,t.CalledServiceID)
 end if;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_Stockdetail` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_Stockdetail`(v_FromDate date, v_ToDate date,
 v_facilityid int(11))
@@ -25286,19 +25290,19 @@ group by C.VanSerialNo,C.Vanid;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_Stocksummary` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_Stocksummary`(v_FromDate date,
   v_ToDate date,v_facilityid int(11))
@@ -25391,19 +25395,19 @@ BEGIN
  
  END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_tenture_wise_quality_rating` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_tenture_wise_quality_rating`(v_psmrid int(11),
 v_rolename varchar(50))
@@ -25432,19 +25436,19 @@ inner join m_user u on u.userid=t2.CallReceivedUserID
          else ">2years" end;
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_TMSaveWorkList` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_TMSaveWorkList`()
 begin
@@ -25493,19 +25497,19 @@ where i.referred_visitcode is not null and i.Processed !='M'
  
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_trend_overall_quality_rating` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_trend_overall_quality_rating`(v_psmrid int(11),
 v_type varchar(50),v_month varchar(30))
@@ -25566,19 +25570,19 @@ group by case when Quarter(CreatedDate)=1 then 'Jan-March'
 end if;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_UpdateHRP_HRniReasons` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_UpdateHRP_HRniReasons`(v_BenCallID bigint(20), v_obcallid bigint(20))
 BEGIN
@@ -25652,19 +25656,19 @@ select 'Updation has done Successfully';
 
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_UpdateHRP_HRniReasons_bkp2024feb26` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_UpdateHRP_HRniReasons_bkp2024feb26`(v_BenCallID bigint(20), v_obcallid bigint(20))
 BEGIN
@@ -25731,19 +25735,19 @@ select 'Updation has done Successfully';
 
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_UpdateHRP_HRniReasons_bkp2024jan11` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_UpdateHRP_HRniReasons_bkp2024jan11`(v_BenCallID bigint(20), v_obcallid bigint(20))
 BEGIN
@@ -25810,19 +25814,19 @@ select 'Updation has done Successfully';
 
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_UpdateIsOutboundnull_Data` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_UpdateIsOutboundnull_Data`()
 begin
@@ -25835,19 +25839,19 @@ and DATE(t2.calltime)=CURDATE() - INTERVAL 1 DAY;
 
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_UpdateNotificationMap` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_UpdateNotificationMap`(v_NotificationID int, v_ModifiedBy varchar(50), v_ValidFrom datetime, v_Deleted bit)
 BEGIN
@@ -25871,19 +25875,19 @@ where NotificationID =v_NotificationID;
  
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `question_report_procedure` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `question_report_procedure`()
 BEGIN
@@ -25913,19 +25917,19 @@ EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `question_report_procedure1` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `question_report_procedure1`()
 BEGIN
@@ -25954,19 +25958,19 @@ EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_load_fact_104benmedhistory` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `sp_load_fact_104benmedhistory`()
 BEGIN
@@ -26107,550 +26111,550 @@ insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_L
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Final view structure for view `question_report`
 --
 
 /*!50001 DROP VIEW IF EXISTS `question_report`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `question_report` AS select `t`.`MotherID` AS `MotherID`,`t`.`CreatedDate` AS `CreatedDate`,`t`.`QuestionID` AS `QuestionID`,`r`.`Question` AS `Question`,`t`.`Answer` AS `Answer`,`m`.`Name` AS `Name`,`m`.`District_Name` AS `District_Name`,`m`.`Block_Name` AS `Block_Name`,`m`.`LMP_Date` AS `LMP_Date`,`m`.`EDD` AS `EDD`,`b`.`ReceivedAgentID` AS `ReceivedAgentID`,`b`.`CallTime` AS `CallTime`,`b`.`CallEndTime` AS `CallEndTime`,`b`.`PhoneNo` AS `PhoneNo`,`c`.`CallType` AS `CallType`,if((`b`.`isCallAnswered` = '1'),'YES','NO') AS `isCallAnswered`,if((`b`.`isCallDisconnected` = '1'),'YES','NO') AS `isCallDisconnected`,if((`b`.`isWrongNumber` = '1'),'YES','NO') AS `isWrongNumber` from ((((`t_mctscallresponse` `t` join `m_questionnaire` `r` on((`r`.`QuestionID` = `t`.`QuestionID`))) join `t_mothervalidrecord` `m` on((`m`.`MCTSID_no` = `t`.`MotherID`))) left join `t_bencall` `b` on((`t`.`BenCallID` = `b`.`BenCallID`))) left join `m_calltype` `c` on((`c`.`CallTypeID` = `b`.`CallTypeID`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `question_report1`
 --
 
 /*!50001 DROP VIEW IF EXISTS `question_report1`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `question_report1` AS select `t`.`ChildID` AS `ChildID`,`t`.`CreatedDate` AS `CreatedDate`,`t`.`QuestionID` AS `QuestionID`,`r`.`Question` AS `Question`,`t`.`Answer` AS `Answer`,`m`.`Child_Name` AS `Child_Name`,`m`.`District_Name` AS `District_Name`,`m`.`Block_Name` AS `Block_Name`,`m`.`DOB` AS `DOB`,`m`.`Mother_Name` AS `Mother_Name`,`b`.`CallTime` AS `CallTime`,`m`.`Phone_No` AS `Phone_No` from ((((`t_mctscallresponse` `t` join `m_questionnaire` `r` on((`r`.`QuestionID` = `t`.`QuestionID`))) join `t_childvaliddata` `m` on((`m`.`MCTSID_no_Child_ID` = `t`.`ChildID`))) left join `t_bencall` `b` on((`t`.`BenCallID` = `b`.`BenCallID`))) left join `m_calltype` `c` on((`c`.`CallTypeID` = `b`.`CallTypeID`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `showofficedetails`
 --
 
 /*!50001 DROP VIEW IF EXISTS `showofficedetails`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `showofficedetails` AS select `psam`.`PSAddMapID` AS `PSAddMapID`,`psam`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`psm`.`ServiceProviderID` AS `ServiceProviderID`,`sp`.`ServiceProviderName` AS `ServiceProviderName`,`psm`.`StateID` AS `StateID`,`st`.`StateName` AS `StateName`,`psm`.`ServiceID` AS `ServiceID`,`sm`.`ServiceName` AS `ServiceName`,`sm`.`IsNational` AS `IsNational`,`psam`.`DistrictID` AS `DistrictID`,`dis`.`DistrictName` AS `DistrictName`,`psam`.`LocationName` AS `LocationName`,`psam`.`Address` AS `Address`,`psam`.`Deleted` AS `Deleted`,`psam`.`CreatedBy` AS `CreatedBy`,`psam`.`CreatedDate` AS `CreatedDate`,`psam`.`ModifiedBy` AS `ModifiedBy`,`psam`.`LastModDate` AS `LastModDate` from (((((`m_providerserviceaddmapping` `psam` left join `m_providerservicemapping` `psm` on((`psam`.`ProviderServiceMapID` = `psm`.`ProviderServiceMapID`))) left join `m_district` `dis` on((`psam`.`DistrictID` = `dis`.`DistrictID`))) left join `m_serviceprovider` `sp` on((`psm`.`ServiceProviderID` = `sp`.`ServiceProviderID`))) left join `m_state` `st` on((`psm`.`StateID` = `st`.`StateID`))) left join `m_servicemaster` `sm` on((`psm`.`ServiceID` = `sm`.`ServiceID`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `showuserdetailsfromuserservicerolemapping`
 --
 
 /*!50001 DROP VIEW IF EXISTS `showuserdetailsfromuserservicerolemapping`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `showuserdetailsfromuserservicerolemapping` AS select `usr`.`USRMappingID` AS `USRMappingID`,`usr`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`usr`.`UserID` AS `UserID`,`usr`.`RoleID` AS `RoleID`,`role`.`RoleName` AS `RoleName`,`us`.`TitleID` AS `TitleID`,`ti`.`TitleName` AS `TitleName`,`us`.`FirstName` AS `FirstName`,`us`.`MiddleName` AS `MiddleName`,`us`.`LastName` AS `LastName`,`us`.`GenderID` AS `GenderID`,`gn`.`GenderName` AS `GenderName`,`us`.`MaritalStatusID` AS `MaritalStatusID`,`ms`.`Status` AS `MaritalStatus`,`us`.`AadhaarNo` AS `AadhaarNo`,`us`.`PAN` AS `PAN`,`us`.`DOB` AS `DOB`,`us`.`DOJ` AS `DOJ`,`us`.`QualificationID` AS `QualificationID`,`qua`.`Name` AS `Qualification`,`us`.`UserName` AS `UserName`,`us`.`Password` AS `Password`,`usr`.`AgentID` AS `AgentID`,`usr`.`AgentPassword` AS `AgentPassword`,`usr`.`CZRole` AS `CZRole`,`us`.`EmailID` AS `EmailID`,`ulmc`.`languages` AS `Languages`,`us`.`StatusID` AS `StatusID`,`sta`.`Status` AS `UserStatus`,`us`.`EmergencyContactPerson` AS `EmergencyContactPerson`,`us`.`EmergencyContactNo` AS `EmergencyContactNo`,`us`.`IsSupervisor` AS `IsSupervisor`,`us`.`Deleted` AS `UserDeleted`,`usd`.`DemographicID` AS `DemographicID`,`usd`.`FathersName` AS `FathersName`,`usd`.`MothersName` AS `MothersName`,`usd`.`CommunityID` AS `CommunityID`,`com`.`CommunityType` AS `CommunityType`,`usd`.`ReligionID` AS `ReligionID`,`rel`.`ReligionType` AS `ReligionType`,`usd`.`AddressLine1` AS `UserAddressLine1`,`usd`.`AddressLine2` AS `UserAddressLine2`,`usd`.`PermAddressLine1` AS `PermAddressLine1`,`usd`.`PermAddressLine2` AS `PermAddressLine2`,`usd`.`PermStateID` AS `PermStateID`,`usd`.`PermDistrictID` AS `PermDistrictID`,`usd`.`PermPinCode` AS `PermPinCode`,`usd`.`PermanentAddress` AS `UserPremanentAddress`,`usd`.`CityID` AS `UserCityID`,`ct`.`CityName` AS `UserCity`,`usd`.`StateID` AS `UserStateID`,`st`.`StateName` AS `UserState`,`usd`.`CountryID` AS `UserCountryID`,`cou`.`CountryName` AS `UserCountry`,`usd`.`PinCode` AS `PinCode`,`usd`.`IsPresent` AS `IsPresent`,`usd`.`IsPermanent` AS `IsPermanent`,`psm`.`ServiceProviderID` AS `ServiceProviderID`,`sp`.`ServiceProviderName` AS `ServiceProviderName`,`psm`.`ServiceID` AS `ServiceID`,`ser`.`ServiceName` AS `ServiceName`,`ser`.`IsNational` AS `IsNational`,`psm`.`StateID` AS `PSMStateID`,`st1`.`StateName` AS `PSMStateName`,`usr`.`WorkingLocationID` AS `WorkingLocationID`,`psam`.`LocationName` AS `WorkingLocationName`,`psam`.`DistrictID` AS `WorkingDistrictID`,`dis1`.`DistrictName` AS `WorkingDistrictName`,`psam`.`Address` AS `WorkingAddress`,`usr`.`Deleted` AS `USRMDeleted` from ((((((((((((((((((((`m_userservicerolemapping` `usr` left join `m_user` `us` on((`usr`.`UserID` = `us`.`UserID`))) left join `m_userdemographics` `usd` on((`us`.`UserID` = `usd`.`UserID`))) left join `m_role` `role` on((`usr`.`RoleID` = `role`.`RoleID`))) left join `m_providerservicemapping` `psm` on((`usr`.`ProviderServiceMapID` = `psm`.`ProviderServiceMapID`))) left join `m_providerserviceaddmapping` `psam` on((`usr`.`WorkingLocationID` = `psam`.`PSAddMapID`))) left join `m_title` `ti` on((`us`.`TitleID` = `ti`.`TitleID`))) left join `m_gender` `gn` on((`us`.`GenderID` = `gn`.`GenderID`))) left join `m_maritalstatus` `ms` on((`us`.`MaritalStatusID` = `ms`.`MaritalStatusID`))) left join `m_userqualification` `qua` on((`us`.`QualificationID` = `qua`.`QualificationID`))) left join `m_status` `sta` on((`us`.`StatusID` = `sta`.`StatusID`))) left join `m_community` `com` on((`usd`.`CommunityID` = `com`.`CommunityID`))) left join `m_religion` `rel` on((`usd`.`ReligionID` = `rel`.`ReligionID`))) left join `m_city` `ct` on((`usd`.`CityID` = `ct`.`CityID`))) left join `m_state` `st` on((`usd`.`StateID` = `st`.`StateID`))) left join `m_country` `cou` on((`usd`.`CountryID` = `cou`.`CountryID`))) left join `m_serviceprovider` `sp` on((`psm`.`ServiceProviderID` = `sp`.`ServiceProviderID`))) left join `m_servicemaster` `ser` on((`psm`.`ServiceID` = `ser`.`ServiceID`))) left join `m_state` `st1` on((`psm`.`StateID` = `st1`.`StateID`))) left join `m_district` `dis1` on((`psam`.`DistrictID` = `dis1`.`DistrictID`))) left join (select `ulm`.`UserID` AS `UserID`,group_concat(`ulm`.`LanguageID` separator ',') AS `languages` from `m_userlangmapping` `ulm` group by `ulm`.`UserID`) `ulmc` on((`ulmc`.`UserID` = `usr`.`UserID`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_104benmedhistory`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_104benmedhistory`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_104benmedhistory` AS select `t_104benmedhistory`.`BenHistoryID` AS `BenHistoryID`,`t_104benmedhistory`.`RequestID` AS `RequestID`,`t_104benmedhistory`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`t_104benmedhistory`.`BenCallID` AS `BenCallID`,`t_104benmedhistory`.`PatientName` AS `PatientName`,`t_104benmedhistory`.`PatientAge` AS `PatientAge`,`t_104benmedhistory`.`PatientGenderID` AS `PatientGenderID`,`t_104benmedhistory`.`Algorithm` AS `Symptom Results`,`t_104benmedhistory`.`SelecteDiagnosisID` AS `DiseaseSummaryID`,`t_104benmedhistory`.`SelecteDiagnosis` AS `DiseaseSummary`,NULL AS `ChiefComplaintID`,NULL AS `ChiefComplaint`,`t_104benmedhistory`.`Allergies` AS `Allergies`,NULL AS `SelecteDiagnosisID`,NULL AS `SelecteDiagnosis`,`t_104benmedhistory`.`CategoryID` AS `CategoryID`,`t_104benmedhistory`.`SubCategoryID` AS `SubCategoryID`,`t_104benmedhistory`.`AddedAdvice` AS `AddedAdvice`,`t_104benmedhistory`.`PrescriptionID` AS `PrescriptionID`,`t_104benmedhistory`.`ActionByHAO` AS `ActionByHAO`,`t_104benmedhistory`.`ActionByCO` AS `ActionByCO`,`t_104benmedhistory`.`ActionByMO` AS `ActionByMO`,`t_104benmedhistory`.`ActionByPD` AS `ActionByPD`,`t_104benmedhistory`.`Remarks` AS `Remarks`,`t_104benmedhistory`.`IsSelf` AS `IsSelf`,`t_104benmedhistory`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`t_104benmedhistory`.`Deleted` AS `Deleted`,`t_104benmedhistory`.`Processed` AS `Processed`,`t_104benmedhistory`.`CreatedBy` AS `CreatedBy`,`t_104benmedhistory`.`CreatedDate` AS `CreatedDate`,`t_104benmedhistory`.`ModifiedBy` AS `ModifiedBy`,`t_104benmedhistory`.`LastModDate` AS `LastModDate`,`t_104benmedhistory`.`IsChiefComplaint` AS `IsChiefComplaint` from `t_104benmedhistory` where (`t_104benmedhistory`.`IsChiefComplaint` = 0) union all select `t_104benmedhistory`.`BenHistoryID` AS `BenHistoryID`,`t_104benmedhistory`.`RequestID` AS `RequestID`,`t_104benmedhistory`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`t_104benmedhistory`.`BenCallID` AS `BenCallID`,`t_104benmedhistory`.`PatientName` AS `PatientName`,`t_104benmedhistory`.`PatientAge` AS `PatientAge`,`t_104benmedhistory`.`PatientGenderID` AS `PatientGenderID`,`t_104benmedhistory`.`Algorithm` AS `Symptom Results`,NULL AS `DiseaseSummaryID`,NULL AS `DiseaseSummary`,`t_104benmedhistory`.`DiseaseSummaryID` AS `ChiefComplaintID`,`t_104benmedhistory`.`DiseaseSummary` AS `ChiefComplaint`,`t_104benmedhistory`.`Allergies` AS `Allergies`,`t_104benmedhistory`.`SelecteDiagnosisID` AS `SelecteDiagnosisID`,`t_104benmedhistory`.`SelecteDiagnosis` AS `SelecteDiagnosis`,`t_104benmedhistory`.`CategoryID` AS `CategoryID`,`t_104benmedhistory`.`SubCategoryID` AS `SubCategoryID`,`t_104benmedhistory`.`AddedAdvice` AS `AddedAdvice`,`t_104benmedhistory`.`PrescriptionID` AS `PrescriptionID`,`t_104benmedhistory`.`ActionByHAO` AS `ActionByHAO`,`t_104benmedhistory`.`ActionByCO` AS `ActionByCO`,`t_104benmedhistory`.`ActionByMO` AS `ActionByMO`,`t_104benmedhistory`.`ActionByPD` AS `ActionByPD`,`t_104benmedhistory`.`Remarks` AS `Remarks`,`t_104benmedhistory`.`IsSelf` AS `IsSelf`,`t_104benmedhistory`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`t_104benmedhistory`.`Deleted` AS `Deleted`,`t_104benmedhistory`.`Processed` AS `Processed`,`t_104benmedhistory`.`CreatedBy` AS `CreatedBy`,`t_104benmedhistory`.`CreatedDate` AS `CreatedDate`,`t_104benmedhistory`.`ModifiedBy` AS `ModifiedBy`,`t_104benmedhistory`.`LastModDate` AS `LastModDate`,`t_104benmedhistory`.`IsChiefComplaint` AS `IsChiefComplaint` from `t_104benmedhistory` where (`t_104benmedhistory`.`IsChiefComplaint` = 1) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_benprocedurecomponentdetails`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_benprocedurecomponentdetails`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_benprocedurecomponentdetails` AS select uuid() AS `id`,`lto`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`lto`.`BenVisitID` AS `BenVisitID`,`lto`.`VisitCode` AS `VisitCode`,`lto`.`PrescriptionID` AS `PrescriptionID`,`lto`.`ProcedureID` AS `ProcedureID`,`mp`.`ProcedureName` AS `ProcedureName`,`mp`.`ProcedureDesc` AS `ProcedureDesc`,`mp`.`ProcedureType` AS `ProcedureType`,`ip`.`ProcedureName` AS `IOTProcedureName`,`ip`.`ProcedureCode` AS `ProcedureCode`,`ip`.`ProcedureStartAPI` AS `ProcedureStartAPI`,`ip`.`ProcedureEndAPI` AS `ProcedureEndAPI`,`ip`.`ProcedureStatusAPI` AS `ProcedureStatusAPI`,`ip`.`CalibrationStartAPI` AS `CalibrationStartAPI`,`ip`.`CalibrationStatusAPI` AS `CalibrationStatusAPI`,`ip`.`CalibrationEndAPI` AS `CalibrationEndAPI`,`ip`.`isLabProcedure` AS `isLabProcedure`,`ip`.`DiscoveryCode` AS `DiscoveryCode`,`mpcm`.`TestComponentID` AS `TestComponentID`,`mtc`.`TestComponentName` AS `TestComponentName`,`mtc`.`TestComponentDesc` AS `TestComponentDesc`,`mtc`.`InputType` AS `InputType`,`mtc`.`MeasurementUnit` AS `MeasurementUnit`,`mtc`.`Range_min` AS `Range_min`,`mtc`.`Range_max` AS `Range_max`,`mtc`.`Range_normal_min` AS `Range_normal_min`,`mtc`.`Range_normal_max` AS `Range_normal_max`,`ic`.`ComponentName` AS `IOTComponentName`,`ic`.`ComponentCode` AS `ComponentCode`,`ic`.`IOTProcedureID` AS `IOTProcedureID`,`ic`.`ComponentUnit` AS `ComponentUnit`,`crm`.`ResultValue` AS `ResultValue`,`mtc`.`isDecimal` AS `isDecimal`,`mp`.`isMandatory` AS `isMandatory` from ((((((`t_lab_testorder` `lto` join `m_procedure` `mp` on(((`lto`.`ProcedureID` = `mp`.`ProcedureID`) and (`mp`.`Deleted` = 0x00)))) join `m_procedurecomponentmap` `mpcm` on(((`lto`.`ProcedureID` = `mpcm`.`ProcedureID`) and (`mpcm`.`Deleted` = 0x00)))) join `m_testcomponent` `mtc` on(((`mpcm`.`TestComponentID` = `mtc`.`TestComponentID`) and (`mtc`.`Deleted` = 0x00)))) left join `m_componentresultmap` `crm` on(((`mtc`.`TestComponentID` = `crm`.`TestComponentID`) and (`crm`.`Deleted` = 0x00)))) left join `m_iotprocedure` `ip` on(((`mp`.`IOTProcedureID` = `ip`.`IOTProcedureID`) and (`ip`.`Deleted` = 0x00)))) left join `m_iotcomponent` `ic` on(((`mtc`.`IOTComponentID` = `ic`.`IOTComponentId`) and (`ic`.`Deleted` = 0x00)))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_doortodooruserdetails`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_doortodooruserdetails`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_doortodooruserdetails` AS select uuid() AS `id`,`u`.`UserID` AS `UserID`,`u`.`UserName` AS `UserName`,`u`.`ContactNo` AS `ContactNo`,`u`.`EmergencyContactNo` AS `EmergencyContactNo`,`u`.`EmergencyContactPerson` AS `EmergencyContactPerson`,`r`.`RoleID` AS `RoleID`,`r`.`RoleName` AS `RoleName`,`upp`.`StateID` AS `StateID`,`s`.`StateName` AS `StateName`,`psd`.`DistrictID` AS `DistrictID`,`d`.`DistrictName` AS `DistrictName`,`psd`.`DistrictBlockID` AS `DistrictBlockID`,`db`.`BlockName` AS `BlockName`,`spv`.`DistrictBranchID` AS `DistrictBranchID`,`v`.`VillageName` AS `VillageName`,`ud`.`DesignationID` AS `designationid`,`ud`.`DesignationName` AS `designationname` from ((((((((((((`m_user` `u` join `m_designation` `ud` on((`ud`.`DesignationID` = `u`.`DesignationID`))) join `m_userservicerolemapping` `usr` on((`u`.`UserID` = `usr`.`UserID`))) join `m_userparkingplacemap` `upp` on((`u`.`UserID` = `upp`.`UserID`))) join `m_parkingplacesubdistrictmap` `psd` on((`upp`.`ParkingPlaceID` = `psd`.`ParkingPlaceID`))) join `m_uservanmapping` `uv` on((`upp`.`UserParkingPlaceMapID` = `uv`.`UserParkingPlaceMapID`))) join `m_vanservicepointmap` `vsp` on((`uv`.`VanID` = `vsp`.`VanID`))) join `m_servicepointvillagemap` `spv` on((`vsp`.`ServicePointID` = `spv`.`ServicePointID`))) join `m_role` `r` on((`usr`.`RoleID` = `r`.`RoleID`))) join `m_state` `s` on((`upp`.`StateID` = `s`.`StateID`))) join `m_district` `d` on((`psd`.`DistrictID` = `d`.`DistrictID`))) join `m_districtblock` `db` on((`psd`.`DistrictBlockID` = `db`.`BlockID`))) join `m_districtbranchmapping` `v` on((`spv`.`DistrictBranchID` = `v`.`DistrictBranchID`))) where ((`u`.`Deleted` is false) and (`usr`.`Deleted` is false) and (`upp`.`Deleted` is false) and (`psd`.`Deleted` is false) and (`uv`.`Deleted` is false) and (`vsp`.`Deleted` is false) and (`spv`.`Deleted` is false) and (`r`.`Deleted` is false) and (`s`.`Deleted` is false) and (`d`.`Deleted` is false) and (`db`.`Deleted` is false) and (`v`.`Deleted` is false) and (`u`.`DesignationID` is not null)) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_drugforprescription`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_drugforprescription`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_drugforprescription` AS select `mifm`.`ItemFacilityMapID` AS `id`,`mi`.`ItemID` AS `itemID`,`mi`.`ItemName` AS `itemName`,`mi`.`Strength` AS `Strength`,`mu`.`UOMName` AS `unitOfMeasurement`,cast(sum(ifnull(`tise`.`QuantityInHand`,0)) as unsigned) AS `quantityInHand`,`mi`.`ItemFormID` AS `itemFormID`,`mi`.`RouteID` AS `routeID`,`mifm`.`FacilityID` AS `facilityID`,`mi`.`Sctcode` AS `Sctcode`,`mi`.`SctTerm` AS `SctTerm`,`mi`.`Composition` AS `composition`,`mi`.`isEDL` AS `isedl` from (((`m_itemfacilitymapping` `mifm` join `m_item` `mi` on(((`mifm`.`ItemID` = `mi`.`ItemID`) and (`mifm`.`ProviderServiceMapID` = `mi`.`ProviderServiceMapID`) and (`mi`.`Deleted` is false)))) left join `t_itemstockentry` `tise` on(((`mifm`.`FacilityID` = `tise`.`FacilityID`) and (`mifm`.`ItemID` = `tise`.`ItemID`) and (`tise`.`Deleted` is false)))) left join `m_uom` `mu` on(((`mi`.`UOMID` = `mu`.`UOMID`) and (`mu`.`Deleted` is false)))) where ((`mifm`.`Deleted` is false) and (`mi`.`ItemFormID` is not null) and ((`tise`.`ExpiryDate` > curdate()) or isnull(`tise`.`ExpiryDate`))) group by `mifm`.`FacilityID`,`mi`.`ItemID` */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_emailstockalert`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_emailstockalert`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_emailstockalert` AS select uuid() AS `uuid`,`f`.`FacilityID` AS `facilityId`,`i`.`ItemID` AS `itemID`,`f`.`FacilityName` AS `FacilityName`,`i`.`ItemName` AS `ItemName`,sum(`t`.`Quantity`) AS `Totalquantity`,sum(`t`.`QuantityInHand`) AS `Quantityinhand`,`t`.`CreatedBy` AS `CreatedBy`,`u`.`emailid` AS `emailid`,`prkdis`.`districtname` AS `DistrictName`,(100 - ((sum(`t`.`QuantityInHand`) * 100) / sum(`t`.`Quantity`))) AS `QuantityConsumedPercent` from (((((`t_itemstockentry` `t` join `m_item` `i` on((`i`.`ItemID` = `t`.`ItemID`))) join `m_facility` `f` on((`f`.`FacilityID` = `t`.`FacilityID`))) join (select `m_user`.`UserID` AS `userid`,`m_user`.`UserName` AS `username`,`m_user`.`EmailID` AS `emailid` from `m_user` where (`m_user`.`EmailID` is not null)) `u` on((`u`.`username` = `t`.`CreatedBy`))) left join `m_van` `v` on((`v`.`FacilityID` = `t`.`FacilityID`))) left join (select `p`.`ParkingPlaceID` AS `parkingplaceid`,group_concat(distinct `d`.`DistrictName` separator ',') AS `districtname` from (`m_parkingplacesubdistrictmap` `p` join `m_district` `d` on((`d`.`DistrictID` = `p`.`DistrictID`))) group by `p`.`ParkingPlaceID`) `prkdis` on((`v`.`ParkingPlaceID` = `prkdis`.`parkingplaceid`))) where (`i`.`Deleted` is false) group by `f`.`FacilityID`,`i`.`ItemID` having ((((sum(`t`.`QuantityInHand`) * 100) / sum(`t`.`Quantity`)) <= 20) and (sum(`t`.`QuantityInHand`) > 0)) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_fetchfacility`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_fetchfacility`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_fetchfacility` AS select `mf`.`FacilityID` AS `FacilityID`,`mf`.`FacilityName` AS `FacilityName`,`mf`.`FacilityDesc` AS `FacilityDesc`,`mf`.`FacilityCode` AS `FacilityCode`,`mf`.`FacilityTypeID` AS `FacilityTypeID`,`mf`.`Location` AS `Location`,`mf`.`PhysicalLocation` AS `PhysicalLocation`,`mf`.`StoreType` AS `StoreType`,`mf`.`Status` AS `Status`,`mf`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`mf`.`IsMainFacility` AS `IsMainFacility`,`mf`.`MainFacilityID` AS `MainFacilityID`,`mf`.`Deleted` AS `FacilityDeleted`,`mf`.`CreatedBy` AS `FacilityCreatedBy`,`mf`.`CreatedDate` AS `FacilityCreatedDate`,`mf`.`ModifiedBy` AS `FacilityModifiedBy`,`mf`.`ModifiedBy` AS `FacilityLastModDate`,`mp`.`ParkingPlaceID` AS `ParkingPlaceID`,`mp`.`ParkingPlaceName` AS `ParkingPlaceName`,`mp`.`ParkingPlaceDesc` AS `ParkingPlaceDesc`,`mp`.`AreaHQAddress` AS `AreaHQAddress`,`mp`.`Deleted` AS `PPDeleted`,`mv`.`VanID` AS `VanID`,`mv`.`VanName` AS `VanName`,`mv`.`VehicalNo` AS `VehicalNo`,`mv`.`VanTypeID` AS `VanTypeID`,`mv`.`ParkingPlaceID` AS `VanParkingPlaceID`,`mv`.`Deleted` AS `VanDeleted` from ((`m_facility` `mf` left join `m_van` `mv` on((`mv`.`FacilityID` = `mf`.`FacilityID`))) left join `m_parkingplace` `mp` on((`mp`.`FacilityID` = `mf`.`FacilityID`))) order by `mf`.`FacilityID` */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_fetchitemfacilitymap`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_fetchitemfacilitymap`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_fetchitemfacilitymap` AS select `ifm`.`ItemFacilityMapID` AS `ItemFacilityMapID`,`ifm`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`ifm`.`Status` AS `Status`,`ifm`.`Deleted` AS `ItemFacilityMappingDeleted`,`ifm`.`FacilityID` AS `FacilityID`,`fc`.`FacilityName` AS `FacilityName`,`fc`.`FacilityDesc` AS `FacilityDesc`,`fc`.`FacilityCode` AS `FacilityCode`,`fc`.`FacilityTypeID` AS `FacilityTypeID`,`fct`.`FacilityTypeName` AS `FacilityTypeName`,`fct`.`FacilityTypeDesc` AS `FacilityTypeDesc`,`fct`.`FacilityTypeCode` AS `FacilityTypeCode`,`fc`.`Location` AS `Location`,`fc`.`PhysicalLocation` AS `PhysicalLocation`,`fc`.`StoreType` AS `StoreType`,`fc`.`IsMainFacility` AS `IsMainFacility`,`fc`.`Deleted` AS `FacilityDeleted`,`it`.`ItemID` AS `ItemID`,`it`.`ItemName` AS `ItemName`,`it`.`ItemDesc` AS `ItemDesc`,`it`.`ItemCode` AS `ItemCode`,`it`.`ItemCategoryID` AS `ItemCategoryID`,`itc`.`ItemCategoryName` AS `ItemCategoryName`,`itc`.`ItemCategoryDesc` AS `ItemCategoryDesc`,`itc`.`ItemCategoryCode` AS `ItemCategoryCode`,`it`.`IsMedical` AS `IsMedical`,`it`.`ItemFormID` AS `ItemFormID`,`itf`.`ItemFormName` AS `ItemFormName`,`itf`.`ItemFormDesc` AS `ItemFormDesc`,`itf`.`ItemFormCode` AS `ItemFormCode`,`it`.`PharmacologyCategoryID` AS `PharmacologyCategoryID`,`pcat`.`PharmCategoryName` AS `PharmCategoryName`,`pcat`.`PharmCategoryDesc` AS `PharmCategoryDesc`,`pcat`.`PharmCategoryCode` AS `PharmCategoryCode`,`it`.`ManufacturerID` AS `ManufacturerID`,concat(`it`.`Strength`,' ',`uom`.`UOMName`) AS `Strength`,`it`.`IsScheduledDrug` AS `IsScheduledDrug`,`it`.`RouteID` AS `RouteID`,`it`.`Deleted` AS `ItemDeleted` from (((((((`m_itemfacilitymapping` `ifm` left join `m_facility` `fc` on((`ifm`.`FacilityID` = `fc`.`FacilityID`))) left join `m_item` `it` on((`ifm`.`ItemID` = `it`.`ItemID`))) left join `m_facilitytype` `fct` on((`fc`.`FacilityTypeID` = `fct`.`FacilityTypeID`))) left join `m_itemcategory` `itc` on((`it`.`ItemCategoryID` = `itc`.`ItemCategoryID`))) left join `m_itemform` `itf` on((`it`.`ItemFormID` = `itf`.`ItemFormID`))) left join `m_pharmacologicalcategory` `pcat` on((`it`.`PharmacologyCategoryID` = `pcat`.`PharmCategoryID`))) left join `m_uom` `uom` on((`it`.`UOMID` = `uom`.`UOMID`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_fetchnotification`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_fetchnotification`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_fetchnotification` AS select `unm`.`UserNotificationMapID` AS `UserNotificationMapID`,`unm`.`NotificationID` AS `NotificationID`,`unm`.`UserID` AS `UserID`,`unm`.`RoleID` AS `RoleID`,`unm`.`NotificationState` AS `NotificationState`,`unm`.`NotificationTypeID` AS `NotificationTypeID`,`unm`.`NotificationType` AS `NotificationType`,`unm`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`unm`.`WorkingLocationID` AS `WorkingLocationID`,`unm`.`Deleted` AS `Deleted`,`unm`.`Processed` AS `Processed`,`unm`.`CreatedBy` AS `CreatedBy`,`unm`.`CreatedDate` AS `CreatedDate`,`unm`.`ModifiedBy` AS `ModifiedBy`,`unm`.`LastModDate` AS `LastModDate` from (`m_usernotificationmap` `unm` left join `m_notification` `noti` on((`unm`.`NotificationID` = `noti`.`NotificationID`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_get_call_section_mapping`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_get_call_section_mapping`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8mb4 */;
+-- /*!50001 SET character_set_results     = utf8mb4 */;
+-- /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_get_call_section_mapping` AS select `c`.`ID` AS `id`,`c`.`callConfigId` AS `callconfigid`,`s`.`id` AS `sectionid`,`s`.`name` AS `sectionname`,`c`.`IsChecked` AS `ischecked`,`c`.`CallSectionRank` AS `callsectionrank`,`c`.`ProviderServiceMapID` AS `providerservicemapid`,`c`.`Deleted` AS `deleted` from (`m_section` `s` join `m_callsectionmapping` `c` on(((`s`.`id` = `c`.`SectionID`) and (`c`.`Deleted` is false)))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_get_prkngplc_blok_dist_zone_state`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_get_prkngplc_blok_dist_zone_state`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_get_prkngplc_blok_dist_zone_state` AS select distinct `m_sp`.`ServicePointID` AS `Servicepointid`,`m_pp`.`ParkingPlaceID` AS `ParkingPlaceID`,`m_pp`.`ParkingPlaceName` AS `ParkingPlaceName`,`m_db`.`BlockID` AS `BlockID`,`m_db`.`BlockName` AS `BlockName`,`m_d`.`DistrictID` AS `DistrictID`,`m_d`.`DistrictName` AS `DistrictName`,`m_zdm`.`ZoneID` AS `ZoneID`,`m_z`.`ZoneName` AS `ZoneName`,`m_s`.`StateID` AS `StateID`,`m_s`.`StateName` AS `StateName`,`m_sp`.`ProviderServiceMapID` AS `SPproviderservicemapid`,`m_pp`.`ProviderServiceMapID` AS `PPproviderservicemapid`,`m_zdm`.`ProviderServiceMapID` AS `ZDMproviderservicemapid` from ((((((`m_servicepoint` `m_sp` join `m_parkingplace` `m_pp` on(((`m_sp`.`ParkingPlaceID` = `m_pp`.`ParkingPlaceID`) and (`m_pp`.`Deleted` is false)))) join `m_districtblock` `m_db` on(((`m_pp`.`DistrictBlockID` = `m_db`.`BlockID`) and (`m_db`.`Deleted` is false)))) join `m_district` `m_d` on(((`m_db`.`DistrictID` = `m_d`.`DistrictID`) and (`m_d`.`Deleted` is false)))) join `m_zonedistrictmap` `m_zdm` on(((`m_d`.`DistrictID` = `m_zdm`.`DistrictID`) and (`m_zdm`.`Deleted` is false)))) join `m_zone` `m_z` on(((`m_z`.`ZoneID` = `m_zdm`.`ZoneID`) and (`m_z`.`Deleted` is false)))) join `m_state` `m_s` on(((`m_d`.`StateID` = `m_s`.`StateID`) and (`m_s`.`Deleted` is false)))) where (`m_sp`.`Deleted` is false) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_get_prkngplc_dist_zone_state_from_spid`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_get_prkngplc_dist_zone_state_from_spid`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_get_prkngplc_dist_zone_state_from_spid` AS select `m_sp`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`m_sp`.`ServicePointID` AS `ServicePointID`,`m_sp`.`ParkingPlaceID` AS `ParkingPlaceID`,`m_pp`.`ParkingPlaceName` AS `ParkingPlaceName`,`m_ppsdm`.`DistrictID` AS `DistrictID`,`m_d`.`DistrictName` AS `DistrictName`,`m_zdm`.`ZoneID` AS `ZoneID`,`m_z`.`ZoneName` AS `ZoneName`,`m_d`.`StateID` AS `StateID`,`m_s`.`StateName` AS `StateName` from ((((((`m_servicepoint` `m_sp` join `m_parkingplacesubdistrictmap` `m_ppsdm` on(((`m_sp`.`ParkingPlaceID` = `m_ppsdm`.`ParkingPlaceID`) and (`m_sp`.`ProviderServiceMapID` = `m_ppsdm`.`ProviderServiceMapID`) and (`m_ppsdm`.`Deleted` is false)))) join `m_zonedistrictmap` `m_zdm` on(((`m_zdm`.`DistrictID` = `m_ppsdm`.`DistrictID`) and (`m_zdm`.`ProviderServiceMapID` = `m_ppsdm`.`ProviderServiceMapID`) and (`m_zdm`.`Deleted` is false)))) join `m_parkingplace` `m_pp` on(((`m_sp`.`ParkingPlaceID` = `m_pp`.`ParkingPlaceID`) and (`m_pp`.`Deleted` is false)))) join `m_district` `m_d` on(((`m_d`.`DistrictID` = `m_zdm`.`DistrictID`) and (`m_d`.`Deleted` is false)))) join `m_zone` `m_z` on(((`m_zdm`.`ZoneID` = `m_z`.`ZoneID`) and (`m_z`.`Deleted` is false)))) join `m_state` `m_s` on(((`m_d`.`StateID` = `m_s`.`StateID`) and (`m_s`.`Deleted` is false)))) where (`m_sp`.`Deleted` is false) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_get_qualityaudit_sectionquestionairevalues`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_get_qualityaudit_sectionquestionairevalues`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_get_qualityaudit_sectionquestionairevalues` AS select uuid() AS `id`,`t1`.`id` AS `sectionId`,`t1`.`Name` AS `sectionName`,`t1`.`SectionRank` AS `SectionRank`,`t2`.`id` AS `questionId`,`t2`.`Question` AS `Question`,`t2`.`QuestionRank` AS `QuestionRank`,`t3`.`id` AS `optionId`,`t3`.`QuestionValues` AS `QuestionValues`,`t3`.`Score` AS `Score`,`t1`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`t2`.`isFatalQuestion` AS `isFatalQuestion` from ((`m_qualityauditsection` `t1` join `m_qualityauditquestionnaire` `t2` on((`t1`.`id` = `t2`.`Sectionid`))) join `m_qualityauditquestionnairevalues` `t3` on((`t2`.`id` = `t3`.`QuestionID`))) where ((`t1`.`Deleted` is false) and (`t2`.`Deleted` is false) and (`t3`.`Deleted` is false)) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_get_section_question_mapping`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_get_section_question_mapping`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_get_section_question_mapping` AS select `t1`.`id` AS `id`,`t1`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`t1`.`Sectionid` AS `Sectionid`,`t2`.`name` AS `sectionName`,`t1`.`SectionQuestionRank` AS `SectionQuestionRank`,`t1`.`Questionid` AS `Questionid`,`t3`.`Question` AS `Question`,`t3`.`QuestionRank` AS `QuestionRank`,`t3`.`QuestionTypeID` AS `QuestionTypeID`,`t1`.`Role` AS `Role`,`t4`.`QuestionType` AS `QuestionType`,`t1`.`Deleted` AS `deleted` from (((`m_sectionqamapping` `t1` join `m_section` `t2` on((`t1`.`Sectionid` = `t2`.`id`))) join `m_questionnaire` `t3` on((`t1`.`Questionid` = `t3`.`QuestionID`))) join `m_questiontype` `t4` on((`t3`.`QuestionTypeID` = `t4`.`QuestionTypeID`))) order by `t1`.`LastModDate` desc */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_get_section_question_mapping_associate`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_get_section_question_mapping_associate`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_get_section_question_mapping_associate` AS select `a`.`id` AS `id`,`a`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`a`.`Sectionid` AS `Sectionid`,`a`.`sectionName` AS `sectionName`,`a`.`SectionQuestionRank` AS `SectionQuestionRank`,`a`.`Questionid` AS `Questionid`,`a`.`Question` AS `Question`,`a`.`QuestionRank` AS `QuestionRank`,`a`.`QuestionTypeID` AS `QuestionTypeID`,`a`.`QuestionType` AS `QuestionType`,`a`.`deleted` AS `deleted`,`a`.`CallSectionRank` AS `CallSectionRank`,`a`.`AnswerType` AS `AnswerType`,`a`.`callConfigId` AS `callConfigId`,group_concat(`a`.`parentQuestionID` separator ',') AS `parentQuestionID`,group_concat(`a`.`parentQuestion` separator ',') AS `parentQuestion`,group_concat(`a`.`parentAnswer` separator '||') AS `parentAnswer`,`a`.`Role` AS `Role` from (select distinct `t1`.`id` AS `id`,`t1`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`t1`.`Sectionid` AS `Sectionid`,`t2`.`name` AS `sectionName`,`t1`.`SectionQuestionRank` AS `SectionQuestionRank`,`t1`.`Questionid` AS `Questionid`,`t3`.`Question` AS `Question`,`t3`.`QuestionRank` AS `QuestionRank`,`t3`.`QuestionTypeID` AS `QuestionTypeID`,`t4`.`QuestionType` AS `QuestionType`,`t1`.`Deleted` AS `deleted`,`t5`.`CallSectionRank` AS `CallSectionRank`,`t3`.`AnswerType` AS `AnswerType`,`t6`.`MCTSCallConfigID` AS `callConfigId`,(case when (`t1`.`Questionid` = `t7`.`childQuestionID`) then `t7`.`parentQuestionID` else NULL end) AS `parentQuestionID`,(case when (`t1`.`Questionid` = `t7`.`childQuestionID`) then `t8`.`Question` else NULL end) AS `parentQuestion`,(case when (`t1`.`Questionid` = `t7`.`childQuestionID`) then `t7`.`AnswerType` else NULL end) AS `parentAnswer`,`t1`.`Role` AS `Role` from (((((((`m_sectionqamapping` `t1` join `m_section` `t2` on((`t1`.`Sectionid` = `t2`.`id`))) join `m_questionnaire` `t3` on((`t1`.`Questionid` = `t3`.`QuestionID`))) join `m_questiontype` `t4` on((`t3`.`QuestionTypeID` = `t4`.`QuestionTypeID`))) join `m_callsectionmapping` `t5` on((`t1`.`Sectionid` = `t5`.`SectionID`))) join `m_mctscallconfiguration` `t6` on((`t5`.`callConfigId` = `t6`.`MCTSCallConfigID`))) left join `m_mapquestion` `t7` on((`t1`.`Questionid` = `t7`.`childQuestionID`))) left join `m_questionnaire` `t8` on((`t8`.`QuestionID` = `t7`.`parentQuestionID`))) where ((`t1`.`Deleted` is false) and (`t5`.`IsChecked` is true))) `a` group by `a`.`Questionid`,`a`.`callConfigId`,`a`.`Sectionid` */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_get_userlangmapping`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_get_userlangmapping`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8mb4 */;
+-- /*!50001 SET character_set_results     = utf8mb4 */;
+-- /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_get_userlangmapping` AS select `ul`.`UserLangID` AS `userlangid`,`ul`.`UserID` AS `userid`,`ul`.`LanguageID` AS `languageid`,`l`.`LanguageName` AS `LanguageName` from (`m_userlangmapping` `ul` join `m_language` `l` on((`l`.`LanguageID` = `ul`.`LanguageID`))) where (`ul`.`Deleted` is false) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_getagentsbyroleid`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_getagentsbyroleid`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8mb4 */;
+-- /*!50001 SET character_set_results     = utf8mb4 */;
+-- /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_getagentsbyroleid` AS select `usr`.`USRMappingID` AS `USRMappingID`,`u`.`UserID` AS `UserID`,`u`.`FirstName` AS `FirstName`,`u`.`MiddleName` AS `MiddleName`,`u`.`LastName` AS `LastName`,`usr`.`RoleID` AS `RoleID`,`usr`.`AgentID` AS `AgentID` from (`m_user` `u` join `m_userservicerolemapping` `usr` on((`u`.`UserID` = `usr`.`UserID`))) where ((`u`.`Deleted` is false) and (`usr`.`Deleted` is false)) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_getdialpreference`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_getdialpreference`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8mb4 */;
+-- /*!50001 SET character_set_results     = utf8mb4 */;
+-- /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_getdialpreference` AS select `t1`.`USRMappingID` AS `USRMappingID`,`t1`.`UserID` AS `UserID`,`t2`.`FirstName` AS `FirstName`,`t2`.`MiddleName` AS `MiddleName`,`t2`.`LastName` AS `LastName`,`t1`.`RoleID` AS `RoleID`,`t3`.`RoleName` AS `RoleName`,`t1`.`isAutoPreviewDial` AS `isAutoPreviewDial`,`t1`.`PreviewWindowTime` AS `PreviewWindowTime`,`t1`.`ProviderServiceMapID` AS `ProviderServiceMapID` from ((`m_userservicerolemapping` `t1` join `m_user` `t2` on(((`t1`.`UserID` = `t2`.`UserID`) and (`t1`.`Deleted` is false)))) join `m_role` `t3` on((`t1`.`RoleID` = `t3`.`RoleID`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_getprescribeddrugswithdetails`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_getprescribeddrugswithdetails`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_getprescribeddrugswithdetails` AS select `pd`.`PrescribedDrugID` AS `PrescribedDrugID`,`pd`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`pd`.`BenVisitID` AS `BenVisitID`,`pd`.`VisitCode` AS `VisitCode`,`pd`.`PrescriptionID` AS `PrescriptionID`,`pd`.`DrugID` AS `DrugID`,`pd`.`GenericDrugName` AS `GenericDrugName`,`pd`.`DrugForm` AS `DrugForm`,`pd`.`DrugStrength` AS `DrugStrength`,`pd`.`Dose` AS `Dose`,`pd`.`Route` AS `Route`,`pd`.`Frequency` AS `Frequency`,`pd`.`Duration` AS `Duration`,`pd`.`DuartionUnit` AS `DuartionUnit`,`pd`.`RelationToFood` AS `RelationToFood`,`pd`.`SpecialInstruction` AS `SpecialInstruction`,ifnull(`pd`.`QtyPrescribed`,0) AS `QtyPrescribed`,`pd`.`CreatedDate` AS `CreatedDate`,`pd`.`CreatedBy` AS `CreatedBy`,`ise`.`ItemStockEntryID` AS `ItemStockEntryID`,`ise`.`FacilityID` AS `FacilityID`,`ise`.`BatchNo` AS `BatchNo`,ifnull(`ise`.`QuantityInHand`,0) AS `QuantityInHand`,`ise`.`ExpiryDate` AS `ExpiryDate`,`pd`.`isEDL` AS `isEDL` from (`t_prescribeddrug` `pd` left join `t_itemstockentry` `ise` on(((`pd`.`DrugID` = `ise`.`ItemID`) and (`pd`.`VanID` = `ise`.`VanID`) and (`ise`.`Deleted` is false)))) where (`pd`.`Deleted` is false) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_getvanlocdetails`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_getvanlocdetails`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8mb4 */;
+-- /*!50001 SET character_set_results     = utf8mb4 */;
+-- /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_getvanlocdetails` AS select distinct `van`.`VanID` AS `VanID`,`van`.`ParkingPlaceID` AS `ParkingPlaceID`,`dis`.`StateID` AS `StateID`,`dis`.`DistrictID` AS `DistrictID`,`dis`.`DistrictName` AS `DistrictName`,`db`.`BlockID` AS `blockid`,`db`.`BlockName` AS `blockname`,`usrm`.`Villageid` AS `villageid`,`usrm`.`VillageName` AS `VillageName`,`dis`.`GovtDistrictID` AS `District_LGDCode`,`dis`.`GovtStateID` AS `State_LGDCode`,`usrm`.`ProviderServiceMapID` AS `ProviderServiceMapID` from ((((`m_van` `van` left join `m_parkingplacesubdistrictmap` `prkdis` on((`van`.`ParkingPlaceID` = `prkdis`.`ParkingPlaceID`))) left join `m_district` `dis` on((`prkdis`.`DistrictID` = `dis`.`DistrictID`))) left join `m_districtblock` `db` on((`db`.`DistrictID` = `dis`.`DistrictID`))) left join `m_userservicerolemapping` `usrm` on((`usrm`.`Blockid` = `db`.`BlockID`))) where ((`van`.`Deleted` is false) and (`db`.`Deleted` is false) and (`prkdis`.`Deleted` is false) and (`dis`.`Deleted` is false)) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_mother_child_feedback_report`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_mother_child_feedback_report`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_mother_child_feedback_report` AS select distinct `tf`.`FeedbackID` AS `FeedbackID`,`tf`.`RequestID` AS `RequestID`,`tf`.`InstitutionID` AS `InstitutionID`,`mi`.`InstitutionName` AS `Institute_Facility_Name`,`tf`.`DesignationID` AS `DesignationID`,`md`.`DesignationName` AS `Designation`,`tf`.`StateID` AS `StateID`,`tf`.`DistrictID` AS `DistrictID`,`tf`.`BlockID` AS `BlockID`,`tf`.`DistrictBranchID` AS `DistrictBranchID`,`tf`.`InstitutionTypeID` AS `InstitutionTypeID`,`tf`.`SeverityID` AS `SeverityID`,`tf`.`FeedbackTypeID` AS `FeedbackTypeID`,`mf`.`FeedbackTypeName` AS `Type_of_complain`,`tf`.`FeedbackNatureID` AS `FeedbackNatureID`,`mf1`.`FeedbackNature` AS `Nature_of_Complaint`,`tf`.`FeedbackStatusID` AS `FeedbackStatusID`,`tf`.`Feedback` AS `Brief_of_Complaint`,`tf`.`Comments` AS `Details_of_Complaint`,`tf`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`tf`.`UserID` AS `UserID`,`tf`.`FeedbackAgainst` AS `FeedbackAgainst`,`tf`.`SMSPhoneNo` AS `SMSPhoneNo`,`tf`.`ServiceAvailDate` AS `DateofComplaint`,`tf`.`EmailStatusID` AS `EmailStatusID`,`tf`.`FeedbackActual` AS `FeedbackActual`,`tf`.`FeedbackUpdated` AS `FeedbackUpdated`,`tf`.`FeedbackResponse` AS `FeedbackResponse`,`tf`.`AgentUserID` AS `AgentUserID`,`tf`.`SupUserID` AS `SupUserID`,`tf`.`Comments` AS `Comments`,`tf`.`AuthName` AS `AuthName`,`tf`.`AuthDesignation` AS `AuthDesignation`,`tf`.`AuthInstitution` AS `AuthInstitution`,`tf`.`AuthEmailID` AS `AuthEmailID`,`tf`.`CreatedDate` AS `CreatedDate`,(case when (`tm`.`BeneficiaryRegID` is not null) then TRUE else FALSE end) AS `is_mother`,`tm`.`MotherValidRecordID` AS `MotherValidRecordID`,`tm`.`RowID` AS `RowID`,`tm`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`tm`.`Date_of_Entry` AS `Date_of_Entry`,`tm`.`Entry_type` AS `Entry_type`,`tm`.`MCTSID_no` AS `MCTSID_no`,`tm`.`Name` AS `Name`,`tm`.`Husband_Name` AS `Husband_Name`,`tm`.`PhoneNo_Of_Whom` AS `PhoneNo_Of_Whom`,`tm`.`Whom_PhoneNo` AS `Alternate_number`,`tm`.`Birth_Date` AS `Birth_Date`,`tm`.`Age` AS `Age`,`tm`.`Blood_Group` AS `Blood_Group`,`tm`.`Caste` AS `Caste`,`tm`.`Aadhar_no` AS `Aadhar_no`,`tm`.`State_ID` AS `State_ID`,`tm`.`State_Name` AS `State_Name`,`tm`.`District_ID` AS `District_ID`,`tm`.`District_Name` AS `District_Name`,`tm`.`Taluka_Name` AS `Taluka_Name`,`tm`.`Taluka_ID` AS `Taluka_ID`,`tm`.`Block_ID` AS `Block_ID`,`tm`.`Block_Name` AS `Block_Name`,`tm`.`SubCenter_ID` AS `SubCenter_ID`,`tm`.`SubCenter_Name` AS `SubCenter_Name`,`tm`.`Village_ID` AS `Village_ID`,`tm`.`Village_Name` AS `Village_Name`,`tm`.`City_ID` AS `City_ID`,`tm`.`City_Name` AS `City_Name`,`tm`.`SubCenter_Name1` AS `SubCenter_Name1`,`tm`.`ANM_ID` AS `ANM_ID`,`tm`.`ANM_Name` AS `ANM_Name`,`tm`.`ANM_Ph` AS `ANM_Ph`,`tm`.`ASHA_ID` AS `ASHA_ID`,`tm`.`ASHA_Name` AS `ASHA_Name`,`tm`.`ASHA_Ph` AS `ASHA_Ph`,`tm`.`PHC_ID` AS `PHC_ID`,`tm`.`PHC_Name` AS `PHC_Name`,`tm`.`SUBPHC_ID` AS `SUBPHC_ID`,`tm`.`SUBPHC_Name` AS `SUBPHC_Name`,`tm`.`YR` AS `YR`,`tm`.`GP_Village` AS `GP_Village`,`tm`.`Address` AS `Address`,`tm`.`LMP_Date` AS `LMP_Date`,`tm`.`ANC1_Date` AS `ANC1_Date`,`tm`.`ANC2_Date` AS `ANC2_Date`,`tm`.`ANC3_Date` AS `ANC3_Date`,`tm`.`ANC4_Date` AS `ANC4_Date`,`tm`.`ANC_Complication` AS `ANC_Complication`,`tm`.`TT1_Date` AS `TT1_Date`,`tm`.`TT2_Date` AS `TT2_Date`,`tm`.`TTBooster_Date` AS `TTBooster_Date`,`tm`.`IFA100_Given_Date` AS `IFA100_Given_Date`,`tm`.`EDD` AS `EDD`,`tm`.`Anemia` AS `Anemia`,`tm`.`RTI_STI` AS `RTI_STI`,`tm`.`Delivery_Lnk_Facility` AS `Delivery_Lnk_Facility`,`tm`.`Facility_Name` AS `Facility_Name`,`tm`.`Delivery_Date` AS `Delivery_Date`,`tm`.`Delivery_Place_home_type` AS `Delivery_Place_home_type`,`tm`.`Delivery_Place_Public` AS `Delivery_Place_Public`,`tm`.`Delivery_Place_Private` AS `Delivery_Place_Private`,`tm`.`Delivery_type` AS `Delivery_type`,`tm`.`Delivery_Complications` AS `Delivery_Complications`,`tm`.`Discharge_Date` AS `Discharge_Date`,`tm`.`Abortion` AS `Abortion`,`tm`.`PNC_Home_Visit` AS `PNC_Home_Visit`,`tm`.`PNC_Complication` AS `PNC_Complication`,`tm`.`PPC_Method` AS `PPC_Method`,`tm`.`PNC_Checkup` AS `PNC_Checkup`,`tm`.`Outcome_Nos` AS `Outcome_Nos`,`tm`.`Child1_ID` AS `Child1_ID`,`tm`.`Child1_Name` AS `Child1_Name`,`tm`.`Child1_Gender` AS `Child1_Gender`,`tm`.`Child1_Weight` AS `Child1_Weight`,`tm`.`Child1_BreastFeeding` AS `Child1_BreastFeeding`,`tm`.`Child2_ID` AS `Child2_ID`,`tm`.`Child2_Name` AS `Child2_Name`,`tm`.`Child2_Gender` AS `Child2_Gender`,`tm`.`Child2_weight` AS `Child2_weight`,`tm`.`Child2_Breastfeeding` AS `Child2_Breastfeeding`,`tm`.`Child3_ID` AS `Child3_ID`,`tm`.`Child3_Name` AS `Child3_Name`,`tm`.`Child3_Gender` AS `Child3_Gender`,`tm`.`Child3_Weight` AS `Child3_Weight`,`tm`.`Child3_Breastfeeding` AS `Child3_Breastfeeding`,`tm`.`Child4_ID` AS `Child4_ID`,`tm`.`Child4_Name` AS `Child4_Name`,`tm`.`Child4_Gender` AS `Child4_Gender`,`tm`.`Child4_Weight` AS `Child4_Weight`,`tm`.`Child4_Breastfeeding` AS `Child4_Breastfeeding`,`tm`.`Mother_Reg_Date` AS `Mother_Reg_Date`,`tm`.`Last_Update_Date` AS `Last_Update_Date`,`tm`.`EID` AS `EID`,`tm`.`EID_time` AS `EID_time`,`tm`.`CPSMS_Flag` AS `CPSMS_Flag`,`tm`.`JSY_Beneficiary` AS `JSY_Beneficiary`,`tm`.`JSY_Paid_Date` AS `JSY_Paid_Date`,`tm`.`Bank_Name` AS `Bank_Name`,`tm`.`Bank_Branch_Name` AS `Bank_Branch_Name`,`tm`.`Acc_No` AS `Acc_No`,`tm`.`IFSC_Code` AS `IFSC_Code`,`tm`.`Remarks` AS `Remarks`,`tm`.`Referred_By_Telecaller` AS `Referred_By_Telecaller`,`tm`.`Referred_Date` AS `Referred_Date`,`tm`.`No_of_Try` AS `No_of_Try`,`tm`.`Call_Answered` AS `Call_Answered`,`tm`.`Status` AS `Status`,`tm`.`High_Risk` AS `High_Risk`,`tm`.`High_Risk_Reason` AS `High_Risk_Reason`,`tm`.`Call_Verified` AS `Call_Verified`,`tm`.`Associate` AS `Associate`,`tm`.`Call_Date` AS `Call_Date`,`tm`.`Due_Services` AS `Due_Services`,`tm`.`Due_Services_Response` AS `Due_Services_Response`,`tm`.`Overdue_Services` AS `Overdue_Services`,`tm`.`Overdue_Services_Response` AS `Overdue_Services_Response`,`tm`.`Given_Services` AS `Given_Services`,`tm`.`Given_Services_Response` AS `Given_Services_Response`,`tm`.`Miscarriage` AS `Miscarriage`,`tm`.`Baby_Died` AS `Baby_Died`,`tm`.`Call_No` AS `Call_No`,`tm`.`Questions_Asked` AS `Questions_Asked`,`tm`.`Asnwer_Given_by_Benificary` AS `Asnwer_Given_by_Benificary`,`tm`.`Source` AS `Source`,`tm`.`NoCall_Reason` AS `NoCall_Reason`,`tm`.`NoPhone_Reason` AS `NoPhone_Reason`,`tm`.`Created_By` AS `Created_By`,`tm`.`Updated_By` AS `Updated_By`,`tm`.`BPL_APL` AS `BPL_APL`,`tm`.`MDDS_StateID` AS `MDDS_StateID`,`tm`.`MDDS_District_ID` AS `MDDS_District_ID`,`tm`.`MDDS_Taluka_ID` AS `MDDS_Taluka_ID`,`tm`.`MDDS_Village_ID` AS `MDDS_Village_ID`,`tm`.`Is_Valid` AS `Is_Valid`,`tm`.`InValid_Reason` AS `InValid_Reason`,`tm`.`Is_Error` AS `Is_Error`,`tm`.`Error_Reason` AS `Error_Reason`,`tm`.`FileID` AS `FileID`,`tm`.`IsAllocated` AS `IsAllocated`,`tm`.`Deleted` AS `Deleted`,`tm`.`Processed` AS `Processed`,`tm`.`CreatedBy` AS `CreatedBy`,`tm`.`ModifiedBy` AS `ModifiedBy`,`tm`.`LastModDate` AS `LastModDate`,`tc`.`MCTSID_no_Child_ID` AS `MCTSID_no_Child_ID`,`tc`.`Child_Name` AS `Child_Name`,`tc`.`Father_Name` AS `Father_Name`,`tc`.`Mother_Name` AS `Mother_Name`,`tc`.`Mother_ID` AS `Mother_ID`,`tc`.`DOB` AS `DOB`,`tc`.`Place_of_Birth` AS `Place_of_Birth`,`tc`.`Gender` AS `Gender`,`tc`.`BloodGroup` AS `BloodGroup`,`tc`.`Child_Aadhaar_No` AS `Child_Aadhaar_No`,`tc`.`Weight_of_Child` AS `Weight_of_Child`,`tc`.`Child_EID` AS `Child_EID`,`tc`.`Child_EID_Time` AS `Child_EID_Time`,`tc`.`Emamta_Health_ID` AS `Emamta_Health_ID`,`tc`.`Emamta_Family_ID` AS `Emamta_Family_ID`,`tc`.`Phone_No_of` AS `Phone_No_of`,`tc`.`Phone_No` AS `Phone_No`,`tc`.`Registration_Date` AS `Registration_Date`,`tc`.`Updated_Date` AS `Updated_Date`,`tc`.`CityID` AS `CityID`,`tc`.`City` AS `City`,`tc`.`Year` AS `Year`,`tc`.`ANM_Phone_No` AS `ANM_Phone_No`,`tc`.`ASHA_Phone_No` AS `ASHA_Phone_No`,`tc`.`BCG_Date` AS `BCG_Date`,`tc`.`OPV0_Date` AS `OPV0_Date`,`tc`.`Hepatitis_B1_Date` AS `Hepatitis_B1_Date`,`tc`.`DPT1_Date` AS `DPT1_Date`,`tc`.`OPV1_Date` AS `OPV1_Date`,`tc`.`Hepatitis_B2_Date` AS `Hepatitis_B2_Date`,`tc`.`DPT2_Date` AS `DPT2_Date`,`tc`.`OPV2_Date` AS `OPV2_Date`,`tc`.`Hepatitis_B3_Date` AS `Hepatitis_B3_Date`,`tc`.`DPT3_Date` AS `DPT3_Date`,`tc`.`OPV3_Date` AS `OPV3_Date`,`tc`.`Hepatitis_B4_Date` AS `Hepatitis_B4_Date`,`tc`.`Measles_Date` AS `Measles_Date`,`tc`.`VitA_Dose1_Date` AS `VitA_Dose1_Date`,`tc`.`MR_Date` AS `MR_Date`,`tc`.`DPTBooster_Date` AS `DPTBooster_Date`,`tc`.`OPVBooster_Date` AS `OPVBooster_Date`,`tc`.`VitA_Dose2_Date` AS `VitA_Dose2_Date`,`tc`.`VitA_Dose3_Date` AS `VitA_Dose3_Date`,`tc`.`VitA_Dose99_Date` AS `VitA_Dose99_Date`,`tc`.`VitA_Dose5_Date` AS `VitA_Dose5_Date`,`tc`.`VitA_Dose6_Date` AS `VitA_Dose6_Date`,`tc`.`VitA_Dose7_Date` AS `VitA_Dose7_Date`,`tc`.`VitA_Dose8_Date` AS `VitA_Dose8_Date`,`tc`.`VitA_Dose9_Date` AS `VitA_Dose9_Date`,`tc`.`JE_Date` AS `JE_Date`,`tc`.`DT5_Date` AS `DT5_Date`,`tc`.`TT10_Date` AS `TT10_Date`,`tc`.`TT16_Date` AS `TT16_Date`,`tc`.`Measles_2_Date` AS `Measles_2_Date`,`tc`.`PentaValent1_Date` AS `PentaValent1_Date`,`tc`.`PentaValent2_Date` AS `PentaValent2_Date`,`tc`.`PentaValent3_Date` AS `PentaValent3_Date`,`tc`.`is_Upload` AS `is_Upload`,`tc`.`Delete_Mother` AS `Delete_Mother`,`tc`.`Delete_Reason` AS `Delete_Reason`,`tc`.`Deleted_ON` AS `Deleted_ON`,`tc`.`SMS_Status` AS `SMS_Status`,`tc`.`BirthCertificateNo` AS `BirthCertificateNo`,`tc`.`Rural_urban` AS `Rural_urban`,`tc`.`SNO` AS `SNO`,`tc`.`Lead_ID` AS `Lead_ID`,`tc`.`My_ID` AS `My_ID`,`tc`.`CID_NO` AS `CID_NO`,`tc`.`MID_NO` AS `MID_NO`,`tc`.`Duplicate_Bit` AS `Duplicate_Bit`,`tc`.`FacilityType` AS `FacilityType`,`tc`.`DueServices` AS `DueServices`,`tc`.`OverDueServices` AS `OverDueServices`,`tc`.`GivenServices` AS `GivenServices` from ((((((`t_feedback` `tf` left join `t_mothervalidrecord` `tm` on((`tf`.`BeneficiaryRegID` = `tm`.`BeneficiaryRegID`))) left join `t_childvaliddata` `tc` on((`tc`.`BeneficiaryRegID` = `tm`.`BeneficiaryRegID`))) left join `m_feedbacktype` `mf` on((`mf`.`FeedbackTypeID` = `tf`.`FeedbackTypeID`))) left join `m_feedbacknature` `mf1` on((`mf1`.`FeedbackTypeID` = `mf`.`FeedbackTypeID`))) left join `m_designation` `md` on((`md`.`DesignationID` = `tf`.`DesignationID`))) left join `m_institution` `mi` on((`mi`.`InstitutionID` = `tf`.`InstitutionID`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_showprovideradmin`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_showprovideradmin`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_showprovideradmin` AS select `usrm`.`USRMappingID` AS `USRMappingID`,`usrm`.`UserID` AS `UserID`,`usr`.`TitleID` AS `TitleID`,`title`.`TitleName` AS `TitleName`,`usr`.`FirstName` AS `FirstName`,`usr`.`MiddleName` AS `MiddleName`,`usr`.`LastName` AS `LastName`,`usr`.`IsSupervisor` AS `IsSupervisor`,`usr`.`Deleted` AS `UserDeleted`,`usrm`.`RoleID` AS `RoleID`,`role`.`RoleName` AS `RoleName`,`role`.`Deleted` AS `RoleDeleted`,`usrm`.`AgentID` AS `AgentID`,`usrm`.`AgentPassword` AS `AgentPassword`,`usrm`.`CZRole` AS `CZRole`,`usrm`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`psm`.`Deleted` AS `ProviderServiceMapDeleted`,`usrm`.`WorkingLocationID` AS `WorkingLocationID`,`psam`.`LocationName` AS `LocationName`,`psam`.`Deleted` AS `WorkingLocationDeleted`,`usrm`.`Deleted` AS `USRMDeleted`,`psm`.`ServiceProviderID` AS `ServiceProviderID`,`sp`.`ServiceProviderName` AS `ServiceProviderName`,`sp`.`Deleted` AS `ServiceProviderDeleted`,`psm`.`ServiceID` AS `ServiceID`,`sm`.`ServiceName` AS `ServiceName`,`sm`.`IsNational` AS `IsNational`,`sm`.`Deleted` AS `ServiceDeleted`,`psm`.`StateID` AS `StateID`,`st`.`StateName` AS `StateName` from ((((((((`m_userservicerolemapping` `usrm` left join `m_providerservicemapping` `psm` on((`usrm`.`ProviderServiceMapID` = `psm`.`ProviderServiceMapID`))) left join `m_user` `usr` on((`usrm`.`UserID` = `usr`.`UserID`))) left join `m_role` `role` on((`usrm`.`RoleID` = `role`.`RoleID`))) left join `m_providerserviceaddmapping` `psam` on((`usrm`.`WorkingLocationID` = `psam`.`PSAddMapID`))) left join `m_serviceprovider` `sp` on((`psm`.`ServiceProviderID` = `sp`.`ServiceProviderID`))) left join `m_servicemaster` `sm` on((`psm`.`ServiceID` = `sm`.`ServiceID`))) left join `m_state` `st` on((`psm`.`StateID` = `st`.`StateID`))) left join `m_title` `title` on((`usr`.`TitleID` = `title`.`TitleID`))) where (`role`.`RoleID` = 11) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_showproviderservicemapping`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_showproviderservicemapping`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_showproviderservicemapping` AS select `psm`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`psm`.`ServiceProviderID` AS `ServiceProviderID`,`sp`.`ServiceProviderName` AS `ServiceProviderName`,`psm`.`ServiceID` AS `ServiceID`,`ser`.`ServiceName` AS `ServiceName`,`ser`.`IsNational` AS `IsNational`,`psm`.`CountryID` AS `CountryID`,`cou`.`CountryName` AS `CountryName`,`psm`.`StateID` AS `StateID`,`st`.`StateName` AS `StateName`,`psm`.`DistrictID` AS `DistrictID`,`psm`.`CityID` AS `CityID`,`psm`.`DistrictBlockID` AS `DistrictBlockID`,`psm`.`Address` AS `Address`,`psm`.`StatusID` AS `StatusID`,`sta`.`Status` AS `Status`,`psm`.`CTI_CampaignName` AS `CTI_CampaignName`,`psm`.`ValidFrom` AS `ValidFrom`,`psm`.`ValidTill` AS `ValidTill`,`psm`.`Deleted` AS `Deleted`,`psm`.`Processed` AS `Processed`,`psm`.`CreatedBy` AS `CreatedBy`,`psm`.`CreatedDate` AS `CreatedDate`,`psm`.`ModifiedBy` AS `ModifiedBy`,`psm`.`LastModDate` AS `LastModDate` from (((((`m_providerservicemapping` `psm` left join `m_country` `cou` on((`psm`.`CountryID` = `cou`.`CountryID`))) left join `m_serviceprovider` `sp` on((`psm`.`ServiceProviderID` = `sp`.`ServiceProviderID`))) left join `m_servicemaster` `ser` on((`psm`.`ServiceID` = `ser`.`ServiceID`))) left join `m_state` `st` on((`psm`.`StateID` = `st`.`StateID`))) left join `m_status` `sta` on((`psm`.`StatusID` = `sta`.`StatusID`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_showsubcategory`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_showsubcategory`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_showsubcategory` AS select `ca`.`CategoryID` AS `CategoryID`,`ca`.`CategoryName` AS `CategoryName`,`ca`.`CategoryDesc` AS `CategoryDesc`,`sc`.`SubCategoryID` AS `SubCategoryID`,`sc`.`SubCategoryName` AS `SubCategoryName`,`sc`.`SubCategoryDesc` AS `SubCategoryDesc`,`sc`.`SubCatFilePath` AS `SubCatFilePath`,`sc`.`Deleted` AS `SubCategoryDeleted`,`ca`.`SubServiceID` AS `SubServiceID`,`sus`.`SubServiceName` AS `SubServiceName`,`ca`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`ca`.`Deleted` AS `CategoryDeleted` from ((`m_category` `ca` left join `m_subcategory` `sc` on((`sc`.`CategoryID` = `ca`.`CategoryID`))) left join `m_subservice` `sus` on((`ca`.`SubServiceID` = `sus`.`SubServiceID`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_showuser`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_showuser`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_showuser` AS select `usr`.`UserID` AS `UserID`,`usr`.`TitleID` AS `TitleID`,`usr`.`FirstName` AS `FirstName`,`usr`.`MiddleName` AS `MiddleName`,`usr`.`LastName` AS `LastName`,`usr`.`GenderID` AS `GenderID`,`usr`.`MaritalStatusID` AS `MaritalStatusID`,`usr`.`AadhaarNo` AS `AadhaarNo`,`usr`.`PAN` AS `PAN`,`usr`.`DOB` AS `DOB`,`usr`.`DOJ` AS `DOJ`,`usr`.`QualificationID` AS `QualificationID`,`usr`.`DesignationID` AS `DesignationID`,`usr`.`UserName` AS `UserName`,`usr`.`Password` AS `Password`,`usr`.`CZUserID` AS `CZUserID`,`usr`.`CZPassword` AS `CZPassword`,`usr`.`AgentID` AS `AgentID`,`usr`.`AgentPassword` AS `AgentPassword`,`usr`.`CZRole` AS `CZRole`,`usr`.`ContactNo` AS `ContactNo`,`usr`.`EmailID` AS `EmailID`,`usr`.`StatusID` AS `StatusID`,`usr`.`ServiceProviderID` AS `ServiceProviderID`,`usr`.`EmergencyContactPerson` AS `EmergencyContactPerson`,`usr`.`EmergencyContactNo` AS `EmergencyContactNo`,`usr`.`IsExternal` AS `IsExternal`,`usr`.`IsSupervisor` AS `IsSupervisor`,`usr`.`IsProviderAdmin` AS `IsProviderAdmin`,`usr`.`Remarks` AS `Remarks`,`usr`.`Deleted` AS `Deleted`,`usr`.`Processed` AS `Processed`,`usr`.`CreatedBy` AS `CreatedBy`,`usr`.`CreatedDate` AS `CreatedDate`,`usr`.`ModifiedBy` AS `ModifiedBy`,`usr`.`LastModDate` AS `LastModDate`,`titl`.`TitleName` AS `TitleName`,`gen`.`GenderName` AS `GenderName`,`usrq`.`Name` AS `UserQualification`,`desg`.`DesignationName` AS `DesignationName`,`marst`.`Status` AS `MaritalStatus`,`sta`.`Status` AS `Status`,`usrd`.`DemographicID` AS `DemographicID`,`usrd`.`FathersName` AS `FathersName`,`usrd`.`MothersName` AS `MothersName`,`usrd`.`CommunityID` AS `CommunityID`,`com`.`CommunityType` AS `CommunityType`,`usrd`.`ReligionID` AS `ReligionID`,`rel`.`ReligionType` AS `ReligionType`,`usrd`.`AddressLine1` AS `AddressLine1`,`usrd`.`AddressLine2` AS `AddressLine2`,`usrd`.`PermAddressLine1` AS `PermAddressLine1`,`usrd`.`PermAddressLine2` AS `PermAddressLine2`,`usrd`.`PermStateID` AS `PermStateID`,`usrd`.`PermDistrictID` AS `PermDistrictID`,`usrd`.`PermPinCode` AS `PermPinCode`,`usrd`.`PermanentAddress` AS `PermanentAddress`,`usrd`.`CityID` AS `CityID`,`usrd`.`DistrictID` AS `DistrictID`,`distr`.`DistrictName` AS `DistrictName`,`usrd`.`StateID` AS `StateID`,`st`.`StateName` AS `StateName`,`usrd`.`CountryID` AS `CountryID`,`cou`.`CountryName` AS `CountryName`,`usrd`.`PinCode` AS `PinCode`,`usrd`.`IsPresent` AS `IsPresent`,`usrd`.`IsPermanent` AS `IsPermanent`,`usrd`.`Deleted` AS `DemographicDeleted`,`usr`.`HealthProfessionalID` AS `HealthProfessionalID` from ((((((((((((`m_user` `usr` left join `m_userdemographics` `usrd` on((`usr`.`UserID` = `usrd`.`UserID`))) left join `m_title` `titl` on((`usr`.`TitleID` = `titl`.`TitleID`))) left join `m_gender` `gen` on((`usr`.`GenderID` = `gen`.`GenderID`))) left join `m_userqualification` `usrq` on((`usr`.`QualificationID` = `usrq`.`QualificationID`))) left join `m_designation` `desg` on((`usr`.`DesignationID` = `desg`.`DesignationID`))) left join `m_status` `sta` on((`usr`.`StatusID` = `sta`.`StatusID`))) left join `m_maritalstatus` `marst` on((`usr`.`MaritalStatusID` = `marst`.`MaritalStatusID`))) left join `m_community` `com` on((`usrd`.`CommunityID` = `com`.`CommunityID`))) left join `m_religion` `rel` on((`usrd`.`ReligionID` = `rel`.`ReligionID`))) left join `m_district` `distr` on((`usrd`.`DistrictID` = `distr`.`DistrictID`))) left join `m_state` `st` on((`usrd`.`StateID` = `st`.`StateID`))) left join `m_country` `cou` on((`usrd`.`CountryID` = `cou`.`CountryID`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_temp`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_temp`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8mb4 */;
+-- /*!50001 SET character_set_results     = utf8mb4 */;
+-- /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_temp` AS select `t1`.`id` AS `id`,`t1`.`Bencallid` AS `Bencallid`,`t1`.`outboundCallType` AS `outboundCallType`,`t1`.`Sectionid` AS `Sectionid`,`t1`.`SectionName` AS `SectionName`,`t1`.`QuestionID` AS `QuestionID`,`t1`.`Answer` AS `Answer`,`t1`.`Score` AS `Score`,`t1`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`t1`.`Deleted` AS `Deleted`,`t1`.`Processed` AS `Processed`,`t1`.`CreatedBy` AS `CreatedBy`,`t1`.`CreatedDate` AS `CreatedDate`,`t1`.`ModifiedBy` AS `ModifiedBy`,`t1`.`LastModDate` AS `LastModDate`,`t2`.`Name` AS `sectionNameN`,`t2`.`SectionRank` AS `SectionRank`,`t3`.`Question` AS `Question`,`t3`.`QuestionRank` AS `QuestionRank` from ((`t_qualityauditorcallresponse` `t1` join `m_qualityauditsection` `t2` on((`t1`.`Sectionid` = `t2`.`id`))) join `m_qualityauditquestionnaire` `t3` on((`t1`.`QuestionID` = `t3`.`id`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_userprkngplacvanspstatedisblok`
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_userprkngplacvanspstatedisblok`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `v_userprkngplacvanspstatedisblok` AS select `upp`.`UserID` AS `userid`,`uvm`.`VanID` AS `VanID`,concat(`mv`.`VehicalNo`,' - ',`mvt`.`VanType`) AS `vanNoAndType`,`mvsp`.`VanSession` AS `VanSession`,`mvsp`.`ServicePointID` AS `ServicePointID`,`msp`.`ServicePointName` AS `ServicePointName`,`upp`.`ParkingPlaceID` AS `parkingplaceid`,`mv`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`mv`.`IsFacility` AS `IsFacility`,`mv`.`FacilityID` AS `FacilityID` from ((((((`m_uservanmapping` `uvm` join `m_userparkingplacemap` `upp` on(((`uvm`.`UserParkingPlaceMapID` = `upp`.`UserParkingPlaceMapID`) and (`upp`.`Deleted` is false)))) join `m_van` `mv` on(((`uvm`.`VanID` = `mv`.`VanID`) and (`mv`.`Deleted` is false)))) join `m_servicepoint` `msp` on(((`upp`.`ParkingPlaceID` = `msp`.`ParkingPlaceID`) and (`msp`.`Deleted` is false)))) join `m_vanservicepointmap` `mvsp` on(((`mv`.`VanID` = `mvsp`.`VanID`) and (`msp`.`ServicePointID` = `mvsp`.`ServicePointID`) and (`mvsp`.`Deleted` is false)))) join `m_parkingplace` `mpp` on(((`upp`.`ParkingPlaceID` = `mpp`.`ParkingPlaceID`) and (`mpp`.`Deleted` is false)))) join `m_vantype` `mvt` on(((`mv`.`VanTypeID` = `mvt`.`VanTypeID`) and (`mvt`.`Deleted` is false)))) where (`uvm`.`Deleted` is false) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 -- --
 -- -- Final view structure for view `v_userservicerolemapping`
@@ -26671,12 +26675,12 @@ DELIMITER ;
 -- /*!50001 SET collation_connection      = @saved_col_connection */;
 -- /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
--- /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+-- -- /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 -- /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 -- /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
--- /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
--- /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
--- /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- -- /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+-- -- /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+-- -- /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 -- /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 
@@ -26805,46 +26809,6 @@ END $$
 DELIMITER ;
 
 
-
-
-
-
-
-DROP TRIGGER IF EXISTS InsertNotificationMapping;
-DELIMITER $$
-CREATE TRIGGER InsertNotificationMapping
-AFTER INSERT ON m_notification
-FOR EACH ROW
-BEGIN
-    CALL PR_InsertInNotificationMap(
-        NEW.RoleID,
-        NEW.NotificationID,
-        NEW.ProviderServiceMapID,
-        NEW.NotificationTypeID,
-        NEW.CreatedBy,
-        NEW.ValidFrom,
-        NEW.WorkingLocationID
-    );
-END$$
-DELIMITER ;
-
-
-
-
-DROP TRIGGER IF EXISTS UpdateNotificationMapping;
-DELIMITER $$
-CREATE TRIGGER UpdateNotificationMapping
-AFTER UPDATE ON m_notification
-FOR EACH ROW
-BEGIN
-    CALL PR_UpdateNotificationMap(
-        NEW.NotificationID,
-        NEW.ModifiedBy,
-        NEW.ValidFrom,
-        NEW.Deleted
-    );
-END$$
-DELIMITER ;
 
 
 
