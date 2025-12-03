@@ -4,24 +4,24 @@
 -- ------------------------------------------------------
 -- Server version	5.7.19-log
 use db_identity;
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+-- /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+-- /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+-- /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+-- /*!50503 SET NAMES utf8 */;
+-- /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+-- /*!40103 SET TIME_ZONE='+00:00' */;
+-- /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+-- /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+-- /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+-- /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `datamigrationtable`
 --
 
 -- DROP TABLE IF EXISTS `datamigrationtable`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `datamigrationtable` (
   `created_date` varchar(300) DEFAULT NULL,
   `ben_phone_no` varchar(300) DEFAULT NULL,
@@ -38,27 +38,27 @@ CREATE TABLE IF NOT EXISTS `datamigrationtable` (
   `VillageName` varchar(300) DEFAULT NULL,
   `BenRegID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `hibernate_sequence`
 --
 
 -- DROP TABLE IF EXISTS `hibernate_sequence`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
   `next_val` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `i_beneficiaryaccount`
 --
 
 -- DROP TABLE IF EXISTS `i_beneficiaryaccount`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_beneficiaryaccount` (
   `BenAccountID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BankName` varchar(100) DEFAULT NULL,
@@ -86,15 +86,15 @@ CREATE TABLE IF NOT EXISTS `i_beneficiaryaccount` (
   KEY `inx_VanSerialNo` (`VanSerialNo`),
   KEY `inx_vanid` (`VanID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5048092 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `i_beneficiaryaddress`
---
+-- --
+-- -- Table structure for table `i_beneficiaryaddress`
+-- --
 
--- DROP TABLE IF EXISTS `i_beneficiaryaddress`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `i_beneficiaryaddress`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_beneficiaryaddress` (
   `BenAddressID` bigint(20) NOT NULL AUTO_INCREMENT,
   `PermAddrLine1` varchar(50) DEFAULT NULL,
@@ -190,15 +190,15 @@ CREATE TABLE IF NOT EXISTS `i_beneficiaryaddress` (
   KEY `inx_CurrDistrictId` (`CurrDistrictId`),
   KEY `inx_createdby` (`CreatedBy`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5048697 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `i_beneficiaryaddress_bkp_14122021`
---
+-- --
+-- -- Table structure for table `i_beneficiaryaddress_bkp_14122021`
+-- --
 
--- DROP TABLE IF EXISTS `i_beneficiaryaddress_bkp_14122021`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `i_beneficiaryaddress_bkp_14122021`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_beneficiaryaddress_bkp_14122021` (
   `BenAddressID` bigint(20) NOT NULL DEFAULT '0',
   `PermAddrLine1` varchar(50) DEFAULT NULL,
@@ -288,15 +288,15 @@ CREATE TABLE IF NOT EXISTS `i_beneficiaryaddress_bkp_14122021` (
   `SyncedDate` datetime DEFAULT NULL,
   `ReservedForChange` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `i_beneficiaryconsent`
---
+-- --
+-- -- Table structure for table `i_beneficiaryconsent`
+-- --
 
--- DROP TABLE IF EXISTS `i_beneficiaryconsent`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `i_beneficiaryconsent`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_beneficiaryconsent` (
   `BenConsentID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenConsent` bit(1) DEFAULT NULL,
@@ -338,15 +338,15 @@ CREATE TABLE IF NOT EXISTS `i_beneficiaryconsent` (
   KEY `inx_VanSerialNo` (`VanSerialNo`),
   KEY `inx_vanid` (`VanID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3755957 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `i_beneficiarycontacts`
---
+-- --
+-- -- Table structure for table `i_beneficiarycontacts`
+-- --
 
--- DROP TABLE IF EXISTS `i_beneficiarycontacts`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `i_beneficiarycontacts`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_beneficiarycontacts` (
   `BenContactsID` bigint(20) NOT NULL AUTO_INCREMENT,
   `PreferredPhoneNum` varchar(25) DEFAULT NULL,
@@ -393,15 +393,15 @@ CREATE TABLE IF NOT EXISTS `i_beneficiarycontacts` (
   KEY `inx_VanSerialNo` (`VanSerialNo`),
   KEY `inx_vanid` (`VanID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5048659 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `i_beneficiarycontacts_bkp_24092019`
---
+-- --
+-- -- Table structure for table `i_beneficiarycontacts_bkp_24092019`
+-- --
 
--- DROP TABLE IF EXISTS `i_beneficiarycontacts_bkp_24092019`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `i_beneficiarycontacts_bkp_24092019`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_beneficiarycontacts_bkp_24092019` (
   `BenContactsID` bigint(20) NOT NULL DEFAULT '0',
   `PreferredPhoneNum` varchar(25) DEFAULT NULL,
@@ -439,15 +439,15 @@ CREATE TABLE IF NOT EXISTS `i_beneficiarycontacts_bkp_24092019` (
   `SyncedDate` datetime DEFAULT NULL,
   `ReservedForChange` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `i_beneficiarydetails`
---
+-- --
+-- -- Table structure for table `i_beneficiarydetails`
+-- --
 
--- DROP TABLE IF EXISTS `i_beneficiarydetails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `i_beneficiarydetails`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_beneficiarydetails` (
   `BeneficiaryDetailsId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -524,15 +524,15 @@ CREATE TABLE IF NOT EXISTS `i_beneficiarydetails` (
   KEY `inx_GenderId` (`GenderId`),
   KEY `inx_familyid` (`familyid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5048645 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `i_beneficiarydetails_bkp_chirangv1`
---
+-- --
+-- -- Table structure for table `i_beneficiarydetails_bkp_chirangv1`
+-- --
 
--- DROP TABLE IF EXISTS `i_beneficiarydetails_bkp_chirangv1`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `i_beneficiarydetails_bkp_chirangv1`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_beneficiarydetails_bkp_chirangv1` (
   `BeneficiaryDetailsId` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -597,15 +597,15 @@ CREATE TABLE IF NOT EXISTS `i_beneficiarydetails_bkp_chirangv1` (
   `SyncedDate` datetime DEFAULT NULL,
   `ReservedForChange` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `i_beneficiarydetails_bkp_kamrupv4`
---
+-- --
+-- -- Table structure for table `i_beneficiarydetails_bkp_kamrupv4`
+-- --
 
--- DROP TABLE IF EXISTS `i_beneficiarydetails_bkp_kamrupv4`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `i_beneficiarydetails_bkp_kamrupv4`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_beneficiarydetails_bkp_kamrupv4` (
   `BeneficiaryDetailsId` bigint(20) NOT NULL DEFAULT '0',
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -670,15 +670,15 @@ CREATE TABLE IF NOT EXISTS `i_beneficiarydetails_bkp_kamrupv4` (
   `SyncedDate` datetime DEFAULT NULL,
   `ReservedForChange` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `i_beneficiarydetails_rmnch`
---
+-- --
+-- -- Table structure for table `i_beneficiarydetails_rmnch`
+-- --
 
--- DROP TABLE IF EXISTS `i_beneficiarydetails_rmnch`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `i_beneficiarydetails_rmnch`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_beneficiarydetails_rmnch` (
   `beneficiaryDetails_RmnchId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -766,15 +766,15 @@ CREATE TABLE IF NOT EXISTS `i_beneficiarydetails_rmnch` (
   KEY `benregID` (`BeneficiaryRegID`),
   KEY `houseHoldID` (`houseoldId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=156853 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `i_beneficiaryfamilymapping`
---
+-- --
+-- -- Table structure for table `i_beneficiaryfamilymapping`
+-- --
 
--- DROP TABLE IF EXISTS `i_beneficiaryfamilymapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `i_beneficiaryfamilymapping`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_beneficiaryfamilymapping` (
   `BenFamilyMapId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenMapId` bigint(20) DEFAULT NULL,
@@ -806,15 +806,15 @@ CREATE TABLE IF NOT EXISTS `i_beneficiaryfamilymapping` (
   KEY `inx_VanSerialNo` (`VanSerialNo`),
   KEY `inx_VanID` (`VanID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5043059 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `i_beneficiaryidentity`
---
+-- --
+-- -- Table structure for table `i_beneficiaryidentity`
+-- --
 
--- DROP TABLE IF EXISTS `i_beneficiaryidentity`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `i_beneficiaryidentity`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_beneficiaryidentity` (
   `BenIdentityId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenMapId` bigint(20) NOT NULL,
@@ -849,15 +849,15 @@ CREATE TABLE IF NOT EXISTS `i_beneficiaryidentity` (
   KEY `inx_VanSerialNo` (`VanSerialNo`),
   KEY `inx_VanID` (`VanID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=545614 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `i_beneficiaryimage`
---
+-- --
+-- -- Table structure for table `i_beneficiaryimage`
+-- --
 
--- DROP TABLE IF EXISTS `i_beneficiaryimage`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `i_beneficiaryimage`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_beneficiaryimage` (
   `BenImageId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenImage` longtext,
@@ -883,15 +883,15 @@ CREATE TABLE IF NOT EXISTS `i_beneficiaryimage` (
   KEY `inx_VanSerialNo` (`VanSerialNo`),
   KEY `inx_vanid` (`VanID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5045474 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `i_beneficiarymapping`
---
+-- --
+-- -- Table structure for table `i_beneficiarymapping`
+-- --
 
--- DROP TABLE IF EXISTS `i_beneficiarymapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `i_beneficiarymapping`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_beneficiarymapping` (
   `BenMapId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenRegId` bigint(20) NOT NULL,
@@ -933,15 +933,15 @@ CREATE TABLE IF NOT EXISTS `i_beneficiarymapping` (
   KEY `inx_vanid` (`VanID`),
   KEY `inx_VanSerialNo` (`VanSerialNo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11594169 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `i_beneficiaryservicemapping`
---
+-- --
+-- -- Table structure for table `i_beneficiaryservicemapping`
+-- --
 
--- DROP TABLE IF EXISTS `i_beneficiaryservicemapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `i_beneficiaryservicemapping`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_beneficiaryservicemapping` (
   `BenServiceMapID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenMapID` bigint(20) NOT NULL,
@@ -978,15 +978,15 @@ CREATE TABLE IF NOT EXISTS `i_beneficiaryservicemapping` (
   KEY `inx_VanSerialNo` (`VanSerialNo`),
   KEY `inx_VanID` (`VanID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3750293 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `i_benfamilytag`
---
+-- --
+-- -- Table structure for table `i_benfamilytag`
+-- --
 
--- DROP TABLE IF EXISTS `i_benfamilytag`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `i_benfamilytag`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_benfamilytag` (
   `BenFamilyTagId` bigint(20) NOT NULL AUTO_INCREMENT,
   `Familyid` varchar(50) DEFAULT NULL,
@@ -1011,15 +1011,15 @@ CREATE TABLE IF NOT EXISTS `i_benfamilytag` (
   KEY `inx_Vanid` (`VanID`),
   KEY `inx_vanserialno` (`VanSerialNo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `i_bornbirthdeatils`
---
+-- --
+-- -- Table structure for table `i_bornbirthdeatils`
+-- --
 
--- DROP TABLE IF EXISTS `i_bornbirthdeatils`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `i_bornbirthdeatils`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_bornbirthdeatils` (
   `BornBirthDeatilsId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -1099,15 +1099,15 @@ CREATE TABLE IF NOT EXISTS `i_bornbirthdeatils` (
   PRIMARY KEY (`BornBirthDeatilsId`),
   KEY `inx_bornbirthdetails_benregID` (`BeneficiaryRegID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20543 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `i_cbac_additional_details`
---
+-- --
+-- -- Table structure for table `i_cbac_additional_details`
+-- --
 
--- DROP TABLE IF EXISTS `i_cbac_additional_details`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `i_cbac_additional_details`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_cbac_additional_details` (
   `cbacAdditionalDetailId` bigint(20) NOT NULL,
   `cbacCloudy` varchar(255) DEFAULT NULL,
@@ -1136,15 +1136,15 @@ CREATE TABLE IF NOT EXISTS `i_cbac_additional_details` (
   `filledDate` datetime DEFAULT NULL,
   PRIMARY KEY (`cbacAdditionalDetailId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `i_cbacdetails`
---
+-- --
+-- -- Table structure for table `i_cbacdetails`
+-- --
 
--- DROP TABLE IF EXISTS `i_cbacdetails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `i_cbacdetails`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_cbacdetails` (
   `CBACDetailsId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -1275,15 +1275,15 @@ CREATE TABLE IF NOT EXISTS `i_cbacdetails` (
   KEY `inx_cbacdetails_benregID` (`BeneficiaryRegID`),
   KEY `inx_cbacdetails_houseHoldID` (`houseoldId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `i_householddetails`
---
+-- --
+-- -- Table structure for table `i_householddetails`
+-- --
 
--- DROP TABLE IF EXISTS `i_householddetails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `i_householddetails`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `i_householddetails` (
   `houseHoldDetailsId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -1367,15 +1367,15 @@ CREATE TABLE IF NOT EXISTS `i_householddetails` (
   KEY `inx_householddetails_benregID` (`BeneficiaryRegID`),
   KEY `inx_householddetails_houseoldId` (`houseoldId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=89265 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_beneficiaryregidmapping`
---
+-- --
+-- -- Table structure for table `m_beneficiaryregidmapping`
+-- --
 
--- DROP TABLE IF EXISTS `m_beneficiaryregidmapping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_beneficiaryregidmapping`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_beneficiaryregidmapping` (
   `BenRegId` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryID` bigint(20) NOT NULL,
@@ -1407,15 +1407,15 @@ CREATE TABLE IF NOT EXISTS `m_beneficiaryregidmapping` (
   KEY `inx_VanSerialNo` (`VanSerialNo`),
   KEY `inx_vanid` (`VanID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9025341 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_bensecurestack`
---
+-- --
+-- -- Table structure for table `m_bensecurestack`
+-- --
 
--- DROP TABLE IF EXISTS `m_bensecurestack`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `m_bensecurestack`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_bensecurestack` (
   `BenSecureStackId` int(15) NOT NULL AUTO_INCREMENT,
   `BenSecureStackSchemeId` int(15) NOT NULL,
@@ -1445,27 +1445,27 @@ CREATE TABLE IF NOT EXISTS `m_bensecurestack` (
   `ReservedForChange` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`BenSecureStackId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `replicationtest`
---
+-- --
+-- -- Table structure for table `replicationtest`
+-- --
 
--- DROP TABLE IF EXISTS `replicationtest`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `replicationtest`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `replicationtest` (
   `id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `samjeevani_zolt_datamigration`
---
+-- --
+-- -- Table structure for table `samjeevani_zolt_datamigration`
+-- --
 
--- DROP TABLE IF EXISTS `samjeevani_zolt_datamigration`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `samjeevani_zolt_datamigration`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `samjeevani_zolt_datamigration` (
   `created_date` varchar(300) DEFAULT NULL,
   `ben_phone_no` varchar(300) DEFAULT NULL,
@@ -1482,15 +1482,15 @@ CREATE TABLE IF NOT EXISTS `samjeevani_zolt_datamigration` (
   `VillageName` varchar(300) DEFAULT NULL,
   `BenRegID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `t_bendataaccess`
---
+-- --
+-- -- Table structure for table `t_bendataaccess`
+-- --
 
--- DROP TABLE IF EXISTS `t_bendataaccess`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- DROP TABLE IF EXISTS `t_bendataaccess`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_bendataaccess` (
   `AccessId` bigint(20) NOT NULL AUTO_INCREMENT,
   `AuthId` varchar(150) NOT NULL,
@@ -1519,7 +1519,7 @@ CREATE TABLE IF NOT EXISTS `t_bendataaccess` (
   `ReservedForChange` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`AccessId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Temporary view structure for view `v_benadvancesearch`
@@ -1527,8 +1527,8 @@ CREATE TABLE IF NOT EXISTS `t_bendataaccess` (
 
 -- DROP TABLE IF EXISTS `v_benadvancesearch`;
 /*!50001 DROP VIEW IF EXISTS `v_benadvancesearch`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `v_benadvancesearch` AS SELECT 
  1 AS `BenMapId`,
  1 AS `BenRegId`,
@@ -1554,7 +1554,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `houseoldId`,
  1 AS `guidelineid`,
  1 AS `rchid`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Dumping events for database 'db_identity'
@@ -1569,26 +1569,26 @@ SET character_set_client = @saved_cs_client;
 --
 
 /*!50001 DROP VIEW IF EXISTS `v_benadvancesearch`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8mb4 */;
+-- /*!50001 SET character_set_results     = utf8mb4 */;
+-- /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 SQL SECURITY DEFINER */
 /*!50001 VIEW `v_benadvancesearch` AS select `benmap`.`BenMapId` AS `BenMapId`,`benmap`.`BenRegId` AS `BenRegId`,`benmap`.`BenDetailsId` AS `BenDetailsId`,`benmap`.`BenAddressId` AS `BenAddressId`,`benmap`.`BenImageId` AS `BenImageId`,`benmap`.`BenContactsId` AS `BenContactsId`,`benmap`.`BenConsentId` AS `BenConsentId`,`benmap`.`BenAccountID` AS `BenAccountID`,`benmap`.`BenSecureStackId` AS `BenSecureStackId`,`benmap`.`VanSerialNo` AS `VanSerialNo`,`benmap`.`VanID` AS `VanID`,`benadd`.`CurrStateId` AS `CurrStateId`,`benadd`.`CurrDistrictId` AS `CurrDistrictId`,`benadd`.`CurrSubDistrictId` AS `CurrSubDistrictId`,`benadd`.`CurrVillageId` AS `CurrVillageId`,`bendetail`.`FirstName` AS `FirstName`,`bendetail`.`MiddleName` AS `MiddleName`,`bendetail`.`LastName` AS `LastName`,`bendetail`.`GenderId` AS `GenderId`,`bendetail`.`FatherName` AS `fathername`,`bendetail`.`DOB` AS `DOB`,`bendetailr`.`houseoldId` AS `houseoldId`,`bendetailr`.`guidelineid` AS `guidelineid`,`bendetailr`.`rchid` AS `rchid` from (((`i_beneficiarymapping` `benmap` join `i_beneficiarydetails` `bendetail` on(((`benmap`.`BenDetailsId` = `bendetail`.`VanSerialNo`) and (`benmap`.`VanID` = `bendetail`.`VanID`)))) join `i_beneficiaryaddress` `benadd` on(((`benmap`.`BenAddressId` = `benadd`.`VanSerialNo`) and (`benmap`.`VanID` = `benadd`.`VanID`)))) left join `i_beneficiarydetails_rmnch` `bendetailr` on((`benmap`.`BenRegId` = `bendetailr`.`BeneficiaryRegID`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+-- /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+-- /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+-- /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+-- /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+-- /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+-- /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-08-09 10:43:44

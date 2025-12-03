@@ -10,7 +10,7 @@ CHANGE COLUMN `AbdmFacilityID` `AbdmFacilityID` VARCHAR(100) NULL DEFAULT NULL ;
 
 USE db_iemr;
 
--- 1️⃣ Add column isNewAbha to t_healthid if it does not exist
+-- 1️ Add column isNewAbha to t_healthid if it does not exist
 SET @col_exists1 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.COLUMNS
@@ -30,7 +30,7 @@ EXECUTE stmt1;
 DEALLOCATE PREPARE stmt1;
 
 
--- 2️⃣ Add column isFurthercallrequired to t_mctsoutboundcalls if it does not exist
+-- 2️ Add column isFurthercallrequired to t_mctsoutboundcalls if it does not exist
 SET @col_exists2 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.COLUMNS

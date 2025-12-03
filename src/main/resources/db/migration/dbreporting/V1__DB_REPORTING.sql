@@ -3,16 +3,16 @@
 -- ------------------------------------------------------
 -- Server version 5.7.19-log
 use db_reporting;
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+-- /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+-- /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+-- /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+-- /*!50503 SET NAMES utf8 */;
+-- /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+-- /*!40103 SET TIME_ZONE='+00:00' */;
+-- /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+-- /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+-- /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+-- /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Temporary view structure for view `assam_104`
@@ -20,8 +20,8 @@ use db_reporting;
 
 -- DROP TABLE IF EXISTS `assam_104`;
 /*!50001 DROP VIEW IF EXISTS `assam_104`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- -- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `assam_104` AS SELECT 
  1 AS `Date`,
  1 AS `Agent_Loggedin`,
@@ -30,15 +30,15 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `Total Calls`,
  1 AS `Grievance Received`,
  1 AS `Average Call Handling Time`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `dim_1097beneficiary`
 --
 
 -- DROP TABLE IF EXISTS `dim_1097beneficiary`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- -- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `dim_1097beneficiary` (
   `Dim_1097BeneficiaryID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -83,15 +83,15 @@ CREATE TABLE IF NOT EXISTS `dim_1097beneficiary` (
   `LodadedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Dim_1097BeneficiaryID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `dim_beneficiary`
 --
 
 -- DROP TABLE IF EXISTS `dim_beneficiary`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `dim_beneficiary` (
   `Dim_BeneficiaryID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryDetailsId` bigint(20) DEFAULT NULL,
@@ -244,15 +244,15 @@ CREATE TABLE IF NOT EXISTS `dim_beneficiary` (
   KEY `inx_PermState` (`PermState`),
   KEY `inx_Isrural` (`Isrural`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7225667 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `dim_date`
 --
 
 -- DROP TABLE IF EXISTS `dim_date`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `dim_date` (
   `date_key` int(11) NOT NULL,
   `full_date` date DEFAULT NULL,
@@ -279,15 +279,15 @@ CREATE TABLE IF NOT EXISTS `dim_date` (
   `fiscal_year_qtr` char(10) NOT NULL,
   PRIMARY KEY (`date_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `dim_user`
 --
 
 -- DROP TABLE IF EXISTS `dim_user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `dim_user` (
   `Dim_USERID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
@@ -351,7 +351,7 @@ CREATE TABLE IF NOT EXISTS `dim_user` (
   PRIMARY KEY (`Dim_USERID`),
   KEY `inx_userid` (`UserID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3104 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Temporary view structure for view `fac_bencall`
@@ -359,21 +359,21 @@ CREATE TABLE IF NOT EXISTS `dim_user` (
 
 -- DROP TABLE IF EXISTS `fac_bencall`;
 /*!50001 DROP VIEW IF EXISTS `fac_bencall`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `fac_bencall` AS SELECT 
  1 AS `PermDistrict`,
  1 AS `CallSubTypeName`,
  1 AS `count(fbc.BenCallID)`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `fact_104bencdiresponse`
 --
 
 -- DROP TABLE IF EXISTS `fact_104bencdiresponse`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_104bencdiresponse` (
   `Fact_104BenCDIResponseID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ID` bigint(20) DEFAULT NULL,
@@ -399,15 +399,15 @@ CREATE TABLE IF NOT EXISTS `fact_104bencdiresponse` (
   KEY `inx_psmrid` (`ProviderServiceMapID`),
   KEY `inx_createddate` (`CreatedDate`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22248 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_104benmedhistory`
 --
 
 -- DROP TABLE IF EXISTS `fact_104benmedhistory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_104benmedhistory` (
   `Fact_104BenMedHistoryID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenHistoryID` bigint(20) DEFAULT NULL,
@@ -468,15 +468,15 @@ CREATE TABLE IF NOT EXISTS `fact_104benmedhistory` (
   KEY `inx_DiseaseSummary` (`DiseaseSummary`),
   KEY `inx_SelecteDiagnosis` (`SelecteDiagnosis`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1456995 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_104prescription`
 --
 
 -- DROP TABLE IF EXISTS `fact_104prescription`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_104prescription` (
   `Fact_104prescriptionID` bigint(20) NOT NULL AUTO_INCREMENT,
   `PrescriptionID` bigint(20) DEFAULT NULL,
@@ -512,15 +512,15 @@ CREATE TABLE IF NOT EXISTS `fact_104prescription` (
   KEY `inx_PrescribedDrugID` (`PrescribedDrugID`),
   KEY `inx_Createddate` (`CreatedDate`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20789 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_1097callsummary`
 --
 
 -- DROP TABLE IF EXISTS `fact_1097callsummary`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_1097callsummary` (
   `Fact_1097CallSummaryID` bigint(20) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
@@ -557,15 +557,15 @@ CREATE TABLE IF NOT EXISTS `fact_1097callsummary` (
   `LodadedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Fact_1097CallSummaryID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7368075 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_anccare`
 --
 
 -- DROP TABLE IF EXISTS `fact_anccare`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_anccare` (
   `Fact_ANCCareID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ID` bigint(20) DEFAULT NULL,
@@ -605,15 +605,15 @@ CREATE TABLE IF NOT EXISTS `fact_anccare` (
   `LodadedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Fact_ANCCareID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_ancdiagnosis`
 --
 
 -- DROP TABLE IF EXISTS `fact_ancdiagnosis`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_ancdiagnosis` (
   `Fact_ANCDiagnosisID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ID` bigint(20) DEFAULT NULL,
@@ -651,15 +651,15 @@ CREATE TABLE IF NOT EXISTS `fact_ancdiagnosis` (
   `LodadedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Fact_ANCDiagnosisID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_bencall`
 --
 
 -- DROP TABLE IF EXISTS `fact_bencall`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_bencall` (
   `Fact_BenCallID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenCallID` bigint(20) DEFAULT NULL,
@@ -740,15 +740,15 @@ CREATE TABLE IF NOT EXISTS `fact_bencall` (
   KEY `inx_IsOutbound` (`IsOutbound`),
   KEY `inx_IsCalledEarlier` (`IsCalledEarlier`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17649176 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_benchiefcomplaint`
 --
 
 -- DROP TABLE IF EXISTS `fact_benchiefcomplaint`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_benchiefcomplaint` (
   `Fact_BenChiefComplaintID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ID` bigint(20) DEFAULT NULL,
@@ -783,15 +783,15 @@ CREATE TABLE IF NOT EXISTS `fact_benchiefcomplaint` (
   `LodadedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Fact_BenChiefComplaintID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=983026 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_bendisease`
 --
 
 -- DROP TABLE IF EXISTS `fact_bendisease`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_bendisease` (
   `FactBenDiseaseID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -817,15 +817,15 @@ CREATE TABLE IF NOT EXISTS `fact_bendisease` (
   `LodadedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`FactBenDiseaseID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_benreferdetails`
 --
 
 -- DROP TABLE IF EXISTS `fact_benreferdetails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_benreferdetails` (
   `FactBenReferID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -851,15 +851,15 @@ CREATE TABLE IF NOT EXISTS `fact_benreferdetails` (
   `LodadedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`FactBenReferID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_benvisitdetail`
 --
 
 -- DROP TABLE IF EXISTS `fact_benvisitdetail`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_benvisitdetail` (
   `Fact_BenVisitDetailID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BenVisitID` bigint(20) DEFAULT NULL,
@@ -898,15 +898,15 @@ CREATE TABLE IF NOT EXISTS `fact_benvisitdetail` (
   KEY `BeneficiaryRegID` (`BeneficiaryRegID`),
   KEY `ProviderServiceMapID` (`ProviderServiceMapID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2652078 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_bloodrequest`
 --
 
 -- DROP TABLE IF EXISTS `fact_bloodrequest`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_bloodrequest` (
   `Fact_BloodRequestID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BloodReqID` bigint(20) DEFAULT NULL,
@@ -952,15 +952,15 @@ CREATE TABLE IF NOT EXISTS `fact_bloodrequest` (
   KEY `inx_createddate` (`CreatedDate`),
   KEY `inx_bencallid` (`BenCallID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_childcongenitalanomalies`
 --
 
 -- DROP TABLE IF EXISTS `fact_childcongenitalanomalies`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_childcongenitalanomalies` (
   `Fact_ChildCongenitalAnomaliesID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ChildCongenitalAnomaliesID` bigint(20) DEFAULT NULL,
@@ -984,15 +984,15 @@ CREATE TABLE IF NOT EXISTS `fact_childcongenitalanomalies` (
   KEY `inx_psmrid` (`ProviderServiceMapID`),
   KEY `inx_childid` (`ChildID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_childinvalidrecord`
 --
 
 -- DROP TABLE IF EXISTS `fact_childinvalidrecord`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_childinvalidrecord` (
   `Fact_ChildInValidRecordID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RowID` bigint(20) DEFAULT NULL,
@@ -1122,15 +1122,15 @@ CREATE TABLE IF NOT EXISTS `fact_childinvalidrecord` (
   KEY `inx_createddate` (`CreatedDate`),
   KEY `inx_psmrid` (`ProviderServiceMapID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_childvalidrecord`
 --
 
 -- DROP TABLE IF EXISTS `fact_childvalidrecord`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_childvalidrecord` (
   `Fact_ChildValidRecordID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RowID` bigint(20) DEFAULT NULL,
@@ -1272,15 +1272,15 @@ CREATE TABLE IF NOT EXISTS `fact_childvalidrecord` (
   KEY `inx_ProviderServiceMapID` (`ProviderServiceMapID`),
   KEY `inx_isSelfNo` (`IsSelfNo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=131071 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_diahypercase`
 --
 
 -- DROP TABLE IF EXISTS `fact_diahypercase`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_diahypercase` (
   `FactDiaHyperCaseID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -1307,15 +1307,15 @@ CREATE TABLE IF NOT EXISTS `fact_diahypercase` (
   `LodadedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`FactDiaHyperCaseID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_directoryservice`
 --
 
 -- DROP TABLE IF EXISTS `fact_directoryservice`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_directoryservice` (
   `Fact_DirectoryServiceID` bigint(20) NOT NULL AUTO_INCREMENT,
   `DirectoryServiceID` bigint(20) DEFAULT NULL,
@@ -1346,15 +1346,15 @@ CREATE TABLE IF NOT EXISTS `fact_directoryservice` (
   KEY `inx_psmrid` (`ProviderServiceMapID`),
   KEY `inx_createddate` (`CreatedDate`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_epidemicoutbreak`
 --
 
 -- DROP TABLE IF EXISTS `fact_epidemicoutbreak`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_epidemicoutbreak` (
   `Fact_EpidemicOutbreakID` bigint(20) NOT NULL AUTO_INCREMENT,
   `OutbreakComplaintID` bigint(20) DEFAULT NULL,
@@ -1384,15 +1384,15 @@ CREATE TABLE IF NOT EXISTS `fact_epidemicoutbreak` (
   KEY `inx_psmrid` (`ProviderServiceMapID`),
   KEY `inx_Benregid` (`BeneficiaryRegID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2215 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_feedback`
 --
 
 -- DROP TABLE IF EXISTS `fact_feedback`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_feedback` (
   `Fact_FeedbackID` bigint(20) NOT NULL AUTO_INCREMENT,
   `FeedbackID` bigint(20) DEFAULT NULL,
@@ -1445,15 +1445,15 @@ CREATE TABLE IF NOT EXISTS `fact_feedback` (
   KEY `inx_createddate` (`CreatedDate`),
   KEY `inx_bencallid` (`BenCallID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5060 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_foodsafetycopmlaint`
 --
 
 -- DROP TABLE IF EXISTS `fact_foodsafetycopmlaint`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_foodsafetycopmlaint` (
   `Fact_FSComplaintID` bigint(20) NOT NULL AUTO_INCREMENT,
   `FSComplaintID` bigint(20) DEFAULT NULL,
@@ -1502,15 +1502,15 @@ CREATE TABLE IF NOT EXISTS `fact_foodsafetycopmlaint` (
   KEY `inx_psmrid` (`ProviderServiceMapID`),
   KEY `inx_Benregid` (`BeneficiaryRegID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_itemstockentry`
 --
 
 -- DROP TABLE IF EXISTS `fact_itemstockentry`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_itemstockentry` (
   `Fact_ItemStockEntryID` int(11) NOT NULL AUTO_INCREMENT,
   `ItemStockEntryID` int(11) DEFAULT NULL,
@@ -1549,15 +1549,15 @@ CREATE TABLE IF NOT EXISTS `fact_itemstockentry` (
   `LodadedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Fact_ItemStockEntryID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=32768 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_itemstockexit`
 --
 
 -- DROP TABLE IF EXISTS `fact_itemstockexit`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_itemstockexit` (
   `Fact_ItemStockExitID` int(11) NOT NULL AUTO_INCREMENT,
   `ItemStockExitID` int(11) DEFAULT NULL,
@@ -1599,15 +1599,15 @@ CREATE TABLE IF NOT EXISTS `fact_itemstockexit` (
   `LodadedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Fact_ItemStockExitID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=983026 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_labtestorder`
 --
 
 -- DROP TABLE IF EXISTS `fact_labtestorder`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_labtestorder` (
   `Fact_LabTestOrderID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ID` bigint(20) DEFAULT NULL,
@@ -1642,15 +1642,15 @@ CREATE TABLE IF NOT EXISTS `fact_labtestorder` (
   KEY `ProviderServiceMapID` (`ProviderServiceMapID`),
   KEY `VisitCode` (`VisitCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_labtestresult`
 --
 
 -- DROP TABLE IF EXISTS `fact_labtestresult`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_labtestresult` (
   `Fact_LabTestresult` bigint(20) NOT NULL AUTO_INCREMENT,
   `ID` bigint(20) DEFAULT NULL,
@@ -1687,15 +1687,15 @@ CREATE TABLE IF NOT EXISTS `fact_labtestresult` (
   PRIMARY KEY (`Fact_LabTestresult`),
   KEY `BeneficiaryRegID` (`BeneficiaryRegID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=785022 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_mctscallresponse`
 --
 
 -- DROP TABLE IF EXISTS `fact_mctscallresponse`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_mctscallresponse` (
   `Fact_MctsCallResponseID` bigint(20) NOT NULL AUTO_INCREMENT,
   `MctsCallResponseID` bigint(20) DEFAULT NULL,
@@ -1731,15 +1731,15 @@ CREATE TABLE IF NOT EXISTS `fact_mctscallresponse` (
   KEY `inx_Bencallid` (`BenCallID`),
   KEY `inx_QuestionId` (`QuestionID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2752471 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_mctsoutboundcall`
 --
 
 -- DROP TABLE IF EXISTS `fact_mctsoutboundcall`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_mctsoutboundcall` (
   `Fact_MctsOutboundCallID` bigint(20) NOT NULL AUTO_INCREMENT,
   `OBCallID` bigint(20) DEFAULT NULL,
@@ -1783,15 +1783,15 @@ CREATE TABLE IF NOT EXISTS `fact_mctsoutboundcall` (
   KEY `inx_CallStatus` (`CallStatus`),
   KEY `inx_CallDateTo` (`CallDateTo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1441771 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_motherinvalidrecord`
 --
 
 -- DROP TABLE IF EXISTS `fact_motherinvalidrecord`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_motherinvalidrecord` (
   `Fact_MotherInValidRecordID` bigint(20) NOT NULL AUTO_INCREMENT,
   `MotherInValidRecordID` bigint(20) DEFAULT NULL,
@@ -1947,15 +1947,15 @@ CREATE TABLE IF NOT EXISTS `fact_motherinvalidrecord` (
   KEY `inx_createddate` (`CreatedDate`),
   KEY `inx_psmrid` (`ProviderServiceMapID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18459 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_mothervalidrecord`
 --
 
 -- DROP TABLE IF EXISTS `fact_mothervalidrecord`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_mothervalidrecord` (
   `Fact_MotherValidRecordID` bigint(20) NOT NULL AUTO_INCREMENT,
   `MotherValidRecordID` bigint(20) DEFAULT NULL,
@@ -2125,15 +2125,15 @@ CREATE TABLE IF NOT EXISTS `fact_mothervalidrecord` (
   KEY `inx_MCTSID_no` (`MCTSID_no`),
   KEY `inx_isSelfNo` (`IsSelfNo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=131071 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_organdonation`
 --
 
 -- DROP TABLE IF EXISTS `fact_organdonation`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_organdonation` (
   `Fact_OrganDonationID` bigint(20) NOT NULL AUTO_INCREMENT,
   `OrganDonationID` bigint(20) DEFAULT NULL,
@@ -2169,15 +2169,15 @@ CREATE TABLE IF NOT EXISTS `fact_organdonation` (
   KEY `inx_psmrid` (`ProviderServiceMapID`),
   KEY `inx_Benregid` (`BeneficiaryRegID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_patientissueexit`
 --
 
 -- DROP TABLE IF EXISTS `fact_patientissueexit`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_patientissueexit` (
   `Fact_PatientIssueExitID` int(11) NOT NULL AUTO_INCREMENT,
   `ItemStockExitID` int(11) DEFAULT NULL,
@@ -2222,15 +2222,15 @@ CREATE TABLE IF NOT EXISTS `fact_patientissueexit` (
   `LodadedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Fact_PatientIssueExitID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=983026 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_phoneblock`
 --
 
 -- DROP TABLE IF EXISTS `fact_phoneblock`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_phoneblock` (
   `Fact_PhoneBlockID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ID` bigint(20) DEFAULT NULL,
@@ -2248,15 +2248,15 @@ CREATE TABLE IF NOT EXISTS `fact_phoneblock` (
   `LodadedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Fact_PhoneBlockID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_phyvitals`
 --
 
 -- DROP TABLE IF EXISTS `fact_phyvitals`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_phyvitals` (
   `fact_PhyVitalsid` bigint(11) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -2296,15 +2296,15 @@ CREATE TABLE IF NOT EXISTS `fact_phyvitals` (
   `createddate` datetime DEFAULT NULL,
   PRIMARY KEY (`fact_PhyVitalsid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2611864 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_pnccare`
 --
 
 -- DROP TABLE IF EXISTS `fact_pnccare`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_pnccare` (
   `Fact_PNCCareID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ID` bigint(20) DEFAULT NULL,
@@ -2352,15 +2352,15 @@ CREATE TABLE IF NOT EXISTS `fact_pnccare` (
   `LodadedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Fact_PNCCareID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_pncdiagnosis`
 --
 
 -- DROP TABLE IF EXISTS `fact_pncdiagnosis`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_pncdiagnosis` (
   `FactPNCDiagnosisID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -2387,15 +2387,15 @@ CREATE TABLE IF NOT EXISTS `fact_pncdiagnosis` (
   `LodadedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`FactPNCDiagnosisID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_prescribeddrug`
 --
 
 -- DROP TABLE IF EXISTS `fact_prescribeddrug`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_prescribeddrug` (
   `Fact_PrescribedDrugID` bigint(20) NOT NULL AUTO_INCREMENT,
   `PrescribedDrugID` bigint(20) DEFAULT NULL,
@@ -2434,15 +2434,15 @@ CREATE TABLE IF NOT EXISTS `fact_prescribeddrug` (
   `LodadedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Fact_PrescribedDrugID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1670564 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_prescription`
 --
 
 -- DROP TABLE IF EXISTS `fact_prescription`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_prescription` (
   `Fact_PrescriptionID` bigint(20) NOT NULL AUTO_INCREMENT,
   `PrescriptionID` bigint(20) DEFAULT NULL,
@@ -2477,15 +2477,15 @@ CREATE TABLE IF NOT EXISTS `fact_prescription` (
   `LodadedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Fact_PrescriptionID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_schemeservice`
 --
 
 -- DROP TABLE IF EXISTS `fact_schemeservice`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_schemeservice` (
   `Fact_SchemeServiceID` bigint(20) NOT NULL AUTO_INCREMENT,
   `SchemeServiceID` bigint(20) DEFAULT NULL,
@@ -2508,15 +2508,15 @@ CREATE TABLE IF NOT EXISTS `fact_schemeservice` (
   KEY `inx_brgid` (`BeneficiaryRegID`),
   KEY `inx_createddate` (`CreatedDate`)
 ) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_tmanc`
 --
 
 -- DROP TABLE IF EXISTS `fact_tmanc`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_tmanc` (
   `Fact_TMANC` bigint(20) NOT NULL AUTO_INCREMENT,
   `BeneficiaryRegID` bigint(20) DEFAULT NULL,
@@ -2552,15 +2552,15 @@ CREATE TABLE IF NOT EXISTS `fact_tmanc` (
   `LodadedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Fact_TMANC`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `fact_tmrequest`
 --
 
 -- DROP TABLE IF EXISTS `fact_tmrequest`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `fact_tmrequest` (
   `Fact_TMRequestID` bigint(20) NOT NULL AUTO_INCREMENT,
   `TMRequestID` bigint(20) DEFAULT NULL,
@@ -2596,15 +2596,15 @@ CREATE TABLE IF NOT EXISTS `fact_tmrequest` (
   `LodadedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Fact_TMRequestID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=131071 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `m_report`
 --
 
 -- DROP TABLE IF EXISTS `m_report`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `m_report` (
   `ReportID` int(11) NOT NULL AUTO_INCREMENT,
   `ReportName` varchar(50) DEFAULT NULL,
@@ -2618,19 +2618,19 @@ CREATE TABLE IF NOT EXISTS `m_report` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ReportID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `replicationtest`
 --
 
 -- DROP TABLE IF EXISTS `replicationtest`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `replicationtest` (
   `id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Temporary view structure for view `sanjeevani_dashboard`
@@ -2638,8 +2638,8 @@ CREATE TABLE IF NOT EXISTS `replicationtest` (
 
 -- DROP TABLE IF EXISTS `sanjeevani_dashboard`;
 /*!50001 DROP VIEW IF EXISTS `sanjeevani_dashboard`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- SET @saved_cs_client     = @@character_set_client;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `sanjeevani_dashboard` AS SELECT 
  1 AS `CurrDistrict`,
  1 AS `CreatedBy`,
@@ -2731,15 +2731,15 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `drug6_Qty`,
  1 AS `drug_7`,
  1 AS `drug7_Qty`*/;
-SET character_set_client = @saved_cs_client;
+-- SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `scheduler_status`
 --
 
 -- DROP TABLE IF EXISTS `scheduler_status`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `scheduler_status` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `proc_name` varchar(45) DEFAULT NULL,
@@ -2747,15 +2747,15 @@ CREATE TABLE IF NOT EXISTS `scheduler_status` (
   `time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=87101 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `t_itemstockentry`
 --
 
 -- DROP TABLE IF EXISTS `t_itemstockentry`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `t_itemstockentry` (
   `ItemStockEntryID` int(11) NOT NULL AUTO_INCREMENT,
   `FacilityID` int(11) NOT NULL,
@@ -2790,85 +2790,85 @@ CREATE TABLE IF NOT EXISTS `t_itemstockentry` (
   CONSTRAINT `FK_ItemStockEntry_Item` FOREIGN KEY (`ItemID`) REFERENCES `m_item` (`ItemID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ItemStockEntry_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6379 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping events for database 'db_reporting'
 --
-/*!50106 SET @save_time_zone= @@TIME_ZONE */ ;
+-- /*!50106 SET @save_time_zone= @@TIME_ZONE */ ;
 /*!50106 DROP EVENT IF EXISTS `Event_ECDReporting` */;
 DELIMITER ;;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;;
-/*!50003 SET character_set_client  = utf8mb4 */ ;;
-/*!50003 SET character_set_results = utf8mb4 */ ;;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
-/*!50003 SET @saved_time_zone      = @@time_zone */ ;;
-/*!50003 SET time_zone             = 'SYSTEM' */ ;;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
+-- /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
+-- /*!50003 SET time_zone             = 'SYSTEM' */ ;;
 /*!50106 CREATE*/ /*!50117 */ /*!50106 EVENT `Event_ECDReporting` ON SCHEDULE EVERY 24 HOUR STARTS '2023-12-31 04:01:00' ON COMPLETION PRESERVE ENABLE COMMENT 'Load_ECDReporting' DO begin
 CALL db_reporting.Pr_UpdateECDReporting();
 end */ ;;
-/*!50003 SET time_zone             = @saved_time_zone */ ;;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;;
-/*!50003 SET character_set_results = @saved_cs_results */ ;;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;;
+-- /*!50003 SET time_zone             = @saved_time_zone */ ;;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;;
 /*!50106 DROP EVENT IF EXISTS `Event_TMSaveWorkList` */;;
 DELIMITER ;;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;;
-/*!50003 SET character_set_client  = utf8 */ ;;
-/*!50003 SET character_set_results = utf8 */ ;;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
-/*!50003 SET @saved_time_zone      = @@time_zone */ ;;
-/*!50003 SET time_zone             = 'SYSTEM' */ ;;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;;
+-- /*!50003 SET character_set_client  = utf8 */ ;;
+-- /*!50003 SET character_set_results = utf8 */ ;;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
+-- /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
+-- /*!50003 SET time_zone             = 'SYSTEM' */ ;;
 /*!50106 CREATE*/ /*!50117 */ /*!50106 EVENT `Event_TMSaveWorkList` ON SCHEDULE EVERY 30 MINUTE STARTS '2021-02-23 11:15:10' ON COMPLETION NOT PRESERVE DISABLE DO begin
 CALL db_iemr.Pr_TMSaveWorkList();
 
 end */ ;;
-/*!50003 SET time_zone             = @saved_time_zone */ ;;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;;
-/*!50003 SET character_set_results = @saved_cs_results */ ;;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;;
+-- /*!50003 SET time_zone             = @saved_time_zone */ ;;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;;
 /*!50106 DROP EVENT IF EXISTS `Identity_Commonn` */;;
 DELIMITER ;;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;;
-/*!50003 SET character_set_client  = utf8 */ ;;
-/*!50003 SET character_set_results = utf8 */ ;;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
-/*!50003 SET @saved_time_zone      = @@time_zone */ ;;
-/*!50003 SET time_zone             = 'SYSTEM' */ ;;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;;
+-- /*!50003 SET character_set_client  = utf8 */ ;;
+-- /*!50003 SET character_set_results = utf8 */ ;;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
+-- /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
+-- /*!50003 SET time_zone             = 'SYSTEM' */ ;;
 /*!50106 CREATE*/ /*!50117 */ /*!50106 EVENT `Identity_Commonn` ON SCHEDULE EVERY 24 HOUR STARTS '2019-02-15 00:35:10' ON COMPLETION PRESERVE ENABLE COMMENT 'Load_Beneficiary' DO begin
 CALL db_reporting.SP_Load_Dim_beneficiary();
 end */ ;;
-/*!50003 SET time_zone             = @saved_time_zone */ ;;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;;
-/*!50003 SET character_set_results = @saved_cs_results */ ;;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;;
+-- /*!50003 SET time_zone             = @saved_time_zone */ ;;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;;
 /*!50106 DROP EVENT IF EXISTS `IEMR_Commonn` */;;
 DELIMITER ;;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;;
-/*!50003 SET character_set_client  = utf8 */ ;;
-/*!50003 SET character_set_results = utf8 */ ;;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
-/*!50003 SET @saved_time_zone      = @@time_zone */ ;;
-/*!50003 SET time_zone             = 'SYSTEM' */ ;;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;;
+-- /*!50003 SET character_set_client  = utf8 */ ;;
+-- /*!50003 SET character_set_results = utf8 */ ;;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
+-- /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
+-- /*!50003 SET time_zone             = 'SYSTEM' */ ;;
 /*!50106 CREATE*/ /*!50117 */ /*!50106 EVENT `IEMR_Commonn` ON SCHEDULE EVERY 24 HOUR STARTS '2019-02-15 01:00:10' ON COMPLETION PRESERVE ENABLE COMMENT 'Load_IEMR_Transaction' DO begin
 CALL db_reporting.SP_Load_Dim_User();
 CALL db_reporting.SP_Load_Fact_104BenMedHistory();
@@ -2897,64 +2897,64 @@ CALL db_reporting.SP_Load_Fact_LabTestResult();
 CALL db_reporting.SP_Load_Fact_PrescribedDrug();
 CALL db_reporting.SP_Load_Fact_PhyVitals();
 end */ ;;
-/*!50003 SET time_zone             = @saved_time_zone */ ;;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;;
-/*!50003 SET character_set_results = @saved_cs_results */ ;;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;;
+-- /*!50003 SET time_zone             = @saved_time_zone */ ;;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;;
 /*!50106 DROP EVENT IF EXISTS `InventoryReport` */;;
 DELIMITER ;;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;;
-/*!50003 SET character_set_client  = utf8 */ ;;
-/*!50003 SET character_set_results = utf8 */ ;;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
-/*!50003 SET @saved_time_zone      = @@time_zone */ ;;
-/*!50003 SET time_zone             = 'SYSTEM' */ ;;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;;
+-- /*!50003 SET character_set_client  = utf8 */ ;;
+-- /*!50003 SET character_set_results = utf8 */ ;;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
+-- /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
+-- /*!50003 SET time_zone             = 'SYSTEM' */ ;;
 /*!50106 CREATE*/ /*!50117 */ /*!50106 EVENT `InventoryReport` ON SCHEDULE EVERY 24 HOUR STARTS '2019-02-15 01:30:10' ON COMPLETION PRESERVE ENABLE COMMENT 'Load_Inventory' DO begin
 call db_reporting.temp_LoadInventoryReport();
 end */ ;;
-/*!50003 SET time_zone             = @saved_time_zone */ ;;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;;
-/*!50003 SET character_set_results = @saved_cs_results */ ;;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;;
+-- /*!50003 SET time_zone             = @saved_time_zone */ ;;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;;
 /*!50106 DROP EVENT IF EXISTS `TMReport` */;;
 DELIMITER ;;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;;
-/*!50003 SET character_set_client  = utf8 */ ;;
-/*!50003 SET character_set_results = utf8 */ ;;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
-/*!50003 SET @saved_time_zone      = @@time_zone */ ;;
-/*!50003 SET time_zone             = 'SYSTEM' */ ;;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;;
+-- /*!50003 SET character_set_client  = utf8 */ ;;
+-- /*!50003 SET character_set_results = utf8 */ ;;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;;
+-- /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
+-- /*!50003 SET time_zone             = 'SYSTEM' */ ;;
 /*!50106 CREATE*/ /*!50117 */ /*!50106 EVENT `TMReport` ON SCHEDULE EVERY 1 DAY STARTS '2019-01-29 02:00:00' ON COMPLETION NOT PRESERVE ENABLE DO call db_reporting.temp_LoadTMReport() */ ;;
-/*!50003 SET time_zone             = @saved_time_zone */ ;;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;;
-/*!50003 SET character_set_results = @saved_cs_results */ ;;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;;
+-- /*!50003 SET time_zone             = @saved_time_zone */ ;;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;;
 DELIMITER ;
-/*!50106 SET TIME_ZONE= @save_time_zone */ ;
+-- /*!50106 SET TIME_ZONE= @save_time_zone */ ;
 
 --
 -- Dumping routines for database 'db_reporting'
 --
 /*!50003 DROP PROCEDURE IF EXISTS `D_mmu_adolescent` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_mmu_adolescent`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -2980,19 +2980,19 @@ SELECT totalPatient, totalAdolescents, newAdolescents, femaleAdolescents;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_AllDiabetic` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_AllDiabetic`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -3119,19 +3119,19 @@ select count(distinct ADT.BeneficiaryRegID) from AllDiabeticTemp ADT
 select  v_AllDiabetic,v_AllDiaRef,v_AllDiaControl,v_AllDiaFemale;
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_AllDiaHTN` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_AllDiaHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -3244,19 +3244,19 @@ select count(distinct BeneficiaryRegID) from AllDiaHTNTemp into v_AllDIaHTN;
 select  v_AllDiaHTN;
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_AllDiaTest` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_AllDiaTest`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -3293,19 +3293,19 @@ where DATE(LTR.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate)
 select v_AllRBS, v_AllHbA1C, v_AllUrineSugar;
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_AllHTN` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_AllHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -3435,19 +3435,19 @@ select v_AllHTN,v_AllHTNRef,v_AllHTNFemale;
     
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_mmu_anc` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_mmu_anc`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -3494,19 +3494,19 @@ SELECT totalANC, newANC, oldANC, trimester1, trimester2, trimester3, highRiskANC
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_mmu_below_5` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_mmu_below_5`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -3541,19 +3541,19 @@ SELECT totalBelow5, newBelow5, oldBelow5, femaleBelow5, referredBelow5, totalPat
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_mmu_common` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_mmu_common`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -3578,19 +3578,19 @@ SELECT COUNT(Distinct beneficiary_reg_id) FROM i_ben_flow_outreach WHERE DATE(vi
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_NewDiabetic` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_NewDiabetic`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -3680,19 +3680,19 @@ select v_NewDiabetic;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_NewDiaDetected` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_NewDiaDetected`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -3764,19 +3764,19 @@ select v_NewDiaDetected, v_NewDiaTreatment;
     
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_NewHTN` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_NewHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -3866,19 +3866,19 @@ select v_NewHTN;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_OldDiabetic` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_OldDiabetic`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -3898,19 +3898,19 @@ select v_OldDiabetic;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_OldDiaFollowUp` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_OldDiaFollowUp`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -3932,19 +3932,19 @@ select v_OldDiaFollowUp;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_OldDiaTest` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_OldDiaTest`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -3997,19 +3997,19 @@ select v_OldRBS, v_OldHbA1C , v_OldUrineSugar;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_OldHTN` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_OldHTN`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -4029,19 +4029,19 @@ select v_OldHTN;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_MMU_OldHTNFollowUp` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_MMU_OldHTNFollowUp`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -4063,19 +4063,19 @@ select v_OldHTNFollowUp;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `D_mmu_pnc` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `D_mmu_pnc`(IN fromDate DATETIME, IN toDate DATETIME, IN PSMID int)
 BEGIN
@@ -4102,19 +4102,19 @@ SELECT COUNT(Distinct t.BeneficiaryRegID) FROM t_benvisitdetail t WHERE DATE(t.C
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `getANCRecIFATab` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `getANCRecIFATab`(fromDate DATETIME, toDate DATETIME, PSMID int)
 BEGIN
@@ -4127,19 +4127,19 @@ INNER JOIN m_item MI on ISEN.ItemID = MI.ItemID AND MI.ItemName IN ('IFA', 'iron
 
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `getANCRefCount` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `getANCRefCount`(fromDate DATETIME, toDate DATETIME, PSMID int)
 BEGIN
@@ -4148,19 +4148,19 @@ INNER JOIN t_benreferdetails BRD ON BVD.BeneficiaryRegID = BRD.BeneficiaryRegID 
 WHERE BVD.VisitCategory = 'ANC' AND date(BRD.LastModDate) between date(fromDate) and date(toDate) and BVD.ProviderServiceMapID = PSMID;
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PopulateDateDimension` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PopulateDateDimension`(BeginDate DATETIME, EndDate DATETIME)
 BEGIN
@@ -4275,19 +4275,19 @@ BEGIN
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104BeneficiaryReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104BeneficiaryReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
@@ -4328,19 +4328,19 @@ select b.beneficiaryID "Beneficiary ID", b.title "Title",
             
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104BoodRequest` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104BoodRequest`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -4389,19 +4389,19 @@ c.ReceivedAgentID "Agent ID", user.firstName "Agent Name"
        order by t.createdDate desc; 
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104BoodRequestDetails_Componentwise` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104BoodRequestDetails_Componentwise`(v_starttime datetime,v_endtime datetime,
 v_districtid int(11),v_talukid int(11),v_villageid int(11),v_psmid int(11))
@@ -4456,19 +4456,19 @@ count(1) count
          
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104BoodRequestDetails_Componentwise_Pivot` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104BoodRequestDetails_Componentwise_Pivot`(v_starttime datetime,v_endtime datetime,
 v_districtid int(11),v_talukid int(11),v_villageid int(11),v_psmid int(11))
@@ -4565,19 +4565,19 @@ drop temporary table if exists temp_report;
 
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104BoodRequestDetails_Groupwise` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104BoodRequestDetails_Groupwise`(v_starttime datetime,v_endtime datetime,
 v_districtid int(11),v_talukid int(11),v_villageid int(11),v_psmid int(11))
@@ -4604,19 +4604,19 @@ count(1) count
              -- ,t.componentTypeName;
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104BoodRequestDetails_Groupwise_Pivot` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104BoodRequestDetails_Groupwise_Pivot`(v_starttime datetime,v_endtime datetime,
 v_districtid int(11),v_talukid int(11),v_villageid int(11),v_psmid int(11))
@@ -4716,19 +4716,19 @@ drop temporary table  if exists  temp4;
 
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104CallQuality_AgentWise` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104CallQuality_AgentWise`(v_starttime datetime,
 v_endtime datetime,
@@ -4750,19 +4750,19 @@ fb.ReceivedAgentID;
    
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104CallQuality_CallTypeWise` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104CallQuality_CallTypeWise`(v_starttime datetime,
 v_endtime datetime,v_calltypeid int(11),
@@ -4777,19 +4777,19 @@ begin
    
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104CallQuality_DateWise` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104CallQuality_DateWise`(v_starttime datetime,
 v_endtime datetime,
@@ -4804,19 +4804,19 @@ begin
    
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104CallQuality_LocationWise` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104CallQuality_LocationWise`(v_starttime datetime,v_endtime datetime,
 v_locationid int(11),v_psmid int(11))
@@ -4832,19 +4832,19 @@ begin
    
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104CallQuality_RoleWise` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104CallQuality_RoleWise`(v_starttime datetime,
 v_endtime datetime,
@@ -4864,19 +4864,19 @@ begin
    
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104CallQuality_SkillsetWise` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104CallQuality_SkillsetWise`(v_starttime datetime,
 v_endtime datetime,
@@ -4896,19 +4896,19 @@ begin
    
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104CallSummaryReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104CallSummaryReport`(v_starttime datetime,v_endtime datetime,
 v_rolename varchar(100),v_calltypeid int(11),
@@ -4933,19 +4933,19 @@ and ( t1.receivedRoleName=ifnull(v_rolename,t1.receivedRoleName) )
 and ( t1.callTypeID=ifnull(v_calltypeid,t1.callTypeID) );
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104CODetailGCategoryReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104CODetailGCategoryReport`(v_starttime datetime,v_endtime datetime,v_psmid int(11))
 begin
@@ -4959,19 +4959,19 @@ order by CategoryName asc;
 
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104CODetailGuidelinesReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104CODetailGuidelinesReport`(v_starttime datetime,v_endtime datetime,v_psmid int(11))
 begin
@@ -4985,19 +4985,19 @@ order by diseaseSummary asc;
 
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104COReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104COReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
@@ -5053,19 +5053,19 @@ t.subCategoryName "Sub Category",
        order by t.createdDate asc;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104DirectoryServiceReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104DirectoryServiceReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -5099,19 +5099,19 @@ and c.ReceivedAgentID=ifnull(v_Agentid,c.ReceivedAgentID)
 order by t.createdDate desc;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104DSusedValidCallAtHAO` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104DSusedValidCallAtHAO`(v_starttime datetime,v_endtime datetime,
 v_callTypeName varchar(100),v_receivedRoleName varchar(100),
@@ -5142,19 +5142,19 @@ t3.DiseaseSummary "Symptom",t3.SelecteDiagnosis
             and t3.SelecteDiagnosis is not null  group by ReceivedRoleName,ReceivedAgentID;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104Epidemicoutbreak` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104Epidemicoutbreak`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -5184,19 +5184,19 @@ c.ReceivedagentID "Agent ID", user.firstName "Agent Name"
               order by t.createddate desc;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104FoodsafetyComplaint` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104FoodsafetyComplaint`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -5229,19 +5229,19 @@ c.ReceivedagentID "Agent ID", user.firstName "Agent Name"
               order by t.createddate desc;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104GrievanceDetailsReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104GrievanceDetailsReport`(v_starttime datetime,v_endtime datetime,v_feedbackNatureID int(11),
 v_feedbacktypeid int(11),
@@ -5257,19 +5257,19 @@ begin
              group by feedbackReport.feedbacktypename;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104GrievanceReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104GrievanceReport`(v_starttime datetime,v_endtime datetime,v_feedbackTypeID int(11),v_Agentid int(11),v_psmid int(11))
 begin
@@ -5292,19 +5292,19 @@ c.callEndUserID, c.ReceivedAgentID, user.firstName "Agent name"
              
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104HAHTDisconnectedCalls` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104HAHTDisconnectedCalls`(v_starttime datetime,v_endtime datetime,
 v_callTypeName varchar(100),v_receivedRoleName varchar(100),
@@ -5335,19 +5335,19 @@ t3.DiseaseSummary "Symptom",t3.SelecteDiagnosis
             
             end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104HAHTvalidcallsclosedatHAO` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104HAHTvalidcallsclosedatHAO`(v_starttime datetime,v_endtime datetime,
 v_callTypeName varchar(100),v_receivedRoleName varchar(100),
@@ -5377,19 +5377,19 @@ and (t1.CallReceivedUserID=t1.CallEndUserID)
            ;
            end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104HAOReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104HAOReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
@@ -5463,19 +5463,19 @@ c.ReceivedAgentID "Agent ID",
             
             end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104HealthSchemes` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104HealthSchemes`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -5502,19 +5502,19 @@ t.schemeServiceID "Scheme Service ID",
              t.createdDate >=v_starttime and t.createdDate <=v_endtime;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104LAHTAlgorithmCalls` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104LAHTAlgorithmCalls`(v_starttime datetime,v_endtime datetime,
 v_callTypeName varchar(100),v_receivedRoleName varchar(100),
@@ -5537,19 +5537,19 @@ t2.FirstName "Agent Name",ReceivedRoleName "Skill Set",t3.DiseaseSummary "Sympto
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104LAHTTransferCallsMO` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104LAHTTransferCallsMO`(v_starttime datetime,v_endtime datetime,
 v_callTypeName varchar(100),v_receivedRoleName varchar(100),
@@ -5578,19 +5578,19 @@ t2.FirstName "Agent Name",ReceivedRoleName "Skill Set",t3.DiseaseSummary "Sympto
             group by ReceivedRoleName,ReceivedAgentID ;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104MODetailsReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104MODetailsReport`(v_starttime datetime,v_endtime datetime,
 v_districtid int(11),v_SubDistrictId int(11),v_villageid int(11),
@@ -5613,19 +5613,19 @@ begin
    
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104MOReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104MOReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
@@ -5698,19 +5698,19 @@ t.patientAge, t.patientGenderName, t.algorithm,
       order by t.createdDate desc;
   end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104OrganDonation` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104OrganDonation`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -5742,19 +5742,19 @@ c.ReceivedagentID "Agent ID", user.firstName "Agent Name"
               order by t.createddate desc;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104OtherAdviceCalls` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104OtherAdviceCalls`(v_starttime datetime,v_endtime datetime,
 v_callTypeName varchar(100),v_receivedRoleName varchar(100),
@@ -5775,19 +5775,19 @@ select t1.CreatedDate,CallID,ReceivedAgentID,t2.FirstName,ReceivedRoleName,t3.Di
             group by ReceivedRoleName,ReceivedAgentID;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104PrescriptionReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104PrescriptionReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
@@ -5806,19 +5806,19 @@ c.callSubTypeName,t.benCallID, c.callEndUserID, c.ReceivedAgentID, c.callReceive
             order by t.prescriptionID desc;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104psychiatrist` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104psychiatrist`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -5853,19 +5853,19 @@ c.ReceivedAgentID "Agent ID",user.firstname "Agent Name"
              
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104QAReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104QAReport`(v_starttime datetime,v_endtime datetime,
 v_receivedRoleName varchar(100),
@@ -5899,19 +5899,19 @@ t1.remarks "Closure Remark",
             group by ReceivedRoleName,ReceivedAgentID;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104RandomPickup` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104RandomPickup`(v_starttime datetime,v_endtime datetime,
 v_callTypeName varchar(100),v_receivedRoleName varchar(100),
@@ -5937,19 +5937,19 @@ t2.FirstName "Agent Name",ReceivedRoleName "Skill Set",t3.DiseaseSummary "Sympto
             group by ReceivedRoleName,ReceivedAgentID;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104SurveyorReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104SurveyorReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -5974,19 +5974,19 @@ select  distinct  t.question "Question", t.answer "Answer", t.score "Score",
               order by t.createddate desc;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_104UnblockUserReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_104UnblockUserReport`(v_starttime datetime,v_endtime datetime,
 v_psmid int(11))
@@ -5997,19 +5997,19 @@ where  phoneBlock.lastModDate >= v_starttime and phoneBlock.lastModDate <=v_endt
              and phoneBlock.isBlocked is false ;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_1097AgegroupDistribution` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_1097AgegroupDistribution`(
 v_starttime datetime,
@@ -6119,19 +6119,19 @@ Drop Temporary table if exists Temp_Agegroup;
  
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_1097calltypeReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_1097calltypeReport`(v_starttime datetime,v_endtime datetime,
  v_statename varchar(100),v_districtname varchar(100),
@@ -6188,19 +6188,19 @@ begin
   
   end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_1097GenderDistribution` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_1097GenderDistribution`(v_starttime datetime,v_endtime datetime,
  v_statename varchar(100),v_districtname varchar(100),v_Gender varchar(100),v_psmrid int(11))
@@ -6294,19 +6294,19 @@ begin
  
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_1097LanguageDistribution` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_1097LanguageDistribution`(v_starttime datetime,v_endtime datetime,
  v_statename varchar(100),v_districtname varchar(100),v_language varchar(100),v_psmrid int(11))
@@ -6399,19 +6399,19 @@ begin
  
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_1097Sexualorientation` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_1097Sexualorientation`(v_starttime datetime,v_endtime datetime,
  v_statename varchar(100),v_districtname varchar(100),v_SexualOrientationType varchar(100),v_psmrid int(11))
@@ -6503,19 +6503,19 @@ begin
  
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_DistrictwisecallvolumeReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_DistrictwisecallvolumeReport`(v_starttime datetime,v_endtime datetime,v_psmid int(11), v_districtid int(11))
 begin
@@ -6533,19 +6533,19 @@ group by db.PermDistrictId,fb.CallTypeID,db.gender;
 
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_DistrictwisecallvolumeReport_pivot` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_DistrictwisecallvolumeReport_pivot`(v_starttime datetime,v_endtime datetime,v_psmid int(11), v_districtid int(11))
 begin
@@ -6641,19 +6641,19 @@ SET @sql2 = CONCAT('create temporary table temp5 as SELECT  permdistrict,', LCL_
  
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDAashaHomeVisitGapReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDAashaHomeVisitGapReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -6705,19 +6705,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
              and fr.questionid in(304) and fr.answer='NO';
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDAbortionReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDAbortionReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -6768,19 +6768,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
              and fr2.questionid in(283,284) and fr2.answer is not null;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDAbortionReport_Correction` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDAbortionReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -6831,19 +6831,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
              and fr2.questionid in(283,284) and fr2.answer is not null;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDAbortionReport_Datacheck` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDAbortionReport_Datacheck`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -6920,19 +6920,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
 
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDAbsenceInVHSNDReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDAbsenceInVHSNDReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -6985,19 +6985,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
              and fr2.questionid in(310) and fr2.answer is not null;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDAbsenceInVHSNDReport_correction` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDAbsenceInVHSNDReport_correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -7049,19 +7049,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
              and fr.questionid in(310) and fr.answer is not null;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDBabyDeathReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDBabyDeathReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -7116,19 +7116,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDBabyDeathReport_Correction` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDBabyDeathReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -7183,19 +7183,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDBabyDeathReport_Datacheck` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDBabyDeathReport_Datacheck`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -7276,19 +7276,19 @@ t2.`Period of occurrence` from temp_ECDBabyDeathReport t1
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDBeneficiarywisefollowupdetails` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDBeneficiarywisefollowupdetails`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
@@ -7423,19 +7423,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDBeneficiarywisefollowupdetails_bkp_09112023` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDBeneficiarywisefollowupdetails_bkp_09112023`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
 begin
@@ -7570,19 +7570,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDBirthDefectReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDBirthDefectReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -7638,19 +7638,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
              and fr2.questionid in(388) and fr2.answer is not null;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDBirthDefectReport_Correction` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDBirthDefectReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -7706,19 +7706,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
              and fr2.questionid in(388) and fr2.answer is not null;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDCalciumIFATabNonadherenceReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDCalciumIFATabNonadherenceReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -7770,19 +7770,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
               and fr.questionid in(335,334)and fr.answer='No';
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDCallDetailsReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDCallDetailsReport`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
@@ -7874,19 +7874,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDCallDetailsReport_16042024` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDCallDetailsReport_16042024`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
@@ -7986,19 +7986,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDCallDetailsReport_bkp_03052024` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDCallDetailsReport_bkp_03052024`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
@@ -8110,19 +8110,19 @@ group by `Phone Number`)t2 on t1.bencallid=t2.max_bencallid and t1.`Phone Number
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDCallDetailsReport_bkp_09112023` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDCallDetailsReport_bkp_09112023`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
@@ -8204,19 +8204,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDCallDetailsReport_Correction` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDCallDetailsReport_Correction`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
@@ -8314,19 +8314,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDCallSummaryReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDCallSummaryReport`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11),
 v_role varchar(50))
@@ -8439,19 +8439,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             and fb.ReceivedRoleName=v_role and fb.CallEndTime is not null)a group by `Date`;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDCallSummaryReport_bkp_06112023` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDCallSummaryReport_bkp_06112023`(v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11),
 v_role varchar(50))
@@ -8564,19 +8564,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             and fb.ReceivedRoleName=v_role and fb.CallEndTime is not null)a group by `Date`;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDCallUniqueDetailsReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDCallUniqueDetailsReport`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
@@ -8688,19 +8688,19 @@ group by `Phone Number`)t2 on t1.bencallid=t2.max_bencallid and t1.`Phone Number
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDCallUniqueDetailsReport_03052024` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDCallUniqueDetailsReport_03052024`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
@@ -8853,19 +8853,19 @@ group by `Phone Number`)t2 on t1.bencallid=t2.max_bencallid and t1.`Phone Number
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDCallUniqueDetailsReport_bkp_09052024` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDCallUniqueDetailsReport_bkp_09052024`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
@@ -9018,19 +9018,19 @@ group by registrationno)t2 on t1.bencallid=t2.max_bencallid;
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDCallUniqueDetailsReport_bkp_09112023` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDCallUniqueDetailsReport_bkp_09112023`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
@@ -9183,19 +9183,19 @@ group by registrationno)t2 on t1.bencallid=t2.max_bencallid;
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDCumulativeDistrictReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDCumulativeDistrictReport`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11),v_role varchar(50))
@@ -9309,19 +9309,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDCumulativeDistrictReport_09112023` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDCumulativeDistrictReport_09112023`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11),v_role varchar(50))
@@ -9435,19 +9435,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDCumulativeDistrictReport_bkp_09112023` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDCumulativeDistrictReport_bkp_09112023`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11),v_role varchar(50))
@@ -9561,19 +9561,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDDeliveryStatusReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDDeliveryStatusReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -9623,19 +9623,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
              and fr.questionid in(372) and fr.answer is not null;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDDeliveryStatusReport_Datacheck` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDDeliveryStatusReport_Datacheck`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -9709,19 +9709,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
   drop temporary table if exists temp_ECDDeliveryStatusReport_2;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDDevelopmentalDelayReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDDevelopmentalDelayReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -9774,19 +9774,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             and fr.questionid in(396,397,398,409,408,407,406,405,404,403,402,401,400,399) and fr.answer='NO';
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDHRPWCasesIdentifiedReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDHRPWCasesIdentifiedReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -9842,19 +9842,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             and fr2.questionid in(308) and  fr2.answer<>"Don't know/Not stated";
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDHRPWCasesIdentifiedReport_Correction` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDHRPWCasesIdentifiedReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -9910,19 +9910,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             and fr2.questionid in(308) and  fr2.answer<>"Don't know/Not stated";
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDInfantsHighRiskReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDInfantsHighRiskReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -10030,19 +10030,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
              -- where fr.questionid in();
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDInfantsHighRiskReport_Correction` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDInfantsHighRiskReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -10150,19 +10150,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
              -- where fr.questionid in();
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDJSYRelatedComplaintsReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDJSYRelatedComplaintsReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -10212,19 +10212,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
              and fr.questionid in(376)and  fr.answer='Delay in Process';
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDJSYRelatedComplaintsReport_Correction` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDJSYRelatedComplaintsReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -10274,19 +10274,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
              and fr.questionid in(376)and  fr.answer='Delay in Process';
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDMaternalDeathReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDMaternalDeathReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -10341,19 +10341,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDMaternalDeathReport_Correction` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDMaternalDeathReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -10408,19 +10408,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDMiscarriageReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDMiscarriageReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -10473,19 +10473,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
              and fr2.questionid in(281,284) and fr2.answer is not null;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDMiscarriageReport_Correction` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDMiscarriageReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -10538,19 +10538,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
              and fr2.questionid in(281,284) and fr2.answer is not null;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDMiscarriageReport_Datacheck` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDMiscarriageReport_Datacheck`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -10626,19 +10626,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
   drop temporary table if exists temp_ECDMiscarriageReport_2;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDNCDIdentifiedReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDNCDIdentifiedReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -10690,19 +10690,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
               and fr.questionid in(303) and fr.answer is not null;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDNotConnectedPhonelistDiffformatReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDNotConnectedPhonelistDiffformatReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -10768,19 +10768,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             and ((fb.IsVerified is false) or(fb.isWrongNumber is true)) ;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDNotConnectedPhonelistDiffformatReport_16042024` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDNotConnectedPhonelistDiffformatReport_16042024`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -10846,19 +10846,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             and ((fb.IsVerified is false) or(fb.isWrongNumber is true)) ;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDNotConnectedPhonelistDiffformatReport_23012024` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDNotConnectedPhonelistDiffformatReport_23012024`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -10926,19 +10926,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             and ((fb.IsVerified is false));-- or(fb.isWrongNumber is true)) ;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDNotConnectedPhonelistDiffformatReport_Correction` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDNotConnectedPhonelistDiffformatReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -11004,19 +11004,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             and ((fb.IsVerified is false));-- or(fb.isWrongNumber is true)) ;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDStillBirthReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDStillBirthReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -11071,19 +11071,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDStillBirthReport_Correction` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDStillBirthReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -11138,19 +11138,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDStillBirthReport_datacheck` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDStillBirthReport_datacheck`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -11238,19 +11238,19 @@ t2.`Period of occurrence` from temp_ECDStillBirthReport t1
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDVaccineDropOutIdentifiedReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDVaccineDropOutIdentifiedReport`(v_starttime datetime,
 v_endtime datetime,
@@ -11304,19 +11304,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
              and fr.questionid in(378) and fr.answer<>'Not Applicable';
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDVaccineDropOutIdentifiedReport_Correction` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDVaccineDropOutIdentifiedReport_Correction`(v_starttime datetime,
 v_endtime datetime,
@@ -11370,19 +11370,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
              and fr.questionid in(378) and fr.answer<>'Not Applicable';
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDVaccineLeftOutIdentifiedReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDVaccineLeftOutIdentifiedReport`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -11435,19 +11435,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
               and fr.questionid in(379) and   fr.answer<>'Not Applicable';
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_ECDVaccineLeftOutIdentifiedReport_Correction` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_ECDVaccineLeftOutIdentifiedReport_Correction`(v_starttime datetime,v_endtime datetime,
 v_Agentid int(11),v_psmid int(11))
@@ -11500,19 +11500,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
               and fr.questionid in(379) and   fr.answer<>'Not Applicable';
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchChildOutboundWorklist` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchChildOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
@@ -11580,19 +11580,19 @@ AND(current_date() between mctsoutbou0_.CallDateFrom AND mctsoutbou0_.CallDateTo
 group by A.childID)B;
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchMCTS_1` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchMCTS_1`( IN P_ProviderServiceMapID INT)
 BEGIN
@@ -11785,19 +11785,19 @@ on B.motherID=D.MCTSID_no order by CallDateFrom;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchMCTS_2` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchMCTS_2`(IN P_ProviderServiceMapID INT, IN P_CallDateFrom DATETIME,IN P_CallDateTo DATETIME)
 BEGIN
@@ -11992,19 +11992,19 @@ from
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchMCTS_3` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchMCTS_3`(IN P_ProviderServiceMapID INT)
 BEGIN
@@ -12167,19 +12167,19 @@ on B.childID=D.MCTSID_no_Child_ID order by CallDateFrom;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchMCTS_4` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchMCTS_4`(IN P_ProviderServiceMapID INT, IN P_CallDateFrom DATETIME,IN P_CallDateTo DATETIME )
 BEGIN
@@ -12347,19 +12347,19 @@ from t_MCTSOutboundCalls mctsoutbou0_
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchMotherChildOutboundWorklist` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchMotherChildOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
@@ -12437,19 +12437,19 @@ group by A.motherID)B where OutboundCallType like 'PNC%';
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchMotherOutboundWorklist` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchMotherOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
@@ -12530,19 +12530,19 @@ B where OutboundCallType like 'ANC%'
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchSpecialist` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchSpecialist`(specializationid int,parkingplaceid int)
 BEGIN
@@ -12563,19 +12563,19 @@ left join m_specialization spec on spec.SpecializationID=usm.SpecializationID or
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchUnregisteredUser` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchUnregisteredUser`(v_ParkingPlace int)
 BEGIN
@@ -12589,19 +12589,19 @@ uspm.UserID not in (select UserID from m_userbiometricmapping where IsCompleted 
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_FetchUserDetails` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_FetchUserDetails`(v_ServiceProviderID int, v_PSMStateID int, v_ServiceID int, v_RoleID int, v_Name_User varchar(50), v_UserID int)
 BEGIN
@@ -12689,19 +12689,19 @@ USRMDeleted
     and UserDeleted != 0b1;
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_Insert104BRCategory` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_Insert104BRCategory`(v_SubServiceID smallint, v_ProviderServiceMapID int)
 BEGIN
@@ -12743,19 +12743,19 @@ and (cat.CategoryName = "Blood Document");
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_InsertCallType` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_InsertCallType`(v_ProviderServiceMapID int)
 BEGIN
@@ -12816,19 +12816,19 @@ end if;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_InsertInNotificationMap` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_InsertInNotificationMap`(v_RoleID int, v_NotificationID int, v_ProviderServiceMapID int,v_NotificationTypeID int, v_CreatedBy varchar(50), v_ValidFrom datetime, v_WorkingLocationID int)
 BEGIN
@@ -12933,19 +12933,19 @@ end if;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_InsertMCTSFieldsStatewise` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_InsertMCTSFieldsStatewise`(v_ProviderServiceMapID int)
 BEGIN
@@ -12994,19 +12994,19 @@ end if;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_InstituteBulkUpload` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_InstituteBulkUpload`(
 IN_InstDet longtext,v_Created_by varchar(50),v_userid int(11),v_serviceproviderid int(11)
@@ -13252,19 +13252,19 @@ m.CreatedBy= replace(v_Created_by, '"',''),m.InstituteTypeId=t.InstitutionTypeId
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_MCTSCallAnsweredReport_Pivot` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_MCTSCallAnsweredReport_Pivot`(
  v_starttime datetime,v_endtime datetime,
@@ -13503,19 +13503,19 @@ end if;
  drop temporary table if exists temp_MctsQAMapping_pivot;
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_MCTSCallDetailsReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_MCTSCallDetailsReport`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
@@ -13575,19 +13575,19 @@ select `User ID`, `CampaignID`, `Call Time`, `Mother District`, `ChildDistrict`,
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_MCTSCallDetailsUniqueReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_MCTSCallDetailsUniqueReport`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
@@ -13607,19 +13607,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_MCTSCallNotAnsweredReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_MCTSCallNotAnsweredReport`(
 v_starttime datetime,v_endtime datetime,
@@ -13670,19 +13670,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
 
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_MCTSComplaintReport_Child` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_MCTSComplaintReport_Child`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
@@ -13712,19 +13712,19 @@ where  fb.ismother is false and ff.providerServiceMapID=ifnull(v_psmid,ff.provid
 
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_MCTSComplaintReport_Mother` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_MCTSComplaintReport_Mother`(
  v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
@@ -13754,19 +13754,19 @@ begin
  
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_MCTSCongenitalAnomalies` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_MCTSCongenitalAnomalies`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
@@ -13787,19 +13787,19 @@ where c.providerServiceMapID=ifnull(v_psmid,c.providerServiceMapID)
 
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_MCTSDailyReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_MCTSDailyReport`(
 v_starttime datetime,v_endtime datetime,
@@ -14063,19 +14063,19 @@ end if;
 select * from temp_dailyReport ;-- where TotalCalls is not null;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_MCTSDataReport_Child` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_MCTSDataReport_Child`(v_starttime datetime,v_endtime datetime,
 -- v_Agentid int(11),
@@ -14158,19 +14158,19 @@ MDDS_Village_ID "MDDS Village ID"
  
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_MCTSDataReport_Mother` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_MCTSDataReport_Mother`(v_starttime datetime,v_endtime datetime,
 -- v_Agentid int(11),
@@ -14251,19 +14251,19 @@ Aadhar_no "Aadhar No",
  
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_MCTSHighRiskReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_MCTSHighRiskReport`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
@@ -14322,19 +14322,19 @@ where  fm.High_Risk is true and  fb.providerServiceMapID=ifnull(v_psmid,fb.provi
 end if;
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_MCTSInvalidRecords_child` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_MCTSInvalidRecords_child`(v_starttime datetime,v_endtime datetime,
  -- v_Agentid int(11),
@@ -14390,19 +14390,19 @@ createdBy "Updated By"
   
   end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_MCTSInvalidrecords_Mother` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_MCTSInvalidrecords_Mother`(v_starttime datetime,v_endtime datetime,
 -- v_Agentid int(11),
@@ -14513,19 +14513,19 @@ from db_reporting.fact_motherinvalidrecord
  
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_MCTSNHMReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_MCTSNHMReport`(
 v_starttime datetime,v_endtime datetime,v_Agentid int(11),v_psmid int(11))
@@ -14572,19 +14572,19 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
             
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_StockDetail` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_StockDetail`(v_FromDate date, v_ToDate date)
 BEGIN
@@ -14653,19 +14653,19 @@ group by C.ItemStockEntryID;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_StockSummary` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_StockSummary`(v_FromDate date, v_ToDate date)
 BEGIN
@@ -14752,19 +14752,19 @@ group by D.ItemID;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_TMSaveWorkList` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_TMSaveWorkList`()
 begin
@@ -14813,19 +14813,19 @@ where i.referred_visitcode is not null and i.Processed !='M'
  
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Pr_UpdateECDReporting` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `Pr_UpdateECDReporting`()
 begin
@@ -15811,19 +15811,19 @@ WHERE   DATE(TM.CreatedDate)<= (CURDATE() - INTERVAL 1 DAY) ;
 
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_UpdateHRP_HRniReasons` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_UpdateHRP_HRniReasons`(v_BenCallID bigint(20), v_obcallid bigint(20))
 BEGIN
@@ -15890,19 +15890,19 @@ select 'Updation has done Successfully';
 
  end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `PR_UpdateNotificationMap` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `PR_UpdateNotificationMap`(v_NotificationID int, v_ModifiedBy varchar(50), v_ValidFrom datetime, v_Deleted bit)
 BEGIN
@@ -15926,19 +15926,19 @@ where NotificationID =v_NotificationID;
  
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_ANC` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_ANC`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
@@ -15978,19 +15978,19 @@ where date(AD.VisitDate) between date(P_CallDateFrom) and date(P_CallDateTo)
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_ANCHighRisk` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_ANCHighRisk`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
@@ -16032,19 +16032,19 @@ where date(AD.VisitDate) between date(P_CallDateFrom) and date(P_CallDateTo)
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_BenDisease` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_BenDisease`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
@@ -16078,19 +16078,19 @@ where date(BEND.VisitDate) between date(P_CallDateFrom) and date(P_CallDateTo)
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_ChiefComplaintReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_ChiefComplaintReport`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ParkingPlaceID INT)
 BEGIN
@@ -16116,19 +16116,19 @@ group by ChiefComplaintID,VanID;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_ChildrenCases` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_ChildrenCases`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
@@ -16166,19 +16166,19 @@ where date(BVD.createddate) between date(P_CallDateFrom) and date(P_CallDateTo)
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Consultation` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Consultation`(IN P_CallDateFrom Date, IN P_CallDateTo Date, IN P_ParkingPlaceID INT)
 BEGIN
@@ -16269,19 +16269,19 @@ where date(TMR.createddate) between P_CallDateFrom and P_CallDateTo
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_DiabeticHyper` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_DiabeticHyper`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
@@ -16316,19 +16316,19 @@ where date(DHC.VisitDate) between date(P_CallDateFrom) and date(P_CallDateTo)
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_LabTestresult` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_LabTestresult`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
@@ -16366,19 +16366,19 @@ where date(LTR.VisitDate) between date(P_CallDateFrom) and date(P_CallDateTo)
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_LabTestresult_SPARSHA` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_LabTestresult_SPARSHA`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
@@ -16406,19 +16406,19 @@ where date(LTR.VisitDate) between date(P_CallDateFrom) and date(P_CallDateTo)
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Dim_1097Beneficiary` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Dim_1097Beneficiary`()
 BEGIN
@@ -16592,19 +16592,19 @@ INSERT INTO db_reporting.scheduler_status (proc_name, status, time)
 
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Dim_beneficiary` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Dim_beneficiary`()
 BEGIN
@@ -17077,19 +17077,19 @@ insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_L
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Dim_User` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Dim_User`()
 BEGIN
@@ -17255,19 +17255,19 @@ insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_L
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_104BenCDIResponse` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_104BenCDIResponse`()
 BEGIN
@@ -17343,19 +17343,19 @@ INSERT INTO db_reporting.scheduler_status (proc_name, status, time)
   VALUES ('SP_Load_Fact_104BenCDIResponse', 'completed', now());
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_load_fact_104benmedhistory` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `sp_load_fact_104benmedhistory`()
 BEGIN
@@ -17498,19 +17498,19 @@ insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_L
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_104prescription` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_104prescription`()
 BEGIN
@@ -17602,19 +17602,19 @@ insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_L
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_1097CallSummary` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_1097CallSummary`()
 BEGIN
@@ -17714,19 +17714,19 @@ insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_L
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_ANCCare` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_ANCCare`()
 BEGIN
@@ -17836,19 +17836,19 @@ AC.SyncedDate,
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_ANCDiagnosis` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_ANCDiagnosis`()
 BEGIN
@@ -17960,19 +17960,19 @@ AD.SyncedDate,
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_BenCall` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_BenCall`()
 BEGIN
@@ -18093,19 +18093,19 @@ TB.IsVerified,
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_BenChiefComplaint` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_BenChiefComplaint`()
 BEGIN
@@ -18225,19 +18225,19 @@ FBCC.LodadedDate < BCC.LastModDate ;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_BenDisease` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_BenDisease`()
 BEGIN
@@ -18428,19 +18428,19 @@ WHERE DATE(NCDS.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_BenReferDetails` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_BenReferDetails`()
 BEGIN
@@ -18524,19 +18524,19 @@ group by  BRD.VisitCode;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_BenVisitDetail` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_BenVisitDetail`()
 BEGIN
@@ -18641,19 +18641,19 @@ BVD.VisitFlowStatusFlag,
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_BloodRequest` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_BloodRequest`()
 BEGIN
@@ -18826,19 +18826,19 @@ insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_L
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_ChildCongenitalAnomalies` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_ChildCongenitalAnomalies`()
 BEGIN
@@ -18913,19 +18913,19 @@ insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_L
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_ChildInValidRecord` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_ChildInValidRecord`()
 BEGIN
@@ -19214,19 +19214,19 @@ insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_L
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_ChildValidRecord` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_ChildValidRecord`()
 BEGIN
@@ -19522,19 +19522,19 @@ insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_L
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_DiaHyperCase` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_DiaHyperCase`()
 BEGIN
@@ -19808,19 +19808,19 @@ WHERE DATE(NCDS.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_DirectoryService` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_DirectoryService`()
 BEGIN
@@ -19915,19 +19915,19 @@ insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_L
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_EpidemicOutbreak` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_EpidemicOutbreak`()
 BEGIN
@@ -20012,19 +20012,19 @@ LEFT JOIN    db_iemr.m_districtbranchmapping  MDBM ON  MDBM.DistrictBranchID = T
 insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_Load_Fact_EpidemicOutbreak','completed',now());
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_Feedback` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_Feedback`()
 BEGIN
@@ -20168,19 +20168,19 @@ insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_L
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_FoodSafetyCopmlaint` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_FoodSafetyCopmlaint`()
 BEGIN
@@ -20307,19 +20307,19 @@ FSC.LastModDate,
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_ItemStockEntry` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_ItemStockEntry`()
 BEGIN
@@ -20419,19 +20419,19 @@ ISE.LastModDate,
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_ItemStockExit` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_ItemStockExit`()
 BEGIN
@@ -20531,19 +20531,19 @@ ISEx.LastModDate,
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_LabTestOrder` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_LabTestOrder`()
 BEGIN
@@ -20639,19 +20639,19 @@ inner join db_iemr.t_benvisitdetail BVD on LTO.VisitCode = BVD.VisitCode and LTO
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_LabTestResult` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_LabTestResult`()
 BEGIN
@@ -20758,19 +20758,19 @@ from db_iemr.t_lab_testresult LTR
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_MCTSCallResponse` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_MCTSCallResponse`()
 BEGIN
@@ -20843,19 +20843,19 @@ insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_L
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_MctsOutboundCall` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_MctsOutboundCall`()
 BEGIN
@@ -20941,19 +20941,19 @@ insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_L
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_MotherInValidRecord` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_MotherInValidRecord`()
 BEGIN
@@ -21290,19 +21290,19 @@ WHERE   DATE(TM.CreatedDate)= CURDATE() - INTERVAL 1 DAY ;
 insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_Load_Fact_MotherInValidRecord','completed',now());
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_MotherValidRecord` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8mb4 */ ;
+-- /*!50003 SET character_set_results = utf8mb4 */ ;
+-- /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_MotherValidRecord`()
 BEGIN
@@ -21952,19 +21952,19 @@ insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_L
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_OrganDonation` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_OrganDonation`()
 BEGIN
@@ -22109,19 +22109,19 @@ insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_L
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_PatientIssueExit` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_PatientIssueExit`()
 BEGIN
@@ -22253,19 +22253,19 @@ inner join db_iemr.m_itemcategory ITMC
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_PhoneBlock` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_PhoneBlock`()
 BEGIN
@@ -22333,19 +22333,19 @@ TPB.LastModDate,
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_PhyVitals` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_PhyVitals`()
 BEGIN
@@ -22436,19 +22436,19 @@ H.VisitCode=V.VisitCode
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_PNCCare` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_PNCCare`()
 BEGIN
@@ -22574,19 +22574,19 @@ PC.SyncedDate,
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_PNCDiagnosis` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_PNCDiagnosis`()
 BEGIN
@@ -22675,19 +22675,19 @@ WHERE DATE(PNCD.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_PrescribedDrug` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_PrescribedDrug`()
 BEGIN
@@ -22795,19 +22795,19 @@ RxD.SyncedDate,
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_Prescription` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_Prescription`()
 BEGIN
@@ -22907,19 +22907,19 @@ Rx.SyncedDate,
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_SchemeService` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_SchemeService`()
 BEGIN
@@ -22994,19 +22994,19 @@ INSERT INTO db_reporting.Fact_SchemeService
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_Load_Fact_TMrequest` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_Load_Fact_TMrequest`()
 BEGIN
@@ -23128,19 +23128,19 @@ FTMR.LodadedDate < TMR.LastModDate ;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_PatientAttended` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_PatientAttended`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
@@ -23171,19 +23171,19 @@ where date(BVD.createddate) between date(P_CallDateFrom) and date(P_CallDateTo)
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_PatientInfo` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_PatientInfo`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
@@ -23219,19 +23219,19 @@ where date(BVD.createddate) between date(P_CallDateFrom) and date(P_CallDateTo)
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_PatientVisitInfo_SPARSHA` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_PatientVisitInfo_SPARSHA`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
@@ -23274,19 +23274,19 @@ where date(BVD.createddate) between date(P_CallDateFrom) and date(P_CallDateTo)
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_PhyVitals_SPARSHA` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_PhyVitals_SPARSHA`(IN P_CallDateFrom DATETIME, 
 IN P_CallDateTo DATETIME, 
@@ -23338,19 +23338,19 @@ where date(RxD.CreatedDate) between date(P_CallDateFrom) and date(P_CallDateTo)
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_PNCHighRisk` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_PNCHighRisk`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
@@ -23390,19 +23390,19 @@ where date(PNCD.VisitDate) between date(P_CallDateFrom) and date(P_CallDateTo)
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_PrescribedDrug_SPARSHA` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_PrescribedDrug_SPARSHA`(IN P_CallDateFrom DATETIME, 
 IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
@@ -23435,19 +23435,19 @@ where date(RxD.CreatedDate) between date(P_CallDateFrom) and date(P_CallDateTo)
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_test` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `sp_test`()
 begin
@@ -23456,19 +23456,19 @@ insert into db_reporting.scheduler_status (proc_name, status ,time) values('even
 
 end ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_TestConducted` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_TestConducted`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ProviderServiceMapID INT, IN P_VanID INT)
 BEGIN
@@ -23502,19 +23502,19 @@ where date(LTO.VisitDate) between date(P_CallDateFrom) and date(P_CallDateTo)
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_TMDailyReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_TMDailyReport`(IN P_CallDate DATETIME, IN P_ParkingPlaceID INT)
 BEGIN
@@ -23529,19 +23529,19 @@ group by vanid,date(requestdate)) daydata  on daydata.vanid=monthdata.vanid;
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_TMMonthlyReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_TMMonthlyReport`(IN P_CallDateFrom DATETIME, 
  IN P_CallDateTo DATETIME, IN P_ParkingPlaceID INT,IN P_VanID INT)
@@ -23628,19 +23628,19 @@ group by SpecializationID,year(RequestDate),month(RequestDate)
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_TotalConsultation` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `SP_TotalConsultation`(IN P_CallDateFrom DATETIME, IN P_CallDateTo DATETIME, IN P_ParkingPlaceID INT)
 BEGIN
@@ -23655,19 +23655,19 @@ FROM db_reporting.fact_tmrequest
  
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `temp_LoadInventoryReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `temp_LoadInventoryReport`()
 BEGIN
@@ -23953,19 +23953,19 @@ left join db_iemr.m_uom UOM
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `temp_LoadTMReport` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+-- /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+-- /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+-- /*!50003 SET @saved_col_connection = @@collation_connection */ ;
+-- /*!50003 SET character_set_client  = utf8 */ ;
+-- /*!50003 SET character_set_results = utf8 */ ;
+-- /*!50003 SET collation_connection  = utf8_general_ci */ ;
+-- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+-- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE  PROCEDURE `temp_LoadTMReport`()
 BEGIN
@@ -24122,72 +24122,72 @@ left Join db_iemr.m_Van VAN on TMR.VanID = VAN.VanID
 
 END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
+-- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
+-- /*!50003 SET character_set_client  = @saved_cs_client */ ;
+-- /*!50003 SET character_set_results = @saved_cs_results */ ;
+-- /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Final view structure for view `assam_104`
 --
 
 /*!50001 DROP VIEW IF EXISTS `assam_104`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `assam_104` AS (select cast(`t`.`CreatedDate` as date) AS `Date`,count(distinct `t`.`ReceivedAgentID`) AS `Agent_Loggedin`,count(distinct (case when ((`t`.`ReceivedRoleName` like '%HAO%') and (`t`.`IsOutbound` is false) and (`t`.`CallTypeID` is not null)) then `t`.`BenCallID` end)) AS `Inbound Calls`,count(distinct (case when (`t`.`IsOutbound` is true) then `t`.`CallID` end)) AS `Outbound Calls`,(count(distinct (case when ((`t`.`ReceivedRoleName` like '%HAO%') and (`t`.`IsOutbound` is false) and (`t`.`CallTypeID` is not null)) then `t`.`BenCallID` end)) + count(distinct (case when (`t`.`IsOutbound` is true) then `t`.`CallID` end))) AS `Total Calls`,count(distinct (case when (`m`.`CallType` like '%Grievance%') then `t`.`CallID` end)) AS `Grievance Received`,avg((case when ((`m`.`CallGroupType` in ('Valid','Transfer')) and (`t`.`ReceivedRoleName` like '%HAO%')) then timestampdiff(SECOND,`t`.`CallTime`,`t`.`CallEndTime`) end)) AS `Average Call Handling Time` from ((`db_iemr`.`t_bencall` `t` left join `db_iemr`.`m_calltype` `m` on((`m`.`CallTypeID` = `t`.`CallTypeID`))) left join `db_iemr`.`t_feedback` `f` on((`f`.`BenCallID` = `t`.`BenCallID`))) group by cast(`t`.`CreatedDate` as date)) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `fac_bencall`
 --
 
 /*!50001 DROP VIEW IF EXISTS `fac_bencall`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `fac_bencall` AS select `dben`.`PermDistrict` AS `PermDistrict`,`fbc`.`CallSubTypeName` AS `CallSubTypeName`,count(`fbc`.`BenCallID`) AS `count(fbc.BenCallID)` from (`fact_bencall` `fbc` join `dim_beneficiary` `dben` on((`fbc`.`BeneficiaryRegID` = `dben`.`BeneficiaryRegID`))) where (`fbc`.`ProviderServiceMapID` = 1247) group by `dben`.`PermDistrict`,`fbc`.`CallSubTypeName` */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `sanjeevani_dashboard`
 --
 
 /*!50001 DROP VIEW IF EXISTS `sanjeevani_dashboard`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+-- /*!50001 SET @saved_cs_client          = @@character_set_client */;
+-- /*!50001 SET @saved_cs_results         = @@character_set_results */;
+-- /*!50001 SET @saved_col_connection     = @@collation_connection */;
+-- /*!50001 SET character_set_client      = utf8 */;
+-- /*!50001 SET character_set_results     = utf8 */;
+-- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `sanjeevani_dashboard` AS (select `vital`.`CurrDistrict` AS `CurrDistrict`,`vital`.`CreatedBy` AS `CreatedBy`,`vital`.`VisitCode` AS `VisitCode`,`vital`.`servicePoint` AS `servicePoint`,`vital`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`vital`.`VisitCategory` AS `VisitCategory`,`vital`.`visit_date` AS `visit_date`,`vital`.`visit_time` AS `visit_time`,`vital`.`visit_month` AS `visit_month`,`vital`.`visit_year` AS `visit_year`,`vital`.`beneficiary_id` AS `beneficiary_id`,`vital`.`ben_name` AS `ben_name`,`vital`.`FirstName` AS `FirstName`,`vital`.`father_name` AS `father_name`,`vital`.`spouse_name` AS `spouse_name`,`vital`.`ben_phone_no` AS `ben_phone_no`,`vital`.`New/Repeat_visit` AS `New/Repeat_visit`,`vital`.`registrationDate` AS `registrationDate`,`vital`.`ben_dob` AS `ben_dob`,`vital`.`age_part1` AS `age_part1`,`vital`.`age_part2` AS `age_part2`,`vital`.`ben_gender` AS `ben_gender`,`vital`.`maritalstatus` AS `maritalstatus`,`vital`.`community` AS `community`,`vital`.`religion` AS `religion`,`vital`.`incomestatus` AS `incomestatus`,`vital`.`Weight_Kg` AS `Weight_Kg`,`vital`.`Height_cm` AS `Height_cm`,`vital`.`BMI` AS `BMI`,`vital`.`WaistCircumference_cm` AS `WaistCircumference_cm`,`vital`.`ANC/PNC` AS `ANC/PNC`,`vital`.`LMP_Date` AS `LMP_Date`,`vital`.`EDD` AS `EDD`,`vital`.`GestationalAge` AS `GestationalAge`,`vital`.`Temperature` AS `Temperature`,`vital`.`PulseRate` AS `PulseRate`,`vital`.`SystolicBP_1stReading` AS `SystolicBP_1stReading`,`vital`.`DiastolicBP_1stReading` AS `DiastolicBP_1stReading`,`vital`.`DiagnosisProvided1` AS `DiagnosisProvided1`,`vital`.`DiagnosisProvided2` AS `DiagnosisProvided2`,`vital`.`DiagnosisProvided3` AS `DiagnosisProvided3`,`vital`.`DiagnosisProvided4` AS `DiagnosisProvided4`,`vital`.`DiagnosisProvided5` AS `DiagnosisProvided5`,`vital`.`ChiefComplaint` AS `ChiefComplaint`,`vital`.`Reffred_To` AS `Reffred_To`,`vital`.`Referred_For` AS `Referred_For`,`l`.`VisitCode_Test` AS `VisitCode_Test`,`l`.`RBS_Test` AS `RBS_Test`,`l`.`Hemoglobin` AS `Hemoglobin`,`l`.`Vision_Aquity_Test` AS `Vision_Aquity_Test`,`l`.`HbA1c` AS `HbA1c`,`l`.`Malaria` AS `Malaria`,`idrs`.`VisitCode_Screening` AS `VisitCode_Screening`,`idrs`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`idrs`.`Epilepsy_Screenings` AS `Epilepsy_Screenings`,`idrs`.`Asthma_Screenings` AS `Asthma_Screenings`,`idrs`.`Vision_Screenings` AS `Vision_Screenings`,`idrs`.`Tuberculosis_Screenings` AS `Tuberculosis_Screenings`,`idrs`.`Malaria_Screenings` AS `Malaria_Screenings`,`idrs`.`Diabetes_Screenings` AS `Diabetes_Screenings`,`idrs`.`Epilepsy_suspected` AS `Epilepsy_suspected`,`idrs`.`Asthma_suspected` AS `Asthma_suspected`,`idrs`.`Vision_suspected` AS `Vision_suspected`,`idrs`.`Tuberculosis_suspected` AS `Tuberculosis_suspected`,`idrs`.`Malaria_suspected` AS `Malaria_suspected`,`idrs`.`Diabetes_suspected` AS `Diabetes_suspected`,`idrs`.`Hypertension_suspected` AS `Hypertension_suspected`,`idrs`.`Epilepsy_confirmed` AS `Epilepsy_confirmed`,`idrs`.`Asthma_confirmed` AS `Asthma_confirmed`,`idrs`.`Vision_confirmed` AS `Vision_confirmed`,`idrs`.`Tuberculosis_confirmed` AS `Tuberculosis_confirmed`,`idrs`.`Malaria_confirmed` AS `Malaria_confirmed`,`idrs`.`Diabetes_confirmed` AS `Diabetes_confirmed`,`idrs`.`Hypertension_confirmed` AS `Hypertension_confirmed`,`drug`.`VisitCode_Drug` AS `VisitCode_Drug`,`drug`.`Total_drug` AS `Total_drug`,`drug`.`drug_1` AS `drug_1`,`drug`.`drug1_Qty` AS `drug1_Qty`,`drug`.`drug_2` AS `drug_2`,`drug`.`drug2_Qty` AS `drug2_Qty`,`drug`.`drug_3` AS `drug_3`,`drug`.`drug3_Qty` AS `drug3_Qty`,`drug`.`drug_4` AS `drug_4`,`drug`.`drug4_Qty` AS `drug4_Qty`,`drug`.`drug_5` AS `drug_5`,`drug`.`drug5_Qty` AS `drug5_Qty`,`drug`.`drug_6` AS `drug_6`,`drug`.`drug6_Qty` AS `drug6_Qty`,`drug`.`drug_7` AS `drug_7`,`drug`.`drug7_Qty` AS `drug7_Qty` from (((((select substr(`v`.`CreatedBy`,1,(length(`v`.`CreatedBy`) - 5)) AS `CurrDistrict`,substr(`v`.`CreatedBy`,(length(`v`.`CreatedBy`) - 4),2) AS `CreatedBy`,`v`.`VisitCode` AS `VisitCode`,`m`.`servicePoint` AS `servicePoint`,`v`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`v`.`VisitCategory` AS `VisitCategory`,cast(`v`.`CreatedDate` as date) AS `visit_date`,cast(`v`.`CreatedDate` as time) AS `visit_time`,month(`v`.`CreatedDate`) AS `visit_month`,year(`v`.`CreatedDate`) AS `visit_year`,`m`.`beneficiary_id` AS `beneficiary_id`,`m`.`ben_name` AS `ben_name`,`idi`.`FirstName` AS `FirstName`,`m`.`father_name` AS `father_name`,`m`.`spouse_name` AS `spouse_name`,`m`.`ben_phone_no` AS `ben_phone_no`,(case when (`v`.`VisitNo` = 1) then 'New' else 'Revisit' end) AS `New/Repeat_visit`,`m`.`registrationDate` AS `registrationDate`,cast(`m`.`ben_dob` as date) AS `ben_dob`,substring_index(`m`.`ben_age`,'-',1) AS `age_part1`,substring_index(`m`.`ben_age`,'-',-(1)) AS `age_part2`,`m`.`ben_gender` AS `ben_gender`,`idi`.`maritalstatus` AS `maritalstatus`,`idi`.`community` AS `community`,`idi`.`religion` AS `religion`,`idi`.`incomestatus` AS `incomestatus`,`an`.`Weight_Kg` AS `Weight_Kg`,`an`.`Height_cm` AS `Height_cm`,`an`.`BMI` AS `BMI`,`an`.`WaistCircumference_cm` AS `WaistCircumference_cm`,(case when (`v`.`VisitCategory` = 'ANC') then 'ANC' when (`v`.`VisitCategory` = 'PNC') then 'PNC' else NULL end) AS `ANC/PNC`,`anc`.`LastMenstrualPeriod_LMP` AS `LMP_Date`,`anc`.`ExpectedDateofDelivery` AS `EDD`,`anc`.`GestationalAgeOrPeriodofAmenorrhea_POA` AS `GestationalAge`,`p`.`Temperature` AS `Temperature`,`p`.`PulseRate` AS `PulseRate`,`p`.`SystolicBP_1stReading` AS `SystolicBP_1stReading`,`p`.`DiastolicBP_1stReading` AS `DiastolicBP_1stReading`,substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',1),'||',-(1)) AS `DiagnosisProvided1`,(case when (strcmp(substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',1),'||',-(1)),substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',2),'||',-(1))) <> 0) then substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',2),'||',-(1)) end) AS `DiagnosisProvided2`,(case when (strcmp(substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',2),'||',-(1)),substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',3),'||',-(1))) <> 0) then substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',3),'||',-(1)) end) AS `DiagnosisProvided3`,(case when (strcmp(substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',3),'||',-(1)),substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',4),'||',-(1))) <> 0) then substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',4),'||',-(1)) end) AS `DiagnosisProvided4`,(case when (strcmp(substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',4),'||',-(1)),substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',5),'||',-(1))) <> 0) then substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',5),'||',-(1)) end) AS `DiagnosisProvided5`,`chief`.`ChiefComplaint` AS `ChiefComplaint`,`ref`.`referredToInstituteName` AS `Reffred_To`,`ref`.`referralreason` AS `Referred_For` from (((((((((`db_iemr`.`t_benvisitdetail` `v` join `db_iemr`.`i_ben_flow_outreach` `m` on(((`m`.`beneficiary_reg_id` = `v`.`BeneficiaryRegID`) and (`m`.`beneficiary_visit_code` = `v`.`VisitCode`)))) left join `db_iemr`.`t_phy_vitals` `p` on(((`p`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`p`.`VisitCode` = `v`.`VisitCode`)))) left join `db_iemr`.`t_phy_anthropometry` `an` on(((`an`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`an`.`VisitCode` = `v`.`VisitCode`)))) left join `db_iemr`.`t_anccare` `anc` on(((`anc`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`anc`.`VisitCode` = `v`.`VisitCode`)))) left join `db_iemr`.`m_district` `dist` on((`dist`.`DistrictID` = `m`.`districtID`))) left join (select `mp`.`BenRegId` AS `BenRegId`,`mp`.`CreatedDate` AS `registrationdate`,`d`.`Gender` AS `gender`,`d`.`Status` AS `Status`,`d`.`FirstName` AS `FirstName`,`d`.`MaritalStatus` AS `maritalstatus`,`d`.`LiteracyStatus` AS `literacystatus`,`d`.`education` AS `education`,`d`.`occupation` AS `occupation`,`d`.`incomeStatus` AS `incomestatus`,`d`.`community` AS `community`,`d`.`religion` AS `religion`,`ad`.`CurrDistrict` AS `CurrDistrict`,`ad`.`CurrVillage` AS `CurrVillage`,`ad`.`CurrServicePoint` AS `CurrServicePoint` from ((`db_identity`.`i_beneficiarydetails` `d` join `db_identity`.`i_beneficiarymapping` `mp` on(((`mp`.`BenDetailsId` = `d`.`VanSerialNo`) and (`mp`.`VanID` = `d`.`VanID`)))) left join `db_identity`.`i_beneficiaryaddress` `ad` on(((`mp`.`BenAddressId` = `ad`.`VanSerialNo`) and (`mp`.`VanID` = `ad`.`VanID`))))) `idi` on((`idi`.`BenRegId` = `m`.`beneficiary_reg_id`))) left join (select `db_iemr`.`t_benreferdetails`.`VisitCode` AS `visitcode`,`db_iemr`.`t_benreferdetails`.`referredToInstituteName` AS `referredToInstituteName`,`db_iemr`.`t_benreferdetails`.`referralreason` AS `referralreason` from `db_iemr`.`t_benreferdetails` where (`db_iemr`.`t_benreferdetails`.`ProviderServiceMapID` = 18) group by `db_iemr`.`t_benreferdetails`.`VisitCode`) `ref` on((`ref`.`visitcode` = `v`.`VisitCode`))) left join (select `db_iemr`.`t_benchiefcomplaint`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`db_iemr`.`t_benchiefcomplaint`.`VisitCode` AS `VisitCode`,group_concat(distinct `db_iemr`.`t_benchiefcomplaint`.`ChiefComplaint` separator ',') AS `ChiefComplaint` from `db_iemr`.`t_benchiefcomplaint` where (`db_iemr`.`t_benchiefcomplaint`.`ProviderServiceMapID` = 18) group by `db_iemr`.`t_benchiefcomplaint`.`BeneficiaryRegID`,`db_iemr`.`t_benchiefcomplaint`.`VisitCode`) `chief` on(((`chief`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`chief`.`VisitCode` = `v`.`VisitCode`)))) left join (select `db_iemr`.`t_prescription`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`db_iemr`.`t_prescription`.`VisitCode` AS `VisitCode`,group_concat(distinct if((`db_iemr`.`t_prescription`.`DiagnosisProvided` = ''),NULL,`db_iemr`.`t_prescription`.`DiagnosisProvided`) separator '||') AS `DiagnosisProvided` from `db_iemr`.`t_prescription` where (`db_iemr`.`t_prescription`.`ProviderServiceMapID` = 18) group by `db_iemr`.`t_prescription`.`BeneficiaryRegID`,`db_iemr`.`t_prescription`.`VisitCode`) `pre` on(((`pre`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`pre`.`VisitCode` = `v`.`VisitCode`)))) where ((`v`.`ProviderServiceMapID` = 18) and (`v`.`CreatedDate` >= '2022-03-01 00:00:00')))) `vital` left join (select `temp`.`visitcode` AS `VisitCode_Test`,`temp`.`RBS_Test` AS `RBS_Test`,`temp`.`Hemoglobin` AS `Hemoglobin`,`temp`.`Vision_Aquity_Test` AS `Vision_Aquity_Test`,`temp`.`HbA1c` AS `HbA1c`,`temp`.`Malaria` AS `Malaria` from (select `t`.`VisitCode` AS `visitcode`,group_concat((case when (`tr`.`ProcedureID` = 71) then `tr`.`TestResultValue` end) separator ',') AS `RBS_Test`,group_concat((case when (`tr`.`ProcedureID` = 72) then `tr`.`TestResultValue` end) separator ',') AS `Hemoglobin`,group_concat((case when (`tr`.`ProcedureID` = 79) then `tr`.`TestResultValue` end) separator ',') AS `HbA1c`,group_concat((case when (`tr`.`ProcedureID` = 73) then `tr`.`TestResultValue` end) separator ',') AS `Malaria`,group_concat((case when (`tr`.`ProcedureID` = 75) then `tr`.`TestResultValue` end) separator ',') AS `Vision_Aquity_Test` from (`db_iemr`.`t_lab_testorder` `t` left join `db_iemr`.`t_lab_testresult` `tr` on(((`t`.`VisitCode` = `tr`.`VisitCode`) and (`t`.`ProcedureID` = `tr`.`ProcedureID`)))) where (`t`.`ProviderServiceMapID` = 18) group by `t`.`VisitCode`) `temp`) `l` on((`vital`.`VisitCode` = `l`.`VisitCode_Test`))) left join (select `temp`.`Visitcode` AS `VisitCode_Screening`,`temp`.`BeneficiaryRegID` AS `BeneficiaryRegID`,(case when (`temp`.`screening` like '%Epilepsy%') then 'Yes' else NULL end) AS `Epilepsy_Screenings`,(case when (`temp`.`screening` like '%Asthma%') then 'Yes' else NULL end) AS `Asthma_Screenings`,(case when (`temp`.`screening` like '%Vision%') then 'Yes' else NULL end) AS `Vision_Screenings`,(case when (`temp`.`screening` like '%Tuberculosis%') then 'Yes' else NULL end) AS `Tuberculosis_Screenings`,(case when (`temp`.`screening` like '%Malaria%') then 'Yes' else NULL end) AS `Malaria_Screenings`,(case when (`temp`.`screening` like '%Diabetes%') then 'Yes' else NULL end) AS `Diabetes_Screenings`,(case when (`temp`.`suspected` like '%Epilepsy%') then 'Yes' else NULL end) AS `Epilepsy_suspected`,(case when (`temp`.`suspected` like '%Asthma%') then 'Yes' else NULL end) AS `Asthma_suspected`,(case when (`temp`.`suspected` like '%Vision%') then 'Yes' else NULL end) AS `Vision_suspected`,(case when (`temp`.`suspected` like '%Tuberculosis%') then 'Yes' else NULL end) AS `Tuberculosis_suspected`,(case when (`temp`.`suspected` like '%Malaria%') then 'Yes' else NULL end) AS `Malaria_suspected`,(case when (`temp`.`suspected` like '%Diabetes%') then 'Yes' else NULL end) AS `Diabetes_suspected`,(case when (`temp`.`suspected` like '%Hypertension%') then 'Yes' else NULL end) AS `Hypertension_suspected`,(case when (`temp`.`confirmed` like '%Epilepsy%') then 'Yes' else NULL end) AS `Epilepsy_confirmed`,(case when (`temp`.`confirmed` like '%Asthma%') then 'Yes' else NULL end) AS `Asthma_confirmed`,(case when (`temp`.`confirmed` like '%Vision%') then 'Yes' else NULL end) AS `Vision_confirmed`,(case when (`temp`.`confirmed` like '%Tuberculosis%') then 'Yes' else NULL end) AS `Tuberculosis_confirmed`,(case when (`temp`.`confirmed` like '%Malaria%') then 'Yes' else NULL end) AS `Malaria_confirmed`,(case when (`temp`.`confirmed` like '%Diabetes%') then 'Yes' else NULL end) AS `Diabetes_confirmed`,(case when (`temp`.`confirmed` like '%Hypertension%') then 'Yes' else NULL end) AS `Hypertension_confirmed` from (select `db_iemr`.`t_idrsdetails`.`Visitcode` AS `Visitcode`,`db_iemr`.`t_idrsdetails`.`BeneficiaryRegID` AS `BeneficiaryRegID`,group_concat(distinct `db_iemr`.`t_idrsdetails`.`DiseaseQuestionType` separator ',') AS `screening`,group_concat(distinct `db_iemr`.`t_idrsdetails`.`SuspectedDiseases` separator ',') AS `suspected`,group_concat(distinct `db_iemr`.`t_idrsdetails`.`ConfirmedDiseases` separator ',') AS `confirmed` from `db_iemr`.`t_idrsdetails` where (`db_iemr`.`t_idrsdetails`.`ProviderServiceMapID` = 18) group by `db_iemr`.`t_idrsdetails`.`Visitcode`) `temp`) `idrs` on((`idrs`.`VisitCode_Screening` = `vital`.`VisitCode`))) left join (select `a`.`visitcode` AS `VisitCode_Drug`,`a`.`cnt` AS `Total_drug`,(case when (`a`.`cnt` > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',`a`.`cnt`),',',-(1)) end) AS `drug_1`,(case when (`a`.`cnt` > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',`a`.`cnt`),',',-(1)) end) AS `drug1_Qty`,(case when ((`a`.`cnt` - 1) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 1)),',',-(1)) end) AS `drug_2`,(case when ((`a`.`cnt` - 1) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 1)),',',-(1)) end) AS `drug2_Qty`,(case when ((`a`.`cnt` - 2) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 2)),',',-(1)) end) AS `drug_3`,(case when ((`a`.`cnt` - 2) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 2)),',',-(1)) end) AS `drug3_Qty`,(case when ((`a`.`cnt` - 3) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 3)),',',-(1)) end) AS `drug_4`,(case when ((`a`.`cnt` - 3) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 3)),',',-(1)) end) AS `drug4_Qty`,(case when ((`a`.`cnt` - 4) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 4)),',',-(1)) end) AS `drug_5`,(case when ((`a`.`cnt` - 4) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 4)),',',-(1)) end) AS `drug5_Qty`,(case when ((`a`.`cnt` - 5) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 5)),',',-(1)) end) AS `drug_6`,(case when ((`a`.`cnt` - 5) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 5)),',',-(1)) end) AS `drug6_Qty`,(case when ((`a`.`cnt` - 6) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 6)),',',-(1)) end) AS `drug_7`,(case when ((`a`.`cnt` - 6) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 6)),',',-(1)) end) AS `drug7_Qty` from (select `db_iemr`.`t_prescribeddrug`.`VisitCode` AS `visitcode`,group_concat(`db_iemr`.`t_prescribeddrug`.`GenericDrugName` separator ',') AS `GenericDrugName`,group_concat(`db_iemr`.`t_prescribeddrug`.`QtyPrescribed` separator ',') AS `QtyPrescribed`,count(0) AS `cnt` from `db_iemr`.`t_prescribeddrug` where (`db_iemr`.`t_prescribeddrug`.`ProviderServiceMapID` = 18) group by `db_iemr`.`t_prescribeddrug`.`VisitCode`) `a`) `drug` on((`vital`.`VisitCode` = `drug`.`VisitCode_Drug`)))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+-- /*!50001 SET character_set_client      = @saved_cs_client */;
+-- /*!50001 SET character_set_results     = @saved_cs_results */;
+-- /*!50001 SET collation_connection      = @saved_col_connection */;
+-- /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+-- /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+-- /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+-- /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+-- /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+-- /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+-- /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-08-09 11:02:08

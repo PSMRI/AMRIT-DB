@@ -16,9 +16,9 @@ use db_iemr;
 
 USE db_iemr;
 
------------------------------------------------------------
--- 1️⃣ Index: inx_CallDateFrom ON t_mctsoutboundcalls(CallDateFrom)
------------------------------------------------------------
+
+-- 1️ Index: inx_CallDateFrom ON t_mctsoutboundcalls(CallDateFrom)
+
 SET @idx1 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS
@@ -38,9 +38,9 @@ EXECUTE stmt1;
 DEALLOCATE PREPARE stmt1;
 
 
------------------------------------------------------------
--- 2️⃣ Index: inx_CallDateTo ON t_mctsoutboundcalls(CallDateTo)
------------------------------------------------------------
+
+-- 2️ Index: inx_CallDateTo ON t_mctsoutboundcalls(CallDateTo)
+
 SET @idx2 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS
@@ -60,9 +60,9 @@ EXECUTE stmt2;
 DEALLOCATE PREPARE stmt2;
 
 
------------------------------------------------------------
--- 3️⃣ Index: inx_preferredlanguage ON t_mothervalidrecord(preferredlanguage)
------------------------------------------------------------
+
+-- 3️ Index: inx_preferredlanguage ON t_mothervalidrecord(preferredlanguage)
+
 SET @idx3 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS
@@ -82,9 +82,9 @@ EXECUTE stmt3;
 DEALLOCATE PREPARE stmt3;
 
 
------------------------------------------------------------
--- 4️⃣ Index: inx_preferredlanguage ON t_childvaliddata(preferredlanguage)
------------------------------------------------------------
+
+-- 4️ Index: inx_preferredlanguage ON t_childvaliddata(preferredlanguage)
+
 SET @idx4 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS
@@ -104,9 +104,9 @@ EXECUTE stmt4;
 DEALLOCATE PREPARE stmt4;
 
 
------------------------------------------------------------
--- 5️⃣ Index: inx_villageid ON i_ben_flow_outreach(villageID)
------------------------------------------------------------
+
+-- 5️ Index: inx_villageid ON i_ben_flow_outreach(villageID)
+
 SET @idx5 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS
@@ -126,9 +126,8 @@ EXECUTE stmt5;
 DEALLOCATE PREPARE stmt5;
 
 
------------------------------------------------------------
--- 6️⃣ Index: inx_modified_date ON i_ben_flow_outreach(modified_date)
------------------------------------------------------------
+-- 6️ Index: inx_modified_date ON i_ben_flow_outreach(modified_date)
+
 SET @idx6 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS

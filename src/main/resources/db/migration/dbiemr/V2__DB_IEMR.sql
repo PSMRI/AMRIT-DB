@@ -818,9 +818,9 @@ USE db_iemr;
 
 USE db_iemr;
 
----------------------------------------------------------------
+
 -- 1) Add preferredLanguage to t_mothervalidrecord
----------------------------------------------------------------
+
 SET @exists := (
     SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
     WHERE TABLE_SCHEMA='db_iemr'
@@ -837,9 +837,9 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
----------------------------------------------------------------
+
 -- 2) Add preferredLanguage to t_childvaliddata
----------------------------------------------------------------
+
 SET @exists := (
     SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
     WHERE TABLE_SCHEMA='db_iemr'
@@ -856,9 +856,9 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
----------------------------------------------------------------
+
 -- 3) Add ProjectID to t_registrationfields
----------------------------------------------------------------
+
 SET @exists := (
     SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
     WHERE TABLE_SCHEMA='db_iemr'
@@ -875,9 +875,9 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
----------------------------------------------------------------
+
 -- 4) Add BeneficiaryConsent to t_feedback
----------------------------------------------------------------
+
 SET @exists := (
     SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
     WHERE TABLE_SCHEMA='db_iemr'

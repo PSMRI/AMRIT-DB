@@ -1,8 +1,8 @@
 USE db_iemr;
 
--- ===============================================
--- 1️⃣ Parent Table: m_incentive_activity
--- ===============================================
+
+-- 1️ Parent Table: m_incentive_activity
+
 CREATE TABLE if not exists `m_incentive_activity` (
    `id` BIGINT NOT NULL AUTO_INCREMENT,
    `created_by` VARCHAR(255) DEFAULT NULL,
@@ -25,9 +25,8 @@ CREATE TABLE if not exists `m_incentive_activity` (
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8mb3;
 
--- ===============================================
--- 2️⃣ Language Mapping Table
--- ===============================================
+-- 2️ Language Mapping Table
+
 CREATE TABLE if not exists `m_incentive_activity_lang_mapping` (
    `id` BIGINT NOT NULL AUTO_INCREMENT,
    `created_date` DATETIME DEFAULT NULL,
@@ -52,9 +51,8 @@ CREATE TABLE if not exists `m_incentive_activity_lang_mapping` (
       ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=136 DEFAULT CHARSET=utf8mb3;
 
--- ===============================================
--- 3️⃣ Rank Mapping Table
--- ===============================================
+-- 3️ Rank Mapping Table
+
 CREATE TABLE if not exists `m_incentive_activity_rank_mapping` (
    `id` BIGINT NOT NULL AUTO_INCREMENT,
    `activity_id` BIGINT NOT NULL,

@@ -9,9 +9,9 @@ use db_iemr;
 
 USE db_iemr;
 
------------------------------------------------------------
--- 1️⃣ Index: inx_IsHighRisk ON t_mctsoutboundcalls(IsHighRisk)
------------------------------------------------------------
+
+-- 1️ Index: inx_IsHighRisk ON t_mctsoutboundcalls(IsHighRisk)
+
 SET @idx1 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS
@@ -31,9 +31,9 @@ EXECUTE stmt1;
 DEALLOCATE PREPARE stmt1;
 
 
------------------------------------------------------------
--- 2️⃣ Index: inx_isFurtherCallRequired (isFurtherCallRequired)
------------------------------------------------------------
+
+-- 2️ Index: inx_isFurtherCallRequired (isFurtherCallRequired)
+
 SET @idx2 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS
@@ -53,9 +53,9 @@ EXECUTE stmt2;
 DEALLOCATE PREPARE stmt2;
 
 
------------------------------------------------------------
--- 3️⃣ Index: inx_DisplayOBCallType (DisplayOBCallType)
------------------------------------------------------------
+
+-- 3️ Index: inx_DisplayOBCallType (DisplayOBCallType)
+
 SET @idx3 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS
@@ -75,9 +75,9 @@ EXECUTE stmt3;
 DEALLOCATE PREPARE stmt3;
 
 
------------------------------------------------------------
--- 4️⃣ Index: inx_iszerocall ON t_bencall(iszerocall)
------------------------------------------------------------
+
+-- 4️ Index: inx_iszerocall ON t_bencall(iszerocall)
+
 SET @idx4 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS
