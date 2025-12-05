@@ -2785,11 +2785,8 @@ CREATE TABLE IF NOT EXISTS `t_itemstockentry` (
   PRIMARY KEY (`ItemStockEntryID`),
   KEY `FK_ItemStockEntry_Facility_idx` (`FacilityID`),
   KEY `FK_ItemStockEntry_Item_idx` (`ItemID`),
-  KEY `FK_ItemStockEntry_ProviderServiceMapping_idx` (`ProviderServiceMapID`),
-  CONSTRAINT `FK_ItemStockEntry_Facility` FOREIGN KEY (`FacilityID`) REFERENCES `m_facility` (`FacilityID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_ItemStockEntry_Item` FOREIGN KEY (`ItemID`) REFERENCES `m_item` (`ItemID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_ItemStockEntry_ProviderServiceMapping` FOREIGN KEY (`ProviderServiceMapID`) REFERENCES `m_providerservicemapping` (`ProviderServiceMapID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6379 DEFAULT CHARSET=utf8;
+  KEY `FK_ItemStockEntry_ProviderServiceMapping_idx` (`ProviderServiceMapID`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=6379 DEFAULT CHARSET=utf8;
 -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
