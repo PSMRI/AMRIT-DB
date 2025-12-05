@@ -2086,6 +2086,33 @@ CREATE TABLE IF NOT EXISTS `m_callnotansweredreasons` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `m_section`
+--
+
+-- DROP TABLE IF EXISTS `m_section`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE IF NOT EXISTS `m_section` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(300) DEFAULT NULL,
+  `SectionDesc` varchar(100) DEFAULT NULL,
+  `Deleted` bit(1) DEFAULT b'0',
+  `Processed` char(4) NOT NULL DEFAULT 'N',
+  `ProviderServiceMapID` int(11) DEFAULT NULL,
+  `CreatedBy` varchar(50) NOT NULL,
+  `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ModifiedBy` varchar(50) DEFAULT NULL,
+  `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+
+
+
+
 -- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 -- --
@@ -4502,6 +4529,41 @@ CREATE TABLE IF NOT EXISTS `m_illness` (
   KEY `FK_Illness_VisitCategory_idx` (`VisitCategoryID`),
   CONSTRAINT `FK_Illness_VisitCategory` FOREIGN KEY (`VisitCategoryID`) REFERENCES `m_visitcategory` (`VisitCategoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+
+-- -- /*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --
+-- -- Table structure for table `m_immunizationservicevaccination`
+-- --
+
+-- -- DROP TABLE IF EXISTS `m_immunizationservicevaccination`;
+-- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE IF NOT EXISTS `m_immunizationservicevaccination` (
+  `VaccinationID` smallint(6) NOT NULL AUTO_INCREMENT,
+  `Currentimmunizationserviceid` smallint(6) NOT NULL,
+  `Currentimmunizationservice` varchar(100) DEFAULT NULL,
+  `VisitCategoryID` int(11) DEFAULT NULL,
+  `VaccineName` varchar(50) DEFAULT NULL,
+  `Sctcode` varchar(30) DEFAULT NULL,
+  `SctTerm` varchar(500) DEFAULT NULL,
+  `Deleted` bit(1) DEFAULT b'0',
+  `Processed` char(4) NOT NULL DEFAULT 'N',
+  `CreatedBy` varchar(50) NOT NULL,
+  `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ModifiedBy` varchar(50) DEFAULT NULL,
+  `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `minAllowedAgeInMillis` bigint(20) DEFAULT NULL,
+  `maxAllowedAgeInMillis` bigint(20) DEFAULT NULL,
+  `category` varchar(255) DEFAULT NULL,
+  `overdueDurationSinceMinInMillis` bigint(20) DEFAULT NULL,
+  `dependantVaccineId` int(11) DEFAULT NULL,
+  `dependantCoolDuration` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`VaccinationID`),
+  KEY `FK_csid` (`Currentimmunizationserviceid`),
+  CONSTRAINT `FK_csid` FOREIGN KEY (`Currentimmunizationserviceid`) REFERENCES `m_currentimmunizationservice` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
+
 -- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 -- --
@@ -4572,39 +4634,7 @@ CREATE TABLE IF NOT EXISTS `m_immunizationservicestype` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
--- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
--- --
--- -- Table structure for table `m_immunizationservicevaccination`
--- --
-
--- -- DROP TABLE IF EXISTS `m_immunizationservicevaccination`;
--- -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
--- /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE IF NOT EXISTS `m_immunizationservicevaccination` (
-  `VaccinationID` smallint(6) NOT NULL AUTO_INCREMENT,
-  `Currentimmunizationserviceid` smallint(6) NOT NULL,
-  `Currentimmunizationservice` varchar(100) DEFAULT NULL,
-  `VisitCategoryID` int(11) DEFAULT NULL,
-  `VaccineName` varchar(50) DEFAULT NULL,
-  `Sctcode` varchar(30) DEFAULT NULL,
-  `SctTerm` varchar(500) DEFAULT NULL,
-  `Deleted` bit(1) DEFAULT b'0',
-  `Processed` char(4) NOT NULL DEFAULT 'N',
-  `CreatedBy` varchar(50) NOT NULL,
-  `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `ModifiedBy` varchar(50) DEFAULT NULL,
-  `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `minAllowedAgeInMillis` bigint(20) DEFAULT NULL,
-  `maxAllowedAgeInMillis` bigint(20) DEFAULT NULL,
-  `category` varchar(255) DEFAULT NULL,
-  `overdueDurationSinceMinInMillis` bigint(20) DEFAULT NULL,
-  `dependantVaccineId` int(11) DEFAULT NULL,
-  `dependantCoolDuration` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`VaccinationID`),
-  KEY `FK_csid` (`Currentimmunizationserviceid`),
-  CONSTRAINT `FK_csid` FOREIGN KEY (`Currentimmunizationserviceid`) REFERENCES `m_currentimmunizationservice` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
 -- -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 -- --
@@ -7324,28 +7354,7 @@ CREATE TABLE IF NOT EXISTS `m_screeningcondition` (
   `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
--- /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `m_section`
---
-
--- DROP TABLE IF EXISTS `m_section`;
--- /*!40101 SET @saved_cs_client     = @@character_set_client */;
--- /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE IF NOT EXISTS `m_section` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(300) DEFAULT NULL,
-  `SectionDesc` varchar(100) DEFAULT NULL,
-  `Deleted` bit(1) DEFAULT b'0',
-  `Processed` char(4) NOT NULL DEFAULT 'N',
-  `ProviderServiceMapID` int(11) DEFAULT NULL,
-  `CreatedBy` varchar(50) NOT NULL,
-  `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `ModifiedBy` varchar(50) DEFAULT NULL,
-  `LastModDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -17207,7 +17216,7 @@ CREATE TABLE IF NOT EXISTS `t_pnc_visit` (
   `other_death_cause` varchar(255) DEFAULT NULL,
   `other_ppc_method` varchar(255) DEFAULT NULL,
   `death_place` varchar(255) DEFAULT NULL,
-  `pnc_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `pnc_date` timestamp NOT NULL,
   `pnc_period` int(11) DEFAULT NULL,
   `referral_facility` varchar(255) DEFAULT NULL,
   `remarks` varchar(255) DEFAULT NULL,
