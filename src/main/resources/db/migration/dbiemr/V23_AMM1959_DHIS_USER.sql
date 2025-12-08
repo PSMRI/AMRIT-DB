@@ -1,1 +1,1 @@
-ALTER TABLE db_iemr.m_user ADD COLUMN dhistoken VARCHAR(255);
+ALTER TABLE db_iemr.m_user ADD COLUMN IF NOT EXISTS dhistoken VARCHAR(255);
