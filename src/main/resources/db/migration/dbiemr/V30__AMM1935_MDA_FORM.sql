@@ -1,5 +1,5 @@
 
-CREATE TABLE `form_fields` (
+CREATE TABLE IF NOT EXISTS `form_fields` (
 
   `id` bigint NOT NULL AUTO_INCREMENT,
 
@@ -47,7 +47,7 @@ CREATE TABLE `form_fields` (
  
 
 
- CREATE TABLE `form_module` (
+CREATE TABLE IF NOT EXISTS `form_module` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `module_name` varchar(255) NOT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -56,7 +56,7 @@ CREATE TABLE `form_fields` (
 
 
 
-CREATE TABLE `form_master` (
+CREATE TABLE IF NOT EXISTS `form_master` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `form_id` varchar(100) NOT NULL,
   `form_name` varchar(255) NOT NULL,
