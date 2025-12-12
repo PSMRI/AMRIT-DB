@@ -8,7 +8,7 @@ ALTER TABLE t_idrsdetails
  MODIFY COLUMN Question LONGTEXT;
 
 
- Drop procedure if exists `FHIR_R_Practitioner`
+ Drop procedure if exists FHIR_R_Practitioner;
 
  DELIMITER $$
 
@@ -71,10 +71,10 @@ DELIMITER ;
 
 
 
--- CALL FHIR_R_Practitioner(30002900000006);
 
 
-Drop procedure if exists `FHIR_R_OrganizationDetails`
+
+Drop procedure if exists FHIR_R_OrganizationDetails;
 
 DELIMITER $$
 
@@ -108,10 +108,10 @@ BEGIN
 END$$
 
 DELIMITER ;
--- call FHIR_R_OrganizationDetails(30002900000006);
 
 
-Drop procedure if exists `FHIR_R_PatientEncounter_Practitioner`
+
+Drop procedure if exists FHIR_R_MedicalHistoryDetails;
 
 
 DELIMITER $$
@@ -134,4 +134,3 @@ END$$
 
 DELIMITER ;
 
--- call FHIR_R_MedicalHistoryDetails(30002900000006);
