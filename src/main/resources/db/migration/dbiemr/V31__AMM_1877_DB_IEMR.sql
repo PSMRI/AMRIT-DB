@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `form_fields` (
 -------------------------------------------------------------
 --  m_translation
 -------------------------------------------------------------
-CREATE TABLE `m_translation` (
+CREATE TABLE IF NOT EXISTS `m_translation` (
    `id` bigint NOT NULL AUTO_INCREMENT,
    `label_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
    `english` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL ,
