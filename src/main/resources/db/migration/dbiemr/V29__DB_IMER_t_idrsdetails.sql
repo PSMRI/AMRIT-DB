@@ -54,7 +54,7 @@ BEGIN
         b.CreatedDate AS CreatedDate
        
     FROM t_benvisitdetail b
-    INNER JOIN m_user u 
+    LEFT JOIN m_user u 
         ON u.UserName = b.CreatedBy
     LEFT JOIN m_designation d 
         ON d.DesignationID = u.DesignationID
