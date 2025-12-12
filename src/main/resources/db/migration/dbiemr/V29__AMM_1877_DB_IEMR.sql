@@ -8,7 +8,7 @@ USE db_iemr;
 -------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `form_module` (
    `id` bigint NOT NULL AUTO_INCREMENT,
-   `module_name` varchar(255) NOT NULL,
+   `module_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
    `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
