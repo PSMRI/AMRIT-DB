@@ -1,4 +1,26 @@
 
+
+CREATE TABLE IF NOT EXISTS `form_module` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `module_name` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE IF NOT EXISTS `form_master` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `form_id` varchar(100) NOT NULL,
+  `form_name` varchar(255) NOT NULL,
+  `module_id` bigint DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `version` int DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `form_id` (`form_id`),
+  KEY `fk_module` (`module_id`),
+  CONSTRAINT `fk_module` FOREIGN KEY (`module_id`) REFERENCES `form_module` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
 CREATE TABLE IF NOT EXISTS `form_fields` (
 
   `id` bigint NOT NULL AUTO_INCREMENT,
@@ -46,28 +68,6 @@ CREATE TABLE IF NOT EXISTS `form_fields` (
 ) ENGINE=InnoDB AUTO_INCREMENT=468 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
  
 
-
-CREATE TABLE IF NOT EXISTS `form_module` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `module_name` varchar(255) NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
-
-
-
-CREATE TABLE IF NOT EXISTS `form_master` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `form_id` varchar(100) NOT NULL,
-  `form_name` varchar(255) NOT NULL,
-  `module_id` bigint DEFAULT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `version` int DEFAULT '1',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `form_id` (`form_id`),
-  KEY `fk_module` (`module_id`),
-  CONSTRAINT `fk_module` FOREIGN KEY (`module_id`) REFERENCES `form_module` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 -- Step 1: Insert the module if not already present
 INSERT INTO db_iemr.form_module (module_name)
