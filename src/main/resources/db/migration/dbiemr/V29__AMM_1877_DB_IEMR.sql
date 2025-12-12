@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `m_translation` (
    `label_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
    `english` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL ,
    `hindi_translation` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL ,
-   `is_active` tinyint(1) NOT NULL,
+   `is_active` tinyint(1) NOT NULL DEFAULT 1,
    `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
    `created_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
    `updated_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
