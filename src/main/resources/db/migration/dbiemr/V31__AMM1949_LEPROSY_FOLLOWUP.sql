@@ -23,4 +23,4 @@ CREATE TABLE IF NOT EXISTS `db_iemr`.`leprosy_follow_up` (
   `modified_by` VARCHAR(100) DEFAULT NULL,
   `last_mod_date` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-)
+);
