@@ -82,7 +82,7 @@ CREATE PROCEDURE `FHIR_R_OrganizationDetails`(
     IN visitCode_IN BIGINT
 )
 BEGIN
-    SELECT  
+    SELECT DISTINCT
         b.BenVisitID,
         sod.ServiceProviderID,
         sod.ServiceProviderName,
@@ -98,12 +98,17 @@ BEGIN
         sod.AbdmFacilityId,
         sod.AbdmFacilityName,
         sod.PSAddMapID,
-    sod.ProviderServiceMapID
+        sod.ProviderServiceMapID
     FROM t_benvisitdetail b
     INNER JOIN m_user u 
         ON u.UserName = b.CreatedBy
+    INNER JOIN m_userservicerolemapping usr
+        ON usr.UserID = u.UserID
+        AND usr.Deleted = 0
     INNER JOIN showofficedetails sod
-        ON sod.ServiceProviderID = u.ServiceProviderID
+        ON sod.ServiceProviderID = usr.ServiceProviderID
+        AND sod.ProviderServiceMapID = usr.ProviderServiceMapID
+        AND sod.PSAddMapID = usr.WorkingLocationID
     WHERE b.VisitCode = visitCode_IN;
 END$$
 
