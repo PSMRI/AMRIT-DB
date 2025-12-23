@@ -21352,32 +21352,36 @@ DELIMITER ;
 -- /*!50003 SET collation_connection  = utf8_general_ci */ ;
 -- /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 -- /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE  PROCEDURE `FHIR_R_Immunization`(
-# IN parameter
- IN beneficiaryRegID_IN bigint(20), IN visitCode_IN bigint(20), 
-# OUT parameter
-OUT id_OUT bigint(20), OUT beneficiaryRegID_OUT bigint(20), OUT visitCode_OUT bigint(20),
- OUT providerServiceMapID_OUT int(11), OUT vanID_OUT int(11), 
-  OUT DefaultReceivingAge_OUT varchar(15), OUT VaccineName_OUT varchar(30), 
-  OUT ReceivedDate_OUT datetime, OUT ReceivedFacilityName_OUT varchar(20),
- 
-  OUT sctcode_OUT varchar(30), OUT sctTerm_OUT varchar(500),
-   OUT createdDate_OUT datetime, OUT createdBy_OUT varchar(50)
+DELIMITER $$
+
+CREATE PROCEDURE FHIR_R_Immunization (
+    IN beneficiaryRegID_IN BIGINT,
+    IN visitCode_IN BIGINT
 )
-BEGIN 
+BEGIN
+    SELECT
+        ID,
+        beneficiaryRegID,
+        visitCode,
+        providerServiceMapID,
+        vanID,
+        DefaultReceivingAge,
+        VaccineName,
+        ReceivedDate,
+        ReceivedFacilityName,
+        sctcode,
+        sctTerm,
+        createdDate,
+        createdBy
+    FROM t_childvaccinedetail1
+    WHERE BeneficiaryRegID = beneficiaryRegID_IN
+      AND VisitCode = visitCode_IN
+      AND Deleted IS NOT TRUE;
+END$$
 
-  SELECT ID, beneficiaryRegID, visitCode, providerServiceMapID,vanID, 
-   DefaultReceivingAge,VaccineName,ReceivedDate,ReceivedFacilityName,
-  sctcode, sctTerm, 
-  createdDate, createdBy
-FROM t_childvaccinedetail1 
-WHERE BeneficiaryRegID = beneficiaryRegID_IN AND VisitCode = visitCode_IN AND
-Deleted IS NOT TRUE   AND
- Sctcode IS NOT NULL  AND length(Sctcode) > 0 AND Sctcode != 'N/A';
-
-END ;;
 DELIMITER ;
+
+
 -- /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 -- /*!50003 SET character_set_client  = @saved_cs_client */ ;
 -- /*!50003 SET character_set_results = @saved_cs_results */ ;
