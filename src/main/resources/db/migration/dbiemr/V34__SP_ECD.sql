@@ -1,3 +1,6 @@
+
+Drop procedure if exists PR_FetchECDMotherOutboundWorklist;
+
 DELIMITER $$
 
 CREATE DEFINER=`piramaldev`@`%` PROCEDURE `PR_FetchECDMotherOutboundWorklist`(v_AllocatedUserID int)
