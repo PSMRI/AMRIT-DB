@@ -3,9 +3,9 @@
 -- ========================================
 USE db_iemr;
 
--------------------------------------------------------------
+-- -----------------------------------------------------------
 -- form_module
--------------------------------------------------------------
+-- -----------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `form_module` (
    `id` bigint NOT NULL AUTO_INCREMENT,
    `module_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -13,9 +13,9 @@ CREATE TABLE IF NOT EXISTS `form_module` (
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--------------------------------------------------------------
+-- -----------------------------------------------------------
 -- form_master
--------------------------------------------------------------
+-- -----------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `form_master` (
    `id` bigint NOT NULL AUTO_INCREMENT,
    `form_id` varchar(100) NOT NULL,
@@ -29,9 +29,9 @@ CREATE TABLE IF NOT EXISTS `form_master` (
    CONSTRAINT `fk_module` FOREIGN KEY (`module_id`) REFERENCES `form_module` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--------------------------------------------------------------
---  form_fields
--------------------------------------------------------------
+-- -----------------------------------------------------------
+-- form_fields
+-- -----------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `form_fields` (
    `id` bigint NOT NULL AUTO_INCREMENT,
    `form_id` varchar(100) NOT NULL,
@@ -56,9 +56,9 @@ CREATE TABLE IF NOT EXISTS `form_fields` (
    CONSTRAINT `form_fields_chk_3` CHECK (json_valid(`conditional`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--------------------------------------------------------------
---  m_translation
--------------------------------------------------------------
+-- -----------------------------------------------------------
+-- m_translation
+-- -----------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `m_translation` (
    `id` bigint NOT NULL AUTO_INCREMENT,
    `label_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
