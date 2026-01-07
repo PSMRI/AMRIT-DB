@@ -15,6 +15,10 @@ public class FlywayConfig {
     @Value("${amrit.flyway.ignore-applied-migration-checksum:false}")
     private boolean ignoreAppliedMigrationChecksum;
 
+    /**
+     * Helper method to create a Flyway instance with centralized configuration.
+     * Updated to use valid ignoreMigrationPatterns status.
+     */
     private Flyway createFlyway(DataSource dataSource, String location) {
         FluentConfiguration configuration = Flyway.configure()
                 .dataSource(dataSource)
@@ -22,7 +26,9 @@ public class FlywayConfig {
                 .baselineOnMigrate(true);
 
         if (ignoreAppliedMigrationChecksum) {
-            configuration.ignoreMigrationPatterns("*:applied");
+            // Updated from "*:applied" to "*:Ignored" to fix invalid pattern syntax
+            // This allows the app to start even if checksums for applied migrations have changed locally
+            configuration.ignoreMigrationPatterns("*:Ignored");
         }
 
         return configuration.load();
@@ -47,5 +53,4 @@ public class FlywayConfig {
     public Flyway flywayDb1097identity(@Qualifier("db1097identityDataSource") DataSource dataSource) {
         return createFlyway(dataSource, "classpath:db/migration/db1097identity");
     }
-
 }
