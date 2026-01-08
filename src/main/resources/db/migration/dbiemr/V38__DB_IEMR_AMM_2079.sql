@@ -8,3 +8,4 @@ ALTER TABLE db_iemr.vhnc_form
     ADD COLUMN no_of_committee INT,
     ADD COLUMN followup_previous TINYINT(1);
 
+
