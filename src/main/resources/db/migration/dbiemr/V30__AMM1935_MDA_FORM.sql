@@ -65,31 +65,8 @@ CREATE TABLE IF NOT EXISTS `form_fields` (
   CONSTRAINT `form_fields_chk_3` CHECK (json_valid(`conditional`))
 ) ENGINE=InnoDB AUTO_INCREMENT=468 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Step 1: Insert the module if not already present
-INSERT INTO db_iemr.form_module (module_name)
-SELECT 'MDA'
-WHERE NOT EXISTS (
-    SELECT 1 FROM db_iemr.form_module WHERE module_name = 'MDA'
-);
 
--- Step 2: Fetch the module ID
-SET @moduleId = (
-    SELECT id FROM db_iemr.form_module WHERE module_name = 'MDA' LIMIT 1
-);
 
--- Step 3: Insert into form_master using the dynamic ID
-INSERT INTO db_iemr.form_master (form_id, form_name, module_id, version)
-VALUES ('mda_distribution_form', 'MDA Distribution Form', @moduleId, 1);
-
-INSERT INTO db_iemr.form_fields 
-(form_id, section_title, field_id, label, type, is_required, default_value, placeholder, options, validation, conditional, sequence, is_visible)
-VALUES 
-('mda_distribution_form', 'MDA Distribution Details', 'mda_distribution_date', 'MDA Distribution Date', 'date', 1, NULL, 'Select distribution date', NULL, '{"maxDate":"today","frequency":"monthly"}', NULL, 1, 1);
-
-INSERT INTO db_iemr.form_fields 
-(form_id, section_title, field_id, label, type, is_required, default_value, placeholder, options, validation, conditional, sequence, is_visible)
-VALUES 
-('mda_distribution_form', 'MDA Distribution Details', 'is_medicine_distributed', 'Is Medicine Distributed', 'dropdown', 1, NULL, 'Select option', '["Yes","No"]', NULL, NULL, 2, 1);
 
 
 CREATE TABLE IF NOT EXISTS db_iemr.`t_mda_distribution_data` (    
