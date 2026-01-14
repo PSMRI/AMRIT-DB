@@ -26,9 +26,9 @@ public class FlywayConfig {
                 .baselineOnMigrate(true);
 
         if (ignoreAppliedMigrationChecksum) {
-            // Updated from "*:applied" to "*:Ignored" to fix invalid pattern syntax
-            // This allows the app to start even if checksums for applied migrations have changed locally
-            configuration.ignoreMigrationPatterns("*:Ignored");
+            // Updated to use validateOnMigrate(false) which is supported in Community Edition
+            // This disables validation of applied migrations, allowing the app to start even if checksums change
+            configuration.validateOnMigrate(false);
         }
 
         return configuration.load();
