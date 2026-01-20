@@ -1,5 +1,6 @@
 # AMRIT - DB Service
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![DeepWiki](https://img.shields.io/badge/DeepWiki-PSMRI%2FAMRIT--DB-blue.svg?...)](https://deepwiki.com/PSMRI/AMRIT-DB)
 
 ## Overview  
 The AMRIT-DB service is a Spring Boot application designed to simplify database schema management and cloning. Using Flyway for migrations, it ensures consistency and ease in setting up local environments, making it an invaluable tool for developers.
