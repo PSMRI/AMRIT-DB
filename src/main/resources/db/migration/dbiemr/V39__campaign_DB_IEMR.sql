@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS db_iemr.campaign_pulse_polio (
   COMMENT='Pulse Polio Campaign Data';
 
 
-  CREATE TABLE IF NOT EXISTS db_iemr.campaign_mda (
+  CREATE TABLE IF NOT EXISTS db_iemr.campaign_filariasis_mda (
       id BIGINT NOT NULL AUTO_INCREMENT,
       start_date DATE NOT NULL,
       end_date DATE NOT NULL,
