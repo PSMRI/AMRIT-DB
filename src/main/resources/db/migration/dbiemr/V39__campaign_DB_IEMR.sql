@@ -68,9 +68,6 @@ CREATE TABLE IF NOT EXISTS db_iemr.campaign_pulse_polio (
     COLLATE=utf8mb4_unicode_ci
     COMMENT='MDA (Mass Drug Administration) Campaign Data';
 
-  -- Verify table created
-  DESCRIBE db_iemr.campaign_mda;
-
 
 SELECT
     TABLE_NAME,
