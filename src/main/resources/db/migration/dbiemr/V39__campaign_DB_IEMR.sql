@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS db_iemr.campaign_ors (
     INDEX idx_created_date (created_date)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci
+  COLLATE=utf8mb4_unicode_ci;
 
 
 CREATE TABLE IF NOT EXISTS db_iemr.campaign_pulse_polio (
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS db_iemr.campaign_pulse_polio (
     INDEX idx_created_date (created_date)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci
+  COLLATE=utf8mb4_unicode_ci;
 
 
   CREATE TABLE IF NOT EXISTS db_iemr.campaign_filariasis_mda (
@@ -63,4 +63,4 @@ CREATE TABLE IF NOT EXISTS db_iemr.campaign_pulse_polio (
       INDEX idx_created_date (created_date)
   ) ENGINE=InnoDB
     DEFAULT CHARSET=utf8mb4
-    COLLATE=utf8mb4_unicode_ci
+    COLLATE=utf8mb4_unicode_ci;
