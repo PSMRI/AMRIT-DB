@@ -13,14 +13,14 @@ SET @preparedStatement = (SELECT IF(
       AND (COLUMN_NAME = @columnname)
   ) > 0,
   'SELECT 1',
-  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' VARCHAR(255) COMMENT "Village name where meeting held";')
+  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' VARCHAR(255);')
 ));
 PREPARE alterIfNotExists FROM @preparedStatement;
 EXECUTE alterIfNotExists;
 DEALLOCATE PREPARE alterIfNotExists;
 
--- Add auxiliary_nurse_midwife_multipurpose_worker_attended column if it doesn't exist
-SET @columnname = 'auxiliary_nurse_midwife_multipurpose_worker_attended';
+-- Add anm_mpw_attended(Auxiliary Nurse Midwife) column if it doesn't exist
+SET @columnname = 'anm_mpw_attended';
 SET @preparedStatement = (SELECT IF(
   (
     SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
@@ -30,14 +30,14 @@ SET @preparedStatement = (SELECT IF(
       AND (COLUMN_NAME = @columnname)
   ) > 0,
   'SELECT 1',
-  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' INT DEFAULT 0 COMMENT "Number of Auxiliary Nurse Midwife/Multi Purpose Worker attended";')
+  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' INT DEFAULT 0 COMMENT "Number of ANM (Auxiliary Nurse Midwife) / MPW (Multi Purpose Worker) attended";')
 ));
 PREPARE alterIfNotExists FROM @preparedStatement;
 EXECUTE alterIfNotExists;
 DEALLOCATE PREPARE alterIfNotExists;
 
--- Add anganwadi_worker_attended column if it doesn't exist
-SET @columnname = 'anganwadi_worker_attended';
+-- Add aww_attended(Anganwadi Worker) column if it doesn't exist
+SET @columnname = 'aww_attended';
 SET @preparedStatement = (SELECT IF(
   (
     SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
@@ -47,7 +47,7 @@ SET @preparedStatement = (SELECT IF(
       AND (COLUMN_NAME = @columnname)
   ) > 0,
   'SELECT 1',
-  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' INT DEFAULT 0 COMMENT "Number of Anganwadi Worker attended";')
+  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' INT DEFAULT 0 COMMENT "Number of AWW (Anganwadi Worker) attended";')
 ));
 PREPARE alterIfNotExists FROM @preparedStatement;
 EXECUTE alterIfNotExists;
@@ -64,7 +64,7 @@ SET @preparedStatement = (SELECT IF(
       AND (COLUMN_NAME = @columnname)
   ) > 0,
   'SELECT 1',
-  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' INT DEFAULT 0 COMMENT "Number of pregnant women attended";')
+  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' INT DEFAULT 0;')
 ));
 PREPARE alterIfNotExists FROM @preparedStatement;
 EXECUTE alterIfNotExists;
@@ -81,7 +81,7 @@ SET @preparedStatement = (SELECT IF(
       AND (COLUMN_NAME = @columnname)
   ) > 0,
   'SELECT 1',
-  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' INT DEFAULT 0 COMMENT "Number of lactating mothers attended";')
+  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' INT DEFAULT 0;')
 ));
 PREPARE alterIfNotExists FROM @preparedStatement;
 EXECUTE alterIfNotExists;
@@ -98,7 +98,7 @@ SET @preparedStatement = (SELECT IF(
       AND (COLUMN_NAME = @columnname)
   ) > 0,
   'SELECT 1',
-  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' INT DEFAULT 0 COMMENT "Number of committee members present";')
+  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' INT DEFAULT 0;')
 ));
 PREPARE alterIfNotExists FROM @preparedStatement;
 EXECUTE alterIfNotExists;
@@ -115,7 +115,7 @@ SET @preparedStatement = (SELECT IF(
       AND (COLUMN_NAME = @columnname)
   ) > 0,
   'SELECT 1',
-  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' TEXT COMMENT "Follow-up notes from previous meeting";')
+  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' TEXT;')
 ));
 PREPARE alterIfNotExists FROM @preparedStatement;
 EXECUTE alterIfNotExists;
