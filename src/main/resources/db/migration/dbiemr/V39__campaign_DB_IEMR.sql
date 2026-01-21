@@ -19,7 +19,6 @@ CREATE TABLE IF NOT EXISTS db_iemr.campaign_ors (
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_unicode_ci
-  COMMENT='ORS Campaign Data';
 
 
 CREATE TABLE IF NOT EXISTS db_iemr.campaign_pulse_polio (
@@ -42,7 +41,6 @@ CREATE TABLE IF NOT EXISTS db_iemr.campaign_pulse_polio (
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_unicode_ci
-  COMMENT='Pulse Polio Campaign Data';
 
 
   CREATE TABLE IF NOT EXISTS db_iemr.campaign_filariasis_mda (
@@ -66,23 +64,3 @@ CREATE TABLE IF NOT EXISTS db_iemr.campaign_pulse_polio (
   ) ENGINE=InnoDB
     DEFAULT CHARSET=utf8mb4
     COLLATE=utf8mb4_unicode_ci
-    COMMENT='MDA (Mass Drug Administration) Campaign Data';
-
-
-SELECT
-    TABLE_NAME,
-    ENGINE,
-    TABLE_ROWS,
-    AVG_ROW_LENGTH,
-    DATA_LENGTH,
-    INDEX_LENGTH,
-    AUTO_INCREMENT,
-    TABLE_COLLATION,
-    CREATE_TIME,
-    UPDATE_TIME,
-    TABLE_COMMENT
-FROM information_schema.TABLES
-WHERE TABLE_SCHEMA = 'db_iemr'
-  AND TABLE_NAME IN ('campaign_ors', 'campaign_pulse_polio', 'campaign_filariasis_mda')
-ORDER BY TABLE_NAME;
-
