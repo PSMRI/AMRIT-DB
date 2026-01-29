@@ -33,11 +33,11 @@ CREATE TABLE IF NOT EXISTS `t_hbyc_child_visits` (
    `pneumonia_symptoms` tinyint(1) DEFAULT NULL,
    `temperature` decimal(4,2) DEFAULT NULL,
    `mcp_card_images` json DEFAULT NULL,
-   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+   `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
+   `updated_date` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
    `created_by` varchar(100) DEFAULT NULL,
    `is_breathing_difficulty` tinyint(1) DEFAULT NULL,
    `is_complementary_feeding` tinyint(1) DEFAULT NULL,
-   PRIMARY KEY (`id`)
+   PRIMARY KEY (`id`),
+   KEY `idx_user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
