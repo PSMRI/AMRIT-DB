@@ -15,3 +15,4 @@ CREATE TABLE IF NOT EXISTS `malaria_follow_up` (
     PRIMARY KEY (`id`),
     INDEX `idx_malaria_follow_up_user_id` (`user_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+

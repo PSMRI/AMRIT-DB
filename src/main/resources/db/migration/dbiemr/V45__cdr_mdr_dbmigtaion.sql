@@ -177,3 +177,4 @@ SET @table_exists = (
  PREPARE stmt FROM @sql_add_column_3;
  EXECUTE stmt;
  DEALLOCATE PREPARE stmt;
+

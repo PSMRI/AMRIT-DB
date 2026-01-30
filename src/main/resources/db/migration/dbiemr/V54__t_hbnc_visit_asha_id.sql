@@ -11,3 +11,4 @@ SET @preparedStatement = (SELECT IF(
 PREPARE stmt FROM @preparedStatement;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
+

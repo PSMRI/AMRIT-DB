@@ -17,3 +17,4 @@ CREATE TABLE IF NOT EXISTS `t_eye_checkup` (
     `updated_date` DATETIME DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+

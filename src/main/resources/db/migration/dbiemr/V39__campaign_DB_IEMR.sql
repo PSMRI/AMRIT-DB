@@ -64,3 +64,4 @@ CREATE TABLE IF NOT EXISTS db_iemr.campaign_pulse_polio (
   ) ENGINE=InnoDB
     DEFAULT CHARSET=utf8mb4
     COLLATE=utf8mb4_unicode_ci;
+
