@@ -23,7 +23,7 @@ package com.db.piramalswasthya.controller;
 
 import java.util.List;
 
-import org.slf4j.Logger;
+//import org.slf4j.Logger; (unused import)
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -39,7 +39,6 @@ import com.google.gson.Gson;
 
 @RequestMapping("/db/migration")
 public class VersionController {
-	private Logger logger = LoggerFactory.getLogger(VersionController.class);
 	
 	private VersionService service;
 	
