@@ -13,7 +13,7 @@
     `meeting_date` timestamp NULL DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `uk_asha_month` (`asha_id`)
-  ) ENGINE=InnoDB AUTO_INCREMFENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 SET @dbname = 'db_iemr';
 SET @tablename = 'uwin_session_record';
