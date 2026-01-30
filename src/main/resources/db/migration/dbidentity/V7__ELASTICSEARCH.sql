@@ -1,4 +1,4 @@
-CREATE TABLE t_elasticsearch_sync_job (
+CREATE TABLE IF NOT EXISTS t_elasticsearch_sync_job (
     job_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     job_type VARCHAR(50) NOT NULL,        -- FULL_SYNC, INCREMENTAL
     status VARCHAR(50) NOT NULL,           -- RUNNING, COMPLETED, FAILED
