@@ -27,26 +27,6 @@ CREATE TABLE IF NOT EXISTS `irs_round` (
     `updated_by` VARCHAR(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-SET @tablename = 'm_user';
-SET @columnname = 'MaritalStatusID';
-SET @preparedStatement = (SELECT IF(
-  (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = @dbname AND TABLE_NAME = @tablename AND COLUMN_NAME = @columnname) > 0,
-  'SELECT 1',
-  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' INT;')
-));
-PREPARE alterIfNotExists FROM @preparedStatement;
-EXECUTE alterIfNotExists;
-DEALLOCATE PREPARE alterIfNotExists;
-
-SET @preparedStatement = (SELECT IF(
-  (SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = @dbname AND TABLE_NAME = @tablename AND COLUMN_NAME = 'MaritalStatusID') = 'smallint',
-  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' MODIFY COLUMN MaritalStatusID INT;'),
-  'SELECT 1'
-));
-PREPARE alterIfExists FROM @preparedStatement;
-EXECUTE alterIfExists;
-DEALLOCATE PREPARE alterIfExists;
-
 SET @tablename = 'asha_profile';
 SET @columnname = 'profileImage';
 SET @preparedStatement = (SELECT IF(
