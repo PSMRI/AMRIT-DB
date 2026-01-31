@@ -1,9 +1,20 @@
 # AMRIT Database Anonymization & UAT Refresh - Execution Plan
 
+**⚠️ OBSOLETE**: This document has been superseded by:
+- `db-anonymization-master-plan.md` (Version 2.0)
+- `db-anonymization-phase1-analysis-plan.md`
+- `db-anonymization-phase2-execution-plan.md`
+- `db-anonymization-phase3-automation-plan.md`
+
+**Reason**: Original plan used Python/bash scripts. Current implementation is pure Java 17 + Spring Boot with Anonymization Registry and drift gates.
+
+---
+
 **Issue**: [C4GT Community] Automate anonymized production DB snapshot for UAT #112  
 **Target Repository**: AMRIT-DB  
-**Status**: Planning Phase  
-**Last Updated**: January 8, 2026
+**Status**: ~~Planning Phase~~ **SUPERSEDED**  
+**Last Updated**: January 8, 2026  
+**Obsoleted**: February 1, 2026
 
 ---
 

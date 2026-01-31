@@ -13,24 +13,28 @@
 
 ## Executive Summary
 
-Phase 3 focuses on **automation, deployment, and operational readiness**. This phase provides two deployment modes:
+Phase 3 focuses on **automation, deployment, and operational readiness** with **fail-closed schema drift protection** at two critical gates. This phase provides two deployment modes:
 
 1. **Jenkins Mode** (Preferred): CI/CD pipeline with scheduling and monitoring
 2. **Standalone Mode**: Java CLI application for manual/cron execution
 
-Both modes are **cross-platform** (Windows, Linux, macOS) and use only Java - no OS-specific scripts.
+Both modes are **cross-platform** (Windows, Linux, macOS) and use **only Java** - no OS-specific scripts (no bash/PowerShell). All orchestration via Java ProcessBuilder and Spring Boot services.
+
+**CRITICAL SECURITY**: Schema Drift Gates enforce fail-closed validation **before anonymization** and **before UAT restore** to prevent PII leakage from uncovered schema changes.
 
 ### Key Deliverables
 
-- ✅ Production database backup automation (Java-based, zero production impact)
-- ✅ **Option A**: Jenkins pipeline (if Jenkins available)
+- ✅ Production database backup automation (Java ProcessBuilder, zero production impact)
+- ✅ **Schema Drift Gate #1**: Before anonymization (abort if uncovered PII)
+- ✅ **Schema Drift Gate #2**: Before UAT restore (verify anonymization coverage)
+- ✅ **Option A**: Jenkins pipeline (Java JAR invoked, no bash)
 - ✅ **Option B**: Standalone Java CLI (if no Jenkins)
-- ✅ Java-based orchestration (cross-platform)
-- ✅ UAT environment automated restoration
+- ✅ Pure Java orchestration (OrchestrationService.java, cross-platform)
+- ✅ UAT environment automated restoration with safety fuses
 - ✅ Scheduled execution (Jenkins cron OR Windows Task Scheduler / Linux cron)
-- ✅ Monitoring, alerting, and notifications
+- ✅ Monitoring, alerting, and drift notifications
 - ✅ Operations runbook (both deployment modes)
-- ✅ Disaster recovery procedure
+- ✅ Disaster recovery procedure with encrypted backups
 
 ---
 
@@ -68,11 +72,15 @@ Both modes are **cross-platform** (Windows, Linux, macOS) and use only Java - no
 | Objective | Description | Success Criteria |
 |-----------|-------------|------------------|
 | **Zero-Touch Automation** | One-click UAT refresh from production | Single command/button executes end-to-end |
-| **Production Safety** | Backup production with zero impact | No production performance degradation during backup |
+| **Schema Drift Gates (CRITICAL)** | Fail-closed validation before anonymization AND before UAT restore | 0 executions with uncovered PII, 100% abort on drift |
+| **Production Safety** | Backup production with zero impact (Java ProcessBuilder) | No production performance degradation during backup |
 | **Scheduled Execution** | Automated weekly/monthly UAT refresh | Cron/Task Scheduler runs successfully |
+| **Drift Alerting** | Automatic notification when Flyway migrations add uncovered PII | DevOps team receives drift report within 5 minutes |
+| **Safety Fuses** | Allowlists, explicit confirmation flags, no secrets in CLI args | 100% safe execution (no accidental prod overwrites) |
+| **Encrypted Artifacts** | All backups and BenRegID mappings encrypted at rest | AES-256 encryption, key rotation |  
 | **Monitoring** | Real-time progress tracking and alerting | Slack/email notifications at key stages |
-| **Rollback Capability** | Quick recovery from failed anonymization | Restore UAT to previous state in <15 minutes |
-| **Documentation** | Complete operations documentation | Runbook covers all scenarios |
+| **Rollback Capability** | Quick recovery from failed anonymization via backup restoration | Restore UAT to previous state in <15 minutes |
+| **Documentation** | Complete operations documentation | Runbook covers all scenarios (including drift response) |
 
 ### 1.2 Success Metrics
 
@@ -90,7 +98,8 @@ Both modes are **cross-platform** (Windows, Linux, macOS) and use only Java - no
 
 | Feature | Jenkins Mode | Standalone Mode |
 |---------|-------------|-----------------|
-| **Execution** | Jenkins web UI + API | Java CLI command |
+| **Execution** | Jenkins invokes JAR | Java CLI command (JAR) |
+| **Orchestration** | Pure Java (OrchestrationService.java) | Pure Java (OrchestrationService.java) |
 | **Scheduling** | Jenkins cron | OS cron / Task Scheduler |
 | **Monitoring** | Jenkins dashboard + Prometheus | Logs + Prometheus (optional) |
 | **Notifications** | Jenkins plugins (Slack/email) | Java-based email/webhook |
@@ -118,19 +127,25 @@ Both modes are **cross-platform** (Windows, Linux, macOS) and use only Java - no
 The standalone mode provides a **single executable JAR** that contains all functionality:
 
 ```bash
-# Windows (PowerShell)
-java -jar amrit-anonymization-cli.jar --refresh-uat
+# Windows (PowerShell) - with safety confirmation flag
+java -jar amrit-anonymization-cli.jar --refresh-uat --confirm-uat-overwrite --target-env=UAT
 
-# Linux/Mac
-java -jar amrit-anonymization-cli.jar --refresh-uat
+# Linux/Mac - with safety confirmation flag  
+java -jar amrit-anonymization-cli.jar --refresh-uat --confirm-uat-overwrite --target-env=UAT
+
+# Secrets via environment variables (NEVER in CLI args)
+export DB_PASSWORD=$(aws secretsmanager get-secret-value --secret-id prod-db-password --query SecretString --output text)
+java -jar amrit-anonymization-cli.jar --refresh-uat --confirm-uat-overwrite --target-env=UAT
 ```
 
 **Features**:
-- All Phase 2 anonymization engine included
-- Built-in backup/restore logic
-- Configuration via properties file or environment variables
-- Detailed logging to console and file
-- Exit codes for automation (0=success, 1=failure)
+- All Phase 2 anonymization engine included (with drift gates)
+- Built-in backup/restore logic (Java ProcessBuilder, cross-platform)
+- Configuration via properties file or environment variables (secrets via env vars only)
+- **Safety Fuses**: Allowlist validation (target-env must be UAT/DEV, NEVER PROD), explicit confirmation flags
+- **Schema Drift Gates**: Automatic drift detection before anonymization AND before UAT restore
+- Detailed logging to console and file (metadata only, no PII)
+- Exit codes for automation (0=success, 1=failure, 2=drift detected)
 - Progress tracking via log messages
 
 **Scheduling on Windows**:
@@ -185,9 +200,10 @@ Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "AMRIT-UAT-Re
 │  ┌────────────────────────────────────────────────────────┐      │
 │  │  Temporary MySQL Instance                              │      │
 │  │  • Restore production backup                           │      │
+│  │  🚨 DRIFT GATE #1: Schema validation (FAIL-CLOSED)    │      │
 │  │  • Run Java anonymization engine (Phase 2)             │      │
 │  │  • Validate anonymized data                            │      │
-│  │  • Export anonymized backup                            │      │
+│  │  • Export anonymized backup (encrypted)                │      │
 │  └────────────────────────────────────────────────────────┘      │
 └──────────────────────┬───────────────────────────────────────────┘
                        │
@@ -205,7 +221,8 @@ Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "AMRIT-UAT-Re
 │  └────────────────────────────────────────────────────────┘      │
 └──────────────────────┬───────────────────────────────────────────┘
                        │
-                       │ [4] Restore to UAT
+                       │ 🚨 DRIFT GATE #2: Pre-restore validation
+                       │ [4] Restore to UAT (if no drift)
                        │
                        ▼
 ┌──────────────────────────────────────────────────────────────────┐
@@ -227,103 +244,114 @@ Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "AMRIT-UAT-Re
 | **Production DB** | MySQL 8.0 | Source of truth | Production VPC |
 | **Read Replica** | MySQL 8.0 | Backup source (zero prod impact) | Production VPC |
 | **Backup Storage** | S3 / NFS | Store production backups | Secure storage |
-| **Anonymization Server** | EC2 / VM | Temporary DB + Java engine | Staging VPC |
-| **UAT Database** | MySQL 8.0 | Target environment | UAT VPC |
-| **Jenkins Server** | Jenkins 2.x | Orchestration & scheduling | CI/CD VPC |
-| **Monitoring** | Prometheus/Grafana | Metrics & alerts | Monitoring VPC |
+| **Anonymization Server** | EC2 / VM | Temporary DB + Java engine + Drift Detector | Staging VPC |
+| **UAT Database** | MySQL 8.0 | Target environment (allowlist validated) | UAT VPC |
+| **Jenkins Server** | Jenkins 2.x | Invokes Java JAR (NO bash) | CI/CD VPC |
+| **Secrets Manager** | AWS Secrets Manager / Vault | Encrypted credentials (NEVER in CLI) | Secure VPC |
+| **Monitoring** | Prometheus/Grafana | Metrics & drift alerts | Monitoring VPC |
 
 ---
 
-## 3. Production Backup Strategy
+## 4. Production Backup Strategy
 
-### 3.1 Backup Options Analysis
+### 4.1 Backup Options Analysis
 
-#### Option 1: mysqldump from Read Replica (RECOMMENDED)
+#### Option 1: Java ProcessBuilder + mysqldump from Read Replica (RECOMMENDED)
 
 **Pros**:
 - ✅ Zero production impact (reads from replica)
 - ✅ Consistent snapshot (--single-transaction)
-- ✅ Simple to implement
+- ✅ Cross-platform (Java ProcessBuilder works on Windows/Linux/Mac)
+- ✅ No bash/PowerShell scripts required
 
 **Cons**:
 - ❌ Slower for very large databases (>100GB)
 - ❌ Requires read replica setup
 
-**Implementation**:
+**Implementation** (Java, not bash):
 
-```bash
-#!/bin/bash
-# scripts/backup/backup_from_replica.sh
+```java
+// BackupService.java (from Phase 2)
 
-set -e
-
-BACKUP_DIR="/data/backups/production"
-TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-BACKUP_PATH="${BACKUP_DIR}/prod_backup_${TIMESTAMP}"
-
-# MySQL connection details (read replica)
-MYSQL_HOST="${REPLICA_HOST:-prod-db-replica.example.com}"
-MYSQL_USER="${MYSQL_USER:-backup_user}"
-MYSQL_PASSWORD="${MYSQL_PASSWORD}"
-
-DATABASES=("db_identity" "db_1097_identity" "db_iemr" "db_reporting")
-
-echo "[$(date)] Starting production backup from replica..."
-
-mkdir -p "${BACKUP_PATH}"
-
-for db in "${DATABASES[@]}"; do
-    echo "[$(date)] Backing up ${db}..."
+@Service
+public class BackupService {
     
-    mysqldump \
-        --host="${MYSQL_HOST}" \
-        --user="${MYSQL_USER}" \
-        --password="${MYSQL_PASSWORD}" \
-        --single-transaction \
-        --quick \
-        --lock-tables=false \
-        --routines \
-        --triggers \
-        --events \
-        "${db}" > "${BACKUP_PATH}/${db}.sql"
+    private final String backupDir;
+    private final DatabaseConfig dbConfig;
+    private final EncryptionService encryptionService;
     
-    # Compress
-    gzip "${BACKUP_PATH}/${db}.sql"
+    public BackupInfo backupFromReplica(List<String> databases) {
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+        Path backupPath = Paths.get(backupDir, "prod_backup_" + timestamp);
+        Files.createDirectories(backupPath);
+        
+        List<Path> backupFiles = new ArrayList<>();
+        
+        for (String db : databases) {
+            log.info("Backing up database: {}", db);
+            
+            // Build mysqldump command (cross-platform)
+            ProcessBuilder pb = new ProcessBuilder(
+                "mysqldump",
+                "--host=" + dbConfig.getReplicaHost(),
+                "--user=" + dbConfig.getBackupUser(),
+                "--password=" + getPasswordFromEnv(), // NEVER from CLI args
+                "--single-transaction",
+                "--quick",
+                "--lock-tables=false",
+                "--routines",
+                "--triggers",
+                "--events",
+                db
+            );
+            
+            Path outputFile = backupPath.resolve(db + ".sql");
+            pb.redirectOutput(outputFile.toFile());
+            
+            Process process = pb.start();
+            int exitCode = process.waitFor();
+            
+            if (exitCode != 0) {
+                throw new BackupException("mysqldump failed for " + db);
+            }
+            
+            // Compress and encrypt
+            Path encryptedFile = compressAndEncrypt(outputFile);
+            backupFiles.add(encryptedFile);
+            
+            log.info("Backup complete: {} ({})", db, Files.size(encryptedFile));
+        }
+        
+        // Create encrypted tarball
+        Path tarball = createEncryptedTarball(backupPath, backupFiles);
+        
+        // Upload to S3 (optional)
+        if (uploadToS3Enabled) {
+            s3Client.uploadBackup(tarball);
+        }
+        
+        return new BackupInfo(tarball, backupFiles, timestamp);
+    }
     
-    echo "[$(date)] ${db} backup complete ($(du -h ${BACKUP_PATH}/${db}.sql.gz | cut -f1))"
-done
-
-# Create tarball
-tar -czf "${BACKUP_PATH}.tar.gz" -C "${BACKUP_DIR}" "prod_backup_${TIMESTAMP}"
-rm -rf "${BACKUP_PATH}"
-
-echo "[$(date)] Backup complete: ${BACKUP_PATH}.tar.gz"
-echo "[$(date)] Total size: $(du -h ${BACKUP_PATH}.tar.gz | cut -f1)"
-
-# Upload to S3 (optional)
-if [ "${UPLOAD_TO_S3}" == "true" ]; then
-    aws s3 cp "${BACKUP_PATH}.tar.gz" "s3://amrit-backups/production/"
-    echo "[$(date)] Uploaded to S3"
-fi
-
-# Output backup path for Jenkins
-echo "BACKUP_PATH=${BACKUP_PATH}.tar.gz" > /tmp/backup_info.env
+    private String getPasswordFromEnv() {
+        // Retrieve from environment variable or Secrets Manager
+        return System.getenv("DB_PASSWORD");
+    }
+}
 ```
+
+**Key Changes from Bash**:
+- ✅ Pure Java ProcessBuilder (cross-platform)
+- ✅ Passwords from environment variables (NEVER CLI args)
+- ✅ AES-256 encryption of backup files
+- ✅ No temporary /tmp/backup_info.env files
+- ✅ Exception handling and logging
 
 #### Option 2: Percona XtraBackup (Advanced)
 
 **Use Case**: Very large databases (>500GB) requiring faster backup/restore
 
-```bash
-#!/bin/bash
-# scripts/backup/xtrabackup.sh
-
-xtrabackup --backup \
-    --target-dir=/data/backups/xtra_${TIMESTAMP} \
-    --user=backup_user \
-    --password=${MYSQL_PASSWORD} \
-    --slave-info
-```
+**Implementation**: Use Java ProcessBuilder to invoke `xtrabackup` binary (same pattern as BackupService.java above)
 
 ### 3.2 Backup Scheduling
 
@@ -342,113 +370,213 @@ triggers {
 
 ---
 
-## 4. UAT Restoration Process
+## 5. UAT Restoration Process
 
-### 4.1 Restore Script
+### 5.1 Restore Service (Java)
 
-```bash
-#!/bin/bash
-# scripts/restore/restore_to_uat.sh
+**CRITICAL**: Restore includes Drift Gate #2 validation before overwriting UAT
 
-set -e
+```java
+// RestoreService.java (from Phase 2)
 
-ANONYMIZED_BACKUP="$1"
-
-if [ -z "${ANONYMIZED_BACKUP}" ]; then
-    echo "Error: No backup file specified"
-    echo "Usage: $0 <anonymized_backup.tar.gz>"
-    exit 1
-fi
-
-# UAT MySQL connection
-UAT_MYSQL_HOST="${UAT_MYSQL_HOST:-uat-db.example.com}"
-UAT_MYSQL_USER="${UAT_MYSQL_USER:-uat_admin}"
-UAT_MYSQL_PASSWORD="${UAT_MYSQL_PASSWORD}"
-
-echo "[$(date)] Starting UAT restoration..."
-
-# Extract backup
-TEMP_DIR="/tmp/uat_restore_$$"
-mkdir -p "${TEMP_DIR}"
-tar -xzf "${ANONYMIZED_BACKUP}" -C "${TEMP_DIR}"
-
-DATABASES=("db_identity" "db_1097_identity" "db_iemr" "db_reporting")
-
-for db in "${DATABASES[@]}"; do
-    echo "[$(date)] Restoring ${db} to UAT..."
+@Service
+public class RestoreService {
     
-    # Drop existing database (WARNING: UAT only!)
-    mysql \
-        --host="${UAT_MYSQL_HOST}" \
-        --user="${UAT_MYSQL_USER}" \
-        --password="${UAT_MYSQL_PASSWORD}" \
-        -e "DROP DATABASE IF EXISTS ${db}; CREATE DATABASE ${db};"
+    private final DriftDetector driftDetector;
+    private final DatabaseConfig dbConfig;
+    private final AllowlistValidator allowlistValidator;
+    private final DecryptionService decryptionService;
     
-    # Restore
-    gunzip -c "${TEMP_DIR}/${db}.sql.gz" | mysql \
-        --host="${UAT_MYSQL_HOST}" \
-        --user="${UAT_MYSQL_USER}" \
-        --password="${UAT_MYSQL_PASSWORD}" \
-        "${db}"
+    public RestoreResult restoreToUAT(
+        Path anonymizedBackup,
+        boolean confirmOverwrite,
+        String targetEnv
+    ) {
+        log.info("Starting UAT restoration...");
+        
+        // SAFETY FUSE #1: Allowlist validation
+        if (!allowlistValidator.isAllowed(targetEnv)) {
+            throw new SecurityException(
+                "Target environment not in allowlist: " + targetEnv +
+                ". Allowed: [UAT, DEV]. NEVER use PROD."
+            );
+        }
+        
+        // SAFETY FUSE #2: Explicit confirmation flag
+        if (!confirmOverwrite) {
+            throw new SecurityException(
+                "Missing --confirm-uat-overwrite flag. " +
+                "This operation will DROP and RECREATE UAT databases."
+            );
+        }
+        
+        // DRIFT GATE #2: Pre-restore schema validation
+        log.info("🚨 Running Drift Gate #2: Pre-restore validation...");
+        DriftReport driftReport = driftDetector.detectDrift(
+            dbConfig.getUatConnection()
+        );
+        
+        if (driftReport.hasDrift()) {
+            log.error("DRIFT DETECTED before UAT restore. ABORTING.");
+            driftReportGenerator.generateHtmlReport(driftReport);
+            throw new DriftDetectedException(
+                "Schema drift detected in UAT. Cannot proceed with restore. " +
+                "See drift report: " + driftReport.getReportPath()
+            );
+        }
+        
+        log.info("✅ Drift Gate #2 passed. Proceeding with restore...");
+        
+        // Decrypt and extract backup
+        Path tempDir = Files.createTempDirectory("uat_restore_");
+        List<Path> sqlFiles = decryptionService.decryptAndExtract(
+            anonymizedBackup, 
+            tempDir
+        );
+        
+        List<String> databases = List.of(
+            "db_identity", 
+            "db_1097_identity", 
+            "db_iemr", 
+            "db_reporting"
+        );
+        
+        for (String db : databases) {
+            log.info("Restoring {} to UAT...", db);
+            
+            // Drop and recreate (WARNING: UAT only - validated by allowlist)
+            executeSQL(
+                dbConfig.getUatConnection(),
+                "DROP DATABASE IF EXISTS " + db + "; CREATE DATABASE " + db
+            );
+            
+            // Restore via ProcessBuilder (cross-platform)
+            Path sqlFile = findSqlFile(sqlFiles, db);
+            ProcessBuilder pb = new ProcessBuilder(
+                "mysql",
+                "--host=" + dbConfig.getUatHost(),
+                "--user=" + dbConfig.getUatUser(),
+                "--password=" + getPasswordFromEnv("UAT_DB_PASSWORD"),
+                db
+            );
+            pb.redirectInput(sqlFile.toFile());
+            
+            Process process = pb.start();
+            int exitCode = process.waitFor();
+            
+            if (exitCode != 0) {
+                throw new RestoreException("Restore failed for " + db);
+            }
+            
+            log.info("{} restored successfully", db);
+        }
+        
+        // Cleanup
+        FileUtils.deleteDirectory(tempDir.toFile());
+        
+        log.info("UAT restoration complete!");
+        return new RestoreResult(databases, LocalDateTime.now());
+    }
     
-    echo "[$(date)] ${db} restored successfully"
-done
-
-# Cleanup
-rm -rf "${TEMP_DIR}"
-
-echo "[$(date)] UAT restoration complete!"
+    private String getPasswordFromEnv(String key) {
+        // NEVER pass passwords as CLI arguments
+        return System.getenv(key);
+    }
+}
 ```
 
-### 4.2 Pre-Restoration Validation
+**Key Safety Features**:
+- 🚨 **Drift Gate #2**: Pre-restore validation (fail-closed)
+- 🔒 **Allowlist Validator**: Target env must be UAT/DEV (NEVER PROD)
+- ✅ **Explicit Confirmation**: --confirm-uat-overwrite flag required
+- 🔐 **Encrypted Backups**: AES-256 decryption before restore
+- 🚫 **No Secrets in CLI**: Passwords from environment variables only
 
-```bash
-#!/bin/bash
-# scripts/validation/pre_restore_checks.sh
+### 5.2 Pre-Restoration Validation (Java)
 
-set -e
+**Integrated into RestoreService.java** (see Drift Gate #2 above)
 
-echo "[$(date)] Running pre-restoration checks..."
+Validation includes:
+- Allowlist check (target env must be UAT/DEV)
+- Explicit confirmation flag check
+- Schema drift detection (fail-closed)
+- Database accessibility check
+- Sufficient disk space check
+- Backup file integrity check (decryption test)
 
-# Check 1: UAT database is accessible
-mysql --host="${UAT_MYSQL_HOST}" --user="${UAT_MYSQL_USER}" --password="${UAT_MYSQL_PASSWORD}" -e "SELECT 1" > /dev/null
-if [ $? -eq 0 ]; then
-    echo "✅ UAT database accessible"
-else
-    echo "❌ Cannot connect to UAT database"
-    exit 1
-fi
+```java
+// ValidationService.java
 
-# Check 2: Sufficient disk space
-REQUIRED_SPACE_GB=100
-AVAILABLE_SPACE_GB=$(df -BG /var/lib/mysql | tail -1 | awk '{print $4}' | sed 's/G//')
-
-if [ "${AVAILABLE_SPACE_GB}" -ge "${REQUIRED_SPACE_GB}" ]; then
-    echo "✅ Sufficient disk space (${AVAILABLE_SPACE_GB}GB available)"
-else
-    echo "❌ Insufficient disk space (${AVAILABLE_SPACE_GB}GB available, ${REQUIRED_SPACE_GB}GB required)"
-    exit 1
-fi
-
-# Check 3: Anonymized backup file exists
-if [ -f "${ANONYMIZED_BACKUP}" ]; then
-    echo "✅ Anonymized backup found: ${ANONYMIZED_BACKUP}"
-else
-    echo "❌ Anonymized backup not found: ${ANONYMIZED_BACKUP}"
-    exit 1
-fi
-
-echo "[$(date)] All pre-restoration checks passed ✅"
+@Service
+public class ValidationService {
+    
+    public ValidationResult runPreRestoreChecks(
+        DatabaseConfig uatConfig,
+        Path anonymizedBackup
+    ) {
+        log.info("Running pre-restoration checks...");
+        List<String> checks = new ArrayList<>();
+        
+        // Check 1: UAT database accessibility
+        try {
+            executeSQL(uatConfig.getConnection(), "SELECT 1");
+            checks.add("✅ UAT database accessible");
+        } catch (SQLException e) {
+            throw new ValidationException("❌ Cannot connect to UAT database");
+        }
+        
+        // Check 2: Sufficient disk space
+        long requiredBytes = 100L * 1024 * 1024 * 1024; // 100GB
+        long availableBytes = Files.getFileStore(
+            Paths.get("/var/lib/mysql")
+        ).getUsableSpace();
+        
+        if (availableBytes >= requiredBytes) {
+            checks.add("✅ Sufficient disk space (" + 
+                (availableBytes / 1024 / 1024 / 1024) + "GB available)");
+        } else {
+            throw new ValidationException(
+                "❌ Insufficient disk space (" +
+                (availableBytes / 1024 / 1024 / 1024) + "GB available, " +
+                (requiredBytes / 1024 / 1024 / 1024) + "GB required)"
+            );
+        }
+        
+        // Check 3: Anonymized backup exists and is decryptable
+        if (Files.exists(anonymizedBackup)) {
+            try {
+                decryptionService.testDecrypt(anonymizedBackup);
+                checks.add("✅ Anonymized backup found and decryptable: " + 
+                    anonymizedBackup);
+            } catch (Exception e) {
+                throw new ValidationException(
+                    "❌ Backup file corrupt or cannot decrypt: " + 
+                    anonymizedBackup
+                );
+            }
+        } else {
+            throw new ValidationException(
+                "❌ Anonymized backup not found: " + anonymizedBackup
+            );
+        }
+        
+        log.info("All pre-restoration checks passed ✅");
+        return new ValidationResult(checks);
+    }
+}
 ```
 
 ---
 
-## 5. Jenkins Pipeline Design
+## 6. Option A: Jenkins Pipeline
 
-### 5.1 Jenkinsfile
+### 6.1 Jenkinsfile (Java-Only Orchestration)
+
+**CRITICAL**: Jenkins invokes Java JAR only - NO bash/PowerShell scripts
 
 ```groovy
 // Jenkinsfile.uat-refresh
+// Pure Java orchestration - NO bash scripts
 
 pipeline {
     agent {
@@ -460,6 +588,16 @@ pipeline {
             name: 'EXECUTION_MODE',
             choices: ['FULL_REFRESH', 'ANONYMIZE_ONLY', 'RESTORE_ONLY'],
             description: 'Execution mode'
+        )
+        choice(
+            name: 'TARGET_ENV',
+            choices: ['UAT', 'DEV'],
+            description: 'Target environment (NEVER PROD - allowlist enforced)'
+        )
+        booleanParam(
+            name: 'CONFIRM_OVERWRITE',
+            defaultValue: false,
+            description: 'REQUIRED: Confirm UAT database will be overwritten'
         )
         booleanParam(
             name: 'SKIP_BACKUP',
@@ -475,22 +613,34 @@ pipeline {
     
     environment {
         BACKUP_DIR = '/data/backups'
+        ANONYMIZATION_JAR = 'target/Amrit-DB-1.0.0.jar'
         ANONYMIZATION_CONFIG = 'docs/phase1-outputs/anonymization-strategy-map.json'
         SLACK_CHANNEL = '#amrit-uat-refresh'
+        // Secrets from Jenkins Credentials (NEVER in CLI args)
+        DB_CREDENTIALS = credentials('prod-db-replica-creds')
+        UAT_CREDENTIALS = credentials('uat-db-creds')
     }
     
     stages {
         stage('Initialize') {
             steps {
                 script {
-                    echo "🚀 Starting UAT Refresh Pipeline"
+                    echo "🚀 Starting UAT Refresh Pipeline (Java-Only)"
                     echo "Mode: ${params.EXECUTION_MODE}"
+                    echo "Target: ${params.TARGET_ENV}"
+                    
+                    // SAFETY CHECK: Confirm overwrite flag
+                    if (!params.CONFIRM_OVERWRITE) {
+                        error("❌ ABORTED: CONFIRM_OVERWRITE flag not set. " +
+                              "This operation will DROP and RECREATE ${params.TARGET_ENV} databases. " +
+                              "Re-run with CONFIRM_OVERWRITE=true to proceed.")
+                    }
                     
                     if (params.SEND_NOTIFICATIONS) {
                         slackSend(
                             channel: env.SLACK_CHANNEL,
                             color: 'good',
-                            message: "UAT Refresh Started\nMode: ${params.EXECUTION_MODE}\nTriggered by: ${currentBuild.getBuildCauses()[0].userId}"
+                            message: "UAT Refresh Started\nMode: ${params.EXECUTION_MODE}\nTarget: ${params.TARGET_ENV}\nTriggered by: ${currentBuild.getBuildCauses()[0].userId}"
                         )
                     }
                 }
@@ -503,16 +653,20 @@ pipeline {
             }
             steps {
                 script {
-                    echo "📦 Creating production backup from read replica..."
+                    echo "📦 Creating production backup from read replica (Java ProcessBuilder)..."
                     
+                    // Invoke Java JAR (NOT bash script)
                     sh '''
-                        cd ${WORKSPACE}/AMRIT-DB/scripts/backup
-                        bash backup_from_replica.sh
+                        java -jar ${ANONYMIZATION_JAR} \
+                            --backup-production \
+                            --source=REPLICA \
+                            --output-dir=${BACKUP_DIR}
                     '''
                     
-                    // Load backup path
-                    def backupInfo = readProperties file: '/tmp/backup_info.env'
-                    env.BACKUP_PATH = backupInfo.BACKUP_PATH
+                    // Read backup metadata from JSON (not .env file)
+                    def backupInfo = readJSON file: "${BACKUP_DIR}/latest_backup.json"
+                    env.BACKUP_PATH = backupInfo.backupPath
+                    env.BACKUP_TIMESTAMP = backupInfo.timestamp
                     
                     echo "Backup created: ${env.BACKUP_PATH}"
                 }
@@ -527,21 +681,12 @@ pipeline {
                 script {
                     echo "🔧 Setting up temporary anonymization environment..."
                     
+                    // Java-based Docker orchestration
                     sh '''
-                        # Start temporary MySQL instance in Docker
-                        docker run -d \
-                            --name amrit-anonymization-db \
-                            -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} \
-                            -v ${BACKUP_DIR}:/backups \
-                            -p 3307:3306 \
-                            mysql:8.0
-                        
-                        # Wait for MySQL to be ready
-                        sleep 30
-                        
-                        docker exec amrit-anonymization-db \
-                            mysql -uroot -p${MYSQL_ROOT_PASSWORD} \
-                            -e "SELECT 1"
+                        java -jar ${ANONYMIZATION_JAR} \
+                            --setup-temp-db \
+                            --docker-image=mysql:8.0 \
+                            --port=3307
                     '''
                 }
             }
@@ -553,12 +698,52 @@ pipeline {
             }
             steps {
                 script {
-                    echo "📥 Restoring production backup to temporary database..."
+                    echo "📥 Restoring production backup to temporary database (Java ProcessBuilder)..."
                     
                     sh '''
-                        cd ${WORKSPACE}/AMRIT-DB/scripts/restore
-                        bash restore_to_temp_db.sh ${BACKUP_PATH}
+                        java -jar ${ANONYMIZATION_JAR} \
+                            --restore \
+                            --backup=${BACKUP_PATH} \
+                            --target=TEMP_DB \
+                            --host=localhost \
+                            --port=3307
                     '''
+                }
+            }
+        }
+        
+        stage('🚨 Drift Gate #1: Pre-Anonymization') {
+            when {
+                expression { params.EXECUTION_MODE == 'FULL_REFRESH' || params.EXECUTION_MODE == 'ANONYMIZE_ONLY' }
+            }
+            steps {
+                script {
+                    echo "🚨 CRITICAL: Running Schema Drift Gate #1 (FAIL-CLOSED)..."
+                    
+                    sh '''
+                        java -jar ${ANONYMIZATION_JAR} \
+                            --drift-detect \
+                            --host=localhost \
+                            --port=3307 \
+                            --fail-on-drift
+                    '''
+                    
+                    // Read drift report
+                    def driftReport = readJSON file: 'docs/phase2-outputs/drift_report.json'
+                    
+                    if (driftReport.hasDrift) {
+                        // Publish drift report for review
+                        publishHTML([
+                            reportDir: 'docs/phase2-outputs',
+                            reportFiles: 'drift_report.html',
+                            reportName: 'Schema Drift Report'
+                        ])
+                        
+                        error("❌ ABORTED: Schema drift detected. Uncovered PII columns found. " +
+                              "See drift report for details. Update Anonymization Registry before proceeding.")
+                    }
+                    
+                    echo "✅ Drift Gate #1 passed. No uncovered PII detected."
                 }
             }
         }
@@ -569,18 +754,14 @@ pipeline {
             }
             steps {
                 script {
-                    echo "🎭 Running anonymization engine..."
+                    echo "🎭 Running anonymization engine (Java)..."
                     
                     sh '''
-                        cd ${WORKSPACE}/AMRIT-DB
-                        
-                        # Run Java anonymization application
-                        ./mvnw spring-boot:run \
-                            -Dspring-boot.run.profiles=anonymization \
-                            -Dspring-boot.run.arguments="--anonymize \
-                                --config=${ANONYMIZATION_CONFIG} \
-                                --host=localhost \
-                                --port=3307"
+                        java -jar ${ANONYMIZATION_JAR} \
+                            --anonymize \
+                            --config=${ANONYMIZATION_CONFIG} \
+                            --host=localhost \
+                            --port=3307
                     '''
                     
                     // Check anonymization result
@@ -603,11 +784,13 @@ pipeline {
             }
             steps {
                 script {
-                    echo "✔️  Running post-anonymization validation..."
+                    echo "✔️  Running post-anonymization validation (Java)..."
                     
                     sh '''
-                        cd ${WORKSPACE}/AMRIT-DB/scripts/validation
-                        bash post_anonymization_checks.sh
+                        java -jar ${ANONYMIZATION_JAR} \
+                            --validate \
+                            --host=localhost \
+                            --port=3307
                     '''
                     
                     // Publish validation report
@@ -626,17 +809,21 @@ pipeline {
             }
             steps {
                 script {
-                    echo "💾 Exporting anonymized backup..."
+                    echo "💾 Exporting anonymized backup (encrypted)..."
                     
                     sh '''
-                        cd ${WORKSPACE}/AMRIT-DB/scripts/backup
-                        bash export_anonymized_backup.sh
+                        java -jar ${ANONYMIZATION_JAR} \
+                            --export-backup \
+                            --source-host=localhost \
+                            --source-port=3307 \
+                            --output-dir=${BACKUP_DIR} \
+                            --encrypt
                     '''
                     
-                    def exportInfo = readProperties file: '/tmp/export_info.env'
-                    env.ANONYMIZED_BACKUP = exportInfo.ANONYMIZED_BACKUP
+                    def exportInfo = readJSON file: "${BACKUP_DIR}/anonymized_backup.json"
+                    env.ANONYMIZED_BACKUP = exportInfo.backupPath
                     
-                    echo "Anonymized backup: ${env.ANONYMIZED_BACKUP}"
+                    echo "Anonymized backup (encrypted): ${env.ANONYMIZED_BACKUP}"
                 }
             }
         }
@@ -647,12 +834,46 @@ pipeline {
             }
             steps {
                 script {
-                    echo "🧹 Cleaning up temporary database..."
+                    echo "🧹 Cleaning up temporary database (Java Docker management)..."
                     
                     sh '''
-                        docker stop amrit-anonymization-db
-                        docker rm amrit-anonymization-db
+                        java -jar ${ANONYMIZATION_JAR} --cleanup-temp-db
                     '''
+                }
+            }
+        }
+        
+        stage('🚨 Drift Gate #2: Pre-UAT-Restore') {
+            when {
+                expression { params.EXECUTION_MODE == 'FULL_REFRESH' || params.EXECUTION_MODE == 'RESTORE_ONLY' }
+            }
+            steps {
+                script {
+                    echo "🚨 CRITICAL: Running Schema Drift Gate #2 (FAIL-CLOSED)..."
+                    echo "Validating UAT schema before restore..."
+                    
+                    sh '''
+                        java -jar ${ANONYMIZATION_JAR} \
+                            --drift-detect \
+                            --target=${TARGET_ENV} \
+                            --fail-on-drift
+                    '''
+                    
+                    // Read drift report
+                    def driftReport = readJSON file: 'docs/phase2-outputs/drift_report_uat.json'
+                    
+                    if (driftReport.hasDrift) {
+                        publishHTML([
+                            reportDir: 'docs/phase2-outputs',
+                            reportFiles: 'drift_report_uat.html',
+                            reportName: 'UAT Schema Drift Report'
+                        ])
+                        
+                        error("❌ ABORTED: Schema drift detected in ${params.TARGET_ENV}. " +
+                              "Cannot proceed with restore. Update Anonymization Registry first.")
+                    }
+                    
+                    echo "✅ Drift Gate #2 passed. UAT schema matches registry."
                 }
             }
         }
@@ -663,11 +884,13 @@ pipeline {
             }
             steps {
                 script {
-                    echo "🔍 Running pre-restoration checks..."
+                    echo "🔍 Running pre-restoration checks (Java ValidationService)..."
                     
                     sh '''
-                        cd ${WORKSPACE}/AMRIT-DB/scripts/validation
-                        bash pre_restore_checks.sh
+                        java -jar ${ANONYMIZATION_JAR} \
+                            --pre-restore-checks \
+                            --target=${TARGET_ENV} \
+                            --backup=${ANONYMIZED_BACKUP}
                     '''
                 }
             }
@@ -679,21 +902,28 @@ pipeline {
             }
             steps {
                 script {
-                    echo "🎯 Restoring anonymized data to UAT..."
+                    echo "🎯 Restoring anonymized data to ${params.TARGET_ENV} (Java RestoreService)..."
                     
                     // Create UAT backup before overwrite (rollback capability)
+                    echo "Creating pre-restore backup of ${params.TARGET_ENV}..."
                     sh '''
-                        cd ${WORKSPACE}/AMRIT-DB/scripts/backup
-                        bash backup_uat_current.sh
+                        java -jar ${ANONYMIZATION_JAR} \
+                            --backup-current \
+                            --source=${TARGET_ENV} \
+                            --output-dir=${BACKUP_DIR}/pre-restore-backups
                     '''
                     
-                    // Restore
+                    // Restore with safety flags
                     sh '''
-                        cd ${WORKSPACE}/AMRIT-DB/scripts/restore
-                        bash restore_to_uat.sh ${ANONYMIZED_BACKUP}
+                        java -jar ${ANONYMIZATION_JAR} \
+                            --restore \
+                            --backup=${ANONYMIZED_BACKUP} \
+                            --target-env=${TARGET_ENV} \
+                            --confirm-uat-overwrite \
+                            --decrypt
                     '''
                     
-                    echo "✅ UAT database restored successfully"
+                    echo "✅ ${params.TARGET_ENV} database restored successfully"
                 }
             }
         }
@@ -704,12 +934,19 @@ pipeline {
             }
             steps {
                 script {
-                    echo "🔬 Running post-restoration validation..."
+                    echo "🔬 Running post-restoration validation (Java)..."
                     
                     sh '''
-                        cd ${WORKSPACE}/AMRIT-DB/scripts/validation
-                        bash post_restore_checks.sh
+                        java -jar ${ANONYMIZATION_JAR} \
+                            --post-restore-checks \
+                            --target=${TARGET_ENV}
                     '''
+                    
+                    publishHTML([
+                        reportDir: 'docs/phase2-outputs',
+                        reportFiles: 'post_restore_validation.html',
+                        reportName: 'Post-Restoration Validation Report'
+                    ])
                 }
             }
         }
@@ -724,21 +961,23 @@ pipeline {
                     slackSend(
                         channel: env.SLACK_CHANNEL,
                         color: 'good',
-                        message: "✅ UAT Refresh Successful\nDuration: ${currentBuild.durationString}\nUAT is ready for testing!"
+                        message: "✅ UAT Refresh Successful\nTarget: ${params.TARGET_ENV}\nDuration: ${currentBuild.durationString}\n✅ Drift Gates Passed\n${params.TARGET_ENV} is ready for testing!"
                     )
                     
                     emailext(
                         to: 'amrit-dev-team@example.com',
                         subject: "✅ UAT Refresh Successful - ${new Date().format('yyyy-MM-dd')}",
                         body: """
-                            UAT environment has been refreshed with anonymized production data.
+                            ${params.TARGET_ENV} environment has been refreshed with anonymized production data.
                             
                             Details:
                             - Execution Mode: ${params.EXECUTION_MODE}
+                            - Target Environment: ${params.TARGET_ENV}
                             - Duration: ${currentBuild.durationString}
                             - Triggered by: ${currentBuild.getBuildCauses()[0].userId}
+                            - Drift Gates: ✅ Passed (no uncovered PII detected)
                             
-                            UAT is now ready for testing!
+                            ${params.TARGET_ENV} is now ready for testing!
                         """
                     )
                 }
@@ -753,7 +992,7 @@ pipeline {
                     slackSend(
                         channel: env.SLACK_CHANNEL,
                         color: 'danger',
-                        message: "❌ UAT Refresh Failed\nCheck Jenkins console: ${env.BUILD_URL}"
+                        message: "❌ UAT Refresh Failed\nPossible Causes:\n- Schema drift detected (check drift report)\n- Validation failure\n- Database connection issue\nCheck Jenkins console: ${env.BUILD_URL}"
                     )
                     
                     emailext(
@@ -761,6 +1000,11 @@ pipeline {
                         subject: "❌ UAT Refresh Failed - ${new Date().format('yyyy-MM-dd')}",
                         body: """
                             UAT refresh failed. Please check Jenkins logs.
+                            
+                            Common Causes:
+                            1. Schema drift detected (uncovered PII columns) - Update Anonymization Registry
+                            2. Validation failure - Check validation report
+                            3. Database connectivity issues
                             
                             Build URL: ${env.BUILD_URL}
                         """
@@ -782,7 +1026,7 @@ pipeline {
 }
 ```
 
-### 5.2 Jenkins Job Configuration
+### 6.2 Jenkins Job Configuration
 
 **Job Type**: Pipeline
 
@@ -792,6 +1036,8 @@ pipeline {
 
 **Parameters**:
 - `EXECUTION_MODE`: FULL_REFRESH / ANONYMIZE_ONLY / RESTORE_ONLY
+- `TARGET_ENV`: UAT / DEV (allowlist enforced, NEVER PROD)
+- `CONFIRM_OVERWRITE`: true/false (REQUIRED - safety fuse)
 - `SKIP_BACKUP`: true/false
 - `SEND_NOTIFICATIONS`: true/false
 
@@ -799,105 +1045,296 @@ pipeline {
 - Label: `amrit-anonymization-agent`
 - Java 17 installed
 - Docker installed (for temporary MySQL)
-- MySQL client tools
+- MySQL client tools (mysqldump/mysql binaries)
 - 200GB+ free disk space
+- Access to Secrets Manager (AWS Secrets Manager / HashiCorp Vault)
 
 ---
 
-## 6. Bash Orchestration Scripts
+## 7. Option B: Standalone Java CLI
 
-### 6.1 Master Orchestration Script
+### 7.1 OrchestrationService (Java)
 
-```bash
-#!/bin/bash
-# scripts/orchestrate_uat_refresh.sh
+**NO bash/PowerShell scripts** - Pure Java orchestration for cross-platform compatibility
 
-set -e
+```java
+// OrchestrationService.java
 
-# Configuration
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BACKUP_DIR="/data/backups"
-LOG_DIR="/var/log/amrit-anonymization"
-TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-LOG_FILE="${LOG_DIR}/uat_refresh_${TIMESTAMP}.log"
-
-# Load environment variables
-source "${SCRIPT_DIR}/../config/production.env"
-source "${SCRIPT_DIR}/../config/uat.env"
-
-# Functions
-log() {
-    echo "[$(date +'%Y-%m-%d %H:%M:%S')] $1" | tee -a "${LOG_FILE}"
+@Service
+public class OrchestrationService {
+    
+    private final BackupService backupService;
+    private final RestoreService restoreService;
+    private final DriftDetector driftDetector;
+    private final AnonymizationOrchestrator anonymizationOrchestrator;
+    private final ValidationService validationService;
+    private final AllowlistValidator allowlistValidator;
+    private final NotificationService notificationService;
+    
+    public OrchestrationResult executeFullUATRefresh(
+        OrchestrationConfig config
+    ) {
+        log.info("==========================================");
+        log.info("AMRIT UAT Refresh - Starting (Java-Only)");
+        log.info("Target: {}", config.getTargetEnv());
+        log.info("==========================================");
+        
+        try {
+            // SAFETY FUSE #1: Allowlist validation
+            if (!allowlistValidator.isAllowed(config.getTargetEnv())) {
+                throw new SecurityException(
+                    "Target environment not allowed: " + config.getTargetEnv()
+                );
+            }
+            
+            // SAFETY FUSE #2: Explicit confirmation
+            if (!config.isConfirmOverwrite()) {
+                throw new SecurityException(
+                    "Missing confirmation flag. Set --confirm-uat-overwrite"
+                );
+            }
+            
+            // Step 1: Backup production from replica
+            log.info("Step 1: Backing up production databases...");
+            BackupInfo prodBackup = backupService.backupFromReplica(
+                List.of("db_identity", "db_1097_identity", "db_iemr", "db_reporting")
+            );
+            log.info("Backup created: {}", prodBackup.getBackupPath());
+            
+            // Step 2: Setup temporary anonymization database
+            log.info("Step 2: Setting up temporary anonymization environment...");
+            TempDatabaseService tempDb = setupTempDatabase();
+            
+            // Step 3: Restore to temp DB
+            log.info("Step 3: Restoring backup to temporary database...");
+            restoreService.restoreToTempDB(prodBackup, tempDb.getConnection());
+            
+            // Step 4: DRIFT GATE #1 - Pre-anonymization validation
+            log.info("🚨 Step 4: Running Drift Gate #1 (FAIL-CLOSED)...");
+            DriftReport driftReport1 = driftDetector.detectDrift(
+                tempDb.getConnection()
+            );
+            if (driftReport1.hasDrift()) {
+                throw new DriftDetectedException(
+                    "Schema drift detected. Uncovered PII found. ABORTING."
+                );
+            }
+            log.info("✅ Drift Gate #1 passed.");
+            
+            // Step 5: Run anonymization
+            log.info("Step 5: Running anonymization...");
+            AnonymizationResult anonResult = anonymizationOrchestrator.execute(
+                tempDb.getConnection(),
+                config.getAnonymizationConfig()
+            );
+            
+            // Step 6: Validation
+            log.info("Step 6: Validating anonymized data...");
+            validationService.postAnonymizationChecks(tempDb.getConnection());
+            
+            // Step 7: Export anonymized backup (encrypted)
+            log.info("Step 7: Exporting anonymized backup (encrypted)...");
+            BackupInfo anonBackup = backupService.exportAnonymizedBackup(
+                tempDb.getConnection(),
+                true // encrypt
+            );
+            
+            // Step 8: Cleanup temp DB
+            log.info("Step 8: Cleaning up temporary database...");
+            tempDb.cleanup();
+            
+            // Step 9: DRIFT GATE #2 - Pre-UAT-restore validation
+            log.info("🚨 Step 9: Running Drift Gate #2 (FAIL-CLOSED)...");
+            DriftReport driftReport2 = driftDetector.detectDrift(
+                config.getUatConnection()
+            );
+            if (driftReport2.hasDrift()) {
+                throw new DriftDetectedException(
+                    "Schema drift detected in UAT. ABORTING."
+                );
+            }
+            log.info("✅ Drift Gate #2 passed.");
+            
+            // Step 10: Pre-restoration checks
+            log.info("Step 10: Running pre-restoration checks...");
+            validationService.runPreRestoreChecks(
+                config.getUatConfig(),
+                anonBackup.getBackupPath()
+            );
+            
+            // Step 11: Backup current UAT (rollback capability)
+            log.info("Step 11: Backing up current UAT state...");
+            backupService.backupCurrentUAT();
+            
+            // Step 12: Restore to UAT
+            log.info("Step 12: Restoring to UAT environment...");
+            restoreService.restoreToUAT(
+                anonBackup.getBackupPath(),
+                config.isConfirmOverwrite(),
+                config.getTargetEnv()
+            );
+            
+            // Step 13: Post-restoration validation
+            log.info("Step 13: Final validation...");
+            validationService.postRestoreChecks(config.getUatConnection());
+            
+            log.info("==========================================");
+            log.info("UAT Refresh completed successfully!");
+            log.info("==========================================");
+            
+            // Send notifications
+            notificationService.sendSuccess(config);
+            
+            return OrchestrationResult.success(anonResult);
+            
+        } catch (DriftDetectedException e) {
+            log.error("❌ ABORTED: Schema drift detected", e);
+            notificationService.sendDriftAlert(e.getDriftReport());
+            throw e;
+        } catch (Exception e) {
+            log.error("❌ UAT Refresh failed", e);
+            notificationService.sendFailure(e);
+            throw e;
+        }
+    }
 }
+```
 
-error_exit() {
-    log "ERROR: $1"
-    exit 1
+**Key Features**:
+- 🚨 **Two Drift Gates**: Before anonymization AND before UAT restore
+- 🔒 **Allowlist Validator**: Prevents accidental production overwrites
+- ✅ **Explicit Confirmation**: --confirm-uat-overwrite flag required
+- 🔐 **Encrypted Backups**: AES-256 encryption for all backups
+- 🚫 **No Secrets in CLI**: All credentials from environment variables or Secrets Manager
+- 📧 **Notifications**: Email/Slack alerts for success, failure, and drift detection
+
+### 7.2 CLI Application (Main Class)
+
+```java
+// AmritAnonymizationCLI.java
+
+@SpringBootApplication
+public class AmritAnonymizationCLI implements CommandLineRunner {
+    
+    @Autowired
+    private OrchestrationService orchestrationService;
+    
+    public static void main(String[] args) {
+        System.exit(SpringApplication.exit(
+            SpringApplication.run(AmritAnonymizationCLI.class, args)
+        ));
+    }
+    
+    @Override
+    public void run(String... args) {
+        CommandLine cmd = parseArguments(args);
+        
+        try {
+            if (cmd.hasOption("refresh-uat")) {
+                // Validate safety flags
+                validateSafetyFlags(cmd);
+                
+                // Build config from CLI args
+                OrchestrationConfig config = OrchestrationConfig.builder()
+                    .targetEnv(cmd.getOptionValue("target-env", "UAT"))
+                    .confirmOverwrite(cmd.hasOption("confirm-uat-overwrite"))
+                    .skipBackup(cmd.hasOption("skip-backup"))
+                    .build();
+                
+                // Execute
+                OrchestrationResult result = orchestrationService.executeFullUATRefresh(config);
+                
+                System.exit(0); // Success
+                
+            } else if (cmd.hasOption("drift-detect")) {
+                // Run drift detection only
+                DriftReport report = driftDetector.detectDrift(
+                    cmd.getOptionValue("target")
+                );
+                System.exit(report.hasDrift() ? 2 : 0); // 2 = drift detected
+                
+            } else {
+                printUsage();
+                System.exit(1);
+            }
+            
+        } catch (DriftDetectedException e) {
+            System.err.println("❌ ABORTED: Schema drift detected");
+            System.err.println("See drift report: " + e.getDriftReport().getReportPath());
+            System.exit(2); // Exit code 2 = drift detected
+            
+        } catch (SecurityException e) {
+            System.err.println("❌ SECURITY ERROR: " + e.getMessage());
+            System.exit(3); // Exit code 3 = security violation
+            
+        } catch (Exception e) {
+            System.err.println("❌ ERROR: " + e.getMessage());
+            e.printStackTrace();
+            System.exit(1); // Exit code 1 = general failure
+        }
+    }
+    
+    private void validateSafetyFlags(CommandLine cmd) {
+        // SAFETY: Require explicit confirmation flag
+        if (!cmd.hasOption("confirm-uat-overwrite")) {
+            throw new SecurityException(
+                "Missing required flag: --confirm-uat-overwrite\n" +
+                "This operation will DROP and RECREATE UAT databases.\n" +
+                "Add --confirm-uat-overwrite to proceed."
+            );
+        }
+        
+        // SAFETY: Validate target environment
+        String targetEnv = cmd.getOptionValue("target-env", "UAT").toUpperCase();
+        if (targetEnv.equals("PROD") || targetEnv.equals("PRODUCTION")) {
+            throw new SecurityException(
+                "BLOCKED: Cannot target PROD environment. " +
+                "Allowed targets: UAT, DEV only."
+            );
+        }
+    }
+    
+    private void printUsage() {
+        System.out.println("""
+            AMRIT Database Anonymization CLI
+            
+            Usage:
+              java -jar amrit-anonymization-cli.jar [OPTIONS]
+            
+            Options:
+              --refresh-uat                 Execute full UAT refresh
+              --target-env=ENV              Target environment (UAT or DEV, default: UAT)
+              --confirm-uat-overwrite       REQUIRED: Confirm database overwrite
+              --skip-backup                 Skip production backup (use existing)
+              --drift-detect                Run drift detection only
+              --target=TARGET               Target for drift detection
+              
+            Examples:
+              # Full UAT refresh (Windows)
+              java -jar amrit-anonymization-cli.jar --refresh-uat --target-env=UAT --confirm-uat-overwrite
+              
+              # Drift detection only
+              java -jar amrit-anonymization-cli.jar --drift-detect --target=UAT
+              
+            Exit Codes:
+              0 = Success
+              1 = General failure
+              2 = Schema drift detected
+              3 = Security violation (allowlist/confirmation)
+            
+            Security:
+              - Passwords MUST be in environment variables (never CLI args)
+              - Target environment validated against allowlist (UAT, DEV only)
+              - Explicit confirmation flag required (--confirm-uat-overwrite)
+              - All backups encrypted with AES-256
+        """);
+    }
 }
-
-# Main execution
-main() {
-    log "========================================="
-    log "AMRIT UAT Refresh - Starting"
-    log "========================================="
-    
-    # Step 1: Backup production
-    log "Step 1: Backing up production databases..."
-    bash "${SCRIPT_DIR}/backup/backup_from_replica.sh" || error_exit "Production backup failed"
-    source /tmp/backup_info.env
-    log "Backup created: ${BACKUP_PATH}"
-    
-    # Step 2: Setup anonymization environment
-    log "Step 2: Setting up anonymization environment..."
-    bash "${SCRIPT_DIR}/setup/setup_temp_db.sh" || error_exit "Setup failed"
-    
-    # Step 3: Restore to temp DB
-    log "Step 3: Restoring backup to temporary database..."
-    bash "${SCRIPT_DIR}/restore/restore_to_temp_db.sh" "${BACKUP_PATH}" || error_exit "Restore failed"
-    
-    # Step 4: Run anonymization
-    log "Step 4: Running anonymization..."
-    cd "${SCRIPT_DIR}/../.."
-    ./mvnw spring-boot:run \
-        -Dspring-boot.run.profiles=anonymization \
-        -Dspring-boot.run.arguments="--anonymize --config=${ANONYMIZATION_CONFIG}" \
-        || error_exit "Anonymization failed"
-    
-    # Step 5: Validation
-    log "Step 5: Validating anonymized data..."
-    bash "${SCRIPT_DIR}/validation/post_anonymization_checks.sh" || error_exit "Validation failed"
-    
-    # Step 6: Export anonymized backup
-    log "Step 6: Exporting anonymized backup..."
-    bash "${SCRIPT_DIR}/backup/export_anonymized_backup.sh" || error_exit "Export failed"
-    source /tmp/export_info.env
-    log "Anonymized backup: ${ANONYMIZED_BACKUP}"
-    
-    # Step 7: Cleanup temp DB
-    log "Step 7: Cleaning up temporary database..."
-    bash "${SCRIPT_DIR}/setup/cleanup_temp_db.sh"
-    
-    # Step 8: Restore to UAT
-    log "Step 8: Restoring to UAT environment..."
-    bash "${SCRIPT_DIR}/restore/restore_to_uat.sh" "${ANONYMIZED_BACKUP}" || error_exit "UAT restore failed"
-    
-    # Step 9: Post-restoration validation
-    log "Step 9: Final validation..."
-    bash "${SCRIPT_DIR}/validation/post_restore_checks.sh" || error_exit "Final validation failed"
-    
-    log "========================================="
-    log "UAT Refresh completed successfully!"
-    log "========================================="
-}
-
-# Execute
-mkdir -p "${LOG_DIR}"
-main 2>&1 | tee -a "${LOG_FILE}"
 ```
 
 ---
 
-## 7. Configuration Management
+## 8. Java Orchestration Engine
 
 ### 7.1 Environment Configuration Files
 
@@ -1240,16 +1677,35 @@ withCredentials([
 
 Phase 3 is complete when:
 
-- ✅ Jenkins pipeline runs end-to-end successfully
+- ✅ **Jenkins pipeline runs end-to-end successfully** with Java JAR invocation only (NO bash)
+- ✅ **Drift Gate #1 (pre-anonymization) operational** - aborts on uncovered PII
+- ✅ **Drift Gate #2 (pre-UAT-restore) operational** - aborts on schema mismatch
 - ✅ Scheduled weekly UAT refresh working automatically
+- ✅ **Allowlist validation enforced** - PROD blocked, UAT/DEV allowed only
+- ✅ **Explicit confirmation flag required** - no accidental overwrites
+- ✅ **All backups encrypted with AES-256** - encryption/decryption verified
+- ✅ **All secrets via Secrets Manager** - ZERO secrets in CLI args or config files
 - ✅ Zero production impact during backup (validated via monitoring)
 - ✅ UAT refresh completes in <2 hours
-- ✅ Rollback procedure tested and documented
-- ✅ Operations team trained and can execute manually
-- ✅ Monitoring and alerting operational
-- ✅ All documentation complete
-- ✅ Security audit passed
+- ✅ **Drift notifications working** - Slack/email alerts on drift detection
+- ✅ Rollback procedure tested and documented (via backup restoration)
+- ✅ Operations team trained and can execute manually (Java CLI)
+- ✅ Monitoring and alerting operational (drift metrics included)
+- ✅ All documentation complete (Java-only, NO bash references)
+- ✅ **Security audit passed** - allowlist, confirmation flags, encrypted artifacts
+- ✅ **Cross-platform verified** - Works on Windows, Linux, macOS (pure Java)
 
 ---
+
+**Version**: 2.0 (Updated February 1, 2026)  
+**Changes**:
+- Added Drift Gate #1 (pre-anonymization) and Drift Gate #2 (pre-UAT-restore)
+- Replaced all bash/PowerShell scripts with pure Java orchestration (ProcessBuilder, Spring Boot services)
+- Added safety fuses: allowlist validation, explicit confirmation flags
+- Enforced secrets via Secrets Manager (NEVER CLI args)
+- Added AES-256 encryption for all backup artifacts
+- Updated Jenkins pipeline to Java JAR invocation only
+- Added drift detection alerts and metrics
+- Updated operations runbook with drift response procedures
 
 **End of Phase 3 Plan**
