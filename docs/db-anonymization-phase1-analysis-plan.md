@@ -10,7 +10,9 @@
 
 ## Executive Summary
 
-Phase 1 focuses on **systematic analysis** of all AMRIT databases to identify PII/sensitive fields, determine anonymization strategies, and establish the technical foundation for a Java-based anonymization solution. No data transformation occurs in this phase - only analysis, documentation, and tool development.
+Phase 1 focuses on **systematic analysis** of all AMRIT databases to identify PII/sensitive fields, determine anonymization strategies, **bootstrap the Anonymization Registry with canonical naming**, and establish the technical foundation for a Java-based anonymization solution with fail-closed schema drift protection. No data transformation occurs in this phase - only analysis, documentation, registry creation, and tool development.
+
+**Registry Bootstrapping**: The primary deliverable of Phase 1 is the `anonymization-registry.json` - a metadata-only registry that establishes canonical naming for all database objects, maps every PII field to an anonymization rule, and provides schema drift detection. This registry enforces 100% PII coverage and prevents schema changes from introducing uncovered sensitive fields.
 
 ### Language & Technology Constraints
 
@@ -43,17 +45,88 @@ Phase 1 focuses on **systematic analysis** of all AMRIT databases to identify PI
 |-----------|-------------|------------------|
 | **Database Schema Discovery** | Analyze all 4 databases and extract complete table/column metadata | 100% table coverage documented |
 | **PII Identification** | Identify all fields containing PII or sensitive health data | Classification for every sensitive field |
-| **Anonymization Strategy Definition** | Define how each PII field type will be anonymized | Strategy document with field-level mappings |
+| **Registry Bootstrapping (PRIMARY)** | Build metadata-only Anonymization Registry with canonical naming, lineage tracking, and PII rules binding | `anonymization-registry.json` v1.0 with 100% PII coverage and fail-closed validation |
+| **Canonical Naming Establishment** | Define canonical names for all database objects (tables/columns), defaulting to current physical schema names | All objects have canonical names + alias tracking for future migrations |
+| **Schema Snapshot & Hashing** | Capture current schema state with SHA-256 hashing for drift detection | Schema snapshot in registry + drift detection algorithm |
+| **Anonymization Strategy Definition** | Define how each PII field type will be anonymized and bind to registry rules | Every PII field has assigned anonymization rule in registry |
 | **Constraint Analysis** | Document foreign keys, unique constraints, and cross-DB relationships | Complete ER diagram and constraint catalog |
-| **Tool Development** | Build Java analyzer tool to automate discovery | Working schema analyzer with JSON/CSV export |
+| **Tool Development** | Build Java analyzer tool to automate discovery + AnonymizationRegistry.java + DriftDetector.java | Working schema analyzer with JSON export + registry validation |
 | **Sample Data Generation** | Integrate JavaFaker + BenGenAPI for realistic fake data | Sample dataset for testing |
+| **Drift Report Format** | Design metadata-only drift report template (HTML) showing uncovered PII and required actions | Drift report template ready for Phase 2 execution gate |
 
 ### 1.2 Out of Scope for Phase 1
 
 - ❌ Actual data anonymization (Phase 2)
+- ❌ Drift gate execution enforcement (Phase 2)
 - ❌ Production database backup/restore (Phase 3)
 - ❌ Jenkins pipeline setup (Phase 3)
 - ❌ UAT environment restoration (Phase 3)
+- ❌ CI/CD integration for registry validation (Phase 3)
+
+### 1.3 Governance: Registry Maintenance & CI Enforcement
+
+**CRITICAL RULE**: Any Flyway migration or schema change MUST update the Anonymization Registry and anonymization rules, otherwise CI MUST block the merge.
+
+**Enforcement Mechanism**:
+
+1. **Pre-Merge CI Check** (Phase 3 implementation):
+   ```bash
+   # .github/workflows/schema-validation.yml (or Jenkins equivalent)
+   - name: Validate Schema Drift
+     run: |
+       java -jar anonymization-tools.jar --validate-registry \
+         --flyway-migrations=src/main/resources/db/migration \
+         --registry=docs/anonymization-registry.json \
+         --fail-on-drift
+   ```
+
+2. **Developer Workflow**:
+   - Developer creates Flyway migration (e.g., `V38__ADD_EMERGENCY_CONTACT.sql`)
+   - If migration adds PII column (`EmergencyContactPhone VARCHAR(15)`), developer MUST:
+     - Update `anonymization-registry.json` to add column lineage
+     - Add anonymization rule: `"EmergencyContactPhone": {"rule": "FAKE_PHONE", ...}`
+     - Update `AnonymizationStrategy` enum if new rule type needed
+   - Commit both migration + registry changes together
+   - CI runs drift validation before merge
+   - If validation fails → CI blocks merge with error message
+
+3. **CI Validation Logic** (Java implementation in Phase 1):
+   ```java
+   public class RegistryValidator {
+       public ValidationResult validateRegistryAgainstSchema() {
+           // 1. Apply Flyway migrations to test database
+           // 2. Extract current schema
+           // 3. Compare against registry schema snapshot
+           // 4. Check if any new/renamed columns exist without rules
+           // 5. Return FAIL if uncovered PII detected
+           
+           if (hasUncoveredPII()) {
+               return ValidationResult.fail(
+                   "Schema drift detected! " +
+                   "New columns found without anonymization rules. " +
+                   "Update anonymization-registry.json before merging."
+               );
+           }
+           return ValidationResult.pass();
+       }
+   }
+   ```
+
+4. **Pull Request Template** (mandatory checklist):
+   ```markdown
+   ## Schema Change Checklist
+   - [ ] Does this PR add/rename database tables or columns?
+   - [ ] If YES: Have you updated `anonymization-registry.json`?
+   - [ ] If YES: Have you added anonymization rules for PII fields?
+   - [ ] CI validation passing (no schema drift errors)?
+   ```
+
+**Consequences of Non-Compliance**:
+- ❌ CI pipeline fails → merge blocked
+- ❌ Phase 2 execution gate aborts UAT restore
+- ❌ Manual override requires security team approval + incident ticket
+
+**Registry Update SLA**: Within same PR as schema change (cannot be deferred to later PR)
 
 ---
 
@@ -730,15 +803,14 @@ public class BenRegIDMapper {
         return mappingCache.getOrDefault(originalId, originalId);
     }
     
-    public void exportMapping(String filePath) {
-        // Export to CSV for audit trail
-        try (CSVPrinter printer = new CSVPrinter(new FileWriter(filePath), CSVFormat.DEFAULT)) {
-            printer.printRecord("original_benregid", "anonymized_benregid");
-            for (Map.Entry<Long, Long> entry : mappingCache.entrySet()) {
-                printer.printRecord(entry.getKey(), entry.getValue());
-            }
-        }
+    public void clearMapping() {
+        // Security: Discard mapping after execution (NEVER export to CSV)
+        log.info("Discarding BenRegID mapping (security requirement - no reversible artifacts)");
+        mappingCache.clear();
     }
+    
+    // ❌ REMOVED: exportMapping() method - violates security policy
+    // BenRegID mappings MUST stay in-memory only (never exported to CSV/file)
 }
 ```
 
@@ -780,7 +852,7 @@ public class DeterministicHasher {
 
 ## 5. Output Artifacts
 
-Phase 1 will produce the following deliverables:
+Phase 1 will produce the following deliverables (7 core artifacts + 1 governance artifact):
 
 ### 5.1 Schema Catalog (schema-catalog.json)
 
@@ -836,7 +908,338 @@ Complete metadata of all 4 databases:
 }
 ```
 
-### 5.2 PII Field Inventory (pii-field-inventory.csv)
+### 5.2 Anonymization Registry (anonymization-registry.json)
+
+**Purpose**: Metadata-only registry for schema drift protection and fail-closed enforcement.
+
+**Structure**:
+
+```json
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-15T14:30:00Z",
+  "schemaVersion": "V35",
+  "databases": {
+    "db_identity": {
+      "schemaHash": "sha256:a1b2c3d4...",
+      "tables": {
+        "i_beneficiary": {
+          "canonicalName": "i_beneficiary",
+          "aliases": [],
+          "columns": {
+            "BeneficiaryRegID": {
+              "canonicalName": "BeneficiaryRegID",
+              "dataType": "BIGINT(20)",
+              "nullable": false,
+              "piiRisk": "LINKING_KEY",
+              "anonymizationRule": "BENREGID_MAPPING",
+              "aliases": [],
+              "addedInMigration": "V1"
+            },
+            "FirstName": {
+              "canonicalName": "FirstName",
+              "dataType": "VARCHAR(50)",
+              "nullable": true,
+              "piiRisk": "CRITICAL",
+              "anonymizationRule": "FAKE_NAME",
+              "aliases": [],
+              "addedInMigration": "V1"
+            },
+            "PhoneNo": {
+              "canonicalName": "PhoneNo",
+              "dataType": "VARCHAR(15)",
+              "nullable": true,
+              "piiRisk": "CRITICAL",
+              "anonymizationRule": "FAKE_PHONE",
+              "aliases": ["ContactNumber"],
+              "addedInMigration": "V1"
+            },
+            "AadharNo": {
+              "canonicalName": "AadharNo",
+              "dataType": "VARCHAR(12)",
+              "nullable": true,
+              "piiRisk": "CRITICAL",
+              "anonymizationRule": "FAKE_AADHAR",
+              "aliases": [],
+              "addedInMigration": "V1"
+            }
+          }
+        }
+      }
+    },
+    "db_iemr": {
+      "schemaHash": "sha256:e5f6g7h8...",
+      "tables": {
+        "t_prescription": {
+          "canonicalName": "t_prescription",
+          "aliases": [],
+          "columns": {
+            "BeneficiaryRegID": {
+              "canonicalName": "BeneficiaryRegID",
+              "dataType": "BIGINT(20)",
+              "nullable": false,
+              "piiRisk": "LINKING_KEY",
+              "anonymizationRule": "BENREGID_MAPPING",
+              "aliases": [],
+              "addedInMigration": "V1"
+            },
+            "Diagnosis": {
+              "canonicalName": "Diagnosis",
+              "dataType": "TEXT",
+              "nullable": true,
+              "piiRisk": "MEDIUM",
+              "anonymizationRule": "GENERIC_PLACEHOLDER",
+              "aliases": [],
+              "addedInMigration": "V1"
+            }
+          }
+        }
+      }
+    }
+  },
+  "piiRiskLevels": {
+    "CRITICAL": "Direct PII (name, phone, Aadhar) - MUST anonymize",
+    "HIGH": "Indirect identifiers (email, address) - MUST anonymize",
+    "MEDIUM": "Health data (diagnosis, prescriptions) - MUST anonymize",
+    "LINKING_KEY": "Cross-table linkage (BenRegID) - MUST remap consistently",
+    "LOW": "Metadata (timestamps, status codes) - MAY retain"
+  },
+  "piiRiskThreshold": "MEDIUM",
+  "flywayMigrations": {
+    "tracked": ["V1", "V2", "V3", ..., "V35"],
+    "lastValidated": "V35"
+  }
+}
+```
+
+**Key Features**:
+- **Canonical Naming**: Resolves physical schema changes (e.g., `ben_first_name` → `FirstName`)
+- **Alias Tracking**: Handles column renames across Flyway migrations
+- **PII Risk Classification**: 5-level risk model (CRITICAL, HIGH, MEDIUM, LINKING_KEY, LOW)
+- **Anonymization Rule Binding**: Every PII field has an assigned strategy
+- **Migration Tracking**: Links columns to Flyway versions for audit trail
+- **Schema Hashing**: Detects schema drift via SHA-256 hash comparison
+- **Fail-Closed Enforcement**: Phase 2 execution will abort if uncovered PII detected
+
+**Security Guarantees**:
+- ✅ **NO row data stored** (metadata only)
+- ✅ **NO original→anonymized mappings** (BenRegID mapping stays in-memory)
+- ✅ **NO plaintext values** (sampleValues excluded from registry)
+
+### 5.3 PII Coverage Report (pii-coverage-report.json)
+
+**Purpose**: Validation report confirming 100% PII rule coverage before Phase 2 execution.
+
+**Structure**:
+
+```json
+{
+  "reportVersion": "1.0",
+  "generatedAt": "2026-02-15T16:45:00Z",
+  "schemaVersion": "V35",
+  "registryVersion": "1.0",
+  "summary": {
+    "totalTables": 373,
+    "totalColumns": 4812,
+    "piiColumns": 287,
+    "coveredPiiColumns": 287,
+    "uncoveredPiiColumns": 0,
+    "coveragePercentage": 100.0,
+    "validationStatus": "PASS"
+  },
+  "databaseBreakdown": {
+    "db_identity": {
+      "piiColumns": 45,
+      "coveredPiiColumns": 45,
+      "coveragePercentage": 100.0,
+      "status": "PASS"
+    },
+    "db_1097_identity": {
+      "piiColumns": 23,
+      "coveredPiiColumns": 23,
+      "coveragePercentage": 100.0,
+      "status": "PASS"
+    },
+    "db_iemr": {
+      "piiColumns": 198,
+      "coveredPiiColumns": 198,
+      "coveragePercentage": 100.0,
+      "status": "PASS"
+    },
+    "db_reporting": {
+      "piiColumns": 21,
+      "coveredPiiColumns": 21,
+      "coveragePercentage": 100.0,
+      "status": "PASS"
+    }
+  },
+  "piiRiskDistribution": {
+    "CRITICAL": 156,
+    "HIGH": 78,
+    "MEDIUM": 53,
+    "LINKING_KEY": 4
+  },
+  "uncoveredPiiFields": [],
+  "validationRules": [
+    {
+      "rule": "ALL_PII_MUST_HAVE_RULE",
+      "status": "PASS",
+      "message": "All 287 PII columns have assigned anonymization rules"
+    },
+    {
+      "rule": "LINKING_KEYS_MUST_USE_MAPPING",
+      "status": "PASS",
+      "message": "All 4 linking keys use BENREGID_MAPPING strategy"
+    },
+    {
+      "rule": "CRITICAL_PII_CANNOT_BE_NULL_STRATEGY",
+      "status": "PASS",
+      "message": "No CRITICAL PII fields use NULL anonymization"
+    }
+  ],
+  "failClosedRecommendation": "ALLOW_EXECUTION"
+}
+```
+
+**Usage in Phase 2**:
+- Step 0 of execution workflow validates this report
+- If `coveragePercentage < 100.0` → ABORT execution
+- If `failClosedRecommendation == "BLOCK_EXECUTION"` → ABORT
+
+### 5.4 Drift Report Format Template (drift-report-template.html)
+
+**Purpose**: HTML template for reporting schema drift (used in Phase 2 execution gate).
+
+**Template Structure**:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AMRIT Schema Drift Report - {TIMESTAMP}</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        .critical { background-color: #ffcccc; }
+        .warning { background-color: #ffffcc; }
+        .pass { background-color: #ccffcc; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+    </style>
+</head>
+<body>
+    <h1>🚨 AMRIT Anonymization Schema Drift Report</h1>
+    <h2>Execution Blocked - Manual Intervention Required</h2>
+    
+    <div class="summary">
+        <p><strong>Generated:</strong> {TIMESTAMP}</p>
+        <p><strong>Schema Version:</strong> {FLYWAY_VERSION}</p>
+        <p><strong>Registry Version:</strong> {REGISTRY_VERSION}</p>
+        <p><strong>Status:</strong> <span class="critical">❌ DRIFT DETECTED</span></p>
+        <p><strong>Execution Gate:</strong> <span class="critical">🛑 BLOCKED</span></p>
+    </div>
+    
+    <h3>Uncovered PII Fields (Action Required)</h3>
+    <table>
+        <tr>
+            <th>Database</th>
+            <th>Table</th>
+            <th>Column</th>
+            <th>Data Type</th>
+            <th>PII Risk</th>
+            <th>Current Status</th>
+            <th>Required Action</th>
+        </tr>
+        <!-- Example rows -->
+        <tr class="critical">
+            <td>db_identity</td>
+            <td>i_beneficiary</td>
+            <td>EmergencyContactPhone</td>
+            <td>VARCHAR(15)</td>
+            <td>CRITICAL</td>
+            <td>❌ No anonymization rule</td>
+            <td>Add rule: FAKE_PHONE in registry</td>
+        </tr>
+        <tr class="critical">
+            <td>db_iemr</td>
+            <td>t_prescription</td>
+            <td>PatientNationalHealthID</td>
+            <td>VARCHAR(20)</td>
+            <td>CRITICAL</td>
+            <td>❌ No anonymization rule</td>
+            <td>Add rule: FAKE_HEALTH_ID in registry</td>
+        </tr>
+    </table>
+    
+    <h3>Renamed Objects (Lineage Update Required)</h3>
+    <table>
+        <tr>
+            <th>Database</th>
+            <th>Object Type</th>
+            <th>Old Name</th>
+            <th>New Name</th>
+            <th>Action Required</th>
+        </tr>
+        <tr class="warning">
+            <td>db_identity</td>
+            <td>Column</td>
+            <td>ben_first_name</td>
+            <td>FirstName</td>
+            <td>Update canonical name + add alias in registry</td>
+        </tr>
+    </table>
+    
+    <h3>Schema Hash Mismatch</h3>
+    <table>
+        <tr>
+            <th>Database</th>
+            <th>Expected Hash (Registry)</th>
+            <th>Actual Hash (Current Schema)</th>
+            <th>Status</th>
+        </tr>
+        <tr class="critical">
+            <td>db_identity</td>
+            <td>sha256:a1b2c3d4...</td>
+            <td>sha256:e5f6g7h8...</td>
+            <td>❌ MISMATCH</td>
+        </tr>
+        <tr class="pass">
+            <td>db_1097_identity</td>
+            <td>sha256:i9j0k1l2...</td>
+            <td>sha256:i9j0k1l2...</td>
+            <td>✅ MATCH</td>
+        </tr>
+    </table>
+    
+    <h3>Remediation Steps</h3>
+    <ol>
+        <li><strong>Update Registry:</strong> Add anonymization rules for all uncovered PII fields in <code>anonymization-registry.json</code></li>
+        <li><strong>Update Lineage:</strong> Add canonical name mappings for renamed objects</li>
+        <li><strong>Update Schema Snapshot:</strong> Regenerate schema hashes: <code>java -jar anonymization-tools.jar --update-snapshot</code></li>
+        <li><strong>Validate Changes:</strong> Run validation: <code>java -jar anonymization-tools.jar --validate-registry</code></li>
+        <li><strong>Commit Registry:</strong> Commit updated registry to version control</li>
+        <li><strong>Retry Execution:</strong> Re-run UAT restore pipeline after registry update</li>
+    </ol>
+    
+    <h3>Security Note</h3>
+    <p>⚠️ This report contains <strong>metadata only</strong>. No row data, no plaintext values, no original→anonymized mappings are included.</p>
+    
+    <footer>
+        <p><em>Generated by AMRIT Anonymization Registry - Fail-Closed Enforcement</em></p>
+        <p><em>For assistance, contact: devops@example.com or file incident ticket</em></p>
+    </footer>
+</body>
+</html>
+```
+
+**Output File Naming**: `drift-report-{YYYY-MM-DD-HHmmss}.html`
+
+**Delivery Mechanism**:
+- Saved to Jenkins workspace artifacts
+- Emailed to DevOps + Security team
+- Logged to monitoring system (PagerDuty/Slack alert)
+
+### 5.5 PII Field Inventory (pii-field-inventory.csv)
 
 Comprehensive list of all PII fields:
 
@@ -847,7 +1250,7 @@ Comprehensive list of all PII fields:
 | db_identity | i_beneficiary | AadharNo | VARCHAR(12) | GOVERNMENT_ID | FAKE_AADHAR | Yes | No | "123456789012" |
 | db_iemr | t_prescription | Diagnosis | TEXT | MEDICAL_CONDITION | GENERIC_PLACEHOLDER | No | No | "Diabetes Type 2" |
 
-### 5.3 Anonymization Strategy Map (anonymization-strategy-map.json)
+### 5.6 Anonymization Strategy Map (anonymization-strategy-map.json)
 
 Detailed execution plan for Phase 2:
 
@@ -888,7 +1291,7 @@ Detailed execution plan for Phase 2:
 }
 ```
 
-### 5.4 Constraint Dependency Graph (constraint-dependency-graph.html)
+### 5.7 Constraint Dependency Graph (constraint-dependency-graph.html)
 
 Visual representation of relationships:
 
@@ -899,7 +1302,7 @@ Visual representation of relationships:
 <!-- Color-coded by anonymization priority -->
 ```
 
-### 5.5 Data Sample Analysis Report
+### 5.8 Data Sample Analysis Report
 
 Statistical analysis of current data:
 
@@ -1036,12 +1439,20 @@ Phase 1 is complete when:
 
 - ✅ All 4 databases fully analyzed and documented
 - ✅ 100% of PII fields identified and classified
-- ✅ Anonymization strategy defined for every PII field type
+- ✅ **Anonymization Registry v1.0 created with 100% PII coverage**
+- ✅ **Canonical naming established for all database objects (tables + columns)**
+- ✅ **Schema snapshot with SHA-256 hashes captured in registry**
+- ✅ **PII Coverage Report shows 100% coverage validation**
+- ✅ **Drift Report Format template finalized for Phase 2 execution gate**
+- ✅ Anonymization strategy defined for every PII field type and bound to registry rules
 - ✅ BenRegID cross-database handling strategy finalized
-- ✅ Java analyzer tools working and tested
-- ✅ All 5 output artifacts generated and reviewed
+- ✅ Java analyzer tools working and tested (DatabaseSchemaAnalyzer + AnonymizationRegistry.java + DriftDetector.java)
+- ✅ All 8 output artifacts generated and reviewed
 - ✅ Fake data samples generated and validated for realism
 - ✅ BeneficiaryID-Generation-API integration successful
+- ✅ **Governance rule documented: Flyway/schema changes must update registry (CI enforcement planned for Phase 3)**
+- ✅ **RegistryValidator.java implemented for CI integration**
+- ✅ **Pull Request template updated with schema change checklist**
 - ✅ Approval from stakeholders to proceed to Phase 2
 
 ---

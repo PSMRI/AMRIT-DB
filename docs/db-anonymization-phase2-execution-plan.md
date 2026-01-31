@@ -12,17 +12,19 @@
 
 ## Executive Summary
 
-Phase 2 focuses on building the **execution engine** that performs actual data anonymization. This phase takes the analysis outputs from Phase 1 and implements a robust, auditable, and reversible anonymization process. The engine will handle bulk data transformation while preserving referential integrity and ensuring zero data loss.
+Phase 2 focuses on building the **execution engine** that performs actual data anonymization with **fail-closed schema drift protection**. This phase takes the analysis outputs from Phase 1 (including the Anonymization Registry) and implements a robust, auditable anonymization process with rollback capability via backup restoration. The engine will handle bulk data transformation while preserving referential integrity and ensuring zero data loss.
+
+**Schema Drift Gate**: Before any anonymization occurs, the execution engine validates the live database schema against the Anonymization Registry. If any uncovered PII is detected (new columns, renamed tables, missing rules), execution **ABORTS immediately** (fail-closed behavior) and generates a drift report.
 
 ### Key Deliverables
 
-- ✅ Java-based anonymization execution engine
-- ✅ Batch processing system for large datasets
-- ✅ BenRegID cross-database mapping implementation
-- ✅ SQL script generation for bulk updates
+- ✅ Java-based anonymization execution engine with drift detection gate
+- ✅ Batch processing system using PK keyset pagination (not LIMIT/OFFSET)
+- ✅ BenRegID cross-database mapping implementation (in-memory only, NO CSV export)
+- ✅ SQL batch execution with PreparedStatement for bulk updates
 - ✅ Referential integrity validation framework
-- ✅ Audit logging and compliance reporting
-- ✅ Rollback capability with backup verification
+- ✅ Audit logging (metadata only, NO plaintext PII or reversible mappings)
+- ✅ Rollback capability via backup restoration (NOT reversible anonymization)
 
 ---
 
@@ -49,40 +51,111 @@ Phase 2 focuses on building the **execution engine** that performs actual data a
 
 | Objective | Description | Success Criteria |
 |-----------|-------------|------------------|
-| **Execution Engine** | Build Java application that anonymizes all identified PII fields | Successfully anonymizes 100% of identified fields |
+| **Schema Drift Detection (CRITICAL)** | Validate live schema against Anonymization Registry before execution | 0 uncovered PII columns (fail-closed gate) |
+| **Drift Report Generation** | Produce metadata-only HTML report showing uncovered PII and remediation steps | Drift report ready for DevOps review |
+| **Execution Engine** | Build Java application that anonymizes all identified PII fields | Successfully anonymizes 100% of mapped fields |
 | **Referential Integrity** | Preserve all foreign key relationships, especially BenRegID | 0 constraint violations post-anonymization |
-| **Performance** | Process millions of rows efficiently | Complete db_identity in <30 minutes |
-| **Auditability** | Log every transformation for compliance | Complete audit trail with before/after counts |
-| **Reversibility** | Ability to rollback via backup restoration | Tested rollback procedure |
+| **Performance** | Process millions of rows efficiently using PK keyset pagination | Complete db_identity in <30 minutes |
+| **Auditability** | Log every transformation for compliance (metadata only, NO plaintext mappings or original→anon pairs) | Complete audit trail with before/after counts |
+| **Rollback Capability** | Ability to restore from pre-anonymization backup | Tested rollback procedure via backup restoration |
 | **Validation** | Automated checks to verify anonymization success | 100% validation pass rate |
 
 ### 1.2 Input Artifacts (from Phase 1)
 
 - `schema-catalog.json` - Complete database schema
+- `anonymization-registry.json` - Canonical schema with PII rules (drift detection)
 - `pii-field-inventory.csv` - All PII fields identified
 - `anonymization-strategy-map.json` - Strategy per field
-- `benregid_mapping.csv` - BenRegID mapping (generated in Phase 2)
 
 ### 1.3 Output Artifacts
 
 - `anonymized_database_backup_<timestamp>.sql` - Anonymized database dumps
-- `anonymization_audit_report_<timestamp>.json` - Complete audit trail
+- `drift-report-<timestamp>.html` - Schema drift detection report (if drift detected, execution aborts)
+- `anonymization_audit_report_<timestamp>.json` - Complete audit trail (metadata only, NO plaintext mappings)
 - `validation_report_<timestamp>.html` - Validation results
 - `anonymization_execution.log` - Detailed execution logs
-- `benregid_mapping_<timestamp>.csv` - BenRegID mapping for reference
 
 ---
 
-## 2. Architecture & Design
+## 2. Phase 2 Preflight: Schema Drift Gate
+
+### 2.1 Drift Detection Algorithm
+
+**Purpose**: Ensure the live database schema matches the Anonymization Registry before anonymization. If drift is detected (new PII columns, renamed tables, missing rules), **ABORT execution immediately** (fail-closed).
+
+**Workflow**:
+
+```
+STEP 1: Load Anonymization Registry
+  ↓ Load anonymization-registry.json
+  ↓ Extract canonical names, anonymization rules, schema hashes
+
+STEP 2: Analyze Live Database Schema  
+  ↓ Connect to all 4 databases
+  ↓ Extract current schema metadata (tables, columns, types)
+  ↓ Compute SHA-256 hash per database
+
+STEP 3: Resolve Physical Schema to Canonical Names
+  ↓ For each physical table/column, lookup in lineage
+  ↓ If physical name ≠ canonical name, check aliases
+  ↓ Example: Physical "ben_first_name" → Canonical "FirstName"
+  ↓ If no match found → Flag as NEW/UNMAPPED object
+
+STEP 4: Apply PII-Risk Heuristics
+  ↓ For each unmapped column, run PIIDetector heuristic
+  ↓ Check column name patterns: .*name.*, .*phone.*, .*email.*, etc.
+  ↓ Check data type: VARCHAR → potential PII, INT → likely safe
+  ↓ Assign risk level: CRITICAL, HIGH, MEDIUM, LOW, UNKNOWN
+
+STEP 5: Fail-Closed Validation
+  ↓ Collect all unmapped columns with PII risk ≥ MEDIUM
+  ↓ Collect all columns missing anonymization rules
+  ↓ Compute schema hash mismatch per database
+  ↓
+  ↓ IF drift detected:
+  ↓   → Generate drift-report-<timestamp>.html
+  ↓   → Log all uncovered PII columns
+  ↓   → Send alert to DevOps team
+  ↓   → ❌ ABORT EXECUTION (FAIL-CLOSED)
+  ↓
+  ↓ IF no drift:
+  ↓   → ✅ Proceed to anonymization
+```
+
+### 2.2 Drift Report Output
+
+**Report includes**:
+- Uncovered PII fields (table, column, risk level, suggested anonymization rule)
+- Renamed objects requiring lineage update (old name → new name)
+- Schema hash comparison (expected vs. actual)
+- Remediation steps (update registry + rules, commit, retry)
+
+**Delivery**:
+- Saved to `docs/phase2-outputs/drift-report-<timestamp>.html`
+- Emailed to DevOps + Security team
+- Slack/PagerDuty alert triggered
+
+---
+
+## 3. Architecture & Design
 
 ### 2.1 High-Level Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                    Phase 1 Outputs                              │
-│  (schema-catalog.json, pii-field-inventory.csv, strategy-map)  │
+│  (anonymization-registry.json, pii-coverage-report.json, etc.) │
 └────────────────────┬────────────────────────────────────────────┘
                      │
+                     ▼
+┌─────────────────────────────────────────────────────────────────┐
+│           PREFLIGHT: DriftDetector (FAIL-CLOSED GATE)           │
+│  • Load registry → Analyze live schema → Resolve canonical     │
+│  • Apply PII-risk heuristics → Fail-closed validation          │
+│  • IF DRIFT → Generate report + ABORT                          │
+│  • IF NO DRIFT → Proceed to orchestrator                       │
+└────────────────────┬────────────────────────────────────────────┘
+                     │ (Only if no drift detected)
                      ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │              Anonymization Orchestrator                          │
@@ -127,7 +200,15 @@ AMRIT-DB/
 │   │   ├── analyzer/                    [Phase 1 - Already built]
 │   │   │   ├── DatabaseSchemaAnalyzer.java
 │   │   │   ├── PIIDetector.java
+│   │   │   ├── AnonymizationRegistry.java
 │   │   │   └── ...
+│   │   │
+│   │   ├── drift/                       [NEW - Phase 2 Preflight]
+│   │   │   ├── DriftDetector.java
+│   │   │   ├── DriftDetectionResult.java
+│   │   │   ├── DriftReportGenerator.java
+│   │   │   ├── UncoveredPII.java
+│   │   │   └── UnmappedObject.java
 │   │   │
 │   │   ├── executor/                    [NEW - Phase 2]
 │   │   │   ├── AnonymizationOrchestrator.java
@@ -148,12 +229,11 @@ AMRIT-DB/
 │   │   │
 │   │   ├── mapping/                     [NEW - Phase 2]
 │   │   │   ├── BenRegIDMapper.java
-│   │   │   ├── MappingTable.java
-│   │   │   └── MappingPersistence.java
+│   │   │   └── InMemoryMapping.java
 │   │   │
 │   │   ├── batch/                       [NEW - Phase 2]
 │   │   │   ├── BatchProcessor.java
-│   │   │   ├── ChunkStrategy.java
+│   │   │   ├── KeysetPagination.java   [Replaces LIMIT/OFFSET]
 │   │   │   └── ParallelExecutor.java
 │   │   │
 │   │   ├── validation/                  [NEW - Phase 2]
@@ -170,8 +250,8 @@ AMRIT-DB/
 │   │   │   └── ComplianceReporter.java
 │   │   │
 │   │   ├── backup/                      [NEW - Phase 2]
-│   │   │   ├── BackupManager.java
-│   │   │   ├── RestoreManager.java
+│   │   │   ├── BackupService.java      [Pure Java, ProcessBuilder]
+│   │   │   ├── RestoreService.java     [Pure Java, ProcessBuilder]
 │   │   │   └── BackupVerifier.java
 │   │   │
 │   │   └── model/                       [Shared]
@@ -186,15 +266,15 @@ AMRIT-DB/
 │
 ├── src/main/resources/
 │   ├── application-anonymization.properties  [NEW]
-│   └── anonymization-strategies.yml          [NEW]
+│   ├── anonymization-strategies.yml          [NEW]
+│   └── drift-report-template.html            [NEW]
 │
-└── scripts/
-    ├── backup/                          [NEW - Bash scripts]
-    │   ├── create_backup.sh
-    │   └── restore_backup.sh
-    └── validation/                      [NEW - SQL scripts]
-        ├── check_foreign_keys.sql
-        └── check_unique_constraints.sql
+└── docs/
+    └── phase2-outputs/                  [NEW - Phase 2 artifacts]
+        ├── drift-report-<timestamp>.html
+        ├── anonymization_audit_report_<timestamp>.json
+        ├── validation_report_<timestamp>.html
+        └── anonymization_execution.log
 ```
 
 ---
@@ -209,6 +289,12 @@ AMRIT-DB/
 @Service
 @Slf4j
 public class AnonymizationOrchestrator {
+    
+    @Autowired
+    private DriftDetector driftDetector;
+    
+    @Autowired
+    private DriftReportGenerator driftReportGenerator;
     
     @Autowired
     private ExecutionPlanner executionPlanner;
@@ -226,7 +312,7 @@ public class AnonymizationOrchestrator {
     private AuditLogger auditLogger;
     
     @Autowired
-    private BackupManager backupManager;
+    private BackupService backupService;
     
     public AnonymizationResult executeAnonymization(AnonymizationConfig config) {
         
@@ -236,9 +322,34 @@ public class AnonymizationOrchestrator {
         context.setStartTime(Instant.now());
         
         try {
-            // Step 1: Create backup checkpoint
-            log.info("Step 1: Creating backup checkpoint...");
-            BackupInfo backup = backupManager.createBackup();
+            // ================================================================
+            // STEP 0: DRIFT DETECTION GATE (FAIL-CLOSED)
+            // ================================================================
+            log.info("Step 0: Running schema drift detection gate...");
+            DriftDetectionResult driftResult = driftDetector.detectDrift();
+            context.setDriftDetectionResult(driftResult);
+            
+            if (driftResult.isDriftDetected()) {
+                log.error("❌ Schema drift detected! Execution ABORTED (fail-closed)");
+                
+                // Generate drift report
+                driftReportGenerator.generateDriftReport(driftResult);
+                
+                // Abort execution
+                context.setStatus(ExecutionStatus.ABORTED_DRIFT);
+                context.setError("Schema drift detected - uncovered PII columns found");
+                
+                return new AnonymizationResult(context);
+            }
+            
+            log.info("✅ Drift gate passed - No uncovered PII detected");
+            log.info("Proceeding to anonymization...");
+            
+            // ================================================================
+            // STEP 1: Create Pre-Anonymization Backup
+            // ================================================================
+            log.info("Step 1: Creating pre-anonymization backup...");
+            BackupInfo backup = backupService.createBackup();
             context.setBackupInfo(backup);
             auditLogger.logBackupCreated(backup);
             
@@ -254,11 +365,14 @@ public class AnonymizationOrchestrator {
                 throw new AnonymizationException("Pre-execution validation failed: " + preValidation.getErrors());
             }
             
-            // Step 4: Build BenRegID mapping
-            log.info("Step 4: Building BenRegID mapping...");
+            // ================================================================
+            // STEP 4: Build BenRegID Mapping (IN-MEMORY ONLY)
+            // ================================================================
+            log.info("Step 4: Building BenRegID mapping (in-memory, NO CSV export)...");
             benRegIDMapper.buildMapping();
             context.setBenRegIDMappingCount(benRegIDMapper.getMappingCount());
             auditLogger.logBenRegIDMappingCreated(benRegIDMapper.getMappingCount());
+            log.info("BenRegID mappings created: {} (in-memory, ephemeral)", benRegIDMapper.getMappingCount());
             
             // Step 5: Execute anonymization in planned order
             log.info("Step 5: Executing anonymization...");
@@ -277,30 +391,41 @@ public class AnonymizationOrchestrator {
                 throw new AnonymizationException("Validation failed, rolled back: " + postValidation.getErrors());
             }
             
-            // Step 7: Generate audit report
-            log.info("Step 7: Generating audit report...");
+            // ================================================================
+            // STEP 10: Generate Audit Report (METADATA ONLY)
+            // ================================================================
+            log.info("Step 10: Generating audit report (metadata only)...");
             AuditReport auditReport = auditLogger.generateReport(context);
             context.setAuditReport(auditReport);
             
-            // Step 8: Export anonymized backup
-            log.info("Step 8: Creating anonymized backup...");
-            BackupInfo anonymizedBackup = backupManager.createAnonymizedBackup();
-            context.setAnonymizedBackup(anonymizedBackup);
+            // ================================================================
+            // STEP 11: Discard BenRegID Mapping (SECURITY)
+            // ================================================================
+            log.info("Step 11: Discarding BenRegID mapping (security requirement)...");
+            benRegIDMapper.clearMapping();
+            log.info("BenRegID mapping cleared from memory (never persisted)");
             
             context.setEndTime(Instant.now());
             context.setStatus(ExecutionStatus.SUCCESS);
             
-            log.info("Anonymization completed successfully!");
-            log.info("Duration: {} minutes", context.getDurationMinutes());
-            log.info("Records processed: {}", context.getTotalRecordsProcessed());
+            log.info("=================================================" );
+            log.info("  Anonymization completed successfully!         ");
+            log.info("  Duration: {} minutes", context.getDurationMinutes());
+            log.info("  Records processed: {}", context.getTotalRecordsProcessed());
+            log.info("  Rollback: Via backup restoration (backup saved)");
+            log.info("=================================================");
             
             return new AnonymizationResult(context);
             
         } catch (Exception e) {
             log.error("Anonymization failed: {}", e.getMessage(), e);
             context.setStatus(ExecutionStatus.FAILED);
-            context.setError(e);
+            context.setError(e.getMessage());
             auditLogger.logError(e);
+            
+            // Discard in-memory mapping on failure
+            benRegIDMapper.clearMapping();
+            
             throw new AnonymizationException("Anonymization failed", e);
         }
     }
@@ -443,11 +568,19 @@ public class ExecutionEngine {
         int processedRows = 0;
         int updatedRows = 0;
         
-        // Process in batches
-        for (int offset = 0; offset < totalRows; offset += batchSize) {
+        Object lastPKValue = null; // For keyset pagination
+        
+        // Process in batches using PK keyset pagination (NOT LIMIT/OFFSET)
+        while (processedRows < totalRows) {
             
-            // Fetch batch
-            List<Map<String, Object>> batch = fetchBatch(tableName, offset, batchSize);
+            // Fetch batch using keyset pagination
+            List<Map<String, Object>> batch = fetchBatchKeyset(
+                tableName, primaryKey, lastPKValue, batchSize
+            );
+            
+            if (batch.isEmpty()) {
+                break; // No more rows
+            }
             
             // Anonymize batch
             List<Map<String, Object>> anonymizedBatch = anonymizeBatch(batch, columns);
@@ -458,9 +591,12 @@ public class ExecutionEngine {
             processedRows += batch.size();
             updatedRows += updated;
             
+            // Update last PK value for next iteration
+            lastPKValue = batch.get(batch.size() - 1).get(primaryKey);
+            
             progressTracker.updateProgress(tableName, processedRows);
             
-            log.debug("Processed {}/{} rows", processedRows, totalRows);
+            log.debug("Processed {}/{} rows (last PK: {})", processedRows, totalRows, lastPKValue);
         }
         
         progressTracker.completeTable(tableName);
@@ -468,12 +604,40 @@ public class ExecutionEngine {
         return new TableAnonymizationResult(tableName, totalRows, updatedRows);
     }
     
-    private List<Map<String, Object>> fetchBatch(String tableName, int offset, int limit) {
-        String query = String.format(
-            "SELECT * FROM %s LIMIT %d OFFSET %d",
-            tableName, limit, offset
-        );
-        return jdbcTemplate.queryForList(query);
+    /**
+     * Fetch batch using PK keyset pagination (more efficient than LIMIT/OFFSET)
+     * 
+     * Keyset pagination benefits:
+     * - O(1) performance (no offset scanning)
+     * - Works correctly with concurrent modifications
+     * - Stable ordering (PK-based)
+     * 
+     * Example query:
+     *   SELECT * FROM table WHERE pk > ? ORDER BY pk LIMIT 10000
+     */
+    private List<Map<String, Object>> fetchBatchKeyset(
+            String tableName, String primaryKey, Object lastPKValue, int batchSize) {
+        
+        String query;
+        List<Map<String, Object>> batch;
+        
+        if (lastPKValue == null) {
+            // First batch
+            query = String.format(
+                "SELECT * FROM %s ORDER BY %s LIMIT %d",
+                tableName, primaryKey, batchSize
+            );
+            batch = jdbcTemplate.queryForList(query);
+        } else {
+            // Subsequent batches (keyset pagination)
+            query = String.format(
+                "SELECT * FROM %s WHERE %s > ? ORDER BY %s LIMIT %d",
+                tableName, primaryKey, primaryKey, batchSize
+            );
+            batch = jdbcTemplate.queryForList(query, lastPKValue);
+        }
+        
+        return batch;
     }
     
     private List<Map<String, Object>> anonymizeBatch(
@@ -701,10 +865,24 @@ public class BenRegIDMappingStrategy implements AnonymizationStrategy {
 
 ## 4. Execution Workflow
 
-### 4.1 Complete Execution Flow
+### 4.1 Complete Execution Flow (WITH DRIFT GATE)
 
 ```
 START
+  │
+  ├─► 0. DRIFT DETECTION GATE (NEW - FAIL-CLOSED)
+  │     ├─► Load anonymization-registry.json
+  │     ├─► Analyze live database schema (all 4 databases)
+  │     ├─► Compare live schema vs. registry
+  │     ├─► Detect new/renamed/missing tables/columns
+  │     │
+  │     ├─► IF DRIFT DETECTED:
+  │     │     ├─► Generate drift-report-<timestamp>.html
+  │     │     ├─► Log all uncovered PII columns
+  │     │     ├─► Send alert to DevOps team
+  │     │     └─► ABORT EXECUTION (FAIL-CLOSED)
+  │     │
+  │     └─► IF NO DRIFT: Proceed to step 1 ✅
   │
   ├─► 1. Create Pre-Anonymization Backup
   │     └─► mysqldump all 4 databases to backup_<timestamp>.sql
@@ -718,22 +896,22 @@ START
   │     ├─► Check foreign key constraints (baseline)
   │     └─► Verify sufficient disk space
   │
-  ├─► 4. Build BenRegID Mapping
+  ├─► 4. Build BenRegID Mapping (IN-MEMORY ONLY)
   │     ├─► Extract all unique BenRegIDs from db_identity.i_beneficiary
-  │     ├─► Generate anonymized BenRegIDs (sequential or random)
-  │     ├─► Store mapping in benregid_mapping table (MEMORY engine)
-  │     └─► Export mapping to CSV for audit
+  │     ├─► Generate anonymized BenRegIDs via BeneficiaryID-Generation-API
+  │     ├─► Store mapping in ConcurrentHashMap<Long, Long> (in-memory)
+  │     └─► NO CSV EXPORT (security requirement)
   │
   ├─► 5. Anonymize db_identity
   │     ├─► For each table (in dependency order):
   │     │     ├─► Process in batches (e.g., 10,000 rows)
   │     │     ├─► Apply anonymization strategies per column
   │     │     ├─► Update rows in database
-  │     │     └─► Log progress
+  │     │     └─► Log progress (metadata only, NO plaintext values)
   │     └─► Validate db_identity integrity
   │
   ├─► 6. Anonymize db_1097_identity
-  │     ├─► Apply BenRegID mapping (from step 4)
+  │     ├─► Apply BenRegID mapping (from in-memory map)
   │     ├─► Anonymize PII fields
   │     └─► Validate referential integrity with db_identity
   │
@@ -754,20 +932,25 @@ START
   │     ├─► Compare row counts (before == after)
   │     └─► Check data quality (no NULL where NOT NULL)
   │
-  ├─► 10. Generate Audit Report
+  ├─► 10. Generate Audit Report (METADATA ONLY)
   │     ├─► Total tables processed
-  │     ├─► Total rows anonymized
+  │     ├─► Total rows anonymized (counts only)
   │     ├─► Execution duration
-  │     ├─► BenRegID mapping statistics
-  │     └─► Validation results
+  │     ├─► BenRegID mapping statistics (count only, NO mappings)
+  │     ├─► Validation results
+  │     └─► Schema hash (current state)
   │
-  ├─► 11. Create Anonymized Backup
+  ├─► 11. Discard BenRegID Mapping (SECURITY)
+  │     └─► Clear in-memory ConcurrentHashMap (mappings never persisted)
+  │
+  ├─► 12. Create Anonymized Backup
   │     └─► mysqldump anonymized databases to anonymized_<timestamp>.sql
   │
   └─► END (SUCCESS)
   
   ❌ ON ERROR:
       ├─► Log error details
+      ├─► Discard in-memory BenRegID mapping
       ├─► Restore from pre-anonymization backup
       ├─► Generate failure report
       └─► EXIT with error code
@@ -780,7 +963,7 @@ START
 **Rationale**:
 - Full database transaction would lock entire DB for hours
 - Table-level allows parallel processing and progress visibility
-- Rollback handled via backup restoration
+- Rollback handled via backup restoration (NOT transaction rollback)
 
 ```java
 @Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -788,6 +971,7 @@ public TableAnonymizationResult anonymizeTable(TableExecutionStep tableStep) {
     // This creates a new transaction per table
     // If this table fails, only this table is rolled back
     // Other tables remain committed
+    // Full rollback achieved via RestoreService.java (backup restoration)
 }
 ```
 
@@ -810,48 +994,28 @@ public class BenRegIDMapper {
     @Autowired
     private JdbcTemplate identityJdbcTemplate;
     
+    @Autowired
+    private BeneficiaryIDGenerator benIdGenerator;
+    
     private ConcurrentHashMap<Long, Long> mappingCache = new ConcurrentHashMap<>();
     
-    private static final String CREATE_MAPPING_TABLE_SQL = 
-        "CREATE TABLE IF NOT EXISTS benregid_mapping (" +
-        "  original_benregid BIGINT NOT NULL PRIMARY KEY, " +
-        "  anonymized_benregid BIGINT NOT NULL UNIQUE, " +
-        "  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
-        "  INDEX idx_original (original_benregid), " +
-        "  INDEX idx_anonymized (anonymized_benregid)" +
-        ") ENGINE=InnoDB";
-    
     public void buildMapping() {
-        log.info("Building BenRegID mapping...");
+        log.info("Building BenRegID mapping (in-memory, ephemeral)...");
         
-        // Step 1: Create mapping table
-        identityJdbcTemplate.execute(CREATE_MAPPING_TABLE_SQL);
-        
-        // Step 2: Extract all unique BenRegIDs
+        // Step 1: Extract all unique BenRegIDs
         String query = "SELECT DISTINCT BeneficiaryRegID FROM i_beneficiary ORDER BY BeneficiaryRegID";
         List<Long> originalIds = identityJdbcTemplate.queryForList(query, Long.class);
         
         log.info("Found {} unique BenRegIDs", originalIds.size());
         
-        // Step 3: Generate anonymized IDs
-        long startId = 1000000000L; // Start from 1 billion
-        
-        List<Object[]> batchArgs = new ArrayList<>();
-        
+        // Step 2: Generate anonymized IDs using BeneficiaryID-Generation-API
         for (Long originalId : originalIds) {
-            Long anonymizedId = startId++;
+            Long anonymizedId = benIdGenerator.generateBeneficiaryID();
             mappingCache.put(originalId, anonymizedId);
-            batchArgs.add(new Object[]{originalId, anonymizedId});
         }
         
-        // Step 4: Bulk insert into mapping table
-        String insertSQL = "INSERT INTO benregid_mapping (original_benregid, anonymized_benregid) VALUES (?, ?)";
-        identityJdbcTemplate.batchUpdate(insertSQL, batchArgs);
-        
-        log.info("BenRegID mapping built successfully. {} mappings created.", mappingCache.size());
-        
-        // Step 5: Export to CSV for audit
-        exportMappingToCSV();
+        log.info("BenRegID mapping built successfully. {} mappings created (in-memory only).", mappingCache.size());
+        log.info("❌ NO CSV export - mapping stays in-memory (security requirement)");
     }
     
     public Long getAnonymizedId(Long originalId) {
@@ -862,23 +1026,15 @@ public class BenRegIDMapper {
         return mappingCache.size();
     }
     
-    private void exportMappingToCSV() {
-        String fileName = String.format("benregid_mapping_%s.csv", 
-            LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")));
-        
-        String filePath = "docs/phase2-outputs/" + fileName;
-        
-        try (CSVPrinter printer = new CSVPrinter(new FileWriter(filePath), CSVFormat.DEFAULT)) {
-            printer.printRecord("original_benregid", "anonymized_benregid");
-            
-            for (Map.Entry<Long, Long> entry : mappingCache.entrySet()) {
-                printer.printRecord(entry.getKey(), entry.getValue());
-            }
-            
-            log.info("BenRegID mapping exported to: {}", filePath);
-        } catch (IOException e) {
-            log.error("Failed to export BenRegID mapping", e);
-        }
+    /**
+     * Clear mapping from memory (security requirement)
+     * Called after anonymization completes or on error
+     */
+    public void clearMapping() {
+        log.info("Clearing BenRegID mapping from memory...");
+        int count = mappingCache.size();
+        mappingCache.clear();
+        log.info("Cleared {} BenRegID mappings (never persisted to disk)", count);
     }
 }
 ```
@@ -1142,6 +1298,7 @@ public class AuditLogger {
             .details(Map.of(
                 "backupPath", backup.getFilePath(),
                 "backupSize", backup.getSizeBytes()
+                // ❌ NO row data, NO plaintext PII
             ))
             .build();
         
@@ -1153,7 +1310,11 @@ public class AuditLogger {
         AuditEvent event = AuditEvent.builder()
             .timestamp(Instant.now())
             .eventType("BENREGID_MAPPING_CREATED")
-            .details(Map.of("mappingCount", mappingCount))
+            .details(Map.of(
+                "mappingCount", mappingCount
+                // ❌ NO original→anonymized pairs (de-anonymization risk)
+                // ✅ Count only (metadata)
+            ))
             .build();
         
         events.add(event);
@@ -1168,6 +1329,8 @@ public class AuditLogger {
                 "tableName", result.getTableName(),
                 "rowsProcessed", result.getRowsProcessed(),
                 "duration", result.getDurationSeconds()
+                // ❌ NO plaintext values (before/after)
+                // ✅ Metadata only (counts, timings)
             ))
             .build();
         
@@ -1184,9 +1347,10 @@ public class AuditLogger {
             .databasesProcessed(context.getDatabasesProcessed())
             .tablesProcessed(context.getTablesProcessed())
             .totalRowsProcessed(context.getTotalRecordsProcessed())
-            .benRegIDMappingCount(context.getBenRegIDMappingCount())
+            .benRegIDMappingCount(context.getBenRegIDMappingCount()) // Count only
             .validationResult(context.getValidationReport())
             .events(events)
+            .securityNote("Metadata only - no plaintext PII or reversible mappings included")
             .build();
     }
 }
@@ -1201,57 +1365,65 @@ public class AuditLogger {
 ```java
 @Service
 @Slf4j
-public class BackupManager {
+public class BackupService {
     
     @Value("${anonymization.backup.directory}")
     private String backupDirectory;
     
-    public BackupInfo createBackup() {
-        log.info("Creating database backup...");
+    @Value("${mysql.host}")
+    private String mysqlHost;
+    
+    @Value("${mysql.port}")
+    private int mysqlPort;
+    
+    @Value("${mysql.username}")
+    private String mysqlUsername;
+    
+    public BackupInfo createBackup() throws IOException, InterruptedException {
+        log.info("Creating database backup (via ProcessBuilder)...");
         
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
-        String backupFile = String.format("%s/backup_%s.sql", backupDirectory, timestamp);
         
-        // Call mysqldump via ProcessBuilder
         String[] databases = {"db_identity", "db_1097_identity", "db_iemr", "db_reporting"};
+        
+        List<String> backupFiles = new ArrayList<>();
         
         for (String db : databases) {
             String dbBackupFile = String.format("%s/backup_%s_%s.sql", backupDirectory, db, timestamp);
             
+            // Use ProcessBuilder for cross-platform mysqldump execution
             ProcessBuilder pb = new ProcessBuilder(
                 "mysqldump",
-                "-u", "amrit_user",
-                "-p" + System.getenv("DB_PASSWORD"),
+                "-h", mysqlHost,
+                "-P", String.valueOf(mysqlPort),
+                "-u", mysqlUsername,
+                "-p" + System.getenv("MYSQL_PASSWORD"), // From environment variable
                 "--single-transaction",
                 "--quick",
                 "--lock-tables=false",
+                "--skip-triggers", // Optional: skip triggers
                 db
             );
             
-            pb.redirectOutput(new File(dbBackupFile));
+            pb.redirectOutput(ProcessBuilder.Redirect.to(new File(dbBackupFile)));
+            pb.redirectError(ProcessBuilder.Redirect.INHERIT);
             
-            try {
-                Process process = pb.start();
-                int exitCode = process.waitFor();
-                
-                if (exitCode != 0) {
-                    throw new BackupException("mysqldump failed for " + db);
-                }
-                
-                log.info("Backup created for {}: {}", db, dbBackupFile);
-            } catch (Exception e) {
-                throw new BackupException("Backup failed for " + db, e);
+            Process process = pb.start();
+            int exitCode = process.waitFor();
+            
+            if (exitCode != 0) {
+                throw new BackupException("mysqldump failed for " + db + " (exit code: " + exitCode + ")");
             }
+            
+            log.info("Backup created for {}: {}", db, dbBackupFile);
+            backupFiles.add(dbBackupFile);
         }
         
-        return new BackupInfo(backupFile, calculateBackupSize(backupFile));
-    }
-    
-    public void restore(BackupInfo backup) {
-        log.warn("Restoring from backup: {}", backup.getFilePath());
+        long totalSize = backupFiles.stream()
+            .mapToLong(f -> new File(f).length())
+            .sum();
         
-        // Call mysql to restore
-        // Implementation similar to backup but using mysql < backup.sql
+        return new BackupInfo(backupDirectory, backupFiles, totalSize, timestamp);
     }
 }
 ```
@@ -1264,28 +1436,29 @@ public class BackupManager {
 
 | Strategy | Implementation | Expected Improvement |
 |----------|---------------|---------------------|
-| **Batch Updates** | Update 10,000 rows per batch | 100x faster than row-by-row |
-| **Index Maintenance** | Temporarily disable non-unique indexes during bulk updates | 2-3x faster |
-| **MEMORY Engine** | Use MEMORY engine for benregid_mapping table | 10x faster lookups |
+| **PK Keyset Pagination** | Replace LIMIT/OFFSET with WHERE pk > ? | 10-100x faster for large tables |
+| **Batch Updates** | Update 10,000 rows per PreparedStatement batch | 100x faster than row-by-row |
+| **In-Memory Mapping** | ConcurrentHashMap for BenRegID lookup | O(1) lookup vs SQL JOIN |
 | **Parallel Processing** | Process independent tables in parallel | 2-4x faster overall |
 | **Connection Pooling** | Reuse database connections | Reduce overhead |
-| **Prepared Statements** | Use PreparedStatement for batch updates | Faster execution |
+| **PreparedStatement Reuse** | Reuse PreparedStatement for batch updates | Faster execution |
 
-### 10.2 Index Management
+### 10.2 Performance Notes
 
-```java
-@Service
-public class IndexManager {
-    
-    public void disableIndexes(String tableName) {
-        jdbcTemplate.execute("ALTER TABLE " + tableName + " DISABLE KEYS");
-    }
-    
-    public void enableIndexes(String tableName) {
-        jdbcTemplate.execute("ALTER TABLE " + tableName + " ENABLE KEYS");
-    }
-}
-```
+**Removed Optimizations** (security concerns):
+- ❌ `ALTER TABLE ... DISABLE KEYS` - **REMOVED** (not supported by InnoDB, misleading claim)
+- ❌ MEMORY engine for mapping table - **REMOVED** (no persistent mapping table anymore)
+
+**Why DISABLE KEYS was removed**:
+- InnoDB (default MySQL engine) does NOT support `DISABLE KEYS`
+- Only works for MyISAM (legacy engine)
+- Modern InnoDB uses clustered indexes (cannot be disabled)
+- Misleading performance claim
+
+**Actual InnoDB Optimizations**:
+- Use `SET unique_checks=0; SET foreign_key_checks=0;` (risky, not recommended)
+- Use keyset pagination (more effective than index disabling)
+- Use PreparedStatement batching (already implemented)
 
 ---
 
@@ -1339,15 +1512,16 @@ class ExecutionEngineIntegrationTest {
 
 ## 12. Implementation Timeline
 
-### Week 5-6: Core Engine
+### Week 5-6: Core Engine + Drift Gate
 
 | Day | Task | Deliverable |
 |-----|------|-------------|
-| 1-2 | Implement AnonymizationOrchestrator | Orchestration logic |
-| 3-4 | Implement ExecutionPlanner | Dependency-aware execution plan |
-| 5 | Implement ExecutionEngine | Table-level anonymization |
-| 6-7 | Implement all AnonymizationStrategy classes | 8-10 strategy implementations |
-| 8-9 | Implement BenRegIDMapper | Mapping table logic |
+| 1-2 | Implement DriftDetector + DriftReportGenerator | Drift detection gate |
+| 3-4 | Implement AnonymizationOrchestrator | Orchestration logic with drift gate |
+| 5 | Implement ExecutionPlanner | Dependency-aware execution plan |
+| 6 | Implement ExecutionEngine with PK keyset pagination | Table-level anonymization |
+| 7-8 | Implement all AnonymizationStrategy classes | 8-10 strategy implementations |
+| 9 | Implement BenRegIDMapper (in-memory only) | In-memory mapping logic |
 | 10 | Unit tests for all components | Test suite |
 
 ### Week 7: Validation & Audit
@@ -1357,16 +1531,18 @@ class ExecutionEngineIntegrationTest {
 | 1-2 | Implement IntegrityValidator | Pre/post validation |
 | 3 | Implement ForeignKeyChecker | FK validation |
 | 4 | Implement PIILeakageDetector | PII scan logic |
-| 5 | Implement AuditLogger | Audit trail |
+| 5 | Implement AuditLogger (metadata only) | Audit trail (no plaintext) |
+| 6 | Implement BackupService + RestoreService (Java) | Backup/restore via ProcessBuilder |
 
 ### Week 8: Testing & Refinement
 
 | Day | Task | Deliverable |
 |-----|------|-------------|
-| 1-3 | Integration testing on small dataset | Working end-to-end |
-| 4-5 | Performance optimization | Batch tuning |
+| 1-3 | Integration testing on small dataset | Working end-to-end with drift gate |
+| 4-5 | Performance optimization (keyset pagination tuning) | Batch tuning |
 | 6-7 | Full-scale test on production-sized data | Performance report |
-| 8-10 | Bug fixes and refinement | Production-ready code |
+| 8-9 | Drift detection testing (simulate schema changes) | Drift gate validation |
+| 10 | Bug fixes and refinement | Production-ready code |
 
 **Total Duration**: 4 weeks
 
