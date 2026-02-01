@@ -1,5 +1,6 @@
 package com.db.piramalswasthya.anonymization.phase1.export;
 
+import com.db.piramalswasthya.anonymization.phase1.exception.AnonymizationException;
 import com.db.piramalswasthya.anonymization.phase1.model.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -44,7 +45,7 @@ public class ArtifactExporter {
             }
         } catch (IOException e) {
             log.error("Failed to create output directory: {}", outputDir, e);
-            throw new RuntimeException("Cannot create output directory", e);
+            throw new AnonymizationException("Cannot create output directory", e);
         }
     }
     
@@ -58,7 +59,7 @@ public class ArtifactExporter {
             log.info("Exported schema catalog to: {}", outputPath);
         } catch (IOException e) {
             log.error("Failed to export schema catalog", e);
-            throw new RuntimeException("Failed to export schema catalog", e);
+            throw new AnonymizationException("Failed to export schema catalog", e);
         }
     }
     
@@ -99,7 +100,7 @@ public class ArtifactExporter {
             
         } catch (IOException e) {
             log.error("Failed to export PII inventory CSV", e);
-            throw new RuntimeException("Failed to export PII inventory CSV", e);
+            throw new AnonymizationException("Failed to export PII inventory CSV", e);
         }
     }
     
@@ -149,7 +150,7 @@ public class ArtifactExporter {
             log.info("Exported anonymization strategy map to: {}", outputPath);
         } catch (IOException e) {
             log.error("Failed to export strategy map", e);
-            throw new RuntimeException("Failed to export strategy map", e);
+            throw new AnonymizationException("Failed to export strategy map", e);
         }
     }
     
@@ -164,7 +165,7 @@ public class ArtifactExporter {
             log.info("Exported anonymization registry to: {}", outputPath);
         } catch (IOException e) {
             log.error("Failed to export registry", e);
-            throw new RuntimeException("Failed to export registry", e);
+            throw new AnonymizationException("Failed to export registry", e);
         }
     }
     
@@ -234,7 +235,7 @@ public class ArtifactExporter {
             log.info("Exported constraint graph HTML to: {}", outputPath);
         } catch (IOException e) {
             log.error("Failed to export constraint graph HTML", e);
-            throw new RuntimeException("Failed to export constraint graph HTML", e);
+            throw new AnonymizationException("Failed to export constraint graph HTML", e);
         }
     }
     
@@ -285,7 +286,7 @@ public class ArtifactExporter {
             log.info("Exported PII coverage report to: {}", outputPath);
         } catch (IOException e) {
             log.error("Failed to export PII coverage report", e);
-            throw new RuntimeException("Failed to export PII coverage report", e);
+            throw new AnonymizationException("Failed to export PII coverage report", e);
         }
     }
     

@@ -1,5 +1,6 @@
 package com.db.piramalswasthya.anonymization.phase1.detect;
 
+import com.db.piramalswasthya.anonymization.phase1.exception.AnonymizationException;
 import com.db.piramalswasthya.anonymization.phase1.model.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -58,7 +59,7 @@ public class PIIDetector {
             
         } catch (IOException e) {
             log.error("Failed to load PII detection rules: {}", e.getMessage(), e);
-            throw new RuntimeException("Failed to initialize PII detector", e);
+            throw new AnonymizationException("Failed to initialize PII detector", e);
         }
     }
     

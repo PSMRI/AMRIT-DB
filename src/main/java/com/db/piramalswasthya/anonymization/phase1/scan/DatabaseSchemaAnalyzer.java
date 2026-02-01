@@ -1,5 +1,6 @@
 package com.db.piramalswasthya.anonymization.phase1.scan;
 
+import com.db.piramalswasthya.anonymization.phase1.exception.AnonymizationException;
 import com.db.piramalswasthya.anonymization.phase1.model.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -55,7 +56,7 @@ public class DatabaseSchemaAnalyzer {
             
         } catch (SQLException e) {
             log.error("Failed to analyze database {}: {}", databaseName, e.getMessage(), e);
-            throw new RuntimeException("Database analysis failed for " + databaseName, e);
+            throw new AnonymizationException("Database analysis failed for " + databaseName, e);
         }
     }
     
