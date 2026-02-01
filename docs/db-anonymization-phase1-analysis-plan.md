@@ -808,9 +808,6 @@ public class BenRegIDMapper {
         log.info("Discarding BenRegID mapping (security requirement - no reversible artifacts)");
         mappingCache.clear();
     }
-    
-    // ❌ REMOVED: exportMapping() method - violates security policy
-    // BenRegID mappings MUST stay in-memory only (never exported to CSV/file)
 }
 ```
 

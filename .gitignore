@@ -48,6 +48,12 @@ testem.log
 Thumbs.db
 
 # Additional files to ignore
+
+# Phase 1 Anonymization outputs (large generated files)
+docs/phase1-outputs/schema-catalog.json
+docs/phase1-outputs/constraint-dependency-graph.html
+build/anonymization/
+
 mvnw.cmd
 .sts4-cache
 mvnw
