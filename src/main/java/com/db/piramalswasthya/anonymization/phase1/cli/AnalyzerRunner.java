@@ -34,76 +34,129 @@ public class AnalyzerRunner implements ApplicationRunner {
     private static final String TOOL_VERSION = "1.0.0-PHASE1";
     private static final String DEFAULT_OUTPUT_DIR = "docs/phase1-outputs";
     
-    @Autowired
-    @Qualifier("dbiemrDataSource")
-    private DataSource dbiemrDataSource;
+    // Database name constants
+    private static final String DB_IDENTITY = "db_identity";
+    private static final String DB_1097_IDENTITY = "db_1097_identity";
+    private static final String DB_IEMR = "db_iemr";
+    private static final String DB_REPORTING = "db_reporting";
     
-    @Autowired
-    @Qualifier("dbidentityDataSource")
-    private DataSource dbidentityDataSource;
+    // Step message constants (extracted to reduce cognitive complexity)
+    private static final String STEP_1_ANALYZING = "Step 1: Analyzing database schemas...";
+    private static final String STEP_2_DETECTING = "Step 2: Detecting PII fields...";
+    private static final String STEP_3_GENERATING = "Step 3: Generating anonymization registry...";
+    private static final String STEP_4_EXPORTING = "Step 4: Exporting Phase 1 artifacts...";
+    private static final String ANALYSIS_COMPLETE = "===== Phase 1 Analysis Complete =====";
+    private static final String OUTPUT_DIRECTORY_PREFIX = "Output directory: ";
+    private static final String REGISTRY_PRIMARY = "anonymization-registry.json (PRIMARY)";
     
-    @Autowired
-    @Qualifier("dbreportingDataSource")
-    private DataSource dbreportingDataSource;
+    // Dependencies injected via constructor (preferred over field injection)
+    private final DataSource dbiemrDataSource;
+    private final DataSource dbidentityDataSource;
+    private final DataSource dbreportingDataSource;
+    private final DataSource db1097identityDataSource;
+    private final DatabaseSchemaAnalyzer schemaAnalyzer;
+    private final PIIDetector piiDetector;
+    private final RegistryGenerator registryGenerator;
+    private final ArtifactExporter artifactExporter;
     
-    @Autowired
-    @Qualifier("db1097identityDataSource")
-    private DataSource db1097identityDataSource;
-    
-    @Autowired
-    private DatabaseSchemaAnalyzer schemaAnalyzer;
-    
-    @Autowired
-    private PIIDetector piiDetector;
-    
-    @Autowired
-    private RegistryGenerator registryGenerator;
-    
-    @Autowired
-    private ArtifactExporter artifactExporter;
+    /**
+     * Constructor injection for all dependencies.
+     */
+    public AnalyzerRunner(
+            @Qualifier("dbiemrDataSource") DataSource dbiemrDataSource,
+            @Qualifier("dbidentityDataSource") DataSource dbidentityDataSource,
+            @Qualifier("dbreportingDataSource") DataSource dbreportingDataSource,
+            @Qualifier("db1097identityDataSource") DataSource db1097identityDataSource,
+            DatabaseSchemaAnalyzer schemaAnalyzer,
+            PIIDetector piiDetector,
+            RegistryGenerator registryGenerator,
+            ArtifactExporter artifactExporter) {
+        this.dbiemrDataSource = dbiemrDataSource;
+        this.dbidentityDataSource = dbidentityDataSource;
+        this.dbreportingDataSource = dbreportingDataSource;
+        this.db1097identityDataSource = db1097identityDataSource;
+        this.schemaAnalyzer = schemaAnalyzer;
+        this.piiDetector = piiDetector;
+        this.registryGenerator = registryGenerator;
+        this.artifactExporter = artifactExporter;
+    }
     
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        logInitialization();
+        AnalysisConfig config = initializeAnalysisConfig(args);
+        
+        SchemaCatalog catalog = performSchemaAnalysis(config.databasesToAnalyze);
+        AnonymizationRegistry registry = performPIIDetectionAndRegistryGeneration(catalog, config.flywayVersion);
+        
+        if (!config.skipExport) {
+            performArtifactExport(catalog, registry, config.outputDir);
+        }
+
+        printSummary(catalog, registry, config.outputDir);
+        logCompletion(config.outputDir);
+        System.exit(0);
+    }
+    
+    private void logInitialization() {
         log.info("===== AMRIT Anonymization Phase 1 Analyzer =====");
         log.info("Tool Version: {}", TOOL_VERSION);
         log.info("Started at: {}", Instant.now());
-        
-        // Parse CLI arguments
+    }
+    
+    private AnalysisConfig initializeAnalysisConfig(ApplicationArguments args) {
         String outputDir = getOutputDirectory(args);
         Set<String> databasesToAnalyze = getDatabaseSelection(args);
         boolean skipExport = args.containsOption("skip-export");
+        String flywayVersion = extractFlywayVersion(args);
         
         artifactExporter.ensureOutputDirectory(outputDir);
         
-        // Step 1: Schema Analysis
-        log.info("Step 1: Analyzing database schemas...");
-        SchemaCatalog catalog = analyzeDatabases(databasesToAnalyze);
-        
-        // Step 2: PII Detection
-        log.info("Step 2: Detecting PII fields...");
-        piiDetector.annotatePII(catalog);
-        
-        // Step 3: Generate Registry
-        log.info("Step 3: Generating anonymization registry...");
-        String flywayVersion = args.getOptionValues("flyway-version") != null ? 
+        return new AnalysisConfig(outputDir, databasesToAnalyze, skipExport, flywayVersion);
+    }
+    
+    private String extractFlywayVersion(ApplicationArguments args) {
+        return args.getOptionValues("flyway-version") != null ? 
             args.getOptionValues("flyway-version").get(0) : "UNKNOWN";
-        AnonymizationRegistry registry = registryGenerator.generateRegistry(
-            catalog, TOOL_VERSION, flywayVersion);
+    }
+    
+    private SchemaCatalog performSchemaAnalysis(Set<String> databasesToAnalyze) {
+        log.info(STEP_1_ANALYZING);
+        return analyzeDatabases(databasesToAnalyze);
+    }
+    
+    private AnonymizationRegistry performPIIDetectionAndRegistryGeneration(
+            SchemaCatalog catalog, String flywayVersion) {
+        log.info(STEP_2_DETECTING);
+        piiDetector.annotatePII(catalog);
+
+        log.info(STEP_3_GENERATING);
+        return registryGenerator.generateRegistry(catalog, TOOL_VERSION, flywayVersion);
+    }
+    
+    private void performArtifactExport(SchemaCatalog catalog, AnonymizationRegistry registry, String outputDir) {
+        log.info(STEP_4_EXPORTING);
+        exportAllArtifacts(catalog, registry, outputDir);
+    }
+    
+    private void logCompletion(String outputDir) {
+        log.info(ANALYSIS_COMPLETE);
+        log.info(OUTPUT_DIRECTORY_PREFIX + "{}", outputDir);
+    }
+    
+    private static class AnalysisConfig {
+        final String outputDir;
+        final Set<String> databasesToAnalyze;
+        final boolean skipExport;
+        final String flywayVersion;
         
-        // Step 4: Export Artifacts
-        if (!skipExport) {
-            log.info("Step 4: Exporting Phase 1 artifacts...");
-            exportAllArtifacts(catalog, registry, outputDir);
+        AnalysisConfig(String outputDir, Set<String> databasesToAnalyze, 
+                      boolean skipExport, String flywayVersion) {
+            this.outputDir = outputDir;
+            this.databasesToAnalyze = databasesToAnalyze;
+            this.skipExport = skipExport;
+            this.flywayVersion = flywayVersion;
         }
-        
-        // Summary
-        printSummary(catalog, registry, outputDir);
-        
-        log.info("===== Phase 1 Analysis Complete =====");
-        log.info("Output directory: {}", outputDir);
-        
-        // Exit successfully
-        System.exit(0);
     }
     
     /**
@@ -116,23 +169,23 @@ public class AnalyzerRunner implements ApplicationRunner {
             .toolVersion(TOOL_VERSION)
             .build();
         
-        if (databasesToAnalyze.contains("db_identity")) {
-            DatabaseMetadata dbMeta = schemaAnalyzer.analyzeDatabase(dbidentityDataSource, "db_identity");
+        if (databasesToAnalyze.contains(DB_IDENTITY)) {
+            DatabaseMetadata dbMeta = schemaAnalyzer.analyzeDatabase(dbidentityDataSource, DB_IDENTITY);
             catalog.getDatabases().add(dbMeta);
         }
         
-        if (databasesToAnalyze.contains("db_1097_identity")) {
-            DatabaseMetadata dbMeta = schemaAnalyzer.analyzeDatabase(db1097identityDataSource, "db_1097_identity");
+        if (databasesToAnalyze.contains(DB_1097_IDENTITY)) {
+            DatabaseMetadata dbMeta = schemaAnalyzer.analyzeDatabase(db1097identityDataSource, DB_1097_IDENTITY);
             catalog.getDatabases().add(dbMeta);
         }
         
-        if (databasesToAnalyze.contains("db_iemr")) {
-            DatabaseMetadata dbMeta = schemaAnalyzer.analyzeDatabase(dbiemrDataSource, "db_iemr");
+        if (databasesToAnalyze.contains(DB_IEMR)) {
+            DatabaseMetadata dbMeta = schemaAnalyzer.analyzeDatabase(dbiemrDataSource, DB_IEMR);
             catalog.getDatabases().add(dbMeta);
         }
         
-        if (databasesToAnalyze.contains("db_reporting")) {
-            DatabaseMetadata dbMeta = schemaAnalyzer.analyzeDatabase(dbreportingDataSource, "db_reporting");
+        if (databasesToAnalyze.contains(DB_REPORTING)) {
+            DatabaseMetadata dbMeta = schemaAnalyzer.analyzeDatabase(dbreportingDataSource, DB_REPORTING);
             catalog.getDatabases().add(dbMeta);
         }
         
@@ -171,7 +224,7 @@ public class AnalyzerRunner implements ApplicationRunner {
         log.info("  1. schema-catalog.json");
         log.info("  2. pii-field-inventory.csv");
         log.info("  3. anonymization-strategy-map.json");
-        log.info("  4. anonymization-registry.json (PRIMARY)");
+        log.info("  4. {}", REGISTRY_PRIMARY);
         log.info("  5. constraint-dependency-graph.html");
         log.info("  6. pii-coverage-report.json");
     }
@@ -197,10 +250,10 @@ public class AnalyzerRunner implements ApplicationRunner {
             databases.addAll(Arrays.asList(dbList.split(",")));
         } else {
             // Default: analyze all databases
-            databases.add("db_identity");
-            databases.add("db_1097_identity");
-            databases.add("db_iemr");
-            databases.add("db_reporting");
+            databases.add(DB_IDENTITY);
+            databases.add(DB_1097_IDENTITY);
+            databases.add(DB_IEMR);
+            databases.add(DB_REPORTING);
         }
         
         log.info("Selected databases: {}", databases);

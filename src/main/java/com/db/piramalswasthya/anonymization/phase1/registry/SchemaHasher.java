@@ -1,5 +1,6 @@
 package com.db.piramalswasthya.anonymization.phase1.registry;
 
+import com.db.piramalswasthya.anonymization.phase1.exception.AnonymizationException;
 import com.db.piramalswasthya.anonymization.phase1.model.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -132,7 +133,7 @@ public class SchemaHasher {
             
         } catch (NoSuchAlgorithmException e) {
             log.error("SHA-256 algorithm not available", e);
-            throw new RuntimeException("Failed to compute schema hash", e);
+            throw new AnonymizationException("Failed to compute schema hash", e);
         }
     }
     
