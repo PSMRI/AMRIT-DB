@@ -11,7 +11,7 @@
 
 ## Executive Summary
 
-This master plan provides a complete roadmap for implementing an automated, secure, and repeatable process to refresh the UAT environment with anonymized production data. The project is divided into three sequential phases, with a total estimated timeline of **12 weeks** (3 months).
+This master plan provides a complete roadmap for implementing an automated, secure, and repeatable process to refresh the UAT environment with anonymized production data. The project is divided into three sequential phases, with a total estimated timeline of **12 weeks** (3 months). I mean this was the plan, but speeding off here.
 
 ### Vision
 
