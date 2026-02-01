@@ -97,12 +97,13 @@ public class PIIDetector {
             }
         }
         
-        // No rule matched - apply default classification
-        if (defaultClassification != null) {
+        // No rule matched - try fallback heuristics first
+        // This allows common patterns (like primary key IDs) to be classified before default
+        PIICategory heuristicCategory = applyFallbackClassificationAndReturn(column, tableName);
+        
+        // If heuristic didn't find a match (returned UNKNOWN), apply default classification from YAML
+        if (heuristicCategory == PIICategory.UNKNOWN && defaultClassification != null) {
             applyRuleToColumn(column, defaultClassification);
-        } else {
-            // Fallback heuristics if no default configured
-            applyFallbackClassification(column, tableName);
         }
     }
     
@@ -119,8 +120,9 @@ public class PIIDetector {
     /**
      * Fallback heuristic classification if no YAML rule matches.
      * Uses simple keyword matching on normalized column names.
+     * Returns the category assigned for decision-making by caller.
      */
-    private void applyFallbackClassification(ColumnMetadata column, String tableName) {
+    private PIICategory applyFallbackClassificationAndReturn(ColumnMetadata column, String tableName) {
         String normalizedName = column.getName().toLowerCase();
         
         // Check for common PII patterns not in YAML
@@ -129,27 +131,32 @@ public class PIIDetector {
             column.setRiskLevel(RiskLevel.HIGH);
             column.setDetectionRationale("Fallback: Username pattern detected");
             column.setProposedRuleId("FAKE_USERNAME");
+            return PIICategory.PERSONAL_IDENTIFIER;
         } else if (normalizedName.contains("password") || normalizedName.contains("secret")) {
             column.setPiiCategory(PIICategory.METADATA);
             column.setRiskLevel(RiskLevel.CRITICAL);
             column.setDetectionRationale("Fallback: Credential field detected");
             column.setProposedRuleId("HASH_CREDENTIAL");
+            return PIICategory.METADATA;
         } else if (normalizedName.contains("token") || normalizedName.contains("session")) {
             column.setPiiCategory(PIICategory.METADATA);
             column.setRiskLevel(RiskLevel.MEDIUM);
             column.setDetectionRationale("Fallback: Token/session field detected");
             column.setProposedRuleId("REGENERATE_TOKEN");
-        } else if (normalizedName.contains("id") && column.getPrimaryKey()) {
+            return PIICategory.METADATA;
+        } else if (normalizedName.contains("id") && Boolean.TRUE.equals(column.getPrimaryKey())) {
             column.setPiiCategory(PIICategory.NON_PII);
             column.setRiskLevel(RiskLevel.NONE);
             column.setDetectionRationale("Fallback: Primary key ID (non-PII)");
             column.setProposedRuleId("RETAIN");
+            return PIICategory.NON_PII;
         } else {
             // Unknown - mark for manual review
             column.setPiiCategory(PIICategory.UNKNOWN);
             column.setRiskLevel(RiskLevel.NONE);
             column.setDetectionRationale("No rule matched - requires manual review");
             column.setProposedRuleId("TBD");
+            return PIICategory.UNKNOWN;
         }
     }
     

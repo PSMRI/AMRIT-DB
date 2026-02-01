@@ -93,8 +93,8 @@ class SchemaHasherTest {
         DatabaseMetadata db1 = createTestDatabase();
         DatabaseMetadata db2 = createTestDatabase();
         
-        // Change nullability
-        db2.getTables().get(0).getColumns().get(0).setNullable(false);
+        // Change nullability (column 1 is nullable=true, change it to false)
+        db2.getTables().get(0).getColumns().get(1).setNullable(false);
         
         String hash1 = hasher.computeDatabaseHash(db1);
         String hash2 = hasher.computeDatabaseHash(db2);
