@@ -87,9 +87,10 @@ public class DumpAnonymizerCLI implements Callable<Integer> {
 
         @Option(
             names = {"-s", "--salt"},
-            description = "Salt for hashing (default: AMRIT_2024_SECURE_SALT)"
+            description = "Salt for hashing (REQUIRED for security - use: openssl rand -hex 32)",
+            required = true
         )
-        private String salt = "AMRIT_2024_SECURE_SALT";
+        private String salt;
 
         @Option(
             names = {"--dry-run"},
@@ -115,6 +116,11 @@ public class DumpAnonymizerCLI implements Callable<Integer> {
                 System.out.println();
                 
                 if (!validateInputs()) {
+                    return 1;
+                }
+                
+                // Validate salt security
+                if (!validateSalt()) {
                     return 1;
                 }
 
@@ -217,6 +223,48 @@ public class DumpAnonymizerCLI implements Callable<Integer> {
         }
 
         /**
+         * Validate salt security requirements.
+         */
+        private boolean validateSalt() {
+            System.out.println("Validating salt security...");
+            
+            if (salt == null || salt.trim().isEmpty()) {
+                System.err.println("  ERROR: Salt cannot be empty");
+                return false;
+            }
+            
+            if (salt.length() < 32) {
+                System.err.println("  ERROR: Salt must be at least 32 characters for security");
+                System.err.println("  Current length: " + salt.length());
+                System.err.println("  Generate a secure salt: openssl rand -hex 32");
+                return false;
+            }
+            
+            // Check for weak default salts
+            String[] weakSalts = {
+                "AMRIT_2024_SECURE_SALT",
+                "default",
+                "password",
+                "secret",
+                "salt",
+                "12345678",
+                "test"
+            };
+            
+            for (String weak : weakSalts) {
+                if (salt.toLowerCase().contains(weak.toLowerCase())) {
+                    System.err.println("  ERROR: Detected weak/default salt pattern");
+                    System.err.println("  Generate a secure salt: openssl rand -hex 32");
+                    return false;
+                }
+            }
+            
+            System.out.println("  Salt validation passed (length: " + salt.length() + " characters)");
+            System.out.println();
+            return true;
+        }
+        
+        /**
          * Validate all input parameters and files.
          */
         private boolean validateInputs() {
@@ -232,13 +280,12 @@ public class DumpAnonymizerCLI implements Callable<Integer> {
                 System.err.println("  ERROR: Input file not readable: " + inputFile);
                 valid = false;
             } else {
-                long sizeBytes = 0;
                 try {
-                    sizeBytes = Files.size(inputPath);
+                    long sizeBytes = Files.size(inputPath);
                     double sizeMB = sizeBytes / (1024.0 * 1024.0);
-                    System.out.println("  Input file: " + inputFile + " (" + String.format("%.2f", sizeMB) + " MB)");
+                    System.out.println("  Input file: " + inputFile + " (" + String.format("%.2f", sizeMB) + " MB, " + sizeBytes + " bytes)");
                 } catch (Exception e) {
-                    System.err.println("  WARNING: Could not read input file size");
+                    System.err.println("  WARNING: Could not read input file size: " + e.getMessage());
                 }
             }
 
