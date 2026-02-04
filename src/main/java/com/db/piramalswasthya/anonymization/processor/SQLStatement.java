@@ -1,4 +1,4 @@
-package com.db.piramalswasthya.anonymization.processor.model;
+package com.db.piramalswasthya.anonymization.processor;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

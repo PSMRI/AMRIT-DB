@@ -11,6 +11,7 @@ import java.time.Instant;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@SuppressWarnings("unused") // Reserved for future web UI/REST API features
 public class AnonymizationJob {
     private Long id;
     private String jobId;
