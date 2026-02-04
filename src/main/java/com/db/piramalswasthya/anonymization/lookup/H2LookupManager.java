@@ -83,14 +83,53 @@ public class H2LookupManager implements AutoCloseable {
      * @throws AnonymizationException if initialization fails
      */
     public H2LookupManager(Path dbFilePath, String salt) throws AnonymizationException {
-        this.salt = salt != null ? salt : "AMRIT_2024_SECURE_SALT";
+        this(dbFilePath, salt, generateSecurePassword());
+    }
+    
+    /**
+     * Create a new H2 lookup manager with file-based storage and custom password.
+     * 
+     * @param dbFilePath Path to the H2 database file (without .mv.db extension)
+     * @param salt Salt for hashing original values
+     * @param password Password for H2 database connection (minimum 16 characters recommended)
+     * @throws AnonymizationException if initialization fails
+     */
+    public H2LookupManager(Path dbFilePath, String salt, String password) throws AnonymizationException {
+        // Validate salt security - NEVER use default hardcoded salts
+        if (salt == null || salt.isEmpty()) {
+            throw new AnonymizationException("Salt cannot be null or empty. Generate a secure salt using: openssl rand -hex 32");
+        }
+        if (salt.length() < 16) {
+            throw new AnonymizationException("Salt must be at least 16 characters for security. Current length: " + salt.length());
+        }
+        if ("AMRIT_2024_SECURE_SALT".equals(salt) || "default".equalsIgnoreCase(salt) || "salt".equalsIgnoreCase(salt)) {
+            throw new AnonymizationException("Hardcoded default salt detected. Generate a unique secure salt for production.");
+        }
+        this.salt = salt;
+        
+        // Validate password security
+        if (password == null || password.isEmpty()) {
+            throw new AnonymizationException("H2 database password cannot be empty for security reasons");
+        }
+        if (password.length() < 16) {
+            throw new AnonymizationException("H2 database password must be at least 16 characters. Current length: " + password.length());
+        }
+        
+        // Validate database file path to prevent path traversal
+        if (dbFilePath == null) {
+            throw new AnonymizationException("Database file path cannot be null");
+        }
+        String pathStr = dbFilePath.toAbsolutePath().normalize().toString();
+        if (pathStr.contains("..") || pathStr.contains("~")) {
+            throw new AnonymizationException("Invalid database path - potential path traversal attack detected");
+        }
         
         try {
             // Create H2 embedded database connection
-            String jdbcUrl = "jdbc:h2:" + dbFilePath.toAbsolutePath() + ";MODE=MySQL;AUTO_SERVER=TRUE";
+            String jdbcUrl = "jdbc:h2:" + dbFilePath.toAbsolutePath() + ";MODE=MySQL;AUTO_SERVER=TRUE;CIPHER=AES";
             log.info("Initializing H2 lookup database: {}", jdbcUrl);
             
-            this.connection = DriverManager.getConnection(jdbcUrl, "sa", "");
+            this.connection = DriverManager.getConnection(jdbcUrl, "sa", password);
             this.connection.setAutoCommit(true);
             
             // Create table and index
@@ -104,7 +143,14 @@ public class H2LookupManager implements AutoCloseable {
             this.selectStmt = connection.prepareStatement(SELECT_SQL);
             this.updateStmt = connection.prepareStatement(UPDATE_SQL);
             
-            long count = getLookupCount();
+            // Get count inline to avoid overridable method call in constructor
+            long count = 0;
+            try (Statement countStmt = connection.createStatement();
+                 ResultSet rs = countStmt.executeQuery("SELECT COUNT(*) FROM lookup")) {
+                if (rs.next()) {
+                    count = rs.getLong(1);
+                }
+            }
             log.info("H2 lookup database initialized successfully. Current entries: {}", count);
             
         } catch (SQLException e) {
@@ -236,6 +282,22 @@ public class H2LookupManager implements AutoCloseable {
         } catch (SQLException e) {
             throw new AnonymizationException("Failed to compact database", e);
         }
+    }
+    
+    /**
+     * Generate a secure random password for H2 database.
+     * Uses cryptographically strong random number generator (SecureRandom).
+     * 
+     * SECURITY NOTE: This generates a 256-bit password for H2 database encryption.
+     * The password is session-specific and not persisted.
+     * 
+     * @return SHA-256 hex string of 32 random bytes (64 hex characters)
+     */
+    private static String generateSecurePassword() {
+        java.security.SecureRandom random = new java.security.SecureRandom();
+        byte[] bytes = new byte[32]; // 256 bits
+        random.nextBytes(bytes);
+        return DigestUtils.sha256Hex(bytes);
     }
     
     /**
