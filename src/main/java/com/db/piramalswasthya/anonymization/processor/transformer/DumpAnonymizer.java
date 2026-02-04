@@ -1,6 +1,7 @@
 package com.db.piramalswasthya.anonymization.processor.transformer;
 
 import com.db.piramalswasthya.anonymization.exception.AnonymizationException;
+import com.db.piramalswasthya.anonymization.lookup.H2LookupManager;
 import com.db.piramalswasthya.anonymization.model.AnonymizationRegistry.ColumnRegistry;
 import com.db.piramalswasthya.anonymization.processor.parser.InsertStatementParser;
 import com.db.piramalswasthya.anonymization.processor.parser.SQLDumpReader;
@@ -17,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Main orchestrator for anonymizing SQL dumps.
@@ -29,18 +31,32 @@ public class DumpAnonymizer {
     private final AnonymizationRegistryService registry;
     private final StrategyFactory strategyFactory;
     private final InsertStatementParser parser;
+    private final H2LookupManager lookupManager;  // Optional: can be null
     
     private long totalStatements = 0;
     private long insertStatements = 0;
     private long rowsProcessed = 0;
     private long valuesAnonymized = 0;
+    private long lookupHits = 0;
+    private long lookupMisses = 0;
     
     public DumpAnonymizer(AnonymizationRegistryService registry,
                          StrategyFactory strategyFactory,
                          InsertStatementParser parser) {
+        this(registry, strategyFactory, parser, null);
+    }
+    
+    /**
+     * Constructor with optional lookup manager for consistent anonymization
+     */
+    public DumpAnonymizer(AnonymizationRegistryService registry,
+                         StrategyFactory strategyFactory,
+                         InsertStatementParser parser,
+                         H2LookupManager lookupManager) {
         this.registry = registry;
         this.strategyFactory = strategyFactory;
         this.parser = parser;
+        this.lookupManager = lookupManager;
     }
     
     /**
@@ -197,6 +213,20 @@ public class DumpAnonymizer {
             return originalValue;
         }
         
+        // Check lookup first if available
+        if (lookupManager != null) {
+            Optional<String> cachedValue = lookupManager.findAnonymized(
+                databaseName, tableName, columnName, originalValue
+            );
+            
+            if (cachedValue.isPresent()) {
+                lookupHits++;
+                return cachedValue.get();
+            }
+            
+            lookupMisses++;
+        }
+        
         // Get strategy
         AnonymizationStrategy strategy = strategyFactory.getStrategy(strategyName);
         
@@ -211,8 +241,18 @@ public class DumpAnonymizer {
         
         // Apply strategy
         AnonymizationResult result = strategy.anonymize(originalValue, context);
+        String anonymizedValue = result.anonymizedValue();
         
-        return result.anonymizedValue();
+        // Store in lookup if available
+        if (lookupManager != null) {
+            lookupManager.storeMapping(
+                databaseName, tableName, columnName,
+                originalValue, anonymizedValue,
+                strategyName, columnRule.getDataType()
+            );
+        }
+        
+        return anonymizedValue;
     }
     
     /**
@@ -235,6 +275,8 @@ public class DumpAnonymizer {
         insertStatements = 0;
         rowsProcessed = 0;
         valuesAnonymized = 0;
+        lookupHits = 0;
+        lookupMisses = 0;
     }
     
     /**
@@ -242,8 +284,8 @@ public class DumpAnonymizer {
      */
     private void logProgress(SQLDumpReader reader) {
         double progress = reader.getProgress() * 100;
-        log.info("Progress: {:.1f}% | Statements: {} | Rows: {} | Anonymized: {}",
-            progress, totalStatements, rowsProcessed, valuesAnonymized);
+        log.info("Progress: {:.1f}% | Statements: {} | Rows: {} | Anonymized: {} | Lookup: {}/{}",
+            progress, totalStatements, rowsProcessed, valuesAnonymized, lookupHits, (lookupHits + lookupMisses));
     }
     
     /**
@@ -255,6 +297,13 @@ public class DumpAnonymizer {
         log.info("INSERT statements: {}", stats.getInsertStatements());
         log.info("Rows processed: {}", stats.getRowsProcessed());
         log.info("Values anonymized: {}", stats.getValuesAnonymized());
+        
+        if (lookupManager != null) {
+            log.info("Lookup hits: {} ({:.1f}%)", lookupHits, 
+                100.0 * lookupHits / (lookupHits + lookupMisses));
+            log.info("Lookup misses: {}", lookupMisses);
+        }
+        
         log.info("Duration: {} seconds", stats.getDurationMs() / 1000.0);
         log.info("Throughput: {:.0f} rows/second", 
             stats.getRowsProcessed() / (stats.getDurationMs() / 1000.0));
