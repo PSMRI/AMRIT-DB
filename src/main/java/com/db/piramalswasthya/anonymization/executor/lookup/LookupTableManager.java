@@ -2,24 +2,23 @@ package com.db.piramalswasthya.anonymization.executor.lookup;
 
 import com.db.piramalswasthya.anonymization.exception.AnonymizationException;
 import com.db.piramalswasthya.anonymization.executor.model.LookupEntry;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Instant;
 import java.util.Optional;
 
-@Slf4j
+
 @Component
 public class LookupTableManager {
-    
+    private static final Logger log = LoggerFactory.getLogger(LookupTableManager.class);
     private final JdbcTemplate jdbcTemplate;
     
     @Value("${anonymization.lookup.database:db_iemr}")

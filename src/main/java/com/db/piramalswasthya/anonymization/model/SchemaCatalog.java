@@ -25,6 +25,18 @@ public class SchemaCatalog {
     @Builder.Default
     private List<DatabaseMetadata> databases = new ArrayList<>();
     
+    public List<DatabaseMetadata> getDatabases() {
+        return databases;
+    }
+    
+    public void setDatabases(List<DatabaseMetadata> databases) {
+        this.databases = databases;
+    }
+    
+    public static SchemaCatalogBuilder builder() {
+        return new SchemaCatalogBuilder();
+    }
+    
     /**
      * Total count of tables across all databases.
      */
@@ -41,5 +53,41 @@ public class SchemaCatalog {
         return databases.stream()
             .mapToInt(DatabaseMetadata::getTotalPiiColumnCount)
             .sum();
+    }
+    
+    public static class SchemaCatalogBuilder {
+        private String version;
+        private Instant generatedAt;
+        private String toolVersion;
+        private List<DatabaseMetadata> databases = new ArrayList<>();
+        
+        public SchemaCatalogBuilder version(String version) {
+            this.version = version;
+            return this;
+        }
+        
+        public SchemaCatalogBuilder generatedAt(Instant generatedAt) {
+            this.generatedAt = generatedAt;
+            return this;
+        }
+        
+        public SchemaCatalogBuilder toolVersion(String toolVersion) {
+            this.toolVersion = toolVersion;
+            return this;
+        }
+        
+        public SchemaCatalogBuilder databases(List<DatabaseMetadata> databases) {
+            this.databases = databases;
+            return this;
+        }
+        
+        public SchemaCatalog build() {
+            SchemaCatalog catalog = new SchemaCatalog();
+            catalog.version = this.version;
+            catalog.generatedAt = this.generatedAt;
+            catalog.toolVersion = this.toolVersion;
+            catalog.databases = this.databases;
+            return catalog;
+        }
     }
 }

@@ -28,6 +28,22 @@ public class DatabaseMetadata {
     private String schemaHash; // SHA-256 of canonicalized schema
     private String capturedAt;
     
+    public String getDatabaseName() {
+        return databaseName;
+    }
+    
+    public void setDatabaseName(String databaseName) {
+        this.databaseName = databaseName;
+    }
+    
+    public List<TableMetadata> getTables() {
+        return tables;
+    }
+    
+    public void setTables(List<TableMetadata> tables) {
+        this.tables = tables;
+    }
+    
     /**
      * Count of tables with PII.
      */

@@ -211,7 +211,7 @@ public class InsertStatementParser {
                         continue;
                     }
                     // End of row
-                    String value = valueBuffer.toString().trim();
+                    String value = cleanValue(valueBuffer.toString().trim());
                     if (!value.isEmpty()) {
                         rowValues.add(value);
                     }
@@ -221,7 +221,7 @@ public class InsertStatementParser {
                 
                 if (!inString && c == ',' && depth == 0) {
                     // End of value
-                    String value = valueBuffer.toString().trim();
+                    String value = cleanValue(valueBuffer.toString().trim());
                     rowValues.add(value);
                     valueBuffer.setLength(0);
                     pos++;
@@ -236,6 +236,26 @@ public class InsertStatementParser {
         }
         
         return allRows;
+    }
+    
+    /**
+     * Clean a value by stripping quotes and unescaping
+     */
+    private String cleanValue(String value) {
+        if (value == null || value.isEmpty()) {
+            return value;
+        }
+        
+        // Check if value is a quoted string
+        if ((value.startsWith("'") && value.endsWith("'")) || 
+            (value.startsWith("\"") && value.endsWith("\""))) {
+            // Remove surrounding quotes
+            value = value.substring(1, value.length() - 1);
+            // Unescape internal quotes
+            value = value.replace("\\'" , "'").replace("\\\"", "\"");
+        }
+        
+        return value;
     }
     
     /**

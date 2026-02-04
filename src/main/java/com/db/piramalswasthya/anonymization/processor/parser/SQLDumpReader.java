@@ -99,23 +99,18 @@ public class SQLDumpReader implements AutoCloseable {
                 
                 // Handle single-line comments
                 if (trimmed.startsWith("--") || trimmed.startsWith("#")) {
-                    if (statementBuffer.length() == 0) {
-                        return trimmed; // Return comment as statement
-                    }
-                    continue; // Skip inline comments
+                    continue; // Skip all comments
                 }
                 
-                // Handle multi-line comments (/* ... */)
+                // Handle multi-line comments (/* ... */) - always skip
                 if (trimmed.startsWith("/*")) {
                     if (trimmed.endsWith("*/")) {
-                        if (statementBuffer.length() == 0) {
-                            return trimmed; // Return single-line block comment
-                        }
-                        continue;
+                        continue; // Single-line block comment - skip
                     }
                     // Multi-line comment start - skip until */
                     while ((currentLine = reader.readLine()) != null) {
                         lineNumber++;
+                        bytesRead += currentLine.getBytes(StandardCharsets.UTF_8).length + 1;
                         if (currentLine.trim().endsWith("*/")) {
                             break;
                         }
@@ -123,14 +118,20 @@ public class SQLDumpReader implements AutoCloseable {
                     continue;
                 }
                 
+                // Strip inline comments (-- or #) from the line
+                String lineWithoutComment = stripInlineComment(trimmed);
+                if (lineWithoutComment.isEmpty()) {
+                    continue;
+                }
+                
                 // Append line to statement buffer
                 if (statementBuffer.length() > 0) {
                     statementBuffer.append(' ');
                 }
-                statementBuffer.append(trimmed);
+                statementBuffer.append(lineWithoutComment);
                 
                 // Check if statement is complete (ends with semicolon)
-                if (trimmed.endsWith(";")) {
+                if (lineWithoutComment.endsWith(";")) {
                     String statement = statementBuffer.toString();
                     statementBuffer.setLength(0);
                     return statement;
@@ -144,11 +145,57 @@ public class SQLDumpReader implements AutoCloseable {
                 return statement;
             }
             
-            return null; // EOF
+            return null;
             
         } catch (IOException e) {
             throw new AnonymizationException("Error reading SQL dump at line " + lineNumber, e);
         }
+    }
+    
+    /**
+     * Strip inline comments from a line.
+     * Handles -- and # style comments.
+     * 
+     * @param line Line to process
+     * @return Line without inline comment, trimmed
+     */
+    private String stripInlineComment(String line) {
+        // Find comment markers not inside quotes
+        int commentPos = -1;
+        boolean inQuotes = false;
+        char quoteChar = 0;
+        
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+            
+            // Handle quotes
+            if ((c == '\'' || c == '"') && (i == 0 || line.charAt(i - 1) != '\\')) {
+                if (!inQuotes) {
+                    inQuotes = true;
+                    quoteChar = c;
+                } else if (c == quoteChar) {
+                    inQuotes = false;
+                }
+                continue;
+            }
+            
+            // Look for comment markers outside quotes
+            if (!inQuotes) {
+                if (c == '-' && i + 1 < line.length() && line.charAt(i + 1) == '-') {
+                    commentPos = i;
+                    break;
+                } else if (c == '#') {
+                    commentPos = i;
+                    break;
+                }
+            }
+        }
+        
+        if (commentPos >= 0) {
+            return line.substring(0, commentPos).trim();
+        }
+        
+        return line.trim();
     }
     
     /**

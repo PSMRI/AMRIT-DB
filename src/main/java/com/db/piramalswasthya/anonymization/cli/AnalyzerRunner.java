@@ -5,14 +5,14 @@ import com.db.piramalswasthya.anonymization.export.ArtifactExporter;
 import com.db.piramalswasthya.anonymization.model.*;
 import com.db.piramalswasthya.anonymization.registry.RegistryGenerator;
 import com.db.piramalswasthya.anonymization.scan.DatabaseSchemaAnalyzer;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.sql.DataSource;
 import java.time.Instant;
 import java.util.*;
@@ -21,7 +21,7 @@ import java.util.*;
  * CLI runner for Phase 1 anonymization analysis.
  * Activated via --spring.profiles.active=analyzer or --analyze-schema flag.
  */
-@Slf4j
+
 @Component
 @ConditionalOnProperty(
     prefix = "anonymization.analyzer",
@@ -30,7 +30,7 @@ import java.util.*;
     matchIfMissing = false
 )
 public class AnalyzerRunner implements ApplicationRunner {
-    
+    private static final Logger log = LoggerFactory.getLogger(AnalyzerRunner.class);
     private static final String TOOL_VERSION = "1.0.0-PHASE1";
     private static final String DEFAULT_OUTPUT_DIR = "docs/phase1-outputs";
     
