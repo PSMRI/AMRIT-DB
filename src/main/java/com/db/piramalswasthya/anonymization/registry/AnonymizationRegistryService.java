@@ -61,6 +61,28 @@ public class AnonymizationRegistryService {
         }
     }
     
+    public void loadRegistryFromFile(java.nio.file.Path filePath) throws AnonymizationException {
+        try {
+            log.info("Loading anonymization registry from file: {}", filePath);
+            
+            String filename = filePath.getFileName().toString();
+            
+            if (filename.endsWith(".yml") || filename.endsWith(".yaml")) {
+                registry = yamlMapper.readValue(filePath.toFile(), AnonymizationRegistry.class);
+            } else if (filename.endsWith(".json")) {
+                registry = jsonMapper.readValue(filePath.toFile(), AnonymizationRegistry.class);
+            } else {
+                throw new AnonymizationException("Unsupported registry file format: " + filename);
+            }
+            
+            log.info("Registry loaded successfully - Version: {}, Databases: {}", 
+                registry.getVersion(), registry.getDatabases().size());
+            
+        } catch (Exception e) {
+            throw new AnonymizationException("Failed to load anonymization registry from file", e);
+        }
+    }
+    
     public ColumnRegistry getColumnRule(String databaseName, String tableName, String columnName) {
         if (registry == null || registry.getDatabases() == null) {
             return null;
