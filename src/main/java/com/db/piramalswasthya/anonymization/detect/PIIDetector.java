@@ -4,12 +4,14 @@ import com.db.piramalswasthya.anonymization.exception.AnonymizationException;
 import com.db.piramalswasthya.anonymization.model.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PostConstruct;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -20,7 +22,6 @@ import java.util.*;
 @Slf4j
 @Service
 public class PIIDetector {
-    
     private List<PIIDetectionRule> rules = new ArrayList<>();
     private PIIDetectionRule defaultClassification;
     

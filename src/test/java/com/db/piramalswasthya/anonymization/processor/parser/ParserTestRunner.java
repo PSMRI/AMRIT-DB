@@ -1,7 +1,7 @@
 package com.db.piramalswasthya.anonymization.processor.parser;
 
 import com.db.piramalswasthya.anonymization.exception.AnonymizationException;
-import com.db.piramalswasthya.anonymization.processor.model.SQLStatement;
+import com.db.piramalswasthya.anonymization.processor.SQLStatement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.nio.file.Path;

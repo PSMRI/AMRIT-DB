@@ -1,6 +1,6 @@
 package com.db.piramalswasthya.anonymization.processor.parser;
 
-import com.db.piramalswasthya.anonymization.processor.model.SQLStatement;
+import com.db.piramalswasthya.anonymization.processor.SQLStatement;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

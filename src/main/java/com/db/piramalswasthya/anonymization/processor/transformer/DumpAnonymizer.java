@@ -5,7 +5,7 @@ import com.db.piramalswasthya.anonymization.lookup.H2LookupManager;
 import com.db.piramalswasthya.anonymization.model.AnonymizationRegistry.ColumnRegistry;
 import com.db.piramalswasthya.anonymization.processor.parser.InsertStatementParser;
 import com.db.piramalswasthya.anonymization.processor.parser.SQLDumpReader;
-import com.db.piramalswasthya.anonymization.processor.model.SQLStatement;
+import com.db.piramalswasthya.anonymization.processor.SQLStatement;
 import com.db.piramalswasthya.anonymization.processor.writer.SQLDumpWriter;
 import com.db.piramalswasthya.anonymization.registry.AnonymizationRegistryService;
 import com.db.piramalswasthya.anonymization.executor.strategy.AnonymizationResult;

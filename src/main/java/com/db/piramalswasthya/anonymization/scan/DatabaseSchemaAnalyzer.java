@@ -3,8 +3,9 @@ package com.db.piramalswasthya.anonymization.scan;
 import com.db.piramalswasthya.anonymization.exception.AnonymizationException;
 import com.db.piramalswasthya.anonymization.model.*;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
 import javax.sql.DataSource;
 import java.sql.*;
 import java.time.Instant;
@@ -18,6 +19,8 @@ import java.util.List;
 @Slf4j
 @Service
 public class DatabaseSchemaAnalyzer {
+
+    private static final Logger log = LoggerFactory.getLogger(DatabaseSchemaAnalyzer.class);
 
     /**
      * Analyze a single database and extract all schema metadata.

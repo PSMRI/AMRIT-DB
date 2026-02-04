@@ -49,9 +49,6 @@ public class DumpAnonymizerCLI implements Callable<Integer> {
         return 0;
     }
 
-    /**
-     * Main anonymization command.
-     */
     @Command(
         name = "anonymize",
         description = "Anonymize a SQL dump file",
@@ -109,7 +106,6 @@ public class DumpAnonymizerCLI implements Callable<Integer> {
             Instant startTime = Instant.now();
             
             try {
-                // Validate inputs
                 System.out.println("========================================");
                 System.out.println("AMRIT Database Anonymization Tool");
                 System.out.println("========================================");
@@ -119,7 +115,6 @@ public class DumpAnonymizerCLI implements Callable<Integer> {
                     return 1;
                 }
                 
-                // Validate salt security
                 if (!validateSalt()) {
                     return 1;
                 }
@@ -135,7 +130,6 @@ public class DumpAnonymizerCLI implements Callable<Integer> {
                     System.out.println("  Registry loaded: " + registryService.getTotalRulesCount() + " rules");
                 }
 
-                // Initialize strategies
                 List<AnonymizationStrategy> strategyList = new ArrayList<>();
                 strategyList.add(new PreserveStrategy());
                 strategyList.add(new SuppressStrategy());
@@ -149,7 +143,6 @@ public class DumpAnonymizerCLI implements Callable<Integer> {
                     System.out.println("  Strategies registered: " + strategyList.size());
                 }
 
-                // Initialize lookup database
                 H2LookupManager lookupManager = new H2LookupManager(
                     Paths.get(lookupDbPath),
                     salt
@@ -158,10 +151,8 @@ public class DumpAnonymizerCLI implements Callable<Integer> {
                     System.out.println("  Lookup database initialized: " + lookupManager.getLookupCount() + " cached entries");
                 }
                 
-                // Initialize parser
                 InsertStatementParser parser = new InsertStatementParser();
 
-                // Create anonymizer
                 DumpAnonymizer anonymizer = new DumpAnonymizer(
                     registryService,
                     strategyFactory,
@@ -174,19 +165,17 @@ public class DumpAnonymizerCLI implements Callable<Integer> {
                 System.out.println("  Output: " + outputFile);
                 System.out.println();
 
-                // Process dump
                 Path inputPath = Paths.get(inputFile);
                 Path outputPath = Paths.get(outputFile);
 
                 anonymizer.anonymizeDump(inputPath, outputPath);
 
-                // Calculate duration
                 Duration duration = Duration.between(startTime, Instant.now());
                 long seconds = duration.getSeconds();
                 long minutes = seconds / 60;
                 long remainingSeconds = seconds % 60;
 
-                // Show results
+
                 System.out.println();
                 System.out.println("========================================");
                 System.out.println("Anonymization Complete!");
@@ -196,7 +185,6 @@ public class DumpAnonymizerCLI implements Callable<Integer> {
                 System.out.println();
                 System.out.println("The anonymized dump is ready for UAT deployment.");
 
-                // Cleanup
                 lookupManager.close();
 
                 return 0;
@@ -240,7 +228,6 @@ public class DumpAnonymizerCLI implements Callable<Integer> {
                 return false;
             }
             
-            // Check for weak default salts
             String[] weakSalts = {
                 "AMRIT_2024_SECURE_SALT",
                 "default",
@@ -271,7 +258,6 @@ public class DumpAnonymizerCLI implements Callable<Integer> {
             System.out.println("Validating inputs...");
             boolean valid = true;
 
-            // Check input file exists
             Path inputPath = Paths.get(inputFile);
             if (!Files.exists(inputPath)) {
                 System.err.println("  ERROR: Input file not found: " + inputFile);
@@ -289,7 +275,6 @@ public class DumpAnonymizerCLI implements Callable<Integer> {
                 }
             }
 
-            // Check output file can be created
             Path outputPath = Paths.get(outputFile);
             Path outputParent = outputPath.getParent();
             if (outputParent != null && !Files.exists(outputParent)) {
@@ -306,7 +291,6 @@ public class DumpAnonymizerCLI implements Callable<Integer> {
                 System.out.println("  WARNING: Output file exists and will be overwritten: " + outputFile);
             }
 
-            // Check registry file
             if (registryFile != null) {
                 Path registryPath = Paths.get(registryFile);
                 if (!Files.exists(registryPath)) {
@@ -336,10 +320,8 @@ public class DumpAnonymizerCLI implements Callable<Integer> {
                 AnonymizationRegistryService service = new AnonymizationRegistryService();
                 
                 if (registryFile != null) {
-                    // Load from file
                     service.loadRegistryFromFile(Paths.get(registryFile));
                 } else {
-                    // Load from classpath
                     service.loadRegistry();
                 }
                 
@@ -351,9 +333,6 @@ public class DumpAnonymizerCLI implements Callable<Integer> {
         }
     }
 
-    /**
-     * Main entry point.
-     */
     public static void main(String[] args) {
         int exitCode = new CommandLine(new DumpAnonymizerCLI()).execute(args);
         System.exit(exitCode);
