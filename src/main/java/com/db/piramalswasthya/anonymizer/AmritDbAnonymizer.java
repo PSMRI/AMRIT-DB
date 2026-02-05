@@ -1,3 +1,24 @@
+/*
+* AMRIT – Accessible Medical Records via Integrated Technology 
+* Integrated EHR (Electronic Health Records) Solution 
+*
+* Copyright (C) "Piramal Swasthya Management and Research Institute" 
+*
+* This file is part of AMRIT.
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see https://www.gnu.org/licenses/.
+*/
 package com.db.piramalswasthya.anonymizer;
 
 import com.db.piramalswasthya.anonymizer.cli.*;
@@ -26,8 +47,7 @@ import picocli.CommandLine.Command;
     mixinStandardHelpOptions = true,
     subcommands = {
         RunCommand.class,
-        DiffSchemaCommand.class,
-        ValidateRulesCommand.class
+        DiffSchemaCommand.class
     }
 )
 public class AmritDbAnonymizer implements Runnable {
@@ -37,9 +57,8 @@ public class AmritDbAnonymizer implements Runnable {
         System.out.println("AMRIT DB Anonymization Tool v2.0.0");
         System.out.println();
         System.out.println("Commands:");
-        System.out.println("  run           - Execute anonymization (DB1 → Output)");
+        System.out.println("  run           - Execute anonymization (DB1 → DB2)");
         System.out.println("  diff-schema   - Compare DB schema to rules.yaml");
-        System.out.println("  validate-rules - Validate rules.yaml structure");
         System.out.println();
         System.out.println("Use --help with any command for details");
     }
