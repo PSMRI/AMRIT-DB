@@ -163,7 +163,7 @@ public class PIIDetector {
     }
     
     /**
-     * Convert default classification config to a PIIDetectionRule.
+     * Convert default classification configuration to a PIIDetectionRule.
      */
     private PIIDetectionRule convertToRule(Map<String, Object> config) {
         PIIDetectionRule rule = new PIIDetectionRule();

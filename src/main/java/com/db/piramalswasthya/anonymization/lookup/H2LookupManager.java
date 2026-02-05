@@ -129,7 +129,9 @@ public class H2LookupManager implements AutoCloseable {
             String jdbcUrl = "jdbc:h2:" + dbFilePath.toAbsolutePath() + ";MODE=MySQL;AUTO_SERVER=TRUE;CIPHER=AES";
             log.info("Initializing H2 lookup database: {}", jdbcUrl);
             
-            this.connection = DriverManager.getConnection(jdbcUrl, "sa", password);
+            // H2 with CIPHER requires password format: "file_password user_password"
+            String h2Password = password + " " + password;
+            this.connection = DriverManager.getConnection(jdbcUrl, "sa", h2Password);
             this.connection.setAutoCommit(true);
             
             // Create table and index
