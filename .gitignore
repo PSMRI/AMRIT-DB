@@ -59,3 +59,12 @@ mvnw.cmd
 mvnw
 
 src/main/environment/common_local.properties
+src/main/environment/anonymization_local.yaml
+src/main/environment/anonymization_production.yaml
+src/main/environment/anonymization_docker.yaml
+src/main/environment/anonymization_ci.yaml
+
+# Anonymization outputs
+run-report*.json
+logs/
+lookup-cache/

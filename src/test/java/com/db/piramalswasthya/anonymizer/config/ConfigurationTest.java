@@ -21,10 +21,21 @@ class ConfigurationTest {
             source:
               host: db-replica.example.com
               port: 3306
-              database: db_identity
+              schemas:
+                - db_identity
+                - db_iemr
               username: readonly_user
               password: test_password
               readOnly: true
+            
+            target:
+              host: uat-db.example.com
+              port: 3306
+              schemas:
+                - db_identity
+                - db_iemr
+              username: write_user
+              password: test_password
             
             safety:
               enabled: true
@@ -36,11 +47,6 @@ class ConfigurationTest {
             performance:
               batchSize: 1000
               fetchSize: 1000
-            
-            output:
-              mode: SQL_DUMP
-              path: ./output/test.sql.gz
-              compress: true
             
             rulesFile: rules.yaml
             loggingPath: ./logs
@@ -55,14 +61,15 @@ class ConfigurationTest {
         assertNotNull(config);
         assertEquals("db-replica.example.com", config.getSource().getHost());
         assertEquals(3306, config.getSource().getPort());
-        assertEquals("db_identity", config.getSource().getDatabase());
+        assertNotNull(config.getSource().getSchemas());
+        assertEquals(2, config.getSource().getSchemas().size());
+        assertTrue(config.getSource().getSchemas().contains("db_identity"));
         assertTrue(config.getSource().isReadOnly());
         
         assertTrue(config.getSafety().isEnabled());
         assertEquals(1, config.getSafety().getAllowedHosts().size());
         
         assertEquals(1000, config.getPerformance().getBatchSize());
-        assertEquals(AnonymizerConfig.OutputMode.SQL_DUMP, config.getOutput().getMode());
         
         Files.deleteIfExists(tempFile);
     }

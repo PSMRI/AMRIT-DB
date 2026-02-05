@@ -32,8 +32,10 @@ public class RunReport {
     private Long totalDurationMs;
     private String status; // SUCCESS, FAILED, PARTIAL
     private String configHash;
+    private String rulesHash;
     private String rulesVersion;
     private String toolVersion = "2.0.0";
+    private String errorMessage;
     
     private List<TableReport> tables = new ArrayList<>();
     private Map<String, String> errors = new HashMap<>();

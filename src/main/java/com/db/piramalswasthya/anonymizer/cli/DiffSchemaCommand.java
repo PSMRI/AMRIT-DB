@@ -57,30 +57,43 @@ public class DiffSchemaCommand implements Callable<Integer> {
             AnonymizerConfig config = mapper.readValue(new File(configFile), AnonymizerConfig.class);
             AnonymizationRules rules = mapper.readValue(new File(rulesFile), AnonymizationRules.class);
             
-            // 2. Connect to database
+            // 2. Process each schema
             log.info("Connecting to database: {}", config.getSource().getHost());
-            DataSource dataSource = createDataSource(config.getSource());
+            boolean anyDifferences = false;
+            Map<String, SchemaDiff> allDiffs = new LinkedHashMap<>();
             
-            // 3. Query schema from INFORMATION_SCHEMA
-            Map<String, Map<String, ColumnInfo>> dbSchema = extractDatabaseSchema(
-                dataSource, config.getSource().getDatabase());
-            
-            // 4. Compare with rules
-            SchemaDiff diff = compareSchemas(config.getSource().getDatabase(), dbSchema, rules);
-            
-            // 5. Report differences
-            reportDifferences(diff);
-            
-            // 6. Generate suggested rules if output specified
-            if (outputFile != null) {
-                generateSuggestedRules(diff, rules, outputFile);
+            for (String schema : config.getSource().getSchemas()) {
+                log.info("\n=== Processing schema: {} ===", schema);
+                
+                // 3. Create DataSource for this schema
+                DataSource dataSource = createDataSource(config.getSource(), schema);
+                
+                // 4. Query schema from INFORMATION_SCHEMA
+                Map<String, Map<String, ColumnInfo>> dbSchema = extractDatabaseSchema(
+                    dataSource, schema);
+                
+                // 5. Compare with rules
+                SchemaDiff diff = compareSchemas(schema, dbSchema, rules);
+                allDiffs.put(schema, diff);
+                
+                // 6. Report differences for this schema
+                reportDifferences(schema, diff);
+                
+                if (diff.hasDifferences()) {
+                    anyDifferences = true;
+                }
             }
             
-            if (diff.hasDifferences()) {
-                log.warn("Schema differences detected. Review output and update rules.yaml");
+            // 7. Generate suggested rules if output specified
+            if (outputFile != null) {
+                generateSuggestedRules(allDiffs, rules, outputFile);
+            }
+            
+            if (anyDifferences) {
+                log.warn("\nSchema differences detected. Review output and update rules.yaml");
                 return 1;
             } else {
-                log.info("No schema differences detected. Rules are up to date.");
+                log.info("\nNo schema differences detected. Rules are up to date.");
                 return 0;
             }
             
@@ -194,8 +207,8 @@ public class DiffSchemaCommand implements Callable<Integer> {
     /**
      * Report differences to console
      */
-    private void reportDifferences(SchemaDiff diff) {
-        log.info("\nSchema Drift Analysis");
+    private void reportDifferences(String schemaName, SchemaDiff diff) {
+        log.info("\nSchema Drift Analysis - {}", schemaName);
         log.info("=====================\n");
         
         if (!diff.missingTables.isEmpty()) {
@@ -225,37 +238,54 @@ public class DiffSchemaCommand implements Callable<Integer> {
     /**
      * Generate suggested rules YAML
      */
-    private void generateSuggestedRules(SchemaDiff diff, AnonymizationRules existingRules, 
+    private void generateSuggestedRules(Map<String, SchemaDiff> allDiffs, 
+                                       AnonymizationRules existingRules, 
                                        String outputPath) throws Exception {
         
         StringBuilder yaml = new StringBuilder();
         yaml.append("# Suggested rule additions based on schema diff\n");
         yaml.append("# Review and merge into rules.yaml\n\n");
         
-        if (!diff.missingColumns.isEmpty()) {
-            yaml.append("# Missing columns to add:\n");
-            for (Map.Entry<String, List<ColumnInfo>> entry : diff.missingColumns.entrySet()) {
-                String tableName = entry.getKey();
-                yaml.append("\n").append(tableName).append(":\n");
-                yaml.append("  columns:\n");
-                
-                for (ColumnInfo col : entry.getValue()) {
-                    yaml.append("    ").append(col.columnName).append(":\n");
-                    yaml.append("      strategy: PRESERVE  # Review and change if PII\n");
-                    yaml.append("      dataType: ").append(col.dataType).append("\n");
-                    yaml.append("      piiLevel: UNKNOWN\n");
+        for (Map.Entry<String, SchemaDiff> schemaEntry : allDiffs.entrySet()) {
+            String schemaName = schemaEntry.getKey();
+            SchemaDiff diff = schemaEntry.getValue();
+            
+            if (!diff.hasDifferences()) {
+                continue;
+            }
+            
+            yaml.append("# Schema: ").append(schemaName).append("\n");
+            yaml.append("databases:\n");
+            yaml.append("  ").append(schemaName).append(":\n");
+            yaml.append("    tables:\n");
+            
+            if (!diff.missingColumns.isEmpty()) {
+                yaml.append("      # Missing columns to add:\n");
+                for (Map.Entry<String, List<ColumnInfo>> entry : diff.missingColumns.entrySet()) {
+                    String tableName = entry.getKey();
+                    yaml.append("      ").append(tableName).append(":\n");
+                    yaml.append("        columns:\n");
+                    
+                    for (ColumnInfo col : entry.getValue()) {
+                        yaml.append("          ").append(col.columnName).append(":\n");
+                        yaml.append("            strategy: PRESERVE  # Review and change if PII\n");
+                        yaml.append("            dataType: ").append(col.dataType).append("\n");
+                        yaml.append("            piiLevel: UNKNOWN\n");
+                    }
                 }
             }
-        }
-        
-        if (!diff.missingTables.isEmpty()) {
-            yaml.append("\n# Missing tables to add:\n");
-            for (String table : diff.missingTables) {
-                yaml.append("\n").append(table).append(":\n");
-                yaml.append("  primaryKey: <DEFINE_PRIMARY_KEY>\n");
-                yaml.append("  columns: {}\n");
-                yaml.append("  # Run diff-schema again after defining primary key\n");
+            
+            if (!diff.missingTables.isEmpty()) {
+                yaml.append("      # Missing tables to add:\n");
+                for (String table : diff.missingTables) {
+                    yaml.append("      ").append(table).append(":\n");
+                    yaml.append("        primaryKey: <DEFINE_PRIMARY_KEY>\n");
+                    yaml.append("        columns: {}\n");
+                    yaml.append("        # Run diff-schema again after defining primary key\n");
+                }
             }
+            
+            yaml.append("\n");
         }
         
         try (FileWriter writer = new FileWriter(outputPath)) {
@@ -266,13 +296,13 @@ public class DiffSchemaCommand implements Callable<Integer> {
     }
     
     /**
-     * Create MySQL DataSource
+     * Create MySQL DataSource for specific schema
      */
-    private DataSource createDataSource(AnonymizerConfig.DatabaseConfig dbConfig) {
+    private DataSource createDataSource(AnonymizerConfig.DatabaseConfig dbConfig, String schema) {
         MysqlDataSource ds = new MysqlDataSource();
         ds.setServerName(dbConfig.getHost());
         ds.setPort(dbConfig.getPort());
-        ds.setDatabaseName(dbConfig.getDatabase());
+        ds.setDatabaseName(schema);
         ds.setUser(dbConfig.getUsername());
         ds.setPassword(dbConfig.getPassword());
         return ds;
