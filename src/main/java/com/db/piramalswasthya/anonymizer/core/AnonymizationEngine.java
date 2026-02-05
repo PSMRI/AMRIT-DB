@@ -1,3 +1,25 @@
+/*
+* AMRIT – Accessible Medical Records via Integrated Technology 
+* Integrated EHR (Electronic Health Records) Solution 
+*
+* Copyright (C) "Piramal Swasthya Management and Research Institute" 
+*
+* This file is part of AMRIT.
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see https://www.gnu.org/licenses/.
+*/
+
 package com.db.piramalswasthya.anonymizer.core;
 
 import com.db.piramalswasthya.anonymizer.config.AnonymizationRules;
@@ -70,7 +92,7 @@ public class AnonymizationEngine {
                 }
                 
                 Object anonymizedValue = applyStrategy(rule.getStrategy(), 
-                    originalValue.toString(), rule.getOptions());
+                    originalValue.toString());
                 
                 row.put(column, anonymizedValue);
                 
@@ -85,31 +107,15 @@ public class AnonymizationEngine {
     /**
      * Apply anonymization strategy
      */
-    private Object applyStrategy(String strategy, String value, Map<String, Object> options) {
+    private Object applyStrategy(String strategy, String value) {
         return switch (strategy.toUpperCase()) {
-            case "HASH" -> anonymizer.hashId(value);
-            case "FAKE_NAME" -> anonymizer.fakeName(value);
-            case "MASK" -> {
-                int showLast = options != null && options.containsKey("showLast") 
-                    ? ((Number) options.get("showLast")).intValue() 
-                    : 4;
-                yield maskValue(value, showLast);
-            }
-            case "GENERALIZE" -> anonymizer.generalizeDate(value);
-            case "SUPPRESS" -> null; // Replace with NULL
-            case "PRESERVE" -> value; // No change
+            case "HMAC_HASH" -> anonymizer.hashId(value);
+            case "PRESERVE" -> value;
             default -> {
                 log.warn("Unknown strategy: {} - preserving value", strategy);
                 yield value;
             }
         };
-    }
-    
-    private String maskValue(String value, int showLast) {
-        if (value.length() <= showLast) {
-            return "X".repeat(value.length());
-        }
-        return "X".repeat(value.length() - showLast) + value.substring(value.length() - showLast);
     }
     
     private void handleUnknownColumn(String database, String table, String column) {
