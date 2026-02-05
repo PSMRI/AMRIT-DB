@@ -1,0 +1,46 @@
+# AMRIT DB Anonymization - Configuration
+# Place in project root or specify with --config
+
+source:
+  host: db-read-replica.example.com
+  port: 3306
+  database: db_iemr
+  username: readonly_user
+  password: ${DB_PASSWORD}  # Use environment variable
+  readOnly: true
+  connectionTimeout: 30000
+
+target:
+  # For direct restore mode (optional)
+  host: uat-database.example.com
+  port: 3306
+  database: db_iemr_uat
+  username: uat_user
+  password: ${DB_UAT_PASSWORD}
+
+safety:
+  enabled: true
+  allowedHosts:
+    - "db-read-replica.example.com"
+    - "*.internal.nonprod"
+  deniedPatterns:
+    - ".*prod.*"
+    - ".*production.*"
+    - ".*prd.*"
+  requireExplicitApproval: true
+  approvalFlag: "I_CONFIRM_UAT_REFRESH_2026"
+
+performance:
+  batchSize: 1000
+  fetchSize: 1000
+  maxMemoryMb: 512
+  threadPoolSize: 4
+
+output:
+  mode: SQL_DUMP  # SQL_DUMP or DIRECT_RESTORE
+  path: ./output/anonymized-dump.sql.gz
+  compress: true
+  includeSchema: false
+
+rulesFile: rules.yaml
+loggingPath: ./logs
