@@ -1,5 +1,4 @@
 # AMRIT DB Anonymization - Configuration
-# Place in project root or specify with --config
 
 source:
   host: db-read-replica.example.com

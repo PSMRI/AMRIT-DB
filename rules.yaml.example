@@ -1,6 +1,6 @@
 # AMRIT DB Anonymization Rules
 # Defines which columns to anonymize and how
-
+ 
 rulesVersion: "2.0.0"
 schemaHint: "db_iemr-2024-Q4"
 lastUpdated: "2026-02-05T00:00:00Z"
