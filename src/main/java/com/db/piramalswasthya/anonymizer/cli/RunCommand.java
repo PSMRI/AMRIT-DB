@@ -155,9 +155,10 @@ public class RunCommand implements Callable<Integer> {
             report.setStatus("SUCCESS");
             
         } catch (Exception e) {
-            log.error("Anonymization failed: {}", sanitizeError(e), e);
+            String errorContext = String.format("Anonymization failed during execution (ID: %s)", executionId);
+            log.error("{}: {}", errorContext, sanitizeError(e), e);
             report.setStatus("FAILED");
-            report.setErrorMessage(sanitizeError(e));
+            report.setErrorMessage(errorContext + ": " + sanitizeError(e));
             
             report.setEndTime(LocalDateTime.now());
             report.setTotalDurationMs(
@@ -368,7 +369,7 @@ public class RunCommand implements Callable<Integer> {
             ds.setRewriteBatchedStatements(true); // Critical for batch performance
             ds.setUseServerPrepStmts(false); // Avoid prep stmt overhead for large batches
         } catch (Exception e) {
-            log.warn("Failed to set advanced connection properties: {}", e.getMessage());
+            log.warn("Failed to set advanced connection properties for {}: {}", dbConfig.getHost(), e.getMessage(), e);
         }
         
         return ds;
@@ -384,7 +385,7 @@ public class RunCommand implements Callable<Integer> {
             byte[] hash = digest.digest(fileBytes);
             return bytesToHex(hash).substring(0, 16); // First 16 chars
         } catch (Exception e) {
-            log.warn("Failed to hash file {}: {}", filePath, e.getMessage());
+            log.warn("Failed to hash file {}: {}", filePath, e.getMessage(), e);
             return "unknown";
         }
     }

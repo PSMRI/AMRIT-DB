@@ -24,6 +24,8 @@ package com.db.piramalswasthya.anonymizer;
 import com.db.piramalswasthya.anonymizer.cli.*;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * AMRIT Database Anonymization Tool - Main Entry Point
@@ -52,15 +54,17 @@ import picocli.CommandLine.Command;
 )
 public class AmritDbAnonymizer implements Runnable {
 
+    private static final Logger log = LoggerFactory.getLogger(AmritDbAnonymizer.class);
+
     @Override
     public void run() {
-        System.out.println("AMRIT DB Anonymization Tool v2.0.0");
-        System.out.println();
-        System.out.println("Commands:");
-        System.out.println("  run           - Execute anonymization (DB1 → DB2)");
-        System.out.println("  diff-schema   - Compare DB schema to rules.yaml");
-        System.out.println();
-        System.out.println("Use --help with any command for details");
+        log.info("AMRIT DB Anonymization Tool v2.0.0");
+        log.info("");
+        log.info("Commands:");
+        log.info("  run           - Execute anonymization (DB1 → DB2)");
+        log.info("  diff-schema   - Compare DB schema to rules.yaml");
+        log.info("");
+        log.info("Use --help with any command for details");
     }
 
     public static void main(String[] args) {

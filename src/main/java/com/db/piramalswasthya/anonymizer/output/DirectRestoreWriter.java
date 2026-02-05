@@ -44,7 +44,7 @@ import java.util.stream.Collectors;
 public class DirectRestoreWriter implements AutoCloseable {
     
     private static final Logger log = LoggerFactory.getLogger(DirectRestoreWriter.class);
-    private static final Pattern VALID_IDENTIFIER = Pattern.compile("^[A-Za-z0-9_]+$");
+    private static final Pattern VALID_IDENTIFIER = Pattern.compile("^\\w+$");
     
     private final DataSource targetDataSource;
     private final Connection connection;
@@ -159,12 +159,14 @@ public class DirectRestoreWriter implements AutoCloseable {
                 ResultSet rs = srcStmt.executeQuery("SHOW CREATE TABLE " + quotedTable);
                 if (rs.next()) {
                     String createDdl = rs.getString(2);
-                    tgtStmt.execute(createDdl);
-                    log.debug("Created table: {}", table);
+                    tgtStmt.addBatch(createDdl);
+                    log.debug("Queued table creation: {}", table);
                 }
                 rs.close();
             }
             
+            // Execute all CREATE TABLE statements in batch
+            tgtStmt.executeBatch();
             connection.commit();
             log.info("Successfully cloned {} tables", tables.size());
         }
