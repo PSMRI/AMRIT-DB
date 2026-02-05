@@ -1,74 +1,89 @@
-# AMRIT DB Anonymization Rules
-# Defines which columns to anonymize and how
+# AMRIT DB Anonymization Rules v2.0
+# Defines anonymization strategies for all 4 AMRIT schemas
  
 rulesVersion: "2.0.0"
-schemaHint: "db_iemr-2024-Q4"
-lastUpdated: "2026-02-05T00:00:00Z"
+schemaHint: "AMRIT-multi-schema-2025-Q1"
 unknownColumnPolicy: WARN  # FAIL, WARN, or PRESERVE
 
 databases:
+  # Schema 1: Identity Database
   db_identity:
     tables:
       m_beneficiaryregidmapping:
         primaryKey: BenRegID
         columns:
           BenRegID:
-            strategy: HASH
-            dataType: BIGINT
-            piiLevel: CRITICAL
+            strategy: PRESERVE
           FirstName:
-            strategy: FAKE_NAME
-            dataType: VARCHAR
-            piiLevel: HIGH
+            strategy: HMAC_HASH
           LastName:
-            strategy: FAKE_NAME
-            dataType: VARCHAR
-            piiLevel: HIGH
+            strategy: HMAC_HASH
           PhoneNo:
-            strategy: MASK
-            dataType: VARCHAR
-            piiLevel: HIGH
-            options:
-              showLast: 4
+            strategy: HMAC_HASH
           Email:
-            strategy: HASH
-            dataType: VARCHAR
-            piiLevel: HIGH
+            strategy: HMAC_HASH
           DOB:
-            strategy: GENERALIZE
-            dataType: DATE
-            piiLevel: MEDIUM
-            options:
-              precision: YEAR
+            strategy: HMAC_HASH
           GenderID:
             strategy: PRESERVE
-            dataType: INT
-            piiLevel: LOW
   
+  # Schema 2: IEMR Database
   db_iemr:
     tables:
       t_benvisitdetail:
         primaryKey: BenVisitID
         columns:
           BenVisitID:
-            strategy: HASH
-            dataType: BIGINT
-            piiLevel: CRITICAL
-          BeneficiaryRegID:
-            strategy: HASH
-            dataType: BIGINT
-            piiLevel: CRITICAL
-          VisitCode:
-            strategy: HASH
-            dataType: VARCHAR
-            piiLevel: HIGH
-          VisitReason:
             strategy: PRESERVE
-            dataType: VARCHAR
-            piiLevel: LOW
+          BeneficiaryRegID:
+            strategy: HMAC_HASH
           VisitDateTime:
-            strategy: GENERALIZE
-            dataType: DATETIME
-            piiLevel: MEDIUM
-            options:
-              precision: DAY
+            strategy: PRESERVE
+      
+      m_user:
+        primaryKey: UserID
+        columns:
+          UserID:
+            strategy: PRESERVE
+          FirstName:
+            strategy: HMAC_HASH
+          LastName:
+            strategy: HMAC_HASH
+          UserName:
+            strategy: HMAC_HASH
+          EmailID:
+            strategy: HMAC_HASH
+  
+  # Schema 3: Reporting Database
+  db_reporting:
+    tables:
+      fact_bencall:
+        primaryKey: Fact_BenCallID
+        columns:
+          Fact_BenCallID:
+            strategy: PRESERVE
+          BeneficiaryRegID:
+            strategy: HMAC_HASH
+          CallDateTime:
+            strategy: PRESERVE
+  
+  # Schema 4: 1097 Identity Database
+  db_1097_identity:
+    tables:
+      m_beneficiaryregidmapping:
+        primaryKey: BenRegId
+        columns:
+          BenRegId:
+            strategy: PRESERVE
+          HealthID:
+            strategy: HMAC_HASH
+          HealthIDNumber:
+            strategy: HMAC_HASH
+          FirstName:
+            strategy: HMAC_HASH
+          LastName:
+            strategy: HMAC_HASH
+
+# Available strategies:
+# - PRESERVE: Keep original value unchanged
+# - HMAC_HASH: Deterministic HMAC-SHA256 hash (same input → same output)

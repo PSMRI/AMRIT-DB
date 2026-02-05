@@ -6,7 +6,8 @@ import java.util.List;
 /**
  * Configuration for anonymization tool (loaded from config.yaml)
  * 
- * Defines database connections, safety settings, performance tuning, and output options.
+ * Defines database connections, safety settings, and performance tuning.
+ * Supports multiple schemas on single MySQL instance.
  */
 @Data
 public class AnonymizerConfig {
@@ -15,7 +16,6 @@ public class AnonymizerConfig {
     private DatabaseConfig target;
     private SafetyConfig safety;
     private PerformanceConfig performance;
-    private OutputConfig output;
     private String rulesFile = "rules.yaml";
     private String loggingPath = "./logs";
     
@@ -23,7 +23,7 @@ public class AnonymizerConfig {
     public static class DatabaseConfig {
         private String host;
         private int port = 3306;
-        private String database;
+        private List<String> schemas;  // List of schemas to process
         private String username;
         private String password;
         private boolean readOnly = true;
@@ -44,19 +44,5 @@ public class AnonymizerConfig {
         private int batchSize = 1000;
         private int fetchSize = 1000;
         private int maxMemoryMb = 512;
-        private int threadPoolSize = 4;
-    }
-    
-    @Data
-    public static class OutputConfig {
-        private OutputMode mode = OutputMode.SQL_DUMP;
-        private String path;
-        private boolean compress = true;
-        private boolean includeSchema = false;
-    }
-    
-    public enum OutputMode {
-        SQL_DUMP,
-        DIRECT_RESTORE
     }
 }

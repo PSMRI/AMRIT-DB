@@ -6,7 +6,6 @@ import com.db.piramalswasthya.anonymizer.core.AnonymizationEngine;
 import com.db.piramalswasthya.anonymizer.core.HmacAnonymizer;
 import com.db.piramalswasthya.anonymizer.core.KeysetPaginator;
 import com.db.piramalswasthya.anonymizer.output.DirectRestoreWriter;
-import com.db.piramalswasthya.anonymizer.output.SqlDumpWriter;
 import com.db.piramalswasthya.anonymizer.report.RunReport;
 import com.db.piramalswasthya.anonymizer.safety.SafetyGuard;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,22 +19,26 @@ import org.slf4j.LoggerFactory;
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
 /**
- * Main execution command - connects to DB1, streams data, anonymizes, outputs results
+ * Main execution command - Multi-schema direct restore: DB1 replica → DB2 UAT
+ * 
+ * Processes all schemas in config (db_iemr, db_identity, db_reporting, db_1097_identity).
+ * No SQL dump mode - direct restore only for simplicity and performance.
  */
 @Command(
     name = "run",
-    description = "Execute anonymization (DB1 -> SQL dump or DB2)",
+    description = "Execute multi-schema anonymization: DB1 replica → DB2 UAT (direct restore)",
     mixinStandardHelpOptions = true
 )
 public class RunCommand implements Callable<Integer> {
@@ -46,15 +49,16 @@ public class RunCommand implements Callable<Integer> {
             defaultValue = "config.yaml")
     private String configFile;
     
-    @Option(names = {"--approval-flag"}, description = "Explicit approval flag for production safety")
-    private String approvalFlag;
+    @Option(names = {"--approve"}, description = "Explicit approval token (required for safety)", 
+            required = true)
+    private String approvalToken;
     
     @Option(names = {"--dry-run"}, description = "Validate configuration without executing")
     private boolean dryRun;
     
     @Override
     public Integer call() throws Exception {
-        log.info("=== AMRIT DB Anonymization - RUN Command ===");
+        log.info("=== AMRIT DB Anonymization - Multi-Schema Direct Restore ===");
         log.info("Config file: {}", configFile);
         log.info("Dry run: {}", dryRun);
         
@@ -66,86 +70,78 @@ public class RunCommand implements Callable<Integer> {
         report.setStartTime(startTime);
         
         try {
-            // 1. Load configuration
-            log.info("Loading configuration from: {}", configFile);
+            // 1. Load configuration and rules
+            log.info("Loading configuration...");
             AnonymizerConfig config = loadConfig(configFile);
-            report.setConfigHash(hashString(configFile));
-            
-            // 2. Load rules
-            log.info("Loading anonymization rules from: {}", config.getRulesFile());
             AnonymizationRules rules = loadRules(config.getRulesFile());
+            
+            // 2. Hash config and rules for versioning
+            report.setConfigHash(hashFileContents(configFile));
+            report.setRulesHash(hashFileContents(config.getRulesFile()));
             report.setRulesVersion(rules.getRulesVersion());
             
             // 3. Validate configuration
             validateConfiguration(config, rules);
             
+            // 4. Safety checks for BOTH source and target
+            log.info("Running safety checks...");
+            SafetyGuard safetyGuard = new SafetyGuard(config.getSafety());
+            
+            // Validate source (DB1 replica)
+            for (String schema : config.getSource().getSchemas()) {
+                safetyGuard.validateSafeToConnect(
+                    config.getSource().getHost(),
+                    schema,
+                    approvalToken
+                );
+            }
+            
+            // Validate target (DB2 UAT)
+            for (String schema : config.getTarget().getSchemas()) {
+                safetyGuard.validateSafeToConnect(
+                    config.getTarget().getHost(),
+                    schema,
+                    approvalToken
+                );
+            }
+            
+            log.info("Safety checks passed");
+            
             if (dryRun) {
-                log.info("Dry run: configuration validated successfully");
+                log.info("DRY RUN: Configuration and safety validated. Exiting.");
                 report.setStatus("DRY_RUN_SUCCESS");
                 report.setEndTime(LocalDateTime.now());
-                report.setTotalDurationMs(
-                    java.time.Duration.between(startTime, report.getEndTime()).toMillis());
                 writeReport(report, config.getLoggingPath(), executionId);
                 return 0;
             }
             
-            // 4. Safety checks
-            log.info("Running safety checks...");
-            SafetyGuard safetyGuard = new SafetyGuard(config.getSafety());
-            safetyGuard.validateSafeToConnect(
-                config.getSource().getHost(),
-                config.getSource().getDatabase(),
-                approvalFlag
-            );
-            
-            // 5. Initialize anonymization components
-            log.info("Initializing anonymization engine...");
-            String hmacSecret = System.getenv("ANONYMIZATION_SECRET");
-            if (hmacSecret == null || hmacSecret.length() < 32) {
+            // 5. Initialize HMAC anonymizer
+            String secret = System.getenv("ANONYMIZATION_SECRET");
+            if (secret == null || secret.length() < 32) {
                 throw new IllegalStateException(
-                    "ANONYMIZATION_SECRET environment variable must be set (32+ chars)");
+                    "ANONYMIZATION_SECRET env var required (min 32 characters)");
             }
+            HmacAnonymizer hmacAnonymizer = new HmacAnonymizer(secret);
             
-            HmacAnonymizer anonymizer = new HmacAnonymizer(hmacSecret);
-            AnonymizationEngine engine = new AnonymizationEngine(anonymizer, rules);
-            
-            // 6. Connect to source database
-            log.info("Connecting to source database: {}:{}/{}", 
-                config.getSource().getHost(),
-                config.getSource().getPort(),
-                config.getSource().getDatabase());
-            
-            DataSource sourceDataSource = createDataSource(config.getSource());
-            KeysetPaginator paginator = new KeysetPaginator(
-                sourceDataSource, 
-                config.getPerformance().getBatchSize()
-            );
-            
-            // 7. Execute anonymization based on output mode
-            if (config.getOutput().getMode() == AnonymizerConfig.OutputMode.SQL_DUMP) {
-                executeSqlDumpMode(config, rules, engine, paginator, report);
-            } else {
-                executeDirectRestoreMode(config, rules, engine, paginator, report);
+            // 6. Process each schema
+            for (String schema : config.getSource().getSchemas()) {
+                log.info("\n========== Processing schema: {} ==========", schema);
+                
+                processSchema(schema, config, rules, hmacAnonymizer, report);
             }
             
             report.setStatus("SUCCESS");
-            log.info("Anonymization completed successfully");
             
         } catch (Exception e) {
-            log.error("Anonymization failed: {}", e.getMessage(), e);
+            log.error("Anonymization failed: {}", sanitizeError(e), e);
             report.setStatus("FAILED");
-            report.addError("execution", sanitizeError(e));
+            report.setErrorMessage(sanitizeError(e));
             
             report.setEndTime(LocalDateTime.now());
             report.setTotalDurationMs(
                 java.time.Duration.between(startTime, report.getEndTime()).toMillis());
             
-            try {
-                writeReport(report, "./logs", executionId);
-            } catch (IOException ioe) {
-                log.error("Failed to write error report: {}", ioe.getMessage());
-            }
-            
+            writeReport(report, "./logs", executionId);
             return 1;
         }
         
@@ -155,6 +151,7 @@ public class RunCommand implements Callable<Integer> {
         
         writeReport(report, "./logs", executionId);
         
+        log.info("\n=== Anonymization Complete ===");
         log.info("Total rows processed: {}", report.getTotalRowsProcessed());
         log.info("Total duration: {} ms", report.getTotalDurationMs());
         log.info("Report written to: ./logs/run-report-{}.json", executionId);
@@ -163,64 +160,49 @@ public class RunCommand implements Callable<Integer> {
     }
     
     /**
-     * Execute anonymization with SQL dump output
+     * Process single schema: reset target, stream from source, anonymize, write to target
      */
-    private void executeSqlDumpMode(AnonymizerConfig config, AnonymizationRules rules,
-                                   AnonymizationEngine engine, KeysetPaginator paginator,
-                                   RunReport report) throws Exception {
+    private void processSchema(String schema, AnonymizerConfig config, 
+                               AnonymizationRules rules,
+                               HmacAnonymizer hmacAnonymizer,
+                               RunReport report) throws Exception {
         
-        String outputPath = config.getOutput().getPath();
-        if (outputPath == null) {
-            outputPath = String.format("./output/anonymized-%s.sql%s",
-                report.getExecutionId(),
-                config.getOutput().isCompress() ? ".gz" : "");
-        }
+        // Create DataSources for this schema
+        DataSource sourceDataSource = createDataSource(config.getSource(), schema);
+        DataSource targetDataSource = createDataSource(config.getTarget(), schema);
         
-        log.info("Output mode: SQL_DUMP -> {}", outputPath);
-        
-        try (SqlDumpWriter writer = new SqlDumpWriter(outputPath, config.getOutput().isCompress())) {
-            processAllTables(config.getSource().getDatabase(), rules, engine, paginator, 
-                (table, columns, rows) -> {
-                    writer.writeInsert(table, columns, convertRowData(rows));
-                }, report);
-        }
-    }
-    
-    /**
-     * Execute anonymization with direct restore to DB2
-     */
-    private void executeDirectRestoreMode(AnonymizerConfig config, AnonymizationRules rules,
-                                         AnonymizationEngine engine, KeysetPaginator paginator,
-                                         RunReport report) throws Exception {
-        
-        log.info("Output mode: DIRECT_RESTORE -> {}:{}/{}",
-            config.getTarget().getHost(),
-            config.getTarget().getPort(),
-            config.getTarget().getDatabase());
-        
-        DataSource targetDataSource = createDataSource(config.getTarget());
+        // Initialize components
+        AnonymizationEngine engine = new AnonymizationEngine(hmacAnonymizer, rules);
+        KeysetPaginator paginator = new KeysetPaginator(
+            sourceDataSource, 
+            config.getPerformance().getBatchSize()
+        );
         
         try (DirectRestoreWriter writer = new DirectRestoreWriter(
                 targetDataSource, 
-                config.getPerformance().getBatchSize())) {
+                config.getPerformance().getBatchSize(),
+                schema)) {
             
-            processAllTables(config.getSource().getDatabase(), rules, engine, paginator,
-                (table, columns, rows) -> {
-                    writer.writeInsert(table, columns, convertRowData(rows));
-                }, report);
+            // Reset target schema
+            log.info("Resetting target schema: {}", schema);
+            writer.resetSchema(sourceDataSource);
+            
+            // Process all tables in this schema
+            processSchemaTables(schema, rules, engine, paginator, writer, report);
         }
     }
     
     /**
-     * Process all tables defined in rules
+     * Process all tables defined in rules for a schema
      */
-    private void processAllTables(String database, AnonymizationRules rules,
-                                 AnonymizationEngine engine, KeysetPaginator paginator,
-                                 BatchWriter writer, RunReport report) throws Exception {
+    private void processSchemaTables(String schema, AnonymizationRules rules,
+                                     AnonymizationEngine engine, KeysetPaginator paginator,
+                                     DirectRestoreWriter writer, RunReport report) throws Exception {
         
-        AnonymizationRules.DatabaseRules dbRules = rules.getDatabases().get(database);
+        AnonymizationRules.DatabaseRules dbRules = rules.getDatabases().get(schema);
         if (dbRules == null || dbRules.getTables() == null) {
-            throw new IllegalStateException("No tables defined for database: " + database);
+            log.warn("No rules found for schema: {}", schema);
+            return;
         }
         
         for (Map.Entry<String, AnonymizationRules.TableRules> entry : 
@@ -229,74 +211,71 @@ public class RunCommand implements Callable<Integer> {
             String tableName = entry.getKey();
             AnonymizationRules.TableRules tableRules = entry.getValue();
             
-            log.info("Processing table: {}", tableName);
+            if (tableRules.getColumns() == null || tableRules.getColumns().isEmpty()) {
+                log.warn("No columns defined for table: {}.{}", schema, tableName);
+                continue;
+            }
+            
+            log.info("Processing table: {}.{}", schema, tableName);
+            
             long tableStartTime = System.currentTimeMillis();
+            long[] rowCount = {0};  // Use array for lambda access
+            Map<String, Integer> strategyCounts = new HashMap<>();
             
-            Map<String, Integer> tableStrategyCounts = new HashMap<>();
-            final long[] rowCount = {0};
+            // Get all column names for SELECT
+            List<String> allColumns = List.copyOf(tableRules.getColumns().keySet());
             
+            // Stream and process table using keyset pagination
             try {
-                List<String> columns = new ArrayList<>(tableRules.getColumns().keySet());
-                
-                paginator.streamTable(tableName, tableRules.getPrimaryKey(), columns,
+                paginator.streamTable(
+                    tableName,
+                    tableRules.getPrimaryKey(),
+                    allColumns,
                     batch -> {
                         try {
                             // Anonymize batch
-                            Map<String, Integer> batchCounts = engine.anonymizeBatch(
-                                database, tableName, batch);
+                            engine.anonymizeBatch(schema, tableName, batch);
                             
-                            // Merge strategy counts
-                            batchCounts.forEach((strategy, count) ->
-                                tableStrategyCounts.merge(strategy, count, Integer::sum));
+                            // Convert RowData to Map (use getData() directly - no copying)
+                            List<Map<String, Object>> rowMaps = batch.stream()
+                                .map(row -> row.getData())
+                                .toList();
                             
-                            // Write batch
-                            writer.write(tableName, columns, batch);
+                            // Write to target
+                            writer.writeInsert(tableName, allColumns, rowMaps);
                             
                             rowCount[0] += batch.size();
-                        } catch (Exception e) {
-                            throw new RuntimeException("Failed to process batch for " + tableName, e);
+                            
+                            // Track strategy counts
+                            for (String column : tableRules.getColumns().keySet()) {
+                                String strategy = tableRules.getColumns().get(column).getStrategy();
+                                strategyCounts.merge(strategy, 1, Integer::sum);
+                            }
+                        } catch (SQLException e) {
+                            throw new RuntimeException("Batch processing failed", e);
                         }
-                    });
-                
-                long tableDuration = System.currentTimeMillis() - tableStartTime;
-                
-                report.addTableReport(
-                    tableName,
-                    rowCount[0],
-                    tableDuration,
-                    tableRules.getColumns().size(),
-                    tableStrategyCounts
+                    }
                 );
                 
-                log.info("Completed table {} - {} rows in {} ms", 
-                    tableName, rowCount[0], tableDuration);
-                
-            } catch (Exception e) {
-                log.error("Failed to process table {}: {}", tableName, e.getMessage(), e);
-                report.addError(tableName, sanitizeError(e));
+            } catch (SQLException e) {
+                log.error("Failed to process table {}.{}: {}", schema, tableName, e.getMessage());
                 throw e;
             }
+            
+            long tableDuration = System.currentTimeMillis() - tableStartTime;
+            
+            // Record table report
+            report.addTableReport(
+                schema + "." + tableName,
+                rowCount[0],
+                tableDuration,
+                tableRules.getColumns().size(),
+                strategyCounts
+            );
+            
+            log.info("Completed {}.{}: {} rows, {} ms", 
+                schema, tableName, rowCount[0], tableDuration);
         }
-    }
-    
-    /**
-     * Functional interface for batch writing
-     */
-    @FunctionalInterface
-    private interface BatchWriter {
-        void write(String table, List<String> columns, List<KeysetPaginator.RowData> rows) 
-            throws Exception;
-    }
-    
-    /**
-     * Convert RowData to Map for writers
-     */
-    private List<Map<String, Object>> convertRowData(List<KeysetPaginator.RowData> rows) {
-        List<Map<String, Object>> result = new ArrayList<>();
-        for (KeysetPaginator.RowData row : rows) {
-            result.add(new HashMap<>(row.getData()));
-        }
-        return result;
     }
     
     /**
@@ -320,58 +299,70 @@ public class RunCommand implements Callable<Integer> {
      */
     private void validateConfiguration(AnonymizerConfig config, AnonymizationRules rules) {
         if (config.getSource() == null) {
-            throw new IllegalStateException("Source database configuration missing");
+            throw new IllegalArgumentException("Source database configuration required");
         }
         
-        if (config.getOutput().getMode() == AnonymizerConfig.OutputMode.DIRECT_RESTORE 
-                && config.getTarget() == null) {
-            throw new IllegalStateException(
-                "Target database configuration required for DIRECT_RESTORE mode");
+        if (config.getSource().getSchemas() == null || config.getSource().getSchemas().isEmpty()) {
+            throw new IllegalArgumentException("Source schemas list cannot be empty");
+        }
+        
+        if (config.getTarget() == null) {
+            throw new IllegalArgumentException("Target database configuration required for direct restore");
+        }
+        
+        if (config.getTarget().getSchemas() == null || config.getTarget().getSchemas().isEmpty()) {
+            throw new IllegalArgumentException("Target schemas list cannot be empty");
+        }
+        
+        if (!config.getSource().getSchemas().equals(config.getTarget().getSchemas())) {
+            log.warn("Source and target schema lists differ - ensure this is intentional");
         }
         
         if (rules.getDatabases() == null || rules.getDatabases().isEmpty()) {
-            throw new IllegalStateException("No databases defined in rules");
+            throw new IllegalArgumentException("Rules must define at least one database");
         }
         
         log.info("Configuration validated successfully");
+        log.info("Schemas to process: {}", config.getSource().getSchemas());
     }
     
     /**
-     * Create MySQL DataSource
+     * Create MySQL DataSource for specific schema
      */
-    private DataSource createDataSource(AnonymizerConfig.DatabaseConfig dbConfig) {
+    private DataSource createDataSource(AnonymizerConfig.DatabaseConfig dbConfig, String schema) {
         MysqlDataSource ds = new MysqlDataSource();
         ds.setServerName(dbConfig.getHost());
         ds.setPort(dbConfig.getPort());
-        ds.setDatabaseName(dbConfig.getDatabase());
+        ds.setDatabaseName(schema);
         ds.setUser(dbConfig.getUsername());
         ds.setPassword(dbConfig.getPassword());
         
-        // Additional connection properties
+        // Additional connection properties for performance
         try {
             ds.setConnectTimeout(dbConfig.getConnectionTimeout());
             ds.setUseSSL(true);
             ds.setRequireSSL(false);
-            
-            if (dbConfig.isReadOnly()) {
-                ds.setReadOnlyPropagatesToServer(true);
-            }
+            ds.setVerifyServerCertificate(false);
+            ds.setRewriteBatchedStatements(true); // Critical for batch performance
+            ds.setUseServerPrepStmts(false); // Avoid prep stmt overhead for large batches
         } catch (Exception e) {
-            log.warn("Failed to set some connection properties: {}", e.getMessage());
+            log.warn("Failed to set advanced connection properties: {}", e.getMessage());
         }
         
         return ds;
     }
     
     /**
-     * Generate hash of config file for versioning
+     * Hash file contents (not path) for versioning
      */
-    private String hashString(String input) {
+    private String hashFileContents(String filePath) {
         try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hash = md.digest(input.getBytes(StandardCharsets.UTF_8));
-            return bytesToHex(hash).substring(0, 8);
+            byte[] fileBytes = Files.readAllBytes(Paths.get(filePath));
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(fileBytes);
+            return bytesToHex(hash).substring(0, 16); // First 16 chars
         } catch (Exception e) {
+            log.warn("Failed to hash file {}: {}", filePath, e.getMessage());
             return "unknown";
         }
     }
@@ -390,12 +381,13 @@ public class RunCommand implements Callable<Integer> {
     private String sanitizeError(Exception e) {
         String message = e.getMessage();
         if (message == null) {
-            message = e.getClass().getSimpleName();
+            return e.getClass().getSimpleName();
         }
         
         // Remove any potential SQL values or data
         message = message.replaceAll("VALUES\\s*\\([^)]+\\)", "VALUES (...)");
         message = message.replaceAll("'[^']{10,}'", "'...'");
+        message = message.replaceAll("\\b\\d{10,}\\b", "###");
         
         return message;
     }
@@ -405,7 +397,12 @@ public class RunCommand implements Callable<Integer> {
      */
     private void writeReport(RunReport report, String loggingPath, String executionId) 
             throws IOException {
-        String reportPath = String.format("%s/run-report-%s.json", loggingPath, executionId);
-        report.writeToFile(reportPath);
+        Files.createDirectories(Paths.get(loggingPath));
+        String reportPath = loggingPath + "/run-report-" + executionId + ".json";
+        
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writerWithDefaultPrettyPrinter().writeValue(new File(reportPath), report);
+        
+        log.info("Report written to: {}", reportPath);
     }
 }

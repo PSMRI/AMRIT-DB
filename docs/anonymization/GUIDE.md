@@ -1,5 +1,5 @@
 # AMRIT Database Anonymization - User Guide (v2.0)
-Connects directly to DB1, streams with keyset pagination
+Direct restore from DB1 read replica to DB2 UAT database
 
 ## Table of Contents
 
@@ -15,68 +15,93 @@ Connects directly to DB1, streams with keyset pagination
 
 ## Overview
 
-The AMRIT Database Anonymization Tool v2.0 **connects directly to a production read replica (DB1)**, streams data using keyset pagination, anonymizes sensitive fields using HMAC-based deterministic strategies, and outputs to either:
-- Compressed SQL dump (.sql.gz)
-- Direct restore to UAT database (DB2)
+The AMRIT Database Anonymization Tool v2.0 **connects directly to a production read replica (DB1)**, streams data using keyset pagination, anonymizes sensitive fields using HMAC-based deterministic strategies, and **writes directly to UAT database (DB2)**.
 
 **What This Tool DOES:**
 - Connects to DB1 read replica (never production master)
+- Processes multiple schemas in single run (db_iemr, db_identity, db_reporting, db_1097_identity)
 - Streams billions of rows efficiently (keyset pagination, no OFFSET)
+- Resets target schemas (DROP/CREATE or DELETE fallback)
+- Clones table structures from source to target
 - Deterministic HMAC-based anonymization (same input → same output)
-- Production safety guards (hostname checks, allowlists)
+- Direct restore to DB2 (no SQL dump files)
+- Production safety guards (hostname checks, allowlists, approval tokens)
 - PII-safe logging (counts/timings only, never raw data)
 - Schema drift detection (compare DB to rules.yaml)
 - Validates rules before execution
 
 **What This Tool DOES NOT Do:**
-- Does NOT process SQL dump files (use mysqldump separately if needed)
+- Does NOT create SQL dump files (removed in v2.0)
 - Does NOT connect to production master databases (safety enforced)
 - Does NOT log or store raw PII (all logging is sanitized)
 - Does NOT use OFFSET queries (always keyset pagination)
 - Does NOT require large lookup tables (HMAC is deterministic)
 
 **Key Features:**
+- Multi-schema processing in single command
 - Keyset pagination for O(log n) performance on large tables
 - HMAC-SHA256 deterministic anonymization (no lookup tables needed)
+- Schema reset with fallback strategies
 - Production safety: hostname allowlist/denylist with explicit approval flags
 - PII-safe logging: counts, timings, hashed IDs only
 - Schema drift detection: diff-schema command
-- Multiple output modes: SQL dump or direct DB restore
 - YAML-based configuration and rules
 
 ## Architecture
 
 ```
-┌──────────────────┐
-│ DB1 (Read Replica│  ← Read-only connection
-│  Production DB)  │     TLS/SSL enforced
-└────────┬─────────┘
+┌──────────────────────────────────────┐
+│ DB1 (Read Replica - Production)     │
+│ Schemas:                             │
+│  - db_iemr                           │  ← Read-only connection
+│  - db_identity                       │     TLS/SSL enforced
+│  - db_reporting                      │
+│  - db_1097_identity                  │
+└────────┬─────────────────────────────┘
          │ Keyset Pagination
          │ SELECT * FROM table WHERE pk > ? ORDER BY pk LIMIT 1000
-         |
-         |
-┌─────────────────────────────────────┐
-│  Java CLI Tool (amrit-db-anonymize) │
-│  - Safety Guard (allowlist check)   │
-│  - HMAC Anonymizer (deterministic)  │
-│  - Streaming processor (batched)    │
-│  - PII-safe logger                  │
-└────────┬────────────────────────────┘
-         |
-         |-------------+-----------------|
-         |             |                 |
-         |             |                 |
-    .sql.gz       DB2 (UAT)      run-report.json
-   (compressed)   (direct          (PII-safe
-    SQL dump)     restore)         metrics)
+         │
+         │
+┌─────────────────────────────────────────────┐
+│  Java CLI Tool (amrit-db-anonymize)         │
+│  For each schema:                           │
+│    1. Reset target schema (DROP/CREATE)     │
+│    2. Clone table structures from source    │
+│    3. For each table:                       │
+│       - Stream with keyset pagination       │
+│       - Apply HMAC anonymization            │
+│       - Batch INSERT into target            │
+│  - Safety Guard (allowlist check)           │
+│  - HMAC Anonymizer (deterministic)          │
+│  - Streaming processor (batched)            │
+│  - PII-safe logger                          │
+└────────┬────────────────────────────────────┘
+         │
+         │
+         ▼
+┌──────────────────────────────────────┐
+│ DB2 (UAT Database)                   │
+│ Schemas:                             │
+│  - db_iemr        (anonymized)       │
+│  - db_identity    (anonymized)       │
+│  - db_reporting   (anonymized)       │
+│  - db_1097_identity (anonymized)     │
+└──────────────────────────────────────┘
+         │
+         │
+         ▼
+   run-report.json
+   (PII-safe metrics)
 ```
 
 **Key Design Principles:**
-1. **Streaming**: Never loads entire tables into memory
-2. **Keyset Pagination**: O(log n) performance, no OFFSET
-3. **Deterministic**: HMAC ensures same input → same output
-4. **Safety-First**: Multiple layers of production protection
-5. **PII-Safe**: Logs contain only counts, timings, hashed IDs
+1. **Multi-Schema**: Processes all 4 AMRIT schemas in single run
+2. **Streaming**: Never loads entire tables into memory
+3. **Keyset Pagination**: O(log n) performance, no OFFSET
+4. **Deterministic**: HMAC ensures same input → same output
+5. **Direct Restore**: No intermediate SQL dump files
+6. **Safety-First**: Multiple layers of production protection
+7. **PII-Safe**: Logs contain only counts, timings, hashed IDs
 
 ## Prerequisites
 
@@ -108,8 +133,8 @@ The AMRIT Database Anonymization Tool v2.0 **connects directly to a production r
 
 ### Required Access
 
-1. **DB1 (Source)**: Read-only user with SELECT privileges
-2. **DB2 (Target, optional)**: Write user with INSERT/CREATE privileges
+1. **DB1 (Source)**: Read-only user with SELECT privileges on all schemas
+2. **DB2 (Target)**: Write user with DROP/CREATE/INSERT privileges on all schemas
 3. **TLS/SSL**: Encrypted connections enforced for production
 
 ## Installation
@@ -139,119 +164,239 @@ java -jar target/Amrit-DB-1.0.0.war --help
 
 Expected output:
 ```
-AMRIT Database Anonymization Tool v1.0.0
-Use --help for usage information
-
-Available commands:
-  anonymize  - Anonymize a SQL dump file
+Usage: amrit-db.war [-hV] [COMMAND]
+AMRIT Database Anonymization Tool v2.0.0
+Commands:
+  run          Anonymize and restore database
+  diff-schema  Compare database schema with rules
 ```
 
 ## Quick Start
 
-### 1. Create Production Dump
+### 1. Create Configuration Files
 
-```bash
-# Windows (PowerShell)
-mysqldump -u root -p --databases db_identity db_iemr db_1097_identity `
-  --single-transaction --quick --lock-tables=false `
-  --result-file=production-dump.sql
+Create `config.yaml`:
+```yaml
+source:
+  host: db-replica.prod.example.com
+  port: 3306
+  schemas:
+    - db_iemr
+    - db_identity
+    - db_reporting
+    - db_1097_identity
+  username: readonly_user
+  password: ${DB_READ_PASSWORD}
+  readOnly: true
 
-# Linux/Mac
-mysqldump -u root -p --databases db_identity db_iemr db_1097_identity \
-  --single-transaction --quick --lock-tables=false \
-  --result-file=production-dump.sql
+target:
+  host: uat-db.example.com
+  port: 3306
+  schemas:
+    - db_iemr
+    - db_identity
+    - db_reporting
+    - db_1097_identity
+  username: write_user
+  password: ${DB_WRITE_PASSWORD}
+
+safety:
+  enabled: true
+  allowedHosts:
+    - db-replica.prod.example.com
+  requireExplicitApproval: true
+  approvalFlag: PROD_2025_FEB
+
+performance:
+  batchSize: 1000
+  fetchSize: 1000
+
+rulesFile: rules.yaml
+loggingPath: ./logs
 ```
+
+Create `rules.yaml` (see rules.yaml.example for complete structure).
 
 ### 2. Run Anonymization
 
 ```bash
-# Basic usage
-java -jar target/Amrit-DB-1.0.0.war anonymize \
-  --input production-dump.sql \
-  --output anonymized-dump.sql
+# Direct restore from DB1 to DB2
+java -jar target/Amrit-DB-1.0.0.war run \
+  --config config.yaml \
+  --approve PROD_2025_FEB
+
+# This will:
+# 1. Validate safety checks
+# 2. For each schema (db_iemr, db_identity, db_reporting, db_1097_identity):
+#    a. Reset target schema (DROP/CREATE)
+#    b. Clone table structures from source
+#    c. Stream, anonymize, and insert data
+# 3. Generate run-report.json
 ```
 
-### 3. Restore to UAT
+### 3. Review Results
 
-```bash
-# Import anonymized dump
-mysql -u root -p < anonymized-dump.sql
-```
+Check `run-report.json` for:
+- Schemas processed
+- Tables and row counts
+- Anonymization strategies applied
+- Execution time per table
+- Any errors (PII-safe)
 
 ## Command-Line Usage
 
-### Basic Command Structure
+### Run Command (Main Anonymization)
 
 ```bash
-java -jar target/Amrit-DB-1.0.0.war anonymize [OPTIONS]
+java -jar target/Amrit-DB-1.0.0.war run [OPTIONS]
 ```
 
 ### Required Options
 
 | Option | Description | Example |
 |--------|-------------|---------|
-| `-i, --input FILE` | Input SQL dump file | `--input prod.sql` |
-| `-o, --output FILE` | Output anonymized file | `--output uat.sql` |
+| `-c, --config FILE` | Configuration YAML | `--config config.yaml` |
+| `--approve TOKEN` | Approval token matching config | `--approve PROD_2025_FEB` |
 
 ### Optional Parameters
 
 | Option | Description | Default |
 |--------|-------------|---------|
-| `-r, --registry FILE` | Custom registry YAML | classpath:anonymization-registry.yml |
-| `-l, --lookup PATH` | H2 lookup DB path | ./lookup-cache |
-| `-s, --salt STRING` | Custom salt for hashing | AMRIT_2024_SECURE_SALT |
-| `--dry-run` | Validate without processing | (disabled) |
-| `-v, --verbose` | Verbose output | (disabled) |
-| `-h, --help` | Show help message | - |
+| `-r, --rules FILE` | Custom rules YAML | `rules.yaml` (from config) |
+| `--dry-run` | Validate without execution | false |
+
+### Diff-Schema Command (Schema Drift Detection)
+
+```bash
+java -jar target/Amrit-DB-1.0.0.war diff-schema [OPTIONS]
+```
+
+Compare database schemas with rules.yaml to detect missing tables or columns.
+
+| Option | Description | Example |
+|--------|-------------|---------|
+| `-c, --config FILE` | Configuration YAML | `--config config.yaml` |
+| `-r, --rules FILE` | Rules YAML | `--rules rules.yaml` |
+| `-o, --output FILE` | Suggested rules output | `--output suggested.yaml` |
 
 ### Usage Examples
 
-**Example 1: Basic anonymization**
+**Example 1: Direct restore with all schemas**
 ```bash
-java -jar target/Amrit-DB-1.0.0.war anonymize \
-  --input /backup/production.sql \
-  --output /backup/uat.sql
+java -jar target/Amrit-DB-1.0.0.war run \
+  --config config.yaml \
+  --approve PROD_2025_FEB
 ```
 
-**Example 2: Verbose output**
+**Example 2: Dry run validation**
 ```bash
-java -jar target/Amrit-DB-1.0.0.war anonymize \
-  --input production.sql \
-  --output anonymized.sql \
-  --verbose
-```
-
-**Example 3: Custom registry and lookup path**
-```bash
-java -jar target/Amrit-DB-1.0.0.war anonymize \
-  --input prod.sql \
-  --output uat.sql \
-  --registry custom-rules.yml \
-  --lookup /data/lookup-cache
-```
-
-**Example 4: Dry run (validation only)**
-```bash
-java -jar target/Amrit-DB-1.0.0.war anonymize \
-  --input huge-dump.sql \
-  --output test-output.sql \
+java -jar target/Amrit-DB-1.0.0.war run \
+  --config config.yaml \
+  --approve PROD_2025_FEB \
   --dry-run
 ```
 
-**Example 5: Custom salt**
+**Example 3: Schema drift detection**
 ```bash
-java -jar target/Amrit-DB-1.0.0.war anonymize \
-  --input prod.sql \
-  --output uat.sql \
-  --salt "MySecureRandomSalt123"
+java -jar target/Amrit-DB-1.0.0.war diff-schema \
+  --config config.yaml \
+  --rules rules.yaml \
+  --output suggested-rules.yaml
 ```
 
-**Example 6: Increased memory for large dumps**
+**Example 4: Custom rules file**
 ```bash
-java -Xmx8g -jar target/Amrit-DB-1.0.0.war anonymize \
-  --input large-production-10GB.sql \
-  --output uat-anonymized.sql
+java -jar target/Amrit-DB-1.0.0.war run \
+  --config config.yaml \
+  --rules custom-rules.yaml \
+  --approve PROD_2025_FEB
 ```
+
+## Configuration
+
+### config.yaml Structure
+
+Complete configuration file with all options:
+
+```yaml
+# Source Database (Read Replica)
+source:
+  host: db-replica.prod.example.com
+  port: 3306
+  schemas:
+    - db_iemr
+    - db_identity
+    - db_reporting
+    - db_1097_identity
+  username: readonly_user
+  password: ${DB_READ_PASSWORD}
+  readOnly: true
+  connectionTimeout: 30000
+
+# Target Database (UAT)
+target:
+  host: uat-db.example.com
+  port: 3306
+  schemas:
+    - db_iemr
+    - db_identity
+    - db_reporting
+    - db_1097_identity
+  username: write_user
+  password: ${DB_WRITE_PASSWORD}
+  connectionTimeout: 30000
+
+# Safety Configuration
+safety:
+  enabled: true
+  allowedHosts:
+    - db-replica.prod.example.com
+  deniedPatterns:
+    - "*prod-master*"
+  requireExplicitApproval: true
+  approvalFlag: PROD_2025_FEB
+
+# Performance Tuning
+performance:
+  batchSize: 1000
+  fetchSize: 1000
+  maxMemoryMb: 512
+
+rulesFile: rules.yaml
+loggingPath: ./logs
+```
+
+## Schema Reset Strategies
+
+Before anonymizing data, the tool resets target schemas using one of these strategies:
+
+### Strategy 1: DROP and CREATE (Preferred)
+
+```sql
+DROP DATABASE IF EXISTS db_iemr;
+CREATE DATABASE db_iemr CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+**Requirements**: DROP and CREATE privileges
+
+### Strategy 2: Clone and DELETE (Fallback)
+
+```sql
+-- Clone table structures
+SHOW CREATE TABLE source_db.table1;
+-- Execute CREATE TABLE in target_db
+
+-- Delete all data
+SET FOREIGN_KEY_CHECKS = 0;
+DELETE FROM db_iemr.table1;
+SET FOREIGN_KEY_CHECKS = 1;
+```
+
+**Requirements**: DELETE privilege on target, SELECT on source
+
+### Strategy 3: Manual Intervention
+
+If both fail, manually reset schemas and re-run.
 
 ### Exit Codes
 
@@ -440,27 +585,23 @@ databases:
           BenRegID:
             strategy: HASH           # HMAC-SHA256
             dataType: BIGINT
-            piiLevel: CRITICAL
+
           FirstName:
             strategy: FAKE_NAME      # Deterministic fake
             dataType: VARCHAR
-            piiLevel: HIGH
           PhoneNo:
             strategy: MASK           # Show last N
             dataType: VARCHAR
-            piiLevel: HIGH
             options:
               showLast: 4
           DOB:
             strategy: GENERALIZE     # Year only
             dataType: DATE
-            piiLevel: MEDIUM
             options:
               precision: YEAR
           GenderID:
             strategy: PRESERVE       # No change
             dataType: INT
-            piiLevel: LOW
 ```
 
 **Available Strategies:**
