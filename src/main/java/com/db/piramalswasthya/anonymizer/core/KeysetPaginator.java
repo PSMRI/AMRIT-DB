@@ -119,10 +119,10 @@ public class KeysetPaginator {
              PreparedStatement stmt = conn.prepareStatement(selectSql)) {
             
             stmt.setFetchSize(batchSize);
+            stmt.setInt(2, batchSize); // Loop-invariant
             
             while (true) {
                 stmt.setLong(1, lastKey);
-                stmt.setInt(2, batchSize);
                 
                 List<RowData> batch = new ArrayList<>();
                 long newLastKey = lastKey;
@@ -137,8 +137,8 @@ public class KeysetPaginator {
                         
                         // Get numeric PK value
                         Object pkValue = rs.getObject(primaryKey);
-                        if (pkValue instanceof Number) {
-                            newLastKey = ((Number) pkValue).longValue();
+                        if (pkValue instanceof Number number) {
+                            newLastKey = number.longValue();
                         } else {
                             throw new SQLException("Primary key must be numeric: " + primaryKey);
                         }

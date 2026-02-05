@@ -108,7 +108,7 @@ public class DiffSchemaCommand implements Callable<Integer> {
             
             // 7. Generate suggested rules if output specified
             if (outputFile != null) {
-                generateSuggestedRules(allDiffs, rules, outputFile);
+                generateSuggestedRules(allDiffs, outputFile);
             }
             
             if (anyDifferences) {
@@ -261,7 +261,6 @@ public class DiffSchemaCommand implements Callable<Integer> {
      * Generate suggested rules YAML
      */
     private void generateSuggestedRules(Map<String, SchemaDiff> allDiffs, 
-                                       AnonymizationRules existingRules, 
                                        String outputPath) throws Exception {
         
         StringBuilder yaml = new StringBuilder();

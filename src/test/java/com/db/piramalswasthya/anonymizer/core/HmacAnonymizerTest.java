@@ -43,7 +43,7 @@ class HmacAnonymizerTest {
         // Same input should produce same hash
         assertEquals(hash1, hash2);
         assertNotNull(hash1);
-        assertTrue(hash1.length() > 0);
+        assertFalse(hash1.isEmpty());
     }
     
     @Test
