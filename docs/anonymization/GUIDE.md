@@ -1,29 +1,82 @@
-# AMRIT Database Anonymization - User Guide
+# AMRIT Database Anonymization - User Guide (v2.0)
+Connects directly to DB1, streams with keyset pagination
 
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [Prerequisites](#prerequisites)
-3. [Installation](#installation)
-4. [Quick Start](#quick-start)
-5. [Command-Line Usage](#command-line-usage)
-6. [Automation Scripts](#automation-scripts)
-7. [Jenkins Pipeline](#jenkins-pipeline)
-8. [Configuration](#configuration)
-9. [Troubleshooting](#troubleshooting)
-10. [FAQ](#faq)
+2. [Architecture](#architecture)
+3. [Prerequisites](#prerequisites)
+4. [Installation](#installation)
+5. [Configuration](#configuration)
+6. [Command-Line Usage](#command-line-usage)
+7. [Security Model](#security-model)
+8. [Troubleshooting](#troubleshooting)
+9. [FAQ](#faq)
 
 ## Overview
 
-The AMRIT Database Anonymization Tool transforms production SQL dumps into anonymized versions safe for UAT testing. It preserves database structure and referential integrity while protecting sensitive patient information.
+The AMRIT Database Anonymization Tool v2.0 **connects directly to a production read replica (DB1)**, streams data using keyset pagination, anonymizes sensitive fields using HMAC-based deterministic strategies, and outputs to either:
+- Compressed SQL dump (.sql.gz)
+- Direct restore to UAT database (DB2)
+
+**What This Tool DOES:**
+- Connects to DB1 read replica (never production master)
+- Streams billions of rows efficiently (keyset pagination, no OFFSET)
+- Deterministic HMAC-based anonymization (same input → same output)
+- Production safety guards (hostname checks, allowlists)
+- PII-safe logging (counts/timings only, never raw data)
+- Schema drift detection (compare DB to rules.yaml)
+- Validates rules before execution
+
+**What This Tool DOES NOT Do:**
+- Does NOT process SQL dump files (use mysqldump separately if needed)
+- Does NOT connect to production master databases (safety enforced)
+- Does NOT log or store raw PII (all logging is sanitized)
+- Does NOT use OFFSET queries (always keyset pagination)
+- Does NOT require large lookup tables (HMAC is deterministic)
 
 **Key Features:**
-- Processes large SQL dump files efficiently (streaming, memory-safe)
-- Consistent anonymization (same original → same anonymized value)
-- Configurable strategies (hashing, masking, fake data, generalization)
-- Preserves referential integrity across tables
-- Command-line tool and automation scripts
-- Jenkins pipeline ready
+- Keyset pagination for O(log n) performance on large tables
+- HMAC-SHA256 deterministic anonymization (no lookup tables needed)
+- Production safety: hostname allowlist/denylist with explicit approval flags
+- PII-safe logging: counts, timings, hashed IDs only
+- Schema drift detection: diff-schema command
+- Multiple output modes: SQL dump or direct DB restore
+- YAML-based configuration and rules
+
+## Architecture
+
+```
+┌──────────────────┐
+│ DB1 (Read Replica│  ← Read-only connection
+│  Production DB)  │     TLS/SSL enforced
+└────────┬─────────┘
+         │ Keyset Pagination
+         │ SELECT * FROM table WHERE pk > ? ORDER BY pk LIMIT 1000
+         |
+         |
+┌─────────────────────────────────────┐
+│  Java CLI Tool (amrit-db-anonymize) │
+│  - Safety Guard (allowlist check)   │
+│  - HMAC Anonymizer (deterministic)  │
+│  - Streaming processor (batched)    │
+│  - PII-safe logger                  │
+└────────┬────────────────────────────┘
+         |
+         |-------------+-----------------|
+         |             |                 |
+         |             |                 |
+    .sql.gz       DB2 (UAT)      run-report.json
+   (compressed)   (direct          (PII-safe
+    SQL dump)     restore)         metrics)
+```
+
+**Key Design Principles:**
+1. **Streaming**: Never loads entire tables into memory
+2. **Keyset Pagination**: O(log n) performance, no OFFSET
+3. **Deterministic**: HMAC ensures same input → same output
+4. **Safety-First**: Multiple layers of production protection
+5. **PII-Safe**: Logs contain only counts, timings, hashed IDs
 
 ## Prerequisites
 
@@ -42,17 +95,22 @@ The AMRIT Database Anonymization Tool transforms production SQL dumps into anony
    mvn -version
    ```
 
-3. **MySQL 8.0** (for creating dumps)
-   ```bash
-   # Check MySQL version
-   mysql --version
-   ```
+3. **MySQL 8.0+** (for DB connections)
+   - Read replica access to production database
+   - Write access to UAT database (if using direct restore mode)
 
 ### System Requirements
 
-- **Disk Space**: 3x size of production dump (input + output + lookup cache)
-- **Memory**: 4GB RAM recommended
-- **CPU**: 2+ cores recommended for better performance
+- **Memory**: 512MB-2GB RAM (configurable batch size)
+- **CPU**: 2+ cores recommended
+- **Disk Space**: 2x final output size (for compressed dumps)
+- **Network**: Stable connection to database servers
+
+### Required Access
+
+1. **DB1 (Source)**: Read-only user with SELECT privileges
+2. **DB2 (Target, optional)**: Write user with INSERT/CREATE privileges
+3. **TLS/SSL**: Encrypted connections enforced for production
 
 ## Installation
 
@@ -309,64 +367,325 @@ chmod +x scripts/anonymize-db.sh
 
 ## Configuration
 
-### Anonymization Registry
+The tool uses two configuration files:
 
-The registry file (`anonymization-registry.yml`) defines which fields to anonymize and how.
+### 1. config.yaml (System Configuration)
 
-**Location**: `src/main/resources/anonymization-registry.yml`
-
-**Structure:**
 ```yaml
-version: "1.0.0"
-lastUpdated: "2026-02-04T12:00:00Z"
+# Database connections
+source:
+  host: db-read-replica.example.com
+  port: 3306
+  database: db_iemr
+  username: readonly_user
+  password: ${DB_PASSWORD}
+  readOnly: true
+
+target:
+  host: uat-database.example.com
+  port: 3306
+  database: db_iemr_uat
+  username: uat_user
+  password: ${DB_UAT_PASSWORD}
+
+# CRITICAL: Production safety settings
+safety:
+  enabled: true
+  allowedHosts:
+    - "db-read-replica.example.com"
+    - "*.nonprod.internal"
+  deniedPatterns:
+    - ".*prod.*"
+    - ".*production.*"
+  requireExplicitApproval: true
+  approvalFlag: "I_CONFIRM_UAT_REFRESH_2026"
+
+# Performance tuning
+performance:
+  batchSize: 1000        # Rows per batch
+  fetchSize: 1000        # JDBC fetch size
+  maxMemoryMb: 512       # Max heap usage
+  threadPoolSize: 4      # Parallel table processing
+
+# Output configuration
+output:
+  mode: SQL_DUMP         # SQL_DUMP or DIRECT_RESTORE
+  path: ./output/anonymized.sql.gz
+  compress: true
+  includeSchema: false
+
+rulesFile: rules.yaml
+loggingPath: ./logs
+```
+
+**Environment Variables** (recommended for secrets):
+- `DB_PASSWORD`: Source database password
+- `DB_UAT_PASSWORD`: Target database password
+- `ANONYMIZATION_SECRET`: HMAC secret key (32+ chars)
+
+### 2. rules.yaml (Anonymization Rules)
+
+```yaml
+rulesVersion: "2.0.0"
+schemaHint: "db_iemr-2024-Q4"
+lastUpdated: "2026-02-05T00:00:00Z"
+unknownColumnPolicy: WARN  # FAIL, WARN, PRESERVE
+
 databases:
   db_identity:
     tables:
       m_beneficiaryregidmapping:
+        primaryKey: BenRegID
         columns:
           BenRegID:
-            anonymizationRule: "HASH_SHA256"
-            piiRisk: "CRITICAL"
+            strategy: HASH           # HMAC-SHA256
+            dataType: BIGINT
+            piiLevel: CRITICAL
           FirstName:
-            anonymizationRule: "RANDOM_FAKE_DATA"
-            piiRisk: "HIGH"
+            strategy: FAKE_NAME      # Deterministic fake
+            dataType: VARCHAR
+            piiLevel: HIGH
           PhoneNo:
-            anonymizationRule: "PARTIAL_MASK"
-            piiRisk: "HIGH"
+            strategy: MASK           # Show last N
+            dataType: VARCHAR
+            piiLevel: HIGH
             options:
-              show_last_n: 4
+              showLast: 4
+          DOB:
+            strategy: GENERALIZE     # Year only
+            dataType: DATE
+            piiLevel: MEDIUM
+            options:
+              precision: YEAR
+          GenderID:
+            strategy: PRESERVE       # No change
+            dataType: INT
+            piiLevel: LOW
 ```
 
-### Available Anonymization Strategies
+**Available Strategies:**
+| Strategy | Description | Deterministic | Example |
+|----------|-------------|---------------|---------|
+| `HASH` | HMAC-SHA256 hash | Yes | `12345` → `a3f2c8...` |
+| `FAKE_NAME` | HMAC-seeded fake name | Yes | `John Doe` → `Amit Kumar` |
+| `MASK` | Mask with X, show last N | Yes | `9876543210` → `XXXXXX3210` |
+| `GENERALIZE` | Reduce precision | Yes | `1985-05-15` → `1985` |
+| `SUPPRESS` | Replace with NULL | Yes | `Secret` → `NULL` |
+| `PRESERVE` | No change | Yes | `Active` → `Active` |
 
-| Strategy | Description | Example |
-|----------|-------------|---------|
-| `HASH_SHA256` | One-way hash (deterministic) | `BEN12345` → `a3f2c8...` |
-| `RANDOM_FAKE_DATA` | Realistic fake data (Indian locale) | `John` → `Rajesh Kumar` |
-| `PARTIAL_MASK` | Mask with X, show last N | `9876543210` → `XXXXXX3210` |
-| `GENERALIZE` | Reduce precision | `1985-05-15` → `1985` |
-| `SUPPRESS` | Replace with NULL | `Secret notes` → `NULL` |
-| `PRESERVE` | No change (non-sensitive) | `Active` → `Active` |
+**Unknown Column Policy:**
+- `FAIL`: Stop if DB has columns not in rules
+- `WARN`: Log warning, preserve unknown columns
+- `PRESERVE`: Silently keep unknown columns unchanged
 
-### Customizing Registry
+## Command-Line Usage
 
-To add a new field for anonymization:
+### Basic Command Structure
 
-1. Open `anonymization-registry.yml`
-2. Navigate to database → table → columns
-3. Add new column entry:
-   ```yaml
-   NewColumn:
-     canonicalName: "NewColumn"
-     dataType: "VARCHAR"
-     piiRisk: "HIGH"
-     anonymizationRule: "HASH_SHA256"
-   ```
-4. Rebuild and redeploy
+```bash
+java -jar target/Amrit-DB-2.0.0.war <command> [options]
+```
+
+### Available Commands
+
+#### 1. run - Execute Anonymization
+
+```bash
+# Basic usage (SQL dump output)
+java -jar target/Amrit-DB-2.0.0.war run \
+  --config config.yaml \
+  --approval-flag "I_CONFIRM_UAT_REFRESH_2026"
+
+# Direct restore to DB2
+java -jar target/Amrit-DB-2.0.0.war run \
+  --config config-direct-restore.yaml \
+  --approval-flag "I_CONFIRM_UAT_REFRESH_2026"
+
+# Dry run (validation only)
+java -jar target/Amrit-DB-2.0.0.war run \
+  --config config.yaml \
+  --dry-run
+```
+
+#### 2. diff-schema - Schema Drift Detection
+
+```bash
+# Compare DB schema to rules.yaml
+java -jar target/Amrit-DB-2.0.0.war diff-schema \
+  --config config.yaml \
+  --rules rules.yaml
+
+# Output suggested rules to file
+java -jar target/Amrit-DB-2.0.0.war diff-schema \
+  --config config.yaml \
+  --rules rules.yaml \
+  --output suggested-rules.yaml
+```
+
+**Output Example:**
+```
+Schema Drift Analysis
+=====================
+
+Missing Tables (in DB, not in rules):
+  - db_iemr.t_newpatients (15 columns)
+  
+Missing Columns:
+  - db_identity.m_beneficiaryregidmapping.NewColumn (VARCHAR)
+
+Suggested Rules:
+  NewColumn:
+    strategy: PRESERVE  # Review and change if PII
+    dataType: VARCHAR
+    piiLevel: UNKNOWN
+```
+
+#### 3. validate-rules - Validate Configuration
+
+```bash
+# Validate rules.yaml
+java -jar target/Amrit-DB-2.0.0.war validate-rules \
+  --rules rules.yaml
+```
+
+**Validation Checks:**
+- YAML syntax valid
+- Required fields present (rulesVersion, schemaHint)
+- Strategy names are valid
+- Primary keys defined for all tables
+- No duplicate column definitions
+
+## Security Model
+
+### Multi-Layer Safety
+
+1. **Hostname Allowlist**
+   - Only connects to explicitly allowed hosts
+   - Supports wildcards: `*.nonprod.internal`
+
+2. **Deny Pattern Matching**
+   - Built-in patterns: `.*prod.*`, `.*production.*`, `.*live.*`
+   - Custom patterns in config.yaml
+
+3. **Explicit Approval Flag**
+   - Required for execution
+   - Rotates periodically (date-based)
+   - Prevents accidental runs
+
+4. **Read-Only Connections**
+   - Source database connections are read-only
+   - Enforced at JDBC level
+
+5. **PII-Safe Logging**
+   - Logs contain ONLY:
+     - Row counts
+     - Processing times
+     - Hashed IDs (never raw values)
+     - Error codes (no sensitive details)
+
+### Example Safety Violation
+
+```bash
+$ java -jar amrit-db.war run --config config.yaml
+
+Running safety checks for prod-db.example.com:db_iemr
+DENIED: Host 'prod-db.example.com' matches production pattern '.*prod.*'
+   If this is intentional, add to allowlist and provide approval flag.
+
+Exit code: 1
+```
+
+## Command-Line Usage Examples
+
+### Example 1: Weekly UAT Refresh (SQL Dump)
+
+```bash
+# Set environment variables
+export DB_PASSWORD="readonly_pass"
+export ANONYMIZATION_SECRET="your-32-char-secret-key-here"
+
+# Run anonymization
+java -Xmx2g -jar target/Amrit-DB-2.0.0.war run \
+  --config config.yaml \
+  --approval-flag "I_CONFIRM_UAT_REFRESH_2026_FEB"
+
+# Output: ./output/anonymized-2026-02-05.sql.gz
+```
+
+### Example 2: Direct Restore to UAT
+
+```bash
+# config.yaml with output.mode: DIRECT_RESTORE
+java -Xmx2g -jar target/Amrit-DB-2.0.0.war run \
+  --config config-direct-restore.yaml \
+  --approval-flag "I_CONFIRM_UAT_REFRESH_2026_FEB"
+
+# Connects to DB2 and restores directly (no intermediate file)
+```
+
+### Example 3: Schema Change Detection
+
+```bash
+# After a production schema change, check what's new
+java -jar target/Amrit-DB-2.0.0.war diff-schema \
+  --config config.yaml \
+  --rules rules.yaml \
+  --output new-columns.yaml
+
+# Review new-columns.yaml
+# Update rules.yaml with appropriate strategies
+# Commit changes to version control
+```
+
+### Example 4: Pre-Execution Validation
+
+```bash
+# Before running on Monday morning
+java -jar target/Amrit-DB-2.0.0.war validate-rules --rules rules.yaml
+java -jar target/Amrit-DB-2.0.0.war run --config config.yaml --dry-run
+
+# If both pass, run actual execution
+java -jar target/Amrit-DB-2.0.0.war run \
+  --config config.yaml \
+  --approval-flag "I_CONFIRM_UAT_REFRESH_2026_FEB"
+```
 
 ## Troubleshooting
 
 ### Common Issues
+
+#### Issue: "Safety check failed - host not in allowlist"
+
+**Symptoms:**
+```
+DENIED: Host 'db-server.example.com' not in allowlist
+```
+
+**Solution:**
+1. Verify you're connecting to correct read replica
+2. Add host to `config.yaml`:
+   ```yaml
+   safety:
+     allowedHosts:
+       - "db-server.example.com"
+   ```
+3. Provide approval flag: `--approval-flag "..."`
+
+#### Issue: "Connection timeout to database"
+
+**Symptoms:**
+```
+ERROR: Failed to connect to db-replica:3306 after 30s
+```
+
+**Solution:**
+1. Check network connectivity: `telnet db-replica 3306`
+2. Verify credentials: `mysql -h db-replica -u user -p`
+3. Increase timeout in config.yaml:
+   ```yaml
+   source:
+     connectionTimeout: 60000  # 60 seconds
+   ```
 
 #### Issue: "Out of memory error"
 
@@ -376,198 +695,324 @@ java.lang.OutOfMemoryError: Java heap space
 ```
 
 **Solution:**
-Increase heap size:
-```bash
-java -Xmx8g -jar target/Amrit-DB-1.0.0.war anonymize ...
-```
+1. Reduce batch size in config.yaml:
+   ```yaml
+   performance:
+     batchSize: 500  # Was 1000
+     fetchSize: 500
+   ```
+2. Increase JVM heap:
+   ```bash
+   java -Xmx4g -jar target/Amrit-DB-2.0.0.war run ...
+   ```
 
-#### Issue: "H2 database locked"
-
-**Symptoms:**
-```
-Database may be already in use: "Locked by another process"
-```
-
-**Solution:**
-1. Close other processes using lookup DB
-2. Delete lock file: `lookup-cache.lock.db`
-3. Ensure `AUTO_SERVER=TRUE` in H2 URL (already enabled)
-
-#### Issue: "SQL parsing error"
+#### Issue: "Unknown column in rules"
 
 **Symptoms:**
 ```
-Failed to parse INSERT statement at line 12345
+WARN: Column 'NewColumn' in table 't_patients' not found in rules.yaml
 ```
 
 **Solution:**
-Ensure MySQL dump uses compatible format:
-```bash
-mysqldump --compatible=mysql --no-create-info ...
-```
+1. Run schema diff:
+   ```bash
+   java -jar amrit-db.war diff-schema --config config.yaml --output new-rules.yaml
+   ```
+2. Review `new-rules.yaml`
+3. Merge into `rules.yaml`
+4. Re-run with updated rules
 
-#### Issue: "Input file not found"
+#### Issue: "Primary key not defined for table"
 
 **Symptoms:**
 ```
-ERROR: Input file not found: production.sql
+ERROR: Table 't_visits' missing primaryKey in rules.yaml
 ```
 
 **Solution:**
-- Check file path (use absolute paths)
-- Verify file permissions (readable)
-- On Windows, use backslashes: `D:\backup\dump.sql`
-
-#### Issue: "Registry validation failed"
-
-**Symptoms:**
+Add primary key to rules.yaml:
+```yaml
+databases:
+  db_iemr:
+    tables:
+      t_visits:
+        primaryKey: VisitID  # <-- Add this
+        columns:
+          ...
 ```
-ERROR: Failed to load anonymization registry
-```
-
-**Solution:**
-1. Validate YAML syntax: https://www.yamllint.com/
-2. Check indentation (must use spaces, not tabs)
-3. Verify required fields present
 
 ### Debug Mode
 
 Enable detailed logging:
 
 ```bash
-java -Dlogging.level.com.db.piramalswasthya=DEBUG \
-  -jar target/Amrit-DB-1.0.0.war anonymize \
-  --input prod.sql \
-  --output uat.sql \
-  --verbose
+# Set logging level to DEBUG
+export LOGGING_LEVEL=DEBUG
+
+java -jar target/Amrit-DB-2.0.0.war run \
+  --config config.yaml \
+  --approval-flag "..."
+```
+
+**Log Output (PII-Safe):**
+```
+DEBUG KeysetPaginator: Fetching batch WHERE BenRegID > 12345 LIMIT 1000
+DEBUG HmacAnonymizer: Hashed ID count=1000, avg_time=0.5ms
+INFO  Progress: Table m_beneficiaryregidmapping - 50000/500000 rows (10%)
 ```
 
 ### Log Files
 
-**PowerShell Script Logs:**
-- Location: `logs/anonymization_YYYYMMDD_HHMMSS.log`
-- Contains full console output + errors
+**Location**: `./logs/anonymization-YYYYMMDD-HHMMSS.log`
 
-**Application Logs:**
-- Location: `logs/amrit-db.log` (if configured)
-- Rotation: Daily, keep 7 days
+**Contains (PII-Safe)**:
+- Start/end timestamps
+- Tables processed
+- Row counts per table
+- Processing times
+- Errors (no sensitive data)
+- Configuration hash
+- Rules version
 
-**View Last Errors:**
-```bash
-# Windows
-Get-Content logs\anonymization_*.log -Tail 50
-
-# Linux/Mac
-tail -50 logs/anonymization_*.log
+**Example Log:**
+```json
+{
+  "timestamp": "2026-02-05T10:00:00Z",
+  "event": "table_completed",
+  "table": "m_beneficiaryregidmapping",
+  "rowsProcessed": 125000,
+  "durationMs": 45000,
+  "strategy": "HASH",
+  "columnsAnonymized": 8
+}
 ```
 
 ## FAQ
 
-### Q1: How long does anonymization take?
+### Q1: How do I handle schema changes?
 
-**A:** Processing time depends on dump size:
-- 100 MB: 1-2 minutes
-- 1 GB: 10-15 minutes
-- 10 GB: 1.5-2 hours
+**A:** Use the diff-schema command regularly:
 
-### Q2: Can I run multiple anonymizations in parallel?
-
-**A:** Yes, but use separate lookup database paths:
 ```bash
-# Process 1
---lookup ./lookup-cache-1
+# Weekly check
+java -jar amrit-db.war diff-schema \
+  --config config.yaml \
+  --output schema-changes.yaml
 
-# Process 2
---lookup ./lookup-cache-2
+# Review changes
+cat schema-changes.yaml
+
+# Update rules.yaml
+vi rules.yaml
+
+# Commit to version control
+git add rules.yaml
+git commit -m "Add rules for new columns in Q1-2026 schema"
 ```
 
-### Q3: Is the original dump modified?
+### Q2: Can I run this in parallel for multiple databases?
 
-**A:** No. The tool only reads the input file and creates a new output file.
+**A:** Yes, but use separate config files:
 
-### Q4: What happens if anonymization fails midway?
+```bash
+# Terminal 1: db_iemr
+java -jar amrit-db.war run --config config-iemr.yaml --approval-flag "..."
 
-**A:** The output file will be incomplete. Delete it and re-run. The lookup cache preserves mappings.
+# Terminal 2: db_identity
+java -jar amrit-db.war run --config config-identity.yaml --approval-flag "..."
+```
 
-### Q5: Can I anonymize only specific tables?
+### Q3: How long does anonymization take?
 
-**A:** Yes. Modify `anonymization-registry.yml` to include only desired tables. Remove unwanted table entries.
+**A:** Depends on data size:
+- 1M rows: ~5-10 minutes
+- 10M rows: ~30-60 minutes
+- 100M rows (crores): ~5-8 hours
+- 1B rows: ~2-3 days
 
-### Q6: How do I verify anonymization worked?
+**Performance factors:**
+- Network speed (DB1 → tool)
+- Batch size (higher = faster, more memory)
+- Number of columns to anonymize
+- HMAC computation overhead (~100μs per value)
 
-**A:** 
-1. Check output file size (should be similar to input)
-2. Spot-check sensitive fields:
-   ```sql
-   mysql> SELECT BenRegID, FirstName FROM m_beneficiaryregidmapping LIMIT 10;
-   ```
-3. Verify foreign keys still match
+### Q4: Is the anonymization reversible?
 
-### Q7: Can I use this for databases other than MySQL?
+**A:** **NO.** HMAC-SHA256 is one-way:
+- Cannot reverse hash back to original
+- Same input always produces same hash (deterministic)
+- Secure for production-to-UAT workflows
 
-**A:** Currently supports MySQL only. PostgreSQL/Oracle support planned for future releases.
-
-### Q8: How secure is the anonymization?
+### Q5: What happens if the tool crashes mid-execution?
 
 **A:**
-- Uses salted SHA-256 hashing (one-way, irreversible)
-- Lookup table stores hashes, not original values
-- Custom salt recommended for production
+- **SQL Dump mode**: Partial file written, incomplete. Delete and re-run.
+- **Direct Restore mode**: Partial data in DB2. Drop tables and re-run.
+- **No data loss** in DB1 (read-only connection)
+- **Restart from beginning** (no resume support in v2.0)
 
-### Q9: What about foreign key constraints?
+### Q6: Can I anonymize only specific tables?
 
-**A:** The lookup table ensures consistency:
-- Same BenRegID in table A → same hash in table B
-- Referential integrity preserved
+**A:** Yes, edit rules.yaml to include only desired tables:
 
-### Q10: Can I anonymize incrementally?
+```yaml
+databases:
+  db_identity:
+    tables:
+      m_beneficiaryregidmapping:  # Only this table
+        ...
+      # Remove other tables
+```
 
-**A:** Not yet. Currently processes full dumps. Incremental support planned for v2.0.
+### Q7: How do I verify anonymization worked?
+
+**A:** Check run-report.json:
+
+```json
+{
+  "executionId": "20260205-100000",
+  "status": "SUCCESS",
+  "tables": [
+    {
+      "name": "m_beneficiaryregidmapping",
+      "rowsProcessed": 125000,
+      "columnsAnonymized": 8,
+      "strategies": {
+        "HASH": 3,
+        "FAKE_NAME": 2,
+        "MASK": 2,
+        "PRESERVE": 1
+      }
+    }
+  ],
+  "totalDurationMs": 180000,
+  "configHash": "a3f2c8...",
+  "rulesVersion": "2.0.0"
+}
+```
+
+Spot-check UAT database:
+```sql
+SELECT BenRegID, FirstName, PhoneNo FROM m_beneficiaryregidmapping LIMIT 10;
+
+-- Should see:
+-- BenRegID: hashed (long hex string)
+-- FirstName: fake name (Amit Kumar, Priya Sharma)
+-- PhoneNo: masked (XXXXXX3210)
+```
+
+### Q8: How secure is the HMAC secret key?
+
+**A:** **CRITICAL SECURITY:**
+- Store in environment variable or secret manager
+- Never commit to version control
+- Rotate periodically (quarterly recommended)
+- Use 32+ character random string:
+  ```bash
+  openssl rand -hex 32
+  ```
+
+### Q9: Can I use this for databases other than MySQL?
+
+**A:** Currently MySQL only. PostgreSQL/Oracle support planned for v2.1.
+
+### Q10: What's the difference between v1.0 and v2.0?
+
+| Feature | v1.0 (deprecated) | v2.0 (current) |
+|---------|-------------------|----------------|
+| Input | SQL dump file | Live DB connection |
+| Pagination | N/A (file-based) | Keyset pagination |
+| Performance | O(n) file read | O(log n) queries |
+| Safety | Basic | Multi-layer (allowlist, approval) |
+| Output | SQL file | SQL file OR direct restore |
+| Schema Diff | No | Yes (diff-schema command) |
+| PII Logging | Potential risk | Guaranteed PII-safe |
 
 ## Best Practices
 
-1. **Backup Before Restoring**
-   ```bash
-   mysqldump uat_database > uat-backup-before-refresh.sql
+1. **Always Use Read Replicas**
+   - Never connect to production master
+   - Use dedicated read replica with lag monitoring
+
+2. **Rotate Approval Flags Monthly**
+   ```yaml
+   safety:
+     approvalFlag: "I_CONFIRM_UAT_REFRESH_2026_FEB"  # Change monthly
    ```
 
-2. **Use Custom Salt in Production**
+3. **Version Control Your Rules**
    ```bash
-   --salt $(cat /secure/salt.txt)
+   git add rules.yaml config.yaml
+   git commit -m "Update rules for Q1-2026 schema"
+   git tag anonymization-rules-2026-Q1
    ```
 
-3. **Verify Output Before UAT Deployment**
+4. **Run Diff-Schema Weekly**
    ```bash
-   # Test on staging first
-   mysql staging_uat < anonymized-dump.sql
+   # Cron job: Every Monday 6 AM
+   0 6 * * 1 java -jar amrit-db.war diff-schema --config config.yaml
    ```
 
-4. **Keep Lookup Cache Persistent**
-   - Store lookup DB in version control or shared storage
-   - Ensures consistency across multiple anonymization runs
-
-5. **Monitor Disk Space**
+5. **Test on Staging First**
    ```bash
-   # Windows
-   Get-PSDrive C
+   # Staging config (smaller dataset)
+   java -jar amrit-db.war run --config config-staging.yaml --approval-flag "..."
    
-   # Linux
-   df -h
+   # If successful, run production config
+   java -jar amrit-db.war run --config config-prod.yaml --approval-flag "..."
    ```
 
-6. **Schedule Regular UAT Refreshes**
-   - Weekly or bi-weekly recommended
-   - Use Jenkins scheduled builds
+6. **Monitor Execution**
+   - Check run-report.json after completion
+   - Verify row counts match expectations
+   - Spot-check anonymized data in UAT
+
+7. **Keep Logs**
+   ```bash
+   # Archive logs for audit trail
+   tar -czf logs-$(date +%Y%m%d).tar.gz logs/
+   aws s3 cp logs-$(date +%Y%m%d).tar.gz s3://audit-bucket/
+   ```
 
 ## Support
 
 For issues or questions:
 - GitHub Issues: https://github.com/PSMRI/AMRIT-DB/issues
 - Email: support@piramalswasthya.org
-- Documentation: [TECHNICAL-DOCUMENTATION.md](TECHNICAL-DOCUMENTATION.md)
+- Internal Wiki: [AMRIT DB Anonymization](link)
 
-## License
+## Appendix
 
-Copyright (C) 2024 Piramal Swasthya Management and Research Institute
+### A. Full Config Reference
 
-Licensed under GPL v3.0
+See [config.yaml.example](../../config.yaml.example)
+
+### B. Full Rules Reference
+
+See [rules.yaml.example](../../rules.yaml.example)
+
+### C. Architecture Diagram
+
+See [architecture diagram.png](architecture%20diagram.png)
+
+### D. Migration from v1.0 to v2.0
+
+**v1.0 Command:**
+```bash
+java -jar Amrit-DB-1.0.0.war anonymize --input dump.sql --output uat.sql
+```
+
+**v2.0 Equivalent:**
+1. Create DB connection config (config.yaml)
+2. Run: `java -jar Amrit-DB-2.0.0.war run --config config.yaml --approval-flag "..."`
+
+**Key Differences:**
+- v2.0 connects to live DB (no dump file needed)
+- v2.0 requires safety approval flag
+- v2.0 uses keyset pagination (faster for large datasets)
+
+---
+
+**Document Version**: 2.0.0  
+**Last Updated**: February 5, 2026  
+**Status**: v2.0 Implementation In Progress

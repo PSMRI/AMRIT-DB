@@ -1,0 +1,74 @@
+# AMRIT DB Anonymization Rules
+# Defines which columns to anonymize and how
+
+rulesVersion: "2.0.0"
+schemaHint: "db_iemr-2024-Q4"
+lastUpdated: "2026-02-05T00:00:00Z"
+unknownColumnPolicy: WARN  # FAIL, WARN, or PRESERVE
+
+databases:
+  db_identity:
+    tables:
+      m_beneficiaryregidmapping:
+        primaryKey: BenRegID
+        columns:
+          BenRegID:
+            strategy: HASH
+            dataType: BIGINT
+            piiLevel: CRITICAL
+          FirstName:
+            strategy: FAKE_NAME
+            dataType: VARCHAR
+            piiLevel: HIGH
+          LastName:
+            strategy: FAKE_NAME
+            dataType: VARCHAR
+            piiLevel: HIGH
+          PhoneNo:
+            strategy: MASK
+            dataType: VARCHAR
+            piiLevel: HIGH
+            options:
+              showLast: 4
+          Email:
+            strategy: HASH
+            dataType: VARCHAR
+            piiLevel: HIGH
+          DOB:
+            strategy: GENERALIZE
+            dataType: DATE
+            piiLevel: MEDIUM
+            options:
+              precision: YEAR
+          GenderID:
+            strategy: PRESERVE
+            dataType: INT
+            piiLevel: LOW
+  
+  db_iemr:
+    tables:
+      t_benvisitdetail:
+        primaryKey: BenVisitID
+        columns:
+          BenVisitID:
+            strategy: HASH
+            dataType: BIGINT
+            piiLevel: CRITICAL
+          BeneficiaryRegID:
+            strategy: HASH
+            dataType: BIGINT
+            piiLevel: CRITICAL
+          VisitCode:
+            strategy: HASH
+            dataType: VARCHAR
+            piiLevel: HIGH
+          VisitReason:
+            strategy: PRESERVE
+            dataType: VARCHAR
+            piiLevel: LOW
+          VisitDateTime:
+            strategy: GENERALIZE
+            dataType: DATETIME
+            piiLevel: MEDIUM
+            options:
+              precision: DAY
