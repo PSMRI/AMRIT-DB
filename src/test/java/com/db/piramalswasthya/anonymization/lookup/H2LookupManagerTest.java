@@ -1,13 +1,25 @@
 package com.db.piramalswasthya.anonymization.lookup;
 
-import com.db.piramalswasthya.anonymization.exception.AnonymizationException;
-import org.junit.jupiter.api.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+
+import com.db.piramalswasthya.anonymization.exception.AnonymizationException;
 
 /**
  * Tests for H2LookupManager embedded database functionality
@@ -29,7 +41,8 @@ class H2LookupManagerTest {
     @BeforeEach
     void setUp() throws AnonymizationException {
         Path dbFile = testDbPath.resolve("test-lookup");
-        lookupManager = new H2LookupManager(dbFile, "TEST_SALT_2024");
+        // Use fixed password for all tests to avoid encryption mismatch
+        lookupManager = new H2LookupManager(dbFile, "TEST_SALT_2024_SECURE", "TEST_PASSWORD_123456");
     }
     
     @AfterEach
@@ -193,12 +206,12 @@ class H2LookupManagerTest {
         Path dbFile = testDbPath.resolve("persistence-test");
         
         // Session 1: Store data
-        try (H2LookupManager session1 = new H2LookupManager(dbFile, "SALT")) {
+        try (H2LookupManager session1 = new H2LookupManager(dbFile, "SALT_VALUE_16CHARS", "TEST_PASSWORD_123456")) {
             session1.storeMapping("db1", "table1", "col1", "value1", "anon1", "HASH", "VARCHAR");
         }
         
         // Session 2: Read data
-        try (H2LookupManager session2 = new H2LookupManager(dbFile, "SALT")) {
+        try (H2LookupManager session2 = new H2LookupManager(dbFile, "SALT_VALUE_16CHARS", "TEST_PASSWORD_123456")) {
             Optional<String> result = session2.findAnonymized("db1", "table1", "col1", "value1");
             
             assertTrue(result.isPresent(), "Should persist data across sessions");
