@@ -1,8 +1,8 @@
 USE db_identity;
 
----------------------------------------------------------
+
 -- 1) i_beneficiarymapping (BenDetailsId, VanID)
----------------------------------------------------------
+
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
@@ -17,9 +17,9 @@ SET @sql := IF(@exists = 0,
 );
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
----------------------------------------------------------
+
 -- 2) i_beneficiarymapping (BenAddressId, VanID)
----------------------------------------------------------
+
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
@@ -34,9 +34,9 @@ SET @sql := IF(@exists = 0,
 );
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
----------------------------------------------------------
+
 -- 3) i_beneficiarymapping (VanSerialNo, VanID)
----------------------------------------------------------
+
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
@@ -51,9 +51,9 @@ SET @sql := IF(@exists = 0,
 );
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
----------------------------------------------------------
+
 -- 4) i_beneficiarydetails (VanSerialNo, VanID)
----------------------------------------------------------
+
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
@@ -68,9 +68,9 @@ SET @sql := IF(@exists = 0,
 );
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
----------------------------------------------------------
+
 -- 5) i_beneficiarydetails (FirstName)
----------------------------------------------------------
+
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
@@ -85,9 +85,9 @@ SET @sql := IF(@exists = 0,
 );
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
----------------------------------------------------------
+
 -- 6) i_beneficiarydetails (LastName)
----------------------------------------------------------
+
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
@@ -102,9 +102,9 @@ SET @sql := IF(@exists = 0,
 );
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
----------------------------------------------------------
+
 -- 7) i_beneficiarydetails (GenderId)
----------------------------------------------------------
+
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
@@ -119,9 +119,9 @@ SET @sql := IF(@exists = 0,
 );
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
----------------------------------------------------------
+
 -- 8) i_beneficiarydetails (DOB)
----------------------------------------------------------
+
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
@@ -136,9 +136,9 @@ SET @sql := IF(@exists = 0,
 );
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
----------------------------------------------------------
+
 -- 9) i_beneficiarydetails (FatherName)
----------------------------------------------------------
+
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
@@ -153,9 +153,9 @@ SET @sql := IF(@exists = 0,
 );
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
----------------------------------------------------------
+
 -- 10) i_beneficiaryaddress (VanSerialNo, VanID)
----------------------------------------------------------
+
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
