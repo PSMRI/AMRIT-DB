@@ -1,7 +1,5 @@
 USE db_iemr;
 
-USE db_iemr;
-
 ALTER TABLE screening_kala_azar
 MODIFY id BIGINT(20) NOT NULL AUTO_INCREMENT;
 
