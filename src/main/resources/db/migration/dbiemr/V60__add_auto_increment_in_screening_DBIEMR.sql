@@ -61,10 +61,6 @@ SET @preparedStatement = (SELECT IF(
 ));
 PREPARE stmt FROM @preparedStatement; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
-
--- =========================
--- ADD user_id
--- =========================
 SET @columnname = 'user_id';
 SET @preparedStatement = (SELECT IF(
  (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
