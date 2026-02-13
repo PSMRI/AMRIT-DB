@@ -5,14 +5,11 @@
 ## Overview  
 The AMRIT-DB service is a Spring Boot application designed to simplify database schema management and cloning. Using Flyway for migrations, it ensures consistency and ease in setting up local environments, making it an invaluable tool for developers.
 
-This service also includes the **AMRIT Database Anonymization Tool v2.0** - a production-safe tool for anonymizing sensitive data when creating UAT environments from production backups.
-
 ---
 
 ## Table of Contents  
 - [Introduction](#introduction)  
 - [Key Features](#key-features)  
-- [Database Anonymization Tool](#database-anonymization-tool)  
 - [Prerequisites](#prerequisites)  
 - [Creating Migrations](#creating-migrations)  
 - [Build Configuration](#build-configuration)  
@@ -57,22 +54,30 @@ The AMRIT Database Anonymization Tool (v2.0) provides a secure, efficient way to
 mvn clean package -DENV_VAR=local
 ```
 
-**2. Create configuration file** `rules.yaml` (see `rules.yaml.example`)
+**2. Create configuration file** `config.yaml` (see `rules.yaml.example`)
 
-**3. Run anonymization:**
+**3. View available commands:**
 ```bash
-# Run as JAR
-java -jar target/Amrit-DB-1.0.0.war run --config rules.yaml
-
-# Or using the CLI directly
-java -cp target/Amrit-DB-1.0.0.war \
-  com.db.piramalswasthya.anonymizer.AmritDbAnonymizer run --config rules.yaml
+mvn exec:java "-Dexec.args=--help"
 ```
 
-**4. Schema diff (compare rules to actual schema):**
+**4. Run anonymization:**
 ```bash
-java -jar target/Amrit-DB-1.0.0.war diff-schema --config rules.yaml
+# Dry run (validate only)
+mvn exec:java "-Dexec.args=run --config config.yaml --approve YOUR_APPROVAL_TOKEN --dry-run"
+
+# Actual execution
+mvn exec:java "-Dexec.args=run --config config.yaml --approve YOUR_APPROVAL_TOKEN"
 ```
+
+**5. Schema diff (compare rules to actual schema):**
+```bash
+mvn exec:java "-Dexec.args=diff-schema --config config.yaml --rules rules.yaml"
+```
+
+**Command Reference:**
+- `mvn exec:java "-Dexec.args=run --help"` - Show run command options
+- `mvn exec:java "-Dexec.args=diff-schema --help"` - Show diff-schema command options
 
 For complete documentation, see: **[docs/anonymization/GUIDE.md](docs/anonymization/GUIDE.md)**
 
@@ -139,8 +144,8 @@ For subsequent changes, increment the version number, e.g., `V3__<description>.s
 1. **Setup Spring Boot Configuration**:  
    - Go to **Run > Run Configurations**.  
    - Select **Spring Boot App (STS)** or **Java Application (Eclipse)** and create a new configuration.  
-   - Choose the project and main class.  
-   - Apply and run the configuration.  
+   - **Main Class**: `com.db.piramalswasthya.AmritDbApplication`
+   - Choose the project and apply the configuration.  
 
 2. **Verify Application**:  
    - Access Swagger UI: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)  

@@ -144,9 +144,22 @@ mvn clean package -DENV_VAR=local -DskipTests
 # Output: target/Amrit-DB-1.0.0.war
 ```
 
-### 2. Create Configuration
+### 2. Verify Installation
 
-Create `src/main/environment/anonymization_local.yaml`:
+```bash
+# View available commands
+mvn exec:java "-Dexec.args=--help"
+
+# Should show:
+# Usage: amrit-db-anonymize [-hV] [COMMAND]
+# Commands:
+#   run          Execute multi-schema anonymization
+#   diff-schema  Compare DB schema to rules.yaml
+```
+
+### 3. Create Configuration
+
+Create `config.yaml` (copy from `config.yaml.example`):
 ```yaml
 source:
   host: db-replica.prod.example.com
@@ -186,20 +199,28 @@ rulesFile: rules.yaml
 loggingPath: ./logs
 ```
 
-### 3. Set Environment Variables
+### 4. Set Environment Variables
 
 ```bash
+# Windows PowerShell
+$env:DB_READ_PASSWORD="your_readonly_password"
+$env:DB_WRITE_PASSWORD="your_uat_password"
+$env:HMAC_SECRET_KEY="$(openssl rand -hex 32)"
+
+# Linux/Mac
 export DB_READ_PASSWORD="your_readonly_password"
 export DB_WRITE_PASSWORD="your_uat_password"
 export HMAC_SECRET_KEY="$(openssl rand -hex 32)"
 ```
 
-### 4. Run Anonymization
+### 5. Run Anonymization
 
 ```bash
-java -jar target/Amrit-DB-1.0.0.war run \
-  --config src/main/environment/anonymization_local.yaml \
-  --approve PROD_REFRESH_2026_FEB
+# Dry run (validation only)
+mvn exec:java "-Dexec.args=run --config config.yaml --approve PROD_REFRESH_2026_FEB --dry-run"
+
+# Actual execution
+mvn exec:java "-Dexec.args=run --config config.yaml --approve PROD_REFRESH_2026_FEB"
 ```
 
 Output:
@@ -218,7 +239,7 @@ Output:
 [INFO] Report saved: run-report.json
 ```
 
-### 5. Verify Results
+### 6. Verify Results
 
 Check `run-report.json`:
 ```json
@@ -378,15 +399,33 @@ The tool automatically attempts Strategy 1, then falls back to Strategy 2 if nee
 
 ## Command-Line Usage
 
-### Main Commands
+### Running Commands
+
+All commands are executed using Maven exec plugin:
 
 ```bash
-java -jar target/Amrit-DB-1.0.0.war [COMMAND] [OPTIONS]
+mvn exec:java "-Dexec.args=[COMMAND] [OPTIONS]"
+```
+
+**Important Notes:**
+- Always quote the `-Dexec.args` parameter
+- Use double quotes on Windows, single or double on Linux/Mac
+- The tool runs as a CLI application (does not start a web server)
+
+### View Help
+
+```bash
+# Main help
+mvn exec:java "-Dexec.args=--help"
+
+# Command-specific help
+mvn exec:java "-Dexec.args=run --help"
+mvn exec:java "-Dexec.args=diff-schema --help"
 ```
 
 ### run Command
 
-Anonymize and restore database.
+Anonymize and restore database from source to target.
 
 **Required Options:**
 - `--config FILE` - Configuration YAML file
@@ -399,38 +438,33 @@ Anonymize and restore database.
 
 ```bash
 # Normal execution
-java -jar target/Amrit-DB-1.0.0.war run \
-  --config src/main/environment/anonymization_local.yaml \
-  --approve PROD_REFRESH_2026_FEB
+mvn exec:java "-Dexec.args=run --config config.yaml --approve PROD_REFRESH_2026_FEB"
 
 # Dry run (validation only)
-java -jar target/Amrit-DB-1.0.0.war run \
-  --config src/main/environment/anonymization_local.yaml \
-  --approve PROD_REFRESH_2026_FEB \
-  --dry-run
+mvn exec:java "-Dexec.args=run --config config.yaml --approve PROD_REFRESH_2026_FEB --dry-run"
 ```
+
+**Exit Codes:**
+- `0` - Success
+- `1` - Validation or execution error
 
 ### diff-schema Command
 
-Compare database schemas with rules.yaml to detect drift.
+Compare database schemas with rules.yaml to detect schema drift.
 
-**Required Options:**
-- `--config FILE` - Configuration YAML file
-
-**Optional Options:**
-- `--output FILE` - Write suggested rules to file
+**Options:**
+- `-c, --config FILE` - Configuration YAML file
+- `-r, --rules FILE` - Rules YAML file (default: rules.yaml)
+- `-o, --output FILE` - Write suggested rules to file (optional)
 
 **Examples:**
 
 ```bash
 # Compare schema with rules
-java -jar target/Amrit-DB-1.0.0.war diff-schema \
-  --config src/main/environment/anonymization_local.yaml
+mvn exec:java "-Dexec.args=diff-schema --config config.yaml --rules rules.yaml"
 
 # Generate suggested rules for new columns
-java -jar target/Amrit-DB-1.0.0.war diff-schema \
-  --config src/main/environment/anonymization_local.yaml \
-  --output suggested-rules.yaml
+mvn exec:java "-Dexec.args=diff-schema --config config.yaml --rules rules.yaml --output suggested-rules.yaml"
 ```
 
 ### Exit Codes
@@ -506,7 +540,7 @@ WARN: Column 'NewColumn' in table 't_patients' not found in rules.yaml
 **Solution:**
 1. Run schema diff:
    ```bash
-   java -jar amrit-db.war diff-schema --config config.yaml --output new-rules.yaml
+   mvn exec:java "-Dexec.args=diff-schema --config config.yaml --output new-rules.yaml"
    ```
 2. Review `new-rules.yaml`
 3. Merge into `rules.yaml`
@@ -539,9 +573,8 @@ Enable detailed logging:
 # Set logging level to DEBUG
 export LOGGING_LEVEL=DEBUG
 
-java -jar target/Amrit-DB-2.0.0.war run \
-  --config config.yaml \
-  --approval-flag "..."
+# Run with debug logging
+mvn exec:java "-Dexec.args=run --config config.yaml --approve TOKEN"
 ```
 
 **Log Output (PII-Safe):**
@@ -585,9 +618,7 @@ INFO  Progress: Table m_beneficiaryregidmapping - 50000/500000 rows (10%)
 
 ```bash
 # Weekly check
-java -jar amrit-db.war diff-schema \
-  --config config.yaml \
-  --output schema-changes.yaml
+mvn exec:java "-Dexec.args=diff-schema --config config.yaml --output schema-changes.yaml"
 
 # Review changes
 cat schema-changes.yaml
@@ -606,10 +637,10 @@ git commit -m "Add rules for new columns in Q1-2026 schema"
 
 ```bash
 # Terminal 1: db_iemr
-java -jar amrit-db.war run --config config-iemr.yaml --approval-flag "..."
+mvn exec:java "-Dexec.args=run --config config-iemr.yaml --approve TOKEN"
 
 # Terminal 2: db_identity
-java -jar amrit-db.war run --config config-identity.yaml --approval-flag "..."
+mvn exec:java "-Dexec.args=run --config config-identity.yaml --approve TOKEN"
 ```
 
 ### Q3: How long does anonymization take?
@@ -722,17 +753,17 @@ SELECT BenRegID, FirstName, PhoneNo FROM m_beneficiaryregidmapping LIMIT 10;
 
 4. **Run Diff-Schema Weekly**
    ```bash
-   # Cron job: Every Monday 6 AM
-   0 6 * * 1 java -jar amrit-db.war diff-schema --config config.yaml
+   # Cron job: Every Monday 6 AM (Linux)
+   0 6 * * 1 cd /path/to/AMRIT-DB && mvn exec:java "-Dexec.args=diff-schema --config config.yaml"
    ```
 
 5. **Test on Staging First**
    ```bash
    # Staging config (smaller dataset)
-   java -jar amrit-db.war run --config config-staging.yaml --approval-flag "..."
+   mvn exec:java "-Dexec.args=run --config config-staging.yaml --approve TOKEN"
    
    # If successful, run production config
-   java -jar amrit-db.war run --config config-prod.yaml --approval-flag "..."
+   mvn exec:java "-Dexec.args=run --config config-prod.yaml --approve TOKEN"
    ```
 
 6. **Monitor Execution**
@@ -768,19 +799,33 @@ See [rules.yaml.example](../../rules.yaml.example)
 
 See [architecture diagram.png](architecture%20diagram.png)
 
-### D. Migration from v1.0 to v2.0
+### D. Command Reference Quick Guide
 
-**v1.0 Command:**
+**All commands use Maven exec plugin:**
+
 ```bash
-java -jar Amrit-DB-1.0.0.war anonymize --input dump.sql --output uat.sql
+# View all commands
+mvn exec:java "-Dexec.args=--help"
+
+# Run anonymization
+mvn exec:java "-Dexec.args=run --config config.yaml --approve TOKEN"
+
+# Dry run (validation)
+mvn exec:java "-Dexec.args=run --config config.yaml --approve TOKEN --dry-run"
+
+# Compare schema
+mvn exec:java "-Dexec.args=diff-schema --config config.yaml --rules rules.yaml"
+
+# Get help for specific command
+mvn exec:java "-Dexec.args=run --help"
+mvn exec:java "-Dexec.args=diff-schema --help"
 ```
 
-**v2.0 Equivalent:**
-1. Create DB connection config (config.yaml)
-2. Run: `java -jar Amrit-DB-2.0.0.war run --config config.yaml --approval-flag "..."`
-
-**Key Differences:**
-- v2.0 connects to live DB (no dump file needed)
-- v2.0 requires safety approval flag
-- v2.0 uses keyset pagination (faster for large datasets)
+**Key Features:**
+- Direct DB-to-DB streaming (no SQL dump files)
+- Multi-schema processing (db_iemr, db_identity, db_reporting, db_1097_identity)
+- HMAC-SHA256 deterministic anonymization
+- Keyset pagination for efficient large-dataset processing
+- Production safety guards (allowlist, approval tokens)
+- PII-safe logging (only metrics, no sensitive data)
 

@@ -125,6 +125,17 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<!-- Keep Spring Boot as default, but allow CLI override -->
+					<mainClass>com.db.piramalswasthya.AmritDbApplication</mainClass>
+				</configuration>
+			</plugin>
+			<!-- Exec plugin for running CLI tool directly -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<mainClass>com.db.piramalswasthya.anonymizer.AmritDbAnonymizer</mainClass>
 				</configuration>
 			</plugin>
 			<plugin>
