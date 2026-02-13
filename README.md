@@ -30,59 +30,8 @@ The AMRIT-DB service leverages Flyway within a Spring Boot framework to manage a
 
 - **Schema Management**: Automates database schema creation and version control using Flyway.  
 - **Migration Scripts**: Supports SQL-based migration scripts for defining tables, constraints, and relationships.  
-- **Database Anonymization**: Production-safe tool for creating anonymized UAT databases from production read replicas.  
 
 ---
-
-## Database Anonymization Tool
-
-The AMRIT Database Anonymization Tool (v2.0) provides a secure, efficient way to create UAT environments with anonymized production data.
-
-### Features
-
-- **Direct DB-to-DB Streaming**: No intermediate dump files required
-- **Multi-Schema Support**: Processes db_iemr, db_identity, db_reporting, db_1097_identity in one command
-- **HMAC-Based Anonymization**: Deterministic anonymization ensures consistency
-- **Keyset Pagination**: Efficient processing of billions of rows
-- **Production Safety**: Multiple safety guards (allowlist, denylist, approval tokens)
-- **PII-Safe Logging**: Logs only aggregated metrics, never raw sensitive data
-
-### Quick Start - Anonymization
-
-**1. Build the tool:**
-```bash
-mvn clean package -DENV_VAR=local
-```
-
-**2. Create configuration file** `config.yaml` (see `rules.yaml.example`)
-
-**3. View available commands:**
-```bash
-mvn exec:java "-Dexec.args=--help"
-```
-
-**4. Run anonymization:**
-```bash
-# Dry run (validate only)
-mvn exec:java "-Dexec.args=run --config config.yaml --approve YOUR_APPROVAL_TOKEN --dry-run"
-
-# Actual execution
-mvn exec:java "-Dexec.args=run --config config.yaml --approve YOUR_APPROVAL_TOKEN"
-```
-
-**5. Schema diff (compare rules to actual schema):**
-```bash
-mvn exec:java "-Dexec.args=diff-schema --config config.yaml --rules rules.yaml"
-```
-
-**Command Reference:**
-- `mvn exec:java "-Dexec.args=run --help"` - Show run command options
-- `mvn exec:java "-Dexec.args=diff-schema --help"` - Show diff-schema command options
-
-For complete documentation, see: **[docs/anonymization/GUIDE.md](docs/anonymization/GUIDE.md)**
-
----
-
 ### Mandatory Database  
 
 Ensure the following databases are created:  
@@ -93,7 +42,6 @@ Ensure the following databases are created:
 - `db_1097_identity`  
 
 ---
-
 ## Prerequisites  
 
 Ensure you have the following installed before starting:  
