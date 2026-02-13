@@ -78,7 +78,7 @@ public class AnonymizationEngine {
         // Process each row
         for (KeysetPaginator.RowData row : rows) {
             // Iterate over actual data columns in the row
-            for (String column : row.keySet()) {
+            for (String column : ((Map<String, Integer>) row).keySet()) {
                 Object originalValue = row.get(column);
                 
                 // Check if a rule exists for this column

@@ -49,7 +49,7 @@ import java.util.regex.Pattern;
 public class KeysetPaginator {
     
     private static final Logger log = LoggerFactory.getLogger(KeysetPaginator.class);
-    private static final Pattern VALID_IDENTIFIER = Pattern.compile("^[A-Za-z0-9_]+$");
+    private static final Pattern VALID_IDENTIFIER = Pattern.compile("^\\w+$");
     
     private final DataSource dataSource;
     private final int batchSize;
@@ -74,6 +74,9 @@ public class KeysetPaginator {
     
     /**
      * Quote identifier with backticks
+     * 
+     * Security: All identifiers are validated against ^[A-Za-z0-9_]+$ pattern before quoting,
+     * preventing SQL injection. This allows safe use in dynamic SQL construction.
      */
     private String quoteIdentifier(String identifier) {
         validateIdentifier(identifier);
@@ -88,6 +91,7 @@ public class KeysetPaginator {
      * @param columns Columns to select
      * @param handler Handler for each batch of rows
      */
+    @SuppressWarnings("java:S2077") // SQL injection safe: all identifiers validated by quoteIdentifier()
     public void streamTable(String table, String primaryKey, List<String> columns,
                            BatchHandler handler) throws SQLException {
         
@@ -124,36 +128,17 @@ public class KeysetPaginator {
             while (true) {
                 stmt.setLong(1, lastKey);
                 
-                List<RowData> batch = new ArrayList<>();
-                long newLastKey = lastKey;
+                BatchResult batchResult = processBatch(stmt, columns, primaryKey);
                 
-                try (ResultSet rs = stmt.executeQuery()) {
-                    while (rs.next()) {
-                        RowData row = new RowData();
-                        for (String column : columns) {
-                            row.put(column, rs.getObject(column));
-                        }
-                        batch.add(row);
-                        
-                        // Get numeric PK value
-                        Object pkValue = rs.getObject(primaryKey);
-                        if (pkValue instanceof Number number) {
-                            newLastKey = number.longValue();
-                        } else {
-                            throw new SQLException("Primary key must be numeric: " + primaryKey);
-                        }
-                    }
-                }
-                
-                if (batch.isEmpty()) {
+                if (batchResult.batch.isEmpty()) {
                     break; // No more rows
                 }
                 
-                handler.handle(batch);
+                handler.handle(batchResult.batch);
                 
-                totalRows += batch.size();
+                totalRows += batchResult.batch.size();
                 batchCount++;
-                lastKey = newLastKey;
+                lastKey = batchResult.lastKey;
                 
                 // PII-safe progress logging (counts only)
                 if (batchCount % 100 == 0) {
@@ -168,8 +153,38 @@ public class KeysetPaginator {
     }
     
     /**
+     * Process a single batch of rows from the result set
+     */
+    private BatchResult processBatch(PreparedStatement stmt, List<String> columns, String primaryKey) 
+            throws SQLException {
+        List<RowData> batch = new ArrayList<>();
+        long lastKey = 0L;
+        
+        try (ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                RowData row = new RowData();
+                for (String column : columns) {
+                    row.put(column, rs.getObject(column));
+                }
+                batch.add(row);
+                
+                // Get numeric PK value
+                Object pkValue = rs.getObject(primaryKey);
+                if (pkValue instanceof Number number) {
+                    lastKey = number.longValue();
+                } else {
+                    throw new SQLException("Primary key must be numeric: " + primaryKey);
+                }
+            }
+        }
+        
+        return new BatchResult(batch, lastKey);
+    }
+    
+    /**
      * Validate that primary key is numeric (required for keyset pagination)
      */
+    @SuppressWarnings("java:S2077") // SQL injection safe: identifiers validated by quoteIdentifier()
     private void validateNumericPrimaryKey(String table, String primaryKey) throws SQLException {
         String quotedTable = quoteIdentifier(table);
         String quotedPk = quoteIdentifier(primaryKey);
@@ -191,6 +206,19 @@ public class KeysetPaginator {
                         metaData.getColumnTypeName(1));
                 }
             }
+        }
+    }
+    
+    /**
+     * Result of processing a batch
+     */
+    private static class BatchResult {
+        final List<RowData> batch;
+        final long lastKey;
+        
+        BatchResult(List<RowData> batch, long lastKey) {
+            this.batch = batch;
+            this.lastKey = lastKey;
         }
     }
     

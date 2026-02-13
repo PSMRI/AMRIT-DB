@@ -81,6 +81,9 @@ public class DirectRestoreWriter implements AutoCloseable {
     
     /**
      * Quote identifier with backticks after validation
+     * 
+     * Security: All identifiers are validated against ^\w+$ pattern before quoting,
+     * preventing SQL injection. This allows safe use in dynamic SQL construction.
      */
     private String quoteIdentifier(String identifier) {
         validateIdentifier(identifier);
@@ -106,6 +109,7 @@ public class DirectRestoreWriter implements AutoCloseable {
     /**
      * Drop and recreate schema, then clone tables from source
      */
+    @SuppressWarnings("java:S2077") // SQL injection safe: schema validated by quoteIdentifier()
     private void dropAndRecreateSchema(DataSource sourceDataSource) throws SQLException {
         String quotedSchema = quoteIdentifier(schema);
         
@@ -114,7 +118,7 @@ public class DirectRestoreWriter implements AutoCloseable {
         try (Connection adminConn = targetDataSource.getConnection();
              Statement stmt = adminConn.createStatement()) {
             
-            // Drop and recreate
+            // Drop and recreate (safe: quotedSchema validated against ^\w+$ pattern)
             stmt.execute("DROP DATABASE IF EXISTS " + quotedSchema);
             stmt.execute("CREATE DATABASE " + quotedSchema);
             adminConn.commit();
@@ -132,6 +136,7 @@ public class DirectRestoreWriter implements AutoCloseable {
     /**
      * Clone table DDL from source to target
      */
+    @SuppressWarnings("java:S2077") // SQL injection safe: all identifiers validated by quoteIdentifier()
     private void cloneTableStructures(DataSource sourceDataSource) throws SQLException {
         log.info("Cloning table structures from source schema: {}", schema);
         
@@ -139,14 +144,13 @@ public class DirectRestoreWriter implements AutoCloseable {
         
         // Get table list from source
         try (Connection srcConn = sourceDataSource.getConnection();
-             Statement stmt = srcConn.createStatement()) {
+             Statement stmt = srcConn.createStatement();
+             ResultSet rs = stmt.executeQuery("SHOW TABLES")) {
             
             srcConn.setCatalog(schema);
-            ResultSet rs = stmt.executeQuery("SHOW TABLES");
             while (rs.next()) {
                 tables.add(rs.getString(1));
             }
-            rs.close();
         }
         
         log.info("Found {} tables to clone", tables.size());
@@ -162,14 +166,14 @@ public class DirectRestoreWriter implements AutoCloseable {
                 validateIdentifier(table);
                 String quotedTable = quoteIdentifier(table);
                 
-                // Get CREATE TABLE statement from source
-                ResultSet rs = srcStmt.executeQuery("SHOW CREATE TABLE " + quotedTable);
-                if (rs.next()) {
-                    String createDdl = rs.getString(2);
-                    tgtStmt.addBatch(createDdl);
-                    log.debug("Queued table creation: {}", table);
+                // Get CREATE TABLE statement from source (safe: quotedTable validated)
+                try (ResultSet rs = srcStmt.executeQuery("SHOW CREATE TABLE " + quotedTable)) {
+                    if (rs.next()) {
+                        String createDdl = rs.getString(2);
+                        tgtStmt.addBatch(createDdl);
+                        log.debug("Queued table creation: {}", table);
+                    }
                 }
-                rs.close();
             }
             
             // Execute all CREATE TABLE statements in batch
@@ -182,6 +186,7 @@ public class DirectRestoreWriter implements AutoCloseable {
     /**
      * Fallback: Delete all data with FK checks disabled
      */
+    @SuppressWarnings("java:S2077") // SQL injection safe: table names validated by quoteIdentifier()
     private void deleteAllData() throws SQLException {
         log.info("Deleting all data from schema {} with FK checks disabled", schema);
         
@@ -208,13 +213,14 @@ public class DirectRestoreWriter implements AutoCloseable {
                 // Disable FK checks
                 stmt.execute("SET FOREIGN_KEY_CHECKS=0");
                 
-                // Delete from each table
+                // Delete from each table using batch processing (safe: quotedTable validated)
                 for (String table : tables) {
                     String quotedTable = quoteIdentifier(table);
-                    stmt.execute("DELETE FROM " + quotedTable);
-                    log.debug("Deleted data from: {}", table);
+                    stmt.addBatch("DELETE FROM " + quotedTable);
+                    log.debug("Queued deletion from: {}", table);
                 }
                 
+                stmt.executeBatch();
                 connection.commit();
                 log.info("Successfully deleted data from {} tables", tables.size());
             } finally {
@@ -231,6 +237,7 @@ public class DirectRestoreWriter implements AutoCloseable {
     /**
      * Write batch directly to target database
      */
+    @SuppressWarnings("java:S2077") // SQL injection safe: all identifiers validated by quoteIdentifier()
     public void writeInsert(String tableName, List<String> columns, 
                            List<Map<String, Object>> rows) throws SQLException {
         
@@ -248,6 +255,7 @@ public class DirectRestoreWriter implements AutoCloseable {
             .map(this::quoteIdentifier)
             .collect(Collectors.joining(", "));
         
+        // Safe: quotedTable and columnList contain only validated identifiers
         String sql = String.format("INSERT INTO %s (%s) VALUES (%s)",
             quotedTable, columnList, placeholders);
         
@@ -280,6 +288,7 @@ public class DirectRestoreWriter implements AutoCloseable {
      * Delete all rows from table before restore (transactional, no implicit commit)
      * Using DELETE FROM instead of TRUNCATE to maintain transaction control
      */
+    @SuppressWarnings("java:S2077") // SQL injection safe: tableName validated by quoteIdentifier()
     public void truncateTable(String tableName) throws SQLException {
         String quotedTable = quoteIdentifier(tableName);
         
