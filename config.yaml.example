@@ -5,7 +5,7 @@ source:
   host: db-replica.prod.example.com
   port: 3306
   schemas:
-    - db_iemr
+    - dbiemr
     - db_identity
     - db_reporting
     - db_1097_identity
@@ -17,7 +17,7 @@ target:
   host: uat-db.example.com
   port: 3306
   schemas:
-    - db_iemr
+    - dbiemr
     - db_identity
     - db_reporting
     - db_1097_identity

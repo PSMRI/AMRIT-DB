@@ -118,6 +118,9 @@ public class DirectRestoreWriter implements AutoCloseable {
             log.info("Schema {} dropped and recreated", schema);
         }
         
+        // Rebind main connection to the recreated schema
+        connection.setCatalog(schema);
+        
         // Clone table structures from source
         cloneTableStructures(sourceDataSource);
     }
@@ -248,19 +251,18 @@ public class DirectRestoreWriter implements AutoCloseable {
                 stmt.addBatch();
                 count++;
                 
+                // Execute batch at intervals but don't commit - let close() handle commit atomically
                 if (count % batchSize == 0) {
                     stmt.executeBatch();
-                    connection.commit();
                 }
             }
             
-            // Execute remaining batch
+            // Execute remaining batch without committing
             if (count % batchSize != 0) {
                 stmt.executeBatch();
-                connection.commit();
             }
             
-            log.debug("Inserted {} rows into {}", rows.size(), tableName);
+            log.debug("Inserted {} rows into {} (commit deferred to close())", rows.size(), tableName);
         }
     }
     
@@ -289,6 +291,8 @@ public class DirectRestoreWriter implements AutoCloseable {
     @Override
     public void close() throws SQLException {
         if (connection != null && !connection.isClosed()) {
+            SQLException primaryException = null;
+            
             try {
                 if (success) {
                     connection.commit();
@@ -298,16 +302,24 @@ public class DirectRestoreWriter implements AutoCloseable {
                     log.warn("Direct restore writer rolled back due to incomplete operation for schema: {}", schema);
                 }
             } catch (SQLException e) {
+                primaryException = e;
                 log.error("Error during commit/rollback for schema {}: {}", schema, e.getMessage());
-                throw e;
             } finally {
                 try {
                     connection.close();
                     log.info("Direct restore writer closed for schema: {}", schema);
-                } catch (SQLException e) {
-                    log.error("Error closing connection for schema {}: {}", schema, e.getMessage());
-                    throw e;
+                } catch (SQLException closeException) {
+                    log.error("Error closing connection for schema {}: {}", schema, closeException.getMessage());
+                    if (primaryException != null) {
+                        primaryException.addSuppressed(closeException);
+                    } else {
+                        primaryException = closeException;
+                    }
                 }
+            }
+            
+            if (primaryException != null) {
+                throw primaryException;
             }
         }
     }

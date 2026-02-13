@@ -80,7 +80,7 @@ databases:
             canonicalName: "UserID"
             dataType: "INT"
             nullable: false
-            anonymizationRule: "HASH_SHA256"
+            strategy: "HMAC_HASH"
           UserName:
             canonicalName: "UserName"
             dataType: "VARCHAR"
@@ -112,7 +112,7 @@ databases:
             canonicalName: "BeneficiaryRegID"
             dataType: "BIGINT"
             nullable: false
-            anonymizationRule: "HASH_SHA256"
+            strategy: "HMAC_HASH"
           FirstName:
             canonicalName: "FirstName"
             dataType: "VARCHAR"
@@ -129,7 +129,7 @@ databases:
             nullable: true
             anonymizationRule: "PARTIAL_MASK"
   
-  db_iemr:
+  dbiemr:
     schemaHash: "placeholder_hash_iemr"
     tables:
       t_benmedhistory:
@@ -139,7 +139,7 @@ databases:
             canonicalName: "BeneficiaryRegID"
             dataType: "BIGINT"
             nullable: false
-            anonymizationRule: "HASH_SHA256"
+            strategy: "HMAC_HASH"
           ChiefComplaint:
             canonicalName: "ChiefComplaint"
             dataType: "TEXT"
@@ -154,7 +154,7 @@ databases:
             canonicalName: "Diagnosis"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "PRESERVE"
+            anonymizationRule: "GENERALIZE"
       
       t_prescription:
         canonicalName: "t_prescription"
@@ -163,12 +163,12 @@ databases:
             canonicalName: "BeneficiaryRegID"
             dataType: "BIGINT"
             nullable: false
-            anonymizationRule: "HASH_SHA256"
+            strategy: "HMAC_HASH"
           DrugName:
             canonicalName: "DrugName"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "PRESERVE"
+            anonymizationRule: "GENERALIZE"
           DoctorName:
             canonicalName: "DoctorName"
             dataType: "VARCHAR"
@@ -182,12 +182,12 @@ databases:
             canonicalName: "BeneficiaryRegID"
             dataType: "BIGINT"
             nullable: false
-            anonymizationRule: "HASH_SHA256"
+            strategy: "HMAC_HASH"
           TestResult:
             canonicalName: "TestResult"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "PRESERVE"
+            anonymizationRule: "GENERALIZE"
           LabTechnicianName:
             canonicalName: "LabTechnicianName"
             dataType: "VARCHAR"
