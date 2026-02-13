@@ -52,6 +52,10 @@ public class DirectRestoreWriter implements AutoCloseable {
     private final String schema;
     
     public DirectRestoreWriter(DataSource targetDataSource, int batchSize, String schema) throws SQLException {
+        if (batchSize <= 0) {
+            throw new IllegalArgumentException("batchSize must be > 0, got: " + batchSize);
+        }
+        
         this.targetDataSource = targetDataSource;
         this.batchSize = batchSize;
         this.schema = schema;
@@ -200,21 +204,27 @@ public class DirectRestoreWriter implements AutoCloseable {
         log.info("Deleting data from {} tables", tables.size());
         
         try (Statement stmt = connection.createStatement()) {
-            // Disable FK checks
-            stmt.execute("SET FOREIGN_KEY_CHECKS=0");
-            
-            // Delete from each table
-            for (String table : tables) {
-                String quotedTable = quoteIdentifier(table);
-                stmt.execute("DELETE FROM " + quotedTable);
-                log.debug("Deleted data from: {}", table);
+            try {
+                // Disable FK checks
+                stmt.execute("SET FOREIGN_KEY_CHECKS=0");
+                
+                // Delete from each table
+                for (String table : tables) {
+                    String quotedTable = quoteIdentifier(table);
+                    stmt.execute("DELETE FROM " + quotedTable);
+                    log.debug("Deleted data from: {}", table);
+                }
+                
+                connection.commit();
+                log.info("Successfully deleted data from {} tables", tables.size());
+            } finally {
+                // Always re-enable FK checks even if deletes fail
+                try {
+                    stmt.execute("SET FOREIGN_KEY_CHECKS=1");
+                } catch (SQLException e) {
+                    log.error("Failed to re-enable FOREIGN_KEY_CHECKS: {}", e.getMessage());
+                }
             }
-            
-            // Re-enable FK checks
-            stmt.execute("SET FOREIGN_KEY_CHECKS=1");
-            connection.commit();
-            
-            log.info("Successfully deleted data from {} tables", tables.size());
         }
     }
     
@@ -267,15 +277,16 @@ public class DirectRestoreWriter implements AutoCloseable {
     }
     
     /**
-     * Truncate table before restore (optional, lighter than full reset)
+     * Delete all rows from table before restore (transactional, no implicit commit)
+     * Using DELETE FROM instead of TRUNCATE to maintain transaction control
      */
     public void truncateTable(String tableName) throws SQLException {
         String quotedTable = quoteIdentifier(tableName);
         
         try (Statement stmt = connection.createStatement()) {
-            stmt.execute("TRUNCATE TABLE " + quotedTable);
-            connection.commit();
-            log.info("Truncated table: {}", tableName);
+            stmt.execute("DELETE FROM " + quotedTable);
+            // Note: commit is deferred to close() for atomic behavior
+            log.info("Deleted all rows from table: {} (commit deferred)", tableName);
         }
     }
     

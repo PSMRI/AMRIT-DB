@@ -3,6 +3,7 @@
 #
 # Strategies:
 #   HASH_SHA256        - One-way hash (deterministic, linkable)
+#   HMAC_HASH          - HMAC-based one-way hash (deterministic, keyed)
 #   RANDOM_FAKE_DATA   - Realistic fake data using java-faker
 #   PARTIAL_MASK       - Mask characters (show last N digits)
 #   GENERALIZE         - Category/range reduction

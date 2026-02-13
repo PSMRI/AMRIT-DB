@@ -29,6 +29,9 @@ safety:
   allowedHosts:
     - db-replica.prod.example.com
     - localhost  # For testing
+  deniedTargetHosts:
+    - db-prod.example.com
+    - db-replica.prod.example.com  # Never write to production
   requireExplicitApproval: true
   approvalFlag: PROD_REFRESH_2026_FEB  # Change monthly
 
@@ -39,6 +42,7 @@ performance:
 
 rulesFile: rules.yaml
 loggingPath: ./logs
+hmacSecretKey: ${ANONYMIZATION_SECRET}  # Environment variable
 
 # HMAC secret key (set via environment variable)
-# export HMAC_SECRET_KEY=$(openssl rand -hex 32)
+# export ANONYMIZATION_SECRET=$(openssl rand -hex 32)
