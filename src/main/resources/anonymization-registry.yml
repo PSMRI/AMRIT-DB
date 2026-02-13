@@ -26,61 +26,51 @@ databases:
             canonicalName: "BenRegID"
             dataType: "VARCHAR"
             nullable: false
-            piiRisk: "CRITICAL"
             anonymizationRule: "HASH_SHA256"
           BeneficiaryID:
             canonicalName: "BeneficiaryID"
             dataType: "BIGINT"
             nullable: false
-            piiRisk: "CRITICAL"
-            anonymizationRule: "HASH_SHA256"
+            strategy: "HMAC_HASH"
           FirstName:
             canonicalName: "FirstName"
             dataType: "VARCHAR"
             nullable: true
-            piiRisk: "HIGH"
             anonymizationRule: "RANDOM_FAKE_DATA"
           LastName:
             canonicalName: "LastName"
             dataType: "VARCHAR"
             nullable: true
-            piiRisk: "HIGH"
             anonymizationRule: "RANDOM_FAKE_DATA"
           PhoneNo:
             canonicalName: "PhoneNo"
             dataType: "VARCHAR"
             nullable: true
-            piiRisk: "HIGH"
             anonymizationRule: "PARTIAL_MASK"
           AadhaarNo:
             canonicalName: "AadhaarNo"
             dataType: "VARCHAR"
             nullable: true
-            piiRisk: "CRITICAL"
             anonymizationRule: "HASH_SHA256"
           EmailID:
             canonicalName: "EmailID"
             dataType: "VARCHAR"
             nullable: true
-            piiRisk: "HIGH"
             anonymizationRule: "SUPPRESS"
           Address:
             canonicalName: "Address"
             dataType: "TEXT"
             nullable: true
-            piiRisk: "MEDIUM"
             anonymizationRule: "GENERALIZE"
           DateOfBirth:
             canonicalName: "DateOfBirth"
             dataType: "DATE"
             nullable: true
-            piiRisk: "MEDIUM"
             anonymizationRule: "GENERALIZE"
           Gender:
             canonicalName: "Gender"
             dataType: "VARCHAR"
             nullable: true
-            piiRisk: "LOW"
             anonymizationRule: "PRESERVE"
       
       m_user:
@@ -90,31 +80,26 @@ databases:
             canonicalName: "UserID"
             dataType: "INT"
             nullable: false
-            piiRisk: "HIGH"
             anonymizationRule: "HASH_SHA256"
           UserName:
             canonicalName: "UserName"
             dataType: "VARCHAR"
             nullable: false
-            piiRisk: "HIGH"
             anonymizationRule: "RANDOM_FAKE_DATA"
           Password:
             canonicalName: "Password"
             dataType: "VARCHAR"
             nullable: false
-            piiRisk: "CRITICAL"
             anonymizationRule: "SUPPRESS"
           EmailID:
             canonicalName: "EmailID"
             dataType: "VARCHAR"
             nullable: true
-            piiRisk: "HIGH"
             anonymizationRule: "SUPPRESS"
           PhoneNo:
             canonicalName: "PhoneNo"
             dataType: "VARCHAR"
             nullable: true
-            piiRisk: "HIGH"
             anonymizationRule: "PARTIAL_MASK"
   
   db_1097_identity:
@@ -127,25 +112,21 @@ databases:
             canonicalName: "BeneficiaryRegID"
             dataType: "BIGINT"
             nullable: false
-            piiRisk: "CRITICAL"
             anonymizationRule: "HASH_SHA256"
           FirstName:
             canonicalName: "FirstName"
             dataType: "VARCHAR"
             nullable: true
-            piiRisk: "HIGH"
             anonymizationRule: "RANDOM_FAKE_DATA"
           LastName:
             canonicalName: "LastName"
             dataType: "VARCHAR"
             nullable: true
-            piiRisk: "HIGH"
             anonymizationRule: "RANDOM_FAKE_DATA"
           PhoneNo:
             canonicalName: "PhoneNo"
             dataType: "VARCHAR"
             nullable: true
-            piiRisk: "HIGH"
             anonymizationRule: "PARTIAL_MASK"
   
   db_iemr:
@@ -158,25 +139,21 @@ databases:
             canonicalName: "BeneficiaryRegID"
             dataType: "BIGINT"
             nullable: false
-            piiRisk: "CRITICAL"
             anonymizationRule: "HASH_SHA256"
           ChiefComplaint:
             canonicalName: "ChiefComplaint"
             dataType: "TEXT"
             nullable: true
-            piiRisk: "MEDIUM"
             anonymizationRule: "SUPPRESS"
           PresentIllness:
             canonicalName: "PresentIllness"
             dataType: "TEXT"
             nullable: true
-            piiRisk: "MEDIUM"
             anonymizationRule: "SUPPRESS"
           Diagnosis:
             canonicalName: "Diagnosis"
             dataType: "VARCHAR"
             nullable: true
-            piiRisk: "LOW"
             anonymizationRule: "PRESERVE"
       
       t_prescription:
@@ -186,19 +163,16 @@ databases:
             canonicalName: "BeneficiaryRegID"
             dataType: "BIGINT"
             nullable: false
-            piiRisk: "CRITICAL"
             anonymizationRule: "HASH_SHA256"
           DrugName:
             canonicalName: "DrugName"
             dataType: "VARCHAR"
             nullable: true
-            piiRisk: "LOW"
             anonymizationRule: "PRESERVE"
           DoctorName:
             canonicalName: "DoctorName"
             dataType: "VARCHAR"
             nullable: true
-            piiRisk: "HIGH"
             anonymizationRule: "HASH_SHA256"
       
       t_lab_test_result:
@@ -208,19 +182,16 @@ databases:
             canonicalName: "BeneficiaryRegID"
             dataType: "BIGINT"
             nullable: false
-            piiRisk: "CRITICAL"
             anonymizationRule: "HASH_SHA256"
           TestResult:
             canonicalName: "TestResult"
             dataType: "VARCHAR"
             nullable: true
-            piiRisk: "LOW"
             anonymizationRule: "PRESERVE"
           LabTechnicianName:
             canonicalName: "LabTechnicianName"
             dataType: "VARCHAR"
             nullable: true
-            piiRisk: "HIGH"
             anonymizationRule: "HASH_SHA256"
   
   db_reporting:
@@ -233,25 +204,21 @@ databases:
             canonicalName: "BenRegID"
             dataType: "VARCHAR"
             nullable: false
-            piiRisk: "CRITICAL"
             anonymizationRule: "HASH_SHA256"
           BeneficiaryName:
             canonicalName: "BeneficiaryName"
             dataType: "VARCHAR"
             nullable: true
-            piiRisk: "HIGH"
             anonymizationRule: "RANDOM_FAKE_DATA"
           AgeGroup:
             canonicalName: "AgeGroup"
             dataType: "VARCHAR"
             nullable: true
-            piiRisk: "LOW"
             anonymizationRule: "PRESERVE"
           Gender:
             canonicalName: "Gender"
             dataType: "VARCHAR"
             nullable: true
-            piiRisk: "LOW"
             anonymizationRule: "PRESERVE"
       
       fact_consultation:
@@ -261,11 +228,9 @@ databases:
             canonicalName: "BenRegID"
             dataType: "VARCHAR"
             nullable: false
-            piiRisk: "CRITICAL"
             anonymizationRule: "HASH_SHA256"
           ConsultationNotes:
             canonicalName: "ConsultationNotes"
             dataType: "TEXT"
             nullable: true
-            piiRisk: "MEDIUM"
             anonymizationRule: "SUPPRESS"

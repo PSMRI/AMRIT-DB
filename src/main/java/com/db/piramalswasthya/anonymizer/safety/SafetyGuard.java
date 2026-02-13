@@ -87,11 +87,15 @@ public class SafetyGuard {
             }
         }
         
-        // Only check deny patterns if host is NOT in allowlist
-        if (!inAllowlist) {
-            // Check built-in deny patterns
-            for (String pattern : BUILT_IN_DENY_PATTERNS) {
-                if (matchesPattern(host, pattern) || matchesPattern(database, pattern)) {
+        // Always check built-in deny patterns (even for allowlisted hosts)
+        for (String pattern : BUILT_IN_DENY_PATTERNS) {
+            if (matchesPattern(host, pattern) || matchesPattern(database, pattern)) {
+                // Check if explicit approval flag is provided to bypass built-in deny
+                if (config.isRequireExplicitApproval() && 
+                    approvalFlag != null && approvalFlag.equals(config.getApprovalFlag())) {
+                    log.warn("Built-in deny pattern '{}' matched but bypassed with approval flag for {}:{}", 
+                        pattern, host, database);
+                } else {
                     throw new SafetyViolationException(
                         String.format("DENIED: Host '%s' or database '%s' matches production pattern '%s'. " +
                             "If this is intentional, add to allowlist and provide approval flag.",
@@ -99,8 +103,10 @@ public class SafetyGuard {
                     );
                 }
             }
-            
-            // Check custom deny patterns
+        }
+        
+        // Check custom deny patterns (only if not in allowlist)
+        if (!inAllowlist) {
             if (config.getDeniedPatterns() != null) {
                 for (String pattern : config.getDeniedPatterns()) {
                     if (matchesPattern(host, pattern) || matchesPattern(database, pattern)) {

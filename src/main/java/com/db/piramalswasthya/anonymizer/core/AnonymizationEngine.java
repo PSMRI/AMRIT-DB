@@ -77,22 +77,25 @@ public class AnonymizationEngine {
         
         // Process each row
         for (KeysetPaginator.RowData row : rows) {
-            for (Map.Entry<String, AnonymizationRules.ColumnRule> entry : columnRules.entrySet()) {
-                String column = entry.getKey();
-                AnonymizationRules.ColumnRule rule = entry.getValue();
+            // Iterate over actual data columns in the row
+            for (String column : row.keySet()) {
+                Object originalValue = row.get(column);
                 
-                if (row.containsKey(column)) {
-                    Object originalValue = row.get(column);
+                // Check if a rule exists for this column
+                if (columnRules.containsKey(column)) {
+                    AnonymizationRules.ColumnRule rule = columnRules.get(column);
+                    
                     if (originalValue != null) {
                         Object anonymizedValue = applyStrategy(rule.getStrategy(), 
                             originalValue.toString());
                         
                         row.put(column, anonymizedValue);
                         
-                        // Track strategy usage
+                        // Track strategy usage only when rule is applied
                         strategyCounts.merge(rule.getStrategy(), 1, Integer::sum);
                     }
                 } else {
+                    // No rule exists for this data column - apply unknown column policy
                     handleUnknownColumn(database, table, column);
                 }
             }

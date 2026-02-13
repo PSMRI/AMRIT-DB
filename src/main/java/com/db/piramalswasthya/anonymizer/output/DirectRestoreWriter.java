@@ -277,12 +277,38 @@ public class DirectRestoreWriter implements AutoCloseable {
         }
     }
     
+    private boolean success = false;
+    
+    /**
+     * Mark the operation as successful to enable commit on close
+     */
+    public void markSuccess() {
+        this.success = true;
+    }
+    
     @Override
     public void close() throws SQLException {
         if (connection != null && !connection.isClosed()) {
-            connection.commit();
-            connection.close();
-            log.info("Direct restore writer closed for schema: {}", schema);
+            try {
+                if (success) {
+                    connection.commit();
+                    log.info("Direct restore writer committed successfully for schema: {}", schema);
+                } else {
+                    connection.rollback();
+                    log.warn("Direct restore writer rolled back due to incomplete operation for schema: {}", schema);
+                }
+            } catch (SQLException e) {
+                log.error("Error during commit/rollback for schema {}: {}", schema, e.getMessage());
+                throw e;
+            } finally {
+                try {
+                    connection.close();
+                    log.info("Direct restore writer closed for schema: {}", schema);
+                } catch (SQLException e) {
+                    log.error("Error closing connection for schema {}: {}", schema, e.getMessage());
+                    throw e;
+                }
+            }
         }
     }
 }

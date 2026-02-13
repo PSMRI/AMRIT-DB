@@ -102,10 +102,13 @@ public class RunReport {
         mapper.findAndRegisterModules(); // For LocalDateTime
         
         File file = new File(outputPath);
-        file.getParentFile().mkdirs();
+        File parent = file.getParentFile();
+        if (parent != null) {
+            parent.mkdirs();
+        }
         
         mapper.writeValue(file, this);
-        log.info("Run report written to: {}", outputPath);
+        log.info("Run report written to: {}", file.getAbsolutePath());
     }
     
     /**

@@ -53,7 +53,7 @@ class SafetyGuardTest {
     void testDenyPattern_Production() {
         AnonymizerConfig.SafetyConfig config = new AnonymizerConfig.SafetyConfig();
         config.setEnabled(true);
-        config.setAllowedHosts(List.of("db-prod.example.com"));
+        // Do not add to allowlist so deny pattern check will run
         
         SafetyGuard guard = new SafetyGuard(config);
         
