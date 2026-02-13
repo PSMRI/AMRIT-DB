@@ -5,11 +5,14 @@
 ## Overview  
 The AMRIT-DB service is a Spring Boot application designed to simplify database schema management and cloning. Using Flyway for migrations, it ensures consistency and ease in setting up local environments, making it an invaluable tool for developers.
 
+This service also includes the **AMRIT Database Anonymization Tool v2.0** - a production-safe tool for anonymizing sensitive data when creating UAT environments from production backups.
+
 ---
 
 ## Table of Contents  
 - [Introduction](#introduction)  
 - [Key Features](#key-features)  
+- [Database Anonymization Tool](#database-anonymization-tool)  
 - [Prerequisites](#prerequisites)  
 - [Creating Migrations](#creating-migrations)  
 - [Build Configuration](#build-configuration)  
@@ -30,6 +33,50 @@ The AMRIT-DB service leverages Flyway within a Spring Boot framework to manage a
 
 - **Schema Management**: Automates database schema creation and version control using Flyway.  
 - **Migration Scripts**: Supports SQL-based migration scripts for defining tables, constraints, and relationships.  
+- **Database Anonymization**: Production-safe tool for creating anonymized UAT databases from production read replicas.  
+
+---
+
+## Database Anonymization Tool
+
+The AMRIT Database Anonymization Tool (v2.0) provides a secure, efficient way to create UAT environments with anonymized production data.
+
+### Features
+
+- **Direct DB-to-DB Streaming**: No intermediate dump files required
+- **Multi-Schema Support**: Processes db_iemr, db_identity, db_reporting, db_1097_identity in one command
+- **HMAC-Based Anonymization**: Deterministic anonymization ensures consistency
+- **Keyset Pagination**: Efficient processing of billions of rows
+- **Production Safety**: Multiple safety guards (allowlist, denylist, approval tokens)
+- **PII-Safe Logging**: Logs only aggregated metrics, never raw sensitive data
+
+### Quick Start - Anonymization
+
+**1. Build the tool:**
+```bash
+mvn clean package -DENV_VAR=local
+```
+
+**2. Create configuration file** `rules.yaml` (see `rules.yaml.example`)
+
+**3. Run anonymization:**
+```bash
+# Run as JAR
+java -jar target/Amrit-DB-1.0.0.war run --config rules.yaml
+
+# Or using the CLI directly
+java -cp target/Amrit-DB-1.0.0.war \
+  com.db.piramalswasthya.anonymizer.AmritDbAnonymizer run --config rules.yaml
+```
+
+**4. Schema diff (compare rules to actual schema):**
+```bash
+java -jar target/Amrit-DB-1.0.0.war diff-schema --config rules.yaml
+```
+
+For complete documentation, see: **[docs/anonymization/GUIDE.md](docs/anonymization/GUIDE.md)**
+
+---
 
 ### Mandatory Database  
 

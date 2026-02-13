@@ -68,3 +68,4 @@ src/main/environment/anonymization_ci.yaml
 run-report*.json
 logs/
 lookup-cache/
+/bin/
