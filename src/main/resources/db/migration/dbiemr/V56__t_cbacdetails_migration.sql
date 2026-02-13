@@ -1,6 +1,6 @@
-USE db_iemr;
+USE dbiemr;
 
-SET @dbname = 'db_iemr';
+SET @dbname = 'dbiemr';
 SET @tablename = 't_cbacdetails';
 
 -- CbacDetails entity: add missing columns (Cbac_Cooking_Oil, *_score columns, is_refer)

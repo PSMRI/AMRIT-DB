@@ -1,4 +1,4 @@
-USE db_iemr;
+USE dbiemr;
 
 CREATE TABLE IF NOT EXISTS `t_sam_visit` (
    `id` bigint NOT NULL AUTO_INCREMENT,

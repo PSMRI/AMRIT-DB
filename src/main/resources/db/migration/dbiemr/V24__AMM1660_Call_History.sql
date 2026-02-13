@@ -1,12 +1,12 @@
-USE `db_iemr`;
+USE `dbiemr`;
 DROP procedure IF EXISTS `Pr_GetCallHistory`;
  
-USE `db_iemr`;
-DROP procedure IF EXISTS `db_iemr`.`Pr_GetCallHistory`;
+USE `dbiemr`;
+DROP procedure IF EXISTS `dbiemr`.`Pr_GetCallHistory`;
 ;
  
 DELIMITER $$
-USE `db_iemr`$$
+USE `dbiemr`$$
 CREATE PROCEDURE `Pr_GetCallHistory`(v_obcallid int(11))
 begin
 select t1.callid,t2.MotherID,t3.Name,null Child_id,null child_name,

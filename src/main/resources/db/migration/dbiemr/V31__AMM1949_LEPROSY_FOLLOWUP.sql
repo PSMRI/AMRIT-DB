@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `db_iemr`.`leprosy_follow_up` (
+CREATE TABLE IF NOT EXISTS `dbiemr`.`leprosy_follow_up` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `ben_id` BIGINT DEFAULT NULL,
   `visit_number` INT DEFAULT NULL,

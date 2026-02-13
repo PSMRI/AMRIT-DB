@@ -1,4 +1,4 @@
-USE db_iemr;
+USE dbiemr;
 
 -- Step 1: Take backup of existing data
 CREATE TABLE if not EXISTS t_hbnc_visit_backup AS SELECT * FROM t_hbnc_visit;

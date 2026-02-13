@@ -1,4 +1,4 @@
-USE db_iemr;
+USE dbiemr;
 
 
 -- 1️ Parent Table: m_incentive_activity

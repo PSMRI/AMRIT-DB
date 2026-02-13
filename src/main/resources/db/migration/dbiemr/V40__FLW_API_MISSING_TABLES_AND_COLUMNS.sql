@@ -1,6 +1,6 @@
-USE db_iemr;
+USE dbiemr;
 
-SET @dbname = 'db_iemr';
+SET @dbname = 'dbiemr';
 
 CREATE TABLE IF NOT EXISTS `general_opd_entry` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,

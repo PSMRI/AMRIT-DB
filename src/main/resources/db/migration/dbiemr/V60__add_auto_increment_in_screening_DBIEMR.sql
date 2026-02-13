@@ -1,4 +1,4 @@
-USE db_iemr;
+USE dbiemr;
 
 ALTER TABLE screening_kala_azar
 MODIFY id BIGINT(20) NOT NULL AUTO_INCREMENT;
@@ -14,7 +14,7 @@ MODIFY COLUMN round_number INT NULL,
 MODIFY COLUMN round_date TIMESTAMP NULL,
 MODIFY COLUMN updated_by VARCHAR(200) NULL;
 
-SET @dbname = 'db_iemr';
+SET @dbname = 'dbiemr';
 SET @tablename = 'irs_round';
 
 SET @columnname = 'irs_date';

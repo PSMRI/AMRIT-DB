@@ -1,4 +1,4 @@
-use db_iemr;
+use dbiemr;
 
 CREATE TABLE if not EXISTS`t_videocallparameter` (
   `MeetingID` INT(11) NOT NULL AUTO_INCREMENT,

@@ -1,5 +1,5 @@
 
-CREATE TABLE IF NOT EXISTS db_iemr.campaign_ors (
+CREATE TABLE IF NOT EXISTS dbiemr.campaign_ors (
     id BIGINT NOT NULL AUTO_INCREMENT,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS db_iemr.campaign_ors (
   COLLATE=utf8mb4_unicode_ci;
 
 
-CREATE TABLE IF NOT EXISTS db_iemr.campaign_pulse_polio (
+CREATE TABLE IF NOT EXISTS dbiemr.campaign_pulse_polio (
     id BIGINT NOT NULL AUTO_INCREMENT,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS db_iemr.campaign_pulse_polio (
   COLLATE=utf8mb4_unicode_ci;
 
 
-  CREATE TABLE IF NOT EXISTS db_iemr.campaign_filariasis_mda (
+  CREATE TABLE IF NOT EXISTS dbiemr.campaign_filariasis_mda (
       id BIGINT NOT NULL AUTO_INCREMENT,
       start_date DATE NOT NULL,
       end_date DATE NOT NULL,

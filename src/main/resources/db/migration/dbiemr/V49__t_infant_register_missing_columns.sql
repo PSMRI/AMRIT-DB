@@ -1,6 +1,6 @@
-USE db_iemr;
+USE dbiemr;
 
-SET @dbname = 'db_iemr';
+SET @dbname = 'dbiemr';
 SET @tablename = 't_infant_register';
 
 SET @columnname = 'delivery_discharge_summary1';

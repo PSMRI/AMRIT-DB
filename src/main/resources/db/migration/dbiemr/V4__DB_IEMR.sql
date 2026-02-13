@@ -1,9 +1,9 @@
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: 192.168.5.5    Database: db_iemr
+-- Host: 192.168.5.5    Database: dbiemr
 -- ------------------------------------------------------
 -- Server version	5.7.19-log
- use db_iemr;
+ use dbiemr;
 --
 -- Table structure for table `screening`
 --

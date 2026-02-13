@@ -6,7 +6,7 @@
 --   add column Cbac_DiscolorationSkin varchar(100);
 
 
-USE db_iemr;
+USE dbiemr;
 
 SET @table := 't_cbacdetails';
 

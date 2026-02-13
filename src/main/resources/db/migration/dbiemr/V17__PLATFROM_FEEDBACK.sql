@@ -1,4 +1,4 @@
-USE db_iemr;
+USE dbiemr;
 
 -- ================================================================
 -- Create: Feedback Categories
@@ -49,7 +49,7 @@ CREATE TABLE if not EXISTS  m_platform_feedback (
 -- CREATE INDEX  ix_feedback_CategoryID  ON m_platform_feedback (CategoryID);
 -- CREATE INDEX  ix_feedback_IsAnonymous ON m_platform_feedback (IsAnonymous);
 
-USE db_iemr;
+USE dbiemr;
 
 SET @idx_exists := (
     SELECT COUNT(*)

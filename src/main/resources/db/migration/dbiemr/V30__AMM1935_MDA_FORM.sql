@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `form_fields` (
 
 
 
-CREATE TABLE IF NOT EXISTS db_iemr.`t_mda_distribution_data` (    
+CREATE TABLE IF NOT EXISTS dbiemr.`t_mda_distribution_data` (    
    `ID` BIGINT NOT NULL AUTO_INCREMENT,    
    `BeneficiaryId` BIGINT DEFAULT NULL, 
    `HouseHoldId` BIGINT NOT NULL,    

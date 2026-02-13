@@ -1,5 +1,5 @@
 
-use db_iemr;
+use dbiemr;
 
 
 -- create index  inx_IsHighRisk on t_mctsoutboundcalls(IsHighRisk);
@@ -7,7 +7,7 @@ use db_iemr;
 -- create index  inx_DisplayOBCallType on t_mctsoutboundcalls(DisplayOBCallType);
 -- create index  inx_iszerocall on t_bencall(iszerocall);
 
-USE db_iemr;
+USE dbiemr;
 
 
 -- 1️ Index: inx_IsHighRisk ON t_mctsoutboundcalls(IsHighRisk)
@@ -15,7 +15,7 @@ USE db_iemr;
 SET @idx1 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS
-    WHERE TABLE_SCHEMA = 'db_iemr'
+    WHERE TABLE_SCHEMA = 'dbiemr'
       AND TABLE_NAME = 't_mctsoutboundcalls'
       AND INDEX_NAME = 'inx_IsHighRisk'
 );
@@ -37,7 +37,7 @@ DEALLOCATE PREPARE stmt1;
 SET @idx2 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS
-    WHERE TABLE_SCHEMA = 'db_iemr'
+    WHERE TABLE_SCHEMA = 'dbiemr'
       AND TABLE_NAME = 't_mctsoutboundcalls'
       AND INDEX_NAME = 'inx_isFurtherCallRequired'
 );
@@ -59,7 +59,7 @@ DEALLOCATE PREPARE stmt2;
 SET @idx3 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS
-    WHERE TABLE_SCHEMA = 'db_iemr'
+    WHERE TABLE_SCHEMA = 'dbiemr'
       AND TABLE_NAME = 't_mctsoutboundcalls'
       AND INDEX_NAME = 'inx_DisplayOBCallType'
 );
@@ -81,7 +81,7 @@ DEALLOCATE PREPARE stmt3;
 SET @idx4 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS
-    WHERE TABLE_SCHEMA = 'db_iemr'
+    WHERE TABLE_SCHEMA = 'dbiemr'
       AND TABLE_NAME = 't_bencall'
       AND INDEX_NAME = 'inx_iszerocall'
 );
@@ -101,7 +101,7 @@ DEALLOCATE PREPARE stmt4;
 
 
 
-use db_iemr;
+use dbiemr;
 CREATE TABLE if not exists `t_grievanceworklist` (
    `gwid` bigint NOT NULL AUTO_INCREMENT,
    `Grievanceid` bigint NOT NULL,
@@ -171,12 +171,12 @@ CREATE TABLE if not exists `t_grievancetransaction` (
 
 
 
-USE `db_iemr`;
-DROP procedure IF EXISTS `db_iemr`.`Pr_Grievanceworklist`;
+USE `dbiemr`;
+DROP procedure IF EXISTS `dbiemr`.`Pr_Grievanceworklist`;
 ;
 
 DELIMITER $$
-USE `db_iemr`$$
+USE `dbiemr`$$
 CREATE  PROCEDURE `Pr_Grievanceworklist`(Userid int(11))
 begin
 select distinct t1.complaintID,t1.grievanceid,
@@ -199,7 +199,7 @@ left join db_identity.i_BeneficiaryDetails BD ON BM.BenDetailsId = BD.Beneficiar
 LEFT JOIN db_identity.i_beneficiaryaddress BA ON BA.BenAddressID = BM.BenAddressId
 LEFT JOIN db_identity.m_beneficiaryregidmapping BR ON BR.BenRegId = BM.BenRegId
 left join m_feedbacktype ft on ft.feedbacktypeid=t3.feedbacktypeid
--- left join db_iemr.m_districtbranchmapping md on md.DistrictBranchID=BA.PermVillageID
+-- left join dbiemr.m_districtbranchmapping md on md.DistrictBranchID=BA.PermVillageID
 where t1.callcounter<3 and t1.iscompleted is false and
 -- t1.providerServiceMapId=ifnull(null,t1.providerServiceMapId)
  t1.userid=ifnull(Userid,t1.userid);
@@ -210,12 +210,12 @@ DELIMITER ;
 
 
 
-USE `db_iemr`;
-DROP procedure IF EXISTS `db_iemr`.`Pr_QualityAuditorWorklist`;
+USE `dbiemr`;
+DROP procedure IF EXISTS `dbiemr`.`Pr_QualityAuditorWorklist`;
 ;
 
 DELIMITER $$
-USE `db_iemr`$$
+USE `dbiemr`$$
 CREATE  PROCEDURE `Pr_QualityAuditorWorklist`(v_fromdate datetime,v_todate datetime,v_psmrid int(11),
 v_languageid int(11),v_agentid int(11),v_roleid int(11),v_isvalid bit(1),
 v_cycle int(11),v_Prfromdate datetime,v_Prtodate datetime)

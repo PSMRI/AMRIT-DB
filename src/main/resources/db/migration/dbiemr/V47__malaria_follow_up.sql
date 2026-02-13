@@ -1,4 +1,4 @@
-USE db_iemr;
+USE dbiemr;
 
 CREATE TABLE IF NOT EXISTS `malaria_follow_up` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,

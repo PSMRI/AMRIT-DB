@@ -1,6 +1,6 @@
-USE db_iemr;
+USE dbiemr;
 
-SET @dbname = 'db_iemr';
+SET @dbname = 'dbiemr';
 SET @tablename = 'ELIGIBLE_COUPLE_TRACKING';
 
 SET @columnname = 'date_of_antra_injection';

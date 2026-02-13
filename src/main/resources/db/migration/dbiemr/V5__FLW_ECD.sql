@@ -1,20 +1,20 @@
-use db_iemr;
+use dbiemr;
 
 
 
-alter table db_iemr.t_registrationfields modify Options varchar(500);
+alter table dbiemr.t_registrationfields modify Options varchar(500);
 
-ALTER TABLE `db_iemr`.`m_providerserviceaddmapping` 
+ALTER TABLE `dbiemr`.`m_providerserviceaddmapping` 
 CHANGE COLUMN `AbdmFacilityID` `AbdmFacilityID` VARCHAR(100) NULL DEFAULT NULL ;
 
 
-USE db_iemr;
+USE dbiemr;
 
 -- 1️ Add column isNewAbha to t_healthid if it does not exist
 SET @col_exists1 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA = 'db_iemr'
+    WHERE TABLE_SCHEMA = 'dbiemr'
       AND TABLE_NAME = 't_healthid'
       AND COLUMN_NAME = 'isNewAbha'
 );
@@ -34,7 +34,7 @@ DEALLOCATE PREPARE stmt1;
 SET @col_exists2 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA = 'db_iemr'
+    WHERE TABLE_SCHEMA = 'dbiemr'
       AND TABLE_NAME = 't_mctsoutboundcalls'
       AND COLUMN_NAME = 'isFurthercallrequired'
 );
@@ -49,7 +49,7 @@ PREPARE stmt2 FROM @sql2;
 EXECUTE stmt2;
 DEALLOCATE PREPARE stmt2;
 
--- ALTER TABLE `db_iemr`.`t_healthid` 
+-- ALTER TABLE `dbiemr`.`t_healthid` 
 -- add COLUMN `isNewAbha` bit(1)  NULL DEFAULT 0 AFTER `TxnID`;
 
 -- alter table t_mctsoutboundcalls add isFurthercallrequired bit(1);

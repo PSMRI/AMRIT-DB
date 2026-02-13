@@ -1,4 +1,4 @@
-USE db_iemr;
+USE dbiemr;
 
 CREATE TABLE IF NOT EXISTS `t_ifa_distribution_data` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,

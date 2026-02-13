@@ -1,4 +1,4 @@
-use db_iemr;
+use dbiemr;
 
 --  ALTER TABLE t_kmfilemanager ADD COLUMN SubCategoryID INT NULL;
 
@@ -7,14 +7,14 @@ use db_iemr;
 
 
 
-  USE db_iemr;
+  USE dbiemr;
 
 
 -- 1) ADD COLUMN IF NOT EXISTS
 
 SELECT COUNT(*) INTO @col_exists
 FROM information_schema.columns
-WHERE table_schema = 'db_iemr'
+WHERE table_schema = 'dbiemr'
   AND table_name = 't_kmfilemanager'
   AND column_name = 'SubCategoryID';
 
@@ -34,7 +34,7 @@ DEALLOCATE PREPARE stmt;
 
 SELECT COUNT(*) INTO @fk_exists
 FROM information_schema.table_constraints
-WHERE table_schema = 'db_iemr'
+WHERE table_schema = 'dbiemr'
   AND table_name = 't_kmfilemanager'
   AND constraint_type = 'FOREIGN KEY'
   AND constraint_name = 'FK_KmFileManager_SubCategory';

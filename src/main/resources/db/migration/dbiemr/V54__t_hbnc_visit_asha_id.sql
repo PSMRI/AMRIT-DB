@@ -1,6 +1,6 @@
-USE db_iemr;
+USE dbiemr;
 
-SET @dbname = 'db_iemr';
+SET @dbname = 'dbiemr';
 SET @tablename = 't_hbnc_visit';
 SET @columnname = 'asha_id';
 SET @preparedStatement = (SELECT IF(

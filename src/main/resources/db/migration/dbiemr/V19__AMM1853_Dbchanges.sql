@@ -4,7 +4,7 @@
 --   add column visitNo smallint null,
 --   add column anyOtherHighRiskCondition varchar(100) null;
 
-USE db_iemr;
+USE dbiemr;
 
 -- =============================
 -- Add visitDate

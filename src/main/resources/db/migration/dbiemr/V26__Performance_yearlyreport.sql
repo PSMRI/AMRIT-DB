@@ -1,4 +1,4 @@
-use db_iemr;
+use dbiemr;
 drop procedure if exists pr_Stockdetail;
 
 DELIMITER $$
@@ -91,19 +91,19 @@ BEGIN
                ELSE 0 END)
       )                                              AS ClosingStock
 
-  FROM db_iemr.t_itemstockentry ISE
+  FROM dbiemr.t_itemstockentry ISE
   -- Restrict joined rows by date to shrink join domain while keeping predicates sargable
-  LEFT JOIN db_iemr.t_itemstockexit ISEx
+  LEFT JOIN dbiemr.t_itemstockexit ISEx
          ON ISEx.ItemStockEntryID = ISE.VanSerialNo
         AND ISEx.VanID            = ISE.VanID
         AND ISEx.CreatedDate      < v_ToDateExcl
-  LEFT JOIN db_iemr.t_saitemmapping SAItm
+  LEFT JOIN dbiemr.t_saitemmapping SAItm
          ON SAItm.ItemStockEntryID = ISE.VanSerialNo
         AND SAItm.VanID            = ISE.VanID
         AND SAItm.CreatedDate      < v_ToDateExcl
-  INNER JOIN db_iemr.m_Item         ITM  ON ISE.ItemID         = ITM.ItemID
-  INNER JOIN db_iemr.m_Facility     FAC  ON ISE.FacilityID     = FAC.FacilityID
-  INNER JOIN db_iemr.m_ItemCategory ITMC ON ITM.ItemCategoryID = ITMC.ItemCategoryID
+  INNER JOIN dbiemr.m_Item         ITM  ON ISE.ItemID         = ITM.ItemID
+  INNER JOIN dbiemr.m_Facility     FAC  ON ISE.FacilityID     = FAC.FacilityID
+  INNER JOIN dbiemr.m_ItemCategory ITMC ON ITM.ItemCategoryID = ITMC.ItemCategoryID
 
   WHERE (v_facilityid IS NULL OR ISE.FacilityID = v_facilityid)
     AND ISE.CreatedDate < v_ToDateExcl  -- keep receipts bounded by report window

@@ -1,6 +1,6 @@
-USE db_iemr;
+USE dbiemr;
 
-SET @dbname = 'db_iemr';
+SET @dbname = 'dbiemr';
 SET @tablename = 't_hbnc_visit';
 
 -- ADD COLUMN (only if column does not exist)
@@ -225,7 +225,7 @@ EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
 -- MODIFY COLUMN
-ALTER TABLE db_iemr.t_hbnc_visit
+ALTER TABLE dbiemr.t_hbnc_visit
 MODIFY COLUMN all_limbs_limp TINYINT(1) DEFAULT 0,
 MODIFY COLUMN baby_cry_continuously TINYINT(1) DEFAULT 0,
 MODIFY COLUMN baby_eyes_swollen TINYINT(1) DEFAULT NULL,
@@ -246,12 +246,12 @@ MODIFY COLUMN mother_referred TINYINT(1) DEFAULT NULL,
 MODIFY COLUMN mother_speaks_abnormally TINYINT(1) DEFAULT NULL,
 MODIFY COLUMN mother_temp FLOAT DEFAULT NULL;
 
-ALTER TABLE db_iemr.t_hbnc_visit
+ALTER TABLE dbiemr.t_hbnc_visit
 MODIFY COLUMN baby_referral_date DATE DEFAULT NULL,
 MODIFY COLUMN mother_referral_date DATE DEFAULT NULL,
 MODIFY COLUMN visit_date VARCHAR(200) DEFAULT NULL,
 MODIFY COLUMN supervisor_sign_date DATE DEFAULT NULL;
 
-ALTER TABLE db_iemr.t_hbnc_visit
+ALTER TABLE dbiemr.t_hbnc_visit
 MODIFY COLUMN pus_navel TINYINT(1) DEFAULT NULL,
 MODIFY COLUMN supervisor_comment TEXT;

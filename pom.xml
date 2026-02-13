@@ -94,22 +94,14 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
-		<!-- CLI framework -->
 		<dependency>
 			<groupId>info.picocli</groupId>
 			<artifactId>picocli</artifactId>
 			<version>4.7.5</version>
 		</dependency>
-		
-		<!-- YAML processing -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-yaml</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -125,17 +117,6 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
-					<!-- Keep Spring Boot as default, but allow CLI override -->
-					<mainClass>com.db.piramalswasthya.AmritDbApplication</mainClass>
-				</configuration>
-			</plugin>
-			<!-- Exec plugin for running CLI tool directly -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>3.1.0</version>
-				<configuration>
-					<mainClass>com.db.piramalswasthya.anonymizer.AmritDbAnonymizer</mainClass>
 				</configuration>
 			</plugin>
 			<plugin>

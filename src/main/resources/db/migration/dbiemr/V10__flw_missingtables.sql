@@ -1,6 +1,6 @@
 
 
-use db_iemr;
+use dbiemr;
 
 CREATE TABLE if not exists `m_outreach` (
   `OutreachID` int(11) NOT NULL AUTO_INCREMENT,

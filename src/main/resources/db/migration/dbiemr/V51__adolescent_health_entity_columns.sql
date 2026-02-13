@@ -1,5 +1,5 @@
-USE db_iemr;
+USE dbiemr;
 
 -- adolescent_health: visit_date DATE -> DATETIME (entity Timestamp)
-ALTER TABLE db_iemr.adolescent_health
+ALTER TABLE dbiemr.adolescent_health
   MODIFY COLUMN visit_date DATETIME NULL DEFAULT NULL;

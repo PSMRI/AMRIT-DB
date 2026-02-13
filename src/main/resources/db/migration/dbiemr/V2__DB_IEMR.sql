@@ -1,5 +1,5 @@
 
-use db_iemr;
+use dbiemr;
 
 
 CREATE TABLE if not exists  `m_fieldtypes` (
@@ -118,10 +118,10 @@ CREATE TABLE if not exists `t_projectservicelinemapping` (
    CONSTRAINT `t_projectservicelinemapping_ibfk_4` FOREIGN KEY (`BlockID`) REFERENCES `m_districtblock` (`BlockID`)
  ) ;
 
-USE `db_iemr`;
+USE `dbiemr`;
 CREATE 
     
- OR REPLACE VIEW `db_iemr`.`v_customizationdatafields` AS
+ OR REPLACE VIEW `dbiemr`.`v_customizationdatafields` AS
     SELECT 
         UUID() AS `uuid`,
         `a`.`ServiceLineId` AS `ServiceLineId`,
@@ -177,27 +177,27 @@ CREATE
                 `t3`.`AllowText` AS `AllowText`,
                 `t3`.`IsEditable` AS `IsEditable`
         FROM
-            (((`db_iemr`.`t_projectservicelinemapping` `t1`
+            (((`dbiemr`.`t_projectservicelinemapping` `t1`
         LEFT JOIN (SELECT 
-            `db_iemr`.`t_mapsectionprojects`.`ID` AS `ID`,
-                `db_iemr`.`t_mapsectionprojects`.`ProjectID` AS `ProjectID`,
-                `db_iemr`.`t_mapsectionprojects`.`ProjectName` AS `ProjectName`,
-                `db_iemr`.`t_mapsectionprojects`.`SectionID` AS `SectionID`,
-                `db_iemr`.`t_mapsectionprojects`.`SectionName` AS `SectionName`,
-                `db_iemr`.`t_mapsectionprojects`.`serviceProviderId` AS `serviceProviderId`,
-                `db_iemr`.`t_mapsectionprojects`.`Deleted` AS `Deleted`,
-                `db_iemr`.`t_mapsectionprojects`.`Processed` AS `Processed`,
-                `db_iemr`.`t_mapsectionprojects`.`CreatedBy` AS `CreatedBy`,
-                `db_iemr`.`t_mapsectionprojects`.`CreatedDate` AS `CreatedDate`,
-                `db_iemr`.`t_mapsectionprojects`.`ModifiedBy` AS `ModifiedBy`,
-                `db_iemr`.`t_mapsectionprojects`.`LastModDate` AS `LastModDate`
+            `dbiemr`.`t_mapsectionprojects`.`ID` AS `ID`,
+                `dbiemr`.`t_mapsectionprojects`.`ProjectID` AS `ProjectID`,
+                `dbiemr`.`t_mapsectionprojects`.`ProjectName` AS `ProjectName`,
+                `dbiemr`.`t_mapsectionprojects`.`SectionID` AS `SectionID`,
+                `dbiemr`.`t_mapsectionprojects`.`SectionName` AS `SectionName`,
+                `dbiemr`.`t_mapsectionprojects`.`serviceProviderId` AS `serviceProviderId`,
+                `dbiemr`.`t_mapsectionprojects`.`Deleted` AS `Deleted`,
+                `dbiemr`.`t_mapsectionprojects`.`Processed` AS `Processed`,
+                `dbiemr`.`t_mapsectionprojects`.`CreatedBy` AS `CreatedBy`,
+                `dbiemr`.`t_mapsectionprojects`.`CreatedDate` AS `CreatedDate`,
+                `dbiemr`.`t_mapsectionprojects`.`ModifiedBy` AS `ModifiedBy`,
+                `dbiemr`.`t_mapsectionprojects`.`LastModDate` AS `LastModDate`
         FROM
-            `db_iemr`.`t_mapsectionprojects`
+            `dbiemr`.`t_mapsectionprojects`
         WHERE
-            ((0 <> `db_iemr`.`t_mapsectionprojects`.`Deleted`)
+            ((0 <> `dbiemr`.`t_mapsectionprojects`.`Deleted`)
                 IS FALSE)) `t4` ON ((`t4`.`ProjectID` = `t1`.`ProjectID`)))
-        LEFT JOIN `db_iemr`.`m_registrationsections` `t2` ON ((`t4`.`SectionID` = `t2`.`SectionID`)))
-        LEFT JOIN `db_iemr`.`t_registrationfields` `t3` ON (((`t3`.`SectionID` = `t2`.`SectionID`)
+        LEFT JOIN `dbiemr`.`m_registrationsections` `t2` ON ((`t4`.`SectionID` = `t2`.`SectionID`)))
+        LEFT JOIN `dbiemr`.`t_registrationfields` `t3` ON (((`t3`.`SectionID` = `t2`.`SectionID`)
             AND (`t1`.`ServiceProviderID` = `t3`.`ServiceProviderID`)
             AND ((0 <> `t3`.`Deleted`) IS FALSE)
             AND ((0 <> `t4`.`Deleted`) IS FALSE)))) UNION SELECT DISTINCT
@@ -227,27 +227,27 @@ CREATE
                 `t3`.`AllowText` AS `AllowText`,
                 `t3`.`IsEditable` AS `IsEditable`
         FROM
-            (((`db_iemr`.`t_projectservicelinemapping` `t1`
+            (((`dbiemr`.`t_projectservicelinemapping` `t1`
         LEFT JOIN (SELECT 
-            `db_iemr`.`t_mapsectionprojects`.`ID` AS `ID`,
-                `db_iemr`.`t_mapsectionprojects`.`ProjectID` AS `ProjectID`,
-                `db_iemr`.`t_mapsectionprojects`.`ProjectName` AS `ProjectName`,
-                `db_iemr`.`t_mapsectionprojects`.`SectionID` AS `SectionID`,
-                `db_iemr`.`t_mapsectionprojects`.`SectionName` AS `SectionName`,
-                `db_iemr`.`t_mapsectionprojects`.`serviceProviderId` AS `serviceProviderId`,
-                `db_iemr`.`t_mapsectionprojects`.`Deleted` AS `Deleted`,
-                `db_iemr`.`t_mapsectionprojects`.`Processed` AS `Processed`,
-                `db_iemr`.`t_mapsectionprojects`.`CreatedBy` AS `CreatedBy`,
-                `db_iemr`.`t_mapsectionprojects`.`CreatedDate` AS `CreatedDate`,
-                `db_iemr`.`t_mapsectionprojects`.`ModifiedBy` AS `ModifiedBy`,
-                `db_iemr`.`t_mapsectionprojects`.`LastModDate` AS `LastModDate`
+            `dbiemr`.`t_mapsectionprojects`.`ID` AS `ID`,
+                `dbiemr`.`t_mapsectionprojects`.`ProjectID` AS `ProjectID`,
+                `dbiemr`.`t_mapsectionprojects`.`ProjectName` AS `ProjectName`,
+                `dbiemr`.`t_mapsectionprojects`.`SectionID` AS `SectionID`,
+                `dbiemr`.`t_mapsectionprojects`.`SectionName` AS `SectionName`,
+                `dbiemr`.`t_mapsectionprojects`.`serviceProviderId` AS `serviceProviderId`,
+                `dbiemr`.`t_mapsectionprojects`.`Deleted` AS `Deleted`,
+                `dbiemr`.`t_mapsectionprojects`.`Processed` AS `Processed`,
+                `dbiemr`.`t_mapsectionprojects`.`CreatedBy` AS `CreatedBy`,
+                `dbiemr`.`t_mapsectionprojects`.`CreatedDate` AS `CreatedDate`,
+                `dbiemr`.`t_mapsectionprojects`.`ModifiedBy` AS `ModifiedBy`,
+                `dbiemr`.`t_mapsectionprojects`.`LastModDate` AS `LastModDate`
         FROM
-            `db_iemr`.`t_mapsectionprojects`
+            `dbiemr`.`t_mapsectionprojects`
         WHERE
-            ((0 <> `db_iemr`.`t_mapsectionprojects`.`Deleted`)
+            ((0 <> `dbiemr`.`t_mapsectionprojects`.`Deleted`)
                 IS FALSE)) `t4` ON ((`t4`.`ProjectID` = `t1`.`ProjectID`)))
-        LEFT JOIN `db_iemr`.`m_registrationsections` `t2` ON ((`t4`.`SectionID` = `t2`.`SectionID`)))
-        LEFT JOIN `db_iemr`.`t_registrationfields` `t3` ON (((`t3`.`SectionID` = `t2`.`SectionID`)
+        LEFT JOIN `dbiemr`.`m_registrationsections` `t2` ON ((`t4`.`SectionID` = `t2`.`SectionID`)))
+        LEFT JOIN `dbiemr`.`t_registrationfields` `t3` ON (((`t3`.`SectionID` = `t2`.`SectionID`)
             AND ((0 <> `t3`.`Deleted`) IS FALSE)
             AND ((0 <> `t4`.`Deleted`) IS FALSE))))
         WHERE
@@ -256,7 +256,7 @@ CREATE
         (`a`.`Rank` IS NOT NULL);
 
 
-USE `db_iemr`;
+USE `dbiemr`;
 CREATE 
     
  OR REPLACE VIEW `v_get_prkngplc_dist_zone_state_from_spid` AS
@@ -294,7 +294,7 @@ CREATE
     WHERE
         ((0 <> `m_sp`.`Deleted`) IS FALSE);
 
--- use db_iemr;
+-- use dbiemr;
 
 -- alter table m_providerserviceaddmapping add AbdmFacilityID VARCHAR(20)  DEFAULT NULL;
 
@@ -302,18 +302,18 @@ CREATE
 
 -- alter table t_benvisitdetail add AbdmFacilityID varchar(20)  DEFAULT NULL after CarecontextLinkDate;
 
-USE db_iemr;
+USE dbiemr;
 
 -- 1) Add AbdmFacilityID to m_providerserviceaddmapping
 SET @exists := (
     SELECT COUNT(*)
     FROM information_schema.columns
-    WHERE table_schema = 'db_iemr'
+    WHERE table_schema = 'dbiemr'
       AND table_name = 'm_providerserviceaddmapping'
       AND column_name = 'AbdmFacilityID'
 );
 SET @sql := IF(@exists = 0,
-    'ALTER TABLE db_iemr.m_providerserviceaddmapping ADD COLUMN AbdmFacilityID VARCHAR(20) DEFAULT NULL;',
+    'ALTER TABLE dbiemr.m_providerserviceaddmapping ADD COLUMN AbdmFacilityID VARCHAR(20) DEFAULT NULL;',
     'SELECT "Column AbdmFacilityID already exists";'
 );
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
@@ -324,12 +324,12 @@ PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 SET @exists := (
     SELECT COUNT(*)
     FROM information_schema.columns
-    WHERE table_schema = 'db_iemr'
+    WHERE table_schema = 'dbiemr'
       AND table_name = 'm_providerserviceaddmapping'
       AND column_name = 'AbdmFacilityName'
 );
 SET @sql := IF(@exists = 0,
-    'ALTER TABLE db_iemr.m_providerserviceaddmapping ADD COLUMN AbdmFacilityName VARCHAR(100) DEFAULT NULL;',
+    'ALTER TABLE dbiemr.m_providerserviceaddmapping ADD COLUMN AbdmFacilityName VARCHAR(100) DEFAULT NULL;',
     'SELECT "Column AbdmFacilityName already exists";'
 );
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
@@ -340,18 +340,18 @@ PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 SET @exists := (
     SELECT COUNT(*)
     FROM information_schema.columns
-    WHERE table_schema = 'db_iemr'
+    WHERE table_schema = 'dbiemr'
       AND table_name = 't_benvisitdetail'
       AND column_name = 'AbdmFacilityID'
 );
 SET @sql := IF(@exists = 0,
-    'ALTER TABLE db_iemr.t_benvisitdetail ADD COLUMN AbdmFacilityID VARCHAR(20) DEFAULT NULL AFTER CarecontextLinkDate;',
+    'ALTER TABLE dbiemr.t_benvisitdetail ADD COLUMN AbdmFacilityID VARCHAR(20) DEFAULT NULL AFTER CarecontextLinkDate;',
     'SELECT "Column AbdmFacilityID already exists";'
 );
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
 
-USE `db_iemr`;
+USE `dbiemr`;
 CREATE 
     
  OR REPLACE VIEW `showofficedetails` AS
@@ -387,12 +387,12 @@ CREATE
 
 
 
-USE `db_iemr`;
-DROP procedure IF EXISTS `db_iemr`.`PR_FetchECDChildOutboundWorklist`;
+USE `dbiemr`;
+DROP procedure IF EXISTS `dbiemr`.`PR_FetchECDChildOutboundWorklist`;
 ;
 
 DELIMITER $$
-USE `db_iemr`$$
+USE `dbiemr`$$
 CREATE PROCEDURE `PR_FetchECDChildOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
 
@@ -650,11 +650,11 @@ DELIMITER ;
 ;
 
 
-DROP PROCEDURE IF EXISTS db_iemr.PR_FetchECDMotherOutboundWorklist;
+DROP PROCEDURE IF EXISTS dbiemr.PR_FetchECDMotherOutboundWorklist;
 
 
 DELIMITER $$
-USE `db_iemr`$$
+USE `dbiemr`$$
 CREATE  PROCEDURE `PR_FetchECDMotherOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
  declare v_NextAttemptPeriod int(11);
@@ -797,33 +797,33 @@ DELIMITER ;
 ;
 
 
-USE db_iemr;
+USE dbiemr;
 
 -- -- 1) Add preferredLanguage to t_mothervalidrecord if column does not exist
--- ALTER TABLE db_iemr.t_mothervalidrecord
+-- ALTER TABLE dbiemr.t_mothervalidrecord
 -- ADD COLUMN  preferredLanguage VARCHAR(30) AFTER IsAllocated;
 
 -- -- 2) Add preferredLanguage to t_childvaliddata if column does not exist
--- ALTER TABLE db_iemr.t_childvaliddata
+-- ALTER TABLE dbiemr.t_childvaliddata
 -- ADD COLUMN  preferredLanguage VARCHAR(30) AFTER SMS_Status;
 
 -- -- 3) Add ProjectID column if not exists
--- ALTER TABLE db_iemr.t_registrationfields
+-- ALTER TABLE dbiemr.t_registrationfields
 -- ADD COLUMN  ProjectID INT(11) NOT NULL;
 
 -- -- 4) Add BeneficiaryConsent if column does not exist
--- ALTER TABLE db_iemr.t_feedback
+-- ALTER TABLE dbiemr.t_feedback
 -- ADD COLUMN  BeneficiaryConsent BIT(1) NULL;
 
 
-USE db_iemr;
+USE dbiemr;
 
 
 -- 1) Add preferredLanguage to t_mothervalidrecord
 
 SET @exists := (
     SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA='db_iemr'
+    WHERE TABLE_SCHEMA='dbiemr'
       AND TABLE_NAME='t_mothervalidrecord'
       AND COLUMN_NAME='preferredLanguage'
 );
@@ -842,7 +842,7 @@ DEALLOCATE PREPARE stmt;
 
 SET @exists := (
     SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA='db_iemr'
+    WHERE TABLE_SCHEMA='dbiemr'
       AND TABLE_NAME='t_childvaliddata'
       AND COLUMN_NAME='preferredLanguage'
 );
@@ -861,7 +861,7 @@ DEALLOCATE PREPARE stmt;
 
 SET @exists := (
     SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA='db_iemr'
+    WHERE TABLE_SCHEMA='dbiemr'
       AND TABLE_NAME='t_registrationfields'
       AND COLUMN_NAME='ProjectID'
 );
@@ -880,7 +880,7 @@ DEALLOCATE PREPARE stmt;
 
 SET @exists := (
     SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA='db_iemr'
+    WHERE TABLE_SCHEMA='dbiemr'
       AND TABLE_NAME='t_feedback'
       AND COLUMN_NAME='BeneficiaryConsent'
 );
@@ -895,16 +895,16 @@ EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
 
-alter table db_iemr.high_risk_assess modify id bigint not null auto_increment;
+alter table dbiemr.high_risk_assess modify id bigint not null auto_increment;
 
 
 
 
 
-USE `db_iemr`;
+USE `dbiemr`;
 CREATE 
    
- OR REPLACE VIEW `db_iemr`.`v_customizationdatafields` AS
+ OR REPLACE VIEW `dbiemr`.`v_customizationdatafields` AS
     SELECT 
         UUID() AS `uuid`,
         `a`.`ServiceLineId` AS `ServiceLineId`,
@@ -960,27 +960,27 @@ CREATE
                 `t3`.`AllowText` AS `AllowText`,
                 `t3`.`IsEditable` AS `IsEditable`
         FROM
-            (((`db_iemr`.`t_projectservicelinemapping` `t1`
+            (((`dbiemr`.`t_projectservicelinemapping` `t1`
         LEFT JOIN (SELECT 
-            `db_iemr`.`t_mapsectionprojects`.`ID` AS `ID`,
-                `db_iemr`.`t_mapsectionprojects`.`ProjectID` AS `ProjectID`,
-                `db_iemr`.`t_mapsectionprojects`.`ProjectName` AS `ProjectName`,
-                `db_iemr`.`t_mapsectionprojects`.`SectionID` AS `SectionID`,
-                `db_iemr`.`t_mapsectionprojects`.`SectionName` AS `SectionName`,
-                `db_iemr`.`t_mapsectionprojects`.`serviceProviderId` AS `serviceProviderId`,
-                `db_iemr`.`t_mapsectionprojects`.`Deleted` AS `Deleted`,
-                `db_iemr`.`t_mapsectionprojects`.`Processed` AS `Processed`,
-                `db_iemr`.`t_mapsectionprojects`.`CreatedBy` AS `CreatedBy`,
-                `db_iemr`.`t_mapsectionprojects`.`CreatedDate` AS `CreatedDate`,
-                `db_iemr`.`t_mapsectionprojects`.`ModifiedBy` AS `ModifiedBy`,
-                `db_iemr`.`t_mapsectionprojects`.`LastModDate` AS `LastModDate`
+            `dbiemr`.`t_mapsectionprojects`.`ID` AS `ID`,
+                `dbiemr`.`t_mapsectionprojects`.`ProjectID` AS `ProjectID`,
+                `dbiemr`.`t_mapsectionprojects`.`ProjectName` AS `ProjectName`,
+                `dbiemr`.`t_mapsectionprojects`.`SectionID` AS `SectionID`,
+                `dbiemr`.`t_mapsectionprojects`.`SectionName` AS `SectionName`,
+                `dbiemr`.`t_mapsectionprojects`.`serviceProviderId` AS `serviceProviderId`,
+                `dbiemr`.`t_mapsectionprojects`.`Deleted` AS `Deleted`,
+                `dbiemr`.`t_mapsectionprojects`.`Processed` AS `Processed`,
+                `dbiemr`.`t_mapsectionprojects`.`CreatedBy` AS `CreatedBy`,
+                `dbiemr`.`t_mapsectionprojects`.`CreatedDate` AS `CreatedDate`,
+                `dbiemr`.`t_mapsectionprojects`.`ModifiedBy` AS `ModifiedBy`,
+                `dbiemr`.`t_mapsectionprojects`.`LastModDate` AS `LastModDate`
         FROM
-            `db_iemr`.`t_mapsectionprojects`
+            `dbiemr`.`t_mapsectionprojects`
         WHERE
-            ((0 <> `db_iemr`.`t_mapsectionprojects`.`Deleted`)
+            ((0 <> `dbiemr`.`t_mapsectionprojects`.`Deleted`)
                 IS FALSE)) `t4` ON ((`t4`.`ProjectID` = `t1`.`ProjectID`)))
-        LEFT JOIN `db_iemr`.`m_registrationsections` `t2` ON ((`t4`.`SectionID` = `t2`.`SectionID`)))
-        LEFT JOIN `db_iemr`.`t_registrationfields` `t3` ON (((`t3`.`SectionID` = `t2`.`SectionID`)
+        LEFT JOIN `dbiemr`.`m_registrationsections` `t2` ON ((`t4`.`SectionID` = `t2`.`SectionID`)))
+        LEFT JOIN `dbiemr`.`t_registrationfields` `t3` ON (((`t3`.`SectionID` = `t2`.`SectionID`)
             AND (`t1`.`ServiceProviderID` = `t3`.`ServiceProviderID`)
             AND (`t3`.`ProjectID` = `t4`.`ProjectID`)
             AND ((0 <> `t3`.`Deleted`) IS FALSE)
@@ -1011,27 +1011,27 @@ CREATE
                 `t3`.`AllowText` AS `AllowText`,
                 `t3`.`IsEditable` AS `IsEditable`
         FROM
-            (((`db_iemr`.`t_projectservicelinemapping` `t1`
+            (((`dbiemr`.`t_projectservicelinemapping` `t1`
         LEFT JOIN (SELECT 
-            `db_iemr`.`t_mapsectionprojects`.`ID` AS `ID`,
-                `db_iemr`.`t_mapsectionprojects`.`ProjectID` AS `ProjectID`,
-                `db_iemr`.`t_mapsectionprojects`.`ProjectName` AS `ProjectName`,
-                `db_iemr`.`t_mapsectionprojects`.`SectionID` AS `SectionID`,
-                `db_iemr`.`t_mapsectionprojects`.`SectionName` AS `SectionName`,
-                `db_iemr`.`t_mapsectionprojects`.`serviceProviderId` AS `serviceProviderId`,
-                `db_iemr`.`t_mapsectionprojects`.`Deleted` AS `Deleted`,
-                `db_iemr`.`t_mapsectionprojects`.`Processed` AS `Processed`,
-                `db_iemr`.`t_mapsectionprojects`.`CreatedBy` AS `CreatedBy`,
-                `db_iemr`.`t_mapsectionprojects`.`CreatedDate` AS `CreatedDate`,
-                `db_iemr`.`t_mapsectionprojects`.`ModifiedBy` AS `ModifiedBy`,
-                `db_iemr`.`t_mapsectionprojects`.`LastModDate` AS `LastModDate`
+            `dbiemr`.`t_mapsectionprojects`.`ID` AS `ID`,
+                `dbiemr`.`t_mapsectionprojects`.`ProjectID` AS `ProjectID`,
+                `dbiemr`.`t_mapsectionprojects`.`ProjectName` AS `ProjectName`,
+                `dbiemr`.`t_mapsectionprojects`.`SectionID` AS `SectionID`,
+                `dbiemr`.`t_mapsectionprojects`.`SectionName` AS `SectionName`,
+                `dbiemr`.`t_mapsectionprojects`.`serviceProviderId` AS `serviceProviderId`,
+                `dbiemr`.`t_mapsectionprojects`.`Deleted` AS `Deleted`,
+                `dbiemr`.`t_mapsectionprojects`.`Processed` AS `Processed`,
+                `dbiemr`.`t_mapsectionprojects`.`CreatedBy` AS `CreatedBy`,
+                `dbiemr`.`t_mapsectionprojects`.`CreatedDate` AS `CreatedDate`,
+                `dbiemr`.`t_mapsectionprojects`.`ModifiedBy` AS `ModifiedBy`,
+                `dbiemr`.`t_mapsectionprojects`.`LastModDate` AS `LastModDate`
         FROM
-            `db_iemr`.`t_mapsectionprojects`
+            `dbiemr`.`t_mapsectionprojects`
         WHERE
-            ((0 <> `db_iemr`.`t_mapsectionprojects`.`Deleted`)
+            ((0 <> `dbiemr`.`t_mapsectionprojects`.`Deleted`)
                 IS FALSE)) `t4` ON ((`t4`.`ProjectID` = `t1`.`ProjectID`)))
-        LEFT JOIN `db_iemr`.`m_registrationsections` `t2` ON ((`t4`.`SectionID` = `t2`.`SectionID`)))
-        LEFT JOIN `db_iemr`.`t_registrationfields` `t3` ON (((`t3`.`SectionID` = `t2`.`SectionID`)
+        LEFT JOIN `dbiemr`.`m_registrationsections` `t2` ON ((`t4`.`SectionID` = `t2`.`SectionID`)))
+        LEFT JOIN `dbiemr`.`t_registrationfields` `t3` ON (((`t3`.`SectionID` = `t2`.`SectionID`)
             AND ((0 <> `t3`.`Deleted`) IS FALSE)
             AND ((0 <> `t4`.`Deleted`) IS FALSE))))
         WHERE
@@ -1040,9 +1040,9 @@ CREATE
         (`a`.`Rank` IS NOT NULL);
 
 
-USE `db_iemr`;
+USE `dbiemr`;
 CREATE 
- OR REPLACE VIEW `db_iemr`.`v_getagentsbyroleid` AS
+ OR REPLACE VIEW `dbiemr`.`v_getagentsbyroleid` AS
     SELECT 
         `usr`.`USRMappingID` AS `USRMappingID`,
         `u`.`UserID` AS `UserID`,
@@ -1057,10 +1057,10 @@ CREATE
             ELSE NULL
         END) AS `preferredlanguage`
     FROM
-        (((`db_iemr`.`m_user` `u`
-        JOIN `db_iemr`.`m_userservicerolemapping` `usr` ON ((`u`.`UserID` = `usr`.`UserID`)))
-        LEFT JOIN `db_iemr`.`m_userlangmapping` `ulm` ON ((`ulm`.`UserID` = `usr`.`UserID`)))
-        LEFT JOIN `db_iemr`.`m_language` `l` ON ((`l`.`LanguageID` = `ulm`.`LanguageID`)))
+        (((`dbiemr`.`m_user` `u`
+        JOIN `dbiemr`.`m_userservicerolemapping` `usr` ON ((`u`.`UserID` = `usr`.`UserID`)))
+        LEFT JOIN `dbiemr`.`m_userlangmapping` `ulm` ON ((`ulm`.`UserID` = `usr`.`UserID`)))
+        LEFT JOIN `dbiemr`.`m_language` `l` ON ((`l`.`LanguageID` = `ulm`.`LanguageID`)))
     WHERE
         (((0 <> `u`.`Deleted`) IS FALSE)
             AND ((0 <> `usr`.`Deleted`) IS FALSE));

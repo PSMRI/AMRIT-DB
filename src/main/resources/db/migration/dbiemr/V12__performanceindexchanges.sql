@@ -1,4 +1,4 @@
-use db_iemr;
+use dbiemr;
 
 -- create index  inx_CallDateFrom on t_mctsoutboundcalls(CallDateFrom);
 
@@ -14,7 +14,7 @@ use db_iemr;
 -- create index  inx_modified_date on i_ben_flow_outreach(modified_date);
 
 
-USE db_iemr;
+USE dbiemr;
 
 
 -- 1️ Index: inx_CallDateFrom ON t_mctsoutboundcalls(CallDateFrom)
@@ -22,7 +22,7 @@ USE db_iemr;
 SET @idx1 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS
-    WHERE TABLE_SCHEMA='db_iemr'
+    WHERE TABLE_SCHEMA='dbiemr'
       AND TABLE_NAME='t_mctsoutboundcalls'
       AND INDEX_NAME='inx_CallDateFrom'
 );
@@ -44,7 +44,7 @@ DEALLOCATE PREPARE stmt1;
 SET @idx2 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS
-    WHERE TABLE_SCHEMA='db_iemr'
+    WHERE TABLE_SCHEMA='dbiemr'
       AND TABLE_NAME='t_mctsoutboundcalls'
       AND INDEX_NAME='inx_CallDateTo'
 );
@@ -66,7 +66,7 @@ DEALLOCATE PREPARE stmt2;
 SET @idx3 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS
-    WHERE TABLE_SCHEMA='db_iemr'
+    WHERE TABLE_SCHEMA='dbiemr'
       AND TABLE_NAME='t_mothervalidrecord'
       AND INDEX_NAME='inx_preferredlanguage'
 );
@@ -88,7 +88,7 @@ DEALLOCATE PREPARE stmt3;
 SET @idx4 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS
-    WHERE TABLE_SCHEMA='db_iemr'
+    WHERE TABLE_SCHEMA='dbiemr'
       AND TABLE_NAME='t_childvaliddata'
       AND INDEX_NAME='inx_preferredlanguage'
 );
@@ -110,7 +110,7 @@ DEALLOCATE PREPARE stmt4;
 SET @idx5 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS
-    WHERE TABLE_SCHEMA='db_iemr'
+    WHERE TABLE_SCHEMA='dbiemr'
       AND TABLE_NAME='i_ben_flow_outreach'
       AND INDEX_NAME='inx_villageid'
 );
@@ -131,7 +131,7 @@ DEALLOCATE PREPARE stmt5;
 SET @idx6 := (
     SELECT COUNT(*)
     FROM INFORMATION_SCHEMA.STATISTICS
-    WHERE TABLE_SCHEMA='db_iemr'
+    WHERE TABLE_SCHEMA='dbiemr'
       AND TABLE_NAME='i_ben_flow_outreach'
       AND INDEX_NAME='inx_modified_date'
 );

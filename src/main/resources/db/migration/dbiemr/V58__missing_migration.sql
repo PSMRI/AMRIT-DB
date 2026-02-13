@@ -1,4 +1,4 @@
-USE db_iemr;
+USE dbiemr;
 
 CREATE TABLE IF NOT EXISTS `i_mobilization_mosquito_net` (
    `id` bigint NOT NULL AUTO_INCREMENT,
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `i_mobilization_mosquito_net` (
 
 
   -- t_pnc_visit: add missing columns for PNCVisit entity (safe: add only if not exists)
-  SET @dbname = 'db_iemr';
+  SET @dbname = 'dbiemr';
   SET @tablename = 't_pnc_visit';
 
   SET @columnname = 'steilisation_date';

@@ -1,4 +1,4 @@
-USE db_iemr;
+USE dbiemr;
 
 CREATE TABLE IF NOT EXISTS `maa_meeting` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,

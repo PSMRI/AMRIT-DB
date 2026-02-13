@@ -36,7 +36,7 @@ The AMRIT-DB service leverages Flyway within a Spring Boot framework to manage a
 
 Ensure the following databases are created:  
 
-- `db_iemr`  
+- `dbiemr`  
 - `db_reporting`  
 - `db_identity`  
 - `db_1097_identity`  

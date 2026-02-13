@@ -1,9 +1,9 @@
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: 192.168.5.5    Database: db_iemr
+-- Host: 192.168.5.5    Database: dbiemr
 -- ------------------------------------------------------
 -- Server version	5.7.19-log
- use db_iemr;
+ use dbiemr;
 --
 -- Table structure for table `asha_profile`
 --
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `t_micro_birth_plan` (
 
 -- ALTER TABLE asha_profile 
 -- ADD COLUMN  isFatherOrSpouse TINYINT(1) DEFAULT NULL;
-use db_iemr;
+use dbiemr;
 
 
 
@@ -108,10 +108,10 @@ SET @run := '';
 -- eligible_couple_tracking.lmp_date
 SELECT IF(
     (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS 
-     WHERE TABLE_SCHEMA='db_iemr' 
+     WHERE TABLE_SCHEMA='dbiemr' 
        AND TABLE_NAME='eligible_couple_tracking' 
        AND COLUMN_NAME='lmp_date') = 0,
-    'ALTER TABLE db_iemr.eligible_couple_tracking ADD COLUMN lmp_date VARCHAR(50) DEFAULT NULL;',
+    'ALTER TABLE dbiemr.eligible_couple_tracking ADD COLUMN lmp_date VARCHAR(50) DEFAULT NULL;',
     'SELECT "eligible_couple_tracking.lmp_date already exists";'
 ) INTO @run;
 PREPARE stmt FROM @run; EXECUTE stmt; DEALLOCATE PREPARE stmt;
@@ -120,10 +120,10 @@ PREPARE stmt FROM @run; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 -- t_eligible_couple_register.lmp_date
 SELECT IF(
     (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS 
-     WHERE TABLE_SCHEMA='db_iemr' 
+     WHERE TABLE_SCHEMA='dbiemr' 
        AND TABLE_NAME='t_eligible_couple_register' 
        AND COLUMN_NAME='lmp_date') = 0,
-    'ALTER TABLE db_iemr.t_eligible_couple_register ADD COLUMN lmp_date VARCHAR(50) DEFAULT NULL;',
+    'ALTER TABLE dbiemr.t_eligible_couple_register ADD COLUMN lmp_date VARCHAR(50) DEFAULT NULL;',
     'SELECT "t_eligible_couple_register.lmp_date already exists";'
 ) INTO @run;
 PREPARE stmt FROM @run; EXECUTE stmt; DEALLOCATE PREPARE stmt;
@@ -132,10 +132,10 @@ PREPARE stmt FROM @run; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 -- t_anc_visit.file_path
 SELECT IF(
     (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS 
-     WHERE TABLE_SCHEMA='db_iemr' 
+     WHERE TABLE_SCHEMA='dbiemr' 
        AND TABLE_NAME='t_anc_visit' 
        AND COLUMN_NAME='file_path') = 0,
-    'ALTER TABLE db_iemr.t_anc_visit ADD COLUMN file_path VARCHAR(500) DEFAULT NULL;',
+    'ALTER TABLE dbiemr.t_anc_visit ADD COLUMN file_path VARCHAR(500) DEFAULT NULL;',
     'SELECT "t_anc_visit.file_path already exists";'
 ) INTO @run;
 PREPARE stmt FROM @run; EXECUTE stmt; DEALLOCATE PREPARE stmt;
@@ -144,10 +144,10 @@ PREPARE stmt FROM @run; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 -- asha_profile.profileImage
 SELECT IF(
     (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS 
-     WHERE TABLE_SCHEMA='db_iemr' 
+     WHERE TABLE_SCHEMA='dbiemr' 
        AND TABLE_NAME='asha_profile' 
        AND COLUMN_NAME='profileImage') = 0,
-    'ALTER TABLE db_iemr.asha_profile ADD COLUMN profileImage VARCHAR(1000) DEFAULT NULL;',
+    'ALTER TABLE dbiemr.asha_profile ADD COLUMN profileImage VARCHAR(1000) DEFAULT NULL;',
     'SELECT "asha_profile.profileImage already exists";'
 ) INTO @run;
 PREPARE stmt FROM @run; EXECUTE stmt; DEALLOCATE PREPARE stmt;
@@ -156,10 +156,10 @@ PREPARE stmt FROM @run; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 -- asha_profile.supervisorName
 SELECT IF(
     (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS 
-     WHERE TABLE_SCHEMA='db_iemr' 
+     WHERE TABLE_SCHEMA='dbiemr' 
        AND TABLE_NAME='asha_profile' 
        AND COLUMN_NAME='supervisorName') = 0,
-    'ALTER TABLE db_iemr.asha_profile ADD COLUMN supervisorName VARCHAR(225) DEFAULT NULL;',
+    'ALTER TABLE dbiemr.asha_profile ADD COLUMN supervisorName VARCHAR(225) DEFAULT NULL;',
     'SELECT "asha_profile.supervisorName already exists";'
 ) INTO @run;
 PREPARE stmt FROM @run; EXECUTE stmt; DEALLOCATE PREPARE stmt;
@@ -168,10 +168,10 @@ PREPARE stmt FROM @run; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 -- asha_profile.supervisorMobile
 SELECT IF(
     (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS 
-     WHERE TABLE_SCHEMA='db_iemr' 
+     WHERE TABLE_SCHEMA='dbiemr' 
        AND TABLE_NAME='asha_profile' 
        AND COLUMN_NAME='supervisorMobile') = 0,
-    'ALTER TABLE db_iemr.asha_profile ADD COLUMN supervisorMobile VARCHAR(225) DEFAULT NULL;',
+    'ALTER TABLE dbiemr.asha_profile ADD COLUMN supervisorMobile VARCHAR(225) DEFAULT NULL;',
     'SELECT "asha_profile.supervisorMobile already exists";'
 ) INTO @run;
 PREPARE stmt FROM @run; EXECUTE stmt; DEALLOCATE PREPARE stmt;
@@ -180,10 +180,10 @@ PREPARE stmt FROM @run; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 -- asha_profile.isFatherOrSpouse
 SELECT IF(
     (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS 
-     WHERE TABLE_SCHEMA='db_iemr' 
+     WHERE TABLE_SCHEMA='dbiemr' 
        AND TABLE_NAME='asha_profile' 
        AND COLUMN_NAME='isFatherOrSpouse') = 0,
-    'ALTER TABLE db_iemr.asha_profile ADD COLUMN isFatherOrSpouse TINYINT(1) DEFAULT NULL;',
+    'ALTER TABLE dbiemr.asha_profile ADD COLUMN isFatherOrSpouse TINYINT(1) DEFAULT NULL;',
     'SELECT "asha_profile.isFatherOrSpouse already exists";'
 ) INTO @run;
 PREPARE stmt FROM @run; EXECUTE stmt; DEALLOCATE PREPARE stmt;

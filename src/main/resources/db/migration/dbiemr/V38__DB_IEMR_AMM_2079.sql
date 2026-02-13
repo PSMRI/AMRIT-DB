@@ -1,7 +1,7 @@
-USE db_iemr;
+USE dbiemr;
 
 -- Add village_name column if it doesn't exist
-SET @dbname = 'db_iemr';
+SET @dbname = 'dbiemr';
 SET @tablename = 'vhnc_form';
 SET @columnname = 'village_name';
 SET @preparedStatement = (SELECT IF(

@@ -2826,7 +2826,7 @@ DELIMITER ;;
 -- /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
 -- /*!50003 SET time_zone             = 'SYSTEM' */ ;;
 /*!50106 CREATE*/ /*!50117 */ /*!50106 EVENT `Event_TMSaveWorkList` ON SCHEDULE EVERY 30 MINUTE STARTS '2021-02-23 11:15:10' ON COMPLETION NOT PRESERVE DISABLE DO begin
-CALL db_iemr.Pr_TMSaveWorkList();
+CALL dbiemr.Pr_TMSaveWorkList();
 
 end */ ;;
 -- /*!50003 SET time_zone             = @saved_time_zone */ ;;
@@ -3005,7 +3005,7 @@ create temporary table AllDiabeticTemp as
 
 select 
 distinct BCC.BeneficiaryRegID , 'OldDiabetic' OldDiabetic
-from db_iemr.t_bencomorbiditycondition BCC
+from dbiemr.t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 2
   and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
@@ -3020,8 +3020,8 @@ select distinct A.BeneficiaryRegID , 'NewDiabetic' NewDiabetic
 (select 
 Rx.BeneficiaryRegID,
 Rx.VisitCode
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_prescription Rx 
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_prescription Rx 
   on BVD.BeneficiaryRegID = Rx.BeneficiaryRegID
     and BVD.VisitCode = Rx.VisitCode
     and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
@@ -3035,8 +3035,8 @@ union
 select 
 PNCD.BeneficiaryRegID,
 PNCD.VisitCode
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_pncdiagnosis PNCD
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_pncdiagnosis PNCD
   on BVD.BeneficiaryRegID = PNCD.BeneficiaryRegID
     and BVD.VisitCode = PNCD.VisitCode
     and (BVD.VisitCategory = 'PNC')
@@ -3057,8 +3057,8 @@ CASE
     WHEN ANCD.ComplicationOfCurrentPregnancy like '%Hypertension%' THEN True
     ELSE False
 END as IsHypertension
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_ancdiagnosis ANCD
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_ancdiagnosis ANCD
   on BVD.BeneficiaryRegID = ANCD.BeneficiaryRegID
     and BVD.VisitCode = ANCD.VisitCode
     and (BVD.VisitCategory = 'ANC')
@@ -3077,8 +3077,8 @@ CASE
     WHEN NCDS.ScreeningCondition like '%Hypertension%' THEN True
     ELSE False
 END as IsHypertension
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_ncdscreening NCDS
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_ncdscreening NCDS
   on BVD.BeneficiaryRegID = NCDS.BeneficiaryRegID
     and BVD.VisitCode = NCDS.VisitCode
     and (BVD.VisitCategory = 'NCD screening')
@@ -3086,7 +3086,7 @@ WHERE DATE(NCDS.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate)
     AND NCDS.providerServiceMapID = PSMID
   AND NCDS.Deleted = 0b0
 */
-inner join db_iemr.t_prescribeddrug PD 
+inner join dbiemr.t_prescribeddrug PD 
   on A.BeneficiaryRegID = PD.BeneficiaryRegID
     and A.VisitCode = PD.VisitCode
 WHERE DATE(PD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
@@ -3098,11 +3098,11 @@ WHERE DATE(PD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate)
 select count(distinct BeneficiaryRegID) from AllDiabeticTemp into v_AllDiabetic;
 
 select count(distinct ADT.BeneficiaryRegID) from AllDiabeticTemp ADT
-  inner join db_iemr.t_benreferdetails BRD on ADT.BeneficiaryRegID = BRD.BeneficiaryRegID
+  inner join dbiemr.t_benreferdetails BRD on ADT.BeneficiaryRegID = BRD.BeneficiaryRegID
   into v_AllDiaRef; 
     
 select count(distinct ADT.BeneficiaryRegID) from AllDiabeticTemp ADT
-  inner join db_iemr.t_Lab_TestResult LTR on ADT.BeneficiaryRegID = LTR.BeneficiaryRegID
+  inner join dbiemr.t_Lab_TestResult LTR on ADT.BeneficiaryRegID = LTR.BeneficiaryRegID
     where (LTR.TestResultValue < 160 and LTR.ProcedureID = "% %") 
     and  (LTR.TestResultValue < 7 and LTR.ProcedureID = "% %")
   into v_AllDiaControl; 
@@ -3141,7 +3141,7 @@ create temporary table AllDiaHTNTemp as
 
 select 
 distinct BCC.BeneficiaryRegID , 'OldDiaHTN' OldDiaHTN
-from db_iemr.t_bencomorbiditycondition BCC
+from dbiemr.t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 2
   and BCC.ComorbidConditionID = 3
@@ -3157,8 +3157,8 @@ select distinct A.BeneficiaryRegID , 'NewDiaHTN' NewDiaHTN
 (select 
 Rx.BeneficiaryRegID,
 Rx.VisitCode
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_prescription Rx 
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_prescription Rx 
   on BVD.BeneficiaryRegID = Rx.BeneficiaryRegID
     and BVD.VisitCode = Rx.VisitCode
     and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
@@ -3173,8 +3173,8 @@ union
 select 
 PNCD.BeneficiaryRegID,
 PNCD.VisitCode
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_pncdiagnosis PNCD
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_pncdiagnosis PNCD
   on BVD.BeneficiaryRegID = PNCD.BeneficiaryRegID
     and BVD.VisitCode = PNCD.VisitCode
     and (BVD.VisitCategory = 'PNC')
@@ -3196,8 +3196,8 @@ CASE
     WHEN ANCD.ComplicationOfCurrentPregnancy like '%Hypertension%' THEN True
     ELSE False
 END as IsHypertension
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_ancdiagnosis ANCD
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_ancdiagnosis ANCD
   on BVD.BeneficiaryRegID = ANCD.BeneficiaryRegID
     and BVD.VisitCode = ANCD.VisitCode
     and (BVD.VisitCategory = 'ANC')
@@ -3216,8 +3216,8 @@ CASE
     WHEN NCDS.ScreeningCondition like '%Hypertension%' THEN True
     ELSE False
 END as IsHypertension
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_ncdscreening NCDS
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_ncdscreening NCDS
   on BVD.BeneficiaryRegID = NCDS.BeneficiaryRegID
     and BVD.VisitCode = NCDS.VisitCode
     and (BVD.VisitCategory = 'NCD screening')
@@ -3225,7 +3225,7 @@ WHERE DATE(NCDS.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate)
     AND NCDS.providerServiceMapID = PSMID
   AND NCDS.Deleted = 0b0
 */
-inner join db_iemr.t_prescribeddrug PD 
+inner join dbiemr.t_prescribeddrug PD 
   on A.BeneficiaryRegID = PD.BeneficiaryRegID
     and A.VisitCode = PD.VisitCode
 WHERE DATE(PD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
@@ -3318,7 +3318,7 @@ create temporary table AllHTNTemp as
 
 select 
 distinct BCC.BeneficiaryRegID , 'OldHTN' OldHTN
-from db_iemr.t_bencomorbiditycondition BCC
+from dbiemr.t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 3
   and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
@@ -3333,8 +3333,8 @@ select distinct A.BeneficiaryRegID , 'NewHTN' NewHTN
 (select 
 Rx.BeneficiaryRegID,
 Rx.VisitCode
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_prescription Rx 
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_prescription Rx 
   on BVD.BeneficiaryRegID = Rx.BeneficiaryRegID
     and BVD.VisitCode = Rx.VisitCode
     and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
@@ -3348,8 +3348,8 @@ union
 select 
 PNCD.BeneficiaryRegID,
 PNCD.VisitCode
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_pncdiagnosis PNCD
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_pncdiagnosis PNCD
   on BVD.BeneficiaryRegID = PNCD.BeneficiaryRegID
     and BVD.VisitCode = PNCD.VisitCode
     and (BVD.VisitCategory = 'PNC')
@@ -3370,8 +3370,8 @@ CASE
     WHEN ANCD.ComplicationOfCurrentPregnancy like '%Hypertension%' THEN True
     ELSE False
 END as IsHypertension
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_ancdiagnosis ANCD
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_ancdiagnosis ANCD
   on BVD.BeneficiaryRegID = ANCD.BeneficiaryRegID
     and BVD.VisitCode = ANCD.VisitCode
     and (BVD.VisitCategory = 'ANC')
@@ -3390,8 +3390,8 @@ CASE
     WHEN NCDS.ScreeningCondition like '%Hypertension%' THEN True
     ELSE False
 END as IsHypertension
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_ncdscreening NCDS
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_ncdscreening NCDS
   on BVD.BeneficiaryRegID = NCDS.BeneficiaryRegID
     and BVD.VisitCode = NCDS.VisitCode
     and (BVD.VisitCategory = 'NCD screening')
@@ -3399,7 +3399,7 @@ WHERE DATE(NCDS.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate)
     AND NCDS.providerServiceMapID = PSMID
   AND NCDS.Deleted = 0b0
 */
-inner join db_iemr.t_prescribeddrug PD 
+inner join dbiemr.t_prescribeddrug PD 
   on A.BeneficiaryRegID = PD.BeneficiaryRegID
     and A.VisitCode = PD.VisitCode
 WHERE DATE(PD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
@@ -3411,12 +3411,12 @@ WHERE DATE(PD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate)
 select count(distinct BeneficiaryRegID) from AllHTNTemp into v_AllHTN;
 
 select count(distinct AHT.BeneficiaryRegID) from AllHTNTemp AHT
-  inner join db_iemr.t_benreferdetails BRD on AHT.BeneficiaryRegID = BRD.BeneficiaryRegID
+  inner join dbiemr.t_benreferdetails BRD on AHT.BeneficiaryRegID = BRD.BeneficiaryRegID
   into v_AllHTNRef; 
     
 /*  
 select count(distinct BeneficiaryRegID) from AllDiabeticTemp ADT
-  inner join db_iemr.t_Lab_TestResult LTR on ADT.BefeficiaryRegID = LTR.BeneficiaryRegID
+  inner join dbiemr.t_Lab_TestResult LTR on ADT.BefeficiaryRegID = LTR.BeneficiaryRegID
     where (LTR.ResultValue < 160 and LTR.ProcedureID = "% %") 
     and  (LTR.ResultValue < 7 and LTR.ProcedureID = "% %")
   into v_AllDiaControl; 
@@ -3599,8 +3599,8 @@ select count(distinct BeneficiaryRegID) into v_NewDiabetic
 (select 
 Rx.BeneficiaryRegID,
 Rx.VisitCode
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_prescription Rx 
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_prescription Rx 
   on BVD.BeneficiaryRegID = Rx.BeneficiaryRegID
     and BVD.VisitCode = Rx.VisitCode
     and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
@@ -3614,8 +3614,8 @@ union
 select 
 PNCD.BeneficiaryRegID,
 PNCD.VisitCode
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_pncdiagnosis PNCD
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_pncdiagnosis PNCD
   on BVD.BeneficiaryRegID = PNCD.BeneficiaryRegID
     and BVD.VisitCode = PNCD.VisitCode
     and (BVD.VisitCategory = 'PNC')
@@ -3636,8 +3636,8 @@ CASE
     WHEN ANCD.ComplicationOfCurrentPregnancy like '%Hypertension%' THEN True
     ELSE False
 END as IsHypertension
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_ancdiagnosis ANCD
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_ancdiagnosis ANCD
   on BVD.BeneficiaryRegID = ANCD.BeneficiaryRegID
     and BVD.VisitCode = ANCD.VisitCode
     and (BVD.VisitCategory = 'ANC')
@@ -3656,8 +3656,8 @@ CASE
     WHEN NCDS.ScreeningCondition like '%Hypertension%' THEN True
     ELSE False
 END as IsHypertension
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_ncdscreening NCDS
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_ncdscreening NCDS
   on BVD.BeneficiaryRegID = NCDS.BeneficiaryRegID
     and BVD.VisitCode = NCDS.VisitCode
     and (BVD.VisitCategory = 'NCD screening')
@@ -3665,7 +3665,7 @@ WHERE DATE(NCDS.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate)
     AND NCDS.providerServiceMapID = PSMID
   AND NCDS.Deleted = 0b0
 */
-inner join db_iemr.t_prescribeddrug PD 
+inner join dbiemr.t_prescribeddrug PD 
   on A.BeneficiaryRegID = PD.BenefciaryRegID
     and A.VisitCode = PD.VisitCode
 WHERE DATE(PD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
@@ -3712,8 +3712,8 @@ case when PR.procedureName= '' and LTR.TestResultValue <180 then 1 else 0 end as
 (select 
 Rx.BeneficiaryRegID,
 Rx.VisitCode
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_prescription Rx 
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_prescription Rx 
   on BVD.BeneficiaryRegID = Rx.BeneficiaryRegID
     and BVD.VisitCode = Rx.VisitCode
     and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
@@ -3727,8 +3727,8 @@ union
 select 
 PNCD.BeneficiaryRegID,
 PNCD.VisitCode
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_pncdiagnosis PNCD
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_pncdiagnosis PNCD
   on BVD.BeneficiaryRegID = PNCD.BeneficiaryRegID
     and BVD.VisitCode = PNCD.VisitCode
     and (BVD.VisitCategory = 'PNC')
@@ -3737,7 +3737,7 @@ WHERE DATE(PNCD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate)
   AND PNCD.Deleted = 0b0
     AND PNCD.ProvisionalDiagnosis like '%Diabetes Mellitus%' ) X
 /* 
-inner join db_iemr.t_prescribeddrug PD 
+inner join dbiemr.t_prescribeddrug PD 
   on A.BeneficiaryRegID = PD.BenefciaryRegID
     and A.VisitCode = PD.VisitCode
 WHERE DATE(PD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
@@ -3785,8 +3785,8 @@ select count(distinct BeneficiaryRegID) into v_NewHTN
 (select 
 Rx.BeneficiaryRegID,
 Rx.VisitCode
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_prescription Rx 
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_prescription Rx 
   on BVD.BeneficiaryRegID = Rx.BeneficiaryRegID
     and BVD.VisitCode = Rx.VisitCode
     and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
@@ -3800,8 +3800,8 @@ union
 select 
 PNCD.BeneficiaryRegID,
 PNCD.VisitCode
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_pncdiagnosis PNCD
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_pncdiagnosis PNCD
   on BVD.BeneficiaryRegID = PNCD.BeneficiaryRegID
     and BVD.VisitCode = PNCD.VisitCode
     and (BVD.VisitCategory = 'PNC')
@@ -3822,8 +3822,8 @@ CASE
     WHEN ANCD.ComplicationOfCurrentPregnancy like '%Hypertension%' THEN True
     ELSE False
 END as IsHypertension
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_ancdiagnosis ANCD
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_ancdiagnosis ANCD
   on BVD.BeneficiaryRegID = ANCD.BeneficiaryRegID
     and BVD.VisitCode = ANCD.VisitCode
     and (BVD.VisitCategory = 'ANC')
@@ -3842,8 +3842,8 @@ CASE
     WHEN NCDS.ScreeningCondition like '%Hypertension%' THEN True
     ELSE False
 END as IsHypertension
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_ncdscreening NCDS
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_ncdscreening NCDS
   on BVD.BeneficiaryRegID = NCDS.BeneficiaryRegID
     and BVD.VisitCode = NCDS.VisitCode
     and (BVD.VisitCategory = 'NCD screening')
@@ -3851,7 +3851,7 @@ WHERE DATE(NCDS.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate)
     AND NCDS.providerServiceMapID = PSMID
   AND NCDS.Deleted = 0b0
 */
-inner join db_iemr.t_prescribeddrug PD 
+inner join dbiemr.t_prescribeddrug PD 
   on A.BeneficiaryRegID = PD.BenefciaryRegID
     and A.VisitCode = PD.VisitCode
 WHERE DATE(PD.CreatedDate) BETWEEN DATE(fromDate) AND DATE(toDate) 
@@ -3884,7 +3884,7 @@ declare v_OldDiabetic int;
 
 select 
 count(distinct BCC.BeneficiaryRegID) into v_OldDiabetic
-from db_iemr.t_bencomorbiditycondition BCC
+from dbiemr.t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 2
   and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
@@ -3916,8 +3916,8 @@ declare v_OldDiaFollowUp int;
 
 select 
 count(distinct BCC.BeneficiaryRegID) into v_OldDiaFollowUp
-from db_iemr.t_BenVisitDetail BVD 
-inner join  db_iemr.t_bencomorbiditycondition BCC on BVD.BeneficiaryRegID = BCC.BeneficiaryRegID
+from dbiemr.t_BenVisitDetail BVD 
+inner join  dbiemr.t_bencomorbiditycondition BCC on BVD.BeneficiaryRegID = BCC.BeneficiaryRegID
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 2
   and DATE(BVD.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
@@ -3953,9 +3953,9 @@ declare v_OldUrineSugar int;
 
 select 
 count(distinct BCC.BeneficiaryRegID) into v_OldRBS
-from db_iemr.t_bencomorbiditycondition BCC
+from dbiemr.t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
-join db_iemr.t_lab_testresult LTR on BCC.BeneficiaryRegID = LTR.BeneficiaryRegID  
+join dbiemr.t_lab_testresult LTR on BCC.BeneficiaryRegID = LTR.BeneficiaryRegID  
   and BCC.VisitCode = LTR.VisitCode
 inner join m_procedure PR on LTR.ProcedureID = PR.ProcedureID
 where BCC.ComorbidConditionID = 2
@@ -3966,9 +3966,9 @@ where BCC.ComorbidConditionID = 2
     
 select 
 count(distinct BCC.BeneficiaryRegID) into v_OldHbA1C
-from db_iemr.t_bencomorbiditycondition BCC
+from dbiemr.t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
-join db_iemr.t_lab_testresult LTR on BCC.BeneficiaryRegID = LTR.BeneficiaryRegID  
+join dbiemr.t_lab_testresult LTR on BCC.BeneficiaryRegID = LTR.BeneficiaryRegID  
   and BCC.VisitCode = LTR.VisitCode
 inner join m_procedure PR on LTR.ProcedureID = PR.ProcedureID
 where BCC.ComorbidConditionID = 2
@@ -3979,9 +3979,9 @@ where BCC.ComorbidConditionID = 2
     
 select 
 count(distinct BCC.BeneficiaryRegID) into v_OldUrineSugar
-from db_iemr.t_bencomorbiditycondition BCC
+from dbiemr.t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
-join db_iemr.t_lab_testresult LTR on BCC.BeneficiaryRegID = LTR.BeneficiaryRegID  
+join dbiemr.t_lab_testresult LTR on BCC.BeneficiaryRegID = LTR.BeneficiaryRegID  
   and BCC.VisitCode = LTR.VisitCode
 inner join m_procedure PR on LTR.ProcedureID = PR.ProcedureID
 where BCC.ComorbidConditionID = 2
@@ -4015,7 +4015,7 @@ declare v_OldHTN int;
 
 select 
 count(distinct BCC.BeneficiaryRegID) into v_OldHTN
-from db_iemr.t_bencomorbiditycondition BCC
+from dbiemr.t_bencomorbiditycondition BCC
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 3
   and DATE(BCC.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
@@ -4047,8 +4047,8 @@ declare v_OldHTNFollowUp int;
 
 select 
 count(distinct BCC.BeneficiaryRegID) into v_OldHTNFollowUp
-from db_iemr.t_BenVisitDetail BVD 
-inner join  db_iemr.t_bencomorbiditycondition BCC on BVD.BeneficiaryRegID = BCC.BeneficiaryRegID
+from dbiemr.t_BenVisitDetail BVD 
+inner join  dbiemr.t_bencomorbiditycondition BCC on BVD.BeneficiaryRegID = BCC.BeneficiaryRegID
 join db_identity.i_beneficiarymapping BM on BCC.BeneficiaryRegID = BM.BenRegID
 where BCC.ComorbidConditionID = 3
   and DATE(BVD.CreatedDate)  BETWEEN DATE(fromDate) AND DATE(toDate) 
@@ -4405,7 +4405,7 @@ v_districtid int(11),v_talukid int(11),v_villageid int(11),v_psmid int(11))
 begin
 
 select bg.ComponentType "Component Type",
-ifnull(t.count,0)count  from db_iemr.m_componenttype bg left join (
+ifnull(t.count,0)count  from dbiemr.m_componenttype bg left join (
 select  t.componenttypeid,
 t.componenttypename "Component Type", 
 -- t.componentTypeName "Component Type Name", 
@@ -4428,7 +4428,7 @@ count(1) count
        union
        
 select 'Others' ,
-sum(ifnull(t.count,0)) count  from db_iemr.m_componenttype bg left join (
+sum(ifnull(t.count,0)) count  from dbiemr.m_componenttype bg left join (
 select  t.componenttypeid,
 t.componenttypename , 
 -- t.componentTypeName "Component Type Name", 
@@ -4472,7 +4472,7 @@ v_districtid int(11),v_talukid int(11),v_villageid int(11),v_psmid int(11))
 begin
 
 declare v_stateid int(11);
-select stateid into v_stateid from db_iemr.m_providerservicemapping 
+select stateid into v_stateid from dbiemr.m_providerservicemapping 
 where providerservicemapid=v_psmid;
 
 create temporary table temp_report(
@@ -4481,12 +4481,12 @@ Districtid int(11),DistrictName varchar(100), TotalCount int(11) default 0,
   Others int(11) default 0);
     
      insert into temp_report(Districtid,DistrictName)
-    select Districtid,DistrictName from db_iemr.m_district 
+    select Districtid,DistrictName from dbiemr.m_district 
     where stateid=v_stateid;
 
 create temporary table temp1 as
 select t.PermDistrictId,bg.componenttypeid,replace(bg.ComponentType,' ','') "ComponentType",
-ifnull(t.count,0)count  from db_iemr.m_componenttype bg left join (
+ifnull(t.count,0)count  from dbiemr.m_componenttype bg left join (
 select  b.PermDistrictId,t.componenttypeid,
 t.componenttypename "Component Type", 
 -- t.componentTypeName "Component Type Name", 
@@ -4509,7 +4509,7 @@ count(1) count
        union
        
 select t.PermDistrictId,bg.componenttypeid,'Others' ,
-sum(ifnull(t.count,0)) count  from db_iemr.m_componenttype bg left join (
+sum(ifnull(t.count,0)) count  from dbiemr.m_componenttype bg left join (
 select  PermDistrictId,t.componenttypeid,
 t.componenttypename , 
 -- t.componentTypeName "Component Type Name", 
@@ -4580,7 +4580,7 @@ CREATE  PROCEDURE `Pr_104BoodRequestDetails_Groupwise`(v_starttime datetime,v_en
 v_districtid int(11),v_talukid int(11),v_villageid int(11),v_psmid int(11))
 begin
 
-select bg.bloodgroup "Group",ifnull(t.count,0)count from db_iemr.m_bloodgroup bg left join (
+select bg.bloodgroup "Group",ifnull(t.count,0)count from dbiemr.m_bloodgroup bg left join (
 select  t.bloodgroupid,
 t.BloodGroupName "Blood Group Name", 
 -- t.componentTypeName "Component Type Name", 
@@ -4620,7 +4620,7 @@ v_districtid int(11),v_talukid int(11),v_villageid int(11),v_psmid int(11))
 begin
 
 declare v_stateid int(11);
-select stateid into v_stateid from db_iemr.m_providerservicemapping 
+select stateid into v_stateid from dbiemr.m_providerservicemapping 
 where providerservicemapid=v_psmid;
 
 create temporary table temp1 as
@@ -4647,7 +4647,7 @@ count(1) count
 replace(replace(replace(replace(bg.bloodgroup,' ',''),'''',''),'+','Positi'),'-','Negati') "Groupname",
 ifnull(t.count,0)count from temp1  t
 right join(
-              select * from db_iemr.m_bloodgroup where deleted is false)bg
+              select * from dbiemr.m_bloodgroup where deleted is false)bg
             on t.bloodgroupid=bg.bloodgroupid
            
              group by permdistrict,bg.bloodgroup ;
@@ -4671,7 +4671,7 @@ FROM
   temp3 ;
   
   create temporary table temp4 as
-  select * from  db_iemr.m_district 
+  select * from  dbiemr.m_district 
 where stateid=v_stateid;
  
 SET @sql2 = CONCAT('create temporary table temp5 as SELECT d.Districtname permdistrict,', @sql,'  FROM 
@@ -4736,7 +4736,7 @@ begin
  fb.ReceivedAgentID,
  count(1) "Count Of Calls"  from fact_bencall fb 
  inner join dim_user du on du.userid=fb.CallReceivedUserID
- inner join db_iemr.m_userservicerolemapping mu on mu.userid=du.userid
+ inner join dbiemr.m_userservicerolemapping mu on mu.userid=du.userid
  where 
  fb.createddate>=v_starttime and fb.createddate<=v_endtime 
   and fb.ProviderServiceMapID=ifnull(v_psmid,fb.ProviderServiceMapID) 
@@ -4820,8 +4820,8 @@ v_locationid int(11),v_psmid int(11))
 begin
  select md.locationname "Center",count(1) "Count Of Calls"  from fact_bencall fb 
  inner join dim_user du on du.userid=fb.CallReceivedUserID
- inner join db_iemr.m_userservicerolemapping mu on mu.userid=du.userid
- inner join db_iemr.m_providerserviceaddmapping md on md.PSAddMapID=mu.WorkingLocationID 
+ inner join dbiemr.m_userservicerolemapping mu on mu.userid=du.userid
+ inner join dbiemr.m_providerserviceaddmapping md on md.PSAddMapID=mu.WorkingLocationID 
  where  md.PSAddMapID=ifnull(v_locationid,md.PSAddMapID)  and
  fb.createddate>=v_starttime and fb.createddate<=v_endtime 
   and fb.ProviderServiceMapID=ifnull(v_psmid,fb.ProviderServiceMapID) 
@@ -4849,9 +4849,9 @@ v_roleid int(11),v_psmid int(11))
 begin
  select r.rolename,count(1) "Count Of Calls"  from fact_bencall fb 
  inner join dim_user du on du.userid=fb.CallReceivedUserID
- inner join db_iemr.m_userservicerolemapping mu on mu.userid=du.userid
- inner join db_iemr.m_role r on r.roleid=mu.roleid and r.deleted is false
- -- inner join db_iemr.m_providerserviceaddmapping md on md.PSAddMapID=mu.WorkingLocationID 
+ inner join dbiemr.m_userservicerolemapping mu on mu.userid=du.userid
+ inner join dbiemr.m_role r on r.roleid=mu.roleid and r.deleted is false
+ -- inner join dbiemr.m_providerserviceaddmapping md on md.PSAddMapID=mu.WorkingLocationID 
  where 
  -- md.PSAddMapID=ifnull(v_locationid,md.PSAddMapID)  and
  fb.createddate>=v_starttime and fb.createddate<=v_endtime 
@@ -4881,9 +4881,9 @@ v_roleid int(11),v_psmid int(11))
 begin
  select r.rolename "Skill Set",count(1) "Count Of Calls"  from fact_bencall fb 
  inner join dim_user du on du.userid=fb.CallReceivedUserID
- inner join db_iemr.m_userservicerolemapping mu on mu.userid=du.userid
- inner join db_iemr.m_role r on r.roleid=mu.roleid and r.deleted is false
- -- inner join db_iemr.m_providerserviceaddmapping md on md.PSAddMapID=mu.WorkingLocationID 
+ inner join dbiemr.m_userservicerolemapping mu on mu.userid=du.userid
+ inner join dbiemr.m_role r on r.roleid=mu.roleid and r.deleted is false
+ -- inner join dbiemr.m_providerserviceaddmapping md on md.PSAddMapID=mu.WorkingLocationID 
  where 
  -- md.PSAddMapID=ifnull(v_locationid,md.PSAddMapID)  and
  fb.createddate>=v_starttime and fb.createddate<=v_endtime 
@@ -5563,8 +5563,8 @@ t2.FirstName "Agent Name",ReceivedRoleName "Skill Set",t3.DiseaseSummary "Sympto
        from db_reporting.fact_bencall t1
       LEFT JOIN db_reporting.dim_user t2 ON t1.CallReceivedUserID=t2.UserID 
             LEFT JOIN db_reporting.fact_104benmedhistory t3 ON t1.BenCallID=t3.BenCallID
-      LEFT JOIN db_iemr.m_userservicerolemapping t4 ON t1.CallEndUserID=t4.UserID 
-       LEFT JOIN db_iemr.m_role t5 ON t5.RoleID=t4.RoleID where 
+      LEFT JOIN dbiemr.m_userservicerolemapping t4 ON t1.CallEndUserID=t4.UserID 
+       LEFT JOIN dbiemr.m_role t5 ON t5.RoleID=t4.RoleID where 
             ReceivedRoleName=ifnull(v_receivedRoleName,ReceivedRoleName)
        and t1.CreatedDate >=v_starttime and t1.CreatedDate <=v_endtime
       and t1.CallTypeName=ifnull(v_callTypeName,t1.CallTypeName) 
@@ -5597,8 +5597,8 @@ begin
  inner join fact_bencall fb on fb.bencallid=bh.bencallid
  inner join dim_beneficiary db on fb.BeneficiaryRegID=db.BeneficiaryRegID
  inner join dim_user du on du.userid=fb.CallReceivedUserID
- inner join db_iemr.m_userservicerolemapping mu on mu.userid=du.userid
- inner join db_iemr.m_providerserviceaddmapping md on md.PSAddMapID=mu.WorkingLocationID 
+ inner join dbiemr.m_userservicerolemapping mu on mu.userid=du.userid
+ inner join dbiemr.m_providerserviceaddmapping md on md.PSAddMapID=mu.WorkingLocationID 
  where    db.PermDistrictId=ifnull(v_Districtid,db.PermDistrictId) and db.PermDistrictId is not null 
  and db.PermSubDistrictId=ifnull(v_SubDistrictId,db.PermSubDistrictId) and db.PermSubDistrictId is not null
  and db.PermVillageId=ifnull(v_VillageId,db.PermVillageId) and db.PermVillageId is not null
@@ -6218,7 +6218,7 @@ begin
  create temporary table temp1 as
  select g.GenderName,((ifnull(count,0))*100/v_totalcount) 
  "ServiceProvidedRatio" ,ifnull(count,0) count
-  from db_iemr.m_gender g left join (
+  from dbiemr.m_gender g left join (
  select t2.Gender,  count(1) count from db_reporting.fact_1097callsummary t1
  inner join db_reporting.dim_1097beneficiary t2 on t1.beneficiaryregid=t2.beneficiaryregid
  where t1.createddate between v_starttime and v_endtime
@@ -6254,7 +6254,7 @@ begin
  create temporary table temp2 as
  select g.GenderName,((ifnull(count,0))*100/v_totalcount) 
  "ServiceProvidedRatio" ,ifnull(count,0) count
-  from db_iemr.m_gender g left join (
+  from dbiemr.m_gender g left join (
  select t2.Gender,  count(1) count from db_reporting.fact_1097callsummary t1
  inner join db_reporting.dim_1097beneficiary t2 on t1.beneficiaryregid=t2.beneficiaryregid
  where t1.createddate between v_starttime and v_endtime
@@ -6324,7 +6324,7 @@ begin
  create temporary table temp1 as
  select g.LanguageName,((ifnull(count,0))*100/v_totalcount) 
  "ServiceProvidedRatio" ,ifnull(count,0) count
-  from db_iemr.m_language g left join (
+  from dbiemr.m_language g left join (
  select t2.preferredLanguage,  count(1) count from db_reporting.fact_1097callsummary t1
  inner join db_reporting.dim_1097beneficiary t2 on t1.beneficiaryregid=t2.beneficiaryregid
  where t1.createddate between v_starttime and v_endtime
@@ -6359,7 +6359,7 @@ begin
  if (v_Language is not null) then
  create temporary table temp2 as
  select g.LanguageName,((ifnull(count,0))*100/v_totalcount) "ServiceProvidedRatio" ,ifnull(count,0) count
-  from db_iemr.m_language g left join (
+  from dbiemr.m_language g left join (
  select t2.preferredLanguage,  count(1) count from db_reporting.fact_1097callsummary t1
  inner join db_reporting.dim_1097beneficiary t2 on t1.beneficiaryregid=t2.beneficiaryregid
  where t1.createddate between v_starttime and v_endtime
@@ -6428,7 +6428,7 @@ begin
  if (v_SexualOrientationType is null) then
  create temporary table temp1 as
  select g.SexualOrientation,((ifnull(count,0))*100/v_totalcount) "ServiceProvidedRatio" ,ifnull(count,0) count
-  from db_iemr.m_sexualorientation g left join (
+  from dbiemr.m_sexualorientation g left join (
  select t2.SexualOrientationType,  count(1) count from db_reporting.fact_1097callsummary t1
  inner join db_reporting.dim_1097beneficiary t2 on t1.beneficiaryregid=t2.beneficiaryregid
  where t1.createddate between v_starttime and v_endtime
@@ -6463,7 +6463,7 @@ begin
  if (v_SexualOrientationType is not null) then
  create temporary table temp2 as
  select g.SexualOrientation,((ifnull(count,0))*100/v_totalcount) "ServiceProvidedRatio" ,ifnull(count,0) count
-  from db_iemr.m_sexualorientation g left join (
+  from dbiemr.m_sexualorientation g left join (
  select t2.SexualOrientationType,  count(1) count from db_reporting.fact_1097callsummary t1
  inner join db_reporting.dim_1097beneficiary t2 on t1.beneficiaryregid=t2.beneficiaryregid
  where t1.createddate between v_starttime and v_endtime
@@ -6571,7 +6571,7 @@ Drop temporary table if exists temp;
  create temporary table temp as
  select * from (
  select t.PermDistrict,gender,replace(m.calltype,' ','') callsubtypename ,sum(t.callcount) callcount from temp2 t 
- right join (select * from db_iemr.m_calltype 
+ right join (select * from dbiemr.m_calltype 
  where providerservicemapid=ifnull(v_psmid,providerservicemapid) 
   and deleted is false ) m on replace(m.calltype,' ','') =t.callsubtypename
  group by t.PermDistrict,m.calltype,gender) a order by  callsubtypename;
@@ -7918,9 +7918,9 @@ fb.CZcallDuration "CallDuration",fb.Remarks "Remarks"
 
 from fact_bencall fb
 inner join fact_mctsoutboundcall fo on fo.OBCallID=fb.OBCallID
-inner join db_iemr.m_user u on u.userid=fo.allocateduserid
-inner join db_iemr.m_userservicerolemapping usr on usr.userid=u.userid
-inner join db_iemr.m_role r on r.roleid=usr.roleid
+inner join dbiemr.m_user u on u.userid=fo.allocateduserid
+inner join dbiemr.m_userservicerolemapping usr on usr.userid=u.userid
+inner join dbiemr.m_role r on r.roleid=usr.roleid
 inner join fact_mothervalidrecord fm on fm.MCTSID_no=fo.MotherID
 left join (select * from fact_mctscallresponse 
 where reasonsforhrp is not null)fr on fr.obcallid=fb.obcallid
@@ -7960,9 +7960,9 @@ fo.ishrni "Is HRP",fr.reasonsforhrni "HRP indicators",
 fb.CZcallDuration "CallDuration",fb.Remarks "Remarks"
 from fact_bencall fb
 inner join fact_mctsoutboundcall fo on fo.OBCallID=fb.OBCallID
-inner join db_iemr.m_user u on u.userid=fo.allocateduserid
-inner join db_iemr.m_userservicerolemapping usr on usr.userid=u.userid
-inner join db_iemr.m_role r on r.roleid=usr.roleid
+inner join dbiemr.m_user u on u.userid=fo.allocateduserid
+inner join dbiemr.m_userservicerolemapping usr on usr.userid=u.userid
+inner join dbiemr.m_role r on r.roleid=usr.roleid
 inner join fact_childvalidrecord  fm on fm.MCTSID_no_Child_ID=fo.childid
 left join (select * from fact_mctscallresponse 
 where reasonsforhrni is not null)fr on fr.obcallid=fb.obcallid
@@ -9972,7 +9972,7 @@ where fb.IsMother is true -- and fr.ReasonsforHrni   is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
       and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
-             and fr2.answer in(select name from db_iemr.m_hrni
+             and fr2.answer in(select name from dbiemr.m_hrni
  where name not in("Don't know/Not stated",'Newborn with Congenital Anomalies'))
  union
 select distinct  
@@ -10022,7 +10022,7 @@ where fb.IsMother is false -- and fr.ReasonsforHrni   is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
       and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
-             and fr2.answer in(select name from db_iemr.m_hrni
+             and fr2.answer in(select name from dbiemr.m_hrni
  where name not in("Don't know/Not stated",'Newborn with Congenital Anomalies'));
              -- where fr.questionid in();
 end ;;
@@ -10092,7 +10092,7 @@ where fb.IsMother is true -- and fr.ReasonsforHrni   is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
       and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
-             and fr2.answer in(select name from db_iemr.m_hrni
+             and fr2.answer in(select name from dbiemr.m_hrni
  where name not in("Don't know/Not stated",'Newborn with Congenital Anomalies'))
  union
 select distinct  
@@ -10142,7 +10142,7 @@ where fb.IsMother is false -- and fr.ReasonsforHrni   is not null
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
       and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime  
-             and fr2.answer in(select name from db_iemr.m_hrni
+             and fr2.answer in(select name from dbiemr.m_hrni
  where name not in("Don't know/Not stated",'Newborn with Congenital Anomalies'));
              -- where fr.questionid in();
 end ;;
@@ -12705,7 +12705,7 @@ BEGIN
  
 
 
-insert into db_iemr.m_category 
+insert into dbiemr.m_category 
 (CategoryName,
  CategoryDesc,
  SubServiceID,
@@ -12720,7 +12720,7 @@ v_ProviderServiceMapID,
 
 
 
-insert into db_iemr.m_subcategory 
+insert into dbiemr.m_subcategory 
 (SubCategoryName, 
 SubCategoryDesc,
  CreatedBy)
@@ -12731,7 +12731,7 @@ concat("Blood Document Upload For - ", v_ProviderServiceMapID),
 
 
 
-update db_iemr.m_subcategory subcat , db_iemr.m_category  cat 
+update dbiemr.m_subcategory subcat , dbiemr.m_category  cat 
 set subcat.CategoryID = cat.CategoryID
 where subcat.SubCategoryDesc = cat.CategoryDesc
 and (subcat.SubCategoryName = "Blood Document")
@@ -12769,7 +12769,7 @@ where ProviderServiceMapID = v_ProviderServiceMapID;
 
 if(v_ServiceID = 3 or v_ServiceID = 1 or v_ServiceID = 6)
 then
-INSERT INTO `db_iemr`.`m_calltype`
+INSERT INTO `dbiemr`.`m_calltype`
 (`CallGroupType`,
 `CallType`,
 `CallTypeDesc`,
@@ -12788,7 +12788,7 @@ end if;
 
 if(v_ServiceID = 6)
 then
-INSERT INTO `db_iemr`.`m_calltype`
+INSERT INTO `dbiemr`.`m_calltype`
 (`CallGroupType`,
 `CallType`,
 `CallTypeDesc`,
@@ -12836,7 +12836,7 @@ DECLARE v_NotificationState VARCHAR(30)  default 'unread';
 
 
 select NotificationType  into v_NotificationType
-from db_iemr.m_notificationtype
+from dbiemr.m_notificationtype
 where NotificationTypeID =v_NotificationTypeID;
  
 
@@ -12848,7 +12848,7 @@ where NotificationTypeID =v_NotificationTypeID;
 
 if(v_RoleID is not null and v_WorkingLocationID is not null)
 then
-INSERT INTO `db_iemr`.`m_usernotificationmap` 
+INSERT INTO `dbiemr`.`m_usernotificationmap` 
 (`UserID`, `RoleID`, `NotificationID`, `ProviderServiceMapID`,`NotificationState`, `NotificationTypeID`,`NotificationType`,`CreatedBy`)
 SELECT
  usrm.UserID, 
@@ -12859,7 +12859,7 @@ SELECT
  v_NotificationTypeID,
  v_NotificationType,
  v_CreatedBy
- FROM db_iemr.m_userservicerolemapping usrm 
+ FROM dbiemr.m_userservicerolemapping usrm 
 where usrm.RoleID = v_RoleID 
 and usrm.WorkingLocationID = v_WorkingLocationID 
 and usrm.ProviderServiceMapID = v_ProviderServiceMapID 
@@ -12870,7 +12870,7 @@ end if;
 
 if(v_RoleID is not null and v_WorkingLocationID is null)
 then
-INSERT INTO `db_iemr`.`m_usernotificationmap` 
+INSERT INTO `dbiemr`.`m_usernotificationmap` 
 (`UserID`, `RoleID`, `NotificationID`, `ProviderServiceMapID`,`NotificationState`, `NotificationTypeID`,`NotificationType`,`CreatedBy`)
 SELECT
  usrm.UserID, 
@@ -12881,7 +12881,7 @@ SELECT
  v_NotificationTypeID,
  v_NotificationType,
  v_CreatedBy
- FROM db_iemr.m_userservicerolemapping usrm 
+ FROM dbiemr.m_userservicerolemapping usrm 
 where usrm.RoleID = v_RoleID
 and usrm.ProviderServiceMapID = v_ProviderServiceMapID 
 and usrm.Deleted != 0b1;
@@ -12891,7 +12891,7 @@ end if;
 
 if(v_RoleID is null and v_WorkingLocationID is not null)
 then
-INSERT INTO `db_iemr`.`m_usernotificationmap` 
+INSERT INTO `dbiemr`.`m_usernotificationmap` 
 (`UserID`, `RoleID`, `NotificationID`, `ProviderServiceMapID`,`NotificationState`, `NotificationTypeID`,`NotificationType`,`CreatedBy`)
 SELECT
  usrm.UserID, 
@@ -12902,7 +12902,7 @@ SELECT
  v_NotificationTypeID,
  v_NotificationType,
  v_CreatedBy
- FROM db_iemr.m_userservicerolemapping usrm 
+ FROM dbiemr.m_userservicerolemapping usrm 
 where usrm.WorkingLocationID = v_WorkingLocationID
 and usrm.ProviderServiceMapID = v_ProviderServiceMapID 
 and usrm.Deleted != 0b1;
@@ -12911,7 +12911,7 @@ end if;
 
 if(v_RoleID is null and v_WorkingLocationID is null)
 then
-INSERT INTO `db_iemr`.`m_usernotificationmap` 
+INSERT INTO `dbiemr`.`m_usernotificationmap` 
 (`UserID`, `RoleID`, `NotificationID`, `ProviderServiceMapID`,`NotificationState`, `NotificationTypeID`,`NotificationType`,`CreatedBy`)
 SELECT
  usrm.UserID, 
@@ -12922,7 +12922,7 @@ SELECT
  v_NotificationTypeID,
  v_NotificationType,
  v_CreatedBy
- FROM db_iemr.m_userservicerolemapping usrm 
+ FROM dbiemr.m_userservicerolemapping usrm 
 where usrm.ProviderServiceMapID = v_ProviderServiceMapID 
 and usrm.Deleted != 0b1;
 end if;
@@ -12971,19 +12971,19 @@ where ProviderServiceMapID = v_ProviderServiceMapID;
 
 if(v_ServiceID = 6 and v_StateID = 5)
 THEN
-INSERT INTO `db_iemr`.`m_mctsfieldsstatewise` (`DataFields`, `FieldsFor`, `ProviderServiceMapID`, `CreatedBy`) VALUES ('[{"dbColumnName":"State_ID","excelColumnName":"StateID"},{"dbColumnName":"District_ID","excelColumnName":"District_ID"},{"dbColumnName":"District_Name","excelColumnName":"District_Name"},{"dbColumnName":"Taluka_ID","excelColumnName":"Taluka_ID"},{"dbColumnName":"Taluka_Name","excelColumnName":"Taluka_Name"},{"dbColumnName":"Block_ID","excelColumnName":"HealthBlock_ID"},{"dbColumnName":"Block_Name","excelColumnName":"HealthBlock_Name"},{"dbColumnName":"PHC_ID","excelColumnName":"PHC_ID"},{"dbColumnName":"PHC_Name","excelColumnName":"PHC_Name"},{"dbColumnName":"SubCenter_ID","excelColumnName":"SubCentre_ID"},{"dbColumnName":"SubCenter_Name","excelColumnName":"SubCentre_Name"},{"dbColumnName":"Village_ID","excelColumnName":"Village_ID"},{"dbColumnName":"Village_Name","excelColumnName":"Village_Name"},{"dbColumnName":"YR","excelColumnName":"Yr"},{"dbColumnName":"GP_Village","excelColumnName":"GP_Village"},{"dbColumnName":"Address","excelColumnName":"Address"},{"dbColumnName":"MCTSID_no","excelColumnName":"ID_No"},{"dbColumnName":"Name","excelColumnName":"Name"},{"dbColumnName":"Husband_Name","excelColumnName":"Husband_Name"},{"dbColumnName":"PhoneNo_Of_Whom","excelColumnName":"PhoneNo_Of_Whom"},{"dbColumnName":"Whom_PhoneNo","excelColumnName":"Whom_PhoneNo"},{"dbColumnName":"Birth_Date","excelColumnName":"Birthdate"},{"dbColumnName":"JSY_Beneficiary","excelColumnName":"JSY_Beneficiary"},{"dbColumnName":"Caste","excelColumnName":"Caste"},{"dbColumnName":"SubCenter_Name1","excelColumnName":"SubCentre_Name1"},{"dbColumnName":"ANM_Name","excelColumnName":"ANM_Name"},{"dbColumnName":"ANM_Ph","excelColumnName":"ANM_Phone"},{"dbColumnName":"ASHA_Name","excelColumnName":"ASHA_Name"},{"dbColumnName":"ASHA_Ph","excelColumnName":"ASHA_Phone"},{"dbColumnName":"Delivery_Lnk_Facility","excelColumnName":"Delivery_Lnk_Facility"},{"dbColumnName":"Facility_Name","excelColumnName":"Facility_Name"},{"dbColumnName":"LMP_Date","excelColumnName":"LMP_Date"},{"dbColumnName":"ANC1_Date","excelColumnName":"ANC1_Date"},{"dbColumnName":"ANC2_Date","excelColumnName":"ANC2_Date"},{"dbColumnName":"ANC3_Date","excelColumnName":"ANC3_Date"},{"dbColumnName":"ANC4_Date","excelColumnName":"ANC4_Date"},{"dbColumnName":"TT1_Date","excelColumnName":"TT1_Date"},{"dbColumnName":"TT2_Date","excelColumnName":"TT2_Date"},{"dbColumnName":"TTBooster_Date","excelColumnName":"TTBooster_Date"},{"dbColumnName":"IFA100_Given_Date","excelColumnName":"IFA100_Given_Date"},{"dbColumnName":"Anemia","excelColumnName":"Anemia"},{"dbColumnName":"ANC_Complication","excelColumnName":"ANC_Complication"},{"dbColumnName":"RTI_STI","excelColumnName":"RTI_STI"},{"dbColumnName":"Delivery_Date","excelColumnName":"Dly_Date"},{"dbColumnName":"Delivery_Place_home_type","excelColumnName":"Dly_Place_Home_Type"},{"dbColumnName":"Delivery_Place_Public","excelColumnName":"Dly_Place_Public"},{"dbColumnName":"Delivery_Place_Private","excelColumnName":"Dly_Place_Private"},{"dbColumnName":"Delivery_type","excelColumnName":"Dly_Type"},{"dbColumnName":"Delivery_Complications","excelColumnName":"Dly_Complication"},{"dbColumnName":"Discharge_Date","excelColumnName":"Discharge_Date"},{"dbColumnName":"JSY_Paid_Date","excelColumnName":"JSY_Paid_Date"},{"dbColumnName":"Abortion","excelColumnName":"Abortion"},{"dbColumnName":"PNC_Home_Visit","excelColumnName":"PNC_Home_Visit"},{"dbColumnName":"PNC_Complication","excelColumnName":"PNC_Complication"},{"dbColumnName":"PPC_Method","excelColumnName":"PPC_Method"},{"dbColumnName":"PNC_Checkup","excelColumnName":"PNC_Checkup"},{"dbColumnName":"Outcome_Nos","excelColumnName":"Outcome_Nos"},{"dbColumnName":"Child1_Name","excelColumnName":"Child1_Name"},{"dbColumnName":"Child1_Gender","excelColumnName":"Child1_Sex"},{"dbColumnName":"Child1_Weight","excelColumnName":"Child1_Wt"},{"dbColumnName":"Child1_BreastFeeding","excelColumnName":"Child1_Brestfeeding"},{"dbColumnName":"Child2_Name","excelColumnName":"Child2_Name"},{"dbColumnName":"Child2_Gender","excelColumnName":"Child2_Sex"},{"dbColumnName":"Child2_weight","excelColumnName":"Child2_Wt"},{"dbColumnName":"Child2_Breastfeeding","excelColumnName":"Child2_Brestfeeding"},{"dbColumnName":"Child3_Name","excelColumnName":"Child3_Name"},{"dbColumnName":"Child3_Gender","excelColumnName":"Child3_Sex"},{"dbColumnName":"Child3_Weight","excelColumnName":"Child3_Wt"},{"dbColumnName":"Child3_Breastfeeding","excelColumnName":"Child3_Brestfeeding"},{"dbColumnName":"Child4_Name","excelColumnName":"Child4_Name"},{"dbColumnName":"Child4_Gender","excelColumnName":"Child4_Sex"},{"dbColumnName":"Child4_Weight","excelColumnName":"Child4_Wt"},{"dbColumnName":"Child4_Breastfeeding","excelColumnName":"Child4_Brestfeeding"},{"dbColumnName":"Age","excelColumnName":"Age"},{"dbColumnName":"Mother_Reg_Date","excelColumnName":"MTHR_REG_DATE"},{"dbColumnName":"Last_Update_Date","excelColumnName":"LastUpdateDate"},{"dbColumnName":"Remarks","excelColumnName":"Remarks"},{"dbColumnName":"ANM_ID","excelColumnName":"ANM_ID"},{"dbColumnName":"ASHA_ID","excelColumnName":"ASHA_ID"},{"dbColumnName":"Call_Answered","excelColumnName":"Call_Ans"},{"dbColumnName":"NoCall_Reason","excelColumnName":"NoCall_Reason"},{"dbColumnName":"NoPhone_Reason","excelColumnName":"NoPhone_Reason"},{"dbColumnName":"Created_By","excelColumnName":"Created_By"},{"dbColumnName":"Updated_By","excelColumnName":"Updated_By"},{"dbColumnName":"Aadhar_no","excelColumnName":"Aadhar_No"},{"dbColumnName":"BPL_APL","excelColumnName":"BPL_APL"},{"dbColumnName":"EID","excelColumnName":"EID"},{"dbColumnName":"EID_time","excelColumnName":"EIDTime"},{"dbColumnName":"Entry_type","excelColumnName":"Entry_Type"},{"dbColumnName":"MDDS_StateID","excelColumnName":"MDDS_StateID"},{"dbColumnName":"MDDS_District_ID","excelColumnName":"MDDS_District_ID"},{"dbColumnName":"MDDS_Taluka_ID","excelColumnName":"MDDS_Taluka_ID"},{"dbColumnName":"MDDS_Village_ID","excelColumnName":"MDDS_Village_ID"}]', 'Mother Data', v_ProviderServiceMapID, 'Trigger - MCTSExcelMapping');
-INSERT INTO `db_iemr`.`m_mctsfieldsstatewise` (`DataFields`, `FieldsFor`, `ProviderServiceMapID`, `CreatedBy`) VALUES ('[{"dbColumnName":"State_ID","excelColumnName":"StateID"},{"dbColumnName":"District_ID","excelColumnName":"District_ID"},{"dbColumnName":"District_Name","excelColumnName":"District_Name"},{"dbColumnName":"Taluka_ID","excelColumnName":"Taluka_ID"},{"dbColumnName":"Taluka_Name","excelColumnName":"Taluka_Name"},{"dbColumnName":"Block_ID","excelColumnName":"HealthBlock_ID"},{"dbColumnName":"Block_Name","excelColumnName":"HealthBlock_Name"},{"dbColumnName":"PHC_ID","excelColumnName":"PHC_ID"},{"dbColumnName":"PHC_Name","excelColumnName":"PHC_Name"},{"dbColumnName":"SubCenter_ID","excelColumnName":"SubCentre_ID"},{"dbColumnName":"SubCenter_Name","excelColumnName":"SubCentre_Name"},{"dbColumnName":"Village_ID","excelColumnName":"Village_ID"},{"dbColumnName":"Village_Name","excelColumnName":"Village_Name"},{"dbColumnName":"Year","excelColumnName":"Yr"},{"dbColumnName":"City","excelColumnName":"City_Maholla"},{"dbColumnName":"GP_Village","excelColumnName":"GP_Village"},{"dbColumnName":"Address","excelColumnName":"Address"},{"dbColumnName":"MCTSID_no_Child_ID","excelColumnName":"ID_No"},{"dbColumnName":"Child_Name","excelColumnName":"Name"},{"dbColumnName":"Mother_Name","excelColumnName":"Mother_Name"},{"dbColumnName":"Mother_ID","excelColumnName":"Mother_ID"},{"dbColumnName":"Phone_No_of","excelColumnName":"PhoneNo_Of_Whom"},{"dbColumnName":"Phone_No","excelColumnName":"Whom_PhoneNo"},{"dbColumnName":"DOB","excelColumnName":"Birthdate"},{"dbColumnName":"Place_of_Birth","excelColumnName":"Place_of_Delivery"},{"dbColumnName":"BloodGroup","excelColumnName":"Blood_Group"},{"dbColumnName":"Caste","excelColumnName":"Caste"},{"dbColumnName":"SubCenter_Name1","excelColumnName":"SubCentre_Name1"},{"dbColumnName":"ANM_Name","excelColumnName":"ANM_Name"},{"dbColumnName":"ANM_Phone_No","excelColumnName":"ANM_Phone"},{"dbColumnName":"ASHA_Name","excelColumnName":"ASHA_Name"},{"dbColumnName":"ASHA_Phone_No","excelColumnName":"ASHA_Phone"},{"dbColumnName":"BCG_Date","excelColumnName":"BCG_Dt"},{"dbColumnName":"OPV0_Date","excelColumnName":"OPV0_Dt"},{"dbColumnName":"Hepatitis_B1_Date","excelColumnName":"HepatitisB1_Dt"},{"dbColumnName":"DPT1_Date","excelColumnName":"DPT1_Dt"},{"dbColumnName":"OPV1_Date","excelColumnName":"OPV1_Dt"},{"dbColumnName":"Hepatitis_B2_Date","excelColumnName":"HepatitisB2_Dt"},{"dbColumnName":"DPT2_Date","excelColumnName":"DPT2_Dt"},{"dbColumnName":"OPV2_Date","excelColumnName":"OPV2_Dt"},{"dbColumnName":"Hepatitis_B3_Date","excelColumnName":"HepatitisB3_Dt"},{"dbColumnName":"DPT3_Date","excelColumnName":"DPT3_Dt"},{"dbColumnName":"OPV3_Date","excelColumnName":"OPV3_Dt"},{"dbColumnName":"Hepatitis_B4_Date","excelColumnName":"HepatitisB4_Dt"},{"dbColumnName":"Measles_Date","excelColumnName":"Measles_Dt"},{"dbColumnName":"VitA_Dose1_Date","excelColumnName":"VitA_Dose1_Dt"},{"dbColumnName":"MR_Date","excelColumnName":"MR_Dt"},{"dbColumnName":"DPTBooster_Date","excelColumnName":"DPTBooster_Dt"},{"dbColumnName":"OPVBooster_Date","excelColumnName":"OPVBooster_Dt"},{"dbColumnName":"VitA_Dose2_Date","excelColumnName":"VitA_Dose2_Dt"},{"dbColumnName":"VitA_Dose3_Date","excelColumnName":"VitA_Dose3_Dt"},{"dbColumnName":"JE_Date","excelColumnName":"JE_Dt"},{"dbColumnName":"VitA_Dose9_Date","excelColumnName":"VitA_Dose9_Dt"},{"dbColumnName":"DT5_Date","excelColumnName":"DT5_Dt"},{"dbColumnName":"TT10_Date","excelColumnName":"TT10_Dt"},{"dbColumnName":"TT16_Date","excelColumnName":"TT16_Dt"},{"dbColumnName":"Registration_Date","excelColumnName":"CLD_REG_DATE"},{"dbColumnName":"Gender","excelColumnName":"Sex"},{"dbColumnName":"VitA_Dose5_Date","excelColumnName":"VitA_Dose5_Dt"},{"dbColumnName":"VitA_Dose6_Date","excelColumnName":"VitA_Dose6_Dt"},{"dbColumnName":"VitA_Dose7_Date","excelColumnName":"VitA_Dose7_Dt"},{"dbColumnName":"VitA_Dose8_Date","excelColumnName":"VitA_Dose8_Dt"},{"dbColumnName":"Updated_Date","excelColumnName":"LastUpdateDate"},{"dbColumnName":"Remarks","excelColumnName":"Remarks"},{"dbColumnName":"ANM_ID","excelColumnName":"ANM_ID"},{"dbColumnName":"ASHA_ID","excelColumnName":"ASHA_ID"},{"dbColumnName":"Created_By","excelColumnName":"Created_By"},{"dbColumnName":"Updated_By","excelColumnName":"Updated_By"},{"dbColumnName":"Measles_2_Date","excelColumnName":"Measles2_Dt"},{"dbColumnName":"Weight_of_Child","excelColumnName":"Weight_of_Child"},{"dbColumnName":"Child_Aadhaar_No","excelColumnName":"Child_Aadhaar_No"},{"dbColumnName":"Child_EID","excelColumnName":"Child_EID"},{"dbColumnName":"Child_EID_Time","excelColumnName":"Child_EIDTime"},{"dbColumnName":"Father_Name","excelColumnName":"Father_Name"},{"dbColumnName":"BirthCertificateNo","excelColumnName":"Birth_Certificate_Number"},{"dbColumnName":"Entry_type","excelColumnName":"Entry_Type"},{"dbColumnName":"MDDS_StateID","excelColumnName":"MDDS_StateID"},{"dbColumnName":"MDDS_District_ID","excelColumnName":"MDDS_District_ID"},{"dbColumnName":"MDDS_Taluka_ID","excelColumnName":"MDDS_Taluka_ID"},{"dbColumnName":"MDDS_Village_ID","excelColumnName":"MDDS_Village_ID"}]', 'Child Data', v_ProviderServiceMapID, 'Trigger - MCTSExcelMapping');
+INSERT INTO `dbiemr`.`m_mctsfieldsstatewise` (`DataFields`, `FieldsFor`, `ProviderServiceMapID`, `CreatedBy`) VALUES ('[{"dbColumnName":"State_ID","excelColumnName":"StateID"},{"dbColumnName":"District_ID","excelColumnName":"District_ID"},{"dbColumnName":"District_Name","excelColumnName":"District_Name"},{"dbColumnName":"Taluka_ID","excelColumnName":"Taluka_ID"},{"dbColumnName":"Taluka_Name","excelColumnName":"Taluka_Name"},{"dbColumnName":"Block_ID","excelColumnName":"HealthBlock_ID"},{"dbColumnName":"Block_Name","excelColumnName":"HealthBlock_Name"},{"dbColumnName":"PHC_ID","excelColumnName":"PHC_ID"},{"dbColumnName":"PHC_Name","excelColumnName":"PHC_Name"},{"dbColumnName":"SubCenter_ID","excelColumnName":"SubCentre_ID"},{"dbColumnName":"SubCenter_Name","excelColumnName":"SubCentre_Name"},{"dbColumnName":"Village_ID","excelColumnName":"Village_ID"},{"dbColumnName":"Village_Name","excelColumnName":"Village_Name"},{"dbColumnName":"YR","excelColumnName":"Yr"},{"dbColumnName":"GP_Village","excelColumnName":"GP_Village"},{"dbColumnName":"Address","excelColumnName":"Address"},{"dbColumnName":"MCTSID_no","excelColumnName":"ID_No"},{"dbColumnName":"Name","excelColumnName":"Name"},{"dbColumnName":"Husband_Name","excelColumnName":"Husband_Name"},{"dbColumnName":"PhoneNo_Of_Whom","excelColumnName":"PhoneNo_Of_Whom"},{"dbColumnName":"Whom_PhoneNo","excelColumnName":"Whom_PhoneNo"},{"dbColumnName":"Birth_Date","excelColumnName":"Birthdate"},{"dbColumnName":"JSY_Beneficiary","excelColumnName":"JSY_Beneficiary"},{"dbColumnName":"Caste","excelColumnName":"Caste"},{"dbColumnName":"SubCenter_Name1","excelColumnName":"SubCentre_Name1"},{"dbColumnName":"ANM_Name","excelColumnName":"ANM_Name"},{"dbColumnName":"ANM_Ph","excelColumnName":"ANM_Phone"},{"dbColumnName":"ASHA_Name","excelColumnName":"ASHA_Name"},{"dbColumnName":"ASHA_Ph","excelColumnName":"ASHA_Phone"},{"dbColumnName":"Delivery_Lnk_Facility","excelColumnName":"Delivery_Lnk_Facility"},{"dbColumnName":"Facility_Name","excelColumnName":"Facility_Name"},{"dbColumnName":"LMP_Date","excelColumnName":"LMP_Date"},{"dbColumnName":"ANC1_Date","excelColumnName":"ANC1_Date"},{"dbColumnName":"ANC2_Date","excelColumnName":"ANC2_Date"},{"dbColumnName":"ANC3_Date","excelColumnName":"ANC3_Date"},{"dbColumnName":"ANC4_Date","excelColumnName":"ANC4_Date"},{"dbColumnName":"TT1_Date","excelColumnName":"TT1_Date"},{"dbColumnName":"TT2_Date","excelColumnName":"TT2_Date"},{"dbColumnName":"TTBooster_Date","excelColumnName":"TTBooster_Date"},{"dbColumnName":"IFA100_Given_Date","excelColumnName":"IFA100_Given_Date"},{"dbColumnName":"Anemia","excelColumnName":"Anemia"},{"dbColumnName":"ANC_Complication","excelColumnName":"ANC_Complication"},{"dbColumnName":"RTI_STI","excelColumnName":"RTI_STI"},{"dbColumnName":"Delivery_Date","excelColumnName":"Dly_Date"},{"dbColumnName":"Delivery_Place_home_type","excelColumnName":"Dly_Place_Home_Type"},{"dbColumnName":"Delivery_Place_Public","excelColumnName":"Dly_Place_Public"},{"dbColumnName":"Delivery_Place_Private","excelColumnName":"Dly_Place_Private"},{"dbColumnName":"Delivery_type","excelColumnName":"Dly_Type"},{"dbColumnName":"Delivery_Complications","excelColumnName":"Dly_Complication"},{"dbColumnName":"Discharge_Date","excelColumnName":"Discharge_Date"},{"dbColumnName":"JSY_Paid_Date","excelColumnName":"JSY_Paid_Date"},{"dbColumnName":"Abortion","excelColumnName":"Abortion"},{"dbColumnName":"PNC_Home_Visit","excelColumnName":"PNC_Home_Visit"},{"dbColumnName":"PNC_Complication","excelColumnName":"PNC_Complication"},{"dbColumnName":"PPC_Method","excelColumnName":"PPC_Method"},{"dbColumnName":"PNC_Checkup","excelColumnName":"PNC_Checkup"},{"dbColumnName":"Outcome_Nos","excelColumnName":"Outcome_Nos"},{"dbColumnName":"Child1_Name","excelColumnName":"Child1_Name"},{"dbColumnName":"Child1_Gender","excelColumnName":"Child1_Sex"},{"dbColumnName":"Child1_Weight","excelColumnName":"Child1_Wt"},{"dbColumnName":"Child1_BreastFeeding","excelColumnName":"Child1_Brestfeeding"},{"dbColumnName":"Child2_Name","excelColumnName":"Child2_Name"},{"dbColumnName":"Child2_Gender","excelColumnName":"Child2_Sex"},{"dbColumnName":"Child2_weight","excelColumnName":"Child2_Wt"},{"dbColumnName":"Child2_Breastfeeding","excelColumnName":"Child2_Brestfeeding"},{"dbColumnName":"Child3_Name","excelColumnName":"Child3_Name"},{"dbColumnName":"Child3_Gender","excelColumnName":"Child3_Sex"},{"dbColumnName":"Child3_Weight","excelColumnName":"Child3_Wt"},{"dbColumnName":"Child3_Breastfeeding","excelColumnName":"Child3_Brestfeeding"},{"dbColumnName":"Child4_Name","excelColumnName":"Child4_Name"},{"dbColumnName":"Child4_Gender","excelColumnName":"Child4_Sex"},{"dbColumnName":"Child4_Weight","excelColumnName":"Child4_Wt"},{"dbColumnName":"Child4_Breastfeeding","excelColumnName":"Child4_Brestfeeding"},{"dbColumnName":"Age","excelColumnName":"Age"},{"dbColumnName":"Mother_Reg_Date","excelColumnName":"MTHR_REG_DATE"},{"dbColumnName":"Last_Update_Date","excelColumnName":"LastUpdateDate"},{"dbColumnName":"Remarks","excelColumnName":"Remarks"},{"dbColumnName":"ANM_ID","excelColumnName":"ANM_ID"},{"dbColumnName":"ASHA_ID","excelColumnName":"ASHA_ID"},{"dbColumnName":"Call_Answered","excelColumnName":"Call_Ans"},{"dbColumnName":"NoCall_Reason","excelColumnName":"NoCall_Reason"},{"dbColumnName":"NoPhone_Reason","excelColumnName":"NoPhone_Reason"},{"dbColumnName":"Created_By","excelColumnName":"Created_By"},{"dbColumnName":"Updated_By","excelColumnName":"Updated_By"},{"dbColumnName":"Aadhar_no","excelColumnName":"Aadhar_No"},{"dbColumnName":"BPL_APL","excelColumnName":"BPL_APL"},{"dbColumnName":"EID","excelColumnName":"EID"},{"dbColumnName":"EID_time","excelColumnName":"EIDTime"},{"dbColumnName":"Entry_type","excelColumnName":"Entry_Type"},{"dbColumnName":"MDDS_StateID","excelColumnName":"MDDS_StateID"},{"dbColumnName":"MDDS_District_ID","excelColumnName":"MDDS_District_ID"},{"dbColumnName":"MDDS_Taluka_ID","excelColumnName":"MDDS_Taluka_ID"},{"dbColumnName":"MDDS_Village_ID","excelColumnName":"MDDS_Village_ID"}]', 'Mother Data', v_ProviderServiceMapID, 'Trigger - MCTSExcelMapping');
+INSERT INTO `dbiemr`.`m_mctsfieldsstatewise` (`DataFields`, `FieldsFor`, `ProviderServiceMapID`, `CreatedBy`) VALUES ('[{"dbColumnName":"State_ID","excelColumnName":"StateID"},{"dbColumnName":"District_ID","excelColumnName":"District_ID"},{"dbColumnName":"District_Name","excelColumnName":"District_Name"},{"dbColumnName":"Taluka_ID","excelColumnName":"Taluka_ID"},{"dbColumnName":"Taluka_Name","excelColumnName":"Taluka_Name"},{"dbColumnName":"Block_ID","excelColumnName":"HealthBlock_ID"},{"dbColumnName":"Block_Name","excelColumnName":"HealthBlock_Name"},{"dbColumnName":"PHC_ID","excelColumnName":"PHC_ID"},{"dbColumnName":"PHC_Name","excelColumnName":"PHC_Name"},{"dbColumnName":"SubCenter_ID","excelColumnName":"SubCentre_ID"},{"dbColumnName":"SubCenter_Name","excelColumnName":"SubCentre_Name"},{"dbColumnName":"Village_ID","excelColumnName":"Village_ID"},{"dbColumnName":"Village_Name","excelColumnName":"Village_Name"},{"dbColumnName":"Year","excelColumnName":"Yr"},{"dbColumnName":"City","excelColumnName":"City_Maholla"},{"dbColumnName":"GP_Village","excelColumnName":"GP_Village"},{"dbColumnName":"Address","excelColumnName":"Address"},{"dbColumnName":"MCTSID_no_Child_ID","excelColumnName":"ID_No"},{"dbColumnName":"Child_Name","excelColumnName":"Name"},{"dbColumnName":"Mother_Name","excelColumnName":"Mother_Name"},{"dbColumnName":"Mother_ID","excelColumnName":"Mother_ID"},{"dbColumnName":"Phone_No_of","excelColumnName":"PhoneNo_Of_Whom"},{"dbColumnName":"Phone_No","excelColumnName":"Whom_PhoneNo"},{"dbColumnName":"DOB","excelColumnName":"Birthdate"},{"dbColumnName":"Place_of_Birth","excelColumnName":"Place_of_Delivery"},{"dbColumnName":"BloodGroup","excelColumnName":"Blood_Group"},{"dbColumnName":"Caste","excelColumnName":"Caste"},{"dbColumnName":"SubCenter_Name1","excelColumnName":"SubCentre_Name1"},{"dbColumnName":"ANM_Name","excelColumnName":"ANM_Name"},{"dbColumnName":"ANM_Phone_No","excelColumnName":"ANM_Phone"},{"dbColumnName":"ASHA_Name","excelColumnName":"ASHA_Name"},{"dbColumnName":"ASHA_Phone_No","excelColumnName":"ASHA_Phone"},{"dbColumnName":"BCG_Date","excelColumnName":"BCG_Dt"},{"dbColumnName":"OPV0_Date","excelColumnName":"OPV0_Dt"},{"dbColumnName":"Hepatitis_B1_Date","excelColumnName":"HepatitisB1_Dt"},{"dbColumnName":"DPT1_Date","excelColumnName":"DPT1_Dt"},{"dbColumnName":"OPV1_Date","excelColumnName":"OPV1_Dt"},{"dbColumnName":"Hepatitis_B2_Date","excelColumnName":"HepatitisB2_Dt"},{"dbColumnName":"DPT2_Date","excelColumnName":"DPT2_Dt"},{"dbColumnName":"OPV2_Date","excelColumnName":"OPV2_Dt"},{"dbColumnName":"Hepatitis_B3_Date","excelColumnName":"HepatitisB3_Dt"},{"dbColumnName":"DPT3_Date","excelColumnName":"DPT3_Dt"},{"dbColumnName":"OPV3_Date","excelColumnName":"OPV3_Dt"},{"dbColumnName":"Hepatitis_B4_Date","excelColumnName":"HepatitisB4_Dt"},{"dbColumnName":"Measles_Date","excelColumnName":"Measles_Dt"},{"dbColumnName":"VitA_Dose1_Date","excelColumnName":"VitA_Dose1_Dt"},{"dbColumnName":"MR_Date","excelColumnName":"MR_Dt"},{"dbColumnName":"DPTBooster_Date","excelColumnName":"DPTBooster_Dt"},{"dbColumnName":"OPVBooster_Date","excelColumnName":"OPVBooster_Dt"},{"dbColumnName":"VitA_Dose2_Date","excelColumnName":"VitA_Dose2_Dt"},{"dbColumnName":"VitA_Dose3_Date","excelColumnName":"VitA_Dose3_Dt"},{"dbColumnName":"JE_Date","excelColumnName":"JE_Dt"},{"dbColumnName":"VitA_Dose9_Date","excelColumnName":"VitA_Dose9_Dt"},{"dbColumnName":"DT5_Date","excelColumnName":"DT5_Dt"},{"dbColumnName":"TT10_Date","excelColumnName":"TT10_Dt"},{"dbColumnName":"TT16_Date","excelColumnName":"TT16_Dt"},{"dbColumnName":"Registration_Date","excelColumnName":"CLD_REG_DATE"},{"dbColumnName":"Gender","excelColumnName":"Sex"},{"dbColumnName":"VitA_Dose5_Date","excelColumnName":"VitA_Dose5_Dt"},{"dbColumnName":"VitA_Dose6_Date","excelColumnName":"VitA_Dose6_Dt"},{"dbColumnName":"VitA_Dose7_Date","excelColumnName":"VitA_Dose7_Dt"},{"dbColumnName":"VitA_Dose8_Date","excelColumnName":"VitA_Dose8_Dt"},{"dbColumnName":"Updated_Date","excelColumnName":"LastUpdateDate"},{"dbColumnName":"Remarks","excelColumnName":"Remarks"},{"dbColumnName":"ANM_ID","excelColumnName":"ANM_ID"},{"dbColumnName":"ASHA_ID","excelColumnName":"ASHA_ID"},{"dbColumnName":"Created_By","excelColumnName":"Created_By"},{"dbColumnName":"Updated_By","excelColumnName":"Updated_By"},{"dbColumnName":"Measles_2_Date","excelColumnName":"Measles2_Dt"},{"dbColumnName":"Weight_of_Child","excelColumnName":"Weight_of_Child"},{"dbColumnName":"Child_Aadhaar_No","excelColumnName":"Child_Aadhaar_No"},{"dbColumnName":"Child_EID","excelColumnName":"Child_EID"},{"dbColumnName":"Child_EID_Time","excelColumnName":"Child_EIDTime"},{"dbColumnName":"Father_Name","excelColumnName":"Father_Name"},{"dbColumnName":"BirthCertificateNo","excelColumnName":"Birth_Certificate_Number"},{"dbColumnName":"Entry_type","excelColumnName":"Entry_Type"},{"dbColumnName":"MDDS_StateID","excelColumnName":"MDDS_StateID"},{"dbColumnName":"MDDS_District_ID","excelColumnName":"MDDS_District_ID"},{"dbColumnName":"MDDS_Taluka_ID","excelColumnName":"MDDS_Taluka_ID"},{"dbColumnName":"MDDS_Village_ID","excelColumnName":"MDDS_Village_ID"}]', 'Child Data', v_ProviderServiceMapID, 'Trigger - MCTSExcelMapping');
 
 
 else if (v_ServiceID =6 and v_StateID = 15)
 then
-INSERT INTO `db_iemr`.`m_mctsfieldsstatewise` (`DataFields`, `FieldsFor`, `ProviderServiceMapID`, `CreatedBy`) VALUES ('[{"dbColumnName":"District_ID","excelColumnName":"DISTRICT ID"},{"dbColumnName":"District_Name","excelColumnName":"DIST NAME"},{"dbColumnName":"Taluka_ID","excelColumnName":"TAL CD"},{"dbColumnName":"Taluka_Name","excelColumnName":"TAL NAME"},{"dbColumnName":"Block_ID","excelColumnName":"BLOCK CD"},{"dbColumnName":"Block_Name","excelColumnName":"BLOCK NAME"},{"dbColumnName":"PHC_ID","excelColumnName":"PHC CD"},{"dbColumnName":"PHC_Name","excelColumnName":"PHC NAME"},{"dbColumnName":"SUBPHC_ID","excelColumnName":"SUBPHC CD"},{"dbColumnName":"SUBPHC_Name","excelColumnName":"SC NAME"},{"dbColumnName":"YR","excelColumnName":"YR"},{"dbColumnName":"GP_Village","excelColumnName":"GP VILLAGE"},{"dbColumnName":"Address","excelColumnName":"ADDRESS"},{"dbColumnName":"MCTSID_no","excelColumnName":"ID NO"},{"dbColumnName":"Name","excelColumnName":"NAME"},{"dbColumnName":"Updated_Name","excelColumnName":"UPDATED NAME"},{"dbColumnName":"Husband_Name","excelColumnName":"HUSBAND NAME"},{"dbColumnName":"Updated_HusbandName","excelColumnName":"UPDATED HUSBAND NAME"},{"dbColumnName":"PhoneNo_Of_Whom","excelColumnName":"PHONENO OF WHOM"},{"dbColumnName":"Whom_PhoneNo","excelColumnName":"WHOM PHONENO"},{"dbColumnName":"Birth_Date","excelColumnName":"BIRTHDATE"},{"dbColumnName":"Age","excelColumnName":"AGE"},{"dbColumnName":"JSY_Beneficiary","excelColumnName":"JSY BENEFICIARY"},{"dbColumnName":"Caste","excelColumnName":"CASTE"},{"dbColumnName":"SubCenter_Name","excelColumnName":"SUBCENTRE NAME"},{"dbColumnName":"ANM_Name","excelColumnName":"ANM NAME"},{"dbColumnName":"ANM_Ph","excelColumnName":"ANM PHONE"},{"dbColumnName":"ASHA_Name","excelColumnName":"ASHA NAME"},{"dbColumnName":"ASHA_Ph","excelColumnName":"ASHA PHONE"},{"dbColumnName":"Delivery_Lnk_Facility","excelColumnName":"DELIVERY LNK FACILITY"},{"dbColumnName":"Facility_Name","excelColumnName":"FACILITY NAME"},{"dbColumnName":"LMP_Date","excelColumnName":"LMP DATE"},{"dbColumnName":"ANC1_Date","excelColumnName":"ANC1 DATE"},{"dbColumnName":"ANC2_Date","excelColumnName":"ANC2 DATE"},{"dbColumnName":"ANC3_Date","excelColumnName":"ANC3 DATE"},{"dbColumnName":"ANC4_Date","excelColumnName":"ANC4 DATE"},{"dbColumnName":"TT1_Date","excelColumnName":"TT1 DATE"},{"dbColumnName":"TT2_Date","excelColumnName":"TT2 DATE"},{"dbColumnName":"TTBooster_Date","excelColumnName":"TTBOOSTER DATE"},{"dbColumnName":"IFA100_Given_Date","excelColumnName":"IFA100 GIVEN DATE"},{"dbColumnName":"EDD","excelColumnName":"EDD"},{"dbColumnName":"Anemia","excelColumnName":"ANEMIA"},{"dbColumnName":"ANC_Complication","excelColumnName":"ANC COMPLICATION"},{"dbColumnName":"RTI_STI","excelColumnName":"RTI STI"},{"dbColumnName":"Delivery_Date","excelColumnName":"DLY DATE"},{"dbColumnName":"Delivery_Place_home_type","excelColumnName":"DLY PLACE HOME TYPE"},{"dbColumnName":"Delivery_Place_Public","excelColumnName":"DLY PLACE PUBLIC"},{"dbColumnName":"Delivery_Place_Private","excelColumnName":"DLY PLACE PRIVATE"},{"dbColumnName":"Delivery_type","excelColumnName":"DLY TYPE"},{"dbColumnName":"Delivery_Complications","excelColumnName":"DLY COMPLICATION"},{"dbColumnName":"Discharge_Date","excelColumnName":"DISCHARGE DATE"},{"dbColumnName":"JSY_Paid_Date","excelColumnName":"JSY PAID DATE"},{"dbColumnName":"Abortion","excelColumnName":"ABORTION"},{"dbColumnName":"PNC_Home_Visit","excelColumnName":"PNC HOME VISIT"},{"dbColumnName":"PNC_Complication","excelColumnName":"PNC COMPLICATION"},{"dbColumnName":"PPC_Method","excelColumnName":"PPC METHOD"},{"dbColumnName":"PNC_Checkup","excelColumnName":"PNC CHECKUP"},{"dbColumnName":"Outcome_Nos","excelColumnName":"OUTCOME NOS"},{"dbColumnName":"Child1_Name","excelColumnName":"CHILD1 NAME"},{"dbColumnName":"Child1_Gender","excelColumnName":"CHILD1 SEX"},{"dbColumnName":"Child1_Weight","excelColumnName":"CHILD1 WT"},{"dbColumnName":"Child1_BreastFeeding","excelColumnName":"CHILD1 BRESTFEEDING"},{"dbColumnName":"Child2_Name","excelColumnName":"CHILD2 NAME"},{"dbColumnName":"Child2_Gender","excelColumnName":"CHILD2 SEX"},{"dbColumnName":"Child2_weight","excelColumnName":"CHILD2 WT"},{"dbColumnName":"Child2_Breastfeeding","excelColumnName":"CHILD2 BRESTFEEDING"},{"dbColumnName":"Child3_Name","excelColumnName":"CHILD3 NAME"},{"dbColumnName":"Child3_Gender","excelColumnName":"CHILD3 SEX"},{"dbColumnName":"Child3_Weight","excelColumnName":"CHILD3 WT"},{"dbColumnName":"Child3_Breastfeeding","excelColumnName":"CHILD3 BRESTFEEDING"},{"dbColumnName":"Child4_Name","excelColumnName":"CHILD4 NAME"},{"dbColumnName":"Child4_Gender","excelColumnName":"CHILD4 SEX"},{"dbColumnName":"Child4_Weight","excelColumnName":"CHILD4 WT"},{"dbColumnName":"Child4_Breastfeeding","excelColumnName":"CHILD4 BRESTFEEDING"},{"dbColumnName":"Mother_Reg_Date","excelColumnName":"MTHR REG DATE"},{"dbColumnName":"Last_Update_Date","excelColumnName":"LASTUPDATEDATE"},{"dbColumnName":"Aadhar_no","excelColumnName":"AADHAR NO"},{"dbColumnName":"EID","excelColumnName":"EID"},{"dbColumnName":"EID_time","excelColumnName":"EIDTIME"},{"dbColumnName":"CPSMS_Flag","excelColumnName":"CPSMS FLAG"},{"dbColumnName":"Bank_Name","excelColumnName":"BANK NAME"},{"dbColumnName":"Bank_Branch_Name","excelColumnName":"BRANCH NAME"},{"dbColumnName":"Acc_No","excelColumnName":"ACC NO"},{"dbColumnName":"IFSC_Code","excelColumnName":"IFSC CODE"},{"dbColumnName":"Remarks","excelColumnName":"REMARKS"},{"dbColumnName":"Referred_By_Telecaller","excelColumnName":"REFERRED BY TELECALLER"},{"dbColumnName":"Referred_Date","excelColumnName":"REFERRED DATE"},{"dbColumnName":"No_of_Try","excelColumnName":"No. of Try"},{"dbColumnName":"Call_Answered","excelColumnName":"Call Answered"},{"dbColumnName":"Status","excelColumnName":"STATUS"},{"dbColumnName":"Call_Verified","excelColumnName":"Call verified (yes/ no)"},{"dbColumnName":"Associate","excelColumnName":"Associate"},{"dbColumnName":"Call_Date","excelColumnName":"Call Date"},{"dbColumnName":"Due_Services","excelColumnName":"DUE SERVICES"},{"dbColumnName":"Due_Services_Response","excelColumnName":"DUE SERVICES RESPONSE"},{"dbColumnName":"Overdue_Services","excelColumnName":"OVER DUE SERVICES"},{"dbColumnName":"Overdue_Services_Response","excelColumnName":"OVER DUE SERVICES RESPONSE"},{"dbColumnName":"Given_Services","excelColumnName":"GIVEN SERVICES"},{"dbColumnName":"Given_Services_Response","excelColumnName":"GIVEN SERVICES RESPONSE"},{"dbColumnName":"Miscarriage","excelColumnName":"MISCARRIAGE"},{"dbColumnName":"Baby_Died","excelColumnName":"BABY DIED"},{"dbColumnName":"Call_No","excelColumnName":"Call No."},{"dbColumnName":"Questions_Asked","excelColumnName":"Question Asked"},{"dbColumnName":"Asnwer_Given_by_Benificary","excelColumnName":"Answer given by benificiary"}]', 'Mother Data', v_ProviderServiceMapID, 'Trigger - MCTSExcelMapping');
-INSERT INTO `db_iemr`.`m_mctsfieldsstatewise` (`DataFields`, `FieldsFor`, `ProviderServiceMapID`, `CreatedBy`) VALUES ('[{"dbColumnName":"Lead_ID","excelColumnName":"LEAD_ID"},{"dbColumnName":"My_ID","excelColumnName":"MY_ID"},{"dbColumnName":"State_ID","excelColumnName":"STATE_ID"},{"dbColumnName":"District_ID","excelColumnName":"DISTRICT_ID"},{"dbColumnName":"District_Name","excelColumnName":"DISTRICT_NAME"},{"dbColumnName":"Taluka_Name","excelColumnName":"TALUKA_ID"},{"dbColumnName":"Taluka_ID","excelColumnName":"TALUKA_NAME"},{"dbColumnName":"Block_ID","excelColumnName":"HEALTH_BLOCK_ID"},{"dbColumnName":"Block_Name","excelColumnName":"HEALTH_BLOCK_NAME"},{"dbColumnName":"PHC_ID","excelColumnName":"PHC_ID"},{"dbColumnName":"PHC_Name","excelColumnName":"PHC_NAME"},{"dbColumnName":"SubCenter_ID","excelColumnName":"SUBCENTER_ID"},{"dbColumnName":"SubCenter_Name","excelColumnName":"SUBCENTER_NAME"},{"dbColumnName":"Village_ID","excelColumnName":"VILLAGE_ID"},{"dbColumnName":"Village_Name","excelColumnName":"VILLAGE_NAME"},{"dbColumnName":"Rural_urban","excelColumnName":"RURAL_URBAN"},{"dbColumnName":"Year","excelColumnName":"YEAR"},{"dbColumnName":"SNO","excelColumnName":"SNO1"},{"dbColumnName":"City","excelColumnName":"CITY_MOHOLLA"},{"dbColumnName":"GP_Village","excelColumnName":"GP_VILLAGE"},{"dbColumnName":"Address","excelColumnName":"ADDRESS"},{"dbColumnName":"MCTSID_no_Child_ID","excelColumnName":"CHILD_ID"},{"dbColumnName":"Child_Name","excelColumnName":"CHILD_NAME"},{"dbColumnName":"Mother_Name","excelColumnName":"MOTHER_NAME"},{"dbColumnName":"Mother_ID","excelColumnName":"MOTHER_ID"},{"dbColumnName":"Phone_No_of","excelColumnName":"PHONE_NO_OF_WHOM"},{"dbColumnName":"Phone_No","excelColumnName":"PHONE_NO"},{"dbColumnName":"DOB","excelColumnName":"BIRTH_DATE"},{"dbColumnName":"Place_of_Birth","excelColumnName":"PLACE_OF_DELIVERY"},{"dbColumnName":"BloodGroup","excelColumnName":"BLOOD_GROUP"},{"dbColumnName":"Caste","excelColumnName":"CASTE"},{"dbColumnName":"ANM_Name","excelColumnName":"ANM_NAME"},{"dbColumnName":"ANM_Phone_No","excelColumnName":"ANM_PHONE_NO"},{"dbColumnName":"ASHA_Name","excelColumnName":"ASHA_NAME"},{"dbColumnName":"ASHA_Phone_No","excelColumnName":"ASHA_PHONE_NO"},{"dbColumnName":"BCG_Date","excelColumnName":"BCG_DATE"},{"dbColumnName":"OPV0_Date","excelColumnName":"OPV_0_DATE"},{"dbColumnName":"Hepatitis_B1_Date","excelColumnName":"HEPATITIS_B_1_DATE"},{"dbColumnName":"DPT1_Date","excelColumnName":"DPT_1_DATE"},{"dbColumnName":"OPV1_Date","excelColumnName":"OPV_1_DATE"},{"dbColumnName":"Hepatitis_B2_Date","excelColumnName":"HEPATITIS_B_2_DATE"},{"dbColumnName":"DPT2_Date","excelColumnName":"DPT_2_DATE"},{"dbColumnName":"OPV2_Date","excelColumnName":"OPV_2_DATE"},{"dbColumnName":"Hepatitis_B3_Date","excelColumnName":"HEPATITIS_B_3_DATE"},{"dbColumnName":"DPT3_Date","excelColumnName":"DPT_3_DATE"},{"dbColumnName":"OPV3_Date","excelColumnName":"OPV_3_DATE"},{"dbColumnName":"Hepatitis_B4_Date","excelColumnName":"HEPATITIS_B_4_DATE"},{"dbColumnName":"Measles_Date","excelColumnName":"MEASLES_DATE"},{"dbColumnName":"VitA_Dose1_Date","excelColumnName":"VITA_DOSE_1_DATE"},{"dbColumnName":"MR_Date","excelColumnName":"MR_DATE"},{"dbColumnName":"DPTBooster_Date","excelColumnName":"DPT_BOOSTER_DATE"},{"dbColumnName":"OPVBooster_Date","excelColumnName":"OPV_BOOSTER_DATE"},{"dbColumnName":"VitA_Dose2_Date","excelColumnName":"VITA_DOSE_2_DATE"},{"dbColumnName":"VitA_Dose3_Date","excelColumnName":"VITA_DOSE_3_DATE"},{"dbColumnName":"JE_Date","excelColumnName":"JE_DATE"},{"dbColumnName":"VitA_Dose9_Date","excelColumnName":"VITA_DOSE_9_DATE"},{"dbColumnName":"DT5_Date","excelColumnName":"DT_5_DATE"},{"dbColumnName":"TT10_Date","excelColumnName":"TT_10_DATE"},{"dbColumnName":"TT16_Date","excelColumnName":"TT_16_DATE"},{"dbColumnName":"is_Upload","excelColumnName":"IS_UPLOAD"},{"dbColumnName":"Emamta_Health_ID","excelColumnName":"EMAMTAHEALTH_ID"},{"dbColumnName":"Emamta_Family_ID","excelColumnName":"EMAMTAFAMILY_ID"},{"dbColumnName":"CID_NO","excelColumnName":"CID_NO"},{"dbColumnName":"MID_NO","excelColumnName":"MID_NO"},{"dbColumnName":"Delete_Mother","excelColumnName":"DELETE_MOTHER"},{"dbColumnName":"Delete_Reason","excelColumnName":"REASON_DELETION"},{"dbColumnName":"Deleted_ON","excelColumnName":"DELETED_ON"},{"dbColumnName":"Entry_type","excelColumnName":"ENTRY_TYPE"},{"dbColumnName":"Registration_Date","excelColumnName":"CHILD_REGESTERED_DATE"},{"dbColumnName":"Duplicate_Bit","excelColumnName":"DUPLICATE_BIT"},{"dbColumnName":"FacilityType","excelColumnName":"FACILITY_TYPE"},{"dbColumnName":"Gender","excelColumnName":"SEX"},{"dbColumnName":"VitA_Dose5_Date","excelColumnName":"VITA_DOSE_5_DATE"},{"dbColumnName":"VitA_Dose6_Date","excelColumnName":"VITA_DOSE_6_DATE"},{"dbColumnName":"VitA_Dose7_Date","excelColumnName":"VITA_DOSE_7_DATE"},{"dbColumnName":"VitA_Dose8_Date","excelColumnName":"VITA_DOSE_8_DATE"},{"dbColumnName":"VitA_Dose99_Date","excelColumnName":"VITA_DOSE_99_DATE"},{"dbColumnName":"Updated_Date","excelColumnName":"LAST_UPDATE_DATE"},{"dbColumnName":"SMS_Status","excelColumnName":"SMS_STATUS"},{"dbColumnName":"Remarks","excelColumnName":"REMARKS"},{"dbColumnName":"ANM_ID","excelColumnName":"ANM_ID"},{"dbColumnName":"ASHA_ID","excelColumnName":"ASHA_ID"},{"dbColumnName":"Created_By","excelColumnName":"CREATED_BY"},{"dbColumnName":"Updated_By","excelColumnName":"UPDATED_BY"},{"dbColumnName":"Measles_2_Date","excelColumnName":"MEASLES_2_DATE"},{"dbColumnName":"DueServices","excelColumnName":"DUE SERVICES"},{"dbColumnName":"OverDueServices","excelColumnName":"OVER DUE SERVICES"},{"dbColumnName":"GivenServices","excelColumnName":"GIVEN SERVICES"}]', 'Child Data', v_ProviderServiceMapID, 'Trigger - MCTSExcelMapping');
+INSERT INTO `dbiemr`.`m_mctsfieldsstatewise` (`DataFields`, `FieldsFor`, `ProviderServiceMapID`, `CreatedBy`) VALUES ('[{"dbColumnName":"District_ID","excelColumnName":"DISTRICT ID"},{"dbColumnName":"District_Name","excelColumnName":"DIST NAME"},{"dbColumnName":"Taluka_ID","excelColumnName":"TAL CD"},{"dbColumnName":"Taluka_Name","excelColumnName":"TAL NAME"},{"dbColumnName":"Block_ID","excelColumnName":"BLOCK CD"},{"dbColumnName":"Block_Name","excelColumnName":"BLOCK NAME"},{"dbColumnName":"PHC_ID","excelColumnName":"PHC CD"},{"dbColumnName":"PHC_Name","excelColumnName":"PHC NAME"},{"dbColumnName":"SUBPHC_ID","excelColumnName":"SUBPHC CD"},{"dbColumnName":"SUBPHC_Name","excelColumnName":"SC NAME"},{"dbColumnName":"YR","excelColumnName":"YR"},{"dbColumnName":"GP_Village","excelColumnName":"GP VILLAGE"},{"dbColumnName":"Address","excelColumnName":"ADDRESS"},{"dbColumnName":"MCTSID_no","excelColumnName":"ID NO"},{"dbColumnName":"Name","excelColumnName":"NAME"},{"dbColumnName":"Updated_Name","excelColumnName":"UPDATED NAME"},{"dbColumnName":"Husband_Name","excelColumnName":"HUSBAND NAME"},{"dbColumnName":"Updated_HusbandName","excelColumnName":"UPDATED HUSBAND NAME"},{"dbColumnName":"PhoneNo_Of_Whom","excelColumnName":"PHONENO OF WHOM"},{"dbColumnName":"Whom_PhoneNo","excelColumnName":"WHOM PHONENO"},{"dbColumnName":"Birth_Date","excelColumnName":"BIRTHDATE"},{"dbColumnName":"Age","excelColumnName":"AGE"},{"dbColumnName":"JSY_Beneficiary","excelColumnName":"JSY BENEFICIARY"},{"dbColumnName":"Caste","excelColumnName":"CASTE"},{"dbColumnName":"SubCenter_Name","excelColumnName":"SUBCENTRE NAME"},{"dbColumnName":"ANM_Name","excelColumnName":"ANM NAME"},{"dbColumnName":"ANM_Ph","excelColumnName":"ANM PHONE"},{"dbColumnName":"ASHA_Name","excelColumnName":"ASHA NAME"},{"dbColumnName":"ASHA_Ph","excelColumnName":"ASHA PHONE"},{"dbColumnName":"Delivery_Lnk_Facility","excelColumnName":"DELIVERY LNK FACILITY"},{"dbColumnName":"Facility_Name","excelColumnName":"FACILITY NAME"},{"dbColumnName":"LMP_Date","excelColumnName":"LMP DATE"},{"dbColumnName":"ANC1_Date","excelColumnName":"ANC1 DATE"},{"dbColumnName":"ANC2_Date","excelColumnName":"ANC2 DATE"},{"dbColumnName":"ANC3_Date","excelColumnName":"ANC3 DATE"},{"dbColumnName":"ANC4_Date","excelColumnName":"ANC4 DATE"},{"dbColumnName":"TT1_Date","excelColumnName":"TT1 DATE"},{"dbColumnName":"TT2_Date","excelColumnName":"TT2 DATE"},{"dbColumnName":"TTBooster_Date","excelColumnName":"TTBOOSTER DATE"},{"dbColumnName":"IFA100_Given_Date","excelColumnName":"IFA100 GIVEN DATE"},{"dbColumnName":"EDD","excelColumnName":"EDD"},{"dbColumnName":"Anemia","excelColumnName":"ANEMIA"},{"dbColumnName":"ANC_Complication","excelColumnName":"ANC COMPLICATION"},{"dbColumnName":"RTI_STI","excelColumnName":"RTI STI"},{"dbColumnName":"Delivery_Date","excelColumnName":"DLY DATE"},{"dbColumnName":"Delivery_Place_home_type","excelColumnName":"DLY PLACE HOME TYPE"},{"dbColumnName":"Delivery_Place_Public","excelColumnName":"DLY PLACE PUBLIC"},{"dbColumnName":"Delivery_Place_Private","excelColumnName":"DLY PLACE PRIVATE"},{"dbColumnName":"Delivery_type","excelColumnName":"DLY TYPE"},{"dbColumnName":"Delivery_Complications","excelColumnName":"DLY COMPLICATION"},{"dbColumnName":"Discharge_Date","excelColumnName":"DISCHARGE DATE"},{"dbColumnName":"JSY_Paid_Date","excelColumnName":"JSY PAID DATE"},{"dbColumnName":"Abortion","excelColumnName":"ABORTION"},{"dbColumnName":"PNC_Home_Visit","excelColumnName":"PNC HOME VISIT"},{"dbColumnName":"PNC_Complication","excelColumnName":"PNC COMPLICATION"},{"dbColumnName":"PPC_Method","excelColumnName":"PPC METHOD"},{"dbColumnName":"PNC_Checkup","excelColumnName":"PNC CHECKUP"},{"dbColumnName":"Outcome_Nos","excelColumnName":"OUTCOME NOS"},{"dbColumnName":"Child1_Name","excelColumnName":"CHILD1 NAME"},{"dbColumnName":"Child1_Gender","excelColumnName":"CHILD1 SEX"},{"dbColumnName":"Child1_Weight","excelColumnName":"CHILD1 WT"},{"dbColumnName":"Child1_BreastFeeding","excelColumnName":"CHILD1 BRESTFEEDING"},{"dbColumnName":"Child2_Name","excelColumnName":"CHILD2 NAME"},{"dbColumnName":"Child2_Gender","excelColumnName":"CHILD2 SEX"},{"dbColumnName":"Child2_weight","excelColumnName":"CHILD2 WT"},{"dbColumnName":"Child2_Breastfeeding","excelColumnName":"CHILD2 BRESTFEEDING"},{"dbColumnName":"Child3_Name","excelColumnName":"CHILD3 NAME"},{"dbColumnName":"Child3_Gender","excelColumnName":"CHILD3 SEX"},{"dbColumnName":"Child3_Weight","excelColumnName":"CHILD3 WT"},{"dbColumnName":"Child3_Breastfeeding","excelColumnName":"CHILD3 BRESTFEEDING"},{"dbColumnName":"Child4_Name","excelColumnName":"CHILD4 NAME"},{"dbColumnName":"Child4_Gender","excelColumnName":"CHILD4 SEX"},{"dbColumnName":"Child4_Weight","excelColumnName":"CHILD4 WT"},{"dbColumnName":"Child4_Breastfeeding","excelColumnName":"CHILD4 BRESTFEEDING"},{"dbColumnName":"Mother_Reg_Date","excelColumnName":"MTHR REG DATE"},{"dbColumnName":"Last_Update_Date","excelColumnName":"LASTUPDATEDATE"},{"dbColumnName":"Aadhar_no","excelColumnName":"AADHAR NO"},{"dbColumnName":"EID","excelColumnName":"EID"},{"dbColumnName":"EID_time","excelColumnName":"EIDTIME"},{"dbColumnName":"CPSMS_Flag","excelColumnName":"CPSMS FLAG"},{"dbColumnName":"Bank_Name","excelColumnName":"BANK NAME"},{"dbColumnName":"Bank_Branch_Name","excelColumnName":"BRANCH NAME"},{"dbColumnName":"Acc_No","excelColumnName":"ACC NO"},{"dbColumnName":"IFSC_Code","excelColumnName":"IFSC CODE"},{"dbColumnName":"Remarks","excelColumnName":"REMARKS"},{"dbColumnName":"Referred_By_Telecaller","excelColumnName":"REFERRED BY TELECALLER"},{"dbColumnName":"Referred_Date","excelColumnName":"REFERRED DATE"},{"dbColumnName":"No_of_Try","excelColumnName":"No. of Try"},{"dbColumnName":"Call_Answered","excelColumnName":"Call Answered"},{"dbColumnName":"Status","excelColumnName":"STATUS"},{"dbColumnName":"Call_Verified","excelColumnName":"Call verified (yes/ no)"},{"dbColumnName":"Associate","excelColumnName":"Associate"},{"dbColumnName":"Call_Date","excelColumnName":"Call Date"},{"dbColumnName":"Due_Services","excelColumnName":"DUE SERVICES"},{"dbColumnName":"Due_Services_Response","excelColumnName":"DUE SERVICES RESPONSE"},{"dbColumnName":"Overdue_Services","excelColumnName":"OVER DUE SERVICES"},{"dbColumnName":"Overdue_Services_Response","excelColumnName":"OVER DUE SERVICES RESPONSE"},{"dbColumnName":"Given_Services","excelColumnName":"GIVEN SERVICES"},{"dbColumnName":"Given_Services_Response","excelColumnName":"GIVEN SERVICES RESPONSE"},{"dbColumnName":"Miscarriage","excelColumnName":"MISCARRIAGE"},{"dbColumnName":"Baby_Died","excelColumnName":"BABY DIED"},{"dbColumnName":"Call_No","excelColumnName":"Call No."},{"dbColumnName":"Questions_Asked","excelColumnName":"Question Asked"},{"dbColumnName":"Asnwer_Given_by_Benificary","excelColumnName":"Answer given by benificiary"}]', 'Mother Data', v_ProviderServiceMapID, 'Trigger - MCTSExcelMapping');
+INSERT INTO `dbiemr`.`m_mctsfieldsstatewise` (`DataFields`, `FieldsFor`, `ProviderServiceMapID`, `CreatedBy`) VALUES ('[{"dbColumnName":"Lead_ID","excelColumnName":"LEAD_ID"},{"dbColumnName":"My_ID","excelColumnName":"MY_ID"},{"dbColumnName":"State_ID","excelColumnName":"STATE_ID"},{"dbColumnName":"District_ID","excelColumnName":"DISTRICT_ID"},{"dbColumnName":"District_Name","excelColumnName":"DISTRICT_NAME"},{"dbColumnName":"Taluka_Name","excelColumnName":"TALUKA_ID"},{"dbColumnName":"Taluka_ID","excelColumnName":"TALUKA_NAME"},{"dbColumnName":"Block_ID","excelColumnName":"HEALTH_BLOCK_ID"},{"dbColumnName":"Block_Name","excelColumnName":"HEALTH_BLOCK_NAME"},{"dbColumnName":"PHC_ID","excelColumnName":"PHC_ID"},{"dbColumnName":"PHC_Name","excelColumnName":"PHC_NAME"},{"dbColumnName":"SubCenter_ID","excelColumnName":"SUBCENTER_ID"},{"dbColumnName":"SubCenter_Name","excelColumnName":"SUBCENTER_NAME"},{"dbColumnName":"Village_ID","excelColumnName":"VILLAGE_ID"},{"dbColumnName":"Village_Name","excelColumnName":"VILLAGE_NAME"},{"dbColumnName":"Rural_urban","excelColumnName":"RURAL_URBAN"},{"dbColumnName":"Year","excelColumnName":"YEAR"},{"dbColumnName":"SNO","excelColumnName":"SNO1"},{"dbColumnName":"City","excelColumnName":"CITY_MOHOLLA"},{"dbColumnName":"GP_Village","excelColumnName":"GP_VILLAGE"},{"dbColumnName":"Address","excelColumnName":"ADDRESS"},{"dbColumnName":"MCTSID_no_Child_ID","excelColumnName":"CHILD_ID"},{"dbColumnName":"Child_Name","excelColumnName":"CHILD_NAME"},{"dbColumnName":"Mother_Name","excelColumnName":"MOTHER_NAME"},{"dbColumnName":"Mother_ID","excelColumnName":"MOTHER_ID"},{"dbColumnName":"Phone_No_of","excelColumnName":"PHONE_NO_OF_WHOM"},{"dbColumnName":"Phone_No","excelColumnName":"PHONE_NO"},{"dbColumnName":"DOB","excelColumnName":"BIRTH_DATE"},{"dbColumnName":"Place_of_Birth","excelColumnName":"PLACE_OF_DELIVERY"},{"dbColumnName":"BloodGroup","excelColumnName":"BLOOD_GROUP"},{"dbColumnName":"Caste","excelColumnName":"CASTE"},{"dbColumnName":"ANM_Name","excelColumnName":"ANM_NAME"},{"dbColumnName":"ANM_Phone_No","excelColumnName":"ANM_PHONE_NO"},{"dbColumnName":"ASHA_Name","excelColumnName":"ASHA_NAME"},{"dbColumnName":"ASHA_Phone_No","excelColumnName":"ASHA_PHONE_NO"},{"dbColumnName":"BCG_Date","excelColumnName":"BCG_DATE"},{"dbColumnName":"OPV0_Date","excelColumnName":"OPV_0_DATE"},{"dbColumnName":"Hepatitis_B1_Date","excelColumnName":"HEPATITIS_B_1_DATE"},{"dbColumnName":"DPT1_Date","excelColumnName":"DPT_1_DATE"},{"dbColumnName":"OPV1_Date","excelColumnName":"OPV_1_DATE"},{"dbColumnName":"Hepatitis_B2_Date","excelColumnName":"HEPATITIS_B_2_DATE"},{"dbColumnName":"DPT2_Date","excelColumnName":"DPT_2_DATE"},{"dbColumnName":"OPV2_Date","excelColumnName":"OPV_2_DATE"},{"dbColumnName":"Hepatitis_B3_Date","excelColumnName":"HEPATITIS_B_3_DATE"},{"dbColumnName":"DPT3_Date","excelColumnName":"DPT_3_DATE"},{"dbColumnName":"OPV3_Date","excelColumnName":"OPV_3_DATE"},{"dbColumnName":"Hepatitis_B4_Date","excelColumnName":"HEPATITIS_B_4_DATE"},{"dbColumnName":"Measles_Date","excelColumnName":"MEASLES_DATE"},{"dbColumnName":"VitA_Dose1_Date","excelColumnName":"VITA_DOSE_1_DATE"},{"dbColumnName":"MR_Date","excelColumnName":"MR_DATE"},{"dbColumnName":"DPTBooster_Date","excelColumnName":"DPT_BOOSTER_DATE"},{"dbColumnName":"OPVBooster_Date","excelColumnName":"OPV_BOOSTER_DATE"},{"dbColumnName":"VitA_Dose2_Date","excelColumnName":"VITA_DOSE_2_DATE"},{"dbColumnName":"VitA_Dose3_Date","excelColumnName":"VITA_DOSE_3_DATE"},{"dbColumnName":"JE_Date","excelColumnName":"JE_DATE"},{"dbColumnName":"VitA_Dose9_Date","excelColumnName":"VITA_DOSE_9_DATE"},{"dbColumnName":"DT5_Date","excelColumnName":"DT_5_DATE"},{"dbColumnName":"TT10_Date","excelColumnName":"TT_10_DATE"},{"dbColumnName":"TT16_Date","excelColumnName":"TT_16_DATE"},{"dbColumnName":"is_Upload","excelColumnName":"IS_UPLOAD"},{"dbColumnName":"Emamta_Health_ID","excelColumnName":"EMAMTAHEALTH_ID"},{"dbColumnName":"Emamta_Family_ID","excelColumnName":"EMAMTAFAMILY_ID"},{"dbColumnName":"CID_NO","excelColumnName":"CID_NO"},{"dbColumnName":"MID_NO","excelColumnName":"MID_NO"},{"dbColumnName":"Delete_Mother","excelColumnName":"DELETE_MOTHER"},{"dbColumnName":"Delete_Reason","excelColumnName":"REASON_DELETION"},{"dbColumnName":"Deleted_ON","excelColumnName":"DELETED_ON"},{"dbColumnName":"Entry_type","excelColumnName":"ENTRY_TYPE"},{"dbColumnName":"Registration_Date","excelColumnName":"CHILD_REGESTERED_DATE"},{"dbColumnName":"Duplicate_Bit","excelColumnName":"DUPLICATE_BIT"},{"dbColumnName":"FacilityType","excelColumnName":"FACILITY_TYPE"},{"dbColumnName":"Gender","excelColumnName":"SEX"},{"dbColumnName":"VitA_Dose5_Date","excelColumnName":"VITA_DOSE_5_DATE"},{"dbColumnName":"VitA_Dose6_Date","excelColumnName":"VITA_DOSE_6_DATE"},{"dbColumnName":"VitA_Dose7_Date","excelColumnName":"VITA_DOSE_7_DATE"},{"dbColumnName":"VitA_Dose8_Date","excelColumnName":"VITA_DOSE_8_DATE"},{"dbColumnName":"VitA_Dose99_Date","excelColumnName":"VITA_DOSE_99_DATE"},{"dbColumnName":"Updated_Date","excelColumnName":"LAST_UPDATE_DATE"},{"dbColumnName":"SMS_Status","excelColumnName":"SMS_STATUS"},{"dbColumnName":"Remarks","excelColumnName":"REMARKS"},{"dbColumnName":"ANM_ID","excelColumnName":"ANM_ID"},{"dbColumnName":"ASHA_ID","excelColumnName":"ASHA_ID"},{"dbColumnName":"Created_By","excelColumnName":"CREATED_BY"},{"dbColumnName":"Updated_By","excelColumnName":"UPDATED_BY"},{"dbColumnName":"Measles_2_Date","excelColumnName":"MEASLES_2_DATE"},{"dbColumnName":"DueServices","excelColumnName":"DUE SERVICES"},{"dbColumnName":"OverDueServices","excelColumnName":"OVER DUE SERVICES"},{"dbColumnName":"GivenServices","excelColumnName":"GIVEN SERVICES"}]', 'Child Data', v_ProviderServiceMapID, 'Trigger - MCTSExcelMapping');
 
 else if (v_ServiceID =6 and v_StateID = 18)
 then
-INSERT INTO `db_iemr`.`m_mctsfieldsstatewise` (`DataFields`, `FieldsFor`, `ProviderServiceMapID`, `CreatedBy`) VALUES ('[{"dbColumnName":"District_ID","excelColumnName":"DISTRICT ID"},{"dbColumnName":"District_Name","excelColumnName":"DIST NAME"},{"dbColumnName":"Source","excelColumnName":"SOURCE"},{"dbColumnName":"Taluka_Name","excelColumnName":"TAL NAME"},{"dbColumnName":"Block_ID","excelColumnName":"BLOCK CD"},{"dbColumnName":"Block_Name","excelColumnName":"BLOCK NAME"},{"dbColumnName":"PHC_ID","excelColumnName":"PHC CD"},{"dbColumnName":"PHC_Name","excelColumnName":"PHC NAME"},{"dbColumnName":"SUBPHC_ID","excelColumnName":"SUBPHC CD"},{"dbColumnName":"SUBPHC_Name","excelColumnName":"SC NAME"},{"dbColumnName":"YR","excelColumnName":"YR"},{"dbColumnName":"GP_Village","excelColumnName":"GP VILLAGE"},{"dbColumnName":"Address","excelColumnName":"ADDRESS"},{"dbColumnName":"MCTSID_no","excelColumnName":"ID NO"},{"dbColumnName":"Name","excelColumnName":"NAME"},{"dbColumnName":"Husband_Name","excelColumnName":"HUSBAND NAME"},{"dbColumnName":"PhoneNo_Of_Whom","excelColumnName":"PHONENO OF WHOM"},{"dbColumnName":"Whom_PhoneNo","excelColumnName":"WHOM PHONENO"},{"dbColumnName":"Birth_Date","excelColumnName":"BIRTHDATE"},{"dbColumnName":"Age","excelColumnName":"AGE"},{"dbColumnName":"JSY_Beneficiary","excelColumnName":"JSY BENEFICIARY"},{"dbColumnName":"Caste","excelColumnName":"CASTE"},{"dbColumnName":"SubCenter_Name","excelColumnName":"SUBCENTRE NAME"},{"dbColumnName":"ANM_Name","excelColumnName":"ANM NAME"},{"dbColumnName":"ANM_Ph","excelColumnName":"ANM PHONE"},{"dbColumnName":"ASHA_Name","excelColumnName":"ASHA NAME"},{"dbColumnName":"ASHA_Ph","excelColumnName":"ASHA PHONE"},{"dbColumnName":"Delivery_Lnk_Facility","excelColumnName":"DELIVERY LNK FACILITY"},{"dbColumnName":"Facility_Name","excelColumnName":"FACILITY NAME"},{"dbColumnName":"LMP_Date","excelColumnName":"LMP DATE"},{"dbColumnName":"ANC1_Date","excelColumnName":"ANC1 DATE"},{"dbColumnName":"ANC2_Date","excelColumnName":"ANC2 DATE"},{"dbColumnName":"ANC3_Date","excelColumnName":"ANC3 DATE"},{"dbColumnName":"ANC4_Date","excelColumnName":"ANC4 DATE"},{"dbColumnName":"TT1_Date","excelColumnName":"TT1 DATE"},{"dbColumnName":"TT2_Date","excelColumnName":"TT2 DATE"},{"dbColumnName":"TTBooster_Date","excelColumnName":"TTBOOSTER DATE"},{"dbColumnName":"IFA100_Given_Date","excelColumnName":"IFA100 GIVEN DATE"},{"dbColumnName":"EDD","excelColumnName":"EDD"},{"dbColumnName":"Anemia","excelColumnName":"ANEMIA"},{"dbColumnName":"ANC_Complication","excelColumnName":"ANC COMPLICATION"},{"dbColumnName":"RTI_STI","excelColumnName":"RTI STI"},{"dbColumnName":"Delivery_Date","excelColumnName":"DLY DATE"},{"dbColumnName":"Delivery_Place_home_type","excelColumnName":"DLY PLACE HOME TYPE"},{"dbColumnName":"Delivery_Place_Public","excelColumnName":"DLY PLACE PUBLIC"},{"dbColumnName":"Delivery_Place_Private","excelColumnName":"DLY PLACE PRIVATE"},{"dbColumnName":"Delivery_type","excelColumnName":"DLY TYPE"},{"dbColumnName":"Delivery_Complications","excelColumnName":"DLY COMPLICATION"},{"dbColumnName":"Discharge_Date","excelColumnName":"DISCHARGE DATE"},{"dbColumnName":"JSY_Paid_Date","excelColumnName":"JSY PAID DATE"},{"dbColumnName":"Abortion","excelColumnName":"ABORTION"},{"dbColumnName":"PNC_Home_Visit","excelColumnName":"PNC HOME VISIT"},{"dbColumnName":"PNC_Complication","excelColumnName":"PNC COMPLICATION"},{"dbColumnName":"PPC_Method","excelColumnName":"PPC METHOD"},{"dbColumnName":"PNC_Checkup","excelColumnName":"PNC CHECKUP"},{"dbColumnName":"Outcome_Nos","excelColumnName":"OUTCOME NOS"},{"dbColumnName":"Child1_Name","excelColumnName":"CHILD1 NAME"},{"dbColumnName":"Child1_Gender","excelColumnName":"CHILD1 SEX"},{"dbColumnName":"Child1_Weight","excelColumnName":"CHILD1 WT"},{"dbColumnName":"Child1_BreastFeeding","excelColumnName":"CHILD1 BRESTFEEDING"},{"dbColumnName":"Child2_Name","excelColumnName":"CHILD2 NAME"},{"dbColumnName":"Child2_Gender","excelColumnName":"CHILD2 SEX"},{"dbColumnName":"Child2_weight","excelColumnName":"CHILD2 WT"},{"dbColumnName":"Child2_Breastfeeding","excelColumnName":"CHILD2 BRESTFEEDING"},{"dbColumnName":"Child3_Name","excelColumnName":"CHILD3 NAME"},{"dbColumnName":"Child3_Gender","excelColumnName":"CHILD3 SEX"},{"dbColumnName":"Child3_Weight","excelColumnName":"CHILD3 WT"},{"dbColumnName":"Child3_Breastfeeding","excelColumnName":"CHILD3 BRESTFEEDING"},{"dbColumnName":"Child4_Name","excelColumnName":"CHILD4 NAME"},{"dbColumnName":"Child4_Gender","excelColumnName":"CHILD4 SEX"},{"dbColumnName":"Child4_Weight","excelColumnName":"CHILD4 WT"},{"dbColumnName":"Child4_Breastfeeding","excelColumnName":"CHILD4 BRESTFEEDING"},{"dbColumnName":"Mother_Reg_Date","excelColumnName":"MTHR REG DATE"},{"dbColumnName":"Last_Update_Date","excelColumnName":"LASTUPDATEDATE"},{"dbColumnName":"Aadhar_no","excelColumnName":"AADHAR NO"},{"dbColumnName":"EID","excelColumnName":"EID"},{"dbColumnName":"EID_time","excelColumnName":"EIDTIME"},{"dbColumnName":"CPSMS_Flag","excelColumnName":"CPSMS FLAG"},{"dbColumnName":"Bank_Name","excelColumnName":"BANK NAME"},{"dbColumnName":"Bank_Branch_Name","excelColumnName":"BRANCH NAME"},{"dbColumnName":"Acc_No","excelColumnName":"ACC NO"},{"dbColumnName":"IFSC_Code","excelColumnName":"IFSC CODE"},{"dbColumnName":"Remarks","excelColumnName":"REMARKS"},{"dbColumnName":"Referred_By_Telecaller","excelColumnName":"REFERRED BY TELECALLER"},{"dbColumnName":"Referred_Date","excelColumnName":"REFERRED DATE"}]', 'Mother Data', v_ProviderServiceMapID, 'Trigger - MCTSExcelMapping');
-INSERT INTO `db_iemr`.`m_mctsfieldsstatewise` (`DataFields`, `FieldsFor`, `ProviderServiceMapID`, `CreatedBy`) VALUES ('[{"dbColumnName":"My_ID","excelColumnName":"MY ID"},{"dbColumnName":"State_ID","excelColumnName":"STATE ID"},{"dbColumnName":"District_ID","excelColumnName":"DISTRICT ID"},{"dbColumnName":"District_Name","excelColumnName":"DISTRICT NAME"},{"dbColumnName":"Source","excelColumnName":"SOURCE"},{"dbColumnName":"Taluka_Name","excelColumnName":"TALUKA NAME"},{"dbColumnName":"Block_ID","excelColumnName":"HEALTH BLOCK ID"},{"dbColumnName":"Block_Name","excelColumnName":"HEALTH BLOCK NAME"},{"dbColumnName":"PHC_ID","excelColumnName":"PHC ID"},{"dbColumnName":"PHC_Name","excelColumnName":"PHC NAME"},{"dbColumnName":"SubCenter_ID","excelColumnName":"SUBCENTER ID"},{"dbColumnName":"SubCenter_Name","excelColumnName":"SUBCENTER NAME"},{"dbColumnName":"Village_ID","excelColumnName":"VILLAGE ID"},{"dbColumnName":"Village_Name","excelColumnName":"VILLAGE NAME"},{"dbColumnName":"Rural_urban","excelColumnName":"RURAL URBAN"},{"dbColumnName":"Year","excelColumnName":"YEAR"},{"dbColumnName":"SNO","excelColumnName":"SNO"},{"dbColumnName":"City","excelColumnName":"CITY MOHOLLA"},{"dbColumnName":"GP_Village","excelColumnName":"GP VILLAGE"},{"dbColumnName":"Address","excelColumnName":"ADDRESS"},{"dbColumnName":"MCTSID_no_Child_ID","excelColumnName":"CHILD ID"},{"dbColumnName":"Child_Name","excelColumnName":"CHILD NAME"},{"dbColumnName":"Mother_Name","excelColumnName":"MOTHER NAME"},{"dbColumnName":"Mother_ID","excelColumnName":"MOTHER ID"},{"dbColumnName":"Phone_No_of","excelColumnName":"PHONE NO OF WHOM"},{"dbColumnName":"Phone_No","excelColumnName":"PHONE NO"},{"dbColumnName":"DOB","excelColumnName":"BIRTH DATE"},{"dbColumnName":"Place_of_Birth","excelColumnName":"PLACE OF DELIVERY"},{"dbColumnName":"BloodGroup","excelColumnName":"BLOOD GROUP"},{"dbColumnName":"Caste","excelColumnName":"CASTE"},{"dbColumnName":"ANM_Name","excelColumnName":"ANM NAME"},{"dbColumnName":"ANM_Phone_No","excelColumnName":"ANM PHONE NO"},{"dbColumnName":"ASHA_Name","excelColumnName":"ASHA NAME"},{"dbColumnName":"ASHA_Phone_No","excelColumnName":"ASHA PHONE NO"},{"dbColumnName":"BCG_Date","excelColumnName":"BCG DATE"},{"dbColumnName":"OPV0_Date","excelColumnName":"OPV 0 DATE"},{"dbColumnName":"Hepatitis_B1_Date","excelColumnName":"HEPATITIS B 1 DATE"},{"dbColumnName":"DPT1_Date","excelColumnName":"DPT 1 DATE"},{"dbColumnName":"OPV1_Date","excelColumnName":"OPV 1 DATE"},{"dbColumnName":"Hepatitis_B2_Date","excelColumnName":"HEPATITIS B 2 DATE"},{"dbColumnName":"DPT2_Date","excelColumnName":"DPT 2 DATE"},{"dbColumnName":"OPV2_Date","excelColumnName":"OPV 2 DATE"},{"dbColumnName":"Hepatitis_B3_Date","excelColumnName":"HEPATITIS B 3 DATE"},{"dbColumnName":"DPT3_Date","excelColumnName":"DPT 3 DATE"},{"dbColumnName":"OPV3_Date","excelColumnName":"OPV 3 DATE"},{"dbColumnName":"Hepatitis_B4_Date","excelColumnName":"HEPATITIS B 4 DATE"},{"dbColumnName":"Measles_Date","excelColumnName":"MEASLES DATE"},{"dbColumnName":"VitA_Dose1_Date","excelColumnName":"VITA DOSE 1 DATE"},{"dbColumnName":"MR_Date","excelColumnName":"MR DATE"},{"dbColumnName":"DPTBooster_Date","excelColumnName":"DPT BOOSTER DATE"},{"dbColumnName":"OPVBooster_Date","excelColumnName":"OPV BOOSTER DATE"},{"dbColumnName":"VitA_Dose2_Date","excelColumnName":"VITA DOSE 2 DATE"},{"dbColumnName":"VitA_Dose3_Date","excelColumnName":"VITA DOSE 3 DATE"},{"dbColumnName":"DT5_Date","excelColumnName":"DT5_Dt"},{"dbColumnName":"VitA_Dose9_Date","excelColumnName":"VITA DOSE 9 DATE"},{"dbColumnName":"TT10_Date","excelColumnName":"TT 10 DATE"},{"dbColumnName":"TT16_Date","excelColumnName":"TT 16 DATE"},{"dbColumnName":"is_Upload","excelColumnName":"IS UPLOAD"},{"dbColumnName":"Emamta_Health_ID","excelColumnName":"EMAMTAHEALTH ID"},{"dbColumnName":"Emamta_Family_ID","excelColumnName":"EMAMTAFAMILY ID"},{"dbColumnName":"CID_NO","excelColumnName":"CID NO"},{"dbColumnName":"MID_NO","excelColumnName":"MID NO"},{"dbColumnName":"Delete_Mother","excelColumnName":"DELETE MOTHER"},{"dbColumnName":"Delete_Reason","excelColumnName":"REASON DELETION"},{"dbColumnName":"Deleted_ON","excelColumnName":"DELETED ON"},{"dbColumnName":"Entry_type","excelColumnName":"ENTRY TYPE"},{"dbColumnName":"Registration_Date","excelColumnName":"CHILD REGESTERED DATE"},{"dbColumnName":"Duplicate_Bit","excelColumnName":"DUPLICATE BIT"},{"dbColumnName":"FacilityType","excelColumnName":"FACILITY TYPE"},{"dbColumnName":"Gender","excelColumnName":"SEX"},{"dbColumnName":"VitA_Dose5_Date","excelColumnName":"VITA DOSE 5 DATE"},{"dbColumnName":"VitA_Dose6_Date","excelColumnName":"VITA DOSE 6 DATE"},{"dbColumnName":"VitA_Dose7_Date","excelColumnName":"VITA DOSE 7 DATE"},{"dbColumnName":"VitA_Dose8_Date","excelColumnName":"VITA DOSE 8 DATE"},{"dbColumnName":"VitA_Dose99_Date","excelColumnName":"VITA DOSE 99 DATE"},{"dbColumnName":"Updated_Date","excelColumnName":"LAST UPDATE DATE"},{"dbColumnName":"SMS_Status","excelColumnName":"SMS STATUS"},{"dbColumnName":"Remarks","excelColumnName":"REMARKS"},{"dbColumnName":"ANM_ID","excelColumnName":"ANM ID"},{"dbColumnName":"ASHA_ID","excelColumnName":"ASHA ID"},{"dbColumnName":"Created_By","excelColumnName":"CREATED BY"},{"dbColumnName":"Updated_By","excelColumnName":"UPDATED BY"},{"dbColumnName":"Measles_2_Date","excelColumnName":"MEASLES 2 DATE"}]', 'Child Data', v_ProviderServiceMapID, 'Trigger - MCTSExcelMapping');
+INSERT INTO `dbiemr`.`m_mctsfieldsstatewise` (`DataFields`, `FieldsFor`, `ProviderServiceMapID`, `CreatedBy`) VALUES ('[{"dbColumnName":"District_ID","excelColumnName":"DISTRICT ID"},{"dbColumnName":"District_Name","excelColumnName":"DIST NAME"},{"dbColumnName":"Source","excelColumnName":"SOURCE"},{"dbColumnName":"Taluka_Name","excelColumnName":"TAL NAME"},{"dbColumnName":"Block_ID","excelColumnName":"BLOCK CD"},{"dbColumnName":"Block_Name","excelColumnName":"BLOCK NAME"},{"dbColumnName":"PHC_ID","excelColumnName":"PHC CD"},{"dbColumnName":"PHC_Name","excelColumnName":"PHC NAME"},{"dbColumnName":"SUBPHC_ID","excelColumnName":"SUBPHC CD"},{"dbColumnName":"SUBPHC_Name","excelColumnName":"SC NAME"},{"dbColumnName":"YR","excelColumnName":"YR"},{"dbColumnName":"GP_Village","excelColumnName":"GP VILLAGE"},{"dbColumnName":"Address","excelColumnName":"ADDRESS"},{"dbColumnName":"MCTSID_no","excelColumnName":"ID NO"},{"dbColumnName":"Name","excelColumnName":"NAME"},{"dbColumnName":"Husband_Name","excelColumnName":"HUSBAND NAME"},{"dbColumnName":"PhoneNo_Of_Whom","excelColumnName":"PHONENO OF WHOM"},{"dbColumnName":"Whom_PhoneNo","excelColumnName":"WHOM PHONENO"},{"dbColumnName":"Birth_Date","excelColumnName":"BIRTHDATE"},{"dbColumnName":"Age","excelColumnName":"AGE"},{"dbColumnName":"JSY_Beneficiary","excelColumnName":"JSY BENEFICIARY"},{"dbColumnName":"Caste","excelColumnName":"CASTE"},{"dbColumnName":"SubCenter_Name","excelColumnName":"SUBCENTRE NAME"},{"dbColumnName":"ANM_Name","excelColumnName":"ANM NAME"},{"dbColumnName":"ANM_Ph","excelColumnName":"ANM PHONE"},{"dbColumnName":"ASHA_Name","excelColumnName":"ASHA NAME"},{"dbColumnName":"ASHA_Ph","excelColumnName":"ASHA PHONE"},{"dbColumnName":"Delivery_Lnk_Facility","excelColumnName":"DELIVERY LNK FACILITY"},{"dbColumnName":"Facility_Name","excelColumnName":"FACILITY NAME"},{"dbColumnName":"LMP_Date","excelColumnName":"LMP DATE"},{"dbColumnName":"ANC1_Date","excelColumnName":"ANC1 DATE"},{"dbColumnName":"ANC2_Date","excelColumnName":"ANC2 DATE"},{"dbColumnName":"ANC3_Date","excelColumnName":"ANC3 DATE"},{"dbColumnName":"ANC4_Date","excelColumnName":"ANC4 DATE"},{"dbColumnName":"TT1_Date","excelColumnName":"TT1 DATE"},{"dbColumnName":"TT2_Date","excelColumnName":"TT2 DATE"},{"dbColumnName":"TTBooster_Date","excelColumnName":"TTBOOSTER DATE"},{"dbColumnName":"IFA100_Given_Date","excelColumnName":"IFA100 GIVEN DATE"},{"dbColumnName":"EDD","excelColumnName":"EDD"},{"dbColumnName":"Anemia","excelColumnName":"ANEMIA"},{"dbColumnName":"ANC_Complication","excelColumnName":"ANC COMPLICATION"},{"dbColumnName":"RTI_STI","excelColumnName":"RTI STI"},{"dbColumnName":"Delivery_Date","excelColumnName":"DLY DATE"},{"dbColumnName":"Delivery_Place_home_type","excelColumnName":"DLY PLACE HOME TYPE"},{"dbColumnName":"Delivery_Place_Public","excelColumnName":"DLY PLACE PUBLIC"},{"dbColumnName":"Delivery_Place_Private","excelColumnName":"DLY PLACE PRIVATE"},{"dbColumnName":"Delivery_type","excelColumnName":"DLY TYPE"},{"dbColumnName":"Delivery_Complications","excelColumnName":"DLY COMPLICATION"},{"dbColumnName":"Discharge_Date","excelColumnName":"DISCHARGE DATE"},{"dbColumnName":"JSY_Paid_Date","excelColumnName":"JSY PAID DATE"},{"dbColumnName":"Abortion","excelColumnName":"ABORTION"},{"dbColumnName":"PNC_Home_Visit","excelColumnName":"PNC HOME VISIT"},{"dbColumnName":"PNC_Complication","excelColumnName":"PNC COMPLICATION"},{"dbColumnName":"PPC_Method","excelColumnName":"PPC METHOD"},{"dbColumnName":"PNC_Checkup","excelColumnName":"PNC CHECKUP"},{"dbColumnName":"Outcome_Nos","excelColumnName":"OUTCOME NOS"},{"dbColumnName":"Child1_Name","excelColumnName":"CHILD1 NAME"},{"dbColumnName":"Child1_Gender","excelColumnName":"CHILD1 SEX"},{"dbColumnName":"Child1_Weight","excelColumnName":"CHILD1 WT"},{"dbColumnName":"Child1_BreastFeeding","excelColumnName":"CHILD1 BRESTFEEDING"},{"dbColumnName":"Child2_Name","excelColumnName":"CHILD2 NAME"},{"dbColumnName":"Child2_Gender","excelColumnName":"CHILD2 SEX"},{"dbColumnName":"Child2_weight","excelColumnName":"CHILD2 WT"},{"dbColumnName":"Child2_Breastfeeding","excelColumnName":"CHILD2 BRESTFEEDING"},{"dbColumnName":"Child3_Name","excelColumnName":"CHILD3 NAME"},{"dbColumnName":"Child3_Gender","excelColumnName":"CHILD3 SEX"},{"dbColumnName":"Child3_Weight","excelColumnName":"CHILD3 WT"},{"dbColumnName":"Child3_Breastfeeding","excelColumnName":"CHILD3 BRESTFEEDING"},{"dbColumnName":"Child4_Name","excelColumnName":"CHILD4 NAME"},{"dbColumnName":"Child4_Gender","excelColumnName":"CHILD4 SEX"},{"dbColumnName":"Child4_Weight","excelColumnName":"CHILD4 WT"},{"dbColumnName":"Child4_Breastfeeding","excelColumnName":"CHILD4 BRESTFEEDING"},{"dbColumnName":"Mother_Reg_Date","excelColumnName":"MTHR REG DATE"},{"dbColumnName":"Last_Update_Date","excelColumnName":"LASTUPDATEDATE"},{"dbColumnName":"Aadhar_no","excelColumnName":"AADHAR NO"},{"dbColumnName":"EID","excelColumnName":"EID"},{"dbColumnName":"EID_time","excelColumnName":"EIDTIME"},{"dbColumnName":"CPSMS_Flag","excelColumnName":"CPSMS FLAG"},{"dbColumnName":"Bank_Name","excelColumnName":"BANK NAME"},{"dbColumnName":"Bank_Branch_Name","excelColumnName":"BRANCH NAME"},{"dbColumnName":"Acc_No","excelColumnName":"ACC NO"},{"dbColumnName":"IFSC_Code","excelColumnName":"IFSC CODE"},{"dbColumnName":"Remarks","excelColumnName":"REMARKS"},{"dbColumnName":"Referred_By_Telecaller","excelColumnName":"REFERRED BY TELECALLER"},{"dbColumnName":"Referred_Date","excelColumnName":"REFERRED DATE"}]', 'Mother Data', v_ProviderServiceMapID, 'Trigger - MCTSExcelMapping');
+INSERT INTO `dbiemr`.`m_mctsfieldsstatewise` (`DataFields`, `FieldsFor`, `ProviderServiceMapID`, `CreatedBy`) VALUES ('[{"dbColumnName":"My_ID","excelColumnName":"MY ID"},{"dbColumnName":"State_ID","excelColumnName":"STATE ID"},{"dbColumnName":"District_ID","excelColumnName":"DISTRICT ID"},{"dbColumnName":"District_Name","excelColumnName":"DISTRICT NAME"},{"dbColumnName":"Source","excelColumnName":"SOURCE"},{"dbColumnName":"Taluka_Name","excelColumnName":"TALUKA NAME"},{"dbColumnName":"Block_ID","excelColumnName":"HEALTH BLOCK ID"},{"dbColumnName":"Block_Name","excelColumnName":"HEALTH BLOCK NAME"},{"dbColumnName":"PHC_ID","excelColumnName":"PHC ID"},{"dbColumnName":"PHC_Name","excelColumnName":"PHC NAME"},{"dbColumnName":"SubCenter_ID","excelColumnName":"SUBCENTER ID"},{"dbColumnName":"SubCenter_Name","excelColumnName":"SUBCENTER NAME"},{"dbColumnName":"Village_ID","excelColumnName":"VILLAGE ID"},{"dbColumnName":"Village_Name","excelColumnName":"VILLAGE NAME"},{"dbColumnName":"Rural_urban","excelColumnName":"RURAL URBAN"},{"dbColumnName":"Year","excelColumnName":"YEAR"},{"dbColumnName":"SNO","excelColumnName":"SNO"},{"dbColumnName":"City","excelColumnName":"CITY MOHOLLA"},{"dbColumnName":"GP_Village","excelColumnName":"GP VILLAGE"},{"dbColumnName":"Address","excelColumnName":"ADDRESS"},{"dbColumnName":"MCTSID_no_Child_ID","excelColumnName":"CHILD ID"},{"dbColumnName":"Child_Name","excelColumnName":"CHILD NAME"},{"dbColumnName":"Mother_Name","excelColumnName":"MOTHER NAME"},{"dbColumnName":"Mother_ID","excelColumnName":"MOTHER ID"},{"dbColumnName":"Phone_No_of","excelColumnName":"PHONE NO OF WHOM"},{"dbColumnName":"Phone_No","excelColumnName":"PHONE NO"},{"dbColumnName":"DOB","excelColumnName":"BIRTH DATE"},{"dbColumnName":"Place_of_Birth","excelColumnName":"PLACE OF DELIVERY"},{"dbColumnName":"BloodGroup","excelColumnName":"BLOOD GROUP"},{"dbColumnName":"Caste","excelColumnName":"CASTE"},{"dbColumnName":"ANM_Name","excelColumnName":"ANM NAME"},{"dbColumnName":"ANM_Phone_No","excelColumnName":"ANM PHONE NO"},{"dbColumnName":"ASHA_Name","excelColumnName":"ASHA NAME"},{"dbColumnName":"ASHA_Phone_No","excelColumnName":"ASHA PHONE NO"},{"dbColumnName":"BCG_Date","excelColumnName":"BCG DATE"},{"dbColumnName":"OPV0_Date","excelColumnName":"OPV 0 DATE"},{"dbColumnName":"Hepatitis_B1_Date","excelColumnName":"HEPATITIS B 1 DATE"},{"dbColumnName":"DPT1_Date","excelColumnName":"DPT 1 DATE"},{"dbColumnName":"OPV1_Date","excelColumnName":"OPV 1 DATE"},{"dbColumnName":"Hepatitis_B2_Date","excelColumnName":"HEPATITIS B 2 DATE"},{"dbColumnName":"DPT2_Date","excelColumnName":"DPT 2 DATE"},{"dbColumnName":"OPV2_Date","excelColumnName":"OPV 2 DATE"},{"dbColumnName":"Hepatitis_B3_Date","excelColumnName":"HEPATITIS B 3 DATE"},{"dbColumnName":"DPT3_Date","excelColumnName":"DPT 3 DATE"},{"dbColumnName":"OPV3_Date","excelColumnName":"OPV 3 DATE"},{"dbColumnName":"Hepatitis_B4_Date","excelColumnName":"HEPATITIS B 4 DATE"},{"dbColumnName":"Measles_Date","excelColumnName":"MEASLES DATE"},{"dbColumnName":"VitA_Dose1_Date","excelColumnName":"VITA DOSE 1 DATE"},{"dbColumnName":"MR_Date","excelColumnName":"MR DATE"},{"dbColumnName":"DPTBooster_Date","excelColumnName":"DPT BOOSTER DATE"},{"dbColumnName":"OPVBooster_Date","excelColumnName":"OPV BOOSTER DATE"},{"dbColumnName":"VitA_Dose2_Date","excelColumnName":"VITA DOSE 2 DATE"},{"dbColumnName":"VitA_Dose3_Date","excelColumnName":"VITA DOSE 3 DATE"},{"dbColumnName":"DT5_Date","excelColumnName":"DT5_Dt"},{"dbColumnName":"VitA_Dose9_Date","excelColumnName":"VITA DOSE 9 DATE"},{"dbColumnName":"TT10_Date","excelColumnName":"TT 10 DATE"},{"dbColumnName":"TT16_Date","excelColumnName":"TT 16 DATE"},{"dbColumnName":"is_Upload","excelColumnName":"IS UPLOAD"},{"dbColumnName":"Emamta_Health_ID","excelColumnName":"EMAMTAHEALTH ID"},{"dbColumnName":"Emamta_Family_ID","excelColumnName":"EMAMTAFAMILY ID"},{"dbColumnName":"CID_NO","excelColumnName":"CID NO"},{"dbColumnName":"MID_NO","excelColumnName":"MID NO"},{"dbColumnName":"Delete_Mother","excelColumnName":"DELETE MOTHER"},{"dbColumnName":"Delete_Reason","excelColumnName":"REASON DELETION"},{"dbColumnName":"Deleted_ON","excelColumnName":"DELETED ON"},{"dbColumnName":"Entry_type","excelColumnName":"ENTRY TYPE"},{"dbColumnName":"Registration_Date","excelColumnName":"CHILD REGESTERED DATE"},{"dbColumnName":"Duplicate_Bit","excelColumnName":"DUPLICATE BIT"},{"dbColumnName":"FacilityType","excelColumnName":"FACILITY TYPE"},{"dbColumnName":"Gender","excelColumnName":"SEX"},{"dbColumnName":"VitA_Dose5_Date","excelColumnName":"VITA DOSE 5 DATE"},{"dbColumnName":"VitA_Dose6_Date","excelColumnName":"VITA DOSE 6 DATE"},{"dbColumnName":"VitA_Dose7_Date","excelColumnName":"VITA DOSE 7 DATE"},{"dbColumnName":"VitA_Dose8_Date","excelColumnName":"VITA DOSE 8 DATE"},{"dbColumnName":"VitA_Dose99_Date","excelColumnName":"VITA DOSE 99 DATE"},{"dbColumnName":"Updated_Date","excelColumnName":"LAST UPDATE DATE"},{"dbColumnName":"SMS_Status","excelColumnName":"SMS STATUS"},{"dbColumnName":"Remarks","excelColumnName":"REMARKS"},{"dbColumnName":"ANM_ID","excelColumnName":"ANM ID"},{"dbColumnName":"ASHA_ID","excelColumnName":"ASHA ID"},{"dbColumnName":"Created_By","excelColumnName":"CREATED BY"},{"dbColumnName":"Updated_By","excelColumnName":"UPDATED BY"},{"dbColumnName":"Measles_2_Date","excelColumnName":"MEASLES 2 DATE"}]', 'Child Data', v_ProviderServiceMapID, 'Trigger - MCTSExcelMapping');
 
 end if; 
 end if;
@@ -13093,24 +13093,24 @@ ContactNo3, Website, InstitutionType)
      
      
      update temp_institution t
-     inner join db_iemr.m_state s on s.StateName=t.State
+     inner join dbiemr.m_state s on s.StateName=t.State
      set t.StateID=s.StateID;
      
      update temp_institution t
-     inner join db_iemr.m_district s on s.districtname=t.district
+     inner join dbiemr.m_district s on s.districtname=t.district
      set t.districtid=s.districtid;
      
      
      update temp_institution t
-     inner join db_iemr.m_districtblock s on s.blockname=t.taluk
+     inner join dbiemr.m_districtblock s on s.blockname=t.taluk
      set t.blockid=s.blockid;
      
      
      
      update temp_institution t
    
-     inner join db_iemr.m_servicemaster sm on sm.ServiceName=t.serviceline
-     inner join db_iemr.m_providerservicemapping s on 
+     inner join dbiemr.m_servicemaster sm on sm.ServiceName=t.serviceline
+     inner join dbiemr.m_providerservicemapping s on 
       s.StateID=t.StateID
      and s.serviceproviderid=v_serviceproviderid and s.serviceid=sm.ServiceID
     
@@ -13122,8 +13122,8 @@ ContactNo3, Website, InstitutionType)
      
      update temp_institution t
    
-     inner join db_iemr.m_servicemaster sm on sm.ServiceName=t.serviceline
-     inner join db_iemr.m_providerservicemapping s on 
+     inner join dbiemr.m_servicemaster sm on sm.ServiceName=t.serviceline
+     inner join dbiemr.m_providerservicemapping s on 
     
       s.serviceproviderid=v_serviceproviderid and s.serviceid=sm.ServiceID
     
@@ -13131,7 +13131,7 @@ ContactNo3, Website, InstitutionType)
      where s.Deleted is false and sm.ServiceID=1;
      
      update temp_institution t
-     inner join db_iemr.m_institutiontype s on s.institutiontype=t.InstitutionType
+     inner join dbiemr.m_institutiontype s on s.institutiontype=t.InstitutionType
      and t.providerservicemapid=s.ProviderServiceMapID
      set t.institutiontypeid=s.institutiontypeid;
      
@@ -13169,7 +13169,7 @@ ContactNo3, Website, InstitutionType)
    
      
      update temp_institution t
- inner join db_iemr.m_institution m on m.Institutionname=t.InstitutionName
+ inner join dbiemr.m_institution m on m.Institutionname=t.InstitutionName
   and m.StateID=t.stateid and m.DistrictID=t.districtid 
   and t.providerservicemapid=m.providerservicemapid
  set m.StateID=t.stateid, m.DistrictID=t.DistrictID, m.BlockID=t.BlockID,  
@@ -13200,7 +13200,7 @@ m.CreatedBy= replace(v_Created_by, '"',''),m.InstituteTypeId=t.InstitutionTypeId
     
    set v_updatecount=row_count();
      
- insert into db_iemr.m_institution(InstitutionName, StateID, DistrictID, BlockID,  Address, 
+ insert into dbiemr.m_institution(InstitutionName, StateID, DistrictID, BlockID,  Address, 
  ContactPerson1, 
  ContactPerson1_Email, ContactNo1, ContactPerson2, ContactPerson2_Email, ContactNo2,
   ContactPerson3_Email,ContactPerson3, 
@@ -13214,7 +13214,7 @@ m.CreatedBy= replace(v_Created_by, '"',''),m.InstituteTypeId=t.InstitutionTypeId
  'N' Processed,  replace(v_Created_by, '"',''),
   t.InstitutionTypeId
  from temp_institution t
- left join db_iemr.m_institution m on m.Institutionname=t.InstitutionName
+ left join dbiemr.m_institution m on m.Institutionname=t.InstitutionName
  and m.StateID=t.stateid and m.DistrictID=t.districtid and t.providerservicemapid=m.providerservicemapid
  where m.InstitutionName is null and t.InstitutionName is not null and t.StateID is not null
   and t.institutiontypeid is not null
@@ -13275,15 +13275,15 @@ begin
  
  /*drop temporary table if exists temp_MctsQAMapping;
  create temporary table temp_MctsQAMapping 
- select mcts.QuestionID,mctsq.question from db_iemr.m_MctsQAMapping mcts 
- inner join db_iemr.m_questionnaire  mctsq on mcts.questionid=mcts.Questionid
+ select mcts.QuestionID,mctsq.question from dbiemr.m_MctsQAMapping mcts 
+ inner join dbiemr.m_questionnaire  mctsq on mcts.questionid=mcts.Questionid
   where mcts.outboundCallType = v_outboundCallType and mcts.providerServiceMapID = v_psmid
   and mcts.deleted is false and mcts.effectiveFrom = v_effectiveFrom
   and mcts.interaction is null ;*/
  drop temporary table if exists temp_questions;
  create temporary table temp_questions as 
- select mcts.QuestionID QuestionID , mctsq.question,mctsq.questionrank from db_iemr.m_MctsQAMapping mcts 
- inner join db_iemr.m_questionnaire  mctsq on mctsq.questionid=mcts.Questionid
+ select mcts.QuestionID QuestionID , mctsq.question,mctsq.questionrank from dbiemr.m_MctsQAMapping mcts 
+ inner join dbiemr.m_questionnaire  mctsq on mctsq.questionid=mcts.Questionid
   where mcts.outboundCallType = ifnull(v_outboundCallType,mcts.outboundCallType) 
   and mcts.providerServiceMapID = ifnull(v_psmid,mcts.providerServiceMapID)
   and mcts.deleted is false and 
@@ -13315,7 +13315,7 @@ begin
               and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime 
               and fo.outboundCallType = ifnull(v_outboundCallType,fo.outboundCallType)
  and   fb.CallTypeid 
-               in (select calltypeid from db_iemr.m_calltype
+               in (select calltypeid from dbiemr.m_calltype
               where callgrouptype='Answered' and calltype='Answered')
  
  union all
@@ -13338,7 +13338,7 @@ begin
               and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime 
                and fo.outboundCallType = ifnull(v_outboundCallType,fo.outboundCallType)
               and   fb.CallTypeid 
-               in (select calltypeid from db_iemr.m_calltype
+               in (select calltypeid from dbiemr.m_calltype
               where callgrouptype='Answered' and calltype='Answered');
     --   SELECT * FROM temp_Answereddata;       
               
@@ -13420,7 +13420,7 @@ end if;
               and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime 
                and fo.outboundCallType = ifnull(v_outboundCallType,fo.outboundCallType)
  and   fb.CallTypeid 
-               in (select calltypeid from db_iemr.m_calltype
+               in (select calltypeid from dbiemr.m_calltype
               where callgrouptype='Answered' and calltype='Answered')
  
  union all
@@ -13442,7 +13442,7 @@ end if;
               and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime 
                 and fo.outboundCallType = ifnull(v_outboundCallType,fo.outboundCallType)
               and   fb.CallTypeid 
-               in (select calltypeid from db_iemr.m_calltype
+               in (select calltypeid from dbiemr.m_calltype
               where callgrouptype='Answered' and calltype='Answered');
               
                SET SESSION group_concat_max_len = 1000000;
@@ -13643,7 +13643,7 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
              and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime 
 and   fb.CallTypeid 
-             not in(select calltypeid from db_iemr.m_calltype
+             not in(select calltypeid from dbiemr.m_calltype
              where callgrouptype='Answered' and calltype='Answered')
 
 union all
@@ -13660,7 +13660,7 @@ and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
              and fb.createdDate >=v_starttime and fb.createdDate <=v_endtime 
              and fb.CallTypeid 
-             not in(select calltypeid from db_iemr.m_calltype
+             not in(select calltypeid from dbiemr.m_calltype
              where callgrouptype='Answered' and calltype='Answered');
              
     
@@ -13804,7 +13804,7 @@ v_isMother varchar(10),
 v_Agentid int(11),v_psmid int(11))
 begin
 declare v_stateid int(11);
-select distinct stateid into v_stateid  from db_iemr.m_providerservicemapping 
+select distinct stateid into v_stateid  from dbiemr.m_providerservicemapping 
 where ProviderServiceMapID=v_psmid;
 
 drop temporary table if exists temp_dailyReport;
@@ -13815,31 +13815,31 @@ Date datetime,  Districtid int(11),Districts varchar(100),  TotalCalls int(11),
   TotalVerifiedCalls  int(11),TotalUnVerifiedCalls int(11));
     
      insert into temp_dailyReport(Date,Districtid,Districts)
-    select v_starttime,Districtid,DistrictName from db_iemr.m_district 
+    select v_starttime,Districtid,DistrictName from dbiemr.m_district 
     where stateid=v_stateid;
     
     insert into temp_dailyReport(Date,Districtid,Districts)
-    select date_add(v_starttime, interval 1 day),Districtid,DistrictName from db_iemr.m_district 
+    select date_add(v_starttime, interval 1 day),Districtid,DistrictName from dbiemr.m_district 
     where stateid=v_stateid;
     
      insert into temp_dailyReport(Date,Districtid,Districts)
-    select date_add(v_starttime, interval 2 day),Districtid,DistrictName from db_iemr.m_district 
+    select date_add(v_starttime, interval 2 day),Districtid,DistrictName from dbiemr.m_district 
     where stateid=v_stateid;
     
     insert into temp_dailyReport(Date,Districtid,Districts)
-    select date_add(v_starttime, interval 3 day),Districtid,DistrictName from db_iemr.m_district 
+    select date_add(v_starttime, interval 3 day),Districtid,DistrictName from dbiemr.m_district 
     where stateid=v_stateid;
     
     insert into temp_dailyReport(Date,Districtid,Districts)
-    select date_add(v_starttime, interval 4 day),Districtid,DistrictName from db_iemr.m_district 
+    select date_add(v_starttime, interval 4 day),Districtid,DistrictName from dbiemr.m_district 
     where stateid=v_stateid;
     
      insert into temp_dailyReport(Date,Districtid,Districts)
-    select date_add(v_starttime, interval 5 day),Districtid,DistrictName from db_iemr.m_district 
+    select date_add(v_starttime, interval 5 day),Districtid,DistrictName from dbiemr.m_district 
     where stateid=v_stateid;
     
       insert into temp_dailyReport(Date,Districtid,Districts)
-    select date_add(v_starttime, interval 6 day),Districtid,DistrictName from db_iemr.m_district 
+    select date_add(v_starttime, interval 6 day),Districtid,DistrictName from dbiemr.m_district 
     where stateid=v_stateid;
     
     if (v_isMother='true') then
@@ -13909,7 +13909,7 @@ inner join dim_beneficiary b on fb.BeneficiaryRegID=b.BeneficiaryRegID
 where 
 fb.ismother is true 
 and   fb.CallTypeid 
-              in (select calltypeid from db_iemr.m_calltype
+              in (select calltypeid from dbiemr.m_calltype
              where callgrouptype='Answered' and calltype='Answered')
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
@@ -14016,7 +14016,7 @@ inner join dim_beneficiary b on fb.BeneficiaryRegID=b.BeneficiaryRegID
 where 
 fb.ismother is false 
 and   fb.CallTypeid 
-              in (select calltypeid from db_iemr.m_calltype
+              in (select calltypeid from dbiemr.m_calltype
              where callgrouptype='Answered' and calltype='Answered')
 and fb.providerServiceMapID=ifnull(v_psmid,fb.providerServiceMapID)  
              and fb.ReceivedAgentID=ifnull(v_Agentid,fb.ReceivedAgentID)
@@ -14617,33 +14617,33 @@ ISE.ProviderServiceMapID,
 ISE.CreatedDate as EntryDate,
   (ifnull(ISE.Quantity,0) - sum(ifnull(ISEx.Quantity,0))) as OpeningStock
 -- ISE.QuantityInHand as OpeningStock
-FROM db_iemr.t_itemstockentry ISE
-left join db_iemr.t_itemstockexit ISEx
+FROM dbiemr.t_itemstockentry ISE
+left join dbiemr.t_itemstockexit ISEx
  on ISE.ItemStockEntryID = ISEx.ItemStockEntryID
  and date(ISEx.CreatedDate) <v_FromDate
  
 where date(ISE.CreatedDate) <= v_ToDate
 
 group by ISE.ItemStockEntryID
-) A left join db_iemr.t_saitemmapping SAItm
+) A left join dbiemr.t_saitemmapping SAItm
         on SAItm.ItemStockEntryID=A.ItemStockEntryID
         and date(SAItm.CreatedDate) < v_FromDate
        
 group by A.ItemStockEntryID
- ) B left join db_iemr.t_itemstockexit ISEx
+ ) B left join dbiemr.t_itemstockexit ISEx
         on B.ItemStockEntryID = ISEx.ItemStockEntryID  
         and date(ISEx.CreatedDate) >= v_FromDate  
         and date(ISEx.CreatedDate) <= v_ToDate
        
  group by B.ItemStockEntryID
- ) C left join db_iemr.t_saitemmapping SAItm
+ ) C left join dbiemr.t_saitemmapping SAItm
         on SAItm.ItemStockEntryID=C.ItemStockEntryID
         and date(SAItm.CreatedDate) >= v_FromDate
         and date(SAItm.CreatedDate) <= v_ToDate
        
-        Inner Join db_iemr.m_Item ITM on C.ItemID = ITM.ItemID
-        Inner Join db_iemr.m_Facility FAC on C.FacilityID = FAC.FacilityID
-        Inner join db_iemr.m_ItemCategory ITMC on ITM.ItemCategoryID = ITMC.ItemCategoryID
+        Inner Join dbiemr.m_Item ITM on C.ItemID = ITM.ItemID
+        Inner Join dbiemr.m_Facility FAC on C.FacilityID = FAC.FacilityID
+        Inner join dbiemr.m_ItemCategory ITMC on ITM.ItemCategoryID = ITMC.ItemCategoryID
        
 group by C.ItemStockEntryID;
  
@@ -14713,33 +14713,33 @@ ISE.EntryType,
 ISE.ProviderServiceMapID,
 ISE.CreatedDate as EntryDate,
 (ifnull(ISE.Quantity,0) - sum(ifnull(ISEx.Quantity,0))) as OpeningStock
-FROM db_iemr.t_itemstockentry ISE
-left join db_iemr.t_itemstockexit ISEx
+FROM dbiemr.t_itemstockentry ISE
+left join dbiemr.t_itemstockexit ISEx
  on ISE.ItemStockEntryID = ISEx.ItemStockEntryID
  and date(ISEx.CreatedDate) < v_FromDate
  
 where date(ISE.CreatedDate) <=   v_ToDate
 
 group by ISE.ItemStockEntryID
-) A left join db_iemr.t_saitemmapping SAItm
+) A left join dbiemr.t_saitemmapping SAItm
                 on SAItm.ItemStockEntryID=A.ItemStockEntryID
                 and date(SAItm.CreatedDate) <   v_FromDate
        
 group by A.ItemStockEntryID
- ) B left join db_iemr.t_itemstockexit ISEx
+ ) B left join dbiemr.t_itemstockexit ISEx
                 on B.ItemStockEntryID = ISEx.ItemStockEntryID  
         and date(ISEx.CreatedDate) >=  v_FromDate        
         and date(ISEx.CreatedDate) <=   v_ToDate
        
  group by B.ItemStockEntryID
- ) C left join db_iemr.t_saitemmapping SAItm
+ ) C left join dbiemr.t_saitemmapping SAItm
                 on SAItm.ItemStockEntryID=C.ItemStockEntryID
                 and date(SAItm.CreatedDate) >=   v_FromDate
 and date(SAItm.CreatedDate) <=   v_ToDate
        
-        Inner Join db_iemr.m_Item ITM on C.ItemID = ITM.ItemID
-        Inner Join db_iemr.m_Facility FAC on C.FacilityID = FAC.FacilityID
-        Inner join db_iemr.m_ItemCategory ITMC on ITM.ItemCategoryID = ITMC.ItemCategoryID
+        Inner Join dbiemr.m_Item ITM on C.ItemID = ITM.ItemID
+        Inner Join dbiemr.m_Facility FAC on C.FacilityID = FAC.FacilityID
+        Inner join dbiemr.m_ItemCategory ITMC on ITM.ItemCategoryID = ITMC.ItemCategoryID
        
 group by C.ItemStockEntryID) D
 
@@ -15085,8 +15085,8 @@ Replace(DATE(TC.CreatedDate),'-','')AS fact_CreatedDate,
 NOW(),
 TC.Child_RCH_ID_No,TC.Mother_RCH_ID_No,TC.HepatitisB0_Dt,
 TC.IsHrni,TC.Hrni_Reason,TC.entrytype
- FROM db_iemr.t_childvaliddata TC
-LEFT JOIN db_iemr.t_filemanager TF ON TC.FileID = TF.FileID
+ FROM dbiemr.t_childvaliddata TC
+LEFT JOIN dbiemr.t_filemanager TF ON TC.FileID = TF.FileID
 WHERE DATE(TC.CreatedDate)<=CURDATE() - INTERVAL 1 DAY;
 
 truncate table db_reporting.fact_mothervalidrecord;
@@ -15698,9 +15698,9 @@ MV.MotherValidRecordID,
      MV.ANC2_Symptoms_High_Risk,MV.ANC3_Symptoms_High_Risk,MV.ANC4_Symptoms_High_Risk,
      MV.Delivery_Place,MV.Delivery_Place_Name
 
-FROM db_iemr.t_mothervalidrecord MV
+FROM dbiemr.t_mothervalidrecord MV
 
-LEFT JOIN db_iemr.t_filemanager  FM ON MV.FileID = FM.FileID
+LEFT JOIN dbiemr.t_filemanager  FM ON MV.FileID = FM.FileID
 WHERE DATE(MV.CreatedDate)<=CURDATE() - INTERVAL 1 DAY;
 
 
@@ -15759,7 +15759,7 @@ Replace(DATE(CreatedDate),'-','')AS fact_CreatedDate,
 NOW()  
 ,IsHighRisk,HighRisk_Reason,IsHrni,Hrni_Reason,
 congenitalanomalies,phoneNumberType
-FROM  db_iemr.t_MctsOutboundCalls
+FROM  dbiemr.t_MctsOutboundCalls
 WHERE   DATE(CreatedDate)<= (CURDATE() - INTERVAL 1 DAY);
 
 
@@ -15802,8 +15802,8 @@ NOW(),
 TM.outboundCallType,TM.SectionID,TM.ReasonsforHrni,TM.OtherHrni,
 TM.CongentialAnomalies,TM.OtherCongentialAnomalies,TM.ProbableCauseOfDefect,
 TM.ReasonsForHrp,TM.OtherHrpReason,TM.obcallid,TM.Remarks ,TM.ProviderServiceMapID
-FROM   db_iemr.t_MCTSCallResponse  TM
-LEFT JOIN db_iemr.m_questionnaire MQ ON MQ.QuestionID = TM.QuestionID
+FROM   dbiemr.t_MCTSCallResponse  TM
+LEFT JOIN dbiemr.m_questionnaire MQ ON MQ.QuestionID = TM.QuestionID
 WHERE   DATE(TM.CreatedDate)<= (CURDATE() - INTERVAL 1 DAY) ;
 
 end ;;
@@ -15830,53 +15830,53 @@ BEGIN
 /*Update value in t_mctscallresponse table */
 
 
-update `db_iemr`.`t_mctscallresponse` t1
+update `dbiemr`.`t_mctscallresponse` t1
 inner join m_mapquestion t2 on t1.QuestionID=t2.parentQuestionID
 inner join t_mctscallresponse t3 on t3.questionid=t2.childQuestionID and t3.BenCallID=t1.BenCallID and t3.obcallid=t1.obcallid
 set t1.ReasonsForHrp = t3.Answer 
 where t1.Question='Any High Risk Pregnancy (HRP)?' AND t1.Answer ='Yes' and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
      
-update `db_iemr`.`t_mctscallresponse` t1
+update `dbiemr`.`t_mctscallresponse` t1
 inner join m_mapquestion t2 on t1.QuestionID=t2.parentQuestionID
 inner join t_mctscallresponse t3 on t3.questionid=t2.childQuestionID and t3.BenCallID=t1.BenCallID and t3.obcallid=t1.obcallid
 set t1.ReasonsforHrni = t3.Answer 
 where t1.Question='Any High Risk Newborn/Infant?' AND t1.Answer ='Yes'  and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
   
   /*          
-update `db_iemr`.`t_mctscallresponse` t1
+update `dbiemr`.`t_mctscallresponse` t1
 inner join m_mapquestion t2 on t1.QuestionID=t2.parentQuestionID
 inner join t_mctscallresponse t3 on t3.questionid=t2.childQuestionID and t3.BenCallID=t1.BenCallID and t3.obcallid=t1.obcallid
 set t1.CongentialAnomalies =t3.Answer 
 where t1.Question='Reasons for Congential Anomalies'  and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
                        
-update `db_iemr`.`t_mctscallresponse` t1
+update `dbiemr`.`t_mctscallresponse` t1
 inner join m_mapquestion t2 on t1.QuestionID=t2.parentQuestionID
 inner join t_mctscallresponse t3 on t3.questionid=t2.childQuestionID and t3.BenCallID=t1.BenCallID and t3.obcallid=t1.obcallid
 set t1.ProbableCauseOfDefect = t3.Answer 
 where t1.Question='Probable Defect Cause'  and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 */
 
-update `db_iemr`.`t_mctscallresponse` t1
+update `dbiemr`.`t_mctscallresponse` t1
 set t1.CongentialAnomalies =t1.Answer 
 where t1.Question='Reasons for Congential Anomalies' and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
-update `db_iemr`.`t_mctscallresponse` t1
+update `dbiemr`.`t_mctscallresponse` t1
 set t1.ProbableCauseOfDefect =t1.Answer 
 where t1.Question='Probable Defect Cause' and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
-update `db_iemr`.`t_mctscallresponse` t1
+update `dbiemr`.`t_mctscallresponse` t1
 inner join  t_mctscallresponse t2 on t1.BenCallID=t2.BenCallID and t1.obcallid=t2.obcallid
 set t1.OtherHrpReason = t2.Answer 
 where t2.Question='Other HRP Reason' and t1.Question='Any High Risk Pregnancy (HRP)?' AND t1.Answer ='Yes'
 and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
-update `db_iemr`.`t_mctscallresponse` t1
+update `dbiemr`.`t_mctscallresponse` t1
 inner join  t_mctscallresponse t2 on t1.BenCallID=t2.BenCallID and t1.obcallid=t2.obcallid
 set t1.OtherHrni = t2.Answer 
 where t2.Question='Other HRNI Reason' and t1.Question='Any High Risk Newborn/Infant?' AND t1.Answer ='Yes'
 and t1.BenCallID=v_BenCallID and t1.obcallid=v_obcallid;
 
-update `db_iemr`.`t_mctscallresponse` t1
+update `dbiemr`.`t_mctscallresponse` t1
 inner join  t_mctscallresponse t2 on t1.BenCallID=t2.BenCallID and t1.obcallid=t2.obcallid
 set t1.OtherCongentialAnomalies = t2.Answer 
 where t2.Question='Other Congential Anomalie' and t1.Question='Reasons for Congential Anomalies' 
@@ -15914,7 +15914,7 @@ DECLARE v_NotificationState VARCHAR(30)  default 'unread';
 
 
 
-update `db_iemr`.`m_usernotificationmap` 
+update `dbiemr`.`m_usernotificationmap` 
 set 
 NotificationState = v_NotificationState,
 ModifiedBy = v_ModifiedBy,
@@ -16248,7 +16248,7 @@ FROM db_reporting.fact_tmrequest  TMR
 
 inner join db_reporting.dim_beneficiary BEN on TMR.BeneficiaryRegID = BEN.BeneficiaryRegID
 
-left JOIN (select * from db_iemr.t_tmstats where StartTime is not null and endtime is not null) t2 ON tmr.BeneficiaryRegID = t2.BeneficiaryRegID AND tmr.VisitCode = t2.VisitCode
+left JOIN (select * from dbiemr.t_tmstats where StartTime is not null and endtime is not null) t2 ON tmr.BeneficiaryRegID = t2.BeneficiaryRegID AND tmr.VisitCode = t2.VisitCode
 
 where date(TMR.createddate) between P_CallDateFrom and P_CallDateTo
 
@@ -16911,7 +16911,7 @@ LEFT JOIN db_identity.i_beneficiarymapping BM ON BM.BenDetailsId = BD.Beneficiar
 LEFT JOIN db_identity.i_BeneficiaryContacts BC ON BC.BenContactsID = BM.BenContactsId
 LEFT JOIN db_identity.i_beneficiaryaddress BA ON BA.BenAddressID = BM.BenAddressId
 LEFT JOIN db_identity.m_beneficiaryregidmapping BR ON BR.BenRegId = BM.BenRegId
-left join db_iemr.m_districtbranchmapping md on md.DistrictBranchID=BA.PermVillageID
+left join dbiemr.m_districtbranchmapping md on md.DistrictBranchID=BA.PermVillageID
  WHERE DATE(BD.CreatedDate)=CURDATE() - INTERVAL 1 DAY ;
  -- WHERE DATE(BD.CreatedDate)<CURDATE();
 
@@ -16923,7 +16923,7 @@ LEFT JOIN db_identity.i_beneficiarymapping BM ON BM.BenDetailsId = BD.Beneficiar
 LEFT JOIN db_identity.i_beneficiaryaddress BA ON BA.BenAddressID = BM.BenAddressId
 LEFT JOIN db_identity.i_BeneficiaryContacts BC ON BC.BenContactsID = BM.BenContactsId
 LEFT JOIN db_identity.m_beneficiaryregidmapping BR ON BR.BenRegId = BM.BenRegId
-left join db_iemr.m_districtbranchmapping md on md.DistrictBranchID=BA.PermVillageID
+left join dbiemr.m_districtbranchmapping md on md.DistrictBranchID=BA.PermVillageID
  SET
 
 DB.BeneficiaryDetailsId=BD.BeneficiaryDetailsId,
@@ -17230,21 +17230,21 @@ MU.ModifiedBy,
 MU.LastModDate,
 'SP_Load_Dim_User',
 NOW()
-from db_iemr.m_user  MU
-LEFT JOIN  db_iemr.m_UserDemographics MUD ON MU.UserID = MUD.UserID
-LEFT JOIN db_iemr.m_title  MT ON MT.titleID = MU.titleID
-LEFT JOIN db_iemr.m_gender  MG ON MG.genderID = MU.genderID
-LEFT JOIN db_iemr.m_maritalstatus MST on MST.MaritalStatusID = MU.MaritalStatusID
-LEFT JOIN db_iemr.m_community MC on MC.CommunityID = MUD.CommunityID
-LEFT JOIN db_iemr.m_religion MR on MR.ReligionID = MUD.ReligionID
-LEFT JOIN db_iemr.m_country  MCY ON MCY.countryID = MUD.CountryID
-LEFT JOIN db_iemr.m_state  MS ON MS.stateID = MUD.StateID
-LEFT JOIN db_iemr.m_district MD on MD.DistrictID = MUD.DistrictID
-LEFT join db_iemr.m_userqualification MQ on MQ.QualificationID = MU.QualificationID
-LEFT JOIN db_iemr.m_designation MDG ON MDG.designationID = MU.DesignationID
-LEFT join db_iemr.m_status MSTS on MSTS.StatusID = MU.StatusID
-LEFT join db_iemr.m_providerservicemapping MPS on MPS.ProviderServiceMapID = MSTS.ProviderServiceMapID
-LEFT join db_iemr.m_serviceprovider MSP on MSP.ServiceProviderID = MPS.ServiceProviderID
+from dbiemr.m_user  MU
+LEFT JOIN  dbiemr.m_UserDemographics MUD ON MU.UserID = MUD.UserID
+LEFT JOIN dbiemr.m_title  MT ON MT.titleID = MU.titleID
+LEFT JOIN dbiemr.m_gender  MG ON MG.genderID = MU.genderID
+LEFT JOIN dbiemr.m_maritalstatus MST on MST.MaritalStatusID = MU.MaritalStatusID
+LEFT JOIN dbiemr.m_community MC on MC.CommunityID = MUD.CommunityID
+LEFT JOIN dbiemr.m_religion MR on MR.ReligionID = MUD.ReligionID
+LEFT JOIN dbiemr.m_country  MCY ON MCY.countryID = MUD.CountryID
+LEFT JOIN dbiemr.m_state  MS ON MS.stateID = MUD.StateID
+LEFT JOIN dbiemr.m_district MD on MD.DistrictID = MUD.DistrictID
+LEFT join dbiemr.m_userqualification MQ on MQ.QualificationID = MU.QualificationID
+LEFT JOIN dbiemr.m_designation MDG ON MDG.designationID = MU.DesignationID
+LEFT join dbiemr.m_status MSTS on MSTS.StatusID = MU.StatusID
+LEFT join dbiemr.m_providerservicemapping MPS on MPS.ProviderServiceMapID = MSTS.ProviderServiceMapID
+LEFT join dbiemr.m_serviceprovider MSP on MSP.ServiceProviderID = MPS.ServiceProviderID
 WHERE DATE(MU.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
 -- WHERE DATE(MU.CreatedDate)<CURDATE() ;
 
@@ -17330,8 +17330,8 @@ LodadedDate)
     REPLACE(DATE(BR.CreatedDate), '-', '') AS fact_CreatedDate,
     'SP_Load_Fact_104BenCDIResponse',
     NOW()
-  FROM db_iemr.t_104BenCDIResponse BR
-  LEFT JOIN db_iemr.m_questionnaire MQ
+  FROM dbiemr.t_104BenCDIResponse BR
+  LEFT JOIN dbiemr.m_questionnaire MQ
     ON MQ.QuestionID = BR.QuestionID
  --  WHERE BR.CreatedDate < curdate();
  WHERE DATE(BR.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
@@ -17368,7 +17368,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To Load fact_104benmedhistory (reporting)
-                                                from  t_104benmedhistory(db_iemr)
+                                                from  t_104benmedhistory(dbiemr)
                         
 
 --    Version History               :
@@ -17481,12 +17481,12 @@ C.Suspected_COVID19,
 C.recommendation,
 BM.TreatmentRecommendation 
 
-FROM db_iemr.t_104benmedhistory BM
-LEFT JOIN db_iemr.t_104Prescription  P ON BM.BENCALLID = P.BENCALLID
-LEFT JOIN db_iemr.m_gender MG ON MG.GenderID = BM.PatientGenderID
-Left join db_iemr.m_category MC on BM.CategoryID = MC.CategoryID
-LEFT JOIN db_iemr.m_subcategory MSC on BM.SubcategoryID = MSC.SubCategoryID
-left join db_iemr.t_covid19 C on C.BenCallID=BM.BenCallID and C.BeneficiaryRegID=BM.BeneficiaryRegID
+FROM dbiemr.t_104benmedhistory BM
+LEFT JOIN dbiemr.t_104Prescription  P ON BM.BENCALLID = P.BENCALLID
+LEFT JOIN dbiemr.m_gender MG ON MG.GenderID = BM.PatientGenderID
+Left join dbiemr.m_category MC on BM.CategoryID = MC.CategoryID
+LEFT JOIN dbiemr.m_subcategory MSC on BM.SubcategoryID = MSC.SubCategoryID
+left join dbiemr.t_covid19 C on C.BenCallID=BM.BenCallID and C.BeneficiaryRegID=BM.BeneficiaryRegID
  and C.BenMedHistoryID=BM.BenHistoryID
 WHERE DATE(BM.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
 -- WHERE DATE(BM.CreatedDate)<CURDATE();
@@ -17589,9 +17589,9 @@ TP.LastModDate,
 Replace(DATE(TPD.CreatedDate),'-','')AS fact_CreatedDate,
 'SP_Load_Fact_104prescription',
 NOW()
-FROM db_iemr.t_104prescribeddrug TPD
-LEFT JOIN db_iemr.t_104prescription TP ON TP.PrescriptionID = TPD.PrescriptionID
-LEFT JOIN db_iemr.m_104drugmapping MD  ON MD.DrugMapID = TPD.DrugMapID
+FROM dbiemr.t_104prescribeddrug TPD
+LEFT JOIN dbiemr.t_104prescription TP ON TP.PrescriptionID = TPD.PrescriptionID
+LEFT JOIN dbiemr.m_104drugmapping MD  ON MD.DrugMapID = TPD.DrugMapID
  WHERE date(TPD.CreatedDate)= CURDATE() - INTERVAL 1 DAY;
 -- WHERE TP.CreatedDate< CURDATE();
 
@@ -17626,7 +17626,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load Fact_1097CallSummary(db_reporting)
-                                                from t_bencall(db_iemr)
+                                                from t_bencall(dbiemr)
 
 
 --    Version History               :
@@ -17696,14 +17696,14 @@ TB.LastModDate,
 'SP_Load_Fact_1097CallSummary',
 NOW()
 
-FROM db_iemr.t_bencall TB 
-Left JOIN db_iemr.m_BenCall1097ServicesMapping MB  ON MB.BenCallID = TB.BenCallID
-Left join db_iemr.m_user US on TB.CallReceivedUserID = US.UserID
-Left JOIN db_iemr.m_calltype CT ON TB.CallTypeID = CT.CallTypeID
-Left Join db_iemr.m_Category ICA on MB.CategoryID  = ICA.CategoryID 
-left join db_iemr.m_SubCategory ISCA on MB.SubCategoryID  = ISCA.SubCategoryID 
-Left Join db_iemr.m_Category CCA on MB.COCategoryID  = CCA.CategoryID 
-left join db_iemr.m_SubCategory CSCA on MB.COSubCategoryID  = CSCA.SubCategoryID
+FROM dbiemr.t_bencall TB 
+Left JOIN dbiemr.m_BenCall1097ServicesMapping MB  ON MB.BenCallID = TB.BenCallID
+Left join dbiemr.m_user US on TB.CallReceivedUserID = US.UserID
+Left JOIN dbiemr.m_calltype CT ON TB.CallTypeID = CT.CallTypeID
+Left Join dbiemr.m_Category ICA on MB.CategoryID  = ICA.CategoryID 
+left join dbiemr.m_SubCategory ISCA on MB.SubCategoryID  = ISCA.SubCategoryID 
+Left Join dbiemr.m_Category CCA on MB.COCategoryID  = CCA.CategoryID 
+left join dbiemr.m_SubCategory CSCA on MB.COSubCategoryID  = CSCA.SubCategoryID
 WHERE DATE(TB.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
 -- WHERE DATE(TB.CreatedDate)<CURDATE() ;
 
@@ -17737,7 +17737,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_anccare(db_reporting)
-                                                 from  t_anccare  (db_iemr)
+                                                 from  t_anccare  (dbiemr)
                         
 
 --    Version History               :
@@ -17825,7 +17825,7 @@ AC.SyncedDate,
   Replace(DATE(AC.CreatedDate),'-','')AS fact_CreatedDate,
   'SP_Load_Fact_ANCCare',
   NOW()
- FROM db_iemr.t_anccare AC
+ FROM dbiemr.t_anccare AC
  WHERE DATE(AC.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
  -- WHERE DATE(AC.CreatedDate)<CURDATE();
 
@@ -17859,7 +17859,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_ancdiagnosis(db_reporting)
-                                                 from  t_ancdiagnosis  (db_iemr)
+                                                 from  t_ancdiagnosis  (dbiemr)
                         
 
 --    Version History               :
@@ -17946,9 +17946,9 @@ AD.SyncedDate,
   Replace(DATE(AD.CreatedDate),'-','')AS fact_CreatedDate,
   'SP_Load_Fact_ANCDiagnosis',
   NOW()
- FROM db_iemr.t_ancdiagnosis AD
-        left join db_iemr.m_van VAN on AD.VanID = VAN.VanID 
-        inner join db_iemr.t_benvisitdetail BVD on AD.VisitCode = BVD.VisitCode 
+ FROM dbiemr.t_ancdiagnosis AD
+        left join dbiemr.m_van VAN on AD.VanID = VAN.VanID 
+        inner join dbiemr.t_benvisitdetail BVD on AD.VisitCode = BVD.VisitCode 
       and AD.BeneficiaryRegID = BVD.BeneficiaryRegID
  WHERE DATE(AD.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
  -- WHERE DATE(AD.CreatedDate)<CURDATE();
@@ -18080,9 +18080,9 @@ TB.IsVerified,
   TB.reasonForCallNotAnswered,
   TB.isCallAudited,
    TB.isWrongNumber
- FROM db_iemr.t_bencall TB
- LEFT JOIN db_iemr.m_calltype MC ON MC.CallTypeID =  TB.CallTypeID
- LEFT JOIN db_iemr.m_dispositionstatus MD ON MD.DispositionStatusID= TB.DispositionStatusID
+ FROM dbiemr.t_bencall TB
+ LEFT JOIN dbiemr.m_calltype MC ON MC.CallTypeID =  TB.CallTypeID
+ LEFT JOIN dbiemr.m_dispositionstatus MD ON MD.DispositionStatusID= TB.DispositionStatusID
  WHERE DATE(TB.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
  
 
@@ -18116,7 +18116,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load Fact_BenChiefComplaint(db_reporting)
-                                                 from  t_BenChiefComplaint  (db_iemr)
+                                                 from  t_BenChiefComplaint  (dbiemr)
                         
 
 --    Version History               :
@@ -18194,14 +18194,14 @@ BCC.SyncedDate,
 Replace(DATE(BCC.CreatedDate),'-','')AS fact_CreatedDate,
 'SP_Load_Fact_BenChiefComplaint',
 NOW()
-from db_iemr.t_BenChiefComplaint BCC
-inner join db_iemr.m_Van V on BCC.VanID = V.VanID
-inner join db_iemr.m_providerservicemapping PSM on BCC.ProviderServiceMapID = PSM.ProviderServiceMapID
+from dbiemr.t_BenChiefComplaint BCC
+inner join dbiemr.m_Van V on BCC.VanID = V.VanID
+inner join dbiemr.m_providerservicemapping PSM on BCC.ProviderServiceMapID = PSM.ProviderServiceMapID
  WHERE DATE(BCC.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
  -- WHERE DATE(BCC.CreatedDate)<CURDATE();
 
 update db_reporting.Fact_BenChiefComplaint FBCC
-inner join db_iemr.t_BenChiefComplaint BCC on FBCC.ID = BCC.ID
+inner join dbiemr.t_BenChiefComplaint BCC on FBCC.ID = BCC.ID
 set 
 FBCC.ChiefComplaintID = BCC.ChiefComplaintID,
 FBCC.ChiefComplaint = BCC.ChiefComplaint,
@@ -18248,7 +18248,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_bendisease(db_reporting)
-                                                 from  db_iemr (db_iemr)
+                                                 from  dbiemr (dbiemr)
                         
 
 --    Version History               :
@@ -18308,12 +18308,12 @@ Rx.SyncedDate,
 Replace(DATE(Rx.CreatedDate),'-','')AS dim_create_date,
 'SP_Load_Fact_BenDisease',
 NOW()
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_prescription Rx 
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_prescription Rx 
   on BVD.BeneficiaryRegID = Rx.BeneficiaryRegID
     and BVD.VisitCode = Rx.VisitCode
     and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
-inner join db_iemr.m_van VAN 
+inner join dbiemr.m_van VAN 
   on BVD.VanID = Van.VanID
 WHERE DATE(Rx.CreatedDate)=CURDATE() - INTERVAL 1 DAY
 -- WHERE DATE(Rx.CreatedDate)<CURDATE()
@@ -18343,12 +18343,12 @@ PNCD.SyncedDate,
 Replace(DATE(PNCD.CreatedDate),'-','')AS dim_create_date,
 'SP_Load_Fact_BenDisease',
 NOW()
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_pncdiagnosis PNCD
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_pncdiagnosis PNCD
   on BVD.BeneficiaryRegID = PNCD.BeneficiaryRegID
     and BVD.VisitCode = PNCD.VisitCode
     and (BVD.VisitCategory = 'PNC')
-inner join db_iemr.m_van VAN 
+inner join dbiemr.m_van VAN 
   on BVD.VanID = Van.VanID
 WHERE DATE(PNCD.CreatedDate)=CURDATE() - INTERVAL 1 DAY
 -- WHERE DATE(PNCD.CreatedDate)<CURDATE();
@@ -18377,12 +18377,12 @@ ANCD.SyncedDate,
 Replace(DATE(ANCD.CreatedDate),'-','')AS dim_create_date,
 'SP_Load_Fact_DiaHyperCase',
 NOW()
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_ancdiagnosis ANCD
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_ancdiagnosis ANCD
   on BVD.BeneficiaryRegID = ANCD.BeneficiaryRegID
     and BVD.VisitCode = ANCD.VisitCode
     and (BVD.VisitCategory = 'ANC')
-inner join db_iemr.m_van VAN 
+inner join dbiemr.m_van VAN 
   on BVD.VanID = Van.VanID
 WHERE DATE(ANCD.CreatedDate)=CURDATE() - INTERVAL 1 DAY
 -- WHERE DATE(ANCD.CreatedDate)<CURDATE();
@@ -18411,12 +18411,12 @@ NCDS.SyncedDate,
 Replace(DATE(NCDS.CreatedDate),'-','')AS dim_create_date,
 'SP_Load_Fact_DiaHyperCase',
 NOW()
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_ncdscreening NCDS
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_ncdscreening NCDS
   on BVD.BeneficiaryRegID = NCDS.BeneficiaryRegID
     and BVD.VisitCode = NCDS.VisitCode
     and (BVD.VisitCategory = 'NCD screening')
-inner join db_iemr.m_van VAN 
+inner join dbiemr.m_van VAN 
   on BVD.VanID = Van.VanID
 WHERE DATE(NCDS.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
 -- WHERE DATE(NCDS.CreatedDate)<CURDATE();
@@ -18451,7 +18451,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load Fact_BenReferDetails(db_reporting)
-                                                 from  t_BenReferDetails (db_iemr)
+                                                 from  t_BenReferDetails (dbiemr)
                         
 
 --    Version History               :
@@ -18511,7 +18511,7 @@ BRD.SyncedDate,
 Replace(DATE(BRD.CreatedDate),'-','')AS fact_CreatedDate,
 'SP_Load_Fact_BenReferDetails',
 NOW()
-FROM db_iemr.t_benreferdetails BRD
+FROM dbiemr.t_benreferdetails BRD
 where DATE(BRD.CreatedDate)=CURDATE() - INTERVAL 1 DAY
 -- WHERE DATE(BRD.CreatedDate)<CURDATE()
 group by  BRD.VisitCode;
@@ -18547,7 +18547,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_BenvisitDetail(db_reporting)
-                                                 from  t_benvisitdetail  (db_iemr)
+                                                 from  t_benvisitdetail  (dbiemr)
                         
 
 --    Version History               :
@@ -18629,8 +18629,8 @@ BVD.VisitFlowStatusFlag,
   Replace(DATE(BVD.CreatedDate),'-','')AS fact_CreatedDate,
   'SP_Load_Fact_BenVisitDetail',
   NOW()
- FROM db_iemr.t_benvisitdetail BVD
- left Join db_iemr.m_Van VAN on BVD.VanID = VAN.VanID 
+ FROM dbiemr.t_benvisitdetail BVD
+ left Join dbiemr.m_Van VAN on BVD.VanID = VAN.VanID 
  WHERE DATE(BVD.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
  -- WHERE DATE(BVD.CreatedDate)<CURDATE();
 
@@ -18663,7 +18663,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           29-09-2018
 --    Purpose                       :           TO Load reporting.Fact_Bloodrequest
-                                                from  t_Bloodrequest (db_iemr ).
+                                                from  t_Bloodrequest (dbiemr ).
 
 
 --    Version History               :
@@ -18754,26 +18754,26 @@ SELECT
    REPLACE(DATE(TBR.CreatedDate), '-', '') AS fact_CreatedDate,
    'SP_Load_Fact_BloodRequest',
    NOW()
-   FROM db_iemr.t_Bloodrequest TBR
-   LEFT JOIN db_iemr.m_bloodgroup MB ON MB.BloodGroupID = TBR.BloodGroupID
-   LEFT JOIN db_iemr.m_component MC ON MC.ComponentID = TBR.ComponentID
-   LEFT JOIN db_iemr.m_componenttype MCT ON MCT.ComponentTypeID = TBR.ComponentTypeID
-   LEFT JOIN db_iemr.m_gender MG ON MG.GenderID = TBR.RecipientGenderID
-   LEFT JOIN db_iemr.m_providerservicemapping MPSM ON MPSM.ProviderServiceMapID = TBR.ProviderServiceMapID
-   LEFT JOIN db_iemr.m_district MD on MD.DistrictID = TBR.DistrictID
+   FROM dbiemr.t_Bloodrequest TBR
+   LEFT JOIN dbiemr.m_bloodgroup MB ON MB.BloodGroupID = TBR.BloodGroupID
+   LEFT JOIN dbiemr.m_component MC ON MC.ComponentID = TBR.ComponentID
+   LEFT JOIN dbiemr.m_componenttype MCT ON MCT.ComponentTypeID = TBR.ComponentTypeID
+   LEFT JOIN dbiemr.m_gender MG ON MG.GenderID = TBR.RecipientGenderID
+   LEFT JOIN dbiemr.m_providerservicemapping MPSM ON MPSM.ProviderServiceMapID = TBR.ProviderServiceMapID
+   LEFT JOIN dbiemr.m_district MD on MD.DistrictID = TBR.DistrictID
    WHERE DATE(TBR.CreatedDate)=CURDATE() - INTERVAL 1 DAY ;
 -- WHERE DATE(TBR.CreatedDate)<CURDATE() ;
 
 -- UPDATE
 
   update db_reporting.Fact_Bloodrequest FBR
-   Left JOIN db_iemr.t_Bloodrequest TBR on FBR.BloodReqID  =  TBR.BloodReqID
-   LEFT JOIN db_iemr.m_bloodgroup MB ON MB.BloodGroupID  =  TBR.BloodGroupID
-   LEFT JOIN db_iemr.m_component MC ON MC.ComponentID  =  TBR.ComponentID
-   LEFT JOIN db_iemr.m_componenttype MCT ON MCT.ComponentTypeID  =  TBR.ComponentTypeID
-   LEFT JOIN db_iemr.m_gender MG ON MG.GenderID  =  TBR.RecipientGenderID
-   LEFT JOIN db_iemr.m_providerservicemapping MPSM ON MPSM.ProviderServiceMapID  =  TBR.ProviderServiceMapID
-   LEFT JOIN db_iemr.m_district MD on MD.DistrictID  =  TBR.DistrictID
+   Left JOIN dbiemr.t_Bloodrequest TBR on FBR.BloodReqID  =  TBR.BloodReqID
+   LEFT JOIN dbiemr.m_bloodgroup MB ON MB.BloodGroupID  =  TBR.BloodGroupID
+   LEFT JOIN dbiemr.m_component MC ON MC.ComponentID  =  TBR.ComponentID
+   LEFT JOIN dbiemr.m_componenttype MCT ON MCT.ComponentTypeID  =  TBR.ComponentTypeID
+   LEFT JOIN dbiemr.m_gender MG ON MG.GenderID  =  TBR.RecipientGenderID
+   LEFT JOIN dbiemr.m_providerservicemapping MPSM ON MPSM.ProviderServiceMapID  =  TBR.ProviderServiceMapID
+   LEFT JOIN dbiemr.m_district MD on MD.DistrictID  =  TBR.DistrictID
    set 
    
 FBR.BloodReqID = TBR.BloodReqID,
@@ -18848,7 +18848,7 @@ BEGIN
 --    Created Date                  :           06-06-2018
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
---    Purpose                       :           TO Load ChildCongenitalAnomalies from db_iemr database to db_reporing databse.
+--    Purpose                       :           TO Load ChildCongenitalAnomalies from dbiemr database to db_reporing databse.
 
 
 --    Version History               :
@@ -18901,7 +18901,7 @@ LastModDate,
 Replace(DATE(CreatedDate),'-','')AS fact_CreatedDate,
 'SP_Load_Fact_ChildCongenitalAnomalies',
 NOW()
-FROM   db_iemr.t_ChildCongenitalAnomalies
+FROM   dbiemr.t_ChildCongenitalAnomalies
  WHERE   DATE(CreatedDate)= (CURDATE() - INTERVAL 1 DAY) ;
 -- WHERE   DATE(CreatedDate)< CURDATE();
 
@@ -18937,7 +18937,7 @@ BEGIN
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :
                                                  Load Fact_ChildInValidRecord(db_reporing)
-                                                 from   t_ChildInValidRecord(db_iemr)
+                                                 from   t_ChildInValidRecord(dbiemr)
 
 
 --    Version History               :
@@ -19202,8 +19202,8 @@ TC.LastModDate,
 Replace(DATE(TC.CreatedDate),'-','')AS fact_CreatedDate,
 'SP_Load_Fact_ChildInValidRecord',
 NOW()
-FROM  db_iemr.t_ChildInValiddata TC
-LEFT JOIN `db_iemr`.`t_filemanager` TK ON TC.FileID = TK.FileID
+FROM  dbiemr.t_ChildInValiddata TC
+LEFT JOIN `dbiemr`.`t_filemanager` TK ON TC.FileID = TK.FileID
 WHERE   DATE(TC.CreatedDate)= (CURDATE() - INTERVAL 1 DAY);
 -- WHERE   DATE(TC.CreatedDate)< CURDATE();
 
@@ -19236,7 +19236,7 @@ BEGIN
 --    Created Date                  :           28-05-2017
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
---    Purpose                       :           TO Load Child Validrecord from  Fact_ChildValidRecord(db_iemr)
+--    Purpose                       :           TO Load Child Validrecord from  Fact_ChildValidRecord(dbiemr)
                                                     to Fact_ChildValidRecord(db_reporing ).
 
 
@@ -19506,8 +19506,8 @@ Replace(DATE(TC.CreatedDate),'-','')AS fact_CreatedDate,
 NOW(),
 TC.Child_RCH_ID_No,TC.Mother_RCH_ID_No,TC.HepatitisB0_Dt,
 TC.IsHrni,TC.Hrni_Reason,TC.entrytype
- FROM db_iemr.t_childvaliddata TC
-LEFT JOIN db_iemr.t_filemanager TF ON TC.FileID = TF.FileID
+ FROM dbiemr.t_childvaliddata TC
+LEFT JOIN dbiemr.t_filemanager TF ON TC.FileID = TF.FileID
 WHERE DATE(TC.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
 -- WHERE DATE(TC.CreatedDate)<CURDATE();
 
@@ -19545,7 +19545,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_diahypercase(db_reporting)
-                                                 from  db_iemr (db_iemr)
+                                                 from  dbiemr (dbiemr)
                         
 
 --    Version History               :
@@ -19626,12 +19626,12 @@ NOW()
  BCC.LastModDate,
  BCC.SyncedBy,
  BCC.SyncedDate
-FROM db_iemr.t_bencomorbiditycondition BCC
+FROM dbiemr.t_bencomorbiditycondition BCC
 group by BeneficiaryRegID, VisitCode) CC 
-inner join db_iemr.t_benvisitdetail BVD 
+inner join dbiemr.t_benvisitdetail BVD 
   on BVD.BeneficiaryRegID = CC.BeneficiaryRegID
     and BVD.VisitCode = CC.VisitCode
-inner join db_iemr.m_van VAN 
+inner join dbiemr.m_van VAN 
   on BVD.VanID = Van.VanID
 WHERE DATE(CC.CreatedDate)=CURDATE() - INTERVAL 1 DAY
 -- WHERE DATE(CC.CreatedDate)<CURDATE();
@@ -19667,12 +19667,12 @@ Rx.SyncedDate,
 Replace(DATE(Rx.CreatedDate),'-','')AS dim_create_date,
 'SP_Load_Fact_DiaHyperCase',
 NOW()
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_prescription Rx 
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_prescription Rx 
   on BVD.BeneficiaryRegID = Rx.BeneficiaryRegID
     and BVD.VisitCode = Rx.VisitCode
     and (BVD.VisitCategory = 'General OPD' or BVD.VisitCategory = 'General OPD (QC)')
-inner join db_iemr.m_van VAN 
+inner join dbiemr.m_van VAN 
   on BVD.VanID = Van.VanID
 WHERE DATE(Rx.CreatedDate)=CURDATE() - INTERVAL 1 DAY
 -- WHERE DATE(Rx.CreatedDate)<CURDATE();
@@ -19709,12 +19709,12 @@ PNCD.SyncedDate,
 Replace(DATE(PNCD.CreatedDate),'-','')AS dim_create_date,
 'SP_Load_Fact_DiaHyperCase',
 NOW()
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_pncdiagnosis PNCD
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_pncdiagnosis PNCD
   on BVD.BeneficiaryRegID = PNCD.BeneficiaryRegID
     and BVD.VisitCode = PNCD.VisitCode
     and (BVD.VisitCategory = 'PNC')
-inner join db_iemr.m_van VAN 
+inner join dbiemr.m_van VAN 
   on BVD.VanID = Van.VanID
 WHERE DATE(PNCD.CreatedDate)=CURDATE() - INTERVAL 1 DAY
 -- WHERE DATE(PNCD.CreatedDate)<CURDATE();
@@ -19750,12 +19750,12 @@ ANCD.SyncedDate,
 Replace(DATE(ANCD.CreatedDate),'-','')AS dim_create_date,
 'SP_Load_Fact_DiaHyperCase',
 NOW()
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_ancdiagnosis ANCD
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_ancdiagnosis ANCD
   on BVD.BeneficiaryRegID = ANCD.BeneficiaryRegID
     and BVD.VisitCode = ANCD.VisitCode
     and (BVD.VisitCategory = 'ANC')
-inner join db_iemr.m_van VAN 
+inner join dbiemr.m_van VAN 
   on BVD.VanID = Van.VanID
 WHERE DATE(ANCD.CreatedDate)=CURDATE() - INTERVAL 1 DAY
 -- WHERE DATE(ANCD.CreatedDate)<CURDATE();
@@ -19791,12 +19791,12 @@ NCDS.SyncedDate,
 Replace(DATE(NCDS.CreatedDate),'-','')AS dim_create_date,
 'SP_Load_Fact_DiaHyperCase',
 NOW()
- from db_iemr.t_benvisitdetail BVD
-inner join db_iemr.t_ncdscreening NCDS
+ from dbiemr.t_benvisitdetail BVD
+inner join dbiemr.t_ncdscreening NCDS
   on BVD.BeneficiaryRegID = NCDS.BeneficiaryRegID
     and BVD.VisitCode = NCDS.VisitCode
     and (BVD.VisitCategory = 'NCD screening')
-inner join db_iemr.m_van VAN 
+inner join dbiemr.m_van VAN 
   on BVD.VanID = Van.VanID
 WHERE DATE(NCDS.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
 -- WHERE DATE(NCDS.CreatedDate)<CURDATE();
@@ -19831,7 +19831,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load Fact_DirectoryService(reporting)
-                                                from db_iemr t_DirectoryService
+                                                from dbiemr t_DirectoryService
 
 
                         
@@ -19896,15 +19896,15 @@ TDS.LastModDate,
 Replace(DATE(TDS.CreatedDate),'-','')AS fact_CreatedDate,
 'SP_Load_Fact_DirectoryService',
 NOW()
-  FROM   db_iemr.t_DirectoryService TDS
-LEFT JOIN db_iemr.t_bencall TB ON TB.BenCallID = TDS.BenCallID
-LEFT JOIN db_iemr.m_institutedirectory MI ON MI.InstituteDirectoryID = TDS.InstituteDirectoryID
-LEFT JOIN db_iemr.m_institutesubdirectory MIS ON MIS.InstituteSubDirectoryID = TDS.InstituteSubDirectoryID
-LEFT JOIN db_iemr.m_institution MIT ON MIT.InstitutionID = TDS.InstitutionID
-LEFT JOIN db_iemr.m_providerservicemapping MP ON MP.ProviderServiceMapID = TDS.ProviderServiceMapID
-LEFT JOIN db_iemr.m_state MS ON MS.stateID = MIT.stateID
-LEFT JOIN db_iemr.m_district MD ON MD.districtID = MIT.DistrictID
-LEFT JOIN db_iemr.m_districtblock MB ON MB.BlockID = MIT.BlockID
+  FROM   dbiemr.t_DirectoryService TDS
+LEFT JOIN dbiemr.t_bencall TB ON TB.BenCallID = TDS.BenCallID
+LEFT JOIN dbiemr.m_institutedirectory MI ON MI.InstituteDirectoryID = TDS.InstituteDirectoryID
+LEFT JOIN dbiemr.m_institutesubdirectory MIS ON MIS.InstituteSubDirectoryID = TDS.InstituteSubDirectoryID
+LEFT JOIN dbiemr.m_institution MIT ON MIT.InstitutionID = TDS.InstitutionID
+LEFT JOIN dbiemr.m_providerservicemapping MP ON MP.ProviderServiceMapID = TDS.ProviderServiceMapID
+LEFT JOIN dbiemr.m_state MS ON MS.stateID = MIT.stateID
+LEFT JOIN dbiemr.m_district MD ON MD.districtID = MIT.DistrictID
+LEFT JOIN dbiemr.m_districtblock MB ON MB.BlockID = MIT.BlockID
  WHERE DATE(TDS.CreatedDate)=CURDATE() - INTERVAL 1 DAY ;
 -- WHERE DATE(TDS.CreatedDate)<CURDATE();
 
@@ -19998,11 +19998,11 @@ TEO.LastModDate,
 Replace(DATE(TEO.CreatedDate),'-','')AS fact_CreatedDate,
 'SP_Load_Fact_EpidemicOutbreak',
 NOW()
-FROM         db_iemr.t_EpidemicOutbreak TEO
-LEFT JOIN    db_iemr.m_district MD ON    MD.DistrictID = TEO.AffectedDistrictID
-LEFT JOIN    db_iemr.m_DistrictBlock DB ON DB.BlockID = TEO.AffectedDistrictBlockID
-LEFT JOIN    db_iemr.m_providerservicemapping MP ON MP.ProviderServiceMapID = TEO.ProviderServiceMapID
-LEFT JOIN    db_iemr.m_districtbranchmapping  MDBM ON  MDBM.DistrictBranchID = TEO.AffectedDistrictID
+FROM         dbiemr.t_EpidemicOutbreak TEO
+LEFT JOIN    dbiemr.m_district MD ON    MD.DistrictID = TEO.AffectedDistrictID
+LEFT JOIN    dbiemr.m_DistrictBlock DB ON DB.BlockID = TEO.AffectedDistrictBlockID
+LEFT JOIN    dbiemr.m_providerservicemapping MP ON MP.ProviderServiceMapID = TEO.ProviderServiceMapID
+LEFT JOIN    dbiemr.m_districtbranchmapping  MDBM ON  MDBM.DistrictBranchID = TEO.AffectedDistrictID
   WHERE DATE(TEO.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
     -- WHERE DATE(TEO.CreatedDate)<CURDATE();
 
@@ -20140,23 +20140,23 @@ INSERT INTO   db_reporting.fact_feedback(
   'SP_Load_Fact_Feedback',
   NOW()
 
-  FROM db_iemr.t_feedback TF
-    LEFT JOIN  db_iemr.m_designation MDG ON MDG.designationID = TF.DesignationID
-    LEFT JOIN  db_iemr.m_institution MI ON MI.InstitutionID = TF.InstitutionID
-    LEFT JOIN db_iemr.m_state  MS ON MS.stateID = TF.StateID
-    LEFT JOIN db_iemr.m_district MD on MD.DistrictID = TF.DistrictID
-    LEFT JOIN db_iemr.m_districtbranchmapping   MDB ON MDB.DistrictBranchID = TF.DistrictBranchID
-    LEFT JOIN db_iemr.m_districtblock MB on MB.blockid = MDB.blockid
-    LEFT JOIN db_iemr.m_institutiontype  MIT ON MIT.InstitutionTypeID = TF.InstitutionTypeID
-    LEFT JOIN db_iemr.m_severity  MST ON MST.SeverityID = TF.SeverityID
-    LEFT JOIN db_iemr.m_feedbacktype  MFT ON MFT.FeedbackTypeID = TF.FeedbackTypeID
-    LEFT JOIN db_iemr.m_feedbacknature  MFN ON MFN.FeedbackNatureID = TF.FeedbackNatureID
-    LEFT JOIN db_iemr.m_feedbackstatus  MFS ON MFS.FeedbackStatusID = TF.FeedbackStatusID
-    LEFT JOIN db_iemr.m_providerservicemapping MPS ON MPS.ProviderServiceMapID =TF.ProviderServiceMapID
-    LEFT JOIN db_iemr.m_user MU ON MU.userID = TF.userID
-    LEFT JOIN db_iemr.m_emailstatus ME ON ME.EmailStatusID = TF.EmailStatusID
-    LEFT JOIN db_iemr.m_Category CA ON TF.CategoryID = CA.CategoryID
-    LEFT JOIN db_iemr.m_SubCategory SCA ON TF.SubCategoryID = SCA.SubCategoryID
+  FROM dbiemr.t_feedback TF
+    LEFT JOIN  dbiemr.m_designation MDG ON MDG.designationID = TF.DesignationID
+    LEFT JOIN  dbiemr.m_institution MI ON MI.InstitutionID = TF.InstitutionID
+    LEFT JOIN dbiemr.m_state  MS ON MS.stateID = TF.StateID
+    LEFT JOIN dbiemr.m_district MD on MD.DistrictID = TF.DistrictID
+    LEFT JOIN dbiemr.m_districtbranchmapping   MDB ON MDB.DistrictBranchID = TF.DistrictBranchID
+    LEFT JOIN dbiemr.m_districtblock MB on MB.blockid = MDB.blockid
+    LEFT JOIN dbiemr.m_institutiontype  MIT ON MIT.InstitutionTypeID = TF.InstitutionTypeID
+    LEFT JOIN dbiemr.m_severity  MST ON MST.SeverityID = TF.SeverityID
+    LEFT JOIN dbiemr.m_feedbacktype  MFT ON MFT.FeedbackTypeID = TF.FeedbackTypeID
+    LEFT JOIN dbiemr.m_feedbacknature  MFN ON MFN.FeedbackNatureID = TF.FeedbackNatureID
+    LEFT JOIN dbiemr.m_feedbackstatus  MFS ON MFS.FeedbackStatusID = TF.FeedbackStatusID
+    LEFT JOIN dbiemr.m_providerservicemapping MPS ON MPS.ProviderServiceMapID =TF.ProviderServiceMapID
+    LEFT JOIN dbiemr.m_user MU ON MU.userID = TF.userID
+    LEFT JOIN dbiemr.m_emailstatus ME ON ME.EmailStatusID = TF.EmailStatusID
+    LEFT JOIN dbiemr.m_Category CA ON TF.CategoryID = CA.CategoryID
+    LEFT JOIN dbiemr.m_SubCategory SCA ON TF.SubCategoryID = SCA.SubCategoryID
     
     WHERE DATE(TF.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
     -- WHERE DATE(TF.CreatedDate)<CURDATE();
@@ -20191,7 +20191,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           TO Load Fact_SchemeService
-                                                from db_iemr t_SchemeService.
+                                                from dbiemr t_SchemeService.
 
 
 --    Version History               :
@@ -20291,12 +20291,12 @@ FSC.LastModDate,
  'SP_Load_Fact_FoodSafetyCopmlaint',
  now()
 
- FROM db_iemr.t_foodsafetycopmlaint FSC
-      LEFT JOIN db_iemr.m_FeedbackType FT ON FSC.FeedbackTypeID = FT.FeedbackTypeID
-      LEFT JOIN db_iemr.m_gender M ON M.GenderID = FSC.PatientGenderID
-      left join db_iemr.m_District DIS ON FSC.DistrictID = DIS.DistrictID
-      left join db_iemr.m_DistrictBlock DISB ON FSC.DistrictBlockID = DISB.BlockID
-      left join db_iemr.m_DistrictBranchMapping DISBM ON FSC.VillageID = DISBM.DistrictBranchID
+ FROM dbiemr.t_foodsafetycopmlaint FSC
+      LEFT JOIN dbiemr.m_FeedbackType FT ON FSC.FeedbackTypeID = FT.FeedbackTypeID
+      LEFT JOIN dbiemr.m_gender M ON M.GenderID = FSC.PatientGenderID
+      left join dbiemr.m_District DIS ON FSC.DistrictID = DIS.DistrictID
+      left join dbiemr.m_DistrictBlock DISB ON FSC.DistrictBlockID = DISB.BlockID
+      left join dbiemr.m_DistrictBranchMapping DISBM ON FSC.VillageID = DISBM.DistrictBranchID
       WHERE DATE(FSC.CreatedDate)=CURDATE() - INTERVAL 1 DAY ;
 
 
@@ -20397,10 +20397,10 @@ ISE.LastModDate,
   Replace(DATE(ISE.CreatedDate),'-','')AS fact_CreatedDate,
   'SP_Load_Fact_ItemStockEntry',
   NOW()
- FROM db_iemr.t_ItemStockEntry ISE
- inner join db_iemr.m_item ITM on ISE.ItemID = ITM.ItemID
- inner join db_iemr.m_facility FAC on ISE.FacilityID = FAC.FacilityID
- inner join db_iemr.m_itemcategory ITMC on ITM.ItemCategoryID = ITMC.ItemCategoryID
+ FROM dbiemr.t_ItemStockEntry ISE
+ inner join dbiemr.m_item ITM on ISE.ItemID = ITM.ItemID
+ inner join dbiemr.m_facility FAC on ISE.FacilityID = FAC.FacilityID
+ inner join dbiemr.m_itemcategory ITMC on ITM.ItemCategoryID = ITMC.ItemCategoryID
  
   WHERE DATE(ISE.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
   -- WHERE DATE(ISE.CreatedDate)<CURDATE();
@@ -20408,7 +20408,7 @@ ISE.LastModDate,
   set sql_safe_updates=0;
 
     update db_reporting.fact_itemstockentry f
-    inner join db_iemr.t_ItemStockEntry t on t.itemstockentryid=f.itemstockentryid
+    inner join dbiemr.t_ItemStockEntry t on t.itemstockentryid=f.itemstockentryid
     set f.quantityinhand=t.quantityinhand
     WHERE DATE(t.CreatedDate)<=CURDATE() - INTERVAL 1 DAY;
 
@@ -20515,11 +20515,11 @@ ISEx.LastModDate,
   Replace(DATE(ISEx.CreatedDate),'-','')AS fact_CreatedDate,
   'SP_Load_Fact_ItemStockExit',
   NOW()
- FROM db_iemr.t_ItemStockExit ISEx
- inner join db_iemr.t_ItemStockEntry ISE on ISEx.ItemStockEntryID = ISE.VanSerialNo and ISEx.VanID = ISE.VanID
- inner join db_iemr.m_item ITM on ISE.ItemID = ITM.ItemID
- inner join db_iemr.m_facility FAC on ISE.FacilityID = FAC.FacilityID
- inner join db_iemr.m_itemcategory ITMC on ITM.ItemCategoryID = ITMC.ItemCategoryID
+ FROM dbiemr.t_ItemStockExit ISEx
+ inner join dbiemr.t_ItemStockEntry ISE on ISEx.ItemStockEntryID = ISE.VanSerialNo and ISEx.VanID = ISE.VanID
+ inner join dbiemr.m_item ITM on ISE.ItemID = ITM.ItemID
+ inner join dbiemr.m_facility FAC on ISE.FacilityID = FAC.FacilityID
+ inner join dbiemr.m_itemcategory ITMC on ITM.ItemCategoryID = ITMC.ItemCategoryID
  
   WHERE DATE(ISEx.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
   -- WHERE DATE(ISEx.CreatedDate)<CURDATE();
@@ -20554,7 +20554,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_labtestorder(db_reporting)
-                                                 from  t_lab_testorder  (db_iemr)
+                                                 from  t_lab_testorder  (dbiemr)
                         
 
 --    Version History               :
@@ -20626,9 +20626,9 @@ LTO.SyncedDate,
   Replace(DATE(LTO.CreatedDate),'-','')AS fact_CreatedDate,
   'SP_Load_Fact_LabTestOrder',
   NOW()
- FROM db_iemr.t_lab_testorder LTO
- left join db_iemr.m_van VAN on LTO.VanID = VAN.VanID
-inner join db_iemr.t_benvisitdetail BVD on LTO.VisitCode = BVD.VisitCode and LTO.BeneficiaryRegID = BVD.BeneficiaryRegID
+ FROM dbiemr.t_lab_testorder LTO
+ left join dbiemr.m_van VAN on LTO.VanID = VAN.VanID
+inner join dbiemr.t_benvisitdetail BVD on LTO.VisitCode = BVD.VisitCode and LTO.BeneficiaryRegID = BVD.BeneficiaryRegID
  WHERE DATE(LTO.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
  -- WHERE DATE(LTO.CreatedDate)<CURDATE();
 
@@ -20662,7 +20662,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_LabTestResult(db_reporting)
-                                                 from  t_LabTestResult  (db_iemr)
+                                                 from  t_LabTestResult  (dbiemr)
                         
 
 --    Version History               :
@@ -20742,11 +20742,11 @@ LTR.SyncedDate,
 Replace(DATE(LTR.CreatedDate),'-','')AS fact_CreatedDate,
 'SP_Load_Fact_LabTestResult',
 NOW()
-from db_iemr.t_lab_testresult LTR
-    left join db_iemr.m_testcomponent TC on LTR.TestComponentID = TC.TestComponentID
-        left join db_iemr.m_procedure PRO on LTR.ProcedureID = PRO.ProcedureID
-        left join db_iemr.m_van VAN on LTR.VanID = VAN.VanID 
-        inner join db_iemr.t_benvisitdetail BVD on LTR.VisitCode = BVD.VisitCode 
+from dbiemr.t_lab_testresult LTR
+    left join dbiemr.m_testcomponent TC on LTR.TestComponentID = TC.TestComponentID
+        left join dbiemr.m_procedure PRO on LTR.ProcedureID = PRO.ProcedureID
+        left join dbiemr.m_van VAN on LTR.VanID = VAN.VanID 
+        inner join dbiemr.t_benvisitdetail BVD on LTR.VisitCode = BVD.VisitCode 
       and LTR.BeneficiaryRegID = BVD.BeneficiaryRegID
  WHERE DATE(LTR.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
 -- WHERE DATE(LTR.CreatedDate)<CURDATE();
@@ -20831,8 +20831,8 @@ NOW(),
 TM.outboundCallType,TM.SectionID,TM.ReasonsforHrni,TM.OtherHrni,
 TM.CongentialAnomalies,TM.OtherCongentialAnomalies,TM.ProbableCauseOfDefect,
 TM.ReasonsForHrp,TM.OtherHrpReason,TM.obcallid,TM.Remarks ,TM.ProviderServiceMapID
-FROM   db_iemr.t_MCTSCallResponse  TM
-LEFT JOIN db_iemr.m_questionnaire MQ ON MQ.QuestionID = TM.QuestionID
+FROM   dbiemr.t_MCTSCallResponse  TM
+LEFT JOIN dbiemr.m_questionnaire MQ ON MQ.QuestionID = TM.QuestionID
 WHERE   DATE(TM.CreatedDate)= (CURDATE() - INTERVAL 1 DAY) ;
 -- WHERE   DATE(TM.CreatedDate)<CURDATE();
 
@@ -20865,7 +20865,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           TO Load Fact_MctsOutboundCall(reporting)
-                                                from db_iemr  t_MctsOutboundCalls
+                                                from dbiemr  t_MctsOutboundCalls
 
 
 --    Version History               :
@@ -20931,7 +20931,7 @@ Replace(DATE(CreatedDate),'-','')AS fact_CreatedDate,
 NOW()  
 ,IsHighRisk,HighRisk_Reason,IsHrni,Hrni_Reason,
 congenitalanomalies,phoneNumberType
-FROM  db_iemr.t_MctsOutboundCalls
+FROM  dbiemr.t_MctsOutboundCalls
 WHERE   DATE(CreatedDate)= (CURDATE() - INTERVAL 1 DAY);
 -- WHERE   DATE(CreatedDate)< CURDATE();
 insert into db_reporting.scheduler_status (proc_name, status ,time) values('SP_Load_Fact_MctsOutboundCall','completed',now());
@@ -20964,7 +20964,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           TO Load Fact_MotherInValidRecord(reporting)
-                                                from db_iemr  t_MotherInValidRecord
+                                                from dbiemr  t_MotherInValidRecord
 
 
 --    Version History               :
@@ -21279,8 +21279,8 @@ Replace(DATE(TM.CreatedDate),'-','')AS fact_CreatedDate,
 'SP_Load_Fact_MotherInValidRecord',
 NOW()
 
-FROM   db_iemr.t_MotherInValidRecord  TM
-LEFT  JOIN `db_iemr`.`t_filemanager` TK ON TM.FileID = TK.FileID
+FROM   dbiemr.t_MotherInValidRecord  TM
+LEFT  JOIN `dbiemr`.`t_filemanager` TK ON TM.FileID = TK.FileID
 WHERE   DATE(TM.CreatedDate)= CURDATE() - INTERVAL 1 DAY ;
  -- WHERE   DATE(TM.CreatedDate)< CURDATE();
 
@@ -21313,7 +21313,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           TO Load fact_mothervalidrecord (db_reporing)
-                                                from db_iemr t_mothervalidrecord.
+                                                from dbiemr t_mothervalidrecord.
 
 
 --    Version History               :
@@ -21934,9 +21934,9 @@ MV.MotherValidRecordID,
      MV.ANC2_Symptoms_High_Risk,MV.ANC3_Symptoms_High_Risk,MV.ANC4_Symptoms_High_Risk,
      MV.Delivery_Place,MV.Delivery_Place_Name
 
-FROM db_iemr.t_mothervalidrecord MV
+FROM dbiemr.t_mothervalidrecord MV
 
-LEFT JOIN db_iemr.t_filemanager  FM ON MV.FileID = FM.FileID
+LEFT JOIN dbiemr.t_filemanager  FM ON MV.FileID = FM.FileID
 WHERE DATE(MV.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
 -- WHERE DATE(t_mothervalidrecord.CreatedDate)<CURDATE() ;
 
@@ -21975,7 +21975,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           TO Load Fact_OrganDonation
-                                                 from db_iemr t_OrganDonation.
+                                                 from dbiemr t_OrganDonation.
 
 
 --    Version History               :
@@ -22045,31 +22045,31 @@ TOG.LastModDate,
 Replace(DATE(TOG.CreatedDate),'-','')AS fact_CreatedDate ,
 'SP_Load_Fact_OrganDonation',
 NOW()
-FROM  db_iemr.t_OrganDonation    TOG
-LEFT JOIN db_iemr.m_providerservicemapping MPM ON MPM.ProviderServiceMapID = TOG.ProviderServiceMapID
-LEFT JOIN db_iemr.m_donatableorgan MD ON MD.DonatableOrganID = TOG.DonatableOrganID
-LEFT JOIN db_iemr.m_donationtype MDT ON MDT.DonationTypeID = TOG.DonationTypeID
-LEFT JOIN db_iemr.m_gender  MG ON MG.GenderID=TOG.DonarGenderID
-LEFT JOIN db_iemr.m_institution MIT ON MIT.InstitutionID = TOG.AcceptorHospitalID
-LEFT JOIN db_iemr.m_providerservicemapping MP ON MP.ProviderServiceMapID = TOG.ProviderServiceMapID
-LEFT JOIN db_iemr.m_state MS ON MS.stateID = MIT.stateID
-LEFT JOIN db_iemr.m_district MDD ON MDD.districtID = MIT.districtID
-LEFT JOIN db_iemr.m_districtblock MB ON MB.BlockID = MIT.BlockID
+FROM  dbiemr.t_OrganDonation    TOG
+LEFT JOIN dbiemr.m_providerservicemapping MPM ON MPM.ProviderServiceMapID = TOG.ProviderServiceMapID
+LEFT JOIN dbiemr.m_donatableorgan MD ON MD.DonatableOrganID = TOG.DonatableOrganID
+LEFT JOIN dbiemr.m_donationtype MDT ON MDT.DonationTypeID = TOG.DonationTypeID
+LEFT JOIN dbiemr.m_gender  MG ON MG.GenderID=TOG.DonarGenderID
+LEFT JOIN dbiemr.m_institution MIT ON MIT.InstitutionID = TOG.AcceptorHospitalID
+LEFT JOIN dbiemr.m_providerservicemapping MP ON MP.ProviderServiceMapID = TOG.ProviderServiceMapID
+LEFT JOIN dbiemr.m_state MS ON MS.stateID = MIT.stateID
+LEFT JOIN dbiemr.m_district MDD ON MDD.districtID = MIT.districtID
+LEFT JOIN dbiemr.m_districtblock MB ON MB.BlockID = MIT.BlockID
 WHERE DATE(TOG.CreatedDate)=CURDATE() - INTERVAL 1 DAY ;
 -- WHERE DATE(TOG.CreatedDate)<CURDATE()  ;
 
 
 UPDATE db_reporting.Fact_OrganDonation  FOD
-LEFT JOIN db_iemr.t_OrganDonation    TOG ON FOD.OrganDonationID = TOG.OrganDonationID
-LEFT JOIN db_iemr.m_providerservicemapping MPM ON MPM.ProviderServiceMapID = TOG.ProviderServiceMapID
-LEFT JOIN db_iemr.m_donatableorgan MD ON MD.DonatableOrganID = TOG.DonatableOrganID
-LEFT JOIN db_iemr.m_donationtype MDT ON MDT.DonationTypeID = TOG.DonationTypeID
-LEFT JOIN db_iemr.m_gender  MG ON MG.GenderID=TOG.DonarGenderID
-LEFT JOIN db_iemr.m_institution MIT ON MIT.InstitutionID = TOG.AcceptorHospitalID
-LEFT JOIN db_iemr.m_providerservicemapping MP ON MP.ProviderServiceMapID = TOG.ProviderServiceMapID
-LEFT JOIN db_iemr.m_state MS ON MS.stateID = MIT.stateID
-LEFT JOIN db_iemr.m_district MDD ON MDD.districtID = MIT.districtID
-LEFT JOIN db_iemr.m_districtblock MB ON MB.BlockID = MIT.BlockID
+LEFT JOIN dbiemr.t_OrganDonation    TOG ON FOD.OrganDonationID = TOG.OrganDonationID
+LEFT JOIN dbiemr.m_providerservicemapping MPM ON MPM.ProviderServiceMapID = TOG.ProviderServiceMapID
+LEFT JOIN dbiemr.m_donatableorgan MD ON MD.DonatableOrganID = TOG.DonatableOrganID
+LEFT JOIN dbiemr.m_donationtype MDT ON MDT.DonationTypeID = TOG.DonationTypeID
+LEFT JOIN dbiemr.m_gender  MG ON MG.GenderID=TOG.DonarGenderID
+LEFT JOIN dbiemr.m_institution MIT ON MIT.InstitutionID = TOG.AcceptorHospitalID
+LEFT JOIN dbiemr.m_providerservicemapping MP ON MP.ProviderServiceMapID = TOG.ProviderServiceMapID
+LEFT JOIN dbiemr.m_state MS ON MS.stateID = MIT.stateID
+LEFT JOIN dbiemr.m_district MDD ON MDD.districtID = MIT.districtID
+LEFT JOIN dbiemr.m_districtblock MB ON MB.BlockID = MIT.BlockID
  SET
 
 FOD.OrganDonationID = TOG.OrganDonationID,
@@ -22132,7 +22132,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_patientissueexit(db_reporting)
-                                                 from  t_patientissue and t_itemstockexit  (db_iemr)
+                                                 from  t_patientissue and t_itemstockexit  (dbiemr)
                         
 
 --    Version History               :
@@ -22230,17 +22230,17 @@ ISEx.LastModDate,
   Replace(DATE(ISEx.CreatedDate),'-','')AS fact_CreatedDate,
   'SP_Load_Fact_PatientIssueExit',
   NOW()
- FROM db_iemr.t_itemstockexit ISEx
-inner join db_iemr.t_PatientIssue PI 
+ FROM dbiemr.t_itemstockexit ISEx
+inner join dbiemr.t_PatientIssue PI 
       on ISEx.ExitTypeID = PI.VanSerialNo
       and ISEx.VanID = PI.VanID 
             and ISEx.ExitType = 'T_PatientIssue'
-inner join db_iemr.t_itemstockentry ISE
+inner join dbiemr.t_itemstockentry ISE
       on ISEx.ItemStockEntryID = ISE.VanSerialNo
             and ISEx.VanID = ISE.VanID
-inner join db_iemr.m_item ITM 
+inner join dbiemr.m_item ITM 
       on ISE.ItemID = ITM.ItemID
-inner join db_iemr.m_itemcategory ITMC
+inner join dbiemr.m_itemcategory ITMC
       on ITM.ItemCategoryID = ITMC.ItemCategoryID
  
   WHERE DATE(ISEx.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
@@ -22276,7 +22276,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           TO Load Fact_PhoneBlock
-                                                from db_iemr t_PhoneBlock.
+                                                from dbiemr t_PhoneBlock.
 
 
 --    Version History               :
@@ -22321,7 +22321,7 @@ TPB.LastModDate,
  'SP_Load_Fact_PhoneBlock',
  now()
 
- FROM db_iemr.t_PhoneBlock TPB
+ FROM dbiemr.t_PhoneBlock TPB
       WHERE DATE(TPB.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
       -- WHERE DATE(TPB.CreatedDate)<CURDATE();
 
@@ -22418,14 +22418,14 @@ select V.BeneficiaryRegID ,
    Replace(DATE(V.CreatedDate),'-','')AS fact_CreatedDate,
   'SP_Load_Fact_LabTestOrder',
   NOW(),   V.CreatedDate 
- from db_iemr.t_phy_vitals v
-left join db_iemr.t_phy_anthropometry A on A.beneficiaryregid=V.beneficiaryregid and 
+ from dbiemr.t_phy_vitals v
+left join dbiemr.t_phy_anthropometry A on A.beneficiaryregid=V.beneficiaryregid and 
 A.VisitCode=V.VisitCode
-left join db_iemr.t_benclinicalobservation C on C.beneficiaryregid=V.beneficiaryregid and 
+left join dbiemr.t_benclinicalobservation C on C.beneficiaryregid=V.beneficiaryregid and 
 C.VisitCode=V.VisitCode
-left join db_iemr.t_benpersonalhabit H on H.beneficiaryregid=V.beneficiaryregid and 
+left join dbiemr.t_benpersonalhabit H on H.beneficiaryregid=V.beneficiaryregid and 
 H.VisitCode=V.VisitCode
--- left join db_iemr.fact_benchiefcomplaint CC on CC.beneficiaryregid=V.beneficiaryregid and 
+-- left join dbiemr.fact_benchiefcomplaint CC on CC.beneficiaryregid=V.beneficiaryregid and 
 -- CC.visitid=V.visitid
   WHERE DATE(V.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
 
@@ -22459,7 +22459,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_pnccare(db_reporting)
-                                                 from  t_pnccare  (db_iemr)
+                                                 from  t_pnccare  (dbiemr)
                         
 
 --    Version History               :
@@ -22563,7 +22563,7 @@ PC.SyncedDate,
   Replace(DATE(PC.CreatedDate),'-','')AS fact_CreatedDate,
   'SP_Load_Fact_PNCCare',
   NOW()
- FROM db_iemr.t_pnccare PC
+ FROM dbiemr.t_pnccare PC
  WHERE DATE(PC.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
  -- WHERE DATE(PC.CreatedDate)<CURDATE();
 
@@ -22597,7 +22597,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_pncdiagnosis(db_reporting)
-                                                 from  t_pncdiagnosis  (db_iemr)
+                                                 from  t_pncdiagnosis  (dbiemr)
                         
 
 --    Version History               :
@@ -22659,11 +22659,11 @@ PNCD.SyncedDate,
 Replace(DATE(PNCD.CreatedDate),'-','')AS dim_create_date,
 'SP_Load_Fact_PNCDiagnosis',
 NOW()
- from db_iemr.t_pncdiagnosis PNCD
-inner join db_iemr.t_benvisitdetail BVD
+ from dbiemr.t_pncdiagnosis PNCD
+inner join dbiemr.t_benvisitdetail BVD
   on BVD.BeneficiaryRegID = PNCD.BeneficiaryRegID
     and BVD.VisitCode = PNCD.VisitCode
-inner join db_iemr.m_van VAN 
+inner join dbiemr.m_van VAN 
   on BVD.VanID = Van.VanID
 WHERE DATE(PNCD.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
 -- WHERE DATE(PNCD.CreatedDate)<CURDATE();
@@ -22698,7 +22698,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_prescribeddrug(db_reporting)
-                                                 from  t_prescribeddrug  (db_iemr)
+                                                 from  t_prescribeddrug  (dbiemr)
                         
 
 --    Version History               :
@@ -22784,7 +22784,7 @@ RxD.SyncedDate,
   Replace(DATE(RxD.CreatedDate),'-','')AS fact_CreatedDate,
   'SP_Load_Fact_PrescribedDrug',
   NOW()
- FROM db_iemr.t_prescribeddrug RxD
+ FROM dbiemr.t_prescribeddrug RxD
  WHERE DATE(RxD.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
  -- WHERE DATE(RxD.CreatedDate)<CURDATE();
 
@@ -22818,7 +22818,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_Prescription(db_reporting)
-                                                 from  t_Prescription  (db_iemr)
+                                                 from  t_Prescription  (dbiemr)
                         
 
 --    Version History               :
@@ -22896,7 +22896,7 @@ Rx.SyncedDate,
   Replace(DATE(Rx.CreatedDate),'-','')AS fact_CreatedDate,
   'SP_Load_Fact_Prescription',
   NOW()
- FROM db_iemr.t_prescription Rx
+ FROM dbiemr.t_prescription Rx
  WHERE DATE(Rx.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
  -- WHERE DATE(Rx.CreatedDate)<CURDATE();
 
@@ -22930,7 +22930,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           TO Load Fact_SchemeService
-                                                from db_iemr t_SchemeService.
+                                                from dbiemr t_SchemeService.
 
 
 --    Version History               :
@@ -22981,8 +22981,8 @@ INSERT INTO db_reporting.Fact_SchemeService
  'SP_Load_Fact_SchemeService',
  now()
 
- FROM db_iemr.t_SchemeService TSS
-      LEFT  JOIN db_iemr.m_scheme MS ON MS.SchemeID = TSS.SchemeID
+ FROM dbiemr.t_SchemeService TSS
+      LEFT  JOIN dbiemr.m_scheme MS ON MS.SchemeID = TSS.SchemeID
       WHERE DATE(TSS.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
       -- WHERE DATE(TSS.CreatedDate)<CURDATE();
 
@@ -23017,7 +23017,7 @@ BEGIN
 --    Reviewed By                   :
 --    Reviewed Date                 :           DD-MMM-YYYY
 --    Purpose                       :           To load fact_TMRequest(db_reporting)
-                                                 from  t_TMRequest  (db_iemr)
+                                                 from  t_TMRequest  (dbiemr)
                         
 
 --    Version History               :
@@ -23097,18 +23097,18 @@ TMR.LastModDate,
 Replace(DATE(TMR.CreatedDate),'-','')AS fact_CreatedDate,
 'SP_Load_Fact_TMrequest',
 NOW()
-FROM db_iemr.t_tmrequest TMR
-inner join db_iemr.m_specialization SP on TMR.SpecializationID = SP.SpecializationID
-inner join db_iemr.m_user USR on TMR.UserID = USR.UserID
-inner join db_iemr.t_benvisitdetail BVD on TMR.VisitCode = BVD.VisitCode and TMR.BeneficiaryRegID = BVD.BeneficiaryRegID
-left Join db_iemr.m_Van VAN on TMR.VanID = VAN.VanID 
+FROM dbiemr.t_tmrequest TMR
+inner join dbiemr.m_specialization SP on TMR.SpecializationID = SP.SpecializationID
+inner join dbiemr.m_user USR on TMR.UserID = USR.UserID
+inner join dbiemr.t_benvisitdetail BVD on TMR.VisitCode = BVD.VisitCode and TMR.BeneficiaryRegID = BVD.BeneficiaryRegID
+left Join dbiemr.m_Van VAN on TMR.VanID = VAN.VanID 
  WHERE DATE(TMR.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
 -- WHERE DATE(TMR.CreatedDate)<CURDATE();
 
 
 
 update db_reporting.fact_tmrequest FTMR
-inner join db_iemr.t_tmrequest TMR on FTMR.TMRequestID = TMR.TMRequestID
+inner join dbiemr.t_tmrequest TMR on FTMR.TMRequestID = TMR.TMRequestID
 set 
 FTMR.Status = TMR.Status,
 FTMR.ConsultationStats = TMR.ConsultationStats,
@@ -23740,10 +23740,10 @@ ISE.LastModDate,
   Replace(DATE(ISE.CreatedDate),'-','')AS fact_CreatedDate,
   'SP_Load_Fact_ItemStockEntry',
   NOW()
- FROM db_iemr.t_ItemStockEntry ISE
- inner join db_iemr.m_item ITM on ISE.ItemID = ITM.ItemID
- inner join db_iemr.m_facility FAC on ISE.FacilityID = FAC.FacilityID
- inner join db_iemr.m_itemcategory ITMC on ITM.ItemCategoryID = ITMC.ItemCategoryID
+ FROM dbiemr.t_ItemStockEntry ISE
+ inner join dbiemr.m_item ITM on ISE.ItemID = ITM.ItemID
+ inner join dbiemr.m_facility FAC on ISE.FacilityID = FAC.FacilityID
+ inner join dbiemr.m_itemcategory ITMC on ITM.ItemCategoryID = ITMC.ItemCategoryID
  
         -- WHERE DATE(ISE.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
    WHERE DATE(ISE.CreatedDate)<CURDATE();
@@ -23829,12 +23829,12 @@ ISEx.LastModDate,
   Replace(DATE(ISEx.CreatedDate),'-','')AS fact_CreatedDate,
   'SP_Load_Fact_ItemStockExit',
   NOW()
- FROM db_iemr.t_ItemStockExit ISEx
- inner join db_iemr.t_ItemStockEntry ISE on ISEx.ItemStockEntryID = ISE.ItemStockEntryID
---  inner join db_iemr.t_ItemStockEntry ISE on ISEx.ItemStockEntryID = ISE.VanSerialNo and ISEx.VanID = ISE.VanID
- inner join db_iemr.m_item ITM on ISE.ItemID = ITM.ItemID
- inner join db_iemr.m_facility FAC on ISE.FacilityID = FAC.FacilityID
- inner join db_iemr.m_itemcategory ITMC on ITM.ItemCategoryID = ITMC.ItemCategoryID
+ FROM dbiemr.t_ItemStockExit ISEx
+ inner join dbiemr.t_ItemStockEntry ISE on ISEx.ItemStockEntryID = ISE.ItemStockEntryID
+--  inner join dbiemr.t_ItemStockEntry ISE on ISEx.ItemStockEntryID = ISE.VanSerialNo and ISEx.VanID = ISE.VanID
+ inner join dbiemr.m_item ITM on ISE.ItemID = ITM.ItemID
+ inner join dbiemr.m_facility FAC on ISE.FacilityID = FAC.FacilityID
+ inner join dbiemr.m_itemcategory ITMC on ITM.ItemCategoryID = ITMC.ItemCategoryID
  
         -- WHERE DATE(ISEx.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
    WHERE DATE(ISEx.CreatedDate)<CURDATE();
@@ -23927,21 +23927,21 @@ ISEx.LastModDate,
   Replace(DATE(ISEx.CreatedDate),'-','')AS fact_CreatedDate,
   'SP_Load_Fact_PatientIssueExit',
   NOW()
- FROM db_iemr.t_itemstockexit ISEx
-inner join db_iemr.t_PatientIssue PI 
+ FROM dbiemr.t_itemstockexit ISEx
+inner join dbiemr.t_PatientIssue PI 
                         on ISEx.ExitTypeID = PI.PatientIssueID
 --                      on ISEx.ExitTypeID = PI.VanSerialNo
 --                      and ISEx.VanID = PI.VanID 
             and ISEx.ExitType = 'T_PatientIssue'
-left join db_iemr.t_itemstockentry ISE
+left join dbiemr.t_itemstockentry ISE
                         on ISEx.ItemStockEntryID = ISE.ItemStockEntryID
 --                      on ISEx.ItemStockEntryID = ISE.VanSerialNo
 --             and ISEx.VanID = ISE.VanID
-left join db_iemr.m_item ITM 
+left join dbiemr.m_item ITM 
                         on ISE.ItemID = ITM.ItemID
-left join db_iemr.m_itemcategory ITMC
+left join dbiemr.m_itemcategory ITMC
                         on ITM.ItemCategoryID = ITMC.ItemCategoryID
-left join db_iemr.m_uom UOM 
+left join dbiemr.m_uom UOM 
                         on ITM.UOMID = UOM.UOMID
  
 --      WHERE DATE(ISEx.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
@@ -24033,9 +24033,9 @@ BCC.SyncedDate,
 Replace(DATE(BCC.CreatedDate),'-','')AS fact_CreatedDate,
 'SP_Load_Fact_BenChiefComplaint',
 NOW()
-from db_iemr.t_BenChiefComplaint BCC
-inner join db_iemr.m_Van V on BCC.VanID = V.VanID
-inner join db_iemr.m_providerservicemapping PSM on BCC.ProviderServiceMapID = PSM.ProviderServiceMapID
+from dbiemr.t_BenChiefComplaint BCC
+inner join dbiemr.m_Van V on BCC.VanID = V.VanID
+inner join dbiemr.m_providerservicemapping PSM on BCC.ProviderServiceMapID = PSM.ProviderServiceMapID
 -- WHERE DATE(BCC.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
  WHERE DATE(BCC.CreatedDate)<CURDATE();
  
@@ -24108,11 +24108,11 @@ TMR.LastModDate,
 Replace(DATE(TMR.CreatedDate),'-','')AS fact_CreatedDate,
 'SP_Load_Fact_TMrequest',
 NOW()
-FROM db_iemr.t_tmrequest TMR
-inner join db_iemr.m_specialization SP on TMR.SpecializationID = SP.SpecializationID
-inner join db_iemr.m_user USR on TMR.UserID = USR.UserID
-inner join db_iemr.t_benvisitdetail BVD on TMR.VisitCode = BVD.VisitCode and TMR.BeneficiaryRegID = BVD.BeneficiaryRegID
-left Join db_iemr.m_Van VAN on TMR.VanID = VAN.VanID 
+FROM dbiemr.t_tmrequest TMR
+inner join dbiemr.m_specialization SP on TMR.SpecializationID = SP.SpecializationID
+inner join dbiemr.m_user USR on TMR.UserID = USR.UserID
+inner join dbiemr.t_benvisitdetail BVD on TMR.VisitCode = BVD.VisitCode and TMR.BeneficiaryRegID = BVD.BeneficiaryRegID
+left Join dbiemr.m_Van VAN on TMR.VanID = VAN.VanID 
 -- WHERE DATE(TMR.CreatedDate)=CURDATE() - INTERVAL 1 DAY;
  WHERE DATE(TMR.CreatedDate)<CURDATE();
 
@@ -24137,7 +24137,7 @@ DELIMITER ;
 -- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
-/*!50001 VIEW `assam_104` AS (select cast(`t`.`CreatedDate` as date) AS `Date`,count(distinct `t`.`ReceivedAgentID`) AS `Agent_Loggedin`,count(distinct (case when ((`t`.`ReceivedRoleName` like '%HAO%') and (`t`.`IsOutbound` is false) and (`t`.`CallTypeID` is not null)) then `t`.`BenCallID` end)) AS `Inbound Calls`,count(distinct (case when (`t`.`IsOutbound` is true) then `t`.`CallID` end)) AS `Outbound Calls`,(count(distinct (case when ((`t`.`ReceivedRoleName` like '%HAO%') and (`t`.`IsOutbound` is false) and (`t`.`CallTypeID` is not null)) then `t`.`BenCallID` end)) + count(distinct (case when (`t`.`IsOutbound` is true) then `t`.`CallID` end))) AS `Total Calls`,count(distinct (case when (`m`.`CallType` like '%Grievance%') then `t`.`CallID` end)) AS `Grievance Received`,avg((case when ((`m`.`CallGroupType` in ('Valid','Transfer')) and (`t`.`ReceivedRoleName` like '%HAO%')) then timestampdiff(SECOND,`t`.`CallTime`,`t`.`CallEndTime`) end)) AS `Average Call Handling Time` from ((`db_iemr`.`t_bencall` `t` left join `db_iemr`.`m_calltype` `m` on((`m`.`CallTypeID` = `t`.`CallTypeID`))) left join `db_iemr`.`t_feedback` `f` on((`f`.`BenCallID` = `t`.`BenCallID`))) group by cast(`t`.`CreatedDate` as date)) */;
+/*!50001 VIEW `assam_104` AS (select cast(`t`.`CreatedDate` as date) AS `Date`,count(distinct `t`.`ReceivedAgentID`) AS `Agent_Loggedin`,count(distinct (case when ((`t`.`ReceivedRoleName` like '%HAO%') and (`t`.`IsOutbound` is false) and (`t`.`CallTypeID` is not null)) then `t`.`BenCallID` end)) AS `Inbound Calls`,count(distinct (case when (`t`.`IsOutbound` is true) then `t`.`CallID` end)) AS `Outbound Calls`,(count(distinct (case when ((`t`.`ReceivedRoleName` like '%HAO%') and (`t`.`IsOutbound` is false) and (`t`.`CallTypeID` is not null)) then `t`.`BenCallID` end)) + count(distinct (case when (`t`.`IsOutbound` is true) then `t`.`CallID` end))) AS `Total Calls`,count(distinct (case when (`m`.`CallType` like '%Grievance%') then `t`.`CallID` end)) AS `Grievance Received`,avg((case when ((`m`.`CallGroupType` in ('Valid','Transfer')) and (`t`.`ReceivedRoleName` like '%HAO%')) then timestampdiff(SECOND,`t`.`CallTime`,`t`.`CallEndTime`) end)) AS `Average Call Handling Time` from ((`dbiemr`.`t_bencall` `t` left join `dbiemr`.`m_calltype` `m` on((`m`.`CallTypeID` = `t`.`CallTypeID`))) left join `dbiemr`.`t_feedback` `f` on((`f`.`BenCallID` = `t`.`BenCallID`))) group by cast(`t`.`CreatedDate` as date)) */;
 -- /*!50001 SET character_set_client      = @saved_cs_client */;
 -- /*!50001 SET character_set_results     = @saved_cs_results */;
 -- /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -24173,7 +24173,7 @@ DELIMITER ;
 -- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013  SQL SECURITY DEFINER */
-/*!50001 VIEW `sanjeevani_dashboard` AS (select `vital`.`CurrDistrict` AS `CurrDistrict`,`vital`.`CreatedBy` AS `CreatedBy`,`vital`.`VisitCode` AS `VisitCode`,`vital`.`servicePoint` AS `servicePoint`,`vital`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`vital`.`VisitCategory` AS `VisitCategory`,`vital`.`visit_date` AS `visit_date`,`vital`.`visit_time` AS `visit_time`,`vital`.`visit_month` AS `visit_month`,`vital`.`visit_year` AS `visit_year`,`vital`.`beneficiary_id` AS `beneficiary_id`,`vital`.`ben_name` AS `ben_name`,`vital`.`FirstName` AS `FirstName`,`vital`.`father_name` AS `father_name`,`vital`.`spouse_name` AS `spouse_name`,`vital`.`ben_phone_no` AS `ben_phone_no`,`vital`.`New/Repeat_visit` AS `New/Repeat_visit`,`vital`.`registrationDate` AS `registrationDate`,`vital`.`ben_dob` AS `ben_dob`,`vital`.`age_part1` AS `age_part1`,`vital`.`age_part2` AS `age_part2`,`vital`.`ben_gender` AS `ben_gender`,`vital`.`maritalstatus` AS `maritalstatus`,`vital`.`community` AS `community`,`vital`.`religion` AS `religion`,`vital`.`incomestatus` AS `incomestatus`,`vital`.`Weight_Kg` AS `Weight_Kg`,`vital`.`Height_cm` AS `Height_cm`,`vital`.`BMI` AS `BMI`,`vital`.`WaistCircumference_cm` AS `WaistCircumference_cm`,`vital`.`ANC/PNC` AS `ANC/PNC`,`vital`.`LMP_Date` AS `LMP_Date`,`vital`.`EDD` AS `EDD`,`vital`.`GestationalAge` AS `GestationalAge`,`vital`.`Temperature` AS `Temperature`,`vital`.`PulseRate` AS `PulseRate`,`vital`.`SystolicBP_1stReading` AS `SystolicBP_1stReading`,`vital`.`DiastolicBP_1stReading` AS `DiastolicBP_1stReading`,`vital`.`DiagnosisProvided1` AS `DiagnosisProvided1`,`vital`.`DiagnosisProvided2` AS `DiagnosisProvided2`,`vital`.`DiagnosisProvided3` AS `DiagnosisProvided3`,`vital`.`DiagnosisProvided4` AS `DiagnosisProvided4`,`vital`.`DiagnosisProvided5` AS `DiagnosisProvided5`,`vital`.`ChiefComplaint` AS `ChiefComplaint`,`vital`.`Reffred_To` AS `Reffred_To`,`vital`.`Referred_For` AS `Referred_For`,`l`.`VisitCode_Test` AS `VisitCode_Test`,`l`.`RBS_Test` AS `RBS_Test`,`l`.`Hemoglobin` AS `Hemoglobin`,`l`.`Vision_Aquity_Test` AS `Vision_Aquity_Test`,`l`.`HbA1c` AS `HbA1c`,`l`.`Malaria` AS `Malaria`,`idrs`.`VisitCode_Screening` AS `VisitCode_Screening`,`idrs`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`idrs`.`Epilepsy_Screenings` AS `Epilepsy_Screenings`,`idrs`.`Asthma_Screenings` AS `Asthma_Screenings`,`idrs`.`Vision_Screenings` AS `Vision_Screenings`,`idrs`.`Tuberculosis_Screenings` AS `Tuberculosis_Screenings`,`idrs`.`Malaria_Screenings` AS `Malaria_Screenings`,`idrs`.`Diabetes_Screenings` AS `Diabetes_Screenings`,`idrs`.`Epilepsy_suspected` AS `Epilepsy_suspected`,`idrs`.`Asthma_suspected` AS `Asthma_suspected`,`idrs`.`Vision_suspected` AS `Vision_suspected`,`idrs`.`Tuberculosis_suspected` AS `Tuberculosis_suspected`,`idrs`.`Malaria_suspected` AS `Malaria_suspected`,`idrs`.`Diabetes_suspected` AS `Diabetes_suspected`,`idrs`.`Hypertension_suspected` AS `Hypertension_suspected`,`idrs`.`Epilepsy_confirmed` AS `Epilepsy_confirmed`,`idrs`.`Asthma_confirmed` AS `Asthma_confirmed`,`idrs`.`Vision_confirmed` AS `Vision_confirmed`,`idrs`.`Tuberculosis_confirmed` AS `Tuberculosis_confirmed`,`idrs`.`Malaria_confirmed` AS `Malaria_confirmed`,`idrs`.`Diabetes_confirmed` AS `Diabetes_confirmed`,`idrs`.`Hypertension_confirmed` AS `Hypertension_confirmed`,`drug`.`VisitCode_Drug` AS `VisitCode_Drug`,`drug`.`Total_drug` AS `Total_drug`,`drug`.`drug_1` AS `drug_1`,`drug`.`drug1_Qty` AS `drug1_Qty`,`drug`.`drug_2` AS `drug_2`,`drug`.`drug2_Qty` AS `drug2_Qty`,`drug`.`drug_3` AS `drug_3`,`drug`.`drug3_Qty` AS `drug3_Qty`,`drug`.`drug_4` AS `drug_4`,`drug`.`drug4_Qty` AS `drug4_Qty`,`drug`.`drug_5` AS `drug_5`,`drug`.`drug5_Qty` AS `drug5_Qty`,`drug`.`drug_6` AS `drug_6`,`drug`.`drug6_Qty` AS `drug6_Qty`,`drug`.`drug_7` AS `drug_7`,`drug`.`drug7_Qty` AS `drug7_Qty` from (((((select substr(`v`.`CreatedBy`,1,(length(`v`.`CreatedBy`) - 5)) AS `CurrDistrict`,substr(`v`.`CreatedBy`,(length(`v`.`CreatedBy`) - 4),2) AS `CreatedBy`,`v`.`VisitCode` AS `VisitCode`,`m`.`servicePoint` AS `servicePoint`,`v`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`v`.`VisitCategory` AS `VisitCategory`,cast(`v`.`CreatedDate` as date) AS `visit_date`,cast(`v`.`CreatedDate` as time) AS `visit_time`,month(`v`.`CreatedDate`) AS `visit_month`,year(`v`.`CreatedDate`) AS `visit_year`,`m`.`beneficiary_id` AS `beneficiary_id`,`m`.`ben_name` AS `ben_name`,`idi`.`FirstName` AS `FirstName`,`m`.`father_name` AS `father_name`,`m`.`spouse_name` AS `spouse_name`,`m`.`ben_phone_no` AS `ben_phone_no`,(case when (`v`.`VisitNo` = 1) then 'New' else 'Revisit' end) AS `New/Repeat_visit`,`m`.`registrationDate` AS `registrationDate`,cast(`m`.`ben_dob` as date) AS `ben_dob`,substring_index(`m`.`ben_age`,'-',1) AS `age_part1`,substring_index(`m`.`ben_age`,'-',-(1)) AS `age_part2`,`m`.`ben_gender` AS `ben_gender`,`idi`.`maritalstatus` AS `maritalstatus`,`idi`.`community` AS `community`,`idi`.`religion` AS `religion`,`idi`.`incomestatus` AS `incomestatus`,`an`.`Weight_Kg` AS `Weight_Kg`,`an`.`Height_cm` AS `Height_cm`,`an`.`BMI` AS `BMI`,`an`.`WaistCircumference_cm` AS `WaistCircumference_cm`,(case when (`v`.`VisitCategory` = 'ANC') then 'ANC' when (`v`.`VisitCategory` = 'PNC') then 'PNC' else NULL end) AS `ANC/PNC`,`anc`.`LastMenstrualPeriod_LMP` AS `LMP_Date`,`anc`.`ExpectedDateofDelivery` AS `EDD`,`anc`.`GestationalAgeOrPeriodofAmenorrhea_POA` AS `GestationalAge`,`p`.`Temperature` AS `Temperature`,`p`.`PulseRate` AS `PulseRate`,`p`.`SystolicBP_1stReading` AS `SystolicBP_1stReading`,`p`.`DiastolicBP_1stReading` AS `DiastolicBP_1stReading`,substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',1),'||',-(1)) AS `DiagnosisProvided1`,(case when (strcmp(substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',1),'||',-(1)),substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',2),'||',-(1))) <> 0) then substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',2),'||',-(1)) end) AS `DiagnosisProvided2`,(case when (strcmp(substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',2),'||',-(1)),substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',3),'||',-(1))) <> 0) then substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',3),'||',-(1)) end) AS `DiagnosisProvided3`,(case when (strcmp(substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',3),'||',-(1)),substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',4),'||',-(1))) <> 0) then substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',4),'||',-(1)) end) AS `DiagnosisProvided4`,(case when (strcmp(substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',4),'||',-(1)),substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',5),'||',-(1))) <> 0) then substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',5),'||',-(1)) end) AS `DiagnosisProvided5`,`chief`.`ChiefComplaint` AS `ChiefComplaint`,`ref`.`referredToInstituteName` AS `Reffred_To`,`ref`.`referralreason` AS `Referred_For` from (((((((((`db_iemr`.`t_benvisitdetail` `v` join `db_iemr`.`i_ben_flow_outreach` `m` on(((`m`.`beneficiary_reg_id` = `v`.`BeneficiaryRegID`) and (`m`.`beneficiary_visit_code` = `v`.`VisitCode`)))) left join `db_iemr`.`t_phy_vitals` `p` on(((`p`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`p`.`VisitCode` = `v`.`VisitCode`)))) left join `db_iemr`.`t_phy_anthropometry` `an` on(((`an`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`an`.`VisitCode` = `v`.`VisitCode`)))) left join `db_iemr`.`t_anccare` `anc` on(((`anc`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`anc`.`VisitCode` = `v`.`VisitCode`)))) left join `db_iemr`.`m_district` `dist` on((`dist`.`DistrictID` = `m`.`districtID`))) left join (select `mp`.`BenRegId` AS `BenRegId`,`mp`.`CreatedDate` AS `registrationdate`,`d`.`Gender` AS `gender`,`d`.`Status` AS `Status`,`d`.`FirstName` AS `FirstName`,`d`.`MaritalStatus` AS `maritalstatus`,`d`.`LiteracyStatus` AS `literacystatus`,`d`.`education` AS `education`,`d`.`occupation` AS `occupation`,`d`.`incomeStatus` AS `incomestatus`,`d`.`community` AS `community`,`d`.`religion` AS `religion`,`ad`.`CurrDistrict` AS `CurrDistrict`,`ad`.`CurrVillage` AS `CurrVillage`,`ad`.`CurrServicePoint` AS `CurrServicePoint` from ((`db_identity`.`i_beneficiarydetails` `d` join `db_identity`.`i_beneficiarymapping` `mp` on(((`mp`.`BenDetailsId` = `d`.`VanSerialNo`) and (`mp`.`VanID` = `d`.`VanID`)))) left join `db_identity`.`i_beneficiaryaddress` `ad` on(((`mp`.`BenAddressId` = `ad`.`VanSerialNo`) and (`mp`.`VanID` = `ad`.`VanID`))))) `idi` on((`idi`.`BenRegId` = `m`.`beneficiary_reg_id`))) left join (select `db_iemr`.`t_benreferdetails`.`VisitCode` AS `visitcode`,`db_iemr`.`t_benreferdetails`.`referredToInstituteName` AS `referredToInstituteName`,`db_iemr`.`t_benreferdetails`.`referralreason` AS `referralreason` from `db_iemr`.`t_benreferdetails` where (`db_iemr`.`t_benreferdetails`.`ProviderServiceMapID` = 18) group by `db_iemr`.`t_benreferdetails`.`VisitCode`) `ref` on((`ref`.`visitcode` = `v`.`VisitCode`))) left join (select `db_iemr`.`t_benchiefcomplaint`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`db_iemr`.`t_benchiefcomplaint`.`VisitCode` AS `VisitCode`,group_concat(distinct `db_iemr`.`t_benchiefcomplaint`.`ChiefComplaint` separator ',') AS `ChiefComplaint` from `db_iemr`.`t_benchiefcomplaint` where (`db_iemr`.`t_benchiefcomplaint`.`ProviderServiceMapID` = 18) group by `db_iemr`.`t_benchiefcomplaint`.`BeneficiaryRegID`,`db_iemr`.`t_benchiefcomplaint`.`VisitCode`) `chief` on(((`chief`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`chief`.`VisitCode` = `v`.`VisitCode`)))) left join (select `db_iemr`.`t_prescription`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`db_iemr`.`t_prescription`.`VisitCode` AS `VisitCode`,group_concat(distinct if((`db_iemr`.`t_prescription`.`DiagnosisProvided` = ''),NULL,`db_iemr`.`t_prescription`.`DiagnosisProvided`) separator '||') AS `DiagnosisProvided` from `db_iemr`.`t_prescription` where (`db_iemr`.`t_prescription`.`ProviderServiceMapID` = 18) group by `db_iemr`.`t_prescription`.`BeneficiaryRegID`,`db_iemr`.`t_prescription`.`VisitCode`) `pre` on(((`pre`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`pre`.`VisitCode` = `v`.`VisitCode`)))) where ((`v`.`ProviderServiceMapID` = 18) and (`v`.`CreatedDate` >= '2022-03-01 00:00:00')))) `vital` left join (select `temp`.`visitcode` AS `VisitCode_Test`,`temp`.`RBS_Test` AS `RBS_Test`,`temp`.`Hemoglobin` AS `Hemoglobin`,`temp`.`Vision_Aquity_Test` AS `Vision_Aquity_Test`,`temp`.`HbA1c` AS `HbA1c`,`temp`.`Malaria` AS `Malaria` from (select `t`.`VisitCode` AS `visitcode`,group_concat((case when (`tr`.`ProcedureID` = 71) then `tr`.`TestResultValue` end) separator ',') AS `RBS_Test`,group_concat((case when (`tr`.`ProcedureID` = 72) then `tr`.`TestResultValue` end) separator ',') AS `Hemoglobin`,group_concat((case when (`tr`.`ProcedureID` = 79) then `tr`.`TestResultValue` end) separator ',') AS `HbA1c`,group_concat((case when (`tr`.`ProcedureID` = 73) then `tr`.`TestResultValue` end) separator ',') AS `Malaria`,group_concat((case when (`tr`.`ProcedureID` = 75) then `tr`.`TestResultValue` end) separator ',') AS `Vision_Aquity_Test` from (`db_iemr`.`t_lab_testorder` `t` left join `db_iemr`.`t_lab_testresult` `tr` on(((`t`.`VisitCode` = `tr`.`VisitCode`) and (`t`.`ProcedureID` = `tr`.`ProcedureID`)))) where (`t`.`ProviderServiceMapID` = 18) group by `t`.`VisitCode`) `temp`) `l` on((`vital`.`VisitCode` = `l`.`VisitCode_Test`))) left join (select `temp`.`Visitcode` AS `VisitCode_Screening`,`temp`.`BeneficiaryRegID` AS `BeneficiaryRegID`,(case when (`temp`.`screening` like '%Epilepsy%') then 'Yes' else NULL end) AS `Epilepsy_Screenings`,(case when (`temp`.`screening` like '%Asthma%') then 'Yes' else NULL end) AS `Asthma_Screenings`,(case when (`temp`.`screening` like '%Vision%') then 'Yes' else NULL end) AS `Vision_Screenings`,(case when (`temp`.`screening` like '%Tuberculosis%') then 'Yes' else NULL end) AS `Tuberculosis_Screenings`,(case when (`temp`.`screening` like '%Malaria%') then 'Yes' else NULL end) AS `Malaria_Screenings`,(case when (`temp`.`screening` like '%Diabetes%') then 'Yes' else NULL end) AS `Diabetes_Screenings`,(case when (`temp`.`suspected` like '%Epilepsy%') then 'Yes' else NULL end) AS `Epilepsy_suspected`,(case when (`temp`.`suspected` like '%Asthma%') then 'Yes' else NULL end) AS `Asthma_suspected`,(case when (`temp`.`suspected` like '%Vision%') then 'Yes' else NULL end) AS `Vision_suspected`,(case when (`temp`.`suspected` like '%Tuberculosis%') then 'Yes' else NULL end) AS `Tuberculosis_suspected`,(case when (`temp`.`suspected` like '%Malaria%') then 'Yes' else NULL end) AS `Malaria_suspected`,(case when (`temp`.`suspected` like '%Diabetes%') then 'Yes' else NULL end) AS `Diabetes_suspected`,(case when (`temp`.`suspected` like '%Hypertension%') then 'Yes' else NULL end) AS `Hypertension_suspected`,(case when (`temp`.`confirmed` like '%Epilepsy%') then 'Yes' else NULL end) AS `Epilepsy_confirmed`,(case when (`temp`.`confirmed` like '%Asthma%') then 'Yes' else NULL end) AS `Asthma_confirmed`,(case when (`temp`.`confirmed` like '%Vision%') then 'Yes' else NULL end) AS `Vision_confirmed`,(case when (`temp`.`confirmed` like '%Tuberculosis%') then 'Yes' else NULL end) AS `Tuberculosis_confirmed`,(case when (`temp`.`confirmed` like '%Malaria%') then 'Yes' else NULL end) AS `Malaria_confirmed`,(case when (`temp`.`confirmed` like '%Diabetes%') then 'Yes' else NULL end) AS `Diabetes_confirmed`,(case when (`temp`.`confirmed` like '%Hypertension%') then 'Yes' else NULL end) AS `Hypertension_confirmed` from (select `db_iemr`.`t_idrsdetails`.`Visitcode` AS `Visitcode`,`db_iemr`.`t_idrsdetails`.`BeneficiaryRegID` AS `BeneficiaryRegID`,group_concat(distinct `db_iemr`.`t_idrsdetails`.`DiseaseQuestionType` separator ',') AS `screening`,group_concat(distinct `db_iemr`.`t_idrsdetails`.`SuspectedDiseases` separator ',') AS `suspected`,group_concat(distinct `db_iemr`.`t_idrsdetails`.`ConfirmedDiseases` separator ',') AS `confirmed` from `db_iemr`.`t_idrsdetails` where (`db_iemr`.`t_idrsdetails`.`ProviderServiceMapID` = 18) group by `db_iemr`.`t_idrsdetails`.`Visitcode`) `temp`) `idrs` on((`idrs`.`VisitCode_Screening` = `vital`.`VisitCode`))) left join (select `a`.`visitcode` AS `VisitCode_Drug`,`a`.`cnt` AS `Total_drug`,(case when (`a`.`cnt` > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',`a`.`cnt`),',',-(1)) end) AS `drug_1`,(case when (`a`.`cnt` > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',`a`.`cnt`),',',-(1)) end) AS `drug1_Qty`,(case when ((`a`.`cnt` - 1) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 1)),',',-(1)) end) AS `drug_2`,(case when ((`a`.`cnt` - 1) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 1)),',',-(1)) end) AS `drug2_Qty`,(case when ((`a`.`cnt` - 2) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 2)),',',-(1)) end) AS `drug_3`,(case when ((`a`.`cnt` - 2) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 2)),',',-(1)) end) AS `drug3_Qty`,(case when ((`a`.`cnt` - 3) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 3)),',',-(1)) end) AS `drug_4`,(case when ((`a`.`cnt` - 3) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 3)),',',-(1)) end) AS `drug4_Qty`,(case when ((`a`.`cnt` - 4) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 4)),',',-(1)) end) AS `drug_5`,(case when ((`a`.`cnt` - 4) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 4)),',',-(1)) end) AS `drug5_Qty`,(case when ((`a`.`cnt` - 5) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 5)),',',-(1)) end) AS `drug_6`,(case when ((`a`.`cnt` - 5) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 5)),',',-(1)) end) AS `drug6_Qty`,(case when ((`a`.`cnt` - 6) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 6)),',',-(1)) end) AS `drug_7`,(case when ((`a`.`cnt` - 6) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 6)),',',-(1)) end) AS `drug7_Qty` from (select `db_iemr`.`t_prescribeddrug`.`VisitCode` AS `visitcode`,group_concat(`db_iemr`.`t_prescribeddrug`.`GenericDrugName` separator ',') AS `GenericDrugName`,group_concat(`db_iemr`.`t_prescribeddrug`.`QtyPrescribed` separator ',') AS `QtyPrescribed`,count(0) AS `cnt` from `db_iemr`.`t_prescribeddrug` where (`db_iemr`.`t_prescribeddrug`.`ProviderServiceMapID` = 18) group by `db_iemr`.`t_prescribeddrug`.`VisitCode`) `a`) `drug` on((`vital`.`VisitCode` = `drug`.`VisitCode_Drug`)))) */;
+/*!50001 VIEW `sanjeevani_dashboard` AS (select `vital`.`CurrDistrict` AS `CurrDistrict`,`vital`.`CreatedBy` AS `CreatedBy`,`vital`.`VisitCode` AS `VisitCode`,`vital`.`servicePoint` AS `servicePoint`,`vital`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`vital`.`VisitCategory` AS `VisitCategory`,`vital`.`visit_date` AS `visit_date`,`vital`.`visit_time` AS `visit_time`,`vital`.`visit_month` AS `visit_month`,`vital`.`visit_year` AS `visit_year`,`vital`.`beneficiary_id` AS `beneficiary_id`,`vital`.`ben_name` AS `ben_name`,`vital`.`FirstName` AS `FirstName`,`vital`.`father_name` AS `father_name`,`vital`.`spouse_name` AS `spouse_name`,`vital`.`ben_phone_no` AS `ben_phone_no`,`vital`.`New/Repeat_visit` AS `New/Repeat_visit`,`vital`.`registrationDate` AS `registrationDate`,`vital`.`ben_dob` AS `ben_dob`,`vital`.`age_part1` AS `age_part1`,`vital`.`age_part2` AS `age_part2`,`vital`.`ben_gender` AS `ben_gender`,`vital`.`maritalstatus` AS `maritalstatus`,`vital`.`community` AS `community`,`vital`.`religion` AS `religion`,`vital`.`incomestatus` AS `incomestatus`,`vital`.`Weight_Kg` AS `Weight_Kg`,`vital`.`Height_cm` AS `Height_cm`,`vital`.`BMI` AS `BMI`,`vital`.`WaistCircumference_cm` AS `WaistCircumference_cm`,`vital`.`ANC/PNC` AS `ANC/PNC`,`vital`.`LMP_Date` AS `LMP_Date`,`vital`.`EDD` AS `EDD`,`vital`.`GestationalAge` AS `GestationalAge`,`vital`.`Temperature` AS `Temperature`,`vital`.`PulseRate` AS `PulseRate`,`vital`.`SystolicBP_1stReading` AS `SystolicBP_1stReading`,`vital`.`DiastolicBP_1stReading` AS `DiastolicBP_1stReading`,`vital`.`DiagnosisProvided1` AS `DiagnosisProvided1`,`vital`.`DiagnosisProvided2` AS `DiagnosisProvided2`,`vital`.`DiagnosisProvided3` AS `DiagnosisProvided3`,`vital`.`DiagnosisProvided4` AS `DiagnosisProvided4`,`vital`.`DiagnosisProvided5` AS `DiagnosisProvided5`,`vital`.`ChiefComplaint` AS `ChiefComplaint`,`vital`.`Reffred_To` AS `Reffred_To`,`vital`.`Referred_For` AS `Referred_For`,`l`.`VisitCode_Test` AS `VisitCode_Test`,`l`.`RBS_Test` AS `RBS_Test`,`l`.`Hemoglobin` AS `Hemoglobin`,`l`.`Vision_Aquity_Test` AS `Vision_Aquity_Test`,`l`.`HbA1c` AS `HbA1c`,`l`.`Malaria` AS `Malaria`,`idrs`.`VisitCode_Screening` AS `VisitCode_Screening`,`idrs`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`idrs`.`Epilepsy_Screenings` AS `Epilepsy_Screenings`,`idrs`.`Asthma_Screenings` AS `Asthma_Screenings`,`idrs`.`Vision_Screenings` AS `Vision_Screenings`,`idrs`.`Tuberculosis_Screenings` AS `Tuberculosis_Screenings`,`idrs`.`Malaria_Screenings` AS `Malaria_Screenings`,`idrs`.`Diabetes_Screenings` AS `Diabetes_Screenings`,`idrs`.`Epilepsy_suspected` AS `Epilepsy_suspected`,`idrs`.`Asthma_suspected` AS `Asthma_suspected`,`idrs`.`Vision_suspected` AS `Vision_suspected`,`idrs`.`Tuberculosis_suspected` AS `Tuberculosis_suspected`,`idrs`.`Malaria_suspected` AS `Malaria_suspected`,`idrs`.`Diabetes_suspected` AS `Diabetes_suspected`,`idrs`.`Hypertension_suspected` AS `Hypertension_suspected`,`idrs`.`Epilepsy_confirmed` AS `Epilepsy_confirmed`,`idrs`.`Asthma_confirmed` AS `Asthma_confirmed`,`idrs`.`Vision_confirmed` AS `Vision_confirmed`,`idrs`.`Tuberculosis_confirmed` AS `Tuberculosis_confirmed`,`idrs`.`Malaria_confirmed` AS `Malaria_confirmed`,`idrs`.`Diabetes_confirmed` AS `Diabetes_confirmed`,`idrs`.`Hypertension_confirmed` AS `Hypertension_confirmed`,`drug`.`VisitCode_Drug` AS `VisitCode_Drug`,`drug`.`Total_drug` AS `Total_drug`,`drug`.`drug_1` AS `drug_1`,`drug`.`drug1_Qty` AS `drug1_Qty`,`drug`.`drug_2` AS `drug_2`,`drug`.`drug2_Qty` AS `drug2_Qty`,`drug`.`drug_3` AS `drug_3`,`drug`.`drug3_Qty` AS `drug3_Qty`,`drug`.`drug_4` AS `drug_4`,`drug`.`drug4_Qty` AS `drug4_Qty`,`drug`.`drug_5` AS `drug_5`,`drug`.`drug5_Qty` AS `drug5_Qty`,`drug`.`drug_6` AS `drug_6`,`drug`.`drug6_Qty` AS `drug6_Qty`,`drug`.`drug_7` AS `drug_7`,`drug`.`drug7_Qty` AS `drug7_Qty` from (((((select substr(`v`.`CreatedBy`,1,(length(`v`.`CreatedBy`) - 5)) AS `CurrDistrict`,substr(`v`.`CreatedBy`,(length(`v`.`CreatedBy`) - 4),2) AS `CreatedBy`,`v`.`VisitCode` AS `VisitCode`,`m`.`servicePoint` AS `servicePoint`,`v`.`ProviderServiceMapID` AS `ProviderServiceMapID`,`v`.`VisitCategory` AS `VisitCategory`,cast(`v`.`CreatedDate` as date) AS `visit_date`,cast(`v`.`CreatedDate` as time) AS `visit_time`,month(`v`.`CreatedDate`) AS `visit_month`,year(`v`.`CreatedDate`) AS `visit_year`,`m`.`beneficiary_id` AS `beneficiary_id`,`m`.`ben_name` AS `ben_name`,`idi`.`FirstName` AS `FirstName`,`m`.`father_name` AS `father_name`,`m`.`spouse_name` AS `spouse_name`,`m`.`ben_phone_no` AS `ben_phone_no`,(case when (`v`.`VisitNo` = 1) then 'New' else 'Revisit' end) AS `New/Repeat_visit`,`m`.`registrationDate` AS `registrationDate`,cast(`m`.`ben_dob` as date) AS `ben_dob`,substring_index(`m`.`ben_age`,'-',1) AS `age_part1`,substring_index(`m`.`ben_age`,'-',-(1)) AS `age_part2`,`m`.`ben_gender` AS `ben_gender`,`idi`.`maritalstatus` AS `maritalstatus`,`idi`.`community` AS `community`,`idi`.`religion` AS `religion`,`idi`.`incomestatus` AS `incomestatus`,`an`.`Weight_Kg` AS `Weight_Kg`,`an`.`Height_cm` AS `Height_cm`,`an`.`BMI` AS `BMI`,`an`.`WaistCircumference_cm` AS `WaistCircumference_cm`,(case when (`v`.`VisitCategory` = 'ANC') then 'ANC' when (`v`.`VisitCategory` = 'PNC') then 'PNC' else NULL end) AS `ANC/PNC`,`anc`.`LastMenstrualPeriod_LMP` AS `LMP_Date`,`anc`.`ExpectedDateofDelivery` AS `EDD`,`anc`.`GestationalAgeOrPeriodofAmenorrhea_POA` AS `GestationalAge`,`p`.`Temperature` AS `Temperature`,`p`.`PulseRate` AS `PulseRate`,`p`.`SystolicBP_1stReading` AS `SystolicBP_1stReading`,`p`.`DiastolicBP_1stReading` AS `DiastolicBP_1stReading`,substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',1),'||',-(1)) AS `DiagnosisProvided1`,(case when (strcmp(substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',1),'||',-(1)),substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',2),'||',-(1))) <> 0) then substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',2),'||',-(1)) end) AS `DiagnosisProvided2`,(case when (strcmp(substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',2),'||',-(1)),substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',3),'||',-(1))) <> 0) then substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',3),'||',-(1)) end) AS `DiagnosisProvided3`,(case when (strcmp(substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',3),'||',-(1)),substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',4),'||',-(1))) <> 0) then substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',4),'||',-(1)) end) AS `DiagnosisProvided4`,(case when (strcmp(substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',4),'||',-(1)),substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',5),'||',-(1))) <> 0) then substring_index(substring_index(`pre`.`DiagnosisProvided`,'||',5),'||',-(1)) end) AS `DiagnosisProvided5`,`chief`.`ChiefComplaint` AS `ChiefComplaint`,`ref`.`referredToInstituteName` AS `Reffred_To`,`ref`.`referralreason` AS `Referred_For` from (((((((((`dbiemr`.`t_benvisitdetail` `v` join `dbiemr`.`i_ben_flow_outreach` `m` on(((`m`.`beneficiary_reg_id` = `v`.`BeneficiaryRegID`) and (`m`.`beneficiary_visit_code` = `v`.`VisitCode`)))) left join `dbiemr`.`t_phy_vitals` `p` on(((`p`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`p`.`VisitCode` = `v`.`VisitCode`)))) left join `dbiemr`.`t_phy_anthropometry` `an` on(((`an`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`an`.`VisitCode` = `v`.`VisitCode`)))) left join `dbiemr`.`t_anccare` `anc` on(((`anc`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`anc`.`VisitCode` = `v`.`VisitCode`)))) left join `dbiemr`.`m_district` `dist` on((`dist`.`DistrictID` = `m`.`districtID`))) left join (select `mp`.`BenRegId` AS `BenRegId`,`mp`.`CreatedDate` AS `registrationdate`,`d`.`Gender` AS `gender`,`d`.`Status` AS `Status`,`d`.`FirstName` AS `FirstName`,`d`.`MaritalStatus` AS `maritalstatus`,`d`.`LiteracyStatus` AS `literacystatus`,`d`.`education` AS `education`,`d`.`occupation` AS `occupation`,`d`.`incomeStatus` AS `incomestatus`,`d`.`community` AS `community`,`d`.`religion` AS `religion`,`ad`.`CurrDistrict` AS `CurrDistrict`,`ad`.`CurrVillage` AS `CurrVillage`,`ad`.`CurrServicePoint` AS `CurrServicePoint` from ((`db_identity`.`i_beneficiarydetails` `d` join `db_identity`.`i_beneficiarymapping` `mp` on(((`mp`.`BenDetailsId` = `d`.`VanSerialNo`) and (`mp`.`VanID` = `d`.`VanID`)))) left join `db_identity`.`i_beneficiaryaddress` `ad` on(((`mp`.`BenAddressId` = `ad`.`VanSerialNo`) and (`mp`.`VanID` = `ad`.`VanID`))))) `idi` on((`idi`.`BenRegId` = `m`.`beneficiary_reg_id`))) left join (select `dbiemr`.`t_benreferdetails`.`VisitCode` AS `visitcode`,`dbiemr`.`t_benreferdetails`.`referredToInstituteName` AS `referredToInstituteName`,`dbiemr`.`t_benreferdetails`.`referralreason` AS `referralreason` from `dbiemr`.`t_benreferdetails` where (`dbiemr`.`t_benreferdetails`.`ProviderServiceMapID` = 18) group by `dbiemr`.`t_benreferdetails`.`VisitCode`) `ref` on((`ref`.`visitcode` = `v`.`VisitCode`))) left join (select `dbiemr`.`t_benchiefcomplaint`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`dbiemr`.`t_benchiefcomplaint`.`VisitCode` AS `VisitCode`,group_concat(distinct `dbiemr`.`t_benchiefcomplaint`.`ChiefComplaint` separator ',') AS `ChiefComplaint` from `dbiemr`.`t_benchiefcomplaint` where (`dbiemr`.`t_benchiefcomplaint`.`ProviderServiceMapID` = 18) group by `dbiemr`.`t_benchiefcomplaint`.`BeneficiaryRegID`,`dbiemr`.`t_benchiefcomplaint`.`VisitCode`) `chief` on(((`chief`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`chief`.`VisitCode` = `v`.`VisitCode`)))) left join (select `dbiemr`.`t_prescription`.`BeneficiaryRegID` AS `BeneficiaryRegID`,`dbiemr`.`t_prescription`.`VisitCode` AS `VisitCode`,group_concat(distinct if((`dbiemr`.`t_prescription`.`DiagnosisProvided` = ''),NULL,`dbiemr`.`t_prescription`.`DiagnosisProvided`) separator '||') AS `DiagnosisProvided` from `dbiemr`.`t_prescription` where (`dbiemr`.`t_prescription`.`ProviderServiceMapID` = 18) group by `dbiemr`.`t_prescription`.`BeneficiaryRegID`,`dbiemr`.`t_prescription`.`VisitCode`) `pre` on(((`pre`.`BeneficiaryRegID` = `v`.`BeneficiaryRegID`) and (`pre`.`VisitCode` = `v`.`VisitCode`)))) where ((`v`.`ProviderServiceMapID` = 18) and (`v`.`CreatedDate` >= '2022-03-01 00:00:00')))) `vital` left join (select `temp`.`visitcode` AS `VisitCode_Test`,`temp`.`RBS_Test` AS `RBS_Test`,`temp`.`Hemoglobin` AS `Hemoglobin`,`temp`.`Vision_Aquity_Test` AS `Vision_Aquity_Test`,`temp`.`HbA1c` AS `HbA1c`,`temp`.`Malaria` AS `Malaria` from (select `t`.`VisitCode` AS `visitcode`,group_concat((case when (`tr`.`ProcedureID` = 71) then `tr`.`TestResultValue` end) separator ',') AS `RBS_Test`,group_concat((case when (`tr`.`ProcedureID` = 72) then `tr`.`TestResultValue` end) separator ',') AS `Hemoglobin`,group_concat((case when (`tr`.`ProcedureID` = 79) then `tr`.`TestResultValue` end) separator ',') AS `HbA1c`,group_concat((case when (`tr`.`ProcedureID` = 73) then `tr`.`TestResultValue` end) separator ',') AS `Malaria`,group_concat((case when (`tr`.`ProcedureID` = 75) then `tr`.`TestResultValue` end) separator ',') AS `Vision_Aquity_Test` from (`dbiemr`.`t_lab_testorder` `t` left join `dbiemr`.`t_lab_testresult` `tr` on(((`t`.`VisitCode` = `tr`.`VisitCode`) and (`t`.`ProcedureID` = `tr`.`ProcedureID`)))) where (`t`.`ProviderServiceMapID` = 18) group by `t`.`VisitCode`) `temp`) `l` on((`vital`.`VisitCode` = `l`.`VisitCode_Test`))) left join (select `temp`.`Visitcode` AS `VisitCode_Screening`,`temp`.`BeneficiaryRegID` AS `BeneficiaryRegID`,(case when (`temp`.`screening` like '%Epilepsy%') then 'Yes' else NULL end) AS `Epilepsy_Screenings`,(case when (`temp`.`screening` like '%Asthma%') then 'Yes' else NULL end) AS `Asthma_Screenings`,(case when (`temp`.`screening` like '%Vision%') then 'Yes' else NULL end) AS `Vision_Screenings`,(case when (`temp`.`screening` like '%Tuberculosis%') then 'Yes' else NULL end) AS `Tuberculosis_Screenings`,(case when (`temp`.`screening` like '%Malaria%') then 'Yes' else NULL end) AS `Malaria_Screenings`,(case when (`temp`.`screening` like '%Diabetes%') then 'Yes' else NULL end) AS `Diabetes_Screenings`,(case when (`temp`.`suspected` like '%Epilepsy%') then 'Yes' else NULL end) AS `Epilepsy_suspected`,(case when (`temp`.`suspected` like '%Asthma%') then 'Yes' else NULL end) AS `Asthma_suspected`,(case when (`temp`.`suspected` like '%Vision%') then 'Yes' else NULL end) AS `Vision_suspected`,(case when (`temp`.`suspected` like '%Tuberculosis%') then 'Yes' else NULL end) AS `Tuberculosis_suspected`,(case when (`temp`.`suspected` like '%Malaria%') then 'Yes' else NULL end) AS `Malaria_suspected`,(case when (`temp`.`suspected` like '%Diabetes%') then 'Yes' else NULL end) AS `Diabetes_suspected`,(case when (`temp`.`suspected` like '%Hypertension%') then 'Yes' else NULL end) AS `Hypertension_suspected`,(case when (`temp`.`confirmed` like '%Epilepsy%') then 'Yes' else NULL end) AS `Epilepsy_confirmed`,(case when (`temp`.`confirmed` like '%Asthma%') then 'Yes' else NULL end) AS `Asthma_confirmed`,(case when (`temp`.`confirmed` like '%Vision%') then 'Yes' else NULL end) AS `Vision_confirmed`,(case when (`temp`.`confirmed` like '%Tuberculosis%') then 'Yes' else NULL end) AS `Tuberculosis_confirmed`,(case when (`temp`.`confirmed` like '%Malaria%') then 'Yes' else NULL end) AS `Malaria_confirmed`,(case when (`temp`.`confirmed` like '%Diabetes%') then 'Yes' else NULL end) AS `Diabetes_confirmed`,(case when (`temp`.`confirmed` like '%Hypertension%') then 'Yes' else NULL end) AS `Hypertension_confirmed` from (select `dbiemr`.`t_idrsdetails`.`Visitcode` AS `Visitcode`,`dbiemr`.`t_idrsdetails`.`BeneficiaryRegID` AS `BeneficiaryRegID`,group_concat(distinct `dbiemr`.`t_idrsdetails`.`DiseaseQuestionType` separator ',') AS `screening`,group_concat(distinct `dbiemr`.`t_idrsdetails`.`SuspectedDiseases` separator ',') AS `suspected`,group_concat(distinct `dbiemr`.`t_idrsdetails`.`ConfirmedDiseases` separator ',') AS `confirmed` from `dbiemr`.`t_idrsdetails` where (`dbiemr`.`t_idrsdetails`.`ProviderServiceMapID` = 18) group by `dbiemr`.`t_idrsdetails`.`Visitcode`) `temp`) `idrs` on((`idrs`.`VisitCode_Screening` = `vital`.`VisitCode`))) left join (select `a`.`visitcode` AS `VisitCode_Drug`,`a`.`cnt` AS `Total_drug`,(case when (`a`.`cnt` > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',`a`.`cnt`),',',-(1)) end) AS `drug_1`,(case when (`a`.`cnt` > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',`a`.`cnt`),',',-(1)) end) AS `drug1_Qty`,(case when ((`a`.`cnt` - 1) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 1)),',',-(1)) end) AS `drug_2`,(case when ((`a`.`cnt` - 1) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 1)),',',-(1)) end) AS `drug2_Qty`,(case when ((`a`.`cnt` - 2) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 2)),',',-(1)) end) AS `drug_3`,(case when ((`a`.`cnt` - 2) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 2)),',',-(1)) end) AS `drug3_Qty`,(case when ((`a`.`cnt` - 3) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 3)),',',-(1)) end) AS `drug_4`,(case when ((`a`.`cnt` - 3) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 3)),',',-(1)) end) AS `drug4_Qty`,(case when ((`a`.`cnt` - 4) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 4)),',',-(1)) end) AS `drug_5`,(case when ((`a`.`cnt` - 4) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 4)),',',-(1)) end) AS `drug5_Qty`,(case when ((`a`.`cnt` - 5) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 5)),',',-(1)) end) AS `drug_6`,(case when ((`a`.`cnt` - 5) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 5)),',',-(1)) end) AS `drug6_Qty`,(case when ((`a`.`cnt` - 6) > 0) then substring_index(substring_index(`a`.`GenericDrugName`,',',(`a`.`cnt` - 6)),',',-(1)) end) AS `drug_7`,(case when ((`a`.`cnt` - 6) > 0) then substring_index(substring_index(`a`.`QtyPrescribed`,',',(`a`.`cnt` - 6)),',',-(1)) end) AS `drug7_Qty` from (select `dbiemr`.`t_prescribeddrug`.`VisitCode` AS `visitcode`,group_concat(`dbiemr`.`t_prescribeddrug`.`GenericDrugName` separator ',') AS `GenericDrugName`,group_concat(`dbiemr`.`t_prescribeddrug`.`QtyPrescribed` separator ',') AS `QtyPrescribed`,count(0) AS `cnt` from `dbiemr`.`t_prescribeddrug` where (`dbiemr`.`t_prescribeddrug`.`ProviderServiceMapID` = 18) group by `dbiemr`.`t_prescribeddrug`.`VisitCode`) `a`) `drug` on((`vital`.`VisitCode` = `drug`.`VisitCode_Drug`)))) */;
 -- /*!50001 SET character_set_client      = @saved_cs_client */;
 -- /*!50001 SET character_set_results     = @saved_cs_results */;
 -- /*!50001 SET collation_connection      = @saved_col_connection */;
