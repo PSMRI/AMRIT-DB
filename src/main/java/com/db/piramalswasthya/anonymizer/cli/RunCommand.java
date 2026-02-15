@@ -221,6 +221,11 @@ public class RunCommand implements Callable<Integer> {
                                HmacAnonymizer hmacAnonymizer,
                                RunReport report) throws SQLException {
         
+        if (config.getTarget().isReadOnly()) {
+            throw new IllegalStateException(
+                "Target database is configured as read-only. Set target.readOnly: false in config.yaml");
+        }
+        
         // Create DataSources for this schema
         DataSource sourceDataSource = createDataSource(config.getSource(), schema);
         DataSource targetDataSource = createDataSource(config.getTarget(), schema);
