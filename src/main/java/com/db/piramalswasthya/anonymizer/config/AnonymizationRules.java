@@ -33,6 +33,7 @@ import java.util.Map;
 @Data
 public class AnonymizationRules {
     private String rulesVersion;
+    private String schemaHint;
     private UnknownColumnPolicy unknownColumnPolicy = UnknownColumnPolicy.WARN;
     private Map<String, DatabaseRules> databases;
     
@@ -57,5 +58,6 @@ public class AnonymizationRules {
     public static class ColumnRule {
         private String strategy;
         private String format;
+        private String description;
     }
 }
