@@ -110,25 +110,24 @@ public class SafetyGuard {
             throws SafetyViolationException {
 
         for (String pattern : BUILT_IN_DENY_PATTERNS) {
-            if (!matchesPattern(host, pattern) && !matchesPattern(database, pattern)) {
-                continue;
+            boolean patternMatches = matchesPattern(host, pattern) || matchesPattern(database, pattern);
+            
+            if (patternMatches && !canBypassBuiltInDenyWithApprovalFlag(approvalFlag)) {
+                throw new SafetyViolationException(
+                        String.format(
+                                "DENIED: Host '%s' or database '%s' matches production pattern '%s'. " +
+                                        "If this is intentional, add to allowlist and provide approval flag.",
+                                host, database, pattern
+                        )
+                );
             }
-
-            if (canBypassBuiltInDenyWithApprovalFlag(approvalFlag)) {
+            
+            if (patternMatches) {
                 log.warn(
                         "Built-in deny pattern '{}' matched but bypassed with approval flag for {}:{}",
                         pattern, host, database
                 );
-                continue;
             }
-
-            throw new SafetyViolationException(
-                    String.format(
-                            "DENIED: Host '%s' or database '%s' matches production pattern '%s'. " +
-                                    "If this is intentional, add to allowlist and provide approval flag.",
-                            host, database, pattern
-                    )
-            );
         }
     }
 
@@ -171,7 +170,7 @@ public class SafetyGuard {
         if (host == null || allowed == null) {
             return false;
         }
-        String regex = allowed.replace("*", ".*");
+        String regex = Pattern.quote(allowed).replace("\\*", ".*");
         return host.matches(regex);
     }
 

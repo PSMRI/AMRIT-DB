@@ -86,21 +86,15 @@ public class AnonymizationEngine {
 
             for (String column : columnSnapshot) {
                 Object originalValue = row.get(column);
-
                 AnonymizationRules.ColumnRule rule = columnRules.get(column);
+                
                 if (rule == null) {
                     handleUnknownColumn(database, table, column);
-                    continue;
+                } else if (originalValue != null) {
+                    Object anonymizedValue = applyStrategy(rule.getStrategy(), originalValue.toString());
+                    row.put(column, anonymizedValue);
+                    strategyCounts.merge(rule.getStrategy(), 1, Integer::sum);
                 }
-
-                if (originalValue == null) {
-                    continue;
-                }
-
-                Object anonymizedValue = applyStrategy(rule.getStrategy(), originalValue.toString());
-                row.put(column, anonymizedValue);
-
-                strategyCounts.merge(rule.getStrategy(), 1, Integer::sum);
             }
         }
 

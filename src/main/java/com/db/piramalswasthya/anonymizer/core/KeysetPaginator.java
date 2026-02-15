@@ -124,15 +124,15 @@ public class KeysetPaginator {
         
         log.info("Streaming table {} with keyset pagination (batch={})", table, batchSize);
         
-        // Validate PK is numeric on first query
-        validateNumericPrimaryKey(table, primaryKey);
-        
         long lastKey = 0L;
         long totalRows = 0;
         int batchCount = 0;
         
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(selectSql)) {
+            
+            // Validate PK is numeric using existing connection
+            validateNumericPrimaryKey(conn, table, primaryKey);
             
             stmt.setFetchSize(batchSize);
             stmt.setInt(2, batchSize); // Loop-invariant
@@ -178,9 +178,12 @@ public class KeysetPaginator {
                 for (String column : columns) {
                     row.put(column, rs.getObject(column));
                 }
+                // Ensure PK is in RowData even if not in the original columns list
+                if (!columns.contains(primaryKey)) {
+                    row.put(primaryKey, rs.getObject(primaryKey));
+                }
                 batch.add(row);
-                
-                // Get numeric PK value
+
                 Object pkValue = rs.getObject(primaryKey);
                 if (pkValue instanceof Number number) {
                     lastKey = number.longValue();
@@ -195,28 +198,32 @@ public class KeysetPaginator {
     
     /**
      * Validate that primary key is numeric (required for keyset pagination)
+     * 
+     * @param conn Existing database connection to reuse
+     * @param table Table name
+     * @param primaryKey Primary key column name
+     * @throws SQLException if primary key is not numeric or validation fails
      */
     @SuppressWarnings("java:S2077") // SQL injection safe: identifiers validated by quoteIdentifier()
-    private void validateNumericPrimaryKey(String table, String primaryKey) throws SQLException {
+    private void validateNumericPrimaryKey(Connection conn, String table, String primaryKey) throws SQLException {
         String quotedTable = quoteIdentifier(table);
         String quotedPk = quoteIdentifier(primaryKey);
-        String sql = String.format("SELECT %s FROM %s LIMIT 1", quotedPk, quotedTable);
+        // Use WHERE 1=0 to get metadata even for empty tables
+        String sql = String.format("SELECT %s FROM %s WHERE 1=0", quotedPk, quotedTable);
         
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
+        try (PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             
-            if (rs.next()) {
-                ResultSetMetaData metaData = rs.getMetaData();
-                int type = metaData.getColumnType(1);
-                
-                if (type != Types.TINYINT && type != Types.SMALLINT && 
-                    type != Types.INTEGER && type != Types.BIGINT) {
-                    throw new SQLException(
-                        "Primary key must be numeric (TINYINT/SMALLINT/INTEGER/BIGINT). " +
-                        "Table: " + table + ", Column: " + primaryKey + ", Type: " + 
-                        metaData.getColumnTypeName(1));
-                }
+            // Get metadata directly - works even when table is empty
+            ResultSetMetaData metaData = rs.getMetaData();
+            int type = metaData.getColumnType(1);
+            
+            if (type != Types.TINYINT && type != Types.SMALLINT && 
+                type != Types.INTEGER && type != Types.BIGINT) {
+                throw new SQLException(
+                    "Primary key must be numeric (TINYINT/SMALLINT/INTEGER/BIGINT). " +
+                    "Table: " + table + ", Column: " + primaryKey + ", Type: " + 
+                    metaData.getColumnTypeName(1));
             }
         }
     }
