@@ -1,0 +1,77 @@
+{
+  "version": "1.0",
+  "last_reviewed": "2026-02-04",
+  "reviewed_by": "Security Team",
+  "databases": {
+    "db_identity": {
+      "m_beneficiaryregidmapping": {
+        "BenRegID": "HASH_SHA256",
+        "BeneficiaryID": "HASH_SHA256",
+        "FirstName": "RANDOM_UUID",
+        "LastName": "RANDOM_UUID",
+        "PhoneNo": "PARTIAL_MASK",
+        "AadhaarNo": "HASH_SHA256",
+        "EmailID": "SUPPRESS",
+        "Address": "GENERALIZE",
+        "DateOfBirth": "GENERALIZE",
+        "Gender": "PRESERVE"
+      },
+      "m_user": {
+        "UserID": "HASH_SHA256",
+        "UserName": "RANDOM_UUID",
+        "Password": "SUPPRESS",
+        "EmailID": "SUPPRESS",
+        "PhoneNo": "PARTIAL_MASK"
+      }
+    },
+    "db_1097_identity": {
+      "t_bendemographics": {
+        "BeneficiaryRegID": "HASH_SHA256",
+        "FirstName": "RANDOM_UUID",
+        "LastName": "RANDOM_UUID",
+        "PhoneNo": "PARTIAL_MASK"
+      }
+    },
+    "db_iemr": {
+      "t_benmedhistory": {
+        "BeneficiaryRegID": "HASH_SHA256",
+        "ChiefComplaint": "SUPPRESS",
+        "PresentIllness": "SUPPRESS",
+        "Diagnosis": "PRESERVE"
+      },
+      "t_prescription": {
+        "BeneficiaryRegID": "HASH_SHA256",
+        "DrugName": "PRESERVE",
+        "DoctorName": "HASH_SHA256"
+      },
+      "t_lab_test_result": {
+        "BeneficiaryRegID": "HASH_SHA256",
+        "TestResult": "PRESERVE",
+        "LabTechnicianName": "HASH_SHA256"
+      }
+    },
+    "db_reporting": {
+      "fact_beneficiary": {
+        "BenRegID": "HASH_SHA256",
+        "BeneficiaryName": "RANDOM_UUID",
+        "AgeGroup": "PRESERVE",
+        "Gender": "PRESERVE"
+      },
+      "fact_consultation": {
+        "BenRegID": "HASH_SHA256",
+        "ConsultationNotes": "SUPPRESS"
+      }
+    }
+  },
+  "global_rules": {
+    ".*BenRegID$": "HASH_SHA256",
+    ".*BeneficiaryRegID$": "HASH_SHA256",
+    ".*Password.*": "SUPPRESS",
+    ".*Aadhaar.*": "HASH_SHA256",
+    ".*Phone.*": "PARTIAL_MASK",
+    ".*Email.*": "SUPPRESS",
+    "CreatedDate": "PRESERVE",
+    "ModifiedDate": "PRESERVE",
+    "Deleted": "PRESERVE"
+  }
+}

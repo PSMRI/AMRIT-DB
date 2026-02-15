@@ -1,0 +1,48 @@
+# AMRIT Database Anonymization Configuration v2.0
+# Database connection and anonymization settings
+
+source:
+  host: db-replica.prod.example.com
+  port: 3306
+  schemas:
+    - dbiemr
+    - db_identity
+    - db_reporting
+    - db_1097_identity
+  username: readonly_user
+  password: ${DB_READ_PASSWORD}  # Environment variable
+  readOnly: true
+
+target:
+  host: uat-db.example.com
+  port: 3306
+  schemas:
+    - dbiemr
+    - db_identity
+    - db_reporting
+    - db_1097_identity
+  username: uat_user
+  password: ${DB_WRITE_PASSWORD}  # Environment variable
+
+safety:
+  enabled: true
+  allowedHosts:
+    - db-replica.prod.example.com
+    - localhost  # For testing
+  deniedTargetHosts:
+    - db-prod.example.com
+    - db-replica.prod.example.com  # Never write to production
+  requireExplicitApproval: true
+  approvalFlag: PROD_REFRESH_2026_FEB  # Change monthly
+
+performance:
+  batchSize: 1000
+  fetchSize: 1000
+  maxThreads: 4
+
+rulesFile: rules.yaml
+loggingPath: ./logs
+hmacSecretKey: ${ANONYMIZATION_SECRET}  # Environment variable
+
+# HMAC secret key (set via environment variable)
+# export ANONYMIZATION_SECRET=$(openssl rand -hex 32)
