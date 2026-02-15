@@ -54,11 +54,51 @@ public class AnonymizerConfig {
     
     @Data
     public static class SafetyConfig {
-        private boolean enabled = true;
+        private boolean enabled;
         private List<String> allowedHosts;
         private List<String> deniedPatterns;
-        private boolean requireExplicitApproval = true;
+        private boolean requireExplicitApproval;
         private String approvalFlag;
+        
+        public boolean isEnabled() {
+            return enabled;
+        }
+        
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+        }
+        
+        public List<String> getAllowedHosts() {
+            return allowedHosts;
+        }
+        
+        public void setAllowedHosts(List<String> allowedHosts) {
+            this.allowedHosts = allowedHosts;
+        }
+        
+        public List<String> getDeniedPatterns() {
+            return deniedPatterns;
+        }
+        
+        public void setDeniedPatterns(List<String> deniedPatterns) {
+            this.deniedPatterns = deniedPatterns;
+        }
+        
+        public boolean isRequireExplicitApproval() {
+            return requireExplicitApproval;
+        }
+        
+        public void setRequireExplicitApproval(boolean requireExplicitApproval) {
+            this.requireExplicitApproval = requireExplicitApproval;
+        }
+        
+        public String getApprovalFlag() {
+            return approvalFlag;
+        }
+        
+        public void setApprovalFlag(String approvalFlag) {
+            this.approvalFlag = approvalFlag;
+        }
     }
     
     @Data

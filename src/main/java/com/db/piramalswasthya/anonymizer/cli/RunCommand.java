@@ -27,6 +27,7 @@ import com.db.piramalswasthya.anonymizer.config.AnonymizationRules;
 import com.db.piramalswasthya.anonymizer.core.AnonymizationEngine;
 import com.db.piramalswasthya.anonymizer.core.HmacAnonymizer;
 import com.db.piramalswasthya.anonymizer.core.KeysetPaginator;
+import com.db.piramalswasthya.anonymizer.core.KeysetPaginator.RowData;
 import com.db.piramalswasthya.anonymizer.output.DirectRestoreWriter;
 import com.db.piramalswasthya.anonymizer.report.RunReport;
 import com.db.piramalswasthya.anonymizer.safety.SafetyGuard;
@@ -44,6 +45,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -66,6 +68,7 @@ import java.util.concurrent.Callable;
 public class RunCommand implements Callable<Integer> {
     
     private static final Logger log = LoggerFactory.getLogger(RunCommand.class);
+    private static final String LOGS_DIRECTORY = "./logs";
     
     @Option(names = {"-c", "--config"}, description = "Config file (default: config.yaml)", 
             defaultValue = "config.yaml")
@@ -152,9 +155,8 @@ public class RunCommand implements Callable<Integer> {
                 processSchema(schema, config, rules, hmacAnonymizer, report);
             }
             
-            report.setStatus("SUCCESS");
-            
-        } catch (Exception e) {
+            report.setStatus("SUCCESS");            
+        } catch (SQLException e) {
             String errorContext = String.format("Anonymization failed during execution (ID: %s)", executionId);
             log.error("{}: {}", errorContext, sanitizeError(e), e);
             report.setStatus("FAILED");
@@ -164,7 +166,19 @@ public class RunCommand implements Callable<Integer> {
             report.setTotalDurationMs(
                 java.time.Duration.between(startTime, report.getEndTime()).toMillis());
             
-            writeReport(report, "./logs", executionId);
+            writeReport(report, LOGS_DIRECTORY, executionId);
+            return 1;
+        } catch (IOException e) {
+            String errorContext = String.format("Configuration or file I/O error (ID: %s)", executionId);
+            log.error("{}: {}", errorContext, e.getMessage(), e);
+            report.setStatus("FAILED");
+            report.setErrorMessage(errorContext + ": " + e.getMessage());
+            
+            report.setEndTime(LocalDateTime.now());
+            report.setTotalDurationMs(
+                java.time.Duration.between(startTime, report.getEndTime()).toMillis());
+            
+            writeReport(report, LOGS_DIRECTORY, executionId);
             return 1;
         }
         
@@ -172,7 +186,7 @@ public class RunCommand implements Callable<Integer> {
         report.setTotalDurationMs(
             java.time.Duration.between(startTime, report.getEndTime()).toMillis());
         
-        writeReport(report, "./logs", executionId);
+        writeReport(report, LOGS_DIRECTORY, executionId);
         
         log.info("\n=== Anonymization Complete ===");
         log.info("Total rows processed: {}", report.getTotalRowsProcessed());
@@ -188,7 +202,7 @@ public class RunCommand implements Callable<Integer> {
     private void processSchema(String schema, AnonymizerConfig config, 
                                AnonymizationRules rules,
                                HmacAnonymizer hmacAnonymizer,
-                               RunReport report) throws Exception {
+                               RunReport report) throws SQLException {
         
         // Create DataSources for this schema
         DataSource sourceDataSource = createDataSource(config.getSource(), schema);
@@ -220,7 +234,7 @@ public class RunCommand implements Callable<Integer> {
      */
     private void processSchemaTables(String schema, AnonymizationRules rules,
                                      AnonymizationEngine engine, KeysetPaginator paginator,
-                                     DirectRestoreWriter writer, RunReport report) throws Exception {
+                                     DirectRestoreWriter writer, RunReport report) throws SQLException {
         
         AnonymizationRules.DatabaseRules dbRules = rules.getDatabases().get(schema);
         if (dbRules == null || dbRules.getTables() == null) {
@@ -228,77 +242,112 @@ public class RunCommand implements Callable<Integer> {
             return;
         }
         
-        for (Map.Entry<String, AnonymizationRules.TableRules> entry : 
-                dbRules.getTables().entrySet()) {
-            
-            String tableName = entry.getKey();
-            AnonymizationRules.TableRules tableRules = entry.getValue();
-            
-            if (tableRules.getColumns() == null || tableRules.getColumns().isEmpty()) {
-                log.warn("No columns defined for table: {}.{}", schema, tableName);
-                continue;
-            }
-            
-            log.info("Processing table: {}.{}", schema, tableName);
-            
-            long tableStartTime = System.currentTimeMillis();
-            long[] rowCount = {0};  // Use array for lambda access
-            Map<String, Integer> strategyCounts = new HashMap<>();
-            
-            // Get all column names for SELECT
-            List<String> allColumns = List.copyOf(tableRules.getColumns().keySet());
-            
-            // Stream and process table using keyset pagination
-            try {
-                paginator.streamTable(
-                    tableName,
-                    tableRules.getPrimaryKey(),
-                    allColumns,
-                    batch -> {
-                        try {
-                            // Anonymize batch
-                            engine.anonymizeBatch(schema, tableName, batch);
-                            
-                            // Convert RowData to Map (use getData() directly - no copying)
-                            List<Map<String, Object>> rowMaps = batch.stream()
-                                .map(row -> row.getData())
-                                .toList();
-                            
-                            // Write to target
-                            writer.writeInsert(tableName, allColumns, rowMaps);
-                            
-                            rowCount[0] += batch.size();
-                            
-                            // Track strategy counts
-                            for (String column : tableRules.getColumns().keySet()) {
-                                String strategy = tableRules.getColumns().get(column).getStrategy();
-                                strategyCounts.merge(strategy, 1, Integer::sum);
-                            }
-                        } catch (SQLException e) {
-                            throw new RuntimeException("Batch processing failed", e);
-                        }
-                    }
-                );
-                
-            } catch (SQLException e) {
-                log.error("Failed to process table {}.{}: {}", schema, tableName, e.getMessage());
-                throw e;
-            }
-            
-            long tableDuration = System.currentTimeMillis() - tableStartTime;
-            
-            // Record table report
-            report.addTableReport(
-                schema + "." + tableName,
-                rowCount[0],
-                tableDuration,
-                tableRules.getColumns().size(),
-                strategyCounts
-            );
-            
-            log.info("Completed {}.{}: {} rows, {} ms", 
-                schema, tableName, rowCount[0], tableDuration);
+        for (Map.Entry<String, AnonymizationRules.TableRules> entry : dbRules.getTables().entrySet()) {
+            processTable(schema, entry.getKey(), entry.getValue(), engine, paginator, writer, report);
         }
+    }
+    
+    /**
+     * Process a single table
+     */
+    private void processTable(String schema, String tableName, AnonymizationRules.TableRules tableRules,
+                             AnonymizationEngine engine, KeysetPaginator paginator,
+                             DirectRestoreWriter writer, RunReport report) throws SQLException {
+        
+        if (tableRules.getColumns() == null || tableRules.getColumns().isEmpty()) {
+            log.warn("No columns defined for table: {}.{}", schema, tableName);
+            return;
+        }
+        
+        log.info("Processing table: {}.{}", schema, tableName);
+        
+        long tableStartTime = System.currentTimeMillis();
+        long[] rowCount = {0};
+        Map<String, Integer> strategyCounts = new HashMap<>();
+        List<String> allColumns = List.copyOf(tableRules.getColumns().keySet());
+        
+        BatchContext context = new BatchContext(schema, tableName, tableRules, allColumns, 
+                                                engine, writer, rowCount, strategyCounts);
+        processTableBatches(context, paginator);
+        
+        recordTableCompletion(schema, tableName, tableStartTime, rowCount[0], tableRules, strategyCounts, report);
+    }
+    
+    /**
+     * Process table batches with pagination
+     */
+    private void processTableBatches(BatchContext context, KeysetPaginator paginator) throws SQLException {
+        try {
+            paginator.streamTable(
+                context.tableName,
+                context.tableRules.getPrimaryKey(),
+                context.allColumns,
+                batch -> processBatch(context, batch)
+            );
+        } catch (BatchProcessingException e) {
+            unwrapAndThrowSQLException(e);
+        }
+    }
+    
+    /**
+     * Process a single batch of rows
+     */
+    private void processBatch(BatchContext context, List<RowData> batch) {
+        try {
+            context.engine.anonymizeBatch(context.schema, context.tableName, batch);
+            
+            List<Map<String, Object>> rowMaps = batch.stream()
+                .map(RowData::getData)
+                .toList();
+            
+            context.writer.writeInsert(context.tableName, context.allColumns, rowMaps);
+            context.rowCount[0] += batch.size();
+            
+            updateStrategyCounts(context.tableRules, context.strategyCounts);
+        } catch (SQLException e) {
+            String errorMsg = String.format("Batch processing failed for table %s.%s", 
+                context.schema, context.tableName);
+            throw new BatchProcessingException(errorMsg, e);
+        }
+    }
+    
+    /**
+     * Update strategy counts for reporting
+     */
+    private void updateStrategyCounts(AnonymizationRules.TableRules tableRules, Map<String, Integer> strategyCounts) {
+        for (String column : tableRules.getColumns().keySet()) {
+            String strategy = tableRules.getColumns().get(column).getStrategy();
+            strategyCounts.merge(strategy, 1, Integer::sum);
+        }
+    }
+    
+    /**
+     * Record table completion in report
+     */
+    private void recordTableCompletion(String schema, String tableName, long startTime, long rowCount,
+                                      AnonymizationRules.TableRules tableRules,
+                                      Map<String, Integer> strategyCounts, RunReport report) {
+        long duration = System.currentTimeMillis() - startTime;
+        
+        report.addTableReport(
+            schema + "." + tableName,
+            rowCount,
+            duration,
+            tableRules.getColumns().size(),
+            strategyCounts
+        );
+        
+        log.info("Completed {}.{}: {} rows, {} ms", schema, tableName, rowCount, duration);
+    }
+    
+    /**
+     * Unwrap BatchProcessingException and throw SQLException
+     */
+    private void unwrapAndThrowSQLException(BatchProcessingException e) throws SQLException {
+        if (e.getCause() instanceof SQLException sqlEx) {
+            throw sqlEx;
+        }
+        throw new SQLException("Batch processing failed: " + e.getMessage(), e);
     }
     
     /**
@@ -321,32 +370,43 @@ public class RunCommand implements Callable<Integer> {
      * Validate configuration and rules
      */
     private void validateConfiguration(AnonymizerConfig config, AnonymizationRules rules) {
-        if (config.getSource() == null) {
-            throw new IllegalArgumentException("Source database configuration required");
-        }
-        
-        if (config.getSource().getSchemas() == null || config.getSource().getSchemas().isEmpty()) {
-            throw new IllegalArgumentException("Source schemas list cannot be empty");
-        }
-        
-        if (config.getTarget() == null) {
-            throw new IllegalArgumentException("Target database configuration required for direct restore");
-        }
-        
-        if (config.getTarget().getSchemas() == null || config.getTarget().getSchemas().isEmpty()) {
-            throw new IllegalArgumentException("Target schemas list cannot be empty");
-        }
-        
-        if (!config.getSource().getSchemas().equals(config.getTarget().getSchemas())) {
-            log.warn("Source and target schema lists differ - ensure this is intentional");
-        }
-        
-        if (rules.getDatabases() == null || rules.getDatabases().isEmpty()) {
-            throw new IllegalArgumentException("Rules must define at least one database");
-        }
+        validateSourceConfiguration(config);
+        validateTargetConfiguration(config);
+        validateSchemaMatching(config);
+        validateRules(rules);
         
         log.info("Configuration validated successfully");
         log.info("Schemas to process: {}", config.getSource().getSchemas());
+    }
+    
+    private void validateSourceConfiguration(AnonymizerConfig config) {
+        if (config.getSource() == null) {
+            throw new IllegalArgumentException("Source database configuration required");
+        }
+        if (config.getSource().getSchemas() == null || config.getSource().getSchemas().isEmpty()) {
+            throw new IllegalArgumentException("Source schemas list cannot be empty");
+        }
+    }
+    
+    private void validateTargetConfiguration(AnonymizerConfig config) {
+        if (config.getTarget() == null) {
+            throw new IllegalArgumentException("Target database configuration required for direct restore");
+        }
+        if (config.getTarget().getSchemas() == null || config.getTarget().getSchemas().isEmpty()) {
+            throw new IllegalArgumentException("Target schemas list cannot be empty");
+        }
+    }
+    
+    private void validateSchemaMatching(AnonymizerConfig config) {
+        if (!config.getSource().getSchemas().equals(config.getTarget().getSchemas())) {
+            log.warn("Source and target schema lists differ - ensure this is intentional");
+        }
+    }
+    
+    private void validateRules(AnonymizationRules rules) {
+        if (rules.getDatabases() == null || rules.getDatabases().isEmpty()) {
+            throw new IllegalArgumentException("Rules must define at least one database");
+        }
     }
     
     /**
@@ -368,7 +428,7 @@ public class RunCommand implements Callable<Integer> {
             ds.setVerifyServerCertificate(false);
             ds.setRewriteBatchedStatements(true); // Critical for batch performance
             ds.setUseServerPrepStmts(false); // Avoid prep stmt overhead for large batches
-        } catch (Exception e) {
+        } catch (SQLException e) {
             log.warn("Failed to set advanced connection properties for {}: {}", dbConfig.getHost(), e.getMessage(), e);
         }
         
@@ -384,8 +444,11 @@ public class RunCommand implements Callable<Integer> {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(fileBytes);
             return bytesToHex(hash).substring(0, 16); // First 16 chars
-        } catch (Exception e) {
-            log.warn("Failed to hash file {}: {}", filePath, e.getMessage(), e);
+        } catch (IOException e) {
+            log.warn("Failed to read file {}: {}", filePath, e.getMessage(), e);
+            return "unknown";
+        } catch (NoSuchAlgorithmException e) {
+            log.warn("SHA-256 algorithm not available: {}", e.getMessage(), e);
             return "unknown";
         }
     }
@@ -427,5 +490,41 @@ public class RunCommand implements Callable<Integer> {
         mapper.writerWithDefaultPrettyPrinter().writeValue(new File(reportPath), report);
         
         log.info("Report written to: {}", reportPath);
+    }
+    
+    /**
+     * Custom exception for batch processing failures
+     */
+    private static class BatchProcessingException extends RuntimeException {
+        public BatchProcessingException(String message, Throwable cause) {
+            super(message, cause);
+        }
+    }
+    
+    /**
+     * Context object to reduce method parameters for batch processing
+     */
+    private static class BatchContext {
+        private final String schema;
+        private final String tableName;
+        private final AnonymizationRules.TableRules tableRules;
+        private final List<String> allColumns;
+        private final AnonymizationEngine engine;
+        private final DirectRestoreWriter writer;
+        private final long[] rowCount;
+        private final Map<String, Integer> strategyCounts;
+        
+        BatchContext(String schema, String tableName, AnonymizationRules.TableRules tableRules,
+                    List<String> allColumns, AnonymizationEngine engine, DirectRestoreWriter writer,
+                    long[] rowCount, Map<String, Integer> strategyCounts) {
+            this.schema = schema;
+            this.tableName = tableName;
+            this.tableRules = tableRules;
+            this.allColumns = allColumns;
+            this.engine = engine;
+            this.writer = writer;
+            this.rowCount = rowCount;
+            this.strategyCounts = strategyCounts;
+        }
     }
 }

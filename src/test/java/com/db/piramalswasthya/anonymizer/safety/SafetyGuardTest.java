@@ -38,14 +38,14 @@ class SafetyGuardTest {
     void testValidConnection_Allowed() {
         AnonymizerConfig.SafetyConfig config = new AnonymizerConfig.SafetyConfig();
         config.setEnabled(true);
-        config.setAllowedHosts(List.of("replica.nonprod.internal"));
+        config.setAllowedHosts(List.of("replica.staging.internal"));
         config.setRequireExplicitApproval(false);
         
         SafetyGuard guard = new SafetyGuard(config);
         
         // Should not throw exception
         assertDoesNotThrow(() -> 
-            guard.validateSafeToConnect("replica.nonprod.internal", "db_uat", null)
+            guard.validateSafeToConnect("replica.staging.internal", "db_uat", null)
         );
     }
     
@@ -92,7 +92,7 @@ class SafetyGuardTest {
     void testApprovalFlag_Required() {
         AnonymizerConfig.SafetyConfig config = new AnonymizerConfig.SafetyConfig();
         config.setEnabled(true);
-        config.setAllowedHosts(List.of("replica.nonprod.internal"));
+        config.setAllowedHosts(List.of("replica.staging.internal"));
         config.setRequireExplicitApproval(true);
         config.setApprovalFlag("CONFIRM_2026_FEB");
         
@@ -100,17 +100,17 @@ class SafetyGuardTest {
         
         // Missing approval flag
         assertThrows(SafetyViolationException.class, () ->
-            guard.validateSafeToConnect("replica.nonprod.internal", "db_uat", null)
+            guard.validateSafeToConnect("replica.staging.internal", "db_uat", null)
         );
         
         // Wrong approval flag
         assertThrows(SafetyViolationException.class, () ->
-            guard.validateSafeToConnect("replica.nonprod.internal", "db_uat", "WRONG_FLAG")
+            guard.validateSafeToConnect("replica.staging.internal", "db_uat", "WRONG_FLAG")
         );
         
         // Correct approval flag
         assertDoesNotThrow(() ->
-            guard.validateSafeToConnect("replica.nonprod.internal", "db_uat", "CONFIRM_2026_FEB")
+            guard.validateSafeToConnect("replica.staging.internal", "db_uat", "CONFIRM_2026_FEB")
         );
     }
     
