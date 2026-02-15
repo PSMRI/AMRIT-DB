@@ -17,7 +17,7 @@ target:
   host: uat-db.example.com
   port: 3306
   schemas:
-    - dbiemr
+    - db_iemr
     - db_identity
     - db_reporting
     - db_1097_identity

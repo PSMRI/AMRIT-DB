@@ -1,8 +1,8 @@
 /*
-* AMRIT – Accessible Medical Records via Integrated Technology 
-* Integrated EHR (Electronic Health Records) Solution 
+* AMRIT – Accessible Medical Records via Integrated Technology
+* Integrated EHR (Electronic Health Records) Solution
 *
-* Copyright (C) "Piramal Swasthya Management and Research Institute" 
+* Copyright (C) "Piramal Swasthya Management and Research Institute"
 *
 * This file is part of AMRIT.
 *
@@ -22,9 +22,6 @@
 
 package com.db.piramalswasthya.anonymizer.core;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
@@ -33,32 +30,30 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
 
 /**
- * HMAC-based deterministic anonymization
- * 
+ * HMAC-based deterministic anonymization.
+ *
  * Uses HMAC-SHA256(key, stable_id) to generate consistent fake values.
  * Same input always produces same output (deterministic).
- * 
  */
 public class HmacAnonymizer {
-    
-    private static final Logger log = LoggerFactory.getLogger(HmacAnonymizer.class);
+
     private static final String HMAC_ALGORITHM = "HmacSHA256";
-    
+
     private final SecretKeySpec keySpec;
-    
+
     public HmacAnonymizer(String secretKey) {
         if (secretKey == null || secretKey.length() < 32) {
             throw new IllegalArgumentException("Secret key must be at least 32 characters");
         }
         this.keySpec = new SecretKeySpec(
-            secretKey.getBytes(StandardCharsets.UTF_8), 
-            HMAC_ALGORITHM
+                secretKey.getBytes(StandardCharsets.UTF_8),
+                HMAC_ALGORITHM
         );
     }
-    
+
     /**
-     * Generate deterministic hash for an ID
-     * 
+     * Generate deterministic hash for an ID.
+     *
      * @param stableId Stable identifier (e.g., BenRegID, phone number)
      * @return Deterministic hash (hex string)
      */
@@ -68,32 +63,34 @@ public class HmacAnonymizer {
             mac.init(keySpec);
             byte[] hash = mac.doFinal(stableId.getBytes(StandardCharsets.UTF_8));
             return HexFormat.of().formatHex(hash);
-        } catch (NoSuchAlgorithmException | InvalidKeyException e) {
-            throw new RuntimeException("HMAC hashing failed", e);
+        } catch (NoSuchAlgorithmException e) {
+            throw new HmacAnonymizerException("HMAC algorithm not available: " + HMAC_ALGORITHM, e);
+        } catch (InvalidKeyException e) {
+            throw new HmacAnonymizerException("Invalid HMAC key material for algorithm: " + HMAC_ALGORITHM, e);
         }
     }
-    
+
     /**
-     * Generate deterministic fake name
-     * 
+     * Generate deterministic fake name.
+     *
      * Uses HMAC to seed a predictable name generator.
      */
     public String fakeName(String originalName) {
         String hash = hashId(originalName);
-        int seed = Math.abs(hash.hashCode());
-        
-        // Simple deterministic name generator
+        int h = hash.hashCode();
+        long seed = (h == Integer.MIN_VALUE) ? (Integer.MAX_VALUE + 1L) : Math.abs(h);
+
         String[] firstNames = {"Amit", "Priya", "Raj", "Anjali", "Vikram", "Neha"};
         String[] lastNames = {"Kumar", "Sharma", "Singh", "Patel", "Gupta", "Reddy"};
-        
-        String firstName = firstNames[seed % firstNames.length];
-        String lastName = lastNames[(seed / 10) % lastNames.length];
-        
+
+        String firstName = firstNames[(int) (seed % firstNames.length)];
+        String lastName = lastNames[(int) ((seed / 10) % lastNames.length)];
+
         return firstName + " " + lastName;
     }
-    
+
     /**
-     * Mask phone number - show last 4 digits only
+     * Mask phone number - show last 4 digits only.
      */
     public String maskPhone(String phone) {
         if (phone == null || phone.length() < 4) {
@@ -102,14 +99,23 @@ public class HmacAnonymizer {
         int len = phone.length();
         return "X".repeat(len - 4) + phone.substring(len - 4);
     }
-    
+
     /**
-     * Generalize date to year only
+     * Generalize date to year only.
      */
     public String generalizeDate(String date) {
         if (date == null || date.length() < 4) {
             return "****";
         }
-        return date.substring(0, 4); // Keep year only
+        return date.substring(0, 4);
+    }
+}
+
+/**
+ * Custom exception for HMAC anonymization failures.
+ */
+class HmacAnonymizerException extends RuntimeException {
+    HmacAnonymizerException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

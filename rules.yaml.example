@@ -13,7 +13,7 @@ databases:
         primaryKey: BenRegID
         columns:
           BenRegID:
-            strategy: PRESERVE
+            strategy: HMAC_HASH
           FirstName:
             strategy: HMAC_HASH
           LastName:

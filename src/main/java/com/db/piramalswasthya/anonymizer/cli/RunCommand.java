@@ -69,6 +69,8 @@ public class RunCommand implements Callable<Integer> {
     
     private static final Logger log = LoggerFactory.getLogger(RunCommand.class);
     private static final String LOGS_DIRECTORY = "./logs";
+    private static final String LOG_FORMAT_ERROR_CONTEXT = "{}: {}";
+    private static final String STATUS_FAILED = "FAILED";
     
     @Option(names = {"-c", "--config"}, description = "Config file (default: config.yaml)", 
             defaultValue = "config.yaml")
@@ -94,10 +96,12 @@ public class RunCommand implements Callable<Integer> {
         report.setExecutionId(executionId);
         report.setStartTime(startTime);
         
+        AnonymizerConfig config = null;
+        
         try {
             // 1. Load configuration and rules
             log.info("Loading configuration...");
-            AnonymizerConfig config = loadConfig(configFile);
+            config = loadConfig(configFile);
             AnonymizationRules rules = loadRules(config.getRulesFile());
             
             // 2. Hash config and rules for versioning
@@ -158,27 +162,40 @@ public class RunCommand implements Callable<Integer> {
             report.setStatus("SUCCESS");            
         } catch (SQLException e) {
             String errorContext = String.format("Anonymization failed during execution (ID: %s)", executionId);
-            log.error("{}: {}", errorContext, sanitizeError(e), e);
-            report.setStatus("FAILED");
+            log.error(LOG_FORMAT_ERROR_CONTEXT, errorContext, sanitizeError(e), e);
+            report.setStatus(STATUS_FAILED);
             report.setErrorMessage(errorContext + ": " + sanitizeError(e));
             
             report.setEndTime(LocalDateTime.now());
             report.setTotalDurationMs(
                 java.time.Duration.between(startTime, report.getEndTime()).toMillis());
             
-            writeReport(report, LOGS_DIRECTORY, executionId);
+            writeReport(report, config != null ? config.getLoggingPath() : LOGS_DIRECTORY, executionId);
             return 1;
         } catch (IOException e) {
             String errorContext = String.format("Configuration or file I/O error (ID: %s)", executionId);
-            log.error("{}: {}", errorContext, e.getMessage(), e);
-            report.setStatus("FAILED");
+            log.error(LOG_FORMAT_ERROR_CONTEXT, errorContext, e.getMessage(), e);
+            report.setStatus(STATUS_FAILED);
             report.setErrorMessage(errorContext + ": " + e.getMessage());
             
             report.setEndTime(LocalDateTime.now());
             report.setTotalDurationMs(
                 java.time.Duration.between(startTime, report.getEndTime()).toMillis());
             
-            writeReport(report, LOGS_DIRECTORY, executionId);
+            writeReport(report, config != null ? config.getLoggingPath() : LOGS_DIRECTORY, executionId);
+            return 1;
+        } catch (Exception e) {
+            // Fallback handler for all other exceptions (safety, validation, etc.)
+            String errorContext = String.format("Unexpected error during execution (ID: %s)", executionId);
+            log.error(LOG_FORMAT_ERROR_CONTEXT, errorContext, e.getMessage(), e);
+            report.setStatus(STATUS_FAILED);
+            report.setErrorMessage(errorContext + ": " + sanitizeError(e));
+            
+            report.setEndTime(LocalDateTime.now());
+            report.setTotalDurationMs(
+                java.time.Duration.between(startTime, report.getEndTime()).toMillis());
+            
+            writeReport(report, config != null ? config.getLoggingPath() : LOGS_DIRECTORY, executionId);
             return 1;
         }
         
@@ -186,12 +203,12 @@ public class RunCommand implements Callable<Integer> {
         report.setTotalDurationMs(
             java.time.Duration.between(startTime, report.getEndTime()).toMillis());
         
-        writeReport(report, LOGS_DIRECTORY, executionId);
+        writeReport(report, config.getLoggingPath(), executionId);
         
         log.info("\n=== Anonymization Complete ===");
         log.info("Total rows processed: {}", report.getTotalRowsProcessed());
         log.info("Total duration: {} ms", report.getTotalDurationMs());
-        log.info("Report written to: ./logs/run-report-{}.json", executionId);
+        log.info("Report written to: {}/run-report-{}.json", config.getLoggingPath(), executionId);
         
         return 0;
     }
@@ -226,6 +243,10 @@ public class RunCommand implements Callable<Integer> {
             
             // Process all tables in this schema
             processSchemaTables(schema, rules, engine, paginator, writer, report);
+            
+            // Mark success to commit the transaction
+            writer.markSuccess();
+            log.info("Successfully committed all changes for schema: {}", schema);
         }
     }
     
@@ -266,8 +287,11 @@ public class RunCommand implements Callable<Integer> {
         Map<String, Integer> strategyCounts = new HashMap<>();
         List<String> allColumns = List.copyOf(tableRules.getColumns().keySet());
         
+        // Calculate strategy counts once per table (not per batch)
+        updateStrategyCounts(tableRules, strategyCounts);
+        
         BatchContext context = new BatchContext(schema, tableName, tableRules, allColumns, 
-                                                engine, writer, rowCount, strategyCounts);
+                                                engine, writer, rowCount);
         processTableBatches(context, paginator);
         
         recordTableCompletion(schema, tableName, tableStartTime, rowCount[0], tableRules, strategyCounts, report);
@@ -302,8 +326,6 @@ public class RunCommand implements Callable<Integer> {
             
             context.writer.writeInsert(context.tableName, context.allColumns, rowMaps);
             context.rowCount[0] += batch.size();
-            
-            updateStrategyCounts(context.tableRules, context.strategyCounts);
         } catch (SQLException e) {
             String errorMsg = String.format("Batch processing failed for table %s.%s", 
                 context.schema, context.tableName);
@@ -422,7 +444,7 @@ public class RunCommand implements Callable<Integer> {
         
         // Additional connection properties for performance
         try {
-            ds.setConnectTimeout(dbConfig.getConnectionTimeout());
+            ds.setConnectTimeout(30000); // 30 second timeout
             ds.setUseSSL(true);
             ds.setRequireSSL(false);
             ds.setVerifyServerCertificate(false);
@@ -432,7 +454,8 @@ public class RunCommand implements Callable<Integer> {
             log.warn("Failed to set advanced connection properties for {}: {}", dbConfig.getHost(), e.getMessage(), e);
         }
         
-        return ds;
+        // Wrap DataSource to apply readOnly setting
+        return new ReadOnlyAwareDataSource(ds, dbConfig.isReadOnly());
     }
     
     /**
@@ -512,11 +535,10 @@ public class RunCommand implements Callable<Integer> {
         private final AnonymizationEngine engine;
         private final DirectRestoreWriter writer;
         private final long[] rowCount;
-        private final Map<String, Integer> strategyCounts;
         
         BatchContext(String schema, String tableName, AnonymizationRules.TableRules tableRules,
                     List<String> allColumns, AnonymizationEngine engine, DirectRestoreWriter writer,
-                    long[] rowCount, Map<String, Integer> strategyCounts) {
+                    long[] rowCount) {
             this.schema = schema;
             this.tableName = tableName;
             this.tableRules = tableRules;
@@ -524,7 +546,78 @@ public class RunCommand implements Callable<Integer> {
             this.engine = engine;
             this.writer = writer;
             this.rowCount = rowCount;
-            this.strategyCounts = strategyCounts;
+        }
+    }
+    
+    /**
+     * DataSource wrapper that applies readOnly setting to connections
+     */
+    private static class ReadOnlyAwareDataSource implements DataSource {
+        private final DataSource delegate;
+        private final boolean readOnly;
+        
+        ReadOnlyAwareDataSource(DataSource delegate, boolean readOnly) {
+            this.delegate = delegate;
+            this.readOnly = readOnly;
+        }
+        
+        @Override
+        public java.sql.Connection getConnection() throws SQLException {
+            java.sql.Connection conn = delegate.getConnection();
+            try {
+                conn.setReadOnly(readOnly);
+                return conn;
+            } catch (SQLException e) {
+                conn.close();
+                throw e;
+            }
+        }
+        
+        @Override
+        public java.sql.Connection getConnection(String username, String password) throws SQLException {
+            java.sql.Connection conn = delegate.getConnection(username, password);
+            try {
+                conn.setReadOnly(readOnly);
+                return conn;
+            } catch (SQLException e) {
+                conn.close();
+                throw e;
+            }
+        }
+        
+        @Override
+        public java.io.PrintWriter getLogWriter() throws SQLException {
+            return delegate.getLogWriter();
+        }
+        
+        @Override
+        public void setLogWriter(java.io.PrintWriter out) throws SQLException {
+            delegate.setLogWriter(out);
+        }
+        
+        @Override
+        public void setLoginTimeout(int seconds) throws SQLException {
+            delegate.setLoginTimeout(seconds);
+        }
+        
+        @Override
+        public int getLoginTimeout() throws SQLException {
+            return delegate.getLoginTimeout();
+        }
+        
+        @Override
+        public java.util.logging.Logger getParentLogger() {
+            return java.util.logging.Logger.getLogger("ReadOnlyAwareDataSource");
+        }
+        
+        @Override
+        public <T> T unwrap(Class<T> iface) throws SQLException {
+            return delegate.unwrap(iface);
+        }
+        
+        @Override
+        public boolean isWrapperFor(Class<?> iface) throws SQLException {
+            return delegate.isWrapperFor(iface);
         }
     }
 }

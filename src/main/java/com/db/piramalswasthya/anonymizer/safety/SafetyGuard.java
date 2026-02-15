@@ -1,8 +1,8 @@
 /*
-* AMRIT – Accessible Medical Records via Integrated Technology 
-* Integrated EHR (Electronic Health Records) Solution 
+* AMRIT – Accessible Medical Records via Integrated Technology
+* Integrated EHR (Electronic Health Records) Solution
 *
-* Copyright (C) "Piramal Swasthya Management and Research Institute" 
+* Copyright (C) "Piramal Swasthya Management and Research Institute"
 *
 * This file is part of AMRIT.
 *
@@ -30,114 +30,158 @@ import java.util.regex.Pattern;
 
 /**
  * Production Safety Guard
- * 
+ *
  * Prevents accidental execution against production databases.
  * Checks hostname/database name against deny patterns and allowlist.
- * 
+ *
  * CRITICAL SAFETY LAYER - DO NOT BYPASS WITHOUT EXPLICIT APPROVAL FLAG
  */
 public class SafetyGuard {
-    
+
     private static final Logger log = LoggerFactory.getLogger(SafetyGuard.class);
-    
+
     private final AnonymizerConfig.SafetyConfig config;
-    
+
     // Built-in deny patterns (case-insensitive)
     private static final String[] BUILT_IN_DENY_PATTERNS = {
-        ".*prod.*",
-        ".*production.*",
-        ".*prd.*",
-        ".*live.*"
+            ".*prod.*",
+            ".*production.*",
+            ".*prd.*",
+            ".*live.*"
     };
-    
+
     public SafetyGuard(AnonymizerConfig.SafetyConfig config) {
         this.config = config;
     }
-    
+
     /**
      * Validates that it's safe to connect to the given database.
-     * 
+     *
      * @param host Database hostname
      * @param database Database name
      * @param approvalFlag Explicit approval flag (if required)
      * @throws SafetyViolationException if safety check fails
      */
-    public void validateSafeToConnect(String host, String database, String approvalFlag) 
+    public void validateSafeToConnect(String host, String database, String approvalFlag)
             throws SafetyViolationException {
-        
+
         if (!config.isEnabled()) {
             log.warn("SAFETY GUARD DISABLED - Proceeding without safety checks");
             return;
         }
-        
+
         log.info("Running safety checks for {}:{}", host, database);
-        
-        // Check allowlist first - if host is explicitly allowed, skip deny pattern checks
-        boolean inAllowlist = false;
-        if (config.getAllowedHosts() != null && !config.getAllowedHosts().isEmpty()) {
-            inAllowlist = config.getAllowedHosts().stream()
-                .anyMatch(allowed -> host.equalsIgnoreCase(allowed) || 
-                                     host.matches(allowed.replace("*", ".*")));
-            
-            if (!inAllowlist) {
-                throw new SafetyViolationException(
-                    String.format("DENIED: Host '%s' not in allowlist %s", 
-                        host, config.getAllowedHosts())
-                );
-            }
+
+        boolean hostAllowlisted = enforceAllowlistIfConfigured(host);
+
+        // Allowlist takes precedence over deny patterns.
+        if (!hostAllowlisted) {
+            checkBuiltInDenials(host, database, approvalFlag);
+            checkCustomDenials(host, database);
         }
-        
-        // Always check built-in deny patterns (even for allowlisted hosts)
-        for (String pattern : BUILT_IN_DENY_PATTERNS) {
-            if (matchesPattern(host, pattern) || matchesPattern(database, pattern)) {
-                // Check if explicit approval flag is provided to bypass built-in deny
-                if (config.isRequireExplicitApproval() && 
-                    approvalFlag != null && approvalFlag.equals(config.getApprovalFlag())) {
-                    log.warn("Built-in deny pattern '{}' matched but bypassed with approval flag for {}:{}", 
-                        pattern, host, database);
-                } else {
-                    throw new SafetyViolationException(
-                        String.format("DENIED: Host '%s' or database '%s' matches production pattern '%s'. " +
-                            "If this is intentional, add to allowlist and provide approval flag.",
-                            host, database, pattern)
-                    );
-                }
-            }
-        }
-        
-        // Check custom deny patterns (only if not in allowlist)
-        if (!inAllowlist) {
-            if (config.getDeniedPatterns() != null) {
-                for (String pattern : config.getDeniedPatterns()) {
-                    if (matchesPattern(host, pattern) || matchesPattern(database, pattern)) {
-                        throw new SafetyViolationException(
-                            String.format("DENIED: Matches custom deny pattern '%s'", pattern)
-                        );
-                    }
-                }
-            }
-        }
-        
-        // Check approval flag if required (applies to all connections)
-        if (config.isRequireExplicitApproval()) {
-            if (approvalFlag == null || !approvalFlag.equals(config.getApprovalFlag())) {
-                throw new SafetyViolationException(
-                    "DENIED: Explicit approval flag required but not provided or incorrect. " +
-                    "Set in config.yaml:safety.approvalFlag and pass via --approval-flag"
-                );
-            }
-        }
-        
+
+        enforceApprovalFlagIfRequired(approvalFlag);
+
         log.info("Safety checks passed for {}:{}", host, database);
     }
-    
+
+    /**
+     * If an allowlist is configured, the host must match it. When a host is allowlisted,
+     * deny pattern checks are skipped.
+     */
+    private boolean enforceAllowlistIfConfigured(String host) throws SafetyViolationException {
+        if (config.getAllowedHosts() == null || config.getAllowedHosts().isEmpty()) {
+            return false;
+        }
+
+        boolean inAllowlist = config.getAllowedHosts().stream()
+                .anyMatch(allowed -> hostEqualsIgnoreCase(host, allowed) || hostMatchesWildcard(host, allowed));
+
+        if (!inAllowlist) {
+            throw new SafetyViolationException(
+                    String.format("DENIED: Host '%s' not in allowlist %s", host, config.getAllowedHosts())
+            );
+        }
+
+        return true;
+    }
+
+    private void checkBuiltInDenials(String host, String database, String approvalFlag)
+            throws SafetyViolationException {
+
+        for (String pattern : BUILT_IN_DENY_PATTERNS) {
+            if (!matchesPattern(host, pattern) && !matchesPattern(database, pattern)) {
+                continue;
+            }
+
+            if (canBypassBuiltInDenyWithApprovalFlag(approvalFlag)) {
+                log.warn(
+                        "Built-in deny pattern '{}' matched but bypassed with approval flag for {}:{}",
+                        pattern, host, database
+                );
+                continue;
+            }
+
+            throw new SafetyViolationException(
+                    String.format(
+                            "DENIED: Host '%s' or database '%s' matches production pattern '%s'. " +
+                                    "If this is intentional, add to allowlist and provide approval flag.",
+                            host, database, pattern
+                    )
+            );
+        }
+    }
+
+    private void checkCustomDenials(String host, String database) throws SafetyViolationException {
+        if (config.getDeniedPatterns() == null || config.getDeniedPatterns().isEmpty()) {
+            return;
+        }
+
+        for (String pattern : config.getDeniedPatterns()) {
+            if (matchesPattern(host, pattern) || matchesPattern(database, pattern)) {
+                throw new SafetyViolationException(
+                        String.format("DENIED: Matches custom deny pattern '%s'", pattern)
+                );
+            }
+        }
+    }
+
+    private void enforceApprovalFlagIfRequired(String approvalFlag) throws SafetyViolationException {
+        if (config.isRequireExplicitApproval() && !hasValidApprovalFlag(approvalFlag)) {
+            throw new SafetyViolationException(
+                    "DENIED: Explicit approval flag required but not provided or incorrect. " +
+                            "Set in config.yaml:safety.approvalFlag and pass via --approval-flag"
+            );
+        }
+    }
+
+    private boolean canBypassBuiltInDenyWithApprovalFlag(String approvalFlag) {
+        return config.isRequireExplicitApproval() && hasValidApprovalFlag(approvalFlag);
+    }
+
+    private boolean hasValidApprovalFlag(String approvalFlag) {
+        return approvalFlag != null && approvalFlag.equals(config.getApprovalFlag());
+    }
+
+    private boolean hostEqualsIgnoreCase(String host, String allowed) {
+        return host != null && allowed != null && host.equalsIgnoreCase(allowed);
+    }
+
+    private boolean hostMatchesWildcard(String host, String allowed) {
+        if (host == null || allowed == null) {
+            return false;
+        }
+        String regex = allowed.replace("*", ".*");
+        return host.matches(regex);
+    }
+
     private boolean matchesPattern(String value, String pattern) {
         if (value == null || pattern == null) {
             return false;
         }
         return Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(value).matches();
     }
-    
+
     public static class SafetyViolationException extends Exception {
         public SafetyViolationException(String message) {
             super(message);

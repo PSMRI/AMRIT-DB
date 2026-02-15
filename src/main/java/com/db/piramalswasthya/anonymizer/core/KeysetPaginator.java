@@ -99,10 +99,22 @@ public class KeysetPaginator {
         String quotedTable = quoteIdentifier(table);
         String quotedPk = quoteIdentifier(primaryKey);
         
+        // Build column list, ensuring primary key is included
         StringBuilder columnList = new StringBuilder();
+        boolean pkIncluded = false;
         for (int i = 0; i < columns.size(); i++) {
             if (i > 0) columnList.append(", ");
-            columnList.append(quoteIdentifier(columns.get(i)));
+            String quotedCol = quoteIdentifier(columns.get(i));
+            columnList.append(quotedCol);
+            if (quotedCol.equals(quotedPk)) {
+                pkIncluded = true;
+            }
+        }
+        
+        // Add primary key if not already present
+        if (!pkIncluded) {
+            if (!columns.isEmpty()) columnList.append(", ");
+            columnList.append(quotedPk);
         }
         
         String selectSql = String.format(

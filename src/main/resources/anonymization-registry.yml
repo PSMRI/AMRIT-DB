@@ -27,7 +27,7 @@ databases:
             canonicalName: "BenRegID"
             dataType: "VARCHAR"
             nullable: false
-            anonymizationRule: "HASH_SHA256"
+            strategy: "HASH_SHA256"
           BeneficiaryID:
             canonicalName: "BeneficiaryID"
             dataType: "BIGINT"
@@ -37,42 +37,42 @@ databases:
             canonicalName: "FirstName"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "RANDOM_FAKE_DATA"
+            strategy: "RANDOM_FAKE_DATA"
           LastName:
             canonicalName: "LastName"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "RANDOM_FAKE_DATA"
+            strategy: "RANDOM_FAKE_DATA"
           PhoneNo:
             canonicalName: "PhoneNo"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "PARTIAL_MASK"
+            strategy: "PARTIAL_MASK"
           AadhaarNo:
             canonicalName: "AadhaarNo"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "HASH_SHA256"
+            strategy: "HASH_SHA256"
           EmailID:
             canonicalName: "EmailID"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "SUPPRESS"
+            strategy: "SUPPRESS"
           Address:
             canonicalName: "Address"
             dataType: "TEXT"
             nullable: true
-            anonymizationRule: "GENERALIZE"
+            strategy: "GENERALIZE"
           DateOfBirth:
             canonicalName: "DateOfBirth"
             dataType: "DATE"
             nullable: true
-            anonymizationRule: "GENERALIZE"
+            strategy: "GENERALIZE"
           Gender:
             canonicalName: "Gender"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "PRESERVE"
+            strategy: "PRESERVE"
       
       m_user:
         canonicalName: "m_user"
@@ -86,22 +86,22 @@ databases:
             canonicalName: "UserName"
             dataType: "VARCHAR"
             nullable: false
-            anonymizationRule: "RANDOM_FAKE_DATA"
+            strategy: "RANDOM_FAKE_DATA"
           Password:
             canonicalName: "Password"
             dataType: "VARCHAR"
             nullable: false
-            anonymizationRule: "SUPPRESS"
+            strategy: "SUPPRESS"
           EmailID:
             canonicalName: "EmailID"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "SUPPRESS"
+            strategy: "SUPPRESS"
           PhoneNo:
             canonicalName: "PhoneNo"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "PARTIAL_MASK"
+            strategy: "PARTIAL_MASK"
   
   db_1097_identity:
     schemaHash: "placeholder_hash_1097"
@@ -118,19 +118,19 @@ databases:
             canonicalName: "FirstName"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "RANDOM_FAKE_DATA"
+            strategy: "RANDOM_FAKE_DATA"
           LastName:
             canonicalName: "LastName"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "RANDOM_FAKE_DATA"
+            strategy: "RANDOM_FAKE_DATA"
           PhoneNo:
             canonicalName: "PhoneNo"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "PARTIAL_MASK"
+            strategy: "PARTIAL_MASK"
   
-  dbiemr:
+  db_iemr:
     schemaHash: "placeholder_hash_iemr"
     tables:
       t_benmedhistory:
@@ -145,17 +145,17 @@ databases:
             canonicalName: "ChiefComplaint"
             dataType: "TEXT"
             nullable: true
-            anonymizationRule: "SUPPRESS"
+            strategy: "SUPPRESS"
           PresentIllness:
             canonicalName: "PresentIllness"
             dataType: "TEXT"
             nullable: true
-            anonymizationRule: "SUPPRESS"
+            strategy: "SUPPRESS"
           Diagnosis:
             canonicalName: "Diagnosis"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "GENERALIZE"
+            strategy: "GENERALIZE"
       
       t_prescription:
         canonicalName: "t_prescription"
@@ -169,12 +169,12 @@ databases:
             canonicalName: "DrugName"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "GENERALIZE"
+            strategy: "GENERALIZE"
           DoctorName:
             canonicalName: "DoctorName"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "HASH_SHA256"
+            strategy: "HASH_SHA256"
       
       t_lab_test_result:
         canonicalName: "t_lab_test_result"
@@ -188,12 +188,12 @@ databases:
             canonicalName: "TestResult"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "GENERALIZE"
+            strategy: "GENERALIZE"
           LabTechnicianName:
             canonicalName: "LabTechnicianName"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "HASH_SHA256"
+            strategy: "HASH_SHA256"
   
   db_reporting:
     schemaHash: "placeholder_hash_reporting"
@@ -205,22 +205,22 @@ databases:
             canonicalName: "BenRegID"
             dataType: "VARCHAR"
             nullable: false
-            anonymizationRule: "HASH_SHA256"
+            strategy: "HASH_SHA256"
           BeneficiaryName:
             canonicalName: "BeneficiaryName"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "RANDOM_FAKE_DATA"
+            strategy: "RANDOM_FAKE_DATA"
           AgeGroup:
             canonicalName: "AgeGroup"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "PRESERVE"
+            strategy: "PRESERVE"
           Gender:
             canonicalName: "Gender"
             dataType: "VARCHAR"
             nullable: true
-            anonymizationRule: "PRESERVE"
+            strategy: "PRESERVE"
       
       fact_consultation:
         canonicalName: "fact_consultation"
@@ -229,9 +229,9 @@ databases:
             canonicalName: "BenRegID"
             dataType: "VARCHAR"
             nullable: false
-            anonymizationRule: "HASH_SHA256"
+            strategy: "HASH_SHA256"
           ConsultationNotes:
             canonicalName: "ConsultationNotes"
             dataType: "TEXT"
             nullable: true
-            anonymizationRule: "SUPPRESS"
+            strategy: "SUPPRESS"

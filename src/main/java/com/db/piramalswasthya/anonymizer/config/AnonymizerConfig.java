@@ -50,11 +50,12 @@ public class AnonymizerConfig {
         private String password;
         private boolean readOnly = true;
         private int connectionTimeout = 30000;
+        private boolean verifyServerCertificate = true; // Secure default for production
     }
     
     @Data
     public static class SafetyConfig {
-        private boolean enabled;
+        private boolean enabled = true; // Secure default - safety checks enabled
         private List<String> allowedHosts;
         private List<String> deniedPatterns;
         private boolean requireExplicitApproval;
@@ -106,5 +107,21 @@ public class AnonymizerConfig {
         private int batchSize = 1000;
         private int fetchSize = 1000;
         private int maxMemoryMb = 512;
+    }
+
+    public DatabaseConfig getSource() {
+        return source;
+    }
+
+    public void setSource(DatabaseConfig source) {
+        this.source = source;
+    }
+
+    public DatabaseConfig getTarget() {  // Add this getter if missing
+        return target;
+    }
+
+    public void setTarget(DatabaseConfig target) {  // Add this setter if missing
+        this.target = target;
     }
 }
