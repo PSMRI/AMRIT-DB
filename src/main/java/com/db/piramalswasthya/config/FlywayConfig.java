@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FlywayConfig {
 	 @Bean
-	    public Flyway flywayDbiemr(@Qualifier("dbiemrDataSource") DataSource dataSource) {
+	    public Flyway flywaydbiemr(@Qualifier("dbiemrDataSource") DataSource dataSource) {
 	        return Flyway.configure()
 	                .dataSource(dataSource)
 	                .locations("classpath:db/migration/dbiemr")
