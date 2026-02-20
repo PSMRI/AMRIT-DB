@@ -148,8 +148,8 @@ public class SafetyGuard {
     private void enforceApprovalFlagIfRequired(String approvalFlag) throws SafetyViolationException {
         if (config.isRequireExplicitApproval() && !hasValidApprovalFlag(approvalFlag)) {
             throw new SafetyViolationException(
-                    "DENIED: Explicit approval flag required but not provided or incorrect. " +
-                            "Set in config.yaml:safety.approvalFlag and pass via --approval-flag"
+                "DENIED: Explicit approval flag required but not provided or incorrect. " +
+                    "Set in config.yaml (safety.approvalFlag) and pass via the --approve option"
             );
         }
     }

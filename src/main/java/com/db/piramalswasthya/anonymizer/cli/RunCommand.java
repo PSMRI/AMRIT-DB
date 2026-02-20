@@ -76,9 +76,9 @@ public class RunCommand implements Callable<Integer> {
             defaultValue = "config.yaml")
     private String configFile;
     
-    @Option(names = {"--approve"}, description = "Explicit approval token (required for safety)", 
-            required = true)
-    private String approvalToken;
+        @Option(names = {"--approve"}, description = "Explicit approval token (used when safety requires approval)", 
+            required = false)
+        private String approvalToken;
     
     @Option(names = {"--dry-run"}, description = "Validate configuration without executing")
     private boolean dryRun;
