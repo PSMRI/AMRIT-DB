@@ -41,6 +41,7 @@ public class SafetyGuard {
     private static final Logger log = LoggerFactory.getLogger(SafetyGuard.class);
 
     private final AnonymizerConfig.SafetyConfig config;
+    private final java.util.List<Pattern> compiledDeniedPatterns = new java.util.ArrayList<>();
 
     // Built-in deny patterns (case-insensitive)
     private static final String[] BUILT_IN_DENY_PATTERNS = {
@@ -52,6 +53,16 @@ public class SafetyGuard {
 
     public SafetyGuard(AnonymizerConfig.SafetyConfig config) {
         this.config = config;
+        // Precompile custom denied patterns to fail fast on invalid regexes
+        if (config.getDeniedPatterns() != null) {
+            for (String p : config.getDeniedPatterns()) {
+                try {
+                    compiledDeniedPatterns.add(Pattern.compile(p, Pattern.CASE_INSENSITIVE));
+                } catch (Exception e) {
+                    throw new IllegalArgumentException("Invalid denied pattern: " + p + " -> " + e.getMessage(), e);
+                }
+            }
+        }
     }
 
     /**

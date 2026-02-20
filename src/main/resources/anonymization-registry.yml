@@ -52,7 +52,7 @@ databases:
             canonicalName: "AadhaarNo"
             dataType: "VARCHAR"
             nullable: true
-            strategy: "HASH_SHA256"
+            strategy: "HMAC_HASH"
           EmailID:
             canonicalName: "EmailID"
             dataType: "VARCHAR"
@@ -91,7 +91,7 @@ databases:
             canonicalName: "Password"
             dataType: "VARCHAR"
             nullable: false
-            strategy: "SUPPRESS"
+            strategy: "HMAC_HASH"
           EmailID:
             canonicalName: "EmailID"
             dataType: "VARCHAR"

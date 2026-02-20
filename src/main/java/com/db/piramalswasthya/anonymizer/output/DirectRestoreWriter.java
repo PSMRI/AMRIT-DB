@@ -264,7 +264,19 @@ public class DirectRestoreWriter implements AutoCloseable {
             
             for (Map<String, Object> row : rows) {
                 for (int i = 0; i < columns.size(); i++) {
-                    stmt.setObject(i + 1, row.get(columns.get(i)));
+                    Object v = row.get(columns.get(i));
+                    if (v == null) {
+                        stmt.setNull(i + 1, java.sql.Types.NULL);
+                    } else if (v instanceof String) {
+                        stmt.setString(i + 1, (String) v);
+                    } else if (v instanceof Boolean) {
+                        stmt.setBoolean(i + 1, (Boolean) v);
+                    } else if (v instanceof Number) {
+                        stmt.setObject(i + 1, v);
+                    } else {
+                        // Fallback to string representation for unknown types
+                        stmt.setString(i + 1, v.toString());
+                    }
                 }
                 stmt.addBatch();
                 count++;

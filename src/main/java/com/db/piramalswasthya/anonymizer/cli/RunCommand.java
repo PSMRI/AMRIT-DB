@@ -71,6 +71,7 @@ public class RunCommand implements Callable<Integer> {
     private static final String LOGS_DIRECTORY = "./logs";
     private static final String LOG_FORMAT_ERROR_CONTEXT = "{}: {}";
     private static final String STATUS_FAILED = "FAILED";
+    private static final ObjectMapper YAML_MAPPER = new ObjectMapper(new YAMLFactory());
     
     @Option(names = {"-c", "--config"}, description = "Config file (default: config.yaml)", 
             defaultValue = "config.yaml")
@@ -269,7 +270,7 @@ public class RunCommand implements Callable<Integer> {
         }
         
         for (Map.Entry<String, AnonymizationRules.TableRules> entry : dbRules.getTables().entrySet()) {
-            processTable(schema, entry.getKey(), entry.getValue(), engine, paginator, writer, report);
+            processTable(schema, entry.getKey(), entry.getValue(), rules, engine, paginator, writer, report);
         }
     }
     
@@ -277,7 +278,7 @@ public class RunCommand implements Callable<Integer> {
      * Process a single table
      */
     private void processTable(String schema, String tableName, AnonymizationRules.TableRules tableRules,
-                             AnonymizationEngine engine, KeysetPaginator paginator,
+                             AnonymizationRules rules, AnonymizationEngine engine, KeysetPaginator paginator,
                              DirectRestoreWriter writer, RunReport report) throws SQLException {
         
         if (tableRules.getColumns() == null || tableRules.getColumns().isEmpty()) {
@@ -290,8 +291,35 @@ public class RunCommand implements Callable<Integer> {
         long tableStartTime = System.currentTimeMillis();
         long[] rowCount = {0};
         Map<String, Integer> strategyCounts = new HashMap<>();
-        List<String> allColumns = List.copyOf(tableRules.getColumns().keySet());
-        
+
+        // Fetch real source columns for this table so we don't accidentally drop unknown columns.
+        List<String> sourceColumns = paginator.getTableColumns(tableName);
+
+        // Reconcile rules vs source columns: add missing columns with PRESERVE or fail based on policy
+        java.util.Set<String> ruleColumnSet = tableRules.getColumns() == null ? java.util.Collections.emptySet() : tableRules.getColumns().keySet();
+
+        if (tableRules.getColumns() == null) {
+            tableRules.setColumns(new java.util.LinkedHashMap<>());
+        }
+
+        for (String srcCol : sourceColumns) {
+            if (!tableRules.getColumns().containsKey(srcCol)) {
+                switch (rules.getUnknownColumnPolicy()) {
+                    case FAIL -> throw new IllegalStateException("Unknown column found in source not present in rules: " + srcCol + " for table " + tableName);
+                    case WARN -> log.warn("Unknown column {}.{} found in source - auto-adding with PRESERVE strategy", schema, srcCol);
+                    case PRESERVE -> log.debug("Auto-adding unknown column {}.{} with PRESERVE strategy", schema, srcCol);
+                }
+
+                if (rules.getUnknownColumnPolicy() != AnonymizationRules.UnknownColumnPolicy.FAIL) {
+                    AnonymizationRules.ColumnRule cr = new AnonymizationRules.ColumnRule();
+                    cr.setStrategy("PRESERVE");
+                    tableRules.getColumns().put(srcCol, cr);
+                }
+            }
+        }
+
+        List<String> allColumns = sourceColumns;
+
         // Calculate strategy counts once per table (not per batch)
         updateStrategyCounts(tableRules, strategyCounts);
         
@@ -381,16 +409,14 @@ public class RunCommand implements Callable<Integer> {
      * Load configuration from YAML
      */
     private AnonymizerConfig loadConfig(String path) throws IOException {
-        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        return mapper.readValue(new File(path), AnonymizerConfig.class);
+        return YAML_MAPPER.readValue(new File(path), AnonymizerConfig.class);
     }
     
     /**
      * Load rules from YAML
      */
     private AnonymizationRules loadRules(String path) throws IOException {
-        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        return mapper.readValue(new File(path), AnonymizationRules.class);
+        return YAML_MAPPER.readValue(new File(path), AnonymizationRules.class);
     }
     
     /**
@@ -449,12 +475,20 @@ public class RunCommand implements Callable<Integer> {
         
         // Additional connection properties for performance
         try {
-            ds.setConnectTimeout(30000); // 30 second timeout
+            ds.setConnectTimeout(dbConfig.getConnectionTimeout()); // configurable timeout
             ds.setUseSSL(true);
             ds.setRequireSSL(false);
-            ds.setVerifyServerCertificate(false);
+            ds.setVerifyServerCertificate(dbConfig.isVerifyServerCertificate());
             ds.setRewriteBatchedStatements(true); // Critical for batch performance
             ds.setUseServerPrepStmts(false); // Avoid prep stmt overhead for large batches
+            // Set socket timeout (milliseconds) to avoid hanging reads - default 5 minutes
+            try {
+                // Use reflection because some connector implementations make this protected
+                java.lang.reflect.Method m = ds.getClass().getMethod("setIntegerRuntimeProperty", String.class, int.class);
+                m.invoke(ds, "socketTimeout", 300000);
+            } catch (Exception ex) {
+                log.debug("Connector doesn't support setIntegerRuntimeProperty(socketTimeout) via reflection: {}", ex.getMessage());
+            }
         } catch (SQLException e) {
             log.warn("Failed to set advanced connection properties for {}: {}", dbConfig.getHost(), e.getMessage(), e);
         }

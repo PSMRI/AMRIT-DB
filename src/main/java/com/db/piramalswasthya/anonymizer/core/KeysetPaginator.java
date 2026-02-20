@@ -163,6 +163,29 @@ public class KeysetPaginator {
                 table, batchCount, totalRows);
         }
     }
+
+    /**
+     * Return the actual column list for the table as reported by the database.
+     * Uses SELECT * WHERE 1=0 to obtain ResultSetMetaData so it works on empty tables.
+     */
+    @SuppressWarnings("java:S2077")
+    public List<String> getTableColumns(String table) throws SQLException {
+        validateIdentifier(table);
+        String quotedTable = quoteIdentifier(table);
+        String sql = String.format("SELECT * FROM %s WHERE 1=0", quotedTable);
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            ResultSetMetaData meta = rs.getMetaData();
+            List<String> cols = new ArrayList<>();
+            for (int i = 1; i <= meta.getColumnCount(); i++) {
+                cols.add(meta.getColumnLabel(i));
+            }
+            return cols;
+        }
+    }
     
     /**
      * Process a single batch of rows from the result set
@@ -264,8 +287,11 @@ public class KeysetPaginator {
             return data.containsKey(column);
         }
         
+        /**
+         * Return a defensive copy of the row data to avoid exposing internal mutable state.
+         */
         public java.util.Map<String, Object> getData() {
-            return data;
+            return new java.util.LinkedHashMap<>(data);
         }
     }
 }

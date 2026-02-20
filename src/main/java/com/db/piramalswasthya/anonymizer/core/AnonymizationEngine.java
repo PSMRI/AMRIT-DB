@@ -108,6 +108,17 @@ public class AnonymizationEngine {
         return switch (strategy.toUpperCase()) {
             case "HMAC_HASH" -> anonymizer.hashId(value);
             case "PRESERVE" -> value;
+            case "GENERALIZE" -> {
+                // Attempt to generalize dates; fallback to preserving value with a warning
+                if (value.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                    yield anonymizer.generalizeDate(value);
+                } else if (value.matches("\\d{2}/\\d{2}/\\d{4}")) {
+                    yield anonymizer.generalizeDate(value.replace('/', '-'));
+                } else {
+                    log.warn("GENERALIZE strategy applied to non-date value; preserving: {}", value);
+                    yield value;
+                }
+            }
             default -> {
                 log.warn("Unknown strategy: {} - preserving value", strategy);
                 yield value;
