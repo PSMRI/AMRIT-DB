@@ -49,6 +49,8 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -461,7 +463,7 @@ public class RunCommand implements Callable<Integer> {
         src.setPort(Integer.parseInt(props.getProperty("anonymizer.source.port", "3306")));
         String sSchemas = props.getProperty("anonymizer.source.schemas", "");
         if (!sSchemas.isBlank()) {
-            src.setSchemas(java.util.Arrays.asList(sSchemas.split("\s*,\s*")));
+            src.setSchemas(commaSepToList(sSchemas));
         }
         src.setUsername(props.getProperty("anonymizer.source.username", "root"));
         src.setPassword(props.getProperty("anonymizer.source.password", ""));
@@ -474,7 +476,7 @@ public class RunCommand implements Callable<Integer> {
         tgt.setPort(Integer.parseInt(props.getProperty("anonymizer.target.port", Integer.toString(src.getPort()))));
         String tSchemas = props.getProperty("anonymizer.target.schemas", "");
         if (!tSchemas.isBlank()) {
-            tgt.setSchemas(java.util.Arrays.asList(tSchemas.split("\s*,\s*")));
+            tgt.setSchemas(commaSepToList(tSchemas));
         } else {
             tgt.setSchemas(src.getSchemas());
         }
@@ -492,11 +494,11 @@ public class RunCommand implements Callable<Integer> {
         safety.setEnabled(Boolean.parseBoolean(props.getProperty("anonymizer.safety.enabled", "true")));
         String allow = props.getProperty("anonymizer.safety.allowedHosts", "");
         if (!allow.isBlank()) {
-            safety.setAllowedHosts(java.util.Arrays.asList(allow.split("\s*,\s*")));
+            safety.setAllowedHosts(commaSepToList(allow));
         }
         String denied = props.getProperty("anonymizer.safety.deniedPatterns", "");
         if (!denied.isBlank()) {
-            safety.setDeniedPatterns(java.util.Arrays.asList(denied.split("\s*,\s*")));
+            safety.setDeniedPatterns(commaSepToList(denied));
         }
         safety.setRequireExplicitApproval(Boolean.parseBoolean(props.getProperty("anonymizer.safety.requireExplicitApproval", "false")));
         safety.setApprovalFlag(props.getProperty("anonymizer.safety.approvalFlag", ""));
