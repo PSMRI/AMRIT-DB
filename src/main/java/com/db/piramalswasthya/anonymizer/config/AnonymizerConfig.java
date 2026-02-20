@@ -51,6 +51,15 @@ public class AnonymizerConfig {
         private boolean readOnly = true;
         private int connectionTimeout = 30000;
         private boolean verifyServerCertificate = true; // Secure default for production
+        
+        // Explicit accessors to avoid relying solely on Lombok during compilation
+        public int getPort() {
+            return port;
+        }
+
+        public void setPort(int port) {
+            this.port = port;
+        }
     }
     
     @Data

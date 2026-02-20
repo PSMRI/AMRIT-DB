@@ -50,50 +50,26 @@ The AMRIT Database Anonymization Tool streams data from a production read replic
 
 ## Architecture
 
-```
-┌──────────────────────────────────────┐
-│ DB1 (Read Replica - Production)      │
-│ Schemas:                             │
-│  - db_iemr                           │  ← Read-only connection
-│  - db_identity                       │     TLS/SSL enforced
-│  - db_reporting                      │
-│  - db_1097_identity                  │
-└────────┬─────────────────────────────┘
-         │ Keyset Pagination
-         │ SELECT * FROM table WHERE pk > ? ORDER BY pk LIMIT 1000
-         │
-         │
-         ▼
-┌─────────────────────────────────────────────┐
-│  Java CLI Tool (amrit-db-anonymize)         │
-│  For each schema:                           │
-│    1. Reset target schema (DROP/CREATE)     │
-│    2. Clone table structures from source    │
-│    3. For each table:                       │
-│       - Stream with keyset pagination       │
-│       - Apply HMAC anonymization            │
-│       - Batch INSERT into target            │
-│  - Safety Guard (allowlist check)           │
-│  - HMAC Anonymizer (deterministic)          │
-│  - Streaming processor (batched)            │
-│  - PII-safe logger                          │
-└────────┬────────────────────────────────────┘
-         │
-         │
-         ▼
-┌──────────────────────────────────────┐
-│ DB2 (UAT Database)                   │
-│ Schemas:                             │
-│  - db_iemr        (anonymized)       │
-│  - db_identity    (anonymized)       │
-│  - db_reporting   (anonymized)       │
-│  - db_1097_identity (anonymized)     │
-└──────────────────────────────────────┘
-         │
-         │
-         ▼
-   run-report.json
-   (PII-safe metrics)
+```mermaid
+flowchart LR
+  subgraph Source[DB1: Read Replica]
+    S1[(db_iemr<br/>db_identity<br/>db_reporting<br/>db_1097_identity)]
+  end
+
+  subgraph CLI[amrit-db-anonymize]
+    C1[Keyset Pagination\nHMAC Anonymizer\nClone & Reset Schema]
+  end
+
+  subgraph Target[DB2: UAT]
+    T1[(db_iemr<br/>db_identity<br/>db_reporting<br/>db_1097_identity)]
+  end
+
+  S1 -->|stream rows (keyset)| C1
+  C1 -->|write anonymized rows| T1
+  C1 -->|write metrics| R[run-report.json]
+
+  classDef dbs fill:#f9f,stroke:#333,stroke-width:1px;
+  class Source,Target dbs;
 ```
 
 ### Design Principles
@@ -149,55 +125,46 @@ mvn clean package -DENV_VAR=local -DskipTests
 ```bash
 # View available commands
 mvn exec:java "-Dexec.args=--help"
+```
 
-# Should show:
-# Usage: amrit-db-anonymize [-hV] [COMMAND]
-# Commands:
-#   run          Execute multi-schema anonymization
-#   diff-schema  Compare DB schema to rules.yaml
+```bash
+#expected output:
+
+Usage: amrit-db-anonymize [-hV] [COMMAND]
+AMRIT Database Anonymization Tool - Production-safe DB anonymization with
+streaming
+  -h, --help      Show this help message and exit.
+  -V, --version   Print version information and exit.
+Commands:
+  run          Execute multi-schema anonymization: DB1 replica ? DB2 UAT
+                 (direct restore)
+  diff-schema  Compare DB schema to rules.yaml and suggest updates
 ```
 
 ### 3. Create Configuration
 
-Create `config.yaml` (copy from `config.yaml.example`):
-```yaml
-source:
-  host: db-replica.prod.example.com
-  port: 3306
-  schemas:
-    - db_iemr
-    - db_identity
-    - db_reporting
-    - db_1097_identity
-  username: readonly_user
-  password: ${DB_READ_PASSWORD}
-  readOnly: true
+This project uses Spring `.properties` files and environment variables for configuration.
 
-target:
-  host: uat-db.example.com
-  port: 3306
-  schemas:
-    - db_iemr
-    - db_identity
-    - db_reporting
-    - db_1097_identity
-  username: write_user
-  password: ${DB_WRITE_PASSWORD}
+- Copy the `anonymizer.*` block from [src/main/environment/common_example.properties](src/main/environment/common_example.properties#L1-L200)
+  into [src/main/environment/common_local.properties](src/main/environment/common_local.properties) (this file is gitignored) and update values.
+- Required runtime secrets should be supplied via environment variables (for example `HMAC_SECRET_KEY`).
 
-safety:
-  enabled: true
-  allowedHosts:
-    - db-replica.prod.example.com
-  requireExplicitApproval: true
-  approvalFlag: PROD_2025_FEB
+Example (what to copy into `common_local.properties`):
 
-performance:
-  batchSize: 1000
-  fetchSize: 1000
-
-rulesFile: rules.yaml
-loggingPath: ./logs
 ```
+# anonymizer.source.host=localhost
+# anonymizer.source.port=3306
+# anonymizer.source.schemas=dbiemr,db_identity,db_reporting,db_1097_identity
+# anonymizer.source.username=root
+# anonymizer.source.password=...
+# anonymizer.target.host=localhost
+# anonymizer.target.username=root
+# anonymizer.target.password=...
+# anonymizer.hmacSecretKey=${HMAC_SECRET_KEY}
+# anonymizer.safety.operationId=OPERATION_2026_02_20
+```
+
+The CLI will automatically use the `anonymizer.*` keys from Spring properties when a YAML config is not supplied.
 
 ### 4. Set Environment Variables
 
@@ -215,12 +182,14 @@ export HMAC_SECRET_KEY="$(openssl rand -hex 32)"
 
 ### 5. Run Anonymization
 
+Use the `anonymizer.*` properties or environment variables; do not use YAML.
+
 ```bash
 # Dry run (validation only)
-mvn exec:java "-Dexec.args=run --config config.yaml --approve PROD_REFRESH_2026_FEB --dry-run"
+mvn exec:java "-Dexec.args=run --operation-id PROD_REFRESH_2026_FEB --dry-run"
 
 # Actual execution
-mvn exec:java "-Dexec.args=run --config config.yaml --approve PROD_REFRESH_2026_FEB"
+mvn exec:java "-Dexec.args=run --operation-id PROD_REFRESH_2026_FEB"
 ```
 
 Output:
@@ -272,13 +241,29 @@ Check `run-report.json`:
 
 ### Configuration File Format
 
-The tool uses YAML configuration files. Store them in `src/main/environment/`:
+The tool supports two configuration approaches: the original YAML `config.yaml` and a
+`properties`-based fallback that loads `anonymizer.*` keys from the Spring environment.
+
+YAML files (optional): store them in `src/main/environment/`:
 
 - `anonymization_example.yaml` - Base template
 - `anonymization_local.yaml` - Local development (gitignored)
 - `anonymization_docker.yaml` - Docker environment (gitignored)
 - `anonymization_production.yaml` - Production (gitignored)
 - `anonymization_ci.yaml` - CI/CD pipelines (gitignored)
+
+Properties-based configuration (recommended for local/dev):
+
+- You can provide anonymizer configuration via Spring `.properties` files using keys
+  prefixed with `anonymizer.` (for example `anonymizer.source.host`,
+  `anonymizer.target.username`, `anonymizer.hmacSecretKey`).
+- An example set of keys is available in [src/main/environment/common_example.properties](src/main/environment/common_example.properties#L1-L120).
+- To use locally, copy the `anonymizer.*` block from the example into
+  [src/main/environment/common_local.properties](src/main/environment/common_local.properties) (gitignored) and update values,
+  especially `anonymizer.hmacSecretKey` which should be set to a secure value or
+  supplied via the environment variable `HMAC_SECRET_KEY`.
+- The CLI will automatically fall back to these properties when a YAML config is
+  not provided with `--config`.
 
 ### Complete Configuration Reference
 
@@ -428,8 +413,7 @@ mvn exec:java "-Dexec.args=diff-schema --help"
 Anonymize and restore database from source to target.
 
 **Required Options:**
-- `--config FILE` - Configuration YAML file
-- `--approve TOKEN` - Approval token matching safety.approvalFlag in config
+- `--operation-id ID` - Operation identifier (recommended; can also be set via `anonymizer.safety.operationId` in properties)
 
 **Optional Options:**
 - `--dry-run` - Validate configuration without executing
@@ -437,11 +421,11 @@ Anonymize and restore database from source to target.
 **Examples:**
 
 ```bash
-# Normal execution
-mvn exec:java "-Dexec.args=run --config config.yaml --approve PROD_REFRESH_2026_FEB"
+# Normal execution (uses anonymizer.* properties from Spring environment)
+mvn exec:java "-Dexec.args=run --operation-id OPERATION_2026_02_20"
 
 # Dry run (validation only)
-mvn exec:java "-Dexec.args=run --config config.yaml --approve PROD_REFRESH_2026_FEB --dry-run"
+mvn exec:java "-Dexec.args=run --operation-id OPERATION_2026_02_20 --dry-run"
 ```
 
 **Exit Codes:**
@@ -453,18 +437,17 @@ mvn exec:java "-Dexec.args=run --config config.yaml --approve PROD_REFRESH_2026_
 Compare database schemas with rules.yaml to detect schema drift.
 
 **Options:**
-- `-c, --config FILE` - Configuration YAML file
-- `-r, --rules FILE` - Rules YAML file (default: rules.yaml)
+- `-r, --rules FILE` - Rules file (default: rules.yaml)
 - `-o, --output FILE` - Write suggested rules to file (optional)
 
 **Examples:**
 
 ```bash
-# Compare schema with rules
-mvn exec:java "-Dexec.args=diff-schema --config config.yaml --rules rules.yaml"
+# Compare schema with rules (uses anonymizer.* properties from Spring environment)
+mvn exec:java "-Dexec.args=diff-schema --rules rules.yaml"
 
 # Generate suggested rules for new columns
-mvn exec:java "-Dexec.args=diff-schema --config config.yaml --rules rules.yaml --output suggested-rules.yaml"
+mvn exec:java "-Dexec.args=diff-schema --rules rules.yaml --output suggested-rules.yaml"
 ```
 
 ### Exit Codes
@@ -574,7 +557,7 @@ Enable detailed logging:
 export LOGGING_LEVEL=DEBUG
 
 # Run with debug logging
-mvn exec:java "-Dexec.args=run --config config.yaml --approve TOKEN"
+mvn exec:java "-Dexec.args=run --operation-id TOKEN"
 ```
 
 **Log Output (PII-Safe):**
@@ -636,11 +619,11 @@ git commit -m "Add rules for new columns in Q1-2026 schema"
 **A:** Yes, but use separate config files:
 
 ```bash
-# Terminal 1: db_iemr
-mvn exec:java "-Dexec.args=run --config config-iemr.yaml --approve TOKEN"
+# Terminal 1: db_iemr (properties point to db_iemr)
+mvn exec:java "-Dexec.args=run --operation-id OP_IEMR_2026_02_20"
 
-# Terminal 2: db_identity
-mvn exec:java "-Dexec.args=run --config config-identity.yaml --approve TOKEN"
+# Terminal 2: db_identity (properties point to db_identity)
+mvn exec:java "-Dexec.args=run --operation-id OP_IDENTITY_2026_02_20"
 ```
 
 ### Q3: How long does anonymization take?
@@ -745,25 +728,25 @@ SELECT BenRegID, FirstName, PhoneNo FROM m_beneficiaryregidmapping LIMIT 10;
    ```
 
 3. **Version Control Your Rules**
-   ```bash
-   git add rules.yaml config.yaml
-   git commit -m "Update rules for Q1-2026 schema"
-   git tag anonymization-rules-2026-Q1
-   ```
+  ```bash
+  git add rules.yaml
+  git commit -m "Update rules for Q1-2026 schema"
+  git tag anonymization-rules-2026-Q1
+  ```
 
 4. **Run Diff-Schema Weekly**
    ```bash
    # Cron job: Every Monday 6 AM (Linux)
-   0 6 * * 1 cd /path/to/AMRIT-DB && mvn exec:java "-Dexec.args=diff-schema --config config.yaml"
+  0 6 * * 1 cd /path/to/AMRIT-DB && mvn exec:java "-Dexec.args=diff-schema"
    ```
 
 5. **Test on Staging First**
    ```bash
-   # Staging config (smaller dataset)
-   mvn exec:java "-Dexec.args=run --config config-staging.yaml --approve TOKEN"
+  # Staging run (smaller dataset)
+  mvn exec:java "-Dexec.args=run --operation-id STAGING_RUN_2026"
    
-   # If successful, run production config
-   mvn exec:java "-Dexec.args=run --config config-prod.yaml --approve TOKEN"
+  # If successful, run production (ensure anonymizer.safety.operationId and secrets are set)
+  mvn exec:java "-Dexec.args=run --operation-id PRODUCTION_RUN_2026"
    ```
 
 6. **Monitor Execution**
@@ -808,13 +791,13 @@ See [architecture diagram.png](architecture%20diagram.png)
 mvn exec:java "-Dexec.args=--help"
 
 # Run anonymization
-mvn exec:java "-Dexec.args=run --config config.yaml --approve TOKEN"
+mvn exec:java "-Dexec.args=run --operation-id TOKEN"
 
 # Dry run (validation)
-mvn exec:java "-Dexec.args=run --config config.yaml --approve TOKEN --dry-run"
+mvn exec:java "-Dexec.args=run --operation-id TOKEN --dry-run"
 
 # Compare schema
-mvn exec:java "-Dexec.args=diff-schema --config config.yaml --rules rules.yaml"
+mvn exec:java "-Dexec.args=diff-schema --rules rules.yaml"
 
 # Get help for specific command
 mvn exec:java "-Dexec.args=run --help"
@@ -826,6 +809,6 @@ mvn exec:java "-Dexec.args=diff-schema --help"
 - Multi-schema processing (db_iemr, db_identity, db_reporting, db_1097_identity)
 - HMAC-SHA256 deterministic anonymization
 - Keyset pagination for efficient large-dataset processing
-- Production safety guards (allowlist, approval tokens)
+- Production safety guards (allowlist, operation identifier)
 - PII-safe logging (only metrics, no sensitive data)
 

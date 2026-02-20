@@ -59,6 +59,8 @@ import java.util.concurrent.Callable;
  * 
  * Processes all schemas in config (db_iemr, db_identity, db_reporting, db_1097_identity).
  * No SQL dump mode - direct restore only for simplicity and performance.
+ * Uses the same connection logic for source and target, but with different credentials and safety checks.
+ * Using .properties files for config is supported to avoid excess addition of files, relying on anonymizer.* namespace.
  */
 @Command(
     name = "run",
@@ -102,6 +104,25 @@ public class RunCommand implements Callable<Integer> {
         try {
             // 1. Load configuration and rules
             log.info("Loading configuration...");
+            // If default config file not present, try common properties paths used in repo
+            java.io.File cfgFile = new java.io.File(configFile);
+            if ((!cfgFile.exists() || cfgFile.isDirectory()) && "config.yaml".equals(configFile)) {
+                String[] candidates = new String[] {
+                    "src/main/environment/common_local.properties",
+                    "src/main/environment/common_example.properties",
+                    "src/main/environment/common_docker.properties",
+                    "src/main/resources/application-analyzer.properties"
+                };
+                for (String c : candidates) {
+                    java.io.File f = new java.io.File(c);
+                    if (f.exists() && f.isFile()) {
+                        log.info("Falling back to properties config: {}", c);
+                        configFile = c;
+                        break;
+                    }
+                }
+            }
+
             config = loadConfig(configFile);
             AnonymizationRules rules = loadRules(config.getRulesFile());
             
@@ -409,7 +430,89 @@ public class RunCommand implements Callable<Integer> {
      * Load configuration from YAML
      */
     private AnonymizerConfig loadConfig(String path) throws IOException {
+        if (path == null) {
+            throw new IllegalArgumentException("Config path cannot be null");
+        }
+
+        if (path.endsWith(".properties") || path.endsWith(".env")) {
+            java.util.Properties props = new java.util.Properties();
+            try (java.io.FileInputStream in = new java.io.FileInputStream(path)) {
+                props.load(in);
+            }
+            return loadConfigFromProperties(props);
+        }
+
+        // Default: YAML
         return YAML_MAPPER.readValue(new File(path), AnonymizerConfig.class);
+    }
+
+    /**
+     * Map properties to AnonymizerConfig using anonymizer.* namespace.
+     * Expected keys (examples):
+     *  anonymizer.source.host=localhost
+     *  anonymizer.source.port=3306
+     *  anonymizer.source.schemas=dbiemr,db_identity
+     */
+    private AnonymizerConfig loadConfigFromProperties(java.util.Properties props) {
+        AnonymizerConfig cfg = new AnonymizerConfig();
+
+        AnonymizerConfig.DatabaseConfig src = new AnonymizerConfig.DatabaseConfig();
+        src.setHost(props.getProperty("anonymizer.source.host", "localhost"));
+        src.setPort(Integer.parseInt(props.getProperty("anonymizer.source.port", "3306")));
+        String sSchemas = props.getProperty("anonymizer.source.schemas", "");
+        if (!sSchemas.isBlank()) {
+            src.setSchemas(java.util.Arrays.asList(sSchemas.split("\s*,\s*")));
+        }
+        src.setUsername(props.getProperty("anonymizer.source.username", "root"));
+        src.setPassword(props.getProperty("anonymizer.source.password", ""));
+        src.setReadOnly(Boolean.parseBoolean(props.getProperty("anonymizer.source.readOnly", "true")));
+        src.setConnectionTimeout(Integer.parseInt(props.getProperty("anonymizer.source.connectionTimeout", "30000")));
+        src.setVerifyServerCertificate(Boolean.parseBoolean(props.getProperty("anonymizer.source.verifyServerCertificate", "true")));
+
+        AnonymizerConfig.DatabaseConfig tgt = new AnonymizerConfig.DatabaseConfig();
+        tgt.setHost(props.getProperty("anonymizer.target.host", src.getHost()));
+        tgt.setPort(Integer.parseInt(props.getProperty("anonymizer.target.port", Integer.toString(src.getPort()))));
+        String tSchemas = props.getProperty("anonymizer.target.schemas", "");
+        if (!tSchemas.isBlank()) {
+            tgt.setSchemas(java.util.Arrays.asList(tSchemas.split("\s*,\s*")));
+        } else {
+            tgt.setSchemas(src.getSchemas());
+        }
+        tgt.setUsername(props.getProperty("anonymizer.target.username", src.getUsername()));
+        tgt.setPassword(props.getProperty("anonymizer.target.password", src.getPassword()));
+        tgt.setReadOnly(Boolean.parseBoolean(props.getProperty("anonymizer.target.readOnly", "false")));
+        tgt.setConnectionTimeout(Integer.parseInt(props.getProperty("anonymizer.target.connectionTimeout", Integer.toString(src.getConnectionTimeout()))));
+        tgt.setVerifyServerCertificate(Boolean.parseBoolean(props.getProperty("anonymizer.target.verifyServerCertificate", "true")));
+
+        cfg.setSource(src);
+        cfg.setTarget(tgt);
+
+        // Safety
+        AnonymizerConfig.SafetyConfig safety = new AnonymizerConfig.SafetyConfig();
+        safety.setEnabled(Boolean.parseBoolean(props.getProperty("anonymizer.safety.enabled", "true")));
+        String allow = props.getProperty("anonymizer.safety.allowedHosts", "");
+        if (!allow.isBlank()) {
+            safety.setAllowedHosts(java.util.Arrays.asList(allow.split("\s*,\s*")));
+        }
+        String denied = props.getProperty("anonymizer.safety.deniedPatterns", "");
+        if (!denied.isBlank()) {
+            safety.setDeniedPatterns(java.util.Arrays.asList(denied.split("\s*,\s*")));
+        }
+        safety.setRequireExplicitApproval(Boolean.parseBoolean(props.getProperty("anonymizer.safety.requireExplicitApproval", "false")));
+        safety.setApprovalFlag(props.getProperty("anonymizer.safety.approvalFlag", ""));
+        cfg.setSafety(safety);
+
+        // Performance
+        AnonymizerConfig.PerformanceConfig perf = new AnonymizerConfig.PerformanceConfig();
+        perf.setBatchSize(Integer.parseInt(props.getProperty("anonymizer.performance.batchSize", "1000")));
+        perf.setFetchSize(Integer.parseInt(props.getProperty("anonymizer.performance.fetchSize", "1000")));
+        perf.setMaxMemoryMb(Integer.parseInt(props.getProperty("anonymizer.performance.maxMemoryMb", "512")));
+        cfg.setPerformance(perf);
+
+        cfg.setRulesFile(props.getProperty("anonymizer.rulesFile", "rules.yaml"));
+        cfg.setLoggingPath(props.getProperty("anonymizer.loggingPath", "./logs"));
+
+        return cfg;
     }
     
     /**
