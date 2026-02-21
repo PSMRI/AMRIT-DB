@@ -1,0 +1,237 @@
+# AMRIT Anonymization Rules (Source of Truth)
+# Matches AnonymizationRules Java model structure
+#
+# Strategies:
+#   HASH_SHA256        - One-way hash (deterministic, linkable)
+#   HMAC_HASH          - HMAC-based one-way hash (deterministic, keyed)
+#   RANDOM_FAKE_DATA   - Realistic fake data using java-faker
+#   PARTIAL_MASK       - Mask characters (show last N digits)
+#   GENERALIZE         - Category/range reduction
+#   SUPPRESS           - Replace with NULL
+#   PRESERVE           - Keep original value
+
+version: "1.0.0"
+lastUpdated: "2026-02-15T12:00:00Z"
+schemaVersion: "V6"
+toolVersion: "1.0.0"
+piiRiskThreshold: "MEDIUM"
+
+databases:
+  db_identity:
+    schemaHash: "placeholder_hash_identity"
+    tables:
+      m_beneficiaryregidmapping:
+        canonicalName: "m_beneficiaryregidmapping"
+        columns:
+          BenRegID:
+            canonicalName: "BenRegID"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "HASH_SHA256"
+          BeneficiaryID:
+            canonicalName: "BeneficiaryID"
+            dataType: "BIGINT"
+            nullable: false
+            strategy: "HMAC_HASH"
+          FirstName:
+            canonicalName: "FirstName"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "RANDOM_FAKE_DATA"
+          LastName:
+            canonicalName: "LastName"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "RANDOM_FAKE_DATA"
+          PhoneNo:
+            canonicalName: "PhoneNo"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PARTIAL_MASK"
+          AadhaarNo:
+            canonicalName: "AadhaarNo"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "HMAC_HASH"
+          EmailID:
+            canonicalName: "EmailID"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "SUPPRESS"
+          Address:
+            canonicalName: "Address"
+            dataType: "TEXT"
+            nullable: true
+            strategy: "GENERALIZE"
+          DateOfBirth:
+            canonicalName: "DateOfBirth"
+            dataType: "DATE"
+            nullable: true
+            strategy: "GENERALIZE"
+          Gender:
+            canonicalName: "Gender"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PRESERVE"
+      
+      m_user:
+        canonicalName: "m_user"
+        columns:
+          UserID:
+            canonicalName: "UserID"
+            dataType: "INT"
+            nullable: false
+            strategy: "HMAC_HASH"
+          UserName:
+            canonicalName: "UserName"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "RANDOM_FAKE_DATA"
+          Password:
+            canonicalName: "Password"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "HMAC_HASH"
+          EmailID:
+            canonicalName: "EmailID"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "SUPPRESS"
+          PhoneNo:
+            canonicalName: "PhoneNo"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PARTIAL_MASK"
+  
+  db_1097_identity:
+    schemaHash: "placeholder_hash_1097"
+    tables:
+      t_bendemographics:
+        canonicalName: "t_bendemographics"
+        columns:
+          BeneficiaryRegID:
+            canonicalName: "BeneficiaryRegID"
+            dataType: "BIGINT"
+            nullable: false
+            strategy: "HMAC_HASH"
+          FirstName:
+            canonicalName: "FirstName"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "RANDOM_FAKE_DATA"
+          LastName:
+            canonicalName: "LastName"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "RANDOM_FAKE_DATA"
+          PhoneNo:
+            canonicalName: "PhoneNo"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PARTIAL_MASK"
+  
+  db_iemr:
+    schemaHash: "placeholder_hash_iemr"
+    tables:
+      t_benmedhistory:
+        canonicalName: "t_benmedhistory"
+        columns:
+          BeneficiaryRegID:
+            canonicalName: "BeneficiaryRegID"
+            dataType: "BIGINT"
+            nullable: false
+            strategy: "HMAC_HASH"
+          ChiefComplaint:
+            canonicalName: "ChiefComplaint"
+            dataType: "TEXT"
+            nullable: true
+            strategy: "SUPPRESS"
+          PresentIllness:
+            canonicalName: "PresentIllness"
+            dataType: "TEXT"
+            nullable: true
+            strategy: "SUPPRESS"
+          Diagnosis:
+            canonicalName: "Diagnosis"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "GENERALIZE"
+      
+      t_prescription:
+        canonicalName: "t_prescription"
+        columns:
+          BeneficiaryRegID:
+            canonicalName: "BeneficiaryRegID"
+            dataType: "BIGINT"
+            nullable: false
+            strategy: "HMAC_HASH"
+          DrugName:
+            canonicalName: "DrugName"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "GENERALIZE"
+          DoctorName:
+            canonicalName: "DoctorName"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "HASH_SHA256"
+      
+      t_lab_test_result:
+        canonicalName: "t_lab_test_result"
+        columns:
+          BeneficiaryRegID:
+            canonicalName: "BeneficiaryRegID"
+            dataType: "BIGINT"
+            nullable: false
+            strategy: "HMAC_HASH"
+          TestResult:
+            canonicalName: "TestResult"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "GENERALIZE"
+          LabTechnicianName:
+            canonicalName: "LabTechnicianName"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "HASH_SHA256"
+  
+  db_reporting:
+    schemaHash: "placeholder_hash_reporting"
+    tables:
+      fact_beneficiary:
+        canonicalName: "fact_beneficiary"
+        columns:
+          BenRegID:
+            canonicalName: "BenRegID"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "HASH_SHA256"
+          BeneficiaryName:
+            canonicalName: "BeneficiaryName"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "RANDOM_FAKE_DATA"
+          AgeGroup:
+            canonicalName: "AgeGroup"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PRESERVE"
+          Gender:
+            canonicalName: "Gender"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PRESERVE"
+      
+      fact_consultation:
+        canonicalName: "fact_consultation"
+        columns:
+          BenRegID:
+            canonicalName: "BenRegID"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "HASH_SHA256"
+          ConsultationNotes:
+            canonicalName: "ConsultationNotes"
+            dataType: "TEXT"
+            nullable: true
+            strategy: "SUPPRESS"

@@ -10,11 +10,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FlywayConfig {
 	 @Bean
-	    public Flyway flywayDbiemr(@Qualifier("dbiemrDataSource") DataSource dataSource) {
+	    public Flyway flywaydbiemr(@Qualifier("dbiemrDataSource") DataSource dataSource) {
 	        return Flyway.configure()
 	                .dataSource(dataSource)
 	                .locations("classpath:db/migration/dbiemr")
-	                .baselineOnMigrate(true)
+				.baselineOnMigrate(true)
+				.validateOnMigrate(false)
 	                .load();
 	    }
 
@@ -23,7 +24,8 @@ public class FlywayConfig {
 	        return Flyway.configure()
 	                .dataSource(dataSource)
 	                .locations("classpath:db/migration/dbidentity")
-	                .baselineOnMigrate(true)
+					.baselineOnMigrate(true)
+					.validateOnMigrate(false)
 	                .load();
 	    }
 
@@ -32,7 +34,8 @@ public class FlywayConfig {
 	        return Flyway.configure()
 	                .dataSource(dataSource)
 	                .locations("classpath:db/migration/dbreporting")
-	                .baselineOnMigrate(true)
+					.baselineOnMigrate(true)
+					.validateOnMigrate(false)
 	                .load();
 	    }
 
@@ -41,7 +44,8 @@ public class FlywayConfig {
 	        return Flyway.configure()
 	                .dataSource(dataSource)
 	                .locations("classpath:db/migration/db1097identity")
-	                .baselineOnMigrate(true)
+					.baselineOnMigrate(true)
+					.validateOnMigrate(false)
 	                .load();
 	    }
 
