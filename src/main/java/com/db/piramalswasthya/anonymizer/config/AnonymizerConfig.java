@@ -50,16 +50,7 @@ public class AnonymizerConfig {
         private String password;
         private boolean readOnly = true;
         private int connectionTimeout = 30000;
-        private boolean verifyServerCertificate = true; // Secure default for production
-        
-        // Explicit accessors to avoid relying solely on Lombok during compilation
-        public int getPort() {
-            return port;
-        }
-
-        public void setPort(int port) {
-            this.port = port;
-        }
+        private boolean verifyServerCertificate = true;
     }
     
     @Data
@@ -69,46 +60,6 @@ public class AnonymizerConfig {
         private List<String> deniedPatterns;
         private boolean requireExplicitApproval;
         private String approvalFlag;
-        
-        public boolean isEnabled() {
-            return enabled;
-        }
-        
-        public void setEnabled(boolean enabled) {
-            this.enabled = enabled;
-        }
-        
-        public List<String> getAllowedHosts() {
-            return allowedHosts;
-        }
-        
-        public void setAllowedHosts(List<String> allowedHosts) {
-            this.allowedHosts = allowedHosts;
-        }
-        
-        public List<String> getDeniedPatterns() {
-            return deniedPatterns;
-        }
-        
-        public void setDeniedPatterns(List<String> deniedPatterns) {
-            this.deniedPatterns = deniedPatterns;
-        }
-        
-        public boolean isRequireExplicitApproval() {
-            return requireExplicitApproval;
-        }
-        
-        public void setRequireExplicitApproval(boolean requireExplicitApproval) {
-            this.requireExplicitApproval = requireExplicitApproval;
-        }
-        
-        public String getApprovalFlag() {
-            return approvalFlag;
-        }
-        
-        public void setApprovalFlag(String approvalFlag) {
-            this.approvalFlag = approvalFlag;
-        }
     }
     
     @Data
@@ -118,19 +69,4 @@ public class AnonymizerConfig {
         private int maxMemoryMb = 512;
     }
 
-    public DatabaseConfig getSource() {
-        return source;
-    }
-
-    public void setSource(DatabaseConfig source) {
-        this.source = source;
-    }
-
-    public DatabaseConfig getTarget() {  // Add this getter if missing
-        return target;
-    }
-
-    public void setTarget(DatabaseConfig target) {  // Add this setter if missing
-        this.target = target;
-    }
 }

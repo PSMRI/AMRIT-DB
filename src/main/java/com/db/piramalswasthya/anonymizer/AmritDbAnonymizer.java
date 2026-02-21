@@ -24,8 +24,7 @@ package com.db.piramalswasthya.anonymizer;
 import com.db.piramalswasthya.anonymizer.cli.*;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * AMRIT Database Anonymization Tool - Main Entry Point
@@ -52,9 +51,8 @@ import org.slf4j.LoggerFactory;
         DiffSchemaCommand.class
     }
 )
+@Slf4j
 public class AmritDbAnonymizer implements Runnable {
-
-    private static final Logger log = LoggerFactory.getLogger(AmritDbAnonymizer.class);
 
     @Override
     public void run() {

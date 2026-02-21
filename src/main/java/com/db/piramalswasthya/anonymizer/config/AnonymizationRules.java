@@ -26,9 +26,10 @@ import lombok.Data;
 import java.util.Map;
 
 /**
- * Anonymization rules (loaded from rules.yaml)
+ * Anonymization rules
  * 
- * Defines which columns to anonymize and how, with version tracking and schema hints.
+ * Defines which columns to anonymize and how
+ * with version tracking and schema hints.
  */
 @Data
 public class AnonymizationRules {

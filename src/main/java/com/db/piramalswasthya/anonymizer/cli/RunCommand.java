@@ -22,24 +22,6 @@
 
 package com.db.piramalswasthya.anonymizer.cli;
 
-import com.db.piramalswasthya.anonymizer.config.AnonymizerConfig;
-import com.db.piramalswasthya.anonymizer.config.AnonymizationRules;
-import com.db.piramalswasthya.anonymizer.core.AnonymizationEngine;
-import com.db.piramalswasthya.anonymizer.core.HmacAnonymizer;
-import com.db.piramalswasthya.anonymizer.core.KeysetPaginator;
-import com.db.piramalswasthya.anonymizer.core.KeysetPaginator.RowData;
-import com.db.piramalswasthya.anonymizer.output.DirectRestoreWriter;
-import com.db.piramalswasthya.anonymizer.report.RunReport;
-import com.db.piramalswasthya.anonymizer.safety.SafetyGuard;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.mysql.cj.jdbc.MysqlDataSource;
-import picocli.CommandLine.Command;
-import picocli.CommandLine.Option;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.sql.DataSource;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -56,6 +38,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
+import javax.sql.DataSource;
+
+import lombok.extern.slf4j.Slf4j;
+
+import com.db.piramalswasthya.anonymizer.config.AnonymizationRules;
+import com.db.piramalswasthya.anonymizer.config.AnonymizerConfig;
+import com.db.piramalswasthya.anonymizer.core.AnonymizationEngine;
+import com.db.piramalswasthya.anonymizer.core.HmacAnonymizer;
+import com.db.piramalswasthya.anonymizer.core.KeysetPaginator;
+import com.db.piramalswasthya.anonymizer.core.KeysetPaginator.RowData;
+import com.db.piramalswasthya.anonymizer.output.DirectRestoreWriter;
+import com.db.piramalswasthya.anonymizer.report.RunReport;
+import com.db.piramalswasthya.anonymizer.safety.SafetyGuard;
+import com.db.piramalswasthya.anonymizer.util.StringUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.mysql.cj.jdbc.MysqlDataSource;
+
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
+
 /**
  * Main execution command - Multi-schema direct restore: DB1 replica → DB2 UAT
  * 
@@ -64,14 +67,15 @@ import java.util.concurrent.Callable;
  * Uses the same connection logic for source and target, but with different credentials and safety checks.
  * Using .properties files for config is supported to avoid excess addition of files, relying on anonymizer.* namespace.
  */
+
 @Command(
     name = "run",
     description = "Execute multi-schema anonymization: DB1 replica → DB2 UAT (direct restore)",
     mixinStandardHelpOptions = true
 )
+@Slf4j
 public class RunCommand implements Callable<Integer> {
     
-    private static final Logger log = LoggerFactory.getLogger(RunCommand.class);
     private static final String LOGS_DIRECTORY = "./logs";
     private static final String LOG_FORMAT_ERROR_CONTEXT = "{}: {}";
     private static final String STATUS_FAILED = "FAILED";
@@ -186,9 +190,10 @@ public class RunCommand implements Callable<Integer> {
             report.setStatus("SUCCESS");            
         } catch (SQLException e) {
             String errorContext = String.format("Anonymization failed during execution (ID: %s)", executionId);
-            log.error(LOG_FORMAT_ERROR_CONTEXT, errorContext, sanitizeError(e), e);
+            String sanitized = sanitizeError(e);
+            log.error(LOG_FORMAT_ERROR_CONTEXT, errorContext, sanitized, e);
             report.setStatus(STATUS_FAILED);
-            report.setErrorMessage(errorContext + ": " + sanitizeError(e));
+            report.setErrorMessage(errorContext + ": " + sanitized);
             
             report.setEndTime(LocalDateTime.now());
             report.setTotalDurationMs(
@@ -198,9 +203,10 @@ public class RunCommand implements Callable<Integer> {
             return 1;
         } catch (IOException e) {
             String errorContext = String.format("Configuration or file I/O error (ID: %s)", executionId);
-            log.error(LOG_FORMAT_ERROR_CONTEXT, errorContext, e.getMessage(), e);
+            String sanitized = sanitizeError(e);
+            log.error(LOG_FORMAT_ERROR_CONTEXT, errorContext, sanitized, e);
             report.setStatus(STATUS_FAILED);
-            report.setErrorMessage(errorContext + ": " + e.getMessage());
+            report.setErrorMessage(errorContext + ": " + sanitized);
             
             report.setEndTime(LocalDateTime.now());
             report.setTotalDurationMs(
@@ -211,9 +217,10 @@ public class RunCommand implements Callable<Integer> {
         } catch (Exception e) {
             // Fallback handler for all other exceptions (safety, validation, etc.)
             String errorContext = String.format("Unexpected error during execution (ID: %s)", executionId);
-            log.error(LOG_FORMAT_ERROR_CONTEXT, errorContext, e.getMessage(), e);
+            String sanitized = sanitizeError(e);
+            log.error(LOG_FORMAT_ERROR_CONTEXT, errorContext, sanitized, e);
             report.setStatus(STATUS_FAILED);
-            report.setErrorMessage(errorContext + ": " + sanitizeError(e));
+            report.setErrorMessage(errorContext + ": " + sanitized);
             
             report.setEndTime(LocalDateTime.now());
             report.setTotalDurationMs(
@@ -463,7 +470,7 @@ public class RunCommand implements Callable<Integer> {
         src.setPort(Integer.parseInt(props.getProperty("anonymizer.source.port", "3306")));
         String sSchemas = props.getProperty("anonymizer.source.schemas", "");
         if (!sSchemas.isBlank()) {
-            src.setSchemas(commaSepToList(sSchemas));
+            src.setSchemas(StringUtils.commaSepToList(sSchemas));
         }
         src.setUsername(props.getProperty("anonymizer.source.username", "root"));
         src.setPassword(props.getProperty("anonymizer.source.password", ""));
@@ -476,7 +483,7 @@ public class RunCommand implements Callable<Integer> {
         tgt.setPort(Integer.parseInt(props.getProperty("anonymizer.target.port", Integer.toString(src.getPort()))));
         String tSchemas = props.getProperty("anonymizer.target.schemas", "");
         if (!tSchemas.isBlank()) {
-            tgt.setSchemas(commaSepToList(tSchemas));
+            tgt.setSchemas(StringUtils.commaSepToList(tSchemas));
         } else {
             tgt.setSchemas(src.getSchemas());
         }
@@ -494,11 +501,11 @@ public class RunCommand implements Callable<Integer> {
         safety.setEnabled(Boolean.parseBoolean(props.getProperty("anonymizer.safety.enabled", "true")));
         String allow = props.getProperty("anonymizer.safety.allowedHosts", "");
         if (!allow.isBlank()) {
-            safety.setAllowedHosts(commaSepToList(allow));
+            safety.setAllowedHosts(StringUtils.commaSepToList(allow));
         }
         String denied = props.getProperty("anonymizer.safety.deniedPatterns", "");
         if (!denied.isBlank()) {
-            safety.setDeniedPatterns(commaSepToList(denied));
+            safety.setDeniedPatterns(StringUtils.commaSepToList(denied));
         }
         safety.setRequireExplicitApproval(Boolean.parseBoolean(props.getProperty("anonymizer.safety.requireExplicitApproval", "false")));
         safety.setApprovalFlag(props.getProperty("anonymizer.safety.approvalFlag", ""));
@@ -516,9 +523,33 @@ public class RunCommand implements Callable<Integer> {
 
         return cfg;
     }
+
+    /**
+     * Safely split a comma-separated string without using regex to avoid ReDoS.
+     */
+    private static List<String> commaSepToList(String s) {
+        if (s == null) return Collections.emptyList();
+        String trimmed = s.trim();
+        if (trimmed.isEmpty()) return Collections.emptyList();
+        List<String> out = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < trimmed.length(); i++) {
+            char c = trimmed.charAt(i);
+            if (c == ',') {
+                String part = sb.toString().trim();
+                if (!part.isEmpty()) out.add(part);
+                sb.setLength(0);
+            } else {
+                sb.append(c);
+            }
+        }
+        String last = sb.toString().trim();
+        if (!last.isEmpty()) out.add(last);
+        return out;
+    }
     
     /**
-     * Load rules from YAML
+     * Load rules for anonimization
      */
     private AnonymizationRules loadRules(String path) throws IOException {
         return YAML_MAPPER.readValue(new File(path), AnonymizationRules.class);
@@ -592,10 +623,10 @@ public class RunCommand implements Callable<Integer> {
                 java.lang.reflect.Method m = ds.getClass().getMethod("setIntegerRuntimeProperty", String.class, int.class);
                 m.invoke(ds, "socketTimeout", 300000);
             } catch (Exception ex) {
-                log.debug("Connector doesn't support setIntegerRuntimeProperty(socketTimeout) via reflection: {}", ex.getMessage());
+                log.debug("Connector doesn't support setIntegerRuntimeProperty(socketTimeout) via reflection", ex);
             }
         } catch (SQLException e) {
-            log.warn("Failed to set advanced connection properties for {}: {}", dbConfig.getHost(), e.getMessage(), e);
+            log.warn("Failed to set advanced connection properties for {}", dbConfig.getHost(), e);
         }
         
         // Wrap DataSource to apply readOnly setting
@@ -612,10 +643,10 @@ public class RunCommand implements Callable<Integer> {
             byte[] hash = digest.digest(fileBytes);
             return bytesToHex(hash).substring(0, 16); // First 16 chars
         } catch (IOException e) {
-            log.warn("Failed to read file {}: {}", filePath, e.getMessage(), e);
+            log.warn("Failed to read file {}", filePath, e);
             return "unknown";
         } catch (NoSuchAlgorithmException e) {
-            log.warn("SHA-256 algorithm not available: {}", e.getMessage(), e);
+            log.warn("SHA-256 algorithm not available", e);
             return "unknown";
         }
     }
@@ -631,17 +662,30 @@ public class RunCommand implements Callable<Integer> {
     /**
      * Sanitize error message (remove any potential PII)
      */
-    private String sanitizeError(Exception e) {
+    /* package-private for tests */
+    String sanitizeError(Exception e) {
         String message = e.getMessage();
         if (message == null) {
             return e.getClass().getSimpleName();
         }
-        
+
+        // Cap message length to avoid heavy regex processing on enormous inputs
+        final int MAX_LEN = 2000;
+        boolean truncated = false;
+        if (message.length() > MAX_LEN) {
+            message = message.substring(0, MAX_LEN);
+            truncated = true;
+        }
+
         // Remove any potential SQL values or data
         message = message.replaceAll("VALUES\\s*\\([^)]+\\)", "VALUES (...)");
         message = message.replaceAll("'[^']{10,}'", "'...'");
         message = message.replaceAll("\\b\\d{10,}\\b", "###");
-        
+
+        if (truncated) {
+            message = message + " [truncated]";
+        }
+
         return message;
     }
     

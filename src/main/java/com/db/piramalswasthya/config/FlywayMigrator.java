@@ -1,15 +1,14 @@
 package com.db.piramalswasthya.config;
 
 import org.flywaydb.core.Flyway;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
 
 @Component
+@Slf4j
 public class FlywayMigrator {
-	private Logger logger = LoggerFactory.getLogger(FlywayMigrator.class);
 	private final Flyway flywaydbiemr;
     private final Flyway flywayDbidentity;
     private final Flyway flywayDbreporting;
@@ -31,7 +30,7 @@ public class FlywayMigrator {
         flywayDbidentity.migrate();
         flywayDbreporting.migrate();
         flywayDb1097identity.migrate();
-        logger.info("Flyway migration completed successfully");
+        log.info("Flyway migration completed successfully");
         
     }
 }

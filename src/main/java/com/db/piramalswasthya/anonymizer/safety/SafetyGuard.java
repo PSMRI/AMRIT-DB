@@ -23,8 +23,7 @@
 package com.db.piramalswasthya.anonymizer.safety;
 
 import com.db.piramalswasthya.anonymizer.config.AnonymizerConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.regex.Pattern;
 
@@ -36,9 +35,8 @@ import java.util.regex.Pattern;
  *
  * CRITICAL SAFETY LAYER - DO NOT BYPASS WITHOUT EXPLICIT APPROVAL FLAG
  */
+@Slf4j
 public class SafetyGuard {
-
-    private static final Logger log = LoggerFactory.getLogger(SafetyGuard.class);
 
     private final AnonymizerConfig.SafetyConfig config;
     private final java.util.List<Pattern> compiledDeniedPatterns = new java.util.ArrayList<>();

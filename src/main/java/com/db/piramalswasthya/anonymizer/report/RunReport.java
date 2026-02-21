@@ -26,8 +26,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.Data;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,9 +43,8 @@ import java.util.Map;
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Slf4j
 public class RunReport {
-    
-    private static final Logger log = LoggerFactory.getLogger(RunReport.class);
     
     private String executionId;
     private LocalDateTime startTime;

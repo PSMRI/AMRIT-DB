@@ -22,8 +22,7 @@
 
 package com.db.piramalswasthya.anonymizer.core;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -46,9 +45,9 @@ import java.util.regex.Pattern;
  * 
  * Security: All identifiers are validated and quoted to prevent SQL injection.
  */
+@Slf4j
 public class KeysetPaginator {
     
-    private static final Logger log = LoggerFactory.getLogger(KeysetPaginator.class);
     private static final Pattern VALID_IDENTIFIER = Pattern.compile("^\\w+$");
     
     private final DataSource dataSource;

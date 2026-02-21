@@ -29,8 +29,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
 import java.io.File;
@@ -55,9 +54,8 @@ import java.util.concurrent.Callable;
     description = "Compare DB schema to rules.yaml and suggest updates",
     mixinStandardHelpOptions = true
 )
+@Slf4j
 public class DiffSchemaCommand implements Callable<Integer> {
-    
-    private static final Logger log = LoggerFactory.getLogger(DiffSchemaCommand.class);
     
     @Option(names = {"-c", "--config"}, description = "Config file", defaultValue = "config.yaml")
     private String configFile;
@@ -74,12 +72,12 @@ public class DiffSchemaCommand implements Callable<Integer> {
         log.info("Config: {}, Rules: {}", configFile, rulesFile);
         
         try {
-            // 1. Load configuration and rules
+            // Load configuration and rules
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
             AnonymizerConfig config = mapper.readValue(new File(configFile), AnonymizerConfig.class);
             AnonymizationRules rules = mapper.readValue(new File(rulesFile), AnonymizationRules.class);
             
-            // 2. Process each schema
+            // Process each schema
             log.info("Connecting to database: {}", config.getSource().getHost());
             boolean anyDifferences = false;
             Map<String, SchemaDiff> allDiffs = new LinkedHashMap<>();
@@ -87,18 +85,18 @@ public class DiffSchemaCommand implements Callable<Integer> {
             for (String schema : config.getSource().getSchemas()) {
                 log.info("\n=== Processing schema: {} ===", schema);
                 
-                // 3. Create DataSource for this schema
+                // Create DataSource for this schema
                 DataSource dataSource = createDataSource(config.getSource(), schema);
                 
-                // 4. Query schema from INFORMATION_SCHEMA
+                // Query schema from INFORMATION_SCHEMA
                 Map<String, Map<String, ColumnInfo>> dbSchema = extractDatabaseSchema(
                     dataSource, schema);
                 
-                // 5. Compare with rules
+                // Compare with rules
                 SchemaDiff diff = compareSchemas(schema, dbSchema, rules);
                 allDiffs.put(schema, diff);
                 
-                // 6. Report differences for this schema
+                // Report differences for this schema
                 reportDifferences(schema, diff);
                 
                 if (diff.hasDifferences()) {
@@ -106,7 +104,7 @@ public class DiffSchemaCommand implements Callable<Integer> {
                 }
             }
             
-            // 7. Generate suggested rules if output specified
+            // Generate suggested rules if output specified
             if (outputFile != null) {
                 generateSuggestedRules(allDiffs, outputFile);
             }
@@ -258,7 +256,7 @@ public class DiffSchemaCommand implements Callable<Integer> {
     }
     
     /**
-     * Generate suggested rules YAML
+     * Generate suggested rules
      */
     private void generateSuggestedRules(Map<String, SchemaDiff> allDiffs, 
                                        String outputPath) throws Exception {

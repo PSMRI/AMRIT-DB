@@ -22,8 +22,7 @@
 
 package com.db.piramalswasthya.anonymizer.output;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -41,9 +40,8 @@ import java.util.stream.Collectors;
  * Writes anonymized data directly to target database (DB2)
  * Handles schema reset and supports multi-schema operations.
  */
+@Slf4j
 public class DirectRestoreWriter implements AutoCloseable {
-    
-    private static final Logger log = LoggerFactory.getLogger(DirectRestoreWriter.class);
     private static final Pattern VALID_IDENTIFIER = Pattern.compile("^\\w+$");
     
     private final DataSource targetDataSource;
