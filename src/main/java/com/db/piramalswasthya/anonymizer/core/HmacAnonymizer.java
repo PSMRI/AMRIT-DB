@@ -27,6 +27,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.MessageDigest;
 import java.util.HexFormat;
 
 /**
@@ -69,26 +70,20 @@ public class HmacAnonymizer {
             throw new HmacAnonymizerException("Invalid HMAC key material for algorithm: " + HMAC_ALGORITHM, e);
         }
     }
-
     /**
-     * Generate deterministic fake name.
-     *
-     * Uses HMAC to seed a predictable name generator.
+     * Compute a plain SHA-256 hex digest (non-keyed).
+     * This supports the HASH_SHA256 strategy used in the registry.
      */
-    public String fakeName(String originalName) {
-        String hash = hashId(originalName);
-        int h = hash.hashCode();
-        long seed = (h == Integer.MIN_VALUE) ? (Integer.MAX_VALUE + 1L) : Math.abs(h);
-
-        String[] firstNames = {"Amit", "Priya", "Raj", "Anjali", "Vikram", "Neha"};
-        String[] lastNames = {"Kumar", "Sharma", "Singh", "Patel", "Gupta", "Reddy"};
-
-        String firstName = firstNames[(int) (seed % firstNames.length)];
-        String lastName = lastNames[(int) ((seed / 10) % lastNames.length)];
-
-        return firstName + " " + lastName;
+    public String sha256Hash(String input) {
+        if (input == null) return null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] digest = md.digest(input.getBytes(StandardCharsets.UTF_8));
+            return HexFormat.of().formatHex(digest);
+        } catch (NoSuchAlgorithmException e) {
+            throw new HmacAnonymizerException("SHA-256 algorithm not available", e);
+        }
     }
-
     /**
      * Mask phone number - show last 4 digits only.
      */
@@ -110,10 +105,6 @@ public class HmacAnonymizer {
         return date.substring(0, 4);
     }
 }
-
-/**
- * Custom exception for HMAC anonymization failures.
- */
 class HmacAnonymizerException extends RuntimeException {
     HmacAnonymizerException(String message, Throwable cause) {
         super(message, cause);

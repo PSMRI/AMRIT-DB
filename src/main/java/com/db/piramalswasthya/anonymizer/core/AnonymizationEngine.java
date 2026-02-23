@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Locale;
 
 /**
  * Core anonymization engine - applies rules to data.
@@ -40,10 +41,13 @@ public class AnonymizationEngine {
     private final AnonymizationRules rules;
     private final RandomFakeDataAnonymizer faker;
 
-    public AnonymizationEngine(HmacAnonymizer anonymizer, AnonymizationRules rules, RandomFakeDataAnonymizer faker) {
+    /**
+     * Construct engine with an injected `HmacAnonymizer`, rules and faker locale.
+     */
+    public AnonymizationEngine(HmacAnonymizer anonymizer, AnonymizationRules rules, Locale fakerLocale) {
         this.anonymizer = anonymizer;
         this.rules = rules;
-        this.faker = faker;
+        this.faker = new RandomFakeDataAnonymizer(fakerLocale);
     }
 
     /**
@@ -105,26 +109,38 @@ public class AnonymizationEngine {
      * Apply anonymization strategy.
      */
     private Object applyStrategy(String strategy, String column, String value) {
-        return switch (strategy.toUpperCase()) {
-            case "HMAC_HASH" -> anonymizer.hashId(value);
-            case "PRESERVE" -> value;
-            case "RANDOM_FAKE_DATA" -> faker.anonymize(column, value);
-            case "GENERALIZE" -> {
-                // Attempt to generalize dates; fallback to preserving value with a warning
+        String s = strategy == null ? "" : strategy.toUpperCase();
+        switch (s) {
+            case "HMAC_HASH":
+                return anonymizer.hashId(value);
+            case "HASH_SHA256":
+                return anonymizer.sha256Hash(value);
+            case "PRESERVE":
+                return value;
+            case "FAKE_FULLNAME":
+            case "FAKE_FIRSTNAME":
+            case "FAKE_LASTNAME":
+            case "FAKE_EMAIL":
+            case "FAKE_PHONE":
+            case "FAKE_ADDRESS":
+            case "FAKE_CITY":
+            case "FAKE_ZIP":
+            case "FAKE_USERNAME":
+                // fake generation (single shared Faker)
+                return faker.anonymize(strategy, column, value);
+            case "GENERALIZE":
                 if (value.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                    yield anonymizer.generalizeDate(value);
+                    return anonymizer.generalizeDate(value);
                 } else if (value.matches("\\d{2}/\\d{2}/\\d{4}")) {
-                    yield anonymizer.generalizeDate(value.replace('/', '-'));
+                    return anonymizer.generalizeDate(value.replace('/', '-'));
                 } else {
                     log.warn("GENERALIZE strategy applied to non-date value; preserving: {}", value);
-                    yield value;
+                    return value;
                 }
-            }
-            default -> {
+            default:
                 log.warn("Unknown strategy: {} - preserving value", strategy);
-                yield value;
-            }
-        };
+                return value;
+        }
     }
 
     private void handleUnknownColumn(String database, String table, String column) {

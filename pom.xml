@@ -107,15 +107,23 @@
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
         </dependency>
-        <!-- DataFaker for generating realistic fake data -->
+        <!-- JavaFaker for generating realistic fake data -->
         <dependency>
-            <groupId>net.datafaker</groupId>
-            <artifactId>datafaker</artifactId>
-            <version>1.5.0</version>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>1.0.2</version>
         </dependency>
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>anonymizer/**</exclude>
+                </excludes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -132,7 +140,7 @@
                         <name>com.db/amrit-db</name>
                     </image>
                     <!-- Explicit main class for repackaging (useful for WAR packaging) -->
-                    <mainClass>com.db.piramalswasthya.anonymizer.AmritDbAnonymizer</mainClass>
+                    <mainClass>com.db.piramalswasthya.AmritDbApplication</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -140,7 +148,15 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.6.3</version>
                 <configuration>
-                    <mainClass>com.db.piramalswasthya.anonymizer.AmritDbAnonymizer</mainClass>
+                    <mainClass>com.db.piramalswasthya.AmritDbApplication</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <packagingExcludes>WEB-INF/classes/com/db/piramalswasthya/anonymizer/**</packagingExcludes>
                 </configuration>
             </plugin>
             <plugin>
@@ -206,8 +222,8 @@
                                     ${source-properties}
                                 </echo>
                                 <concat destfile="${target-properties}"
-                                                                        append="yes"
-                                                                        force="yes">
+                                        append="yes"
+                                        force="yes">
                                     <fileset file="${source-properties}">
                                     </fileset>
                                 </concat>

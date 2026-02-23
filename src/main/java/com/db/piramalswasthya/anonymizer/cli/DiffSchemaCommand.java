@@ -41,7 +41,7 @@ import java.util.*;
 import java.util.concurrent.Callable;
 
 /**
- * Schema diff command - compares live DB schema to rules.yaml
+ * Schema diff command - compares live DB schema to anonymization-registry.yml
  * 
  * Outputs:
  * - Missing tables in rules
@@ -51,16 +51,16 @@ import java.util.concurrent.Callable;
  */
 @Command(
     name = "diff-schema",
-    description = "Compare DB schema to rules.yaml and suggest updates",
+    description = "Compare DB schema to anonymization-registry.yml and suggest updates",
     mixinStandardHelpOptions = true
 )
 @Slf4j
 public class DiffSchemaCommand implements Callable<Integer> {
     
-    @Option(names = {"-c", "--config"}, description = "Config file", defaultValue = "config.yaml")
+    @Option(names = {"-c", "--config"}, description = "Config file (default: src/main/environment/common_local.properties)", defaultValue = "src/main/environment/common_local.properties")
     private String configFile;
     
-    @Option(names = {"-r", "--rules"}, description = "Rules file", defaultValue = "rules.yaml")
+    @Option(names = {"-r", "--rules"}, description = "Rules file", defaultValue = "anonymization-registry.yml")
     private String rulesFile;
     
     @Option(names = {"-o", "--output"}, description = "Output file for suggested rules (optional)")
@@ -74,7 +74,16 @@ public class DiffSchemaCommand implements Callable<Integer> {
         try {
             // Load configuration and rules
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-            AnonymizerConfig config = mapper.readValue(new File(configFile), AnonymizerConfig.class);
+            AnonymizerConfig config;
+            if (configFile != null && (configFile.endsWith(".properties") || configFile.endsWith(".env"))) {
+                java.util.Properties props = new java.util.Properties();
+                try (java.io.FileInputStream in = new java.io.FileInputStream(configFile)) {
+                    props.load(in);
+                }
+                config = loadConfigFromProperties(props);
+            } else {
+                config = mapper.readValue(new File(configFile), AnonymizerConfig.class);
+            }
             AnonymizationRules rules = mapper.readValue(new File(rulesFile), AnonymizationRules.class);
             
             // Process each schema
@@ -110,7 +119,7 @@ public class DiffSchemaCommand implements Callable<Integer> {
             }
             
             if (anyDifferences) {
-                log.warn("\nSchema differences detected. Review output and update rules.yaml");
+                log.warn("\nSchema differences detected. Review output and update anonymization-registry.yml");
                 return 1;
             } else {
                 log.info("\nNo schema differences detected. Rules are up to date.");
@@ -121,6 +130,61 @@ public class DiffSchemaCommand implements Callable<Integer> {
             log.error("Schema diff failed: {}", e.getMessage(), e);
             return 1;
         }
+    }
+
+    private AnonymizerConfig loadConfigFromProperties(java.util.Properties props) {
+        AnonymizerConfig cfg = new AnonymizerConfig();
+
+        AnonymizerConfig.DatabaseConfig src = new AnonymizerConfig.DatabaseConfig();
+        src.setHost(props.getProperty("anonymizer.source.host", "localhost"));
+        src.setPort(Integer.parseInt(props.getProperty("anonymizer.source.port", "3306")));
+        String sSchemas = props.getProperty("anonymizer.source.schemas", "");
+        if (!sSchemas.isBlank()) {
+            src.setSchemas(java.util.Arrays.asList(sSchemas.split("\\s*,\\s*")));
+        }
+        src.setUsername(props.getProperty("anonymizer.source.username", "root"));
+        src.setPassword(props.getProperty("anonymizer.source.password", ""));
+        src.setReadOnly(Boolean.parseBoolean(props.getProperty("anonymizer.source.readOnly", "true")));
+        src.setConnectionTimeout(Integer.parseInt(props.getProperty("anonymizer.source.connectionTimeout", "30000")));
+        src.setVerifyServerCertificate(Boolean.parseBoolean(props.getProperty("anonymizer.source.verifyServerCertificate", "true")));
+
+        AnonymizerConfig.DatabaseConfig tgt = new AnonymizerConfig.DatabaseConfig();
+        tgt.setHost(props.getProperty("anonymizer.target.host", src.getHost()));
+        tgt.setPort(Integer.parseInt(props.getProperty("anonymizer.target.port", Integer.toString(src.getPort()))));
+        String tSchemas = props.getProperty("anonymizer.target.schemas", "");
+        if (!tSchemas.isBlank()) {
+            tgt.setSchemas(java.util.Arrays.asList(tSchemas.split("\\s*,\\s*")));
+        } else {
+            tgt.setSchemas(src.getSchemas());
+        }
+        tgt.setUsername(props.getProperty("anonymizer.target.username", src.getUsername()));
+        tgt.setPassword(props.getProperty("anonymizer.target.password", src.getPassword()));
+        tgt.setReadOnly(Boolean.parseBoolean(props.getProperty("anonymizer.target.readOnly", "false")));
+        tgt.setConnectionTimeout(Integer.parseInt(props.getProperty("anonymizer.target.connectionTimeout", Integer.toString(src.getConnectionTimeout()))));
+        tgt.setVerifyServerCertificate(Boolean.parseBoolean(props.getProperty("anonymizer.target.verifyServerCertificate", "true")));
+
+        cfg.setSource(src);
+        cfg.setTarget(tgt);
+        cfg.setRulesFile(props.getProperty("anonymizer.rulesFile", "anonymization-registry.yml"));
+        cfg.setLoggingPath(props.getProperty("anonymizer.loggingPath", "./logs"));
+
+        AnonymizerConfig.SafetyConfig safety = new AnonymizerConfig.SafetyConfig();
+        safety.setEnabled(Boolean.parseBoolean(props.getProperty("anonymizer.safety.enabled", "true")));
+        String allow = props.getProperty("anonymizer.safety.allowedHosts", "");
+        if (!allow.isBlank()) {
+            safety.setAllowedHosts(java.util.Arrays.asList(allow.split("\\s*,\\s*")));
+        }
+        safety.setRequireExplicitApproval(Boolean.parseBoolean(props.getProperty("anonymizer.safety.requireExplicitApproval", "false")));
+        safety.setApprovalFlag(props.getProperty("anonymizer.safety.approvalFlag", ""));
+        cfg.setSafety(safety);
+
+        AnonymizerConfig.PerformanceConfig perf = new AnonymizerConfig.PerformanceConfig();
+        perf.setBatchSize(Integer.parseInt(props.getProperty("anonymizer.performance.batchSize", "1000")));
+        perf.setFetchSize(Integer.parseInt(props.getProperty("anonymizer.performance.fetchSize", "1000")));
+        perf.setMaxMemoryMb(Integer.parseInt(props.getProperty("anonymizer.performance.maxMemoryMb", "512")));
+        cfg.setPerformance(perf);
+
+        return cfg;
     }
     
     /**
@@ -263,7 +327,7 @@ public class DiffSchemaCommand implements Callable<Integer> {
         
         StringBuilder yaml = new StringBuilder();
         yaml.append("# Suggested rule additions based on schema diff\n");
-        yaml.append("# Review and merge into rules.yaml\n\n");
+        yaml.append("# Review and merge into anonymization-registry.yml\n\n");
         
         for (Map.Entry<String, SchemaDiff> schemaEntry : allDiffs.entrySet()) {
             String schemaName = schemaEntry.getKey();

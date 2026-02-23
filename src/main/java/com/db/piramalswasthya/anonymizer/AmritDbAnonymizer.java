@@ -60,7 +60,7 @@ public class AmritDbAnonymizer implements Runnable {
         log.info("");
         log.info("Commands:");
         log.info("  run           - Execute anonymization (DB1 → DB2)");
-        log.info("  diff-schema   - Compare DB schema to rules.yaml");
+        log.info("  diff-schema   - Compare DB schema to anonymization-registry.yml");
         log.info("");
         log.info("Use --help with any command for details");
     }

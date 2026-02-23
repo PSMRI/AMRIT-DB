@@ -46,7 +46,7 @@ The AMRIT Database Anonymization Tool streams data from a production read replic
 - Multi-layer safety guards (allowlist, denylist, approval tokens)
 - PII-safe logging (counts and timings only)
 - Schema drift detection (diff-schema command)
-- YAML-based configuration
+- Registry YAML for rules and properties for runtime configuration
 
 ## Architecture
 
@@ -64,89 +64,36 @@ flowchart LR
     T1[(db_iemr<br/>db_identity<br/>db_reporting<br/>db_1097_identity)]
   end
 
-  S1 -->|stream rows (keyset)| C1
-  C1 -->|write anonymized rows| T1
-  C1 -->|write metrics| R[run-report.json]
+  ## Configuration
 
-  classDef dbs fill:#f9f,stroke:#333,stroke-width:1px;
-  class Source,Target dbs;
-```
+  ### Configuration File Format and Precedence
 
-### Design Principles
+  The project uses Spring `.properties` files for runtime configuration and a single registry file for anonymization rules. Follow this precedence and edit the files below when configuring the system:
 
-1. **Direct Restore**: No intermediate SQL dump files
-2. **Multi-Schema**: Processes all 4 AMRIT schemas in single command
-3. **Streaming**: Never loads entire tables into memory
-4. **Keyset Pagination**: WHERE pk > ? ORDER BY pk - O(log n) performance
-5. **Deterministic**: HMAC ensures same input always produces same output
-6. **Safety-First**: Multiple layers of production protection
-7. **PII-Safe**: Logs contain only aggregated metrics
+  - Rules (source of truth): `src/main/resources/anonymizer/anonymization-registry.yml`.
+  - Runtime settings: `src/main/resources/anonymizer/*.properties` or
+    `src/main/environment/common_local.properties` for local overrides (gitignored).
+  - Environment variables override properties for secrets (for example `HMAC_SECRET_KEY`).
 
-## Prerequisites
 
-### Database Permissions
+  Recommended runtime keys (example - copy into `common_local.properties`):
 
-**DB1 (Source) - Read-only user:**
-```sql
-GRANT SELECT ON db_iemr.* TO 'readonly_user'@'%';
-GRANT SELECT ON db_identity.* TO 'readonly_user'@'%';
-GRANT SELECT ON db_reporting.* TO 'readonly_user'@'%';
-GRANT SELECT ON db_1097_identity.* TO 'readonly_user'@'%';
-```
+  ```
+  # anonymizer.source.host=localhost
+  # anonymizer.source.port=3306
+  # anonymizer.source.schemas=db_iemr,db_identity,db_reporting,db_1097_identity
+  # anonymizer.source.username=readonly_user
+  # anonymizer.source.password=...
+  # anonymizer.target.host=localhost
+  # anonymizer.target.username=uat_user
+  # anonymizer.target.password=...
+  # anonymizer.hmacSecretKey=${HMAC_SECRET_KEY}
+  # anonymizer.safety.operationId=OPERATION_2026_02_20
+  ```
 
-**DB2 (Target) - Write user:**
-```sql
-GRANT ALL PRIVILEGES ON db_iemr.* TO 'uat_user'@'%';
-GRANT ALL PRIVILEGES ON db_identity.* TO 'uat_user'@'%';
-GRANT ALL PRIVILEGES ON db_reporting.* TO 'uat_user'@'%';
-GRANT ALL PRIVILEGES ON db_1097_identity.* TO 'uat_user'@'%';
-```
-
-### System Requirements
-
-- Memory: 512MB-2GB RAM (depends on batch size)
-- CPU: 2+ cores recommended
-- Network: Stable connection to both databases
-- Disk: Minimal (no dump files created)
-
-## Quick Start
-
-### 1. Build the Tool
-
-```bash
-cd AMRIT-DB
-mvn clean package -DENV_VAR=local -DskipTests
-
-# Output: target/Amrit-DB-1.0.0.war
-```
-
-### 2. Verify Installation
-
-```bash
-# View available commands
-mvn exec:java "-Dexec.args=--help"
-```
-
-```bash
-#expected output:
-
-Usage: amrit-db-anonymize [-hV] [COMMAND]
-AMRIT Database Anonymization Tool - Production-safe DB anonymization with
-streaming
-  -h, --help      Show this help message and exit.
-  -V, --version   Print version information and exit.
-Commands:
-  run          Execute multi-schema anonymization: DB1 replica ? DB2 UAT
-                 (direct restore)
-  diff-schema  Compare DB schema to rules.yaml and suggest updates
-```
-
-### 3. Create Configuration
-
-This project uses Spring `.properties` files and environment variables for configuration.
-
-- Copy the `anonymizer.*` block from [src/main/environment/common_example.properties](src/main/environment/common_example.properties#L1-L200)
-  into [src/main/environment/common_local.properties](src/main/environment/common_local.properties) (this file is gitignored) and update values.
+  The CLI prefers runtime values from `anonymizer.*` properties (see below) and
+  environment variables for secrets. Migrate any prior runtime settings into
+  `src/main/environment/common_local.properties`.
 - Required runtime secrets should be supplied via environment variables (for example `HMAC_SECRET_KEY`).
 
 Example (what to copy into `common_local.properties`):
@@ -165,6 +112,10 @@ Example (what to copy into `common_local.properties`):
 ```
 
 The CLI will automatically use the `anonymizer.*` keys from Spring properties when a YAML config is not supplied.
+
+The tool writes anonymized data directly to the configured target database (DB2). Ensure the
+source is configured as a read-only replica and that safety checks are enabled before running
+against production-adjacent resources.
 
 ### 4. Set Environment Variables
 
@@ -241,29 +192,9 @@ Check `run-report.json`:
 
 ### Configuration File Format
 
-The tool supports two configuration approaches: the original YAML `config.yaml` and a
-`properties`-based fallback that loads `anonymizer.*` keys from the Spring environment.
+Runtime configuration (recommended): use `src/main/environment/common_local.properties` with keys prefixed by `anonymizer.` (for example `anonymizer.source.host`, `anonymizer.target.username`). An example file is available at [src/main/environment/common_example.properties](src/main/environment/common_example.properties#L1-L120). Supply secrets via environment variables when possible (for example `HMAC_SECRET_KEY`).
 
-YAML files (optional): store them in `src/main/environment/`:
-
-- `anonymization_example.yaml` - Base template
-- `anonymization_local.yaml` - Local development (gitignored)
-- `anonymization_docker.yaml` - Docker environment (gitignored)
-- `anonymization_production.yaml` - Production (gitignored)
-- `anonymization_ci.yaml` - CI/CD pipelines (gitignored)
-
-Properties-based configuration (recommended for local/dev):
-
-- You can provide anonymizer configuration via Spring `.properties` files using keys
-  prefixed with `anonymizer.` (for example `anonymizer.source.host`,
-  `anonymizer.target.username`, `anonymizer.hmacSecretKey`).
-- An example set of keys is available in [src/main/environment/common_example.properties](src/main/environment/common_example.properties#L1-L120).
-- To use locally, copy the `anonymizer.*` block from the example into
-  [src/main/environment/common_local.properties](src/main/environment/common_local.properties) (gitignored) and update values,
-  especially `anonymizer.hmacSecretKey` which should be set to a secure value or
-  supplied via the environment variable `HMAC_SECRET_KEY`.
-- The CLI will automatically fall back to these properties when a YAML config is
-  not provided with `--config`.
+Rules (source of truth): use `src/main/resources/anonymizer/anonymization-registry.yml` for per-database/table/column strategies.
 
 ### Complete Configuration Reference
 
@@ -318,7 +249,7 @@ performance:
 hmacSecretKey: ${HMAC_SECRET_KEY}
 
 # Rules file path
-rulesFile: rules.yaml
+rulesFile: src/main/resources/anonymizer/anonymization-registry.yml
 ```
 
 ### Environment Variable Substitution
@@ -344,16 +275,20 @@ export HMAC_SECRET_KEY="$(openssl rand -hex 32)"
 
 ### Rules File Format
 
-Create `rules.yaml` to define anonymization strategies for each table and column.
+Anonymization rules live in `src/main/resources/anonymizer/anonymization-registry.yml`.
+Edit that file to configure per-database, per-table, per-column strategies and metadata.
 
 ### Available Strategies
 
-The tool implements two anonymization strategies:
+Supported strategies include:
 
-| Strategy | Description | Use Case | Example |
-|----------|-------------|----------|---------|
-| `PRESERVE` | Keep original value unchanged | Non-sensitive columns, IDs needed for joins | Status codes, timestamps |
-| `HMAC_HASH` | Apply HMAC-SHA256 hash | Sensitive identifiers, deterministic anonymization | Names, phone numbers, email |
+- `HASH_SHA256` — One-way hash (deterministic, linkable)
+- `HMAC_HASH` — HMAC-based one-way hash (deterministic, keyed)
+- `RANDOM_FAKE_DATA` — Realistic fake data using java-faker (can be deterministic if seeded)
+- `PARTIAL_MASK` — Mask characters (show last N digits)
+- `GENERALIZE` — Category/range reduction
+- `SUPPRESS` — Replace with NULL
+- `PRESERVE` — Keep original value
 
 ### Rules Structure
 
@@ -434,20 +369,20 @@ mvn exec:java "-Dexec.args=run --operation-id OPERATION_2026_02_20 --dry-run"
 
 ### diff-schema Command
 
-Compare database schemas with rules.yaml to detect schema drift.
+Compare database schemas with anonymization-registry.yml to detect schema drift.
 
 **Options:**
-- `-r, --rules FILE` - Rules file (default: rules.yaml)
+- `-r, --rules FILE` - Rules file (default: src/main/resources/anonymizer/anonymization-registry.yml)
 - `-o, --output FILE` - Write suggested rules to file (optional)
 
 **Examples:**
 
 ```bash
 # Compare schema with rules (uses anonymizer.* properties from Spring environment)
-mvn exec:java "-Dexec.args=diff-schema --rules rules.yaml"
+mvn exec:java "-Dexec.args=diff-schema --rules src/main/resources/anonymizer/anonymization-registry.yml"
 
 # Generate suggested rules for new columns
-mvn exec:java "-Dexec.args=diff-schema --rules rules.yaml --output suggested-rules.yaml"
+mvn exec:java "-Dexec.args=diff-schema --rules src/main/resources/anonymizer/anonymization-registry.yml --output suggested-anonymization-registry.yml"
 ```
 
 ### Exit Codes
@@ -470,12 +405,10 @@ DENIED: Host 'db-server.example.com' not in allowlist
 
 **Solution:**
 1. Verify you're connecting to correct read replica
-2. Add host to `config.yaml`:
-   ```yaml
-   safety:
-     allowedHosts:
-       - "db-server.example.com"
-   ```
+2. Add host to anonymizer properties (`src/main/resources/anonymizer/*.properties` or `src/main/environment/common_local.properties`):
+  ```properties
+  anonymizer.safety.allowedHosts=db-server.example.com
+  ```
 3. Provide approval flag: `--approval-flag "..."`
 
 #### Issue: "Connection timeout to database"
@@ -488,11 +421,10 @@ ERROR: Failed to connect to db-replica:3306 after 30s
 **Solution:**
 1. Check network connectivity: `telnet db-replica 3306`
 2. Verify credentials: `mysql -h db-replica -u user -p`
-3. Increase timeout in config.yaml:
-   ```yaml
-   source:
-     connectionTimeout: 60000  # 60 seconds
-   ```
+3. Increase timeout in anonymizer properties (or `common_local.properties`):
+  ```properties
+  anonymizer.source.connectionTimeout=60000
+  ```
 
 #### Issue: "Out of memory error"
 
@@ -502,12 +434,11 @@ java.lang.OutOfMemoryError: Java heap space
 ```
 
 **Solution:**
-1. Reduce batch size in config.yaml:
-   ```yaml
-   performance:
-     batchSize: 500  # Was 1000
-     fetchSize: 500
-   ```
+1. Reduce batch size in anonymizer properties (or `common_local.properties`):
+  ```properties
+  anonymizer.performance.batchSize=500
+  anonymizer.performance.fetchSize=500
+  ```
 2. Increase JVM heap:
    ```bash
    java -Xmx4g -jar target/Amrit-DB-2.0.0.war run ...
@@ -517,27 +448,27 @@ java.lang.OutOfMemoryError: Java heap space
 
 **Symptoms:**
 ```
-WARN: Column 'NewColumn' in table 't_patients' not found in rules.yaml
+WARN: Column 'NewColumn' in table 't_patients' not found in anonymization-registry.yml
 ```
 
 **Solution:**
-1. Run schema diff:
-   ```bash
-   mvn exec:java "-Dexec.args=diff-schema --config config.yaml --output new-rules.yaml"
-   ```
-2. Review `new-rules.yaml`
-3. Merge into `rules.yaml`
+1. Run schema diff (write suggestions to a file):
+  ```bash
+  mvn exec:java "-Dexec.args=diff-schema --rules src/main/resources/anonymizer/anonymization-registry.yml --output new-anonymization-registry.yml"
+  ```
+2. Review `new-anonymization-registry.yml`
+3. Merge into `src/main/resources/anonymizer/anonymization-registry.yml`
 4. Re-run with updated rules
 
 #### Issue: "Primary key not defined for table"
 
 **Symptoms:**
 ```
-ERROR: Table 't_visits' missing primaryKey in rules.yaml
+ERROR: Table 't_visits' missing primaryKey in anonymization-registry.yml
 ```
 
-**Solution:**
-Add primary key to rules.yaml:
+Solution:
+Add primary key to `src/main/resources/anonymizer/anonymization-registry.yml`:
 ```yaml
 databases:
   db_iemr:
@@ -601,16 +532,16 @@ INFO  Progress: Table m_beneficiaryregidmapping - 50000/500000 rows (10%)
 
 ```bash
 # Weekly check
-mvn exec:java "-Dexec.args=diff-schema --config config.yaml --output schema-changes.yaml"
+mvn exec:java "-Dexec.args=diff-schema --rules src/main/resources/anonymizer/anonymization-registry.yml --output schema-changes.yaml"
 
 # Review changes
 cat schema-changes.yaml
 
-# Update rules.yaml
-vi rules.yaml
+# Update rules (merge into the registry file)
+vi src/main/resources/anonymizer/anonymization-registry.yml
 
 # Commit to version control
-git add rules.yaml
+git add src/main/resources/anonymizer/anonymization-registry.yml
 git commit -m "Add rules for new columns in Q1-2026 schema"
 ```
 
@@ -656,7 +587,7 @@ mvn exec:java "-Dexec.args=run --operation-id OP_IDENTITY_2026_02_20"
 
 ### Q6: Can I anonymize only specific tables?
 
-**A:** Yes, edit rules.yaml to include only desired tables:
+**A:** Yes, edit `src/main/resources/anonymizer/anonymization-registry.yml` to include only desired tables:
 
 ```yaml
 databases:
@@ -729,7 +660,7 @@ SELECT BenRegID, FirstName, PhoneNo FROM m_beneficiaryregidmapping LIMIT 10;
 
 3. **Version Control Your Rules**
   ```bash
-  git add rules.yaml
+  git add src/main/resources/anonymizer/anonymization-registry.yml
   git commit -m "Update rules for Q1-2026 schema"
   git tag anonymization-rules-2026-Q1
   ```
@@ -772,11 +703,11 @@ For issues or questions:
 
 ### A. Full Config Reference
 
-See [config.yaml.example](../../config.yaml.example)
+See `src/main/environment/common_example.properties` for example runtime properties
 
 ### B. Full Rules Reference
 
-See [rules.yaml.example](../../rules.yaml.example)
+See `src/main/resources/anonymizer/anonymization-registry.yml` for the canonical rules registry
 
 ### C. Architecture Diagram
 
@@ -797,7 +728,7 @@ mvn exec:java "-Dexec.args=run --operation-id TOKEN"
 mvn exec:java "-Dexec.args=run --operation-id TOKEN --dry-run"
 
 # Compare schema
-mvn exec:java "-Dexec.args=diff-schema --rules rules.yaml"
+mvn exec:java "-Dexec.args=diff-schema --rules src/main/resources/anonymizer/anonymization-registry.yml"
 
 # Get help for specific command
 mvn exec:java "-Dexec.args=run --help"

@@ -45,13 +45,11 @@ import lombok.extern.slf4j.Slf4j;
 import com.db.piramalswasthya.anonymizer.config.AnonymizationRules;
 import com.db.piramalswasthya.anonymizer.config.AnonymizerConfig;
 import com.db.piramalswasthya.anonymizer.core.AnonymizationEngine;
-import com.db.piramalswasthya.anonymizer.core.HmacAnonymizer;
-import com.db.piramalswasthya.anonymizer.core.RandomFakeDataAnonymizer;
 import com.db.piramalswasthya.anonymizer.core.KeysetPaginator;
 import com.db.piramalswasthya.anonymizer.core.KeysetPaginator.RowData;
 import com.db.piramalswasthya.anonymizer.output.DirectRestoreWriter;
 import com.db.piramalswasthya.anonymizer.report.RunReport;
-import com.db.piramalswasthya.anonymizer.safety.SafetyGuard;
+
 import com.db.piramalswasthya.anonymizer.util.StringUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -82,11 +80,11 @@ public class RunCommand implements Callable<Integer> {
     private static final String STATUS_FAILED = "FAILED";
     private static final ObjectMapper YAML_MAPPER = new ObjectMapper(new YAMLFactory());
     
-    @Option(names = {"-c", "--config"}, description = "Config file (default: config.yaml)", 
-            defaultValue = "config.yaml")
+        @Option(names = {"-c", "--config"}, description = "Config file (default: src/main/environment/common_local.properties)", 
+            defaultValue = "src/main/environment/common_local.properties")
     private String configFile;
     
-        @Option(names = {"--approve"}, description = "Explicit approval token (used when safety requires approval)", 
+        @Option(names = {"--approve"}, description = "Explicit approval token", 
             required = false)
         private String approvalToken;
     
@@ -111,22 +109,16 @@ public class RunCommand implements Callable<Integer> {
         try {
             // 1. Load configuration and rules
             log.info("Loading configuration...");
-            // If default config file not present, try common properties paths used in repo
+            // Ensure config file exists; fallback only to common_local.properties
             java.io.File cfgFile = new java.io.File(configFile);
-            if ((!cfgFile.exists() || cfgFile.isDirectory()) && "config.yaml".equals(configFile)) {
-                String[] candidates = new String[] {
-                    "src/main/environment/common_local.properties",
-                    "src/main/environment/common_example.properties",
-                    "src/main/environment/common_docker.properties",
-                    "src/main/resources/application-analyzer.properties"
-                };
-                for (String c : candidates) {
-                    java.io.File f = new java.io.File(c);
-                    if (f.exists() && f.isFile()) {
-                        log.info("Falling back to properties config: {}", c);
-                        configFile = c;
-                        break;
-                    }
+            if ((!cfgFile.exists() || cfgFile.isDirectory())) {
+                String fallback = "src/main/environment/common_local.properties";
+                java.io.File f = new java.io.File(fallback);
+                if (f.exists() && f.isFile()) {
+                    log.info("Falling back to properties config: {}", fallback);
+                    configFile = fallback;
+                } else {
+                    throw new IllegalArgumentException("Config file not found: " + configFile + ". Expected " + fallback + " to exist.");
                 }
             }
 
@@ -141,29 +133,16 @@ public class RunCommand implements Callable<Integer> {
             // 3. Validate configuration
             validateConfiguration(config, rules);
             
-            // 4. Safety checks for BOTH source and target
-            log.info("Running safety checks...");
-            SafetyGuard safetyGuard = new SafetyGuard(config.getSafety());
-            
-            // Validate source (DB1 replica)
-            for (String schema : config.getSource().getSchemas()) {
-                safetyGuard.validateSafeToConnect(
-                    config.getSource().getHost(),
-                    schema,
-                    approvalToken
-                );
+            // 4. Interactive safety confirmation
+            log.info("Running interactive safety confirmation...");
+            if (!interactiveSafetyConfirmation(config, approvalToken)) {
+                log.info("User declined safety confirmation. Aborting run.");
+                report.setStatus("ABORTED_BY_USER");
+                report.setEndTime(LocalDateTime.now());
+                writeReport(report, config.getLoggingPath(), executionId);
+                return 1;
             }
-            
-            // Validate target (DB2 UAT)
-            for (String schema : config.getTarget().getSchemas()) {
-                safetyGuard.validateSafeToConnect(
-                    config.getTarget().getHost(),
-                    schema,
-                    approvalToken
-                );
-            }
-            
-            log.info("Safety checks passed");
+            log.info("Safety confirmation accepted");
             
             if (dryRun) {
                 log.info("DRY RUN: Configuration and safety validated. Exiting.");
@@ -173,23 +152,21 @@ public class RunCommand implements Callable<Integer> {
                 return 0;
             }
             
-            // 5. Initialize HMAC anonymizer
+            // 5. Prepare HMAC secret and faker locale (engine will instantiate helpers)
             String secret = System.getenv("ANONYMIZATION_SECRET");
             if (secret == null || secret.length() < 32) {
                 throw new IllegalStateException(
                     "ANONYMIZATION_SECRET env var required (min 32 characters)");
             }
-            HmacAnonymizer hmacAnonymizer = new HmacAnonymizer(secret);
-            // Initialize faker for RANDOM_FAKE_DATA strategy (locale may be provided via env var)
+            // Initialize faker locale (engine will create the seeded Faker instances)
             String fakeLocale = System.getenv().getOrDefault("ANONYMIZER_FAKE_LOCALE", "en");
             java.util.Locale locale = java.util.Locale.forLanguageTag(fakeLocale.replace('_', '-'));
-            RandomFakeDataAnonymizer faker = new RandomFakeDataAnonymizer(locale);
             
             // 6. Process each schema
             for (String schema : config.getSource().getSchemas()) {
                 log.info("\n========== Processing schema: {} ==========", schema);
                 
-                processSchema(schema, config, rules, hmacAnonymizer, faker, report);
+                processSchema(schema, config, rules, secret, locale, report);
             }
             
             report.setStatus("SUCCESS");            
@@ -248,53 +225,52 @@ public class RunCommand implements Callable<Integer> {
         
         return 0;
     }
-    
     /**
      * Process single schema: reset target, stream from source, anonymize, write to target
      */
-    private void processSchema(String schema, AnonymizerConfig config, 
-                               AnonymizationRules rules,
-                               HmacAnonymizer hmacAnonymizer,
-                               RandomFakeDataAnonymizer faker,
+    private void processSchema(String schema, AnonymizerConfig config,
+                               AnonymizationRules rules, String secret, java.util.Locale locale, 
                                RunReport report) throws SQLException {
         
         if (config.getTarget().isReadOnly()) {
             throw new IllegalStateException(
-                "Target database is configured as read-only. Set target.readOnly: false in config.yaml");
+                "Target database is configured as read-only. Set target.readOnly: false in local properties to enable writing.");
         }
-        
+
         // Create DataSources for this schema
         DataSource sourceDataSource = createDataSource(config.getSource(), schema);
-        DataSource targetDataSource = createDataSource(config.getTarget(), schema);
-        
-        // Initialize components
-                AnonymizationEngine engine = new AnonymizationEngine(hmacAnonymizer, rules, faker);
+
+        // Determine write target: always the configured final target
+        DataSource writeTargetDataSource = createDataSource(config.getTarget(), schema);
+
+        // Initialize components - engine now constructs HMAC and Faker internally
+        AnonymizationEngine engine = new AnonymizationEngine(secret, rules, locale);
+
         KeysetPaginator paginator = new KeysetPaginator(
-            sourceDataSource, 
+            sourceDataSource,
             config.getPerformance().getBatchSize()
         );
-        
+
         try (DirectRestoreWriter writer = new DirectRestoreWriter(
-                targetDataSource, 
+                writeTargetDataSource,
                 config.getPerformance().getBatchSize(),
                 schema)) {
-            
-            // Reset target schema
-            log.info("Resetting target schema: {}", schema);
+
+            // Reset write target schema using source schema as template
+            log.info("Resetting write-target schema: {}", schema);
             writer.resetSchema(sourceDataSource);
-            
-            // Process all tables in this schema
+
+            // Process all tables in this schema (anonymize from source -> writeTarget)
             processSchemaTables(schema, rules, engine, paginator, writer, report);
-            
-            // Mark success to commit the transaction
+
+            // Mark success to commit the transaction on the write target
             writer.markSuccess();
-            log.info("Successfully committed all changes for schema: {}", schema);
+            log.info("Successfully committed all changes to write-target for schema: {}", schema);
         }
+
     }
-    
-    /**
-     * Process all tables defined in rules for a schema
-     */
+
+    //Process all tables defined in rules for a schema
     private void processSchemaTables(String schema, AnonymizationRules rules,
                                      AnonymizationEngine engine, KeysetPaginator paginator,
                                      DirectRestoreWriter writer, RunReport report) throws SQLException {
@@ -309,10 +285,8 @@ public class RunCommand implements Callable<Integer> {
             processTable(schema, entry.getKey(), entry.getValue(), rules, engine, paginator, writer, report);
         }
     }
-    
-    /**
-     * Process a single table
-     */
+
+    //Process a single table
     private void processTable(String schema, String tableName, AnonymizationRules.TableRules tableRules,
                              AnonymizationRules rules, AnonymizationEngine engine, KeysetPaginator paginator,
                              DirectRestoreWriter writer, RunReport report) throws SQLException {
@@ -330,9 +304,6 @@ public class RunCommand implements Callable<Integer> {
 
         // Fetch real source columns for this table so we don't accidentally drop unknown columns.
         List<String> sourceColumns = paginator.getTableColumns(tableName);
-
-        // Reconcile rules vs source columns: add missing columns with PRESERVE or fail based on policy
-        java.util.Set<String> ruleColumnSet = tableRules.getColumns() == null ? java.util.Collections.emptySet() : tableRules.getColumns().keySet();
 
         if (tableRules.getColumns() == null) {
             tableRules.setColumns(new java.util.LinkedHashMap<>());
@@ -353,10 +324,9 @@ public class RunCommand implements Callable<Integer> {
                 }
             }
         }
-
         List<String> allColumns = sourceColumns;
 
-        // Calculate strategy counts once per table (not per batch)
+        // Calculate strategy counts once per table for reporting (since we apply strategies per column, not per row)
         updateStrategyCounts(tableRules, strategyCounts);
         
         BatchContext context = new BatchContext(schema, tableName, tableRules, allColumns, 
@@ -388,11 +358,9 @@ public class RunCommand implements Callable<Integer> {
     private void processBatch(BatchContext context, List<RowData> batch) {
         try {
             context.engine.anonymizeBatch(context.schema, context.tableName, batch);
-            
             List<Map<String, Object>> rowMaps = batch.stream()
                 .map(RowData::getData)
                 .toList();
-            
             context.writer.writeInsert(context.tableName, context.allColumns, rowMaps);
             context.rowCount[0] += batch.size();
         } catch (SQLException e) {
@@ -427,7 +395,6 @@ public class RunCommand implements Callable<Integer> {
             tableRules.getColumns().size(),
             strategyCounts
         );
-        
         log.info("Completed {}.{}: {} rows, {} ms", schema, tableName, rowCount, duration);
     }
     
@@ -449,15 +416,13 @@ public class RunCommand implements Callable<Integer> {
             throw new IllegalArgumentException("Config path cannot be null");
         }
 
-        if (path.endsWith(".properties") || path.endsWith(".env")) {
+        if (path.endsWith(".properties")) {
             java.util.Properties props = new java.util.Properties();
             try (java.io.FileInputStream in = new java.io.FileInputStream(path)) {
                 props.load(in);
             }
             return loadConfigFromProperties(props);
         }
-
-        // Default: YAML
         return YAML_MAPPER.readValue(new File(path), AnonymizerConfig.class);
     }
 
@@ -524,35 +489,13 @@ public class RunCommand implements Callable<Integer> {
         perf.setMaxMemoryMb(Integer.parseInt(props.getProperty("anonymizer.performance.maxMemoryMb", "512")));
         cfg.setPerformance(perf);
 
-        cfg.setRulesFile(props.getProperty("anonymizer.rulesFile", "rules.yaml"));
+        cfg.setRulesFile(props.getProperty("anonymizer.rulesFile", "anonymization-registry.yml"));
         cfg.setLoggingPath(props.getProperty("anonymizer.loggingPath", "./logs"));
 
         return cfg;
     }
 
-    /**
-     * Safely split a comma-separated string without using regex to avoid ReDoS.
-     */
-    private static List<String> commaSepToList(String s) {
-        if (s == null) return Collections.emptyList();
-        String trimmed = s.trim();
-        if (trimmed.isEmpty()) return Collections.emptyList();
-        List<String> out = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < trimmed.length(); i++) {
-            char c = trimmed.charAt(i);
-            if (c == ',') {
-                String part = sb.toString().trim();
-                if (!part.isEmpty()) out.add(part);
-                sb.setLength(0);
-            } else {
-                sb.append(c);
-            }
-        }
-        String last = sb.toString().trim();
-        if (!last.isEmpty()) out.add(last);
-        return out;
-    }
+    // Use shared StringUtils.commaSepToList(...) helper instead of duplicating logic
     
     /**
      * Load rules for anonimization
@@ -666,7 +609,7 @@ public class RunCommand implements Callable<Integer> {
     }
     
     /**
-     * Sanitize error message (remove any potential PII)
+     * Sanitize error message
      */
     /* package-private for tests */
     String sanitizeError(Exception e) {
@@ -693,6 +636,60 @@ public class RunCommand implements Callable<Integer> {
         }
 
         return message;
+    }
+
+    /**
+     * Interactive safety confirmation.
+     * Returns true if the user confirms (Y or A), false to abort.
+     */
+    private boolean interactiveSafetyConfirmation(AnonymizerConfig config, String approvalToken) throws IOException {
+        AnonymizerConfig.SafetyConfig safety = config.getSafety();
+        if (safety == null || !safety.isEnabled()) {
+            return true;
+        }
+
+        // If an explicit approval token was provided and matches configured flag, skip interactive prompt
+        if (approvalToken != null && !approvalToken.isBlank() && approvalToken.equals(safety.getApprovalFlag())) {
+            log.info("Approval token provided and matches configured approval flag; skipping interactive confirmation.");
+            return true;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Safety confirmation required before proceeding with anonymization.\n");
+        sb.append("Source host: ").append(config.getSource().getHost()).append("\n");
+        sb.append("Source schemas: ").append(config.getSource().getSchemas()).append("\n");
+        sb.append("Target host: ").append(config.getTarget().getHost()).append("\n");
+        sb.append("Target schemas: ").append(config.getTarget().getSchemas()).append("\n");
+        sb.append("Require explicit approval: ").append(safety.isRequireExplicitApproval()).append("\n");
+        if (safety.isRequireExplicitApproval() && (safety.getApprovalFlag() != null && !safety.getApprovalFlag().isBlank())) {
+            sb.append("Configured approvalFlag: ").append(safety.getApprovalFlag()).append("\n");
+        }
+        sb.append("\nType 'Y' to proceed, 'A' to proceed and acknowledge, or 'N' to abort: ");
+
+        System.out.print(sb.toString());
+
+        String input = null;
+        java.io.Console console = System.console();
+        if (console != null) {
+            input = console.readLine();
+        } else {
+            // Fall back to stdin (works in many CI shells if attached)
+            try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.InputStreamReader(System.in))) {
+                input = br.readLine();
+            }
+        }
+
+        if (input == null) {
+            log.warn("No interactive input available for safety confirmation");
+            return false;
+        }
+
+        input = input.trim();
+        if (input.equalsIgnoreCase("Y") || input.equalsIgnoreCase("A")) {
+            return true;
+        }
+
+        return false;
     }
     
     /**

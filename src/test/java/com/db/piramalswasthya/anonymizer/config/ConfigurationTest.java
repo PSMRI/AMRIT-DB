@@ -25,8 +25,6 @@ package com.db.piramalswasthya.anonymizer.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.junit.jupiter.api.Test;
-
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -70,7 +68,7 @@ class ConfigurationTest {
               batchSize: 1000
               fetchSize: 1000
             
-            rulesFile: rules.yaml
+            rulesFile: anonymization-registry.yml
             loggingPath: ./logs
             """;
         

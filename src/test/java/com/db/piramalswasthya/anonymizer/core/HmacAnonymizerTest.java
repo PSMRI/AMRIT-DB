@@ -58,20 +58,6 @@ class HmacAnonymizerTest {
     }
     
     @Test
-    void testFakeName_Deterministic() {
-        HmacAnonymizer anonymizer = new HmacAnonymizer(TEST_SECRET);
-        
-        String input = "John Doe";
-        String fake1 = anonymizer.fakeName(input);
-        String fake2 = anonymizer.fakeName(input);
-        
-        // Same input should produce same fake name
-        assertEquals(fake1, fake2);
-        assertNotNull(fake1);
-        assertTrue(fake1.contains(" ")); // Should have first and last name
-    }
-    
-    @Test
     void testMaskPhone() {
         HmacAnonymizer anonymizer = new HmacAnonymizer(TEST_SECRET);
         

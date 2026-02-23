@@ -38,7 +38,7 @@ public class AnonymizerConfig {
     private DatabaseConfig target;
     private SafetyConfig safety;
     private PerformanceConfig performance;
-    private String rulesFile = "rules.yaml";
+    private String rulesFile = "anonymization-registry.yml";
     private String loggingPath = "./logs";
     
     @Data
