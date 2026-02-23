@@ -38,8 +38,10 @@ public class AnonymizerConfig {
     private DatabaseConfig target;
     private SafetyConfig safety;
     private PerformanceConfig performance;
+    public static final String DEFAULT_LOGGING_PATH = "./logs";
+
     private String rulesFile = "anonymization-registry.yml";
-    private String loggingPath = "./logs";
+    private String loggingPath = DEFAULT_LOGGING_PATH;
     
     @Data
     public static class DatabaseConfig {

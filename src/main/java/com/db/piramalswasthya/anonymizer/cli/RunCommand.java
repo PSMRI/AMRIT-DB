@@ -37,12 +37,13 @@ import java.util.concurrent.Callable;
 import javax.sql.DataSource;
 
 import lombok.extern.slf4j.Slf4j;
-
-import com.db.piramalswasthya.anonymizer.config.AnonymizationRules;
-import com.db.piramalswasthya.anonymizer.config.AnonymizerConfig;
+import com.db.piramalswasthya.anonymizer.core.RandomFakeDataAnonymizer;
+import com.db.piramalswasthya.anonymizer.core.HmacAnonymizer;
 import com.db.piramalswasthya.anonymizer.core.AnonymizationEngine;
 import com.db.piramalswasthya.anonymizer.core.KeysetPaginator;
 import com.db.piramalswasthya.anonymizer.core.KeysetPaginator.RowData;
+import com.db.piramalswasthya.anonymizer.config.AnonymizationRules;
+import com.db.piramalswasthya.anonymizer.config.AnonymizerConfig;
 import com.db.piramalswasthya.anonymizer.output.DirectRestoreWriter;
 import com.db.piramalswasthya.anonymizer.report.RunReport;
 
@@ -241,8 +242,8 @@ public class RunCommand implements Callable<Integer> {
         DataSource writeTargetDataSource = createDataSource(config.getTarget(), schema);
 
         // Initialize components - construct HMAC helper and shared faker, then inject into engine
-        com.db.piramalswasthya.anonymizer.core.HmacAnonymizer hmac = new com.db.piramalswasthya.anonymizer.core.HmacAnonymizer(secret);
-        com.db.piramalswasthya.anonymizer.core.RandomFakeDataAnonymizer faker = new com.db.piramalswasthya.anonymizer.core.RandomFakeDataAnonymizer(locale);
+        HmacAnonymizer hmac = new HmacAnonymizer(secret);
+        RandomFakeDataAnonymizer faker = new RandomFakeDataAnonymizer(locale);
         AnonymizationEngine engine = new AnonymizationEngine(hmac, rules, faker);
 
         KeysetPaginator paginator = new KeysetPaginator(
@@ -489,7 +490,7 @@ public class RunCommand implements Callable<Integer> {
         cfg.setPerformance(perf);
 
         cfg.setRulesFile(props.getProperty("anonymizer.rulesFile", "anonymization-registry.yml"));
-        cfg.setLoggingPath(props.getProperty("anonymizer.loggingPath", "./logs"));
+        cfg.setLoggingPath(props.getProperty("anonymizer.loggingPath", LOGS_DIRECTORY));
 
         return cfg;
     }
@@ -652,7 +653,7 @@ public class RunCommand implements Callable<Integer> {
         }
         sb.append("\nType 'Y' to proceed, 'A' to proceed and acknowledge, or 'N' to abort: ");
 
-        System.out.print(sb.toString());
+        log.info(sb.toString());
 
         String input = null;
         java.io.Console console = System.console();
@@ -660,9 +661,7 @@ public class RunCommand implements Callable<Integer> {
             input = console.readLine();
         } else {
             // Fall back to stdin (works in many CI shells if attached)
-            try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.InputStreamReader(System.in))) {
-                input = br.readLine();
-            }
+            input = readLineFromStdin();
         }
 
         if (input == null) {
@@ -671,11 +670,16 @@ public class RunCommand implements Callable<Integer> {
         }
 
         input = input.trim();
-        if (input.equalsIgnoreCase("Y") || input.equalsIgnoreCase("A")) {
-            return true;
-        }
+        return input.equalsIgnoreCase("Y") || input.equalsIgnoreCase("A");
+    }
 
-        return false;
+    /**
+     * Read a single line from standard input. Extracted to improve readability and testability.
+     */
+    private String readLineFromStdin() throws IOException {
+        try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.InputStreamReader(System.in))) {
+            return br.readLine();
+        }
     }
     
     /**

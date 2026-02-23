@@ -166,7 +166,7 @@ public class DiffSchemaCommand implements Callable<Integer> {
         cfg.setSource(src);
         cfg.setTarget(tgt);
         cfg.setRulesFile(props.getProperty("anonymizer.rulesFile", "anonymization-registry.yml"));
-        cfg.setLoggingPath(props.getProperty("anonymizer.loggingPath", "./logs"));
+        cfg.setLoggingPath(props.getProperty("anonymizer.loggingPath", AnonymizerConfig.DEFAULT_LOGGING_PATH));
 
         AnonymizerConfig.SafetyConfig safety = new AnonymizerConfig.SafetyConfig();
         safety.setEnabled(Boolean.parseBoolean(props.getProperty("anonymizer.safety.enabled", "true")));

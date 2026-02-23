@@ -1,7 +1,27 @@
+/*
+* AMRIT – Accessible Medical Records via Integrated Technology
+* Integrated EHR (Electronic Health Records) Solution
+*
+* Copyright (C) "Piramal Swasthya Management and Research Institute"
+*
+* This file is part of AMRIT.
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see https://www.gnu.org/licenses/.
+*/
 package com.db.piramalswasthya.anonymizer.core;
 
 import com.github.javafaker.Faker;
-
 import java.security.SecureRandom;
 import java.util.Locale;
 
@@ -33,7 +53,7 @@ public class RandomFakeDataAnonymizer {
     public Object anonymize(String columnName, String original) {
         if (original == null) return null;
 
-        String c = columnName.toLowerCase();
+        String c = columnName == null ? "" : columnName.toLowerCase();
         try {
             if (c.contains("name") || c.contains("firstname") || c.contains("lastname")) {
                 if (c.contains("firstname")) return faker.name().firstName();
