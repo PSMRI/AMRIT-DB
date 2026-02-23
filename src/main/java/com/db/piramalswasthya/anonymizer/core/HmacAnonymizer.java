@@ -27,7 +27,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.MessageDigest;
+import com.db.piramalswasthya.anonymizer.util.CryptoUtils;
 import java.util.HexFormat;
 
 /**
@@ -43,13 +43,14 @@ public class HmacAnonymizer {
     private final SecretKeySpec keySpec;
 
     public HmacAnonymizer(String secretKey) {
-        if (secretKey == null || secretKey.length() < 32) {
-            throw new IllegalArgumentException("Secret key must be at least 32 characters");
+        if (secretKey == null || secretKey.isBlank()) {
+            throw new IllegalArgumentException("Secret key must not be null or empty");
         }
-        this.keySpec = new SecretKeySpec(
-                secretKey.getBytes(StandardCharsets.UTF_8),
-                HMAC_ALGORITHM
-        );
+        byte[] raw = CryptoUtils.decodeSecret(secretKey);
+        if (raw == null || raw.length < 16) {
+            throw new IllegalArgumentException("Secret key raw bytes must be at least 16 bytes");
+        }
+        this.keySpec = new SecretKeySpec(raw, HMAC_ALGORITHM);
     }
 
     /**
@@ -75,14 +76,7 @@ public class HmacAnonymizer {
      * This supports the HASH_SHA256 strategy used in the registry.
      */
     public String sha256Hash(String input) {
-        if (input == null) return null;
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] digest = md.digest(input.getBytes(StandardCharsets.UTF_8));
-            return HexFormat.of().formatHex(digest);
-        } catch (NoSuchAlgorithmException e) {
-            throw new HmacAnonymizerException("SHA-256 algorithm not available", e);
-        }
+        return CryptoUtils.sha256Hex(input);
     }
     /**
      * Mask phone number - show last 4 digits only.

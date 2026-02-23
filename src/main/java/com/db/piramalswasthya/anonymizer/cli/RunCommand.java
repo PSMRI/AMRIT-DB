@@ -26,13 +26,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +47,7 @@ import com.db.piramalswasthya.anonymizer.output.DirectRestoreWriter;
 import com.db.piramalswasthya.anonymizer.report.RunReport;
 
 import com.db.piramalswasthya.anonymizer.util.StringUtils;
+import com.db.piramalswasthya.anonymizer.util.CryptoUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.mysql.cj.jdbc.MysqlDataSource;
@@ -243,8 +240,10 @@ public class RunCommand implements Callable<Integer> {
         // Determine write target: always the configured final target
         DataSource writeTargetDataSource = createDataSource(config.getTarget(), schema);
 
-        // Initialize components - engine now constructs HMAC and Faker internally
-        AnonymizationEngine engine = new AnonymizationEngine(secret, rules, locale);
+        // Initialize components - construct HMAC helper and shared faker, then inject into engine
+        com.db.piramalswasthya.anonymizer.core.HmacAnonymizer hmac = new com.db.piramalswasthya.anonymizer.core.HmacAnonymizer(secret);
+        com.db.piramalswasthya.anonymizer.core.RandomFakeDataAnonymizer faker = new com.db.piramalswasthya.anonymizer.core.RandomFakeDataAnonymizer(locale);
+        AnonymizationEngine engine = new AnonymizationEngine(hmac, rules, faker);
 
         KeysetPaginator paginator = new KeysetPaginator(
             sourceDataSource,
@@ -588,24 +587,11 @@ public class RunCommand implements Callable<Integer> {
     private String hashFileContents(String filePath) {
         try {
             byte[] fileBytes = Files.readAllBytes(Paths.get(filePath));
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(fileBytes);
-            return bytesToHex(hash).substring(0, 16); // First 16 chars
+            return CryptoUtils.sha256Hex(fileBytes).substring(0, 16);
         } catch (IOException e) {
             log.warn("Failed to read file {}", filePath, e);
             return "unknown";
-        } catch (NoSuchAlgorithmException e) {
-            log.warn("SHA-256 algorithm not available", e);
-            return "unknown";
         }
-    }
-    
-    private String bytesToHex(byte[] bytes) {
-        StringBuilder sb = new StringBuilder();
-        for (byte b : bytes) {
-            sb.append(String.format("%02x", b));
-        }
-        return sb.toString();
     }
     
     /**

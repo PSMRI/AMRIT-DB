@@ -30,7 +30,28 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class HmacAnonymizerTest {
     
-    private static final String TEST_SECRET = "test-secret-key-32-characters-long-123456";
+    private static final String TEST_SECRET = loadTestSecret();
+
+    private static String loadTestSecret() {
+        java.util.Properties props = new java.util.Properties();
+        java.nio.file.Path p = java.nio.file.Paths.get("src", "main", "environment", "common_local.properties");
+        if (java.nio.file.Files.exists(p)) {
+            try (java.io.InputStream is = java.nio.file.Files.newInputStream(p)) {
+                props.load(is);
+                for (String name : props.stringPropertyNames()) {
+                    if (name.toLowerCase().contains("secret")) {
+                        String v = props.getProperty(name);
+                        if (v != null && !v.trim().isEmpty()) {
+                            return v.trim();
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                // ignore and fall back to default below
+            }
+        }
+        return "test-secret-key-32-characters-long-123456";
+    }
     
     @Test
     void testHashId_Deterministic() {
@@ -110,5 +131,28 @@ class HmacAnonymizerTest {
         assertThrows(IllegalArgumentException.class, () -> {
             new HmacAnonymizer(null);
         });
+    }
+
+    @Test
+    void testConstructor_HexKey() {
+        // 32 bytes hex = 64 hex chars
+        String hex = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
+        HmacAnonymizer a = new HmacAnonymizer(hex);
+        assertNotNull(a);
+        String h = a.hashId("1");
+        assertNotNull(h);
+        assertFalse(h.isEmpty());
+    }
+
+    @Test
+    void testConstructor_Base64Key() {
+        byte[] raw = new byte[16];
+        java.util.Arrays.fill(raw, (byte) 0x1);
+        String b64 = java.util.Base64.getEncoder().encodeToString(raw);
+        HmacAnonymizer a = new HmacAnonymizer(b64);
+        assertNotNull(a);
+        String h = a.hashId("1");
+        assertNotNull(h);
+        assertFalse(h.isEmpty());
     }
 }

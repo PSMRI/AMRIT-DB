@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Locale;
 
 /**
  * Core anonymization engine - applies rules to data.
@@ -44,10 +43,10 @@ public class AnonymizationEngine {
     /**
      * Construct engine with an injected `HmacAnonymizer`, rules and faker locale.
      */
-    public AnonymizationEngine(HmacAnonymizer anonymizer, AnonymizationRules rules, Locale fakerLocale) {
+    public AnonymizationEngine(HmacAnonymizer anonymizer, AnonymizationRules rules, RandomFakeDataAnonymizer faker) {
         this.anonymizer = anonymizer;
         this.rules = rules;
-        this.faker = new RandomFakeDataAnonymizer(fakerLocale);
+        this.faker = faker;
     }
 
     /**
@@ -134,7 +133,7 @@ public class AnonymizationEngine {
                 } else if (value.matches("\\d{2}/\\d{2}/\\d{4}")) {
                     return anonymizer.generalizeDate(value.replace('/', '-'));
                 } else {
-                    log.warn("GENERALIZE strategy applied to non-date value; preserving: {}", value);
+                    log.warn("GENERALIZE strategy applied to column {} - preserving value", column);
                     return value;
                 }
             default:
