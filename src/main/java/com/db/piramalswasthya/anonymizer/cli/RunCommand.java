@@ -46,6 +46,7 @@ import com.db.piramalswasthya.anonymizer.config.AnonymizationRules;
 import com.db.piramalswasthya.anonymizer.config.AnonymizerConfig;
 import com.db.piramalswasthya.anonymizer.core.AnonymizationEngine;
 import com.db.piramalswasthya.anonymizer.core.HmacAnonymizer;
+import com.db.piramalswasthya.anonymizer.core.RandomFakeDataAnonymizer;
 import com.db.piramalswasthya.anonymizer.core.KeysetPaginator;
 import com.db.piramalswasthya.anonymizer.core.KeysetPaginator.RowData;
 import com.db.piramalswasthya.anonymizer.output.DirectRestoreWriter;
@@ -179,12 +180,16 @@ public class RunCommand implements Callable<Integer> {
                     "ANONYMIZATION_SECRET env var required (min 32 characters)");
             }
             HmacAnonymizer hmacAnonymizer = new HmacAnonymizer(secret);
+            // Initialize faker for RANDOM_FAKE_DATA strategy (locale may be provided via env var)
+            String fakeLocale = System.getenv().getOrDefault("ANONYMIZER_FAKE_LOCALE", "en");
+            java.util.Locale locale = java.util.Locale.forLanguageTag(fakeLocale.replace('_', '-'));
+            RandomFakeDataAnonymizer faker = new RandomFakeDataAnonymizer(locale);
             
             // 6. Process each schema
             for (String schema : config.getSource().getSchemas()) {
                 log.info("\n========== Processing schema: {} ==========", schema);
                 
-                processSchema(schema, config, rules, hmacAnonymizer, report);
+                processSchema(schema, config, rules, hmacAnonymizer, faker, report);
             }
             
             report.setStatus("SUCCESS");            
@@ -250,6 +255,7 @@ public class RunCommand implements Callable<Integer> {
     private void processSchema(String schema, AnonymizerConfig config, 
                                AnonymizationRules rules,
                                HmacAnonymizer hmacAnonymizer,
+                               RandomFakeDataAnonymizer faker,
                                RunReport report) throws SQLException {
         
         if (config.getTarget().isReadOnly()) {
@@ -262,7 +268,7 @@ public class RunCommand implements Callable<Integer> {
         DataSource targetDataSource = createDataSource(config.getTarget(), schema);
         
         // Initialize components
-        AnonymizationEngine engine = new AnonymizationEngine(hmacAnonymizer, rules);
+                AnonymizationEngine engine = new AnonymizationEngine(hmacAnonymizer, rules, faker);
         KeysetPaginator paginator = new KeysetPaginator(
             sourceDataSource, 
             config.getPerformance().getBatchSize()

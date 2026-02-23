@@ -38,10 +38,12 @@ public class AnonymizationEngine {
 
     private final HmacAnonymizer anonymizer;
     private final AnonymizationRules rules;
+    private final RandomFakeDataAnonymizer faker;
 
-    public AnonymizationEngine(HmacAnonymizer anonymizer, AnonymizationRules rules) {
+    public AnonymizationEngine(HmacAnonymizer anonymizer, AnonymizationRules rules, RandomFakeDataAnonymizer faker) {
         this.anonymizer = anonymizer;
         this.rules = rules;
+        this.faker = faker;
     }
 
     /**
@@ -89,7 +91,7 @@ public class AnonymizationEngine {
                 if (rule == null) {
                     handleUnknownColumn(database, table, column);
                 } else if (originalValue != null) {
-                    Object anonymizedValue = applyStrategy(rule.getStrategy(), originalValue.toString());
+                    Object anonymizedValue = applyStrategy(rule.getStrategy(), column, originalValue.toString());
                     row.put(column, anonymizedValue);
                     strategyCounts.merge(rule.getStrategy(), 1, Integer::sum);
                 }
@@ -102,10 +104,11 @@ public class AnonymizationEngine {
     /**
      * Apply anonymization strategy.
      */
-    private Object applyStrategy(String strategy, String value) {
+    private Object applyStrategy(String strategy, String column, String value) {
         return switch (strategy.toUpperCase()) {
             case "HMAC_HASH" -> anonymizer.hashId(value);
             case "PRESERVE" -> value;
+            case "RANDOM_FAKE_DATA" -> faker.anonymize(column, value);
             case "GENERALIZE" -> {
                 // Attempt to generalize dates; fallback to preserving value with a warning
                 if (value.matches("\\d{4}-\\d{2}-\\d{2}")) {
