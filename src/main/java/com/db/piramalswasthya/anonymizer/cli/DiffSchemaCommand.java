@@ -140,7 +140,7 @@ public class DiffSchemaCommand implements Callable<Integer> {
         src.setPort(Integer.parseInt(props.getProperty("anonymizer.source.port", "3306")));
         String sSchemas = props.getProperty("anonymizer.source.schemas", "");
         if (!sSchemas.isBlank()) {
-            src.setSchemas(java.util.Arrays.asList(sSchemas.split("\\s*,\\s*")));
+            src.setSchemas(splitCommaSeparated(sSchemas));
         }
         src.setUsername(props.getProperty("anonymizer.source.username", "root"));
         src.setPassword(props.getProperty("anonymizer.source.password", ""));
@@ -153,7 +153,7 @@ public class DiffSchemaCommand implements Callable<Integer> {
         tgt.setPort(Integer.parseInt(props.getProperty("anonymizer.target.port", Integer.toString(src.getPort()))));
         String tSchemas = props.getProperty("anonymizer.target.schemas", "");
         if (!tSchemas.isBlank()) {
-            tgt.setSchemas(java.util.Arrays.asList(tSchemas.split("\\s*,\\s*")));
+            tgt.setSchemas(splitCommaSeparated(tSchemas));
         } else {
             tgt.setSchemas(src.getSchemas());
         }
@@ -172,7 +172,7 @@ public class DiffSchemaCommand implements Callable<Integer> {
         safety.setEnabled(Boolean.parseBoolean(props.getProperty("anonymizer.safety.enabled", "true")));
         String allow = props.getProperty("anonymizer.safety.allowedHosts", "");
         if (!allow.isBlank()) {
-            safety.setAllowedHosts(java.util.Arrays.asList(allow.split("\\s*,\\s*")));
+            safety.setAllowedHosts(splitCommaSeparated(allow));
         }
         safety.setRequireExplicitApproval(Boolean.parseBoolean(props.getProperty("anonymizer.safety.requireExplicitApproval", "false")));
         safety.setApprovalFlag(props.getProperty("anonymizer.safety.approvalFlag", ""));
@@ -389,6 +389,33 @@ public class DiffSchemaCommand implements Callable<Integer> {
         ds.setUser(dbConfig.getUsername());
         ds.setPassword(dbConfig.getPassword());
         return ds;
+    }
+
+    /**
+     * Split a comma-separated string without using regex to avoid ReDoS risks.
+     * Trims entries and ignores empty tokens.
+     */
+    private static java.util.List<String> splitCommaSeparated(String s) {
+        if (s == null) return java.util.Collections.emptyList();
+        s = s.trim();
+        if (s.isEmpty()) return java.util.Collections.emptyList();
+
+        java.util.List<String> out = new java.util.ArrayList<>();
+        int len = s.length();
+        int start = 0;
+        for (int i = 0; i < len; i++) {
+            if (s.charAt(i) == ',') {
+                String token = s.substring(start, i).trim();
+                if (!token.isEmpty()) out.add(token);
+                start = i + 1;
+            }
+        }
+        // last token
+        if (start <= len) {
+            String token = s.substring(start, len).trim();
+            if (!token.isEmpty()) out.add(token);
+        }
+        return out;
     }
     
     /**
