@@ -1,6 +1,7 @@
 package com.db.piramalswasthya.config;
 
 import org.flywaydb.core.Flyway;
+import org.flywaydb.core.api.exception.FlywayValidateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,19 +32,26 @@ public class FlywayMigrator {
 
     @PostConstruct
     public void migrate() {
-        if (ignoreAppliedMigrationChecksum) {
-            logger.info("Repairing Flyway schema history (realigning checksums and removing failed entries)");
-            flywayDbidentity.repair();
-            flywayDb1097identity.repair();
-            flywayDbiemr.repair();
-            flywayDbreporting.repair();
-        }
-        flywayDbidentity.migrate();
-        flywayDb1097identity.migrate();
-        flywayDbiemr.migrate();
-        flywayDbreporting.migrate();
+        migrateSchema(flywayDbidentity, "db_identity");
+        migrateSchema(flywayDb1097identity, "db_1097_identity");
+        migrateSchema(flywayDbiemr, "db_iemr");
+        migrateSchema(flywayDbreporting, "db_reporting");
         System.out.println("SUCCESS");
         logger.info("Flyway migration completed successfully");
     }
-}
 
+    private void migrateSchema(Flyway flyway, String schemaName) {
+        try {
+            flyway.migrate();
+        } catch (FlywayValidateException e) {
+            if (ignoreAppliedMigrationChecksum) {
+                logger.warn("Checksum mismatch detected for {}: {}. Repairing schema history...",
+                        schemaName, e.getMessage());
+                flyway.repair();
+                flyway.migrate();
+            } else {
+                throw e;
+            }
+        }
+    }
+}
