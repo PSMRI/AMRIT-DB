@@ -3,10 +3,8 @@ package com.db.piramalswasthya.config;
 import org.flywaydb.core.Flyway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import com.db.piramalswasthya.controller.VersionController;
 
 import jakarta.annotation.PostConstruct;
 
@@ -17,6 +15,9 @@ public class FlywayMigrator {
     private final Flyway flywayDbidentity;
     private final Flyway flywayDbreporting;
     private final Flyway flywayDb1097identity;
+
+    @Value("${amrit.flyway.ignore-applied-migration-checksum:false}")
+    private boolean ignoreAppliedMigrationChecksum;
 
     public FlywayMigrator(Flyway flywayDbiemr,
                           Flyway flywayDbidentity,
@@ -30,13 +31,19 @@ public class FlywayMigrator {
 
     @PostConstruct
     public void migrate() {
-        flywayDbiemr.migrate();
+        if (ignoreAppliedMigrationChecksum) {
+            logger.info("Repairing Flyway schema history (realigning checksums and removing failed entries)");
+            flywayDbidentity.repair();
+            flywayDb1097identity.repair();
+            flywayDbiemr.repair();
+            flywayDbreporting.repair();
+        }
         flywayDbidentity.migrate();
-        flywayDbreporting.migrate();
         flywayDb1097identity.migrate();
+        flywayDbiemr.migrate();
+        flywayDbreporting.migrate();
         System.out.println("SUCCESS");
         logger.info("Flyway migration completed successfully");
-        
     }
 }
 
