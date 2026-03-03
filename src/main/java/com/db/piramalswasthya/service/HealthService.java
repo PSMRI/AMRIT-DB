@@ -42,15 +42,6 @@ import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PreDestroy;
 
-/**
- * Health service for AMRIT-DB.
- * Checks the health of the application and its dependencies,
- * specifically the database connectivity and performance metrics.
- * Includes advanced MySQL diagnostics for monitoring stuck processes,
- * long transactions, deadlocks, slow queries, and connection usage.
- *
- * @author Piramal Swasthya
- */
 @Service
 public class HealthService {
 
@@ -104,8 +95,8 @@ public class HealthService {
 
 	private final AtomicLong lastDiagnosticRunAt = new AtomicLong(0);
 	private final AtomicReference<String> cachedDbSeverity = new AtomicReference<>(SEVERITY_OK);
-	private final AtomicLong previousDeadlockCount = new AtomicLong(0);
-	private final AtomicLong previousSlowQueryCount = new AtomicLong(0);
+	private final AtomicLong previousDeadlockCount = new AtomicLong(-1);
+	private final AtomicLong previousSlowQueryCount = new AtomicLong(-1);
 
 	public HealthService(ObjectProvider<DataSource> dataSourceProvider) {
 		this.dataSource = dataSourceProvider.getIfAvailable();
@@ -139,11 +130,6 @@ public class HealthService {
 		}
 	}
 
-	/**
-	 * Check overall health of the application
-	 *
-	 * @return Map containing health status
-	 */
 	public Map<String, Object> checkHealth() {
 		Map<String, Object> response = new LinkedHashMap<>();
 
@@ -162,11 +148,6 @@ public class HealthService {
 		return response;
 	}
 
-	/**
-	 * Check database connectivity with cached severity from background diagnostics
-	 *
-	 * @return Map containing database connectivity status and severity
-	 */
 	private Map<String, Object> checkDatabaseConnectivity() {
 		Map<String, Object> result = new LinkedHashMap<>();
 
@@ -199,9 +180,6 @@ public class HealthService {
 		return result;
 	}
 
-	/**
-	 * Run advanced MySQL diagnostics in background
-	 */
 	private void runAdvancedMySQLDiagnostics() {
 		// Dedup guard: skip if last run was within the past 25 seconds
 		long now = System.currentTimeMillis();
@@ -230,9 +208,6 @@ public class HealthService {
 			worstSeverity);
 	}
 
-	/**
-	 * Check for stuck MySQL processes
-	 */
 	private String performStuckProcessCheck(Connection conn) {
 		try (Statement stmt = conn.createStatement(); 
 		     ResultSet rs = stmt.executeQuery(
@@ -261,9 +236,6 @@ public class HealthService {
 		return SEVERITY_OK;
 	}
 
-	/**
-	 * Check for long-running transactions
-	 */
 	private String performLongTransactionCheck(Connection conn) {
 		try (Statement stmt = conn.createStatement(); 
 		     ResultSet rs = stmt.executeQuery(
@@ -287,9 +259,6 @@ public class HealthService {
 		return SEVERITY_OK;
 	}
 
-	/**
-	 * Check for InnoDB deadlocks
-	 */
 	private String performDeadlockCheck(Connection conn) {
 		try (Statement stmt = conn.createStatement(); 
 		     ResultSet rs = stmt.executeQuery("SHOW STATUS LIKE 'Innodb_deadlocks'")) {
@@ -297,7 +266,9 @@ public class HealthService {
 			if (rs.next()) {
 				long currentDeadlocks = rs.getLong(STATUS_VALUE);
 				long previousDeadlocks = previousDeadlockCount.getAndSet(currentDeadlocks);
-
+			if (previousDeadlocks < 0) {
+				return SEVERITY_OK; // baseline capture on first run
+			}
 				if (currentDeadlocks > previousDeadlocks) {
 					long deltaDeadlocks = currentDeadlocks - previousDeadlocks;
 					logger.warn(
@@ -313,9 +284,6 @@ public class HealthService {
 		return SEVERITY_OK;
 	}
 
-	/**
-	 * Check for slow queries
-	 */
 	private String performSlowQueryCheck(Connection conn) {
 		try (Statement stmt = conn.createStatement(); 
 		     ResultSet rs = stmt.executeQuery("SHOW STATUS LIKE 'Slow_queries'")) {
@@ -323,7 +291,9 @@ public class HealthService {
 			if (rs.next()) {
 				long slowQueries = rs.getLong(STATUS_VALUE);
 				long previousSlow = previousSlowQueryCount.getAndSet(slowQueries);
-
+			if (previousSlow < 0) {
+				return SEVERITY_OK; // baseline capture on first run
+			}
 				// Only warn if slow queries have *increased* since last run
 				if (slowQueries > previousSlow) {
 					long delta = slowQueries - previousSlow;
@@ -340,9 +310,6 @@ public class HealthService {
 		return SEVERITY_OK;
 	}
 
-	/**
-	 * Check MySQL connection pool usage
-	 */
 	private String performConnectionUsageCheck(Connection conn) {
 		try (Statement stmt = conn.createStatement()) {
 			int threadsConnected = 0;
@@ -381,9 +348,7 @@ public class HealthService {
 		return SEVERITY_OK;
 	}
 
-	/**
-	 * Resolve overall database status based on severity
-	 */
+
 	private String resolveDatabaseStatus(String severity) {
 		return switch (severity) {
 			case SEVERITY_CRITICAL -> STATUS_DOWN;
@@ -392,16 +357,12 @@ public class HealthService {
 		};
 	}
 
-	/**
-	 * Escalate severity if candidate is worse than current
-	 */
+
 	private String escalate(String current, String candidate) {
 		return severityRank(candidate) > severityRank(current) ? candidate : current;
 	}
 
-	/**
-	 * Get severity rank for comparison
-	 */
+
 	private int severityRank(String severity) {
 		return switch (severity) {
 			case SEVERITY_CRITICAL -> 2;

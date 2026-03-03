@@ -57,11 +57,22 @@ public class HealthController {
 
 		// Standard HTTP Status logic with DEGRADED support
 		String status = (String) healthStatus.get("status");
-		HttpStatus httpStatus = "UP".equals(status) ? HttpStatus.OK : HttpStatus.SERVICE_UNAVAILABLE;
+		HttpStatus httpStatus = ("DOWN".equals(status) || "NOT_CONFIGURED".equals(status))
+			? HttpStatus.SERVICE_UNAVAILABLE
+			: HttpStatus.OK;
+
+		Object severity = "UNKNOWN";
+		Object databaseObj = healthStatus.get("database");
+		if (databaseObj instanceof Map) {
+			Object extractedSeverity = ((Map<?, ?>) databaseObj).get("severity");
+			if (extractedSeverity != null) {
+				severity = extractedSeverity;
+			}
+		}
 
 		logger.info("Health check completed with status: {} | severity: {}", 
 			status, 
-			healthStatus.getOrDefault("severity", "UNKNOWN"));
+			severity);
 
 		return ResponseEntity.status(httpStatus).body(healthStatus);
 	}
