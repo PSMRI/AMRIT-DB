@@ -216,18 +216,19 @@ public class HealthService {
 				"SELECT COUNT(*) AS cnt FROM information_schema.PROCESSLIST " +
 				"WHERE TIME > " + STUCK_PROCESS_SECONDS + " AND COMMAND != 'Sleep'")) {
 
-			if (rs.next()) {
-				int stuckCount = rs.getInt("cnt");
-				if (stuckCount > 0) {
-					if (stuckCount > STUCK_PROCESS_THRESHOLD) {
-						logger.warn(
-							"[{}] Stuck MySQL processes detected above threshold | count={} | threshold={} | thresholdSeconds={}",
-							LOG_EVENT_STUCK_PROCESS, stuckCount, STUCK_PROCESS_THRESHOLD, STUCK_PROCESS_SECONDS);
-						return SEVERITY_WARNING;
-					} else {
-						logger.info(
-							"[{}] Stuck MySQL processes below threshold | count={} | threshold={}",
-							LOG_EVENT_STUCK_PROCESS, stuckCount, STUCK_PROCESS_THRESHOLD);
+				if (rs.next()) {
+					int stuckCount = rs.getInt("cnt");
+					if (stuckCount > 0) {
+						if (stuckCount > STUCK_PROCESS_THRESHOLD) {
+							logger.warn(
+								"[{}] Stuck MySQL processes detected above threshold | count={} | threshold={} | thresholdSeconds={}",
+								LOG_EVENT_STUCK_PROCESS, stuckCount, STUCK_PROCESS_THRESHOLD, STUCK_PROCESS_SECONDS);
+							return SEVERITY_WARNING;
+						} else {
+							logger.info(
+								"[{}] Stuck MySQL processes below threshold | count={} | threshold={}",
+								LOG_EVENT_STUCK_PROCESS, stuckCount, STUCK_PROCESS_THRESHOLD);
+						}
 					}
 				}
 			}
@@ -271,9 +272,9 @@ public class HealthService {
 				if (rs.next()) {
 					long currentDeadlocks = rs.getLong(STATUS_VALUE);
 					long previousDeadlocks = previousDeadlockCount.getAndSet(currentDeadlocks);
-				if (previousDeadlocks < 0) {
-					return SEVERITY_OK; // baseline capture on first run
-				}
+					if (previousDeadlocks < 0) {
+						return SEVERITY_OK; // baseline capture on first run
+					}
 					if (currentDeadlocks > previousDeadlocks) {
 						long deltaDeadlocks = currentDeadlocks - previousDeadlocks;
 						logger.warn(
@@ -298,9 +299,9 @@ public class HealthService {
 				if (rs.next()) {
 					long slowQueries = rs.getLong(STATUS_VALUE);
 					long previousSlow = previousSlowQueryCount.getAndSet(slowQueries);
-				if (previousSlow < 0) {
-					return SEVERITY_OK; // baseline capture on first run
-				}
+					if (previousSlow < 0) {
+						return SEVERITY_OK; // baseline capture on first run
+					}
 					// Only warn if slow queries have *increased* since last run
 					if (slowQueries > previousSlow) {
 						long delta = slowQueries - previousSlow;
