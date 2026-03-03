@@ -3,11 +3,13 @@ package com.db.piramalswasthya.config;
 import org.flywaydb.core.Flyway;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 import jakarta.annotation.PostConstruct;
 
 @Component
 @Slf4j
+@ConditionalOnProperty(name = "spring.flyway.enabled", havingValue = "true", matchIfMissing = true)
 public class FlywayMigrator {
 	private final Flyway flywaydbiemr;
     private final Flyway flywayDbidentity;

@@ -91,12 +91,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!-- Picocli for CLI -->
+           <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-configuration-processor</artifactId>
+              <optional>true</optional>
+           </dependency>
         <dependency>
             <groupId>info.picocli</groupId>
             <artifactId>picocli</artifactId>
@@ -141,6 +140,10 @@
                     </image>
                     <!-- Explicit main class for repackaging (useful for WAR packaging) -->
                     <mainClass>com.db.piramalswasthya.AmritDbApplication</mainClass>
+                    <!-- produce exec-classified repackaged artifact for local executable runs -->
+                    <classifier>exec</classifier>
+                    <!-- pass safe defaults when running via the plugin to avoid Flyway/web startup -->
+                    <jvmArguments>-Dspring.flyway.enabled=false -Dspring.main.web-application-type=none</jvmArguments>
                 </configuration>
             </plugin>
             <plugin>
