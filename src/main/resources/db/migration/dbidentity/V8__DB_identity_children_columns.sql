@@ -1,63 +1,54 @@
-USE db_iemr;
+USE db_identity;
 
-SET @dbname = 'db_iemr';
-SET @tablename = 'ELIGIBLE_COUPLE_TRACKING';
+-- i_beneficiarydetails_rmnch: add isChildrenAdded, isMarried, doYouHavechildren, noOfchildren, noofAlivechildren
+SET @dbname = 'db_identity';
+SET @tablename = 'i_beneficiarydetails_rmnch';
 
-SET @columnname = 'date_of_antra_injection';
+SET @columnname = 'isChildrenAdded';
 SET @preparedStatement = (SELECT IF(
   (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = @dbname AND TABLE_NAME = @tablename AND COLUMN_NAME = @columnname) > 0,
   'SELECT 1',
-  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' TIMESTAMP NULL;')
+  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' TINYINT(1) DEFAULT NULL;')
 ));
 PREPARE stmt FROM @preparedStatement;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
-SET @columnname = 'due_date_of_antra_injection';
+SET @columnname = 'isMarried';
 SET @preparedStatement = (SELECT IF(
   (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = @dbname AND TABLE_NAME = @tablename AND COLUMN_NAME = @columnname) > 0,
   'SELECT 1',
-  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' VARCHAR(255);')
+  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' TINYINT(1) DEFAULT NULL;')
 ));
 PREPARE stmt FROM @preparedStatement;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
-SET @columnname = 'mpa_file';
+SET @columnname = 'doYouHavechildren';
 SET @preparedStatement = (SELECT IF(
   (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = @dbname AND TABLE_NAME = @tablename AND COLUMN_NAME = @columnname) > 0,
   'SELECT 1',
-  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' VARCHAR(255);')
+  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' TINYINT(1) DEFAULT NULL;')
 ));
 PREPARE stmt FROM @preparedStatement;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
-SET @columnname = 'antra_dose';
+SET @columnname = 'noOfchildren';
 SET @preparedStatement = (SELECT IF(
   (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = @dbname AND TABLE_NAME = @tablename AND COLUMN_NAME = @columnname) > 0,
   'SELECT 1',
-  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' VARCHAR(100);')
+  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' INT DEFAULT NULL;')
 ));
 PREPARE stmt FROM @preparedStatement;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
-SET @columnname = 'discharge_summary1';
+SET @columnname = 'noofAlivechildren';
 SET @preparedStatement = (SELECT IF(
   (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = @dbname AND TABLE_NAME = @tablename AND COLUMN_NAME = @columnname) > 0,
   'SELECT 1',
-  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' VARCHAR(255);')
-));
-PREPARE stmt FROM @preparedStatement;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-SET @columnname = 'discharge_summary2';
-SET @preparedStatement = (SELECT IF(
-  (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = @dbname AND TABLE_NAME = @tablename AND COLUMN_NAME = @columnname) > 0,
-  'SELECT 1',
-  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' VARCHAR(255);')
+  CONCAT('ALTER TABLE ', @dbname, '.', @tablename, ' ADD COLUMN ', @columnname, ' INT DEFAULT NULL;')
 ));
 PREPARE stmt FROM @preparedStatement;
 EXECUTE stmt;
