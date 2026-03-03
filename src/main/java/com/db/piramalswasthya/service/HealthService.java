@@ -82,6 +82,7 @@ public class HealthService {
 	private static final int LONG_TXN_SECONDS = 60;           // transaction age threshold
 	private static final int CONNECTION_USAGE_WARNING = 80;   // > 80% → WARNING
 	private static final int CONNECTION_USAGE_CRITICAL = 95;  // > 95% → CRITICAL
+	private static final int DIAGNOSTIC_QUERY_TIMEOUT_SECONDS = 3; // query timeout for diagnostic statements
 	private static final long DIAGNOSTIC_INTERVAL_SEC = 30;   // background run interval
 	private static final long DIAGNOSTIC_GUARD_SEC = 25;      // safety dedup guard
 
@@ -209,8 +210,9 @@ public class HealthService {
 	}
 
 	private String performStuckProcessCheck(Connection conn) {
-		try (Statement stmt = conn.createStatement(); 
-		     ResultSet rs = stmt.executeQuery(
+		try (Statement stmt = conn.createStatement()) {
+			stmt.setQueryTimeout(DIAGNOSTIC_QUERY_TIMEOUT_SECONDS);
+			try (ResultSet rs = stmt.executeQuery(
 				"SELECT COUNT(*) AS cnt FROM information_schema.PROCESSLIST " +
 				"WHERE TIME > " + STUCK_PROCESS_SECONDS + " AND COMMAND != 'Sleep'")) {
 
@@ -237,19 +239,21 @@ public class HealthService {
 	}
 
 	private String performLongTransactionCheck(Connection conn) {
-		try (Statement stmt = conn.createStatement(); 
-		     ResultSet rs = stmt.executeQuery(
+		try (Statement stmt = conn.createStatement()) {
+			stmt.setQueryTimeout(DIAGNOSTIC_QUERY_TIMEOUT_SECONDS);
+			try (ResultSet rs = stmt.executeQuery(
 				"SELECT COUNT(*) AS cnt FROM information_schema.INNODB_TRX " +
 				"WHERE TIME_TO_SEC(TIMEDIFF(NOW(), trx_started)) > " + LONG_TXN_SECONDS)) {
 
-			if (rs.next()) {
-				int lockCount = rs.getInt("cnt");
-				if (lockCount >= LONG_TXN_WARNING_THRESHOLD) {
-					logger.warn(
-						"[{}] InnoDB long-running transaction(s) detected | count={} | thresholdSeconds={}",
-						LOG_EVENT_LONG_TXN, lockCount, LONG_TXN_SECONDS);
-					// Graduated escalation: WARNING for 1-4, CRITICAL for 5+
-					return lockCount >= LONG_TXN_CRITICAL_THRESHOLD ? SEVERITY_CRITICAL : SEVERITY_WARNING;
+				if (rs.next()) {
+					int lockCount = rs.getInt("cnt");
+					if (lockCount >= LONG_TXN_WARNING_THRESHOLD) {
+						logger.warn(
+							"[{}] InnoDB long-running transaction(s) detected | count={} | thresholdSeconds={}",
+							LOG_EVENT_LONG_TXN, lockCount, LONG_TXN_SECONDS);
+						// Graduated escalation: WARNING for 1-4, CRITICAL for 5+
+						return lockCount >= LONG_TXN_CRITICAL_THRESHOLD ? SEVERITY_CRITICAL : SEVERITY_WARNING;
+					}
 				}
 			}
 		} catch (Exception e) {
@@ -260,21 +264,23 @@ public class HealthService {
 	}
 
 	private String performDeadlockCheck(Connection conn) {
-		try (Statement stmt = conn.createStatement(); 
-		     ResultSet rs = stmt.executeQuery("SHOW STATUS LIKE 'Innodb_deadlocks'")) {
+		try (Statement stmt = conn.createStatement()) {
+			stmt.setQueryTimeout(DIAGNOSTIC_QUERY_TIMEOUT_SECONDS);
+			try (ResultSet rs = stmt.executeQuery("SHOW STATUS LIKE 'Innodb_deadlocks'")) {
 
-			if (rs.next()) {
-				long currentDeadlocks = rs.getLong(STATUS_VALUE);
-				long previousDeadlocks = previousDeadlockCount.getAndSet(currentDeadlocks);
-			if (previousDeadlocks < 0) {
-				return SEVERITY_OK; // baseline capture on first run
-			}
-				if (currentDeadlocks > previousDeadlocks) {
-					long deltaDeadlocks = currentDeadlocks - previousDeadlocks;
-					logger.warn(
-						"[{}] InnoDB deadlocks detected since last run | deltaCount={} | cumulativeCount={}",
-						LOG_EVENT_DEADLOCK, deltaDeadlocks, currentDeadlocks);
-					return SEVERITY_WARNING;
+				if (rs.next()) {
+					long currentDeadlocks = rs.getLong(STATUS_VALUE);
+					long previousDeadlocks = previousDeadlockCount.getAndSet(currentDeadlocks);
+				if (previousDeadlocks < 0) {
+					return SEVERITY_OK; // baseline capture on first run
+				}
+					if (currentDeadlocks > previousDeadlocks) {
+						long deltaDeadlocks = currentDeadlocks - previousDeadlocks;
+						logger.warn(
+							"[{}] InnoDB deadlocks detected since last run | deltaCount={} | cumulativeCount={}",
+							LOG_EVENT_DEADLOCK, deltaDeadlocks, currentDeadlocks);
+						return SEVERITY_WARNING;
+					}
 				}
 			}
 		} catch (Exception e) {
@@ -285,22 +291,24 @@ public class HealthService {
 	}
 
 	private String performSlowQueryCheck(Connection conn) {
-		try (Statement stmt = conn.createStatement(); 
-		     ResultSet rs = stmt.executeQuery("SHOW STATUS LIKE 'Slow_queries'")) {
+		try (Statement stmt = conn.createStatement()) {
+			stmt.setQueryTimeout(DIAGNOSTIC_QUERY_TIMEOUT_SECONDS);
+			try (ResultSet rs = stmt.executeQuery("SHOW STATUS LIKE 'Slow_queries'")) {
 
-			if (rs.next()) {
-				long slowQueries = rs.getLong(STATUS_VALUE);
-				long previousSlow = previousSlowQueryCount.getAndSet(slowQueries);
-			if (previousSlow < 0) {
-				return SEVERITY_OK; // baseline capture on first run
-			}
-				// Only warn if slow queries have *increased* since last run
-				if (slowQueries > previousSlow) {
-					long delta = slowQueries - previousSlow;
-					logger.warn(
-						"[{}] New slow queries detected since last run | deltaCount={} | cumulativeCount={}",
-						LOG_EVENT_SLOW_QUERIES, delta, slowQueries);
-					return SEVERITY_WARNING;
+				if (rs.next()) {
+					long slowQueries = rs.getLong(STATUS_VALUE);
+					long previousSlow = previousSlowQueryCount.getAndSet(slowQueries);
+				if (previousSlow < 0) {
+					return SEVERITY_OK; // baseline capture on first run
+				}
+					// Only warn if slow queries have *increased* since last run
+					if (slowQueries > previousSlow) {
+						long delta = slowQueries - previousSlow;
+						logger.warn(
+							"[{}] New slow queries detected since last run | deltaCount={} | cumulativeCount={}",
+							LOG_EVENT_SLOW_QUERIES, delta, slowQueries);
+						return SEVERITY_WARNING;
+					}
 				}
 			}
 		} catch (Exception e) {
@@ -312,6 +320,7 @@ public class HealthService {
 
 	private String performConnectionUsageCheck(Connection conn) {
 		try (Statement stmt = conn.createStatement()) {
+			stmt.setQueryTimeout(DIAGNOSTIC_QUERY_TIMEOUT_SECONDS);
 			int threadsConnected = 0;
 			int maxConnections = 0;
 
@@ -320,6 +329,7 @@ public class HealthService {
 					threadsConnected = rs.getInt(STATUS_VALUE);
 			}
 
+			stmt.setQueryTimeout(DIAGNOSTIC_QUERY_TIMEOUT_SECONDS);
 			try (ResultSet rs = stmt.executeQuery("SHOW VARIABLES LIKE 'max_connections'")) {
 				if (rs.next())
 					maxConnections = rs.getInt(STATUS_VALUE);
