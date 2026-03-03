@@ -142,8 +142,6 @@
                     <mainClass>com.db.piramalswasthya.AmritDbApplication</mainClass>
                     <!-- produce exec-classified repackaged artifact for local executable runs -->
                     <classifier>exec</classifier>
-                    <!-- pass safe defaults when running via the plugin to avoid Flyway/web startup -->
-                    <jvmArguments>-Dspring.flyway.enabled=false -Dspring.main.web-application-type=none</jvmArguments>
                 </configuration>
             </plugin>
             <plugin>
