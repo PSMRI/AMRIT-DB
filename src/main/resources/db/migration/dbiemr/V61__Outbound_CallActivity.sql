@@ -7,15 +7,11 @@ CREATE TABLE IF NOT EXISTS m_outbound_call_activity (
     CreatedBy VARCHAR(50),
     CreatedDate DATETIME,
     ModifiedBy VARCHAR(50),
-    LastModDate DATETIME
+    LastModDate DATETIME,
+ 
+    INDEX idx_outbound_activity_created_date (CreatedDate),
+    INDEX idx_outbound_activity_is_active (IsActive)
 );
-
--- Add index on CreatedDate and IsActive for m_outbound_call_activity
-CREATE INDEX IF NOT EXISTS idx_outbound_activity_created_date 
-    ON m_outbound_call_activity (CreatedDate);
-
-CREATE INDEX IF NOT EXISTS idx_outbound_activity_is_active 
-    ON m_outbound_call_activity (IsActive);
 
 SET @dbname = 'db_iemr';
 SET @tablename = 't_104CoMoOutboundCallDetails';
