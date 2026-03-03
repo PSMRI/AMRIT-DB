@@ -21,45 +21,61 @@
 */
 package com.db.piramalswasthya.controller;
 
-import java.util.List;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.db.piramalswasthya.data.FlywaySchemaVersion;
-import com.db.piramalswasthya .service.VersionService;
-import com.google.gson.Gson;
-
+/**
+ * REST controller exposing application version and build metadata.
+ * Provides the /version endpoint which returns Git metadata
+ * in a standardized JSON format consistent across all AMRIT APIs.
+ *
+ * @author Piramal Swasthya
+ */
 @RestController
-
-@RequestMapping("/db/migration")
 public class VersionController {
-	private Logger logger = LoggerFactory.getLogger(VersionController.class);
+	private final Logger logger = LoggerFactory.getLogger(VersionController.class);
 	
-	private VersionService service;
-	
-	@Autowired
-	public void setCommonServiceImpl(VersionService service) {
-		this.service = service;
+	private static final String UNKNOWN_VALUE = "unknown";
+
+	@GetMapping(value = "/version", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map<String, String>> versionInformation() {
+		Map<String, String> response = new LinkedHashMap<>();
+		try {
+			logger.info("Version controller start");
+			Properties gitProperties = loadGitProperties();
+			response.put("buildTimestamp", gitProperties.getProperty("git.build.time", UNKNOWN_VALUE));
+			response.put("version", gitProperties.getProperty("git.build.version", UNKNOWN_VALUE));
+			response.put("branch", gitProperties.getProperty("git.branch", UNKNOWN_VALUE));
+			response.put("commitHash", gitProperties.getProperty("git.commit.id.abbrev", UNKNOWN_VALUE));
+		} catch (Exception e) {
+			logger.error("Failed to load version information", e);
+			response.put("buildTimestamp", UNKNOWN_VALUE);
+			response.put("version", UNKNOWN_VALUE);
+			response.put("branch", UNKNOWN_VALUE);
+			response.put("commitHash", UNKNOWN_VALUE);
+		}
+		logger.info("Version controller end");
+		return ResponseEntity.ok(response);
 	}
 
-	@GetMapping("/version")
-	public String getLatestDBMigrationVersion() throws Exception {
-		String resp = null;
-		try {
-			List<FlywaySchemaVersion> latestVersion = service.getLatestVersion();
-			Gson gson = new Gson();
-			if (null != latestVersion && !CollectionUtils.isEmpty(latestVersion)) {
-				resp = gson.toJson(latestVersion);
+	private Properties loadGitProperties() throws IOException {
+		Properties properties = new Properties();
+		try (InputStream input = getClass().getClassLoader()
+				.getResourceAsStream("git.properties")) {
+			if (input != null) {
+				properties.load(input);
 			}
-		} catch (Exception e) {
-			throw new Exception("Error while getting DB Migration version: " + e.getMessage(), e);
 		}
-		return resp;
+		return properties;
 	}
 }
