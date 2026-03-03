@@ -272,9 +272,9 @@ public class HealthService {
 				if (rs.next()) {
 					long currentDeadlocks = rs.getLong(STATUS_VALUE);
 					long previousDeadlocks = previousDeadlockCount.getAndSet(currentDeadlocks);
-				if (previousDeadlocks < 0) {
-					return SEVERITY_OK; // baseline capture on first run
-				}
+					if (previousDeadlocks < 0) {
+						return SEVERITY_OK; // baseline capture on first run
+					}
 					if (currentDeadlocks > previousDeadlocks) {
 						long deltaDeadlocks = currentDeadlocks - previousDeadlocks;
 						logger.warn(
@@ -299,9 +299,9 @@ public class HealthService {
 				if (rs.next()) {
 					long slowQueries = rs.getLong(STATUS_VALUE);
 					long previousSlow = previousSlowQueryCount.getAndSet(slowQueries);
-				if (previousSlow < 0) {
-					return SEVERITY_OK; // baseline capture on first run
-				}
+					if (previousSlow < 0) {
+						return SEVERITY_OK; // baseline capture on first run
+					}
 					// Only warn if slow queries have *increased* since last run
 					if (slowQueries > previousSlow) {
 						long delta = slowQueries - previousSlow;
