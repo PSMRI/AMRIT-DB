@@ -691,6 +691,8 @@ public class RunCommand implements Callable<Integer> {
         String reportPath = loggingPath + "/run-report-" + executionId + ".json";
         
         ObjectMapper mapper = new ObjectMapper();
+        // auto-detect and register modules (e.g., JSR-310) so Java 8 date/time types serialize
+        mapper.findAndRegisterModules();
         mapper.writerWithDefaultPrettyPrinter().writeValue(new File(reportPath), report);
         
         log.info("Report written to: {}", reportPath);

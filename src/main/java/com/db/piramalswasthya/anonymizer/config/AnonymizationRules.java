@@ -23,6 +23,7 @@
 package com.db.piramalswasthya.anonymizer.config;
 
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Map;
 
 /**
@@ -32,6 +33,7 @@ import java.util.Map;
  * with version tracking and schema hints.
  */
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AnonymizationRules {
     private String rulesVersion;
     private String schemaHint;
@@ -45,20 +47,27 @@ public class AnonymizationRules {
     }
     
     @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class DatabaseRules {
         private Map<String, TableRules> tables;
     }
     
     @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class TableRules {
         private String primaryKey;
+        private String canonicalName;
         private Map<String, ColumnRule> columns;
     }
     
     @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class ColumnRule {
         private String strategy;
         private String format;
         private String description;
+        private String canonicalName;
+        private String dataType;
+        private Boolean nullable;
     }
 }

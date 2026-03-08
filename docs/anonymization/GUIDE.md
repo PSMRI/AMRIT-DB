@@ -63,35 +63,19 @@ flowchart LR
   subgraph Target[DB2: UAT]
     T1[(db_iemr<br/>db_identity<br/>db_reporting<br/>db_1097_identity)]
   end
-
-  ## Configuration
+```
+## Configuration
 
   ### Configuration File Format and Precedence
 
   The project uses Spring `.properties` files for runtime configuration and a single registry file for anonymization rules. Follow this precedence and edit the files below when configuring the system:
 
   - Rules (source of truth): `src/main/resources/anonymizer/anonymization-registry.yml`.
-  - Runtime settings: `src/main/resources/anonymizer/*.properties` or
-    `src/main/environment/common_local.properties` for local overrides (gitignored).
+  - Runtime settings: `src/main/environment/common_local.properties` for local overrides (gitignored).
   - Environment variables override properties for secrets (for example `HMAC_SECRET_KEY`).
 
 
-  Recommended runtime keys (example - copy into `common_local.properties`):
-
-  ```
-  # anonymizer.source.host=localhost
-  # anonymizer.source.port=3306
-  # anonymizer.source.schemas=db_iemr,db_identity,db_reporting,db_1097_identity
-  # anonymizer.source.username=readonly_user
-  # anonymizer.source.password=...
-  # anonymizer.target.host=localhost
-  # anonymizer.target.username=uat_user
-  # anonymizer.target.password=...
-  # anonymizer.hmacSecretKey=${HMAC_SECRET_KEY}
-  # anonymizer.safety.operationId=OPERATION_2026_02_20
-  ```
-
-  The CLI prefers runtime values from `anonymizer.*` properties (see below) and
+  The CLI prefers runtime values from `anonymizer.*` properties(see below) and
   environment variables for secrets. Migrate any prior runtime settings into
   `src/main/environment/common_local.properties`.
 - Required runtime secrets should be supplied via environment variables (for example `HMAC_SECRET_KEY`).
@@ -133,7 +117,7 @@ export HMAC_SECRET_KEY="$(openssl rand -hex 32)"
 
 ### 5. Run Anonymization
 
-Use the `anonymizer.*` properties or environment variables; do not use YAML.
+Use the `anonymizer.*` properties or environment variables.
 
 ```bash
 # Dry run (validation only)
@@ -321,16 +305,30 @@ The tool automatically attempts Strategy 1, then falls back to Strategy 2 if nee
 
 ### Running Commands
 
-All commands are executed using Maven exec plugin:
+Run the CLI directly from the packaged classes (recommended) or use Maven exec as an alternative. The direct-run avoids starting the Spring web server and is preferred for local `--dry-run` validation.
+
+**Important Notes:**  
+- The CLI is a standalone application; `java -cp` avoids starting a web server.  
+- Use double quotes on Windows classpaths and single quotes on Linux/macOS.  
+- Ensure `target/dependency` contains a compatible `snakeyaml-2.x` JAR (remove old `snakeyaml-*-android.jar` if present).
+
+1. Copy runtime dependencies to `target/dependency`:
 
 ```bash
-mvn exec:java "-Dexec.args=[COMMAND] [OPTIONS]"
+mvn dependency:copy-dependencies -DoutputDirectory=target/dependency -DincludeScope=runtime
 ```
 
-**Important Notes:**
-- Always quote the `-Dexec.args` parameter
-- Use double quotes on Windows, single or double on Linux/Mac
-- The tool runs as a CLI application (does not start a web server)
+2. Run the CLI (Windows):
+
+```powershell
+java -cp "target/classes;target/dependency/*" com.db.piramalswasthya.anonymizer.AmritDbAnonymizer run -c src/main/environment/common_local.properties --dry-run
+```
+
+Or (Linux/macOS):
+
+```bash
+java -cp 'target/classes:target/dependency/*' com.db.piramalswasthya.anonymizer.AmritDbAnonymizer run -c src/main/environment/common_local.properties --dry-run
+```
 
 ### View Help
 

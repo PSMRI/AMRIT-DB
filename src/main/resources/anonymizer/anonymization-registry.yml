@@ -10,10 +10,10 @@
 #   SUPPRESS           - Replace with NULL
 #   PRESERVE           - Keep original value
 
-version: "1.0.0"
-lastUpdated: "2026-02-15T12:00:00Z"
-schemaVersion: "V6"
-toolVersion: "1.0.0"
+rulesVersion: "1.0.0"
+# lastUpdated: "2026-02-15T12:00:00Z"
+schemaHint: "V6"
+# toolVersion: "1.0.0"
 
 databases:
   db_identity:
@@ -35,12 +35,12 @@ databases:
             canonicalName: "FirstName"
             dataType: "VARCHAR"
             nullable: true
-              strategy: "FAKE_FIRSTNAME"
+            strategy: "FAKE_FIRSTNAME"
           LastName:
             canonicalName: "LastName"
             dataType: "VARCHAR"
             nullable: true
-              strategy: "FAKE_LASTNAME"
+            strategy: "FAKE_LASTNAME"
           PhoneNo:
             canonicalName: "PhoneNo"
             dataType: "VARCHAR"
@@ -84,7 +84,7 @@ databases:
             canonicalName: "UserName"
             dataType: "VARCHAR"
             nullable: false
-              strategy: "FAKE_USERNAME"
+            strategy: "FAKE_USERNAME"
           Password:
             canonicalName: "Password"
             dataType: "VARCHAR"
@@ -115,12 +115,12 @@ databases:
             canonicalName: "FirstName"
             dataType: "VARCHAR"
             nullable: true
-              strategy: "FAKE_FIRSTNAME"
+            strategy: "FAKE_FIRSTNAME"
           LastName:
             canonicalName: "LastName"
             dataType: "VARCHAR"
             nullable: true
-              strategy: "FAKE_LASTNAME"
+            strategy: "FAKE_LASTNAME"
           PhoneNo:
             canonicalName: "PhoneNo"
             dataType: "VARCHAR"
@@ -205,7 +205,7 @@ databases:
             canonicalName: "BeneficiaryName"
             dataType: "VARCHAR"
             nullable: true
-              strategy: "FAKE_FULLNAME"
+            strategy: "FAKE_FULLNAME"
           AgeGroup:
             canonicalName: "AgeGroup"
             dataType: "VARCHAR"
