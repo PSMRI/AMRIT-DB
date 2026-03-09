@@ -92,17 +92,22 @@
             <artifactId>jackson-dataformat-yaml</artifactId>
         </dependency>
 
-        <!-- Explicit SnakeYAML to ensure compatibility with jackson-dataformat-yaml -->
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
-            <version>2.1</version>
+            <version>2.2</version>
         </dependency>
 
         <dependency>
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
             <version>1.0.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.yaml</groupId>
+                    <artifactId>snakeyaml</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

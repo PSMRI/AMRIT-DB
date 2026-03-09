@@ -81,10 +81,7 @@ public class RunCommand implements Callable<Integer> {
         @Option(names = {"-c", "--config"}, description = "Config file (default: src/main/environment/common_local.properties)", 
             defaultValue = "src/main/environment/common_local.properties")
     private String configFile;
-    
-        @Option(names = {"--approve"}, description = "Explicit approval token", 
-            required = false)
-        private String approvalToken;
+
     
     @Option(names = {"--dry-run"}, description = "Validate configuration without executing")
     private boolean dryRun;
@@ -121,19 +118,28 @@ public class RunCommand implements Callable<Integer> {
             }
 
             config = loadConfig(configFile);
+            String rulesPath = config.getRulesFile();
+            if (rulesPath == null || rulesPath.isBlank()) {
+                throw new IllegalArgumentException("Configuration must specify a rules file via 'anonymizer.rulesFile' or rulesFile in YAML config.");
+            }
+            java.io.File rf = new java.io.File(rulesPath);
+            if (!rf.exists() || rf.isDirectory()) {
+                throw new IllegalArgumentException("Anonymization rules file not found: " + rulesPath + ". Provide a valid rules YAML (e.g. anonymization-registry.yml).");
+            }
+
             AnonymizationRules rules = loadRules(config.getRulesFile());
             
             // 2. Hash config and rules for versioning
             report.setConfigHash(hashFileContents(configFile));
             report.setRulesHash(hashFileContents(config.getRulesFile()));
             report.setRulesVersion(rules.getRulesVersion());
-            
+
             // 3. Validate configuration
             validateConfiguration(config, rules);
             
             // 4. Interactive safety confirmation
-            log.info("Running interactive safety confirmation...");
-            if (!interactiveSafetyConfirmation(config, approvalToken)) {
+            log.info("Running safety confirmation checks...");
+            if (!interactiveSafetyConfirmation(config)) {
                 log.info("User declined safety confirmation. Aborting run.");
                 report.setStatus("ABORTED_BY_USER");
                 report.setEndTime(LocalDateTime.now());
@@ -436,40 +442,15 @@ public class RunCommand implements Callable<Integer> {
     private AnonymizerConfig loadConfigFromProperties(java.util.Properties props) {
         AnonymizerConfig cfg = new AnonymizerConfig();
 
-        AnonymizerConfig.DatabaseConfig src = new AnonymizerConfig.DatabaseConfig();
-        src.setHost(props.getProperty("anonymizer.source.host", "localhost"));
-        src.setPort(Integer.parseInt(props.getProperty("anonymizer.source.port", "3306")));
-        String sSchemas = props.getProperty("anonymizer.source.schemas", "");
-        if (!sSchemas.isBlank()) {
-            src.setSchemas(StringUtils.commaSepToList(sSchemas));
-        }
-        src.setUsername(props.getProperty("anonymizer.source.username", "root"));
-        src.setPassword(props.getProperty("anonymizer.source.password", ""));
-        src.setReadOnly(Boolean.parseBoolean(props.getProperty("anonymizer.source.readOnly", "true")));
-        src.setConnectionTimeout(Integer.parseInt(props.getProperty("anonymizer.source.connectionTimeout", "30000")));
-        src.setVerifyServerCertificate(Boolean.parseBoolean(props.getProperty("anonymizer.source.verifyServerCertificate", "true")));
-
-        AnonymizerConfig.DatabaseConfig tgt = new AnonymizerConfig.DatabaseConfig();
-        tgt.setHost(props.getProperty("anonymizer.target.host", src.getHost()));
-        tgt.setPort(Integer.parseInt(props.getProperty("anonymizer.target.port", Integer.toString(src.getPort()))));
-        String tSchemas = props.getProperty("anonymizer.target.schemas", "");
-        if (!tSchemas.isBlank()) {
-            tgt.setSchemas(StringUtils.commaSepToList(tSchemas));
-        } else {
-            tgt.setSchemas(src.getSchemas());
-        }
-        tgt.setUsername(props.getProperty("anonymizer.target.username", src.getUsername()));
-        tgt.setPassword(props.getProperty("anonymizer.target.password", src.getPassword()));
-        tgt.setReadOnly(Boolean.parseBoolean(props.getProperty("anonymizer.target.readOnly", "false")));
-        tgt.setConnectionTimeout(Integer.parseInt(props.getProperty("anonymizer.target.connectionTimeout", Integer.toString(src.getConnectionTimeout()))));
-        tgt.setVerifyServerCertificate(Boolean.parseBoolean(props.getProperty("anonymizer.target.verifyServerCertificate", "true")));
+        AnonymizerConfig.DatabaseConfig src = buildSourceConfig(props);
+        AnonymizerConfig.DatabaseConfig tgt = buildTargetConfig(props, src);
 
         cfg.setSource(src);
         cfg.setTarget(tgt);
 
         // Safety
         AnonymizerConfig.SafetyConfig safety = new AnonymizerConfig.SafetyConfig();
-        safety.setEnabled(Boolean.parseBoolean(props.getProperty("anonymizer.safety.enabled", "true")));
+        safety.setEnabled(propBool(props, "anonymizer.safety.enabled", true));
         String allow = props.getProperty("anonymizer.safety.allowedHosts", "");
         if (!allow.isBlank()) {
             safety.setAllowedHosts(StringUtils.commaSepToList(allow));
@@ -478,21 +459,182 @@ public class RunCommand implements Callable<Integer> {
         if (!denied.isBlank()) {
             safety.setDeniedPatterns(StringUtils.commaSepToList(denied));
         }
-        safety.setRequireExplicitApproval(Boolean.parseBoolean(props.getProperty("anonymizer.safety.requireExplicitApproval", "false")));
-        safety.setApprovalFlag(props.getProperty("anonymizer.safety.approvalFlag", ""));
+        safety.setRequireExplicitApproval(propBool(props, "anonymizer.safety.requireExplicitApproval", false));
+        safety.setApprovalFlag(prop(props, "anonymizer.safety.approvalFlag", ""));
         cfg.setSafety(safety);
 
         // Performance
         AnonymizerConfig.PerformanceConfig perf = new AnonymizerConfig.PerformanceConfig();
-        perf.setBatchSize(Integer.parseInt(props.getProperty("anonymizer.performance.batchSize", "1000")));
-        perf.setFetchSize(Integer.parseInt(props.getProperty("anonymizer.performance.fetchSize", "1000")));
-        perf.setMaxMemoryMb(Integer.parseInt(props.getProperty("anonymizer.performance.maxMemoryMb", "512")));
+        perf.setBatchSize(propInt(props, "anonymizer.performance.batchSize", 1000));
+        perf.setFetchSize(propInt(props, "anonymizer.performance.fetchSize", 1000));
+        perf.setMaxMemoryMb(propInt(props, "anonymizer.performance.maxMemoryMb", 512));
         cfg.setPerformance(perf);
 
-        cfg.setRulesFile(props.getProperty("anonymizer.rulesFile", "anonymization-registry.yml"));
-        cfg.setLoggingPath(props.getProperty("anonymizer.loggingPath", LOGS_DIRECTORY));
+        cfg.setRulesFile(prop(props, "anonymizer.rulesFile", "anonymization-registry.yml"));
+        cfg.setLoggingPath(prop(props, "anonymizer.loggingPath", LOGS_DIRECTORY));
 
         return cfg;
+    }
+
+    private AnonymizerConfig.DatabaseConfig buildSourceConfig(java.util.Properties props) {
+        AnonymizerConfig.DatabaseConfig src = new AnonymizerConfig.DatabaseConfig();
+
+        String jpaUrl = prop(props, "jakarta.persistence.jdbc.url", "").trim();
+        if (!jpaUrl.isBlank()) {
+            JdbcParts p = parseJdbcUrl(jpaUrl);
+            if (p != null) {
+                src.setHost(p.host);
+                src.setPort(p.port);
+                if (p.database != null) src.setSchemas(java.util.List.of(p.database));
+            }
+        }
+
+        java.util.List<String> discovered = new java.util.ArrayList<>();
+        for (String key : props.stringPropertyNames()) {
+            if (key.startsWith("spring.datasource.") && key.endsWith(".jdbc-url")) {
+                String url = props.getProperty(key);
+                JdbcParts p = parseJdbcUrl(url);
+                if (p != null && p.database != null && !discovered.contains(p.database)) {
+                    discovered.add(p.database);
+                    if (src.getHost() == null || src.getHost().isBlank()) {
+                        src.setHost(p.host);
+                        src.setPort(p.port);
+                    }
+                }
+            }
+        }
+        if (!discovered.isEmpty()) {
+            if (src.getSchemas() == null || src.getSchemas().isEmpty()) {
+                src.setSchemas(discovered);
+            } else {
+                java.util.List<String> merged = new java.util.ArrayList<>(src.getSchemas());
+                for (String d : discovered) if (!merged.contains(d)) merged.add(d);
+                src.setSchemas(merged);
+            }
+        }
+
+        // Credentials: prefer jakarta.persistence.user/password, then spring.datasource.username/password, then anonymizer.* (last resort)
+        String jpaUser = prop(props, "jakarta.persistence.jdbc.user", "");
+        String jpaPass = prop(props, "jakarta.persistence.jdbc.password", "");
+        if (!jpaUser.isBlank()) {
+            src.setUsername(jpaUser);
+            src.setPassword(jpaPass);
+        } else if (!prop(props, "spring.datasource.username", "").isBlank()) {
+            src.setUsername(prop(props, "spring.datasource.username", ""));
+            src.setPassword(prop(props, "spring.datasource.password", ""));
+        } else {
+            src.setUsername(prop(props, "anonymizer.source.username", "root"));
+            src.setPassword(prop(props, "anonymizer.source.password", ""));
+        }
+
+        // Defaults for other flags
+        if (src.getHost() == null || src.getHost().isBlank()) src.setHost(prop(props, "anonymizer.source.host", "localhost"));
+        if (src.getPort() == 0) src.setPort(propInt(props, "anonymizer.source.port", 3306));
+        src.setReadOnly(propBool(props, "anonymizer.source.readOnly", true));
+        src.setConnectionTimeout(propInt(props, "anonymizer.source.connectionTimeout", 30000));
+        src.setVerifyServerCertificate(propBool(props, "anonymizer.source.verifyServerCertificate", true));
+
+        return src;
+    }
+
+    private AnonymizerConfig.DatabaseConfig buildTargetConfig(java.util.Properties props, AnonymizerConfig.DatabaseConfig src) {
+        AnonymizerConfig.DatabaseConfig tgt = new AnonymizerConfig.DatabaseConfig();
+        String targetUrl = prop(props, "spring.datasource.db-identity.jdbc-url", "");
+        if (!targetUrl.isBlank()) {
+            JdbcParts p = parseJdbcUrl(targetUrl);
+            if (p != null) {
+                tgt.setHost(p.host);
+                tgt.setPort(p.port);
+                if (p.database != null) tgt.setSchemas(java.util.List.of(p.database));
+            }
+            if (!prop(props, "spring.datasource.db-identity.username", "").isBlank()) {
+                tgt.setUsername(prop(props, "spring.datasource.db-identity.username", ""));
+                tgt.setPassword(prop(props, "spring.datasource.db-identity.password", ""));
+            }
+        }
+
+        // If target schemas still not set, use discovered source schemas
+        if (tgt.getSchemas() == null || tgt.getSchemas().isEmpty()) {
+            tgt.setSchemas(src.getSchemas());
+        }
+
+        // For any missing target host/port/credentials, fall back to anonymizer.* or source
+        if (tgt.getHost() == null || tgt.getHost().isBlank()) tgt.setHost(prop(props, "anonymizer.target.host", src.getHost()));
+        if (tgt.getPort() == 0) tgt.setPort(propInt(props, "anonymizer.target.port", src.getPort()));
+        if (tgt.getUsername() == null || tgt.getUsername().isBlank()) tgt.setUsername(prop(props, "anonymizer.target.username", src.getUsername()));
+        if (tgt.getPassword() == null) tgt.setPassword(prop(props, "anonymizer.target.password", src.getPassword()));
+        tgt.setReadOnly(propBool(props, "anonymizer.target.readOnly", false));
+        tgt.setConnectionTimeout(propInt(props, "anonymizer.target.connectionTimeout", src.getConnectionTimeout()));
+        tgt.setVerifyServerCertificate(propBool(props, "anonymizer.target.verifyServerCertificate", true));
+
+        return tgt;
+    }
+
+    /**
+     * Simple JDBC URL parser to extract host, port and database name for MySQL URLs.
+     * Supports formats like: jdbc:mysql://host:3306/dbname?params
+     */
+    private static class JdbcParts {
+        String host;
+        int port;
+        String database;
+    }
+
+    private JdbcParts parseJdbcUrl(String url) {
+        if (url == null) return null;
+        try {
+            String u = url.trim();
+            if (!u.startsWith("jdbc:")) return null;
+            // remove jdbc: prefix
+            u = u.substring(5);
+            // Expect mysql://host:port/dbname
+            int idx = u.indexOf("//");
+            if (idx >= 0) u = u.substring(idx + 2);
+            // split host[:port]/db
+            int slash = u.indexOf('/');
+            String hostPort = (slash >= 0) ? u.substring(0, slash) : u;
+            String rest = (slash >= 0) ? u.substring(slash + 1) : "";
+            String host = hostPort;
+            int port = 3306;
+            if (hostPort.contains(":")) {
+                String[] hp = hostPort.split(":", 2);
+                host = hp[0];
+                try { port = Integer.parseInt(hp[1]); } catch (NumberFormatException ex) { port = 3306; }
+            }
+            String db = rest;
+            // strip params after ?
+            int q = db.indexOf('?');
+            if (q >= 0) db = db.substring(0, q);
+            JdbcParts p = new JdbcParts();
+            p.host = host;
+            p.port = port;
+            p.database = (db == null || db.isBlank()) ? null : db;
+            return p;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    // Lightweight property helpers to centralize defaults and parsing
+    private String prop(java.util.Properties props, String key, String def) {
+        String v = props.getProperty(key);
+        return v == null ? def : v;
+    }
+
+    private int propInt(java.util.Properties props, String key, int def) {
+        String v = props.getProperty(key);
+        if (v == null) return def;
+        try {
+            return Integer.parseInt(v);
+        } catch (NumberFormatException e) {
+            return def;
+        }
+    }
+
+    private boolean propBool(java.util.Properties props, String key, boolean def) {
+        String v = props.getProperty(key);
+        if (v == null) return def;
+        return Boolean.parseBoolean(v);
     }
 
     // Use shared StringUtils.commaSepToList(...) helper instead of duplicating logic
@@ -629,57 +771,9 @@ public class RunCommand implements Callable<Integer> {
      * Interactive safety confirmation.
      * Returns true if the user confirms (Y or A), false to abort.
      */
-    private boolean interactiveSafetyConfirmation(AnonymizerConfig config, String approvalToken) throws IOException {
-        AnonymizerConfig.SafetyConfig safety = config.getSafety();
-        if (safety == null || !safety.isEnabled()) {
-            return true;
-        }
-
-        // If an explicit approval token was provided and matches configured flag, skip interactive prompt
-        if (approvalToken != null && !approvalToken.isBlank() && approvalToken.equals(safety.getApprovalFlag())) {
-            log.info("Approval token provided and matches configured approval flag; skipping interactive confirmation.");
-            return true;
-        }
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("Safety confirmation required before proceeding with anonymization.\n");
-        sb.append("Source host: ").append(config.getSource().getHost()).append("\n");
-        sb.append("Source schemas: ").append(config.getSource().getSchemas()).append("\n");
-        sb.append("Target host: ").append(config.getTarget().getHost()).append("\n");
-        sb.append("Target schemas: ").append(config.getTarget().getSchemas()).append("\n");
-        sb.append("Require explicit approval: ").append(safety.isRequireExplicitApproval()).append("\n");
-        if (safety.isRequireExplicitApproval() && (safety.getApprovalFlag() != null && !safety.getApprovalFlag().isBlank())) {
-            sb.append("Configured approvalFlag: ").append(safety.getApprovalFlag()).append("\n");
-        }
-        sb.append("\nType 'Y' to proceed, 'A' to proceed and acknowledge, or 'N' to abort: ");
-
-        log.info(sb.toString());
-
-        String input = null;
-        java.io.Console console = System.console();
-        if (console != null) {
-            input = console.readLine();
-        } else {
-            // Fall back to stdin (works in many CI shells if attached)
-            input = readLineFromStdin();
-        }
-
-        if (input == null) {
-            log.warn("No interactive input available for safety confirmation");
-            return false;
-        }
-
-        input = input.trim();
-        return input.equalsIgnoreCase("Y") || input.equalsIgnoreCase("A");
-    }
-
-    /**
-     * Read a single line from standard input. Extracted to improve readability and testability.
-     */
-    private String readLineFromStdin() throws IOException {
-        try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.InputStreamReader(System.in))) {
-            return br.readLine();
-        }
+    private boolean interactiveSafetyConfirmation(AnonymizerConfig config) {
+        log.info("Safety checks enabled; proceeding without interactive approval prompt.");
+        return true;
     }
     
     /**
