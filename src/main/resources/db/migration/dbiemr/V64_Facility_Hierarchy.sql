@@ -21,10 +21,6 @@ SET @exists = (SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEM
 SET @sql = IF(@exists = 0, 'ALTER TABLE m_facilitytype ADD COLUMN RuralUrban VARCHAR(10) DEFAULT NULL', 'SELECT 1');
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
-SET @exists = (SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'm_facilitytype' AND COLUMN_NAME = 'FacilityLevelID');
-SET @sql = IF(@exists = 0, 'ALTER TABLE m_facilitytype ADD COLUMN FacilityLevelID INT DEFAULT NULL', 'SELECT 1');
-PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
-
 SET @exists = (SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'm_facilitytype' AND COLUMN_NAME = 'LevelValue');
 SET @sql = IF(@exists = 0, 'ALTER TABLE m_facilitytype ADD COLUMN LevelValue INT DEFAULT NULL', 'SELECT 1');
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
@@ -32,8 +28,6 @@ PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 SET @exists = (SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'm_facilitytype' AND COLUMN_NAME = 'StateID');
 SET @sql = IF(@exists = 0, 'ALTER TABLE m_facilitytype ADD COLUMN StateID INT DEFAULT NULL', 'SELECT 1');
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
-
-UPDATE m_facilitytype ft JOIN m_facility_level fl ON ft.FacilityLevelID = fl.FacilityLevelID SET ft.LevelValue = fl.LevelValue WHERE ft.LevelValue IS NULL AND ft.FacilityLevelID IS NOT NULL;
 
 SET @exists = (SELECT COUNT(*) FROM information_schema.TABLE_CONSTRAINTS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'm_facilitytype' AND CONSTRAINT_NAME = 'fk_facilitytype_levelvalue');
 SET @sql = IF(@exists = 0, 'ALTER TABLE m_facilitytype ADD CONSTRAINT fk_facilitytype_levelvalue FOREIGN KEY (LevelValue) REFERENCES m_facility_level(LevelValue)', 'SELECT 1');
@@ -90,6 +84,10 @@ SET @exists = (SELECT COUNT(*) FROM information_schema.TABLE_CONSTRAINTS WHERE T
 SET @sql = IF(@exists = 0, 'ALTER TABLE m_facility ADD CONSTRAINT fk_facility_mainvillage FOREIGN KEY (MainVillageID) REFERENCES m_districtbranchmapping(DistrictBranchID)', 'SELECT 1');
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
+SET @exists = (SELECT COUNT(*) FROM information_schema.TABLE_CONSTRAINTS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'm_facility' AND CONSTRAINT_NAME = 'fk_facility_parent');
+SET @sql = IF(@exists = 0, 'ALTER TABLE m_facility ADD CONSTRAINT fk_facility_parent FOREIGN KEY (ParentFacilityID) REFERENCES m_facility(FacilityID)', 'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
 -- 4. facility_village_mapping (new table)
 CREATE TABLE IF NOT EXISTS facility_village_mapping (
   FacilityVillageMappingID BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -100,7 +98,8 @@ CREATE TABLE IF NOT EXISTS facility_village_mapping (
   CreatedDate DATETIME DEFAULT CURRENT_TIMESTAMP,
   ModifiedBy VARCHAR(50),
   LastModDate DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  CONSTRAINT fk_villagemap_facility FOREIGN KEY (FacilityID) REFERENCES m_facility(FacilityID)
+  CONSTRAINT fk_villagemap_facility      FOREIGN KEY (FacilityID)       REFERENCES m_facility(FacilityID),
+  CONSTRAINT fk_villagemap_districtbranch FOREIGN KEY (DistrictBranchID) REFERENCES m_districtbranchmapping(DistrictBranchID)
 );
 
 -- 5. m_UserServiceRoleMapping (add FacilityID, StateID, DistrictID)
