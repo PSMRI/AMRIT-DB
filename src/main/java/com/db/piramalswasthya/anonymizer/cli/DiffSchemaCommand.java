@@ -133,8 +133,6 @@ public class DiffSchemaCommand implements Callable<Integer> {
         }
     }
 
-    // JDBC parsing moved to com.db.piramalswasthya.anonymizer.util.JdbcUrlParser
-
     private AnonymizerConfig loadConfigFromProperties(java.util.Properties props) {
         AnonymizerConfig cfg = new AnonymizerConfig();
         AnonymizerConfig.DatabaseConfig src = new AnonymizerConfig.DatabaseConfig();
@@ -147,16 +145,19 @@ public class DiffSchemaCommand implements Callable<Integer> {
                 // parse to get database name
                 try {
                     String db = url.substring(url.lastIndexOf('/') + 1);
-                    int q = db.indexOf('?'); if (q > 0) db = db.substring(0, q);
+                    int q = db.indexOf('?');
+                    if (q > 0) db = db.substring(0, q);
                     if (db != null && !db.isBlank() && !discovered.contains(db)) discovered.add(db);
-                    // first discovered host/port set to src
-                    JdbcUrlParser.Parts p = null;
-                    try { p = JdbcUrlParser.parse(url); } catch (Exception ignored) {}
-                    if (p != null && (src.getHost() == null || src.getHost().isBlank())) {
-                        src.setHost(p.host());
-                        src.setPort(p.port());
-                    }
-                } catch (Exception ignored) {}
+                } catch (Exception e) {
+                    log.debug("Failed to extract database from URL [{}]: {}", url, e.getMessage());
+                }
+
+                // first discovered host/port set to src
+                JdbcUrlParser.Parts p = safeParseJdbcUrl(url);
+                if (p != null && (src.getHost() == null || src.getHost().isBlank())) {
+                    src.setHost(p.host());
+                    src.setPort(p.port());
+                }
             }
         }
         if (!discovered.isEmpty()) src.setSchemas(discovered);
@@ -211,6 +212,19 @@ public class DiffSchemaCommand implements Callable<Integer> {
         cfg.setPerformance(perf);
 
         return cfg;
+    }
+
+    /**
+     * Safely parse a JDBC URL into parts. Returns null on failure and logs at debug level.
+     */
+    private JdbcUrlParser.Parts safeParseJdbcUrl(String url) {
+        if (url == null) return null;
+        try {
+            return JdbcUrlParser.parse(url);
+        } catch (Exception e) {
+            log.debug("Failed to parse JDBC URL [{}]: {}", url, e.getMessage());
+            return null;
+        }
     }
     
     /**

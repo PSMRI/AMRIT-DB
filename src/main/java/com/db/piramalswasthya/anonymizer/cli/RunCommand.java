@@ -51,7 +51,7 @@ import com.db.piramalswasthya.anonymizer.util.CryptoUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.db.piramalswasthya.anonymizer.util.JdbcUrlParser;
-import com.mysql.cj.jdbc.MysqlDataSource;
+import com.db.piramalswasthya.anonymizer.util.DbUtils;
 
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -143,6 +143,31 @@ public class RunCommand implements Callable<Integer> {
             log.info("Safety confirmation accepted");
             
             if (dryRun) {
+                log.info("DRY RUN: Performing schema/table checks...");
+                for (String schema : config.getSource().getSchemas()) {
+                    log.info("\n--- Dry-run check schema: {} ---", schema);
+                    try {
+                        DataSource sourceDs = DbUtils.createDataSource(config.getSource(), schema);
+                        java.util.List<String> sourceTables = DbUtils.listTables(sourceDs, schema);
+                        log.info("Source tables for {}: {}", schema, sourceTables);
+                        AnonymizationRules.DatabaseRules dbRules = rules.getDatabases() != null ? rules.getDatabases().get(schema) : null;
+                        if (dbRules != null && dbRules.getTables() != null) {
+                            java.util.Set<String> expected = new java.util.LinkedHashSet<>(dbRules.getTables().keySet());
+                            java.util.Set<String> present = new java.util.LinkedHashSet<>(sourceTables);
+                            java.util.Set<String> missingInSource = new java.util.LinkedHashSet<>(expected);
+                            missingInSource.removeAll(present);
+                            if (!missingInSource.isEmpty()) {
+                                log.warn("Tables defined in rules but missing in source {}: {}", schema, missingInSource);
+                            } else {
+                                log.info("All expected tables present in source {}", schema);
+                            }
+                        } else {
+                            log.warn("No rules found for schema: {}", schema);
+                        }
+                    } catch (Exception e) {
+                        log.warn("Dry-run: failed to inspect schema {}: {}", schema, e.getMessage());
+                    }
+                }
                 log.info("DRY RUN: Configuration and safety validated. Exiting.");
                 log.info("Execution {}: DRY_RUN_SUCCESS", executionId);
                 return 0;
@@ -219,11 +244,11 @@ public class RunCommand implements Callable<Integer> {
                 "Target database is configured as read-only. Set target.readOnly: false in local properties to enable writing.");
         }
 
-        // Create DataSources for this schema
-        DataSource sourceDataSource = createDataSource(config.getSource(), schema);
+        // Create DataSources for this schema using centralized DbUtils
+        DataSource sourceDataSource = DbUtils.createDataSource(config.getSource(), schema);
 
         // Determine write target: always the configured final target
-        DataSource writeTargetDataSource = createDataSource(config.getTarget(), schema);
+        DataSource writeTargetDataSource = DbUtils.createDataSource(config.getTarget(), schema);
 
         // Initialize components - construct HMAC helper and shared faker, then inject into engine
         HmacAnonymizer hmac = new HmacAnonymizer(secret);
@@ -234,6 +259,29 @@ public class RunCommand implements Callable<Integer> {
             sourceDataSource,
             config.getPerformance().getBatchSize()
         );
+
+        // Debug: list tables present in the source schema and compare with rules
+        try {
+            java.util.List<String> sourceTables = DbUtils.listTables(sourceDataSource, schema);
+            log.info("Source tables for {}: {}", schema, sourceTables);
+            AnonymizationRules.DatabaseRules dbRules = rules.getDatabases() != null ? rules.getDatabases().get(schema) : null;
+            if (dbRules != null && dbRules.getTables() != null) {
+                java.util.Set<String> expected = new java.util.LinkedHashSet<>(dbRules.getTables().keySet());
+                java.util.Set<String> present = new java.util.LinkedHashSet<>(sourceTables);
+                java.util.Set<String> missingInSource = new java.util.LinkedHashSet<>(expected);
+                missingInSource.removeAll(present);
+                if (!missingInSource.isEmpty()) {
+                    log.warn("Tables defined in rules but missing in source {}: {}", schema, missingInSource);
+                }
+                java.util.Set<String> extraInSource = new java.util.LinkedHashSet<>(present);
+                extraInSource.removeAll(expected);
+                if (!extraInSource.isEmpty()) {
+                    log.info("Extra tables present in source {} not defined in rules: {}", schema, extraInSource);
+                }
+            }
+        } catch (Exception e) {
+            log.debug("Failed to list/compare source tables for {}: {}", schema, e.getMessage());
+        }
 
         try (DirectRestoreWriter writer = new DirectRestoreWriter(
                 writeTargetDataSource,
@@ -270,6 +318,10 @@ public class RunCommand implements Callable<Integer> {
         }
     }
 
+    /**
+     * Table listing moved to DbUtils.listTables
+     */
+
     //Process a single table
     private void processTable(String schema, String tableName, AnonymizationRules.TableRules tableRules,
                              AnonymizationRules rules, AnonymizationEngine engine, KeysetPaginator paginator,
@@ -287,7 +339,16 @@ public class RunCommand implements Callable<Integer> {
         Map<String, Integer> strategyCounts = new HashMap<>();
 
         // Fetch real source columns for this table so we don't accidentally drop unknown columns.
-        List<String> sourceColumns = paginator.getTableColumns(tableName);
+        List<String> sourceColumns;
+        try {
+            sourceColumns = paginator.getTableColumns(tableName);
+        } catch (SQLException e) {
+            if (isTableMissing(e)) {
+                log.warn("Source table not found, skipping {}.{}", schema, tableName);
+                return;
+            }
+            throw e;
+        }
 
         if (tableRules.getColumns() == null) {
             tableRules.setColumns(new java.util.LinkedHashMap<>());
@@ -453,6 +514,21 @@ public class RunCommand implements Callable<Integer> {
                         src.setHost(p.host());
                         src.setPort(p.port());
                     }
+
+                    // If this datasource entry defines credentials, use them as the
+                    // source credentials (first match wins). This supports properties
+                    // like spring.datasource.db-1097-identity.username/password.
+                    String prefix = key.substring(0, key.length() - ".jdbc-url".length());
+                    String uKey = prefix + ".username";
+                    String pKey = prefix + ".password";
+                    String uVal = props.getProperty(uKey);
+                    String pVal = props.getProperty(pKey);
+                    if (uVal != null && !uVal.isBlank()) {
+                        src.setUsername(uVal);
+                    }
+                    if (pVal != null && !pVal.isBlank()) {
+                        src.setPassword(pVal);
+                    }
                 }
             }
         }
@@ -460,9 +536,14 @@ public class RunCommand implements Callable<Integer> {
             src.setSchemas(discovered);
         }
 
-        // Credentials: prefer explicit spring.datasource values; leave empty if not present
-        src.setUsername(prop(props, "spring.datasource.username", ""));
-        src.setPassword(prop(props, "spring.datasource.password", ""));
+        // Credentials: prefer per-datasource values discovered above; fall back to
+        // global spring.datasource.username/password only if none were found.
+        if (src.getUsername() == null || src.getUsername().isBlank()) {
+            src.setUsername(prop(props, "spring.datasource.username", ""));
+        }
+        if (src.getPassword() == null || src.getPassword().isBlank()) {
+            src.setPassword(prop(props, "spring.datasource.password", ""));
+        }
 
 
         if (src.getHost() == null || src.getHost().isBlank()) src.setHost("localhost");
@@ -588,39 +669,10 @@ public class RunCommand implements Callable<Integer> {
     }
     
     /**
-     * Create MySQL DataSource for specific schema
+     * DataSource creation moved to DbUtils.createDataSource
      */
-    private DataSource createDataSource(AnonymizerConfig.DatabaseConfig dbConfig, String schema) {
-        MysqlDataSource ds = new MysqlDataSource();
-        ds.setServerName(dbConfig.getHost());
-        ds.setPort(dbConfig.getPort());
-        ds.setDatabaseName(schema);
-        ds.setUser(dbConfig.getUsername());
-        ds.setPassword(dbConfig.getPassword());
-        
-        // Additional connection properties for performance
-        try {
-            ds.setConnectTimeout(dbConfig.getConnectionTimeout()); // configurable timeout
-            ds.setUseSSL(true);
-            ds.setRequireSSL(false);
-            ds.setVerifyServerCertificate(dbConfig.isVerifyServerCertificate());
-            ds.setRewriteBatchedStatements(true); // Critical for batch performance
-            ds.setUseServerPrepStmts(false); // Avoid prep stmt overhead for large batches
-            // Set socket timeout (milliseconds) to avoid hanging reads - default 5 minutes
-            try {
-                // Use reflection because some connector implementations make this protected
-                java.lang.reflect.Method m = ds.getClass().getMethod("setIntegerRuntimeProperty", String.class, int.class);
-                m.invoke(ds, "socketTimeout", 300000);
-            } catch (Exception ex) {
-                log.debug("Connector doesn't support setIntegerRuntimeProperty(socketTimeout) via reflection", ex);
-            }
-        } catch (SQLException e) {
-            log.warn("Failed to set advanced connection properties for {}", dbConfig.getHost(), e);
-        }
-        
-        // Wrap DataSource to apply readOnly setting
-        return new ReadOnlyAwareDataSource(ds, dbConfig.isReadOnly());
-    }
+
+    // SSL trust detection moved to DbUtils.isSslTrustFailure
     
     /**
      * Hash file contents (not path) for versioning
@@ -672,6 +724,22 @@ public class RunCommand implements Callable<Integer> {
     private boolean interactiveSafetyConfirmation(AnonymizerConfig config) {
         log.info("Safety checks enabled; proceeding without interactive approval prompt.");
         return true;
+    }
+
+    /**
+     * Detect if SQLException indicates a missing table.
+     */
+    private boolean isTableMissing(SQLException e) {
+        if (e == null) return false;
+        String sqlState = e.getSQLState();
+        if (sqlState != null && sqlState.equals("42S02")) return true;
+        String msg = e.getMessage();
+        if (msg != null && (msg.toLowerCase().contains("doesn't exist") || msg.toLowerCase().contains("does not exist"))) {
+            return true;
+        }
+        Throwable cause = e.getCause();
+        if (cause instanceof SQLException) return isTableMissing((SQLException) cause);
+        return false;
     }
     
     // Reporting removed: no file reports are written by the CLI; all information is logged.
