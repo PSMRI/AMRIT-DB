@@ -9,44 +9,40 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class FlywayConfig {
-	 @Bean
-	    public Flyway flywaydbiemr(@Qualifier("dbiemrDataSource") DataSource dataSource) {
-	        return Flyway.configure()
-	                .dataSource(dataSource)
-	                .locations("classpath:db/migration/dbiemr")
+	@Bean
+	public Flyway flywaydbiemr(@Qualifier("dbiemrDataSource") DataSource dataSource) {
+		return Flyway.configure()
+				.dataSource(dataSource)
+				.locations("classpath:db/migration/dbiemr")
 				.baselineOnMigrate(true)
-				.validateOnMigrate(false)
-	                .load();
-	    }
+				.load();
+	}
 
-	    @Bean
-	    public Flyway flywayDbidentity(@Qualifier("dbidentityDataSource") DataSource dataSource) {
-	        return Flyway.configure()
-	                .dataSource(dataSource)
-	                .locations("classpath:db/migration/dbidentity")
-					.baselineOnMigrate(true)
-					.validateOnMigrate(false)
-	                .load();
-	    }
+	@Bean
+	public Flyway flywayDbidentity(@Qualifier("dbidentityDataSource") DataSource dataSource) {
+		return Flyway.configure()
+				.dataSource(dataSource)
+				.locations("classpath:db/migration/dbidentity")
+				.baselineOnMigrate(true)
+				.load();
+	}
 
-	    @Bean
-	    public Flyway flywayDbreporting(@Qualifier("dbreportingDataSource") DataSource dataSource) {
-	        return Flyway.configure()
-	                .dataSource(dataSource)
-	                .locations("classpath:db/migration/dbreporting")
-					.baselineOnMigrate(true)
-					.validateOnMigrate(false)
-	                .load();
-	    }
+	@Bean
+	public Flyway flywayDbreporting(@Qualifier("dbreportingDataSource") DataSource dataSource) {
+		return Flyway.configure()
+				.dataSource(dataSource)
+				.locations("classpath:db/migration/dbreporting")
+				.baselineOnMigrate(true)
+				.load();
+	}
 
-	    @Bean
-	    public Flyway flywayDb1097identity(@Qualifier("db1097identityDataSource") DataSource dataSource) {
-	        return Flyway.configure()
-	                .dataSource(dataSource)
-	                .locations("classpath:db/migration/db1097identity")
-					.baselineOnMigrate(true)
-					.validateOnMigrate(false)
-	                .load();
-	    }
+	@Bean
+	public Flyway flywayDb1097identity(@Qualifier("db1097identityDataSource") DataSource dataSource) {
+		return Flyway.configure()
+				.dataSource(dataSource)
+				.locations("classpath:db/migration/db1097identity")
+				.baselineOnMigrate(true)
+				.load();
+	}
 
 }

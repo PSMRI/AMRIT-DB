@@ -27,6 +27,7 @@ import com.db.piramalswasthya.anonymizer.config.AnonymizationRules;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.mysql.cj.jdbc.MysqlDataSource;
+import com.db.piramalswasthya.anonymizer.util.JdbcUrlParser;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import lombok.extern.slf4j.Slf4j;
@@ -132,37 +133,63 @@ public class DiffSchemaCommand implements Callable<Integer> {
         }
     }
 
+    // JDBC parsing moved to com.db.piramalswasthya.anonymizer.util.JdbcUrlParser
+
     private AnonymizerConfig loadConfigFromProperties(java.util.Properties props) {
         AnonymizerConfig cfg = new AnonymizerConfig();
-
         AnonymizerConfig.DatabaseConfig src = new AnonymizerConfig.DatabaseConfig();
-        src.setHost(props.getProperty("anonymizer.source.host", "localhost"));
-        src.setPort(Integer.parseInt(props.getProperty("anonymizer.source.port", "3306")));
-        String sSchemas = props.getProperty("anonymizer.source.schemas", "");
-        if (!sSchemas.isBlank()) {
-            src.setSchemas(splitCommaSeparated(sSchemas));
+
+        // Discover source schemas from spring.datasource.*.jdbc-url entries
+        java.util.List<String> discovered = new java.util.ArrayList<>();
+        for (String key : props.stringPropertyNames()) {
+            if (key.startsWith("spring.datasource.") && key.endsWith(".jdbc-url")) {
+                String url = props.getProperty(key);
+                // parse to get database name
+                try {
+                    String db = url.substring(url.lastIndexOf('/') + 1);
+                    int q = db.indexOf('?'); if (q > 0) db = db.substring(0, q);
+                    if (db != null && !db.isBlank() && !discovered.contains(db)) discovered.add(db);
+                    // first discovered host/port set to src
+                    JdbcUrlParser.Parts p = null;
+                    try { p = JdbcUrlParser.parse(url); } catch (Exception ignored) {}
+                    if (p != null && (src.getHost() == null || src.getHost().isBlank())) {
+                        src.setHost(p.host());
+                        src.setPort(p.port());
+                    }
+                } catch (Exception ignored) {}
+            }
         }
-        src.setUsername(props.getProperty("anonymizer.source.username", "root"));
-        src.setPassword(props.getProperty("anonymizer.source.password", ""));
-        src.setReadOnly(Boolean.parseBoolean(props.getProperty("anonymizer.source.readOnly", "true")));
-        src.setConnectionTimeout(Integer.parseInt(props.getProperty("anonymizer.source.connectionTimeout", "30000")));
-        src.setVerifyServerCertificate(Boolean.parseBoolean(props.getProperty("anonymizer.source.verifyServerCertificate", "true")));
+        if (!discovered.isEmpty()) src.setSchemas(discovered);
+
+        src.setUsername(props.getProperty("spring.datasource.username", ""));
+        src.setPassword(props.getProperty("spring.datasource.password", ""));
+        src.setReadOnly(true);
+        src.setConnectionTimeout(30000);
+        src.setVerifyServerCertificate(true);
 
         AnonymizerConfig.DatabaseConfig tgt = new AnonymizerConfig.DatabaseConfig();
-        tgt.setHost(props.getProperty("anonymizer.target.host", src.getHost()));
-        tgt.setPort(Integer.parseInt(props.getProperty("anonymizer.target.port", Integer.toString(src.getPort()))));
+        // Prefer configured db-identity jdbc-url if present
+        String targetUrl = props.getProperty("spring.datasource.db-identity.jdbc-url", "");
+        if (targetUrl != null && !targetUrl.isBlank()) {
+            JdbcUrlParser.Parts p = JdbcUrlParser.parse(targetUrl);
+            if (p != null) {
+                tgt.setHost(p.host());
+                tgt.setPort(p.port());
+                if (p.database() != null) tgt.setSchemas(java.util.List.of(p.database()));
+            }
+            tgt.setUsername(props.getProperty("spring.datasource.db-identity.username", src.getUsername()));
+            tgt.setPassword(props.getProperty("spring.datasource.db-identity.password", src.getPassword()));
+        }
+
+        // If target schemas still not set, use anonymizer.target.schemas (from common_local) or source schemas
         String tSchemas = props.getProperty("anonymizer.target.schemas", "");
         if (!tSchemas.isBlank()) {
             tgt.setSchemas(splitCommaSeparated(tSchemas));
         } else {
             tgt.setSchemas(src.getSchemas());
         }
-        tgt.setUsername(props.getProperty("anonymizer.target.username", src.getUsername()));
-        tgt.setPassword(props.getProperty("anonymizer.target.password", src.getPassword()));
-        tgt.setReadOnly(Boolean.parseBoolean(props.getProperty("anonymizer.target.readOnly", "false")));
-        tgt.setConnectionTimeout(Integer.parseInt(props.getProperty("anonymizer.target.connectionTimeout", Integer.toString(src.getConnectionTimeout()))));
-        tgt.setVerifyServerCertificate(Boolean.parseBoolean(props.getProperty("anonymizer.target.verifyServerCertificate", "true")));
 
+        tgt.setReadOnly(Boolean.parseBoolean(props.getProperty("anonymizer.target.readOnly", "false")));
         cfg.setSource(src);
         cfg.setTarget(tgt);
         cfg.setRulesFile(props.getProperty("anonymizer.rulesFile", "anonymization-registry.yml"));
@@ -174,8 +201,7 @@ public class DiffSchemaCommand implements Callable<Integer> {
         if (!allow.isBlank()) {
             safety.setAllowedHosts(splitCommaSeparated(allow));
         }
-        safety.setRequireExplicitApproval(Boolean.parseBoolean(props.getProperty("anonymizer.safety.requireExplicitApproval", "false")));
-        safety.setApprovalFlag(props.getProperty("anonymizer.safety.approvalFlag", ""));
+        // Deprecated safety properties 'requireExplicitApproval' and 'approvalFlag' removed.
         cfg.setSafety(safety);
 
         AnonymizerConfig.PerformanceConfig perf = new AnonymizerConfig.PerformanceConfig();

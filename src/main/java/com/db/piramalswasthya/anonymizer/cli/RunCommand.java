@@ -45,12 +45,12 @@ import com.db.piramalswasthya.anonymizer.core.KeysetPaginator.RowData;
 import com.db.piramalswasthya.anonymizer.config.AnonymizationRules;
 import com.db.piramalswasthya.anonymizer.config.AnonymizerConfig;
 import com.db.piramalswasthya.anonymizer.output.DirectRestoreWriter;
-import com.db.piramalswasthya.anonymizer.report.RunReport;
 
 import com.db.piramalswasthya.anonymizer.util.StringUtils;
 import com.db.piramalswasthya.anonymizer.util.CryptoUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.db.piramalswasthya.anonymizer.util.JdbcUrlParser;
 import com.mysql.cj.jdbc.MysqlDataSource;
 
 import picocli.CommandLine.Command;
@@ -75,11 +75,12 @@ public class RunCommand implements Callable<Integer> {
     
     private static final String LOGS_DIRECTORY = "./logs";
     private static final String LOG_FORMAT_ERROR_CONTEXT = "{}: {}";
-    private static final String STATUS_FAILED = "FAILED";
-    private static final ObjectMapper YAML_MAPPER = new ObjectMapper(new YAMLFactory());
     
-        @Option(names = {"-c", "--config"}, description = "Config file (default: src/main/environment/common_local.properties)", 
-            defaultValue = "src/main/environment/common_local.properties")
+    private static final ObjectMapper YAML_MAPPER = new ObjectMapper(new YAMLFactory());
+    private long totalRowsProcessed = 0L;
+    
+    @Option(names = {"-c", "--config"}, description = "Config file (default: src/main/environment/common_local.properties)", 
+        defaultValue = "src/main/environment/common_local.properties")
     private String configFile;
 
     
@@ -94,10 +95,6 @@ public class RunCommand implements Callable<Integer> {
         
         LocalDateTime startTime = LocalDateTime.now();
         String executionId = startTime.format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
-        
-        RunReport report = new RunReport();
-        report.setExecutionId(executionId);
-        report.setStartTime(startTime);
         
         AnonymizerConfig config = null;
         
@@ -128,11 +125,10 @@ public class RunCommand implements Callable<Integer> {
             }
 
             AnonymizationRules rules = loadRules(config.getRulesFile());
-            
-            // 2. Hash config and rules for versioning
-            report.setConfigHash(hashFileContents(configFile));
-            report.setRulesHash(hashFileContents(config.getRulesFile()));
-            report.setRulesVersion(rules.getRulesVersion());
+            // 2. Hash config and rules for versioning (logged, no file report)
+            log.info("Config hash: {}", hashFileContents(configFile));
+            log.info("Rules hash: {}", hashFileContents(config.getRulesFile()));
+            log.info("Rules version: {}", rules.getRulesVersion());
 
             // 3. Validate configuration
             validateConfiguration(config, rules);
@@ -141,26 +137,38 @@ public class RunCommand implements Callable<Integer> {
             log.info("Running safety confirmation checks...");
             if (!interactiveSafetyConfirmation(config)) {
                 log.info("User declined safety confirmation. Aborting run.");
-                report.setStatus("ABORTED_BY_USER");
-                report.setEndTime(LocalDateTime.now());
-                writeReport(report, config.getLoggingPath(), executionId);
+                log.info("Execution {} aborted by user", executionId);
                 return 1;
             }
             log.info("Safety confirmation accepted");
             
             if (dryRun) {
                 log.info("DRY RUN: Configuration and safety validated. Exiting.");
-                report.setStatus("DRY_RUN_SUCCESS");
-                report.setEndTime(LocalDateTime.now());
-                writeReport(report, config.getLoggingPath(), executionId);
+                log.info("Execution {}: DRY_RUN_SUCCESS", executionId);
                 return 0;
             }
             
             // 5. Prepare HMAC secret and faker locale (engine will instantiate helpers)
             String secret = System.getenv("ANONYMIZATION_SECRET");
             if (secret == null || secret.length() < 32) {
+                // Attempt secure-ish fallback: read from properties file if config was provided as properties.
+                if (configFile != null && configFile.endsWith(".properties")) {
+                    try (java.io.FileInputStream fis = new java.io.FileInputStream(configFile)) {
+                        java.util.Properties p = new java.util.Properties();
+                        p.load(fis);
+                        String propSecret = p.getProperty("anonymizer.hmacSecretKey");
+                        if (propSecret != null && propSecret.length() >= 32) {
+                            log.warn("ANONYMIZATION_SECRET env var missing or weak; falling back to anonymizer.hmacSecretKey from properties. This is insecure for production and should only be used for local testing.");
+                            secret = propSecret;
+                        }
+                    } catch (IOException e) {
+                        log.warn("Failed to read properties for secret fallback: {}", e.getMessage());
+                    }
+                }
+            }
+            if (secret == null || secret.length() < 32) {
                 throw new IllegalStateException(
-                    "ANONYMIZATION_SECRET env var required (min 32 characters)");
+                    "ANONYMIZATION_SECRET env var required (min 32 characters) or anonymizer.hmacSecretKey property in properties file");
             }
             // Initialize faker locale (engine will create the seeded Faker instances)
             String fakeLocale = System.getenv().getOrDefault("ANONYMIZER_FAKE_LOCALE", "en");
@@ -169,63 +177,34 @@ public class RunCommand implements Callable<Integer> {
             // 6. Process each schema
             for (String schema : config.getSource().getSchemas()) {
                 log.info("\n========== Processing schema: {} ==========", schema);
-                
-                processSchema(schema, config, rules, secret, locale, report);
+                processSchema(schema, config, rules, secret, locale);
             }
-            
-            report.setStatus("SUCCESS");            
+            log.info("Execution {}: SUCCESS", executionId);
         } catch (SQLException e) {
             String errorContext = String.format("Anonymization failed during execution (ID: %s)", executionId);
             String sanitized = sanitizeError(e);
             log.error(LOG_FORMAT_ERROR_CONTEXT, errorContext, sanitized, e);
-            report.setStatus(STATUS_FAILED);
-            report.setErrorMessage(errorContext + ": " + sanitized);
-            
-            report.setEndTime(LocalDateTime.now());
-            report.setTotalDurationMs(
-                java.time.Duration.between(startTime, report.getEndTime()).toMillis());
-            
-            writeReport(report, config != null ? config.getLoggingPath() : LOGS_DIRECTORY, executionId);
+            log.error("Execution {}: FAILED - {}", executionId, sanitized);
             return 1;
         } catch (IOException e) {
             String errorContext = String.format("Configuration or file I/O error (ID: %s)", executionId);
             String sanitized = sanitizeError(e);
             log.error(LOG_FORMAT_ERROR_CONTEXT, errorContext, sanitized, e);
-            report.setStatus(STATUS_FAILED);
-            report.setErrorMessage(errorContext + ": " + sanitized);
-            
-            report.setEndTime(LocalDateTime.now());
-            report.setTotalDurationMs(
-                java.time.Duration.between(startTime, report.getEndTime()).toMillis());
-            
-            writeReport(report, config != null ? config.getLoggingPath() : LOGS_DIRECTORY, executionId);
+            log.error("Execution {}: FAILED - {}", executionId, sanitized);
             return 1;
         } catch (Exception e) {
             // Fallback handler for all other exceptions (safety, validation, etc.)
             String errorContext = String.format("Unexpected error during execution (ID: %s)", executionId);
             String sanitized = sanitizeError(e);
             log.error(LOG_FORMAT_ERROR_CONTEXT, errorContext, sanitized, e);
-            report.setStatus(STATUS_FAILED);
-            report.setErrorMessage(errorContext + ": " + sanitized);
-            
-            report.setEndTime(LocalDateTime.now());
-            report.setTotalDurationMs(
-                java.time.Duration.between(startTime, report.getEndTime()).toMillis());
-            
-            writeReport(report, config != null ? config.getLoggingPath() : LOGS_DIRECTORY, executionId);
+            log.error("Execution {}: FAILED - {}", executionId, sanitized);
             return 1;
         }
-        
-        report.setEndTime(LocalDateTime.now());
-        report.setTotalDurationMs(
-            java.time.Duration.between(startTime, report.getEndTime()).toMillis());
-        
-        writeReport(report, config.getLoggingPath(), executionId);
-        
+        long endMillis = java.time.Duration.between(startTime, LocalDateTime.now()).toMillis();
         log.info("\n=== Anonymization Complete ===");
-        log.info("Total rows processed: {}", report.getTotalRowsProcessed());
-        log.info("Total duration: {} ms", report.getTotalDurationMs());
-        log.info("Report written to: {}/run-report-{}.json", config.getLoggingPath(), executionId);
+        log.info("Total rows processed: {}", totalRowsProcessed);
+        log.info("Total duration: {} ms", endMillis);
+        log.info("Execution {} complete", executionId);
         
         return 0;
     }
@@ -233,8 +212,7 @@ public class RunCommand implements Callable<Integer> {
      * Process single schema: reset target, stream from source, anonymize, write to target
      */
     private void processSchema(String schema, AnonymizerConfig config,
-                               AnonymizationRules rules, String secret, java.util.Locale locale, 
-                               RunReport report) throws SQLException {
+                               AnonymizationRules rules, String secret, java.util.Locale locale) throws SQLException {
         
         if (config.getTarget().isReadOnly()) {
             throw new IllegalStateException(
@@ -267,7 +245,7 @@ public class RunCommand implements Callable<Integer> {
             writer.resetSchema(sourceDataSource);
 
             // Process all tables in this schema (anonymize from source -> writeTarget)
-            processSchemaTables(schema, rules, engine, paginator, writer, report);
+            processSchemaTables(schema, rules, engine, paginator, writer);
 
             // Mark success to commit the transaction on the write target
             writer.markSuccess();
@@ -279,7 +257,7 @@ public class RunCommand implements Callable<Integer> {
     //Process all tables defined in rules for a schema
     private void processSchemaTables(String schema, AnonymizationRules rules,
                                      AnonymizationEngine engine, KeysetPaginator paginator,
-                                     DirectRestoreWriter writer, RunReport report) throws SQLException {
+                                     DirectRestoreWriter writer) throws SQLException {
         
         AnonymizationRules.DatabaseRules dbRules = rules.getDatabases().get(schema);
         if (dbRules == null || dbRules.getTables() == null) {
@@ -288,14 +266,14 @@ public class RunCommand implements Callable<Integer> {
         }
         
         for (Map.Entry<String, AnonymizationRules.TableRules> entry : dbRules.getTables().entrySet()) {
-            processTable(schema, entry.getKey(), entry.getValue(), rules, engine, paginator, writer, report);
+            processTable(schema, entry.getKey(), entry.getValue(), rules, engine, paginator, writer);
         }
     }
 
     //Process a single table
     private void processTable(String schema, String tableName, AnonymizationRules.TableRules tableRules,
                              AnonymizationRules rules, AnonymizationEngine engine, KeysetPaginator paginator,
-                             DirectRestoreWriter writer, RunReport report) throws SQLException {
+                             DirectRestoreWriter writer) throws SQLException {
         
         if (tableRules.getColumns() == null || tableRules.getColumns().isEmpty()) {
             log.warn("No columns defined for table: {}.{}", schema, tableName);
@@ -339,7 +317,7 @@ public class RunCommand implements Callable<Integer> {
                                                 engine, writer, rowCount);
         processTableBatches(context, paginator);
         
-        recordTableCompletion(schema, tableName, tableStartTime, rowCount[0], tableRules, strategyCounts, report);
+        recordTableCompletion(schema, tableName, tableStartTime, rowCount[0], tableRules, strategyCounts);
     }
     
     /**
@@ -382,7 +360,7 @@ public class RunCommand implements Callable<Integer> {
     private void updateStrategyCounts(AnonymizationRules.TableRules tableRules, Map<String, Integer> strategyCounts) {
         for (String column : tableRules.getColumns().keySet()) {
             String strategy = tableRules.getColumns().get(column).getStrategy();
-            strategyCounts.merge(strategy, 1, Integer::sum);
+            strategyCounts.put(strategy, strategyCounts.getOrDefault(strategy, 0) + 1);
         }
     }
     
@@ -391,17 +369,11 @@ public class RunCommand implements Callable<Integer> {
      */
     private void recordTableCompletion(String schema, String tableName, long startTime, long rowCount,
                                       AnonymizationRules.TableRules tableRules,
-                                      Map<String, Integer> strategyCounts, RunReport report) {
+                                      Map<String, Integer> strategyCounts) {
         long duration = System.currentTimeMillis() - startTime;
-        
-        report.addTableReport(
-            schema + "." + tableName,
-            rowCount,
-            duration,
-            tableRules.getColumns().size(),
-            strategyCounts
-        );
-        log.info("Completed {}.{}: {} rows, {} ms", schema, tableName, rowCount, duration);
+        totalRowsProcessed += rowCount;
+        log.info("Completed {}.{}: {} rows, {} ms, columns_anonymized={}, strategies={}",
+            schema, tableName, rowCount, duration, tableRules.getColumns().size(), strategyCounts);
     }
     
     /**
@@ -434,10 +406,6 @@ public class RunCommand implements Callable<Integer> {
 
     /**
      * Map properties to AnonymizerConfig using anonymizer.* namespace.
-     * Expected keys (examples):
-     *  anonymizer.source.host=localhost
-     *  anonymizer.source.port=3306
-     *  anonymizer.source.schemas=dbiemr,db_identity
      */
     private AnonymizerConfig loadConfigFromProperties(java.util.Properties props) {
         AnonymizerConfig cfg = new AnonymizerConfig();
@@ -455,12 +423,6 @@ public class RunCommand implements Callable<Integer> {
         if (!allow.isBlank()) {
             safety.setAllowedHosts(StringUtils.commaSepToList(allow));
         }
-        String denied = props.getProperty("anonymizer.safety.deniedPatterns", "");
-        if (!denied.isBlank()) {
-            safety.setDeniedPatterns(StringUtils.commaSepToList(denied));
-        }
-        safety.setRequireExplicitApproval(propBool(props, "anonymizer.safety.requireExplicitApproval", false));
-        safety.setApprovalFlag(prop(props, "anonymizer.safety.approvalFlag", ""));
         cfg.setSafety(safety);
 
         // Performance
@@ -479,60 +441,35 @@ public class RunCommand implements Callable<Integer> {
     private AnonymizerConfig.DatabaseConfig buildSourceConfig(java.util.Properties props) {
         AnonymizerConfig.DatabaseConfig src = new AnonymizerConfig.DatabaseConfig();
 
-        String jpaUrl = prop(props, "jakarta.persistence.jdbc.url", "").trim();
-        if (!jpaUrl.isBlank()) {
-            JdbcParts p = parseJdbcUrl(jpaUrl);
-            if (p != null) {
-                src.setHost(p.host);
-                src.setPort(p.port);
-                if (p.database != null) src.setSchemas(java.util.List.of(p.database));
-            }
-        }
-
+        // Discover schemas and host/port from spring.datasource.*.jdbc-url entries
         java.util.List<String> discovered = new java.util.ArrayList<>();
         for (String key : props.stringPropertyNames()) {
             if (key.startsWith("spring.datasource.") && key.endsWith(".jdbc-url")) {
                 String url = props.getProperty(key);
-                JdbcParts p = parseJdbcUrl(url);
-                if (p != null && p.database != null && !discovered.contains(p.database)) {
-                    discovered.add(p.database);
+                JdbcUrlParser.Parts p = JdbcUrlParser.parse(url);
+                if (p != null && p.database() != null && !discovered.contains(p.database())) {
+                    discovered.add(p.database());
                     if (src.getHost() == null || src.getHost().isBlank()) {
-                        src.setHost(p.host);
-                        src.setPort(p.port);
+                        src.setHost(p.host());
+                        src.setPort(p.port());
                     }
                 }
             }
         }
         if (!discovered.isEmpty()) {
-            if (src.getSchemas() == null || src.getSchemas().isEmpty()) {
-                src.setSchemas(discovered);
-            } else {
-                java.util.List<String> merged = new java.util.ArrayList<>(src.getSchemas());
-                for (String d : discovered) if (!merged.contains(d)) merged.add(d);
-                src.setSchemas(merged);
-            }
+            src.setSchemas(discovered);
         }
 
-        // Credentials: prefer jakarta.persistence.user/password, then spring.datasource.username/password, then anonymizer.* (last resort)
-        String jpaUser = prop(props, "jakarta.persistence.jdbc.user", "");
-        String jpaPass = prop(props, "jakarta.persistence.jdbc.password", "");
-        if (!jpaUser.isBlank()) {
-            src.setUsername(jpaUser);
-            src.setPassword(jpaPass);
-        } else if (!prop(props, "spring.datasource.username", "").isBlank()) {
-            src.setUsername(prop(props, "spring.datasource.username", ""));
-            src.setPassword(prop(props, "spring.datasource.password", ""));
-        } else {
-            src.setUsername(prop(props, "anonymizer.source.username", "root"));
-            src.setPassword(prop(props, "anonymizer.source.password", ""));
-        }
+        // Credentials: prefer explicit spring.datasource values; leave empty if not present
+        src.setUsername(prop(props, "spring.datasource.username", ""));
+        src.setPassword(prop(props, "spring.datasource.password", ""));
 
-        // Defaults for other flags
-        if (src.getHost() == null || src.getHost().isBlank()) src.setHost(prop(props, "anonymizer.source.host", "localhost"));
-        if (src.getPort() == 0) src.setPort(propInt(props, "anonymizer.source.port", 3306));
-        src.setReadOnly(propBool(props, "anonymizer.source.readOnly", true));
-        src.setConnectionTimeout(propInt(props, "anonymizer.source.connectionTimeout", 30000));
-        src.setVerifyServerCertificate(propBool(props, "anonymizer.source.verifyServerCertificate", true));
+
+        if (src.getHost() == null || src.getHost().isBlank()) src.setHost("localhost");
+        if (src.getPort() == 0) src.setPort(3306);
+        src.setReadOnly(true);
+        src.setConnectionTimeout(30000);
+        src.setVerifyServerCertificate(true);
 
         return src;
     }
@@ -541,11 +478,11 @@ public class RunCommand implements Callable<Integer> {
         AnonymizerConfig.DatabaseConfig tgt = new AnonymizerConfig.DatabaseConfig();
         String targetUrl = prop(props, "spring.datasource.db-identity.jdbc-url", "");
         if (!targetUrl.isBlank()) {
-            JdbcParts p = parseJdbcUrl(targetUrl);
+            JdbcUrlParser.Parts p = JdbcUrlParser.parse(targetUrl);
             if (p != null) {
-                tgt.setHost(p.host);
-                tgt.setPort(p.port);
-                if (p.database != null) tgt.setSchemas(java.util.List.of(p.database));
+                tgt.setHost(p.host());
+                tgt.setPort(p.port());
+                if (p.database() != null) tgt.setSchemas(java.util.List.of(p.database()));
             }
             if (!prop(props, "spring.datasource.db-identity.username", "").isBlank()) {
                 tgt.setUsername(prop(props, "spring.datasource.db-identity.username", ""));
@@ -559,10 +496,10 @@ public class RunCommand implements Callable<Integer> {
         }
 
         // For any missing target host/port/credentials, fall back to anonymizer.* or source
-        if (tgt.getHost() == null || tgt.getHost().isBlank()) tgt.setHost(prop(props, "anonymizer.target.host", src.getHost()));
-        if (tgt.getPort() == 0) tgt.setPort(propInt(props, "anonymizer.target.port", src.getPort()));
-        if (tgt.getUsername() == null || tgt.getUsername().isBlank()) tgt.setUsername(prop(props, "anonymizer.target.username", src.getUsername()));
-        if (tgt.getPassword() == null) tgt.setPassword(prop(props, "anonymizer.target.password", src.getPassword()));
+        if (tgt.getHost() == null || tgt.getHost().isBlank()) tgt.setHost(src.getHost());
+        if (tgt.getPort() == 0) tgt.setPort(src.getPort());
+        if (tgt.getUsername() == null || tgt.getUsername().isBlank()) tgt.setUsername(src.getUsername());
+        if (tgt.getPassword() == null) tgt.setPassword(src.getPassword());
         tgt.setReadOnly(propBool(props, "anonymizer.target.readOnly", false));
         tgt.setConnectionTimeout(propInt(props, "anonymizer.target.connectionTimeout", src.getConnectionTimeout()));
         tgt.setVerifyServerCertificate(propBool(props, "anonymizer.target.verifyServerCertificate", true));
@@ -574,46 +511,7 @@ public class RunCommand implements Callable<Integer> {
      * Simple JDBC URL parser to extract host, port and database name for MySQL URLs.
      * Supports formats like: jdbc:mysql://host:3306/dbname?params
      */
-    private static class JdbcParts {
-        String host;
-        int port;
-        String database;
-    }
-
-    private JdbcParts parseJdbcUrl(String url) {
-        if (url == null) return null;
-        try {
-            String u = url.trim();
-            if (!u.startsWith("jdbc:")) return null;
-            // remove jdbc: prefix
-            u = u.substring(5);
-            // Expect mysql://host:port/dbname
-            int idx = u.indexOf("//");
-            if (idx >= 0) u = u.substring(idx + 2);
-            // split host[:port]/db
-            int slash = u.indexOf('/');
-            String hostPort = (slash >= 0) ? u.substring(0, slash) : u;
-            String rest = (slash >= 0) ? u.substring(slash + 1) : "";
-            String host = hostPort;
-            int port = 3306;
-            if (hostPort.contains(":")) {
-                String[] hp = hostPort.split(":", 2);
-                host = hp[0];
-                try { port = Integer.parseInt(hp[1]); } catch (NumberFormatException ex) { port = 3306; }
-            }
-            String db = rest;
-            // strip params after ?
-            int q = db.indexOf('?');
-            if (q >= 0) db = db.substring(0, q);
-            JdbcParts p = new JdbcParts();
-            p.host = host;
-            p.port = port;
-            p.database = (db == null || db.isBlank()) ? null : db;
-            return p;
-        } catch (Exception e) {
-            return null;
-        }
-    }
+    // JDBC parsing moved to com.db.piramalswasthya.anonymizer.util.JdbcUrlParser
 
     // Lightweight property helpers to centralize defaults and parsing
     private String prop(java.util.Properties props, String key, String def) {
@@ -776,21 +674,7 @@ public class RunCommand implements Callable<Integer> {
         return true;
     }
     
-    /**
-     * Write report to file
-     */
-    private void writeReport(RunReport report, String loggingPath, String executionId) 
-            throws IOException {
-        Files.createDirectories(Paths.get(loggingPath));
-        String reportPath = loggingPath + "/run-report-" + executionId + ".json";
-        
-        ObjectMapper mapper = new ObjectMapper();
-        // auto-detect and register modules (e.g., JSR-310) so Java 8 date/time types serialize
-        mapper.findAndRegisterModules();
-        mapper.writerWithDefaultPrettyPrinter().writeValue(new File(reportPath), report);
-        
-        log.info("Report written to: {}", reportPath);
-    }
+    // Reporting removed: no file reports are written by the CLI; all information is logged.
     
     /**
      * Custom exception for batch processing failures
