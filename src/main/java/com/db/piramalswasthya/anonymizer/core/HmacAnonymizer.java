@@ -90,6 +90,24 @@ public class HmacAnonymizer {
     }
 
     /**
+     * Generic partial mask helper.
+     * Masks all characters except the last `showLast` characters.
+     * If input is shorter than or equal to `showLast`, masks entire string.
+     */
+    public String maskPartial(String s, int showLast) {
+        if (s == null || s.isEmpty()) {
+            return "".isEmpty() ? "" : ""; // keep return type consistent
+        }
+        if (showLast < 0) showLast = 0;
+        int len = s.length();
+        if (len <= showLast) {
+            return "X".repeat(len);
+        }
+        int maskLen = Math.max(0, len - showLast);
+        return "X".repeat(maskLen) + s.substring(len - showLast);
+    }
+
+    /**
      * Generalize date to year only.
      */
     public String generalizeDate(String date) {

@@ -126,6 +126,7 @@ public class AnonymizationEngine {
             case "FAKE_ZIP":
             case "FAKE_USERNAME":
                 // fake generation (single shared Faker)
+
                 return faker.anonymize(strategy, column, value);
             case "GENERALIZE":
                 if (value.matches("\\d{4}-\\d{2}-\\d{2}")) {
@@ -135,6 +136,15 @@ public class AnonymizationEngine {
                 } else {
                     log.warn("GENERALIZE strategy applied to column {} - preserving value", column);
                     return value;
+                }
+            case "PARTIAL_MASK":
+                String lc = column == null ? "" : column.toLowerCase();
+                if (lc.contains("phone") || lc.contains("mobile") || lc.contains("msisdn")) {
+                    return anonymizer.maskPhone(value);
+                } else if (lc.contains("pin") || lc.contains("pincode") || lc.contains("zip") || lc.contains("postal")) {
+                    return anonymizer.maskPartial(value, 2);
+                } else {
+                    return anonymizer.maskPartial(value, 3);
                 }
             default:
                 log.warn("Unknown strategy: {} - preserving value", strategy);
