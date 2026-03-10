@@ -129,14 +129,31 @@ public class AnonymizationEngine {
 
                 return faker.anonymize(strategy, column, value);
             case "GENERALIZE":
+                // Date patterns
                 if (value.matches("\\d{4}-\\d{2}-\\d{2}")) {
                     return anonymizer.generalizeDate(value);
                 } else if (value.matches("\\d{2}/\\d{2}/\\d{4}")) {
                     return anonymizer.generalizeDate(value.replace('/', '-'));
-                } else {
-                    log.warn("GENERALIZE strategy applied to column {} - preserving value", column);
-                    return value;
                 }
+
+                // Coordinate pattern: lat,lon  (e.g. 12.9715987,77.5945627)
+                String coordRegex = "^-?\\d+(?:\\.\\d+)?,\\s*-?\\d+(?:\\.\\d+)?$";
+                if (value.matches(coordRegex)) {
+                    try {
+                        String[] parts = value.split(",");
+                        double lat = Double.parseDouble(parts[0].trim());
+                        double lon = Double.parseDouble(parts[1].trim());
+                        String latStr = String.format("%.2f", lat);
+                        String lonStr = String.format("%.2f", lon);
+                        return latStr + "," + lonStr;
+                    } catch (NumberFormatException e) {
+                        log.warn("GENERALIZE coordinate parse failed for {}: {}", column, value);
+                        return value;
+                    }
+                }
+
+                log.warn("GENERALIZE strategy applied to column {} - preserving value", column);
+                return value;
             case "PARTIAL_MASK":
                 String lc = column == null ? "" : column.toLowerCase();
                 if (lc.contains("phone") || lc.contains("mobile") || lc.contains("msisdn")) {

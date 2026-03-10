@@ -65,16 +65,71 @@ public final class DbUtils {
 
     public static java.util.List<String> listTables(DataSource ds, String schema) throws SQLException {
         java.util.List<String> out = new java.util.ArrayList<>();
-        String sql = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = ?";
-        try (Connection conn = ds.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, schema);
-            try (ResultSet rs = ps.executeQuery()) {
+
+        // Prefer JDBC metadata for portability. MySQL may expose the database name as
+        // TABLE_CAT rather than TABLE_SCHEM, so check both, and also compare to
+        // the connection's current catalog.
+        try (Connection conn = ds.getConnection()) {
+            String catalog = null;
+            try {
+                catalog = conn.getCatalog();
+            } catch (Exception ignored) {
+            }
+
+            java.sql.DatabaseMetaData md = conn.getMetaData();
+            try {
+                String metaUrl = md.getURL();
+                log.debug("DbUtils.listTables: requestedSchema='{}' connCatalog='{}' metaUrl='{}'", schema, catalog, metaUrl);
+            } catch (Exception e) {
+                log.debug("DbUtils.listTables: requestedSchema='{}' connCatalog='{}' (failed to get meta URL)", schema, catalog);
+            }
+
+            try (ResultSet rs = md.getTables(catalog, null, "%", new String[]{"TABLE"})) {
                 while (rs.next()) {
-                    out.add(rs.getString(1));
+                    String tableCat = rs.getString("TABLE_CAT");
+                    String tableSchem = rs.getString("TABLE_SCHEM");
+                    String tableName = rs.getString("TABLE_NAME");
+                    if (tableName == null) continue;
+                    boolean matches = false;
+                    if (schema == null || schema.isBlank()) {
+                        matches = true;
+                    } else {
+                        if (schema.equalsIgnoreCase(tableName)) {
+                            // Unlikely, but guard against odd drivers
+                            matches = true;
+                        }
+                        if (!matches && tableCat != null && schema.equalsIgnoreCase(tableCat)) matches = true;
+                        if (!matches && tableSchem != null && schema.equalsIgnoreCase(tableSchem)) matches = true;
+                        if (!matches && catalog != null && schema.equalsIgnoreCase(catalog)) matches = true;
+                    }
+                    if (matches) out.add(tableName);
                 }
             }
+            log.debug("DbUtils.listTables: metadata discovery found {} tables for requested schema='{}'", out.size(), schema);
         }
+
+        // Fallback: query INFORMATION_SCHEMA.TABLES if metadata returned nothing.
+        if (out.isEmpty()) {
+            String sql = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = ?";
+            try (Connection conn = ds.getConnection()) {
+                try {
+                    String url = conn.getMetaData().getURL();
+                    log.debug("DbUtils.listTables: metadata returned no tables; falling back to INFORMATION_SCHEMA on URL='{}', connCatalog='{}'", url, conn.getCatalog());
+                } catch (Exception ex) {
+                    log.debug("DbUtils.listTables: metadata returned no tables; falling back to INFORMATION_SCHEMA (couldn't read meta)");
+                }
+                try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                    ps.setString(1, schema);
+                    try (ResultSet rs = ps.executeQuery()) {
+                        while (rs.next()) {
+                            out.add(rs.getString(1));
+                        }
+                    }
+                }
+                log.debug("DbUtils.listTables: INFORMATION_SCHEMA fallback returned {} tables for schema='{}'", out.size(), schema);
+            }
+        }
+
         return out;
     }
 

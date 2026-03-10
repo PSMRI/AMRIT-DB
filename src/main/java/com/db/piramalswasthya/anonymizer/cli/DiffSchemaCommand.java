@@ -33,8 +33,11 @@ import picocli.CommandLine.Option;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
-import java.io.File;
-import java.io.FileWriter;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -78,54 +81,62 @@ public class DiffSchemaCommand implements Callable<Integer> {
             AnonymizerConfig config;
             if (configFile != null && (configFile.endsWith(".properties") || configFile.endsWith(".env"))) {
                 java.util.Properties props = new java.util.Properties();
-                try (java.io.FileInputStream in = new java.io.FileInputStream(configFile)) {
+                Path cfgPath = Paths.get(configFile);
+                if (!Files.exists(cfgPath)) throw new IllegalArgumentException("Config file not found: " + configFile);
+                try (InputStream in = Files.newInputStream(cfgPath)) {
                     props.load(in);
                 }
                 config = loadConfigFromProperties(props);
             } else {
-                config = mapper.readValue(new File(configFile), AnonymizerConfig.class);
-            }
-            AnonymizationRules rules = mapper.readValue(new File(rulesFile), AnonymizationRules.class);
-            
-            // Process each schema
-            log.info("Connecting to database: {}", config.getSource().getHost());
-            boolean anyDifferences = false;
-            Map<String, SchemaDiff> allDiffs = new LinkedHashMap<>();
-            
-            for (String schema : config.getSource().getSchemas()) {
-                log.info("\n=== Processing schema: {} ===", schema);
-                
-                // Create DataSource for this schema
-                DataSource dataSource = createDataSource(config.getSource(), schema);
-                
-                // Query schema from INFORMATION_SCHEMA
-                Map<String, Map<String, ColumnInfo>> dbSchema = extractDatabaseSchema(
-                    dataSource, schema);
-                
-                // Compare with rules
-                SchemaDiff diff = compareSchemas(schema, dbSchema, rules);
-                allDiffs.put(schema, diff);
-                
-                // Report differences for this schema
-                reportDifferences(schema, diff);
-                
-                if (diff.hasDifferences()) {
-                    anyDifferences = true;
+                if (configFile == null || configFile.isBlank()) throw new IllegalArgumentException("Config file path is empty");
+                Path cfgPath = Paths.get(configFile);
+                if (!Files.exists(cfgPath)) throw new IllegalArgumentException("Config file not found: " + configFile);
+                try (InputStream in = Files.newInputStream(cfgPath)) {
+                    config = mapper.readValue(in, AnonymizerConfig.class);
                 }
             }
-            
+            // Prepare containers to collect diffs
+            boolean anyDifferences = false;
+            Map<String, SchemaDiff> allDiffs = new LinkedHashMap<>();
+
+            Path rulesPath = Paths.get(rulesFile);
+            if (!Files.exists(rulesPath)) throw new IllegalArgumentException("Rules file not found: " + rulesFile);
+            try (InputStream in = Files.newInputStream(rulesPath)) {
+                AnonymizationRules rules = mapper.readValue(in, AnonymizationRules.class);
+
+                // Process each schema
+                log.info("Connecting to database: {}", config.getSource().getHost());
+
+                for (String schema : config.getSource().getSchemas()) {
+                    log.info("\n=== Processing schema: {} ===", schema);
+
+                    // Create DataSource for this schema
+                    DataSource dataSource = createDataSource(config.getSource(), schema);
+
+                    // Query schema from INFORMATION_SCHEMA
+                    Map<String, Map<String, ColumnInfo>> dbSchema = extractDatabaseSchema(
+                        dataSource, schema);
+
+                    // Compare with rules
+                    SchemaDiff diff = compareSchemas(schema, dbSchema, rules);
+                    allDiffs.put(schema, diff);
+
+                    // Report differences for this schema
+                    reportDifferences(schema, diff);
+
+                    if (diff.hasDifferences()) {
+                        anyDifferences = true;
+                    }
+                }
+            }
+
             // Generate suggested rules if output specified
             if (outputFile != null) {
                 generateSuggestedRules(allDiffs, outputFile);
             }
-            
-            if (anyDifferences) {
-                log.warn("\nSchema differences detected. Review output and update anonymization-registry.yml");
-                return 1;
-            } else {
-                log.info("\nNo schema differences detected. Rules are up to date.");
-                return 0;
-            }
+
+            log.info("\nSchema diff completed.");
+            return anyDifferences ? 1 : 0;
             
         } catch (Exception e) {
             log.error("Schema diff failed: {}", e.getMessage(), e);
@@ -411,7 +422,8 @@ public class DiffSchemaCommand implements Callable<Integer> {
             yaml.append("\n");
         }
         
-        try (FileWriter writer = new FileWriter(outputPath)) {
+        Path outPath = Paths.get(outputPath);
+        try (java.io.BufferedWriter writer = Files.newBufferedWriter(outPath, StandardCharsets.UTF_8)) {
             writer.write(yaml.toString());
         }
         
