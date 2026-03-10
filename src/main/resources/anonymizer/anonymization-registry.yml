@@ -127,7 +127,7 @@ databases:
             nullable: true
             strategy: "PARTIAL_MASK"
   
-  db_iemr:
+  dbiemr:
     tables:
       t_benmedhistory:
         canonicalName: "t_benmedhistory"
