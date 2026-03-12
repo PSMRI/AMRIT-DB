@@ -3,10 +3,7 @@ package com.db.piramalswasthya.config;
 import org.flywaydb.core.Flyway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.db.piramalswasthya.controller.VersionController;
 
 import jakarta.annotation.PostConstruct;
 
@@ -30,13 +27,15 @@ public class FlywayMigrator {
 
     @PostConstruct
     public void migrate() {
-        flywayDbiemr.migrate();
-        flywayDbidentity.migrate();
-        flywayDbreporting.migrate();
-        flywayDb1097identity.migrate();
-        System.out.println("SUCCESS");
+        migrateSchema(flywayDbidentity, "db_identity");
+        migrateSchema(flywayDb1097identity, "db_1097_identity");
+        migrateSchema(flywayDbiemr, "db_iemr");
+        migrateSchema(flywayDbreporting, "db_reporting");
         logger.info("Flyway migration completed successfully");
-        
+    }
+
+    private void migrateSchema(Flyway flyway, String schemaName) {
+        flyway.migrate();
+        logger.info("Schema {} migrated successfully", schemaName);
     }
 }
-
