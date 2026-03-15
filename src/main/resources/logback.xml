@@ -1,0 +1,29 @@
+<configuration>
+  <property name="LOG_DIR" value="./logs"/>
+
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_DIR}/anonymizer.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_DIR}/anonymizer.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+      <maxHistory>14</maxHistory>
+      <maxFileSize>50MB</maxFileSize>
+    </rollingPolicy>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- Enable DEBUG for DbUtils to help troubleshoot table discovery -->
+  <logger name="com.db.piramalswasthya.anonymizer.util.DbUtils" level="DEBUG"/>
+
+  <root level="INFO">
+    <appender-ref ref="CONSOLE"/>
+    <appender-ref ref="FILE"/>
+  </root>
+</configuration>
