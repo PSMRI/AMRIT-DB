@@ -19,6 +19,9 @@
     </encoder>
   </appender>
 
+  <!-- Enable DEBUG for DbUtils to help troubleshoot table discovery -->
+  <logger name="com.db.piramalswasthya.anonymizer.util.DbUtils" level="DEBUG"/>
+
   <root level="INFO">
     <appender-ref ref="CONSOLE"/>
     <appender-ref ref="FILE"/>
