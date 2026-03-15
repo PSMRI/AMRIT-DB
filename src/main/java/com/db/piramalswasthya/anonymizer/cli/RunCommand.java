@@ -145,11 +145,12 @@ public class RunCommand implements Callable<Integer> {
             if (dryRun) {
                 log.info("DRY RUN: Performing schema/table checks...");
                 for (String schema : config.getSource().getSchemas()) {
-                    log.info("\n--- Dry-run check schema: {} ---", schema);
+                    String physical = resolvePhysicalSchema(config, schema);
+                    log.info("\n--- Dry-run check schema: {} (physical={}) ---", schema, physical);
                     try {
-                        DataSource sourceDs = DbUtils.createDataSource(config.getSource(), schema);
-                        java.util.List<String> sourceTables = DbUtils.listTables(sourceDs, schema);
-                        log.info("Source tables for {}: {}", schema, sourceTables);
+                        DataSource sourceDs = DbUtils.createDataSource(config.getSource(), physical);
+                        java.util.List<String> sourceTables = DbUtils.listTables(sourceDs, physical);
+                        log.info("Source tables for {} (physical={}): {}", schema, physical, sourceTables);
                         AnonymizationRules.DatabaseRules dbRules = rules.getDatabases() != null ? rules.getDatabases().get(schema) : null;
                         if (dbRules != null && dbRules.getTables() != null) {
                             java.util.Set<String> expected = new java.util.LinkedHashSet<>(dbRules.getTables().keySet());
@@ -233,6 +234,17 @@ public class RunCommand implements Callable<Integer> {
         
         return 0;
     }
+
+    /**
+     * Resolve a logical schema name to a physical DB/schema name using optional mapping
+     * provided in configuration. If no mapping exists, returns the original logical name.
+     */
+    private String resolvePhysicalSchema(AnonymizerConfig config, String logicalSchema) {
+        if (config == null) return logicalSchema;
+        java.util.Map<String,String> map = config.getSchemaMap();
+        if (map == null) return logicalSchema;
+        return map.getOrDefault(logicalSchema, logicalSchema);
+    }
     /**
      * Process single schema: reset target, stream from source, anonymize, write to target
      */
@@ -244,8 +256,10 @@ public class RunCommand implements Callable<Integer> {
                 "Target database is configured as read-only. Set target.readOnly: false in local properties to enable writing.");
         }
 
+        // Resolve logical->physical schema mapping for source (if configured)
+        String physicalSourceSchema = resolvePhysicalSchema(config, schema);
         // Create DataSources for this schema using centralized DbUtils
-        DataSource sourceDataSource = DbUtils.createDataSource(config.getSource(), schema);
+        DataSource sourceDataSource = DbUtils.createDataSource(config.getSource(), physicalSourceSchema);
 
         // Determine write target: always the configured final target
         DataSource writeTargetDataSource = DbUtils.createDataSource(config.getTarget(), schema);
@@ -262,8 +276,8 @@ public class RunCommand implements Callable<Integer> {
 
         // Debug: list tables present in the source schema and compare with rules
         try {
-            java.util.List<String> sourceTables = DbUtils.listTables(sourceDataSource, schema);
-            log.info("Source tables for {}: {}", schema, sourceTables);
+            java.util.List<String> sourceTables = DbUtils.listTables(sourceDataSource, physicalSourceSchema);
+            log.info("Source tables for {} (physical={}): {}", schema, physicalSourceSchema, sourceTables);
             AnonymizationRules.DatabaseRules dbRules = rules.getDatabases() != null ? rules.getDatabases().get(schema) : null;
             if (dbRules != null && dbRules.getTables() != null) {
                 java.util.Set<String> expected = new java.util.LinkedHashSet<>(dbRules.getTables().keySet());
@@ -495,6 +509,17 @@ public class RunCommand implements Callable<Integer> {
 
         cfg.setRulesFile(prop(props, "anonymizer.rulesFile", "anonymization-registry.yml"));
         cfg.setLoggingPath(prop(props, "anonymizer.loggingPath", LOGS_DIRECTORY));
+
+        // Optional schema name mappings: anonymizer.schema.map.<logical>=<physical>, except its not optional
+        java.util.Map<String,String> schemaMap = new java.util.HashMap<>();
+        for (String key : props.stringPropertyNames()) {
+            if (key.startsWith("anonymizer.schema.map.")) {
+                String logical = key.substring("anonymizer.schema.map.".length());
+                String phys = props.getProperty(key);
+                if (phys != null && !phys.isBlank()) schemaMap.put(logical, phys);
+            }
+        }
+        if (!schemaMap.isEmpty()) cfg.setSchemaMap(schemaMap);
 
         return cfg;
     }

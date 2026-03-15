@@ -51,9 +51,13 @@ public final class DbUtils {
             ds.setUseServerPrepStmts(false);
             try {
                 java.lang.reflect.Method m = ds.getClass().getMethod("setIntegerRuntimeProperty", String.class, int.class);
-                m.invoke(ds, "socketTimeout", 300000);
-            } catch (Exception ex) {
-                log.debug("Connector doesn't support setIntegerRuntimeProperty(socketTimeout) via reflection", ex);
+                try {
+                    m.invoke(ds, "socketTimeout", 300000);
+                } catch (Exception invokeEx) {
+                    log.trace("Failed to invoke setIntegerRuntimeProperty on DataSource; continuing without socketTimeout", invokeEx);
+                }
+            } catch (NoSuchMethodException nsme) {
+                log.trace("DataSource does not support setIntegerRuntimeProperty, skipping socketTimeout");
             }
         } catch (SQLException e) {
             log.warn("Failed to set advanced connection properties for {}", dbConfig.getHost(), e);

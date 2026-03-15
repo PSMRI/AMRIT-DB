@@ -42,6 +42,7 @@ public class AnonymizerConfig {
 
     private String rulesFile = "anonymization-registry.yml";
     private String loggingPath = DEFAULT_LOGGING_PATH;
+    private java.util.Map<String,String> schemaMap;
     
     @Data
     public static class DatabaseConfig {
