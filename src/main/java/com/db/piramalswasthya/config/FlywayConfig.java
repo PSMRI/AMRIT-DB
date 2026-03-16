@@ -11,15 +11,15 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FlywayConfig {
 
-	@Value("${amrit.flyway.ignore-applied-migration-checksum:false}")
-	private boolean ignoreAppliedMigrationChecksum;
+	@Value("${amrit.flyway.skip-validation:false}")
+	private boolean skipValidation;
 
 	private Flyway createFlyway(DataSource dataSource, String location) {
 		return Flyway.configure()
 				.dataSource(dataSource)
 				.locations(location)
 				.baselineOnMigrate(true)
-				.validateOnMigrate(!ignoreAppliedMigrationChecksum)
+				.validateOnMigrate(!skipValidation)
 				.load();
 	}
 
