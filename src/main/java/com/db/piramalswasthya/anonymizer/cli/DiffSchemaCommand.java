@@ -26,8 +26,8 @@ import com.db.piramalswasthya.anonymizer.config.AnonymizerConfig;
 import com.db.piramalswasthya.anonymizer.config.AnonymizationRules;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.mysql.cj.jdbc.MysqlDataSource;
 import com.db.piramalswasthya.anonymizer.util.JdbcUrlParser;
+import com.db.piramalswasthya.anonymizer.util.DbUtils;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import lombok.extern.slf4j.Slf4j;
@@ -111,7 +111,7 @@ public class DiffSchemaCommand implements Callable<Integer> {
                     log.info("\n=== Processing schema: {} ===", schema);
 
                     // Create DataSource for this schema
-                    DataSource dataSource = createDataSource(config.getSource(), schema);
+                    DataSource dataSource = DbUtils.createDataSource(config.getSource(), schema);
 
                     // Query schema from INFORMATION_SCHEMA
                     Map<String, Map<String, ColumnInfo>> dbSchema = extractDatabaseSchema(
@@ -431,19 +431,7 @@ public class DiffSchemaCommand implements Callable<Integer> {
         
         log.info("Suggested rules written to: {}", outputPath);
     }
-    
-    /**
-     * Create MySQL DataSource for specific schema
-     */
-    private DataSource createDataSource(AnonymizerConfig.DatabaseConfig dbConfig, String schema) {
-        MysqlDataSource ds = new MysqlDataSource();
-        ds.setServerName(dbConfig.getHost());
-        ds.setPort(dbConfig.getPort());
-        ds.setDatabaseName(schema);
-        ds.setUser(dbConfig.getUsername());
-        ds.setPassword(dbConfig.getPassword());
-        return ds;
-    }
+
 
     /**
      * Split a comma-separated string without using regex to avoid ReDoS risks.

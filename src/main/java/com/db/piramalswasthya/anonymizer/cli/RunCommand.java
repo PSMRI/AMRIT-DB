@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import javax.naming.ConfigurationException;
 
 import javax.sql.DataSource;
 
@@ -205,7 +206,6 @@ public class RunCommand implements Callable<Integer> {
                 log.info("\n========== Processing schema: {} ==========", schema);
                 processSchema(schema, config, rules, secret, locale);
             }
-            log.info("Execution {}: SUCCESS", executionId);
         } catch (SQLException e) {
             String errorContext = String.format("Anonymization failed during execution (ID: %s)", executionId);
             String sanitized = sanitizeError(e);
@@ -219,101 +219,20 @@ public class RunCommand implements Callable<Integer> {
             log.error("Execution {}: FAILED - {}", executionId, sanitized);
             return 1;
         } catch (Exception e) {
-            // Fallback handler for all other exceptions (safety, validation, etc.)
             String errorContext = String.format("Unexpected error during execution (ID: %s)", executionId);
             String sanitized = sanitizeError(e);
             log.error(LOG_FORMAT_ERROR_CONTEXT, errorContext, sanitized, e);
             log.error("Execution {}: FAILED - {}", executionId, sanitized);
             return 1;
         }
+
         long endMillis = java.time.Duration.between(startTime, LocalDateTime.now()).toMillis();
         log.info("\n=== Anonymization Complete ===");
         log.info("Total rows processed: {}", totalRowsProcessed);
         log.info("Total duration: {} ms", endMillis);
         log.info("Execution {} complete", executionId);
-        
+
         return 0;
-    }
-
-    /**
-     * Resolve a logical schema name to a physical DB/schema name using optional mapping
-     * provided in configuration. If no mapping exists, returns the original logical name.
-     */
-    private String resolvePhysicalSchema(AnonymizerConfig config, String logicalSchema) {
-        if (config == null) return logicalSchema;
-        java.util.Map<String,String> map = config.getSchemaMap();
-        if (map == null) return logicalSchema;
-        return map.getOrDefault(logicalSchema, logicalSchema);
-    }
-    /**
-     * Process single schema: reset target, stream from source, anonymize, write to target
-     */
-    private void processSchema(String schema, AnonymizerConfig config,
-                               AnonymizationRules rules, String secret, java.util.Locale locale) throws SQLException {
-        
-        if (config.getTarget().isReadOnly()) {
-            throw new IllegalStateException(
-                "Target database is configured as read-only. Set target.readOnly: false in local properties to enable writing.");
-        }
-
-        // Resolve logical->physical schema mapping for source (if configured)
-        String physicalSourceSchema = resolvePhysicalSchema(config, schema);
-        // Create DataSources for this schema using centralized DbUtils
-        DataSource sourceDataSource = DbUtils.createDataSource(config.getSource(), physicalSourceSchema);
-
-        // Determine write target: always the configured final target
-        DataSource writeTargetDataSource = DbUtils.createDataSource(config.getTarget(), schema);
-
-        // Initialize components - construct HMAC helper and shared faker, then inject into engine
-        HmacAnonymizer hmac = new HmacAnonymizer(secret);
-        RandomFakeDataAnonymizer faker = new RandomFakeDataAnonymizer(locale);
-        AnonymizationEngine engine = new AnonymizationEngine(hmac, rules, faker);
-
-        KeysetPaginator paginator = new KeysetPaginator(
-            sourceDataSource,
-            config.getPerformance().getBatchSize()
-        );
-
-        // Debug: list tables present in the source schema and compare with rules
-        try {
-            java.util.List<String> sourceTables = DbUtils.listTables(sourceDataSource, physicalSourceSchema);
-            log.info("Source tables for {} (physical={}): {}", schema, physicalSourceSchema, sourceTables);
-            AnonymizationRules.DatabaseRules dbRules = rules.getDatabases() != null ? rules.getDatabases().get(schema) : null;
-            if (dbRules != null && dbRules.getTables() != null) {
-                java.util.Set<String> expected = new java.util.LinkedHashSet<>(dbRules.getTables().keySet());
-                java.util.Set<String> present = new java.util.LinkedHashSet<>(sourceTables);
-                java.util.Set<String> missingInSource = new java.util.LinkedHashSet<>(expected);
-                missingInSource.removeAll(present);
-                if (!missingInSource.isEmpty()) {
-                    log.warn("Tables defined in rules but missing in source {}: {}", schema, missingInSource);
-                }
-                java.util.Set<String> extraInSource = new java.util.LinkedHashSet<>(present);
-                extraInSource.removeAll(expected);
-                if (!extraInSource.isEmpty()) {
-                    log.info("Extra tables present in source {} not defined in rules: {}", schema, extraInSource);
-                }
-            }
-        } catch (Exception e) {
-            log.debug("Failed to list/compare source tables for {}: {}", schema, e.getMessage());
-        }
-
-        try (DirectRestoreWriter writer = new DirectRestoreWriter(
-                writeTargetDataSource,
-                config.getPerformance().getBatchSize(),
-                schema)) {
-
-            // Reset write target schema using source schema as template
-            log.info("Resetting write-target schema: {}", schema);
-            writer.resetSchema(sourceDataSource);
-
-            // Process all tables in this schema (anonymize from source -> writeTarget)
-            processSchemaTables(schema, rules, engine, paginator, writer);
-
-            // Mark success to commit the transaction on the write target
-            writer.markSuccess();
-            log.info("Successfully committed all changes to write-target for schema: {}", schema);
-        }
-
     }
 
     //Process all tables defined in rules for a schema
@@ -331,11 +250,6 @@ public class RunCommand implements Callable<Integer> {
             processTable(schema, entry.getKey(), entry.getValue(), rules, engine, paginator, writer);
         }
     }
-
-    /**
-     * Table listing moved to DbUtils.listTables
-     */
-
     //Process a single table
     private void processTable(String schema, String tableName, AnonymizationRules.TableRules tableRules,
                              AnonymizationRules rules, AnonymizationEngine engine, KeysetPaginator paginator,
@@ -540,7 +454,6 @@ public class RunCommand implements Callable<Integer> {
                         src.setPort(p.port());
                     }
 
-                    // If this datasource entry defines credentials, use them as the
                     // source credentials (first match wins). This supports properties
                     // like spring.datasource.db-1097-identity.username/password.
                     String prefix = key.substring(0, key.length() - ".jdbc-url".length());
@@ -613,12 +526,6 @@ public class RunCommand implements Callable<Integer> {
         return tgt;
     }
 
-    /**
-     * Simple JDBC URL parser to extract host, port and database name for MySQL URLs.
-     * Supports formats like: jdbc:mysql://host:3306/dbname?params
-     */
-    // JDBC parsing moved to com.db.piramalswasthya.anonymizer.util.JdbcUrlParser
-
     // Lightweight property helpers to centralize defaults and parsing
     private String prop(java.util.Properties props, String key, String def) {
         String v = props.getProperty(key);
@@ -640,8 +547,6 @@ public class RunCommand implements Callable<Integer> {
         if (v == null) return def;
         return Boolean.parseBoolean(v);
     }
-
-    // Use shared StringUtils.commaSepToList(...) helper instead of duplicating logic
     
     /**
      * Load rules for anonimization
@@ -691,14 +596,89 @@ public class RunCommand implements Callable<Integer> {
         if (rules.getDatabases() == null || rules.getDatabases().isEmpty()) {
             throw new IllegalArgumentException("Rules must define at least one database");
         }
-    }
-    
-    /**
-     * DataSource creation moved to DbUtils.createDataSource
-     */
+    }   
 
-    // SSL trust detection moved to DbUtils.isSslTrustFailure
-    
+    /**
+     * Resolve a logical schema name to a physical DB/schema name using optional mapping
+     * provided in configuration. If no mapping exists, returns the original logical name.
+     */
+    private String resolvePhysicalSchema(AnonymizerConfig config, String logicalSchema) {
+        if (config == null) return logicalSchema;
+        java.util.Map<String,String> map = config.getSchemaMap();
+        if (map == null) return logicalSchema;
+        return map.getOrDefault(logicalSchema, logicalSchema);
+    }
+
+    /**
+     * Process single schema: reset target, stream from source, anonymize, write to target
+     */
+    private void processSchema(String schema, AnonymizerConfig config,
+                               AnonymizationRules rules, String secret, java.util.Locale locale) throws SQLException {
+        if (config.getTarget().isReadOnly()) {
+            throw new IllegalStateException(
+                "Target database is configured as read-only. Set target.readOnly: false in local properties to enable writing.");
+        }
+
+        // Resolve logical->physical schema mapping for source (if configured)
+        String physicalSourceSchema = resolvePhysicalSchema(config, schema);
+        // Create DataSources for this schema using centralized DbUtils
+        DataSource sourceDataSource = DbUtils.createDataSource(config.getSource(), physicalSourceSchema);
+
+        // Determine write target: always the configured final target
+        DataSource writeTargetDataSource = DbUtils.createDataSource(config.getTarget(), schema);
+
+        // Initialize components - construct HMAC helper and shared faker, then inject into engine
+        HmacAnonymizer hmac = new HmacAnonymizer(secret);
+        RandomFakeDataAnonymizer faker = new RandomFakeDataAnonymizer(locale);
+        AnonymizationEngine engine = new AnonymizationEngine(hmac, rules, faker);
+
+        KeysetPaginator paginator = new KeysetPaginator(
+            sourceDataSource,
+            config.getPerformance().getBatchSize()
+        );
+
+        // Debug: list tables present in the source schema and compare with rules
+        try {
+            java.util.List<String> sourceTables = DbUtils.listTables(sourceDataSource, physicalSourceSchema);
+            log.info("Source tables for {} (physical={}): {}", schema, physicalSourceSchema, sourceTables);
+            AnonymizationRules.DatabaseRules dbRules = rules.getDatabases() != null ? rules.getDatabases().get(schema) : null;
+            if (dbRules != null && dbRules.getTables() != null) {
+                java.util.Set<String> expected = new java.util.LinkedHashSet<>(dbRules.getTables().keySet());
+                java.util.Set<String> present = new java.util.LinkedHashSet<>(sourceTables);
+                java.util.Set<String> missingInSource = new java.util.LinkedHashSet<>(expected);
+                missingInSource.removeAll(present);
+                if (!missingInSource.isEmpty()) {
+                    log.warn("Tables defined in rules but missing in source {}: {}", schema, missingInSource);
+                } else {
+                    log.info("All expected tables present in source {}", schema);
+                }
+                java.util.Set<String> extraInSource = new java.util.LinkedHashSet<>(present);
+                extraInSource.removeAll(expected);
+                if (!extraInSource.isEmpty()) {
+                    log.info("Extra tables present in source {} not defined in rules: {}", schema, extraInSource);
+                }
+            }
+        } catch (Exception e) {
+            log.debug("Failed to list/compare source tables for {}: {}", schema, e.getMessage());
+        }
+
+        try (DirectRestoreWriter writer = new DirectRestoreWriter(
+                writeTargetDataSource,
+                config.getPerformance().getBatchSize(),
+                schema)) {
+
+            // Reset write target schema using source schema as template
+            log.info("Resetting write-target schema: {}", schema);
+            writer.resetSchema(sourceDataSource);
+
+            // Process all tables in this schema (anonymize from source -> writeTarget)
+            processSchemaTables(schema, rules, engine, paginator, writer);
+
+            // Mark success to commit the transaction on the write target
+            writer.markSuccess();
+            log.info("Successfully committed all changes to write-target for schema: {}", schema);
+        }
+    }
     /**
      * Hash file contents (not path) for versioning
      */
@@ -767,8 +747,6 @@ public class RunCommand implements Callable<Integer> {
         return false;
     }
     
-    // Reporting removed: no file reports are written by the CLI; all information is logged.
-    
     /**
      * Custom exception for batch processing failures
      */
@@ -802,76 +780,5 @@ public class RunCommand implements Callable<Integer> {
             this.rowCount = rowCount;
         }
     }
-    
-    /**
-     * DataSource wrapper that applies readOnly setting to connections
-     */
-    private static class ReadOnlyAwareDataSource implements DataSource {
-        private final DataSource delegate;
-        private final boolean readOnly;
-        
-        ReadOnlyAwareDataSource(DataSource delegate, boolean readOnly) {
-            this.delegate = delegate;
-            this.readOnly = readOnly;
-        }
-        
-        @Override
-        public java.sql.Connection getConnection() throws SQLException {
-            java.sql.Connection conn = delegate.getConnection();
-            try {
-                conn.setReadOnly(readOnly);
-                return conn;
-            } catch (SQLException e) {
-                conn.close();
-                throw e;
-            }
-        }
-        
-        @Override
-        public java.sql.Connection getConnection(String username, String password) throws SQLException {
-            java.sql.Connection conn = delegate.getConnection(username, password);
-            try {
-                conn.setReadOnly(readOnly);
-                return conn;
-            } catch (SQLException e) {
-                conn.close();
-                throw e;
-            }
-        }
-        
-        @Override
-        public java.io.PrintWriter getLogWriter() throws SQLException {
-            return delegate.getLogWriter();
-        }
-        
-        @Override
-        public void setLogWriter(java.io.PrintWriter out) throws SQLException {
-            delegate.setLogWriter(out);
-        }
-        
-        @Override
-        public void setLoginTimeout(int seconds) throws SQLException {
-            delegate.setLoginTimeout(seconds);
-        }
-        
-        @Override
-        public int getLoginTimeout() throws SQLException {
-            return delegate.getLoginTimeout();
-        }
-        
-        @Override
-        public java.util.logging.Logger getParentLogger() {
-            return java.util.logging.Logger.getLogger("ReadOnlyAwareDataSource");
-        }
-        
-        @Override
-        public <T> T unwrap(Class<T> iface) throws SQLException {
-            return delegate.unwrap(iface);
-        }
-        
-        @Override
-        public boolean isWrapperFor(Class<?> iface) throws SQLException {
-            return delegate.isWrapperFor(iface);
-        }
-    }
+
 }
