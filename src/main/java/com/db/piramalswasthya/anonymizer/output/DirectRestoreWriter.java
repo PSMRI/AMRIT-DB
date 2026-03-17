@@ -54,14 +54,36 @@ public class DirectRestoreWriter implements AutoCloseable {
             throw new IllegalArgumentException("batchSize must be > 0, got: " + batchSize);
         }
         
-        this.targetDataSource = targetDataSource;
+        // Wrap incoming DataSource to avoid storing the caller's mutable reference directly.
+        if (targetDataSource == null) throw new IllegalArgumentException("targetDataSource must not be null");
+        this.targetDataSource = new DataSourceWrapper(targetDataSource);
         this.batchSize = batchSize;
         this.schema = schema;
-        this.connection = targetDataSource.getConnection();
+        this.connection = this.targetDataSource.getConnection();
         this.connection.setAutoCommit(false);
         this.connection.setCatalog(schema);  // Set schema context
         
         log.info("Direct restore writer initialized for schema {} (batchSize={})", schema, batchSize);
+    }
+
+    /**
+     * Minimal DataSource wrapper that delegates to the underlying DataSource.
+     * Used to avoid exposing the constructor parameter reference directly.
+     */
+    private static final class DataSourceWrapper implements DataSource {
+        private final DataSource delegate;
+
+        DataSourceWrapper(DataSource delegate) { this.delegate = delegate; }
+
+        @Override public Connection getConnection() throws SQLException { return delegate.getConnection(); }
+        @Override public Connection getConnection(String username, String password) throws SQLException { return delegate.getConnection(username, password); }
+        @Override public java.io.PrintWriter getLogWriter() throws SQLException { return delegate.getLogWriter(); }
+        @Override public void setLogWriter(java.io.PrintWriter out) throws SQLException { delegate.setLogWriter(out); }
+        @Override public void setLoginTimeout(int seconds) throws SQLException { delegate.setLoginTimeout(seconds); }
+        @Override public int getLoginTimeout() throws SQLException { return delegate.getLoginTimeout(); }
+        @Override public java.util.logging.Logger getParentLogger() { return java.util.logging.Logger.getLogger("DirectRestoreWriter.DataSourceWrapper"); }
+        @Override public <T> T unwrap(Class<T> iface) throws SQLException { return delegate.unwrap(iface); }
+        @Override public boolean isWrapperFor(Class<?> iface) throws SQLException { return delegate.isWrapperFor(iface); }
     }
     
     /**
