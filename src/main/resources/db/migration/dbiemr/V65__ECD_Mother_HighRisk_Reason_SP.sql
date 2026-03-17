@@ -11,12 +11,6 @@ select distinct NextAttemptPeriod into v_NextAttemptPeriod from m_mctscallconfig
 and OutboundCallType like '%ecd%'
  and deleted is false;
 
--- select v_NextAttemptPeriod;
-
--- select date(ifnull(null,date_add(current_date(),interval v_NextAttemptPeriod day)));
-
- -- select lastmoddate,date_add(lastmoddate,interval 2 day) from t_mctsoutboundcalls order by 1 desc limit 2;
--- create temporary table temp_ecdmotherworklisty as
 select * from (
 select
 distinct B.OBCallID,B.BeneficiaryRegID BeneficiaryRegID,
@@ -45,8 +39,8 @@ B.districtBranchName,
 B.alternatePhoneNo,
 B.ashaPhoneNo,
 B.anmPhoneNo,
-B.Age /* New column */
-,B.HighRisk_Reason
+B.Age,
+,B.HighRisk_Reason /* New column */
 ,B.isCallDisconnected
 ,B.sort_createddate
 
@@ -82,8 +76,8 @@ A.districtBranchName,
 A.alternatePhoneNo,
 A.ashaPhoneNo,
 A.anmPhoneNo,
-A.Age /* New column */ ,
-A.HighRisk_Reason,
+A.Age,
+A.HighRisk_Reason, /* New column */
 A.isCallDisconnected,A.sort_createddate
 FROM
 (select distinct mctsoutbou0_.motherID, mctsoutbou0_.OutboundCallType,
@@ -131,29 +125,25 @@ and AllocatedUserID = v_AllocatedUserID and t1.callendtime is not null
 group by t1.obcallid) b2 on b2.obcallid=mctsoutbou0_.obcallid
 left join t_bencall b on b.obcallid=b2.obcallid and b.createddate=b2.max_createddate
 and  b.CalledServiceID=1714 and b.callendtime is not null
-where mctsoutbou0_.AllocatedUserID = v_AllocatedUserID and  mctsoutbou0_.Deleted is false  -- added false check on 04042024
- and ((mctsoutbou0_.isFurtherCallRequired is null) or (mctsoutbou0_.isFurtherCallRequired is true)) and -- added for nofurthercall
+where mctsoutbou0_.AllocatedUserID = v_AllocatedUserID and  mctsoutbou0_.Deleted is false  
+ and ((mctsoutbou0_.isFurtherCallRequired is null) or (mctsoutbou0_.isFurtherCallRequired is true)) and 
 (mctsoutbou0_.CallStatus <>'Completed' and  mctsoutbou0_.CallStatus<>'NA')
  and (mctsoutbou0_.PrefferedCallDate is null or mctsoutbou0_.PrefferedCallDate<=current_timestamp())
  AND
 
  case
- -- when  mctsoutbou0_.IsHighRisk  is true then date(calldateto)>=date(current_date())
  when
  ((v_NextAttemptPeriod=0) or ( NoOfTrials=0)) then (current_timestamp() between mctsoutbou0_.CallDateFrom AND mctsoutbou0_.CallDateTo)
 
- -- when v_NextAttemptPeriod>0 and mctsoutbou0_.IsHighRisk  is true then date(calldateto)>=date(current_date())
- -- mctsoutbou0_.nooftrials>0 and
 else
  v_NextAttemptPeriod>0 and
- -- date(mctsoutbou0_.lastmoddate)!=date(current_timestamp() ) and
   date(current_timestamp() )
   >=date(date_add(mctsoutbou0_.lastmoddate,interval v_NextAttemptPeriod day))
    and (current_timestamp() between mctsoutbou0_.CallDateFrom AND mctsoutbou0_.CallDateTo) end
 ) A
 
 )
-B)C  order by isCallDisconnected,sort_createddate asc;-- ,Createdate asc;
+B)C  order by isCallDisconnected,sort_createddate asc;
 
 
 END $$
