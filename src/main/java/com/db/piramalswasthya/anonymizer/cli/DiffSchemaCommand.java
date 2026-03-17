@@ -404,6 +404,8 @@ public class DiffSchemaCommand implements Callable<Integer> {
                         yaml.append("          ").append(col.columnName).append(":\n");
                         yaml.append("            strategy: PRESERVE  # Review and change if PII\n");
                         yaml.append("            dataType: ").append(col.dataType).append("\n");
+                        yaml.append("            columnSize: ").append(col.columnSize).append("\n");
+                        yaml.append("            nullable: ").append(col.nullable).append("\n");
                         yaml.append("            piiLevel: UNKNOWN\n");
                     }
                 }

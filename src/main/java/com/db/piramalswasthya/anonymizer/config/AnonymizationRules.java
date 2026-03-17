@@ -39,6 +39,14 @@ public class AnonymizationRules {
     private String schemaHint;
     private UnknownColumnPolicy unknownColumnPolicy = UnknownColumnPolicy.WARN;
     private Map<String, DatabaseRules> databases;
+
+    public Map<String, DatabaseRules> getDatabases() {
+        return databases == null ? null : java.util.Collections.unmodifiableMap(new java.util.HashMap<>(databases));
+    }
+
+    public void setDatabases(Map<String, DatabaseRules> databases) {
+        this.databases = databases == null ? null : new java.util.HashMap<>(databases);
+    }
     
     public enum UnknownColumnPolicy {
         FAIL,
@@ -50,6 +58,14 @@ public class AnonymizationRules {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class DatabaseRules {
         private Map<String, TableRules> tables;
+
+        public Map<String, TableRules> getTables() {
+            return tables == null ? null : java.util.Collections.unmodifiableMap(new java.util.HashMap<>(tables));
+        }
+
+        public void setTables(Map<String, TableRules> tables) {
+            this.tables = tables == null ? null : new java.util.HashMap<>(tables);
+        }
     }
     
     @Data
@@ -58,6 +74,14 @@ public class AnonymizationRules {
         private String primaryKey;
         private String canonicalName;
         private Map<String, ColumnRule> columns;
+
+        public Map<String, ColumnRule> getColumns() {
+            return columns == null ? null : java.util.Collections.unmodifiableMap(new java.util.HashMap<>(columns));
+        }
+
+        public void setColumns(Map<String, ColumnRule> columns) {
+            this.columns = columns == null ? null : new java.util.HashMap<>(columns);
+        }
     }
     
     @Data

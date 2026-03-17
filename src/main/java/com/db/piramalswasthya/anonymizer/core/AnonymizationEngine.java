@@ -45,7 +45,16 @@ public class AnonymizationEngine {
      */
     public AnonymizationEngine(HmacAnonymizer anonymizer, AnonymizationRules rules, RandomFakeDataAnonymizer faker) {
         this.anonymizer = anonymizer;
-        this.rules = rules;
+        if (rules == null) {
+            this.rules = null;
+        } else {
+            // Defensive copy to avoid exposing internal mutable rules instance
+            this.rules = new AnonymizationRules();
+            this.rules.setRulesVersion(rules.getRulesVersion());
+            this.rules.setSchemaHint(rules.getSchemaHint());
+            this.rules.setUnknownColumnPolicy(rules.getUnknownColumnPolicy());
+            this.rules.setDatabases(rules.getDatabases());
+        }
         this.faker = faker;
     }
 

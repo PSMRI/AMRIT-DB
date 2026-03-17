@@ -96,14 +96,16 @@ public class HmacAnonymizer {
      */
     public String maskPartial(String s, int showLast) {
         if (s == null || s.isEmpty()) {
-            return "".isEmpty() ? "" : ""; // keep return type consistent
+            return "";
         }
-        if (showLast < 0) showLast = 0;
+        if (showLast < 0) {
+            showLast = 0;
+        }
         int len = s.length();
         if (len <= showLast) {
             return "X".repeat(len);
         }
-        int maskLen = Math.max(0, len - showLast);
+        int maskLen = len - showLast;
         return "X".repeat(maskLen) + s.substring(len - showLast);
     }
 
