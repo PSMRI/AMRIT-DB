@@ -46,7 +46,6 @@ B.alternatePhoneNo,
 B.ashaPhoneNo,
 B.anmPhoneNo,
 B.Age /* New column */
-,B.HighRisk_Reason
 ,B.isCallDisconnected
 ,B.sort_createddate
 
@@ -83,7 +82,6 @@ A.alternatePhoneNo,
 A.ashaPhoneNo,
 A.anmPhoneNo,
 A.Age /* New column */ ,
-A.HighRisk_Reason,
 A.isCallDisconnected,A.sort_createddate
 FROM
 (select distinct mctsoutbou0_.motherID, mctsoutbou0_.OutboundCallType,
@@ -119,8 +117,7 @@ null alternatePhoneNo,
 mctsdatare1_.ASHA_Ph ashaPhoneNo,
 mctsdatare1_.ANM_Ph anmPhoneNo,
 mctsdatare1_.Age /* New column */
-,mctsoutbou0_.HighRisk_Reason
-,case when b.isCallDisconnected is null then 0 when b.isCallDisconnected is false then 1
+,case when b.isCallDisconnected is null then 0 when b.isCallDisconnected is false then 1 
  when b.isCallDisconnected is true then 2 end isCallDisconnected,
 b.createddate sort_createddate 
 from t_MCTSOutboundCalls mctsoutbou0_
