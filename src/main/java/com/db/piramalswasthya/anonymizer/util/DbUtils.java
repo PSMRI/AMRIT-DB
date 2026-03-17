@@ -153,7 +153,7 @@ public final class DbUtils {
         return m == null ? e.getClass().getSimpleName() : (m.length() > 1000 ? m.substring(0,1000) + "..." : m);
     }
 
-    private static class ReadOnlyAwareDataSource implements DataSource {
+    public static class ReadOnlyAwareDataSource implements DataSource {
         private final DataSource delegate;
         private final boolean readOnly;
 
@@ -201,4 +201,27 @@ public final class DbUtils {
         @Override
         public boolean isWrapperFor(Class<?> iface) throws SQLException { return delegate.isWrapperFor(iface); }
     }
+
+    /**
+     * Generic delegating DataSource to avoid duplicating small wrapper implementations.
+     */
+    public static final class DelegatingDataSource implements DataSource {
+        private final DataSource delegate;
+
+        public DelegatingDataSource(DataSource delegate) { this.delegate = delegate; }
+
+        @Override public Connection getConnection() throws SQLException { return delegate.getConnection(); }
+        @Override public Connection getConnection(String username, String password) throws SQLException { return delegate.getConnection(username, password); }
+        @Override public java.io.PrintWriter getLogWriter() throws SQLException { return delegate.getLogWriter(); }
+        @Override public void setLogWriter(java.io.PrintWriter out) throws SQLException { delegate.setLogWriter(out); }
+        @Override public void setLoginTimeout(int seconds) throws SQLException { delegate.setLoginTimeout(seconds); }
+        @Override public int getLoginTimeout() throws SQLException { return delegate.getLoginTimeout(); }
+        @Override public java.util.logging.Logger getParentLogger() { return java.util.logging.Logger.getLogger("DelegatingDataSource"); }
+        @Override public <T> T unwrap(Class<T> iface) throws SQLException { return delegate.unwrap(iface); }
+        @Override public boolean isWrapperFor(Class<?> iface) throws SQLException { return delegate.isWrapperFor(iface); }
+    }
+
+    public static DataSource delegateOf(DataSource ds) { return ds == null ? null : new DelegatingDataSource(ds); }
+
+    public static DataSource readOnlyAware(DataSource ds, boolean readOnly) { return ds == null ? null : new ReadOnlyAwareDataSource(ds, readOnly); }
 }

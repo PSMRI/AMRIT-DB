@@ -33,17 +33,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
+import com.db.piramalswasthya.anonymizer.util.SqlUtils;
 /**
  * Writes anonymized data directly to target database (DB2)
  * Handles schema reset and supports multi-schema operations.
  */
 @Slf4j
 public class DirectRestoreWriter implements AutoCloseable {
-    private static final Pattern VALID_IDENTIFIER = Pattern.compile("^\\w+$");
-    
+
     private final DataSource targetDataSource;
     private final Connection connection;
     private final int batchSize;
@@ -54,9 +52,9 @@ public class DirectRestoreWriter implements AutoCloseable {
             throw new IllegalArgumentException("batchSize must be > 0, got: " + batchSize);
         }
         
-        // Wrap incoming DataSource to avoid storing the caller's mutable reference directly.
+        // Wrap incoming DataSource via central delegating wrapper to avoid storing the caller's mutable reference directly.
         if (targetDataSource == null) throw new IllegalArgumentException("targetDataSource must not be null");
-        this.targetDataSource = new DataSourceWrapper(targetDataSource);
+        this.targetDataSource = com.db.piramalswasthya.anonymizer.util.DbUtils.delegateOf(targetDataSource);
         this.batchSize = batchSize;
         this.schema = schema;
         this.connection = this.targetDataSource.getConnection();
@@ -65,38 +63,12 @@ public class DirectRestoreWriter implements AutoCloseable {
         
         log.info("Direct restore writer initialized for schema {} (batchSize={})", schema, batchSize);
     }
-
-    /**
-     * Minimal DataSource wrapper that delegates to the underlying DataSource.
-     * Used to avoid exposing the constructor parameter reference directly.
-     */
-    private static final class DataSourceWrapper implements DataSource {
-        private final DataSource delegate;
-
-        DataSourceWrapper(DataSource delegate) { this.delegate = delegate; }
-
-        @Override public Connection getConnection() throws SQLException { return delegate.getConnection(); }
-        @Override public Connection getConnection(String username, String password) throws SQLException { return delegate.getConnection(username, password); }
-        @Override public java.io.PrintWriter getLogWriter() throws SQLException { return delegate.getLogWriter(); }
-        @Override public void setLogWriter(java.io.PrintWriter out) throws SQLException { delegate.setLogWriter(out); }
-        @Override public void setLoginTimeout(int seconds) throws SQLException { delegate.setLoginTimeout(seconds); }
-        @Override public int getLoginTimeout() throws SQLException { return delegate.getLoginTimeout(); }
-        @Override public java.util.logging.Logger getParentLogger() { return java.util.logging.Logger.getLogger("DirectRestoreWriter.DataSourceWrapper"); }
-        @Override public <T> T unwrap(Class<T> iface) throws SQLException { return delegate.unwrap(iface); }
-        @Override public boolean isWrapperFor(Class<?> iface) throws SQLException { return delegate.isWrapperFor(iface); }
-    }
     
     /**
      * Validate identifier to prevent SQL injection via YAML
      */
     private void validateIdentifier(String identifier) {
-        if (identifier == null || identifier.isEmpty()) {
-            throw new IllegalArgumentException("Identifier cannot be null or empty");
-        }
-        if (!VALID_IDENTIFIER.matcher(identifier).matches()) {
-            throw new IllegalArgumentException(
-                "Invalid identifier: " + identifier + " (only alphanumeric and underscore allowed)");
-        }
+        SqlUtils.validateIdentifier(identifier);
     }
     
     /**
@@ -106,8 +78,7 @@ public class DirectRestoreWriter implements AutoCloseable {
      * preventing SQL injection. This allows safe use in dynamic SQL construction.
      */
     private String quoteIdentifier(String identifier) {
-        validateIdentifier(identifier);
-        return "`" + identifier + "`";
+        return SqlUtils.quoteIdentifier(identifier);
     }
     
     /**
@@ -117,7 +88,6 @@ public class DirectRestoreWriter implements AutoCloseable {
         validateIdentifier(schema);
         
         try {
-            // Try DROP DATABASE approach (preferred - clean and fast)
             dropAndRecreateSchema(sourceDataSource);
         } catch (SQLException e) {
             log.warn("DROP DATABASE failed (likely permissions): {}. Falling back to DELETE", e.getMessage());

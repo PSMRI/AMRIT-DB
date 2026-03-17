@@ -25,6 +25,7 @@ package com.db.piramalswasthya.anonymizer.core;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
+import com.db.piramalswasthya.anonymizer.util.SqlUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,7 +34,6 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * Keyset Pagination for efficient streaming of large tables
@@ -47,8 +47,6 @@ import java.util.regex.Pattern;
  */
 @Slf4j
 public class KeysetPaginator {
-    
-    private static final Pattern VALID_IDENTIFIER = Pattern.compile("^\\w+$");
     
     private final DataSource dataSource;
     private final int batchSize;
@@ -86,13 +84,7 @@ public class KeysetPaginator {
      * Validate identifier to prevent SQL injection via YAML rules
      */
     private void validateIdentifier(String identifier) {
-        if (identifier == null || identifier.isEmpty()) {
-            throw new IllegalArgumentException("Identifier cannot be null or empty");
-        }
-        if (!VALID_IDENTIFIER.matcher(identifier).matches()) {
-            throw new IllegalArgumentException(
-                "Invalid identifier: " + identifier + " (only alphanumeric and underscore allowed)");
-        }
+        SqlUtils.validateIdentifier(identifier);
     }
     
     /**
@@ -102,8 +94,7 @@ public class KeysetPaginator {
      * preventing SQL injection. This allows safe use in dynamic SQL construction.
      */
     private String quoteIdentifier(String identifier) {
-        validateIdentifier(identifier);
-        return "`" + identifier + "`";
+        return SqlUtils.quoteIdentifier(identifier);
     }
     
     /**
