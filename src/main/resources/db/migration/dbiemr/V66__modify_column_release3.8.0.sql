@@ -37,6 +37,9 @@ MODIFY isFatherOrSpouse TINYINT(1) NULL;
 ALTER TABLE t_anc_visit
 MODIFY date_of_sterilisation DATETIME NULL DEFAULT NULL;
 
+ALTER TABLE t_hbyc_child_visits
+  MODIFY COLUMN baby_weight INT DEFAULT NULL;
+
 SET @schema = 'db_iemr';
 SET @table  = 'tb_screening';
 
