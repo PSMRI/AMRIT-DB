@@ -779,3 +779,27 @@ SET @stmt = (SELECT IF(COUNT(*) = 0,
     WHERE TABLE_SCHEMA = @dbname AND TABLE_NAME = @tablename AND COLUMN_NAME = @col);
 PREPARE s FROM @stmt; EXECUTE s; DEALLOCATE PREPARE s;
 
+
+CREATE TABLE IF NOT EXISTS `tb_confirmed_cases` (
+   `id` int NOT NULL AUTO_INCREMENT,
+   `ben_id` bigint NOT NULL,
+   `regimen_type` varchar(225) DEFAULT NULL,
+   `treatment_start_date` date NOT NULL,
+   `expected_treatment_completion_date` date DEFAULT NULL,
+   `follow_up_date` date DEFAULT NULL,
+   `monthly_follow_up_done` varchar(225) DEFAULT NULL,
+   `adherence_to_medicines` varchar(225) DEFAULT NULL,
+   `any_discomfort` tinyint(1) DEFAULT NULL,
+   `treatment_completed` tinyint(1) DEFAULT NULL,
+   `actual_treatment_completion_date` date DEFAULT NULL,
+   `treatment_outcome` varchar(100) DEFAULT NULL,
+   `date_of_death` date DEFAULT NULL,
+   `place_of_death` varchar(225) DEFAULT NULL,
+   `reason_for_death` varchar(225) DEFAULT 'Tuberculosis',
+   `reason_for_not_completing` varchar(255) DEFAULT NULL,
+   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+   `user_id` int DEFAULT NULL,
+   PRIMARY KEY (`id`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
