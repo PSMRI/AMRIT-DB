@@ -11,7 +11,6 @@ MODIFY dose_status varchar(255) DEFAULT NULL;
 
 ALTER TABLE asha_profile
 MODIFY dob VARCHAR(15) NULL,
-MODIFY mobile_number VARCHAR(10) NULL,
 MODIFY alternate_mobile_number VARCHAR(10) NULL,
 MODIFY father_or_spouse_name VARCHAR(255) NULL,
 MODIFY date_of_joining VARCHAR(15) NULL,
@@ -250,16 +249,6 @@ SET @sql = (
     'SELECT "asymptomatic exists";')
   FROM INFORMATION_SCHEMA.COLUMNS
   WHERE TABLE_SCHEMA=@schema AND TABLE_NAME=@table AND COLUMN_NAME='asymptomatic'
-);
-PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
-
--- recommandate_test
-SET @sql = (
-  SELECT IF(COUNT(*)=0,
-    'ALTER TABLE db_iemr.tb_screening ADD COLUMN recommandate_test VARCHAR(255);',
-    'SELECT "recommandate_test exists";')
-  FROM INFORMATION_SCHEMA.COLUMNS
-  WHERE TABLE_SCHEMA=@schema AND TABLE_NAME=@table AND COLUMN_NAME='recommandate_test'
 );
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
