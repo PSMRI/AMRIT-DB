@@ -27,4 +27,7 @@ SET @sql = (
 );
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
+ALTER TABLE t_anc_visit
+MODIFY lmp_date DATETIME NULL DEFAULT NULL;
+
 
