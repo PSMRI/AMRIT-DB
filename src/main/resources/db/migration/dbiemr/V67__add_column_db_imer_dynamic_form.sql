@@ -1,5 +1,8 @@
 USE db_iemr;
 
+ALTER TABLE t_anc_visit
+MODIFY lmp_date DATETIME NULL DEFAULT NULL,
+
 SET @schema = 'db_iemr';
 SET @table  = 'form_fields';
 
