@@ -30,4 +30,11 @@ PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 ALTER TABLE t_anc_visit
 MODIFY lmp_date DATETIME NULL DEFAULT NULL;
 
+ALTER TABLE screening_aesje
+DROP CHECK screening_aesje_chk_1;
+
+ALTER TABLE screening_aesje
+MODIFY follow_up_point INT(11) DEFAULT NULL;
+
+
 
