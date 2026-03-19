@@ -1,20 +1,22 @@
-CREATE TABLE IF NOT EXISTS t_elasticsearch_sync_job (
-    job_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    job_type VARCHAR(50) NOT NULL,        -- FULL_SYNC, INCREMENTAL
-    status VARCHAR(50) NOT NULL,           -- RUNNING, COMPLETED, FAILED
-    total_records BIGINT NOT NULL DEFAULT 0,
-    processed_records BIGINT NOT NULL DEFAULT 0,
-    success_count BIGINT NOT NULL DEFAULT 0,
-    failure_count BIGINT NOT NULL DEFAULT 0,
-    current_offset BIGINT NOT NULL DEFAULT 0,  -- Resume position (BIGINT to avoid overflow)
-    started_at DATETIME NOT NULL,
-    completed_at DATETIME NULL,
-    error_message TEXT,
-    processing_speed DOUBLE NULL,          -- Records per second
-    estimated_time_remaining BIGINT NULL,  -- Seconds
-
-    -- Indexes for query performance
-    INDEX idx_job_status (status),
-    INDEX idx_started_at (started_at),
-    INDEX idx_status_started_at (status, started_at)
-);
+CREATE TABLE `t_elasticsearch_sync_job` (
+  `job_id` bigint NOT NULL AUTO_INCREMENT,
+  `job_type` varchar(50) NOT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'PENDING',
+  `total_records` bigint DEFAULT '0',
+  `processed_records` bigint DEFAULT '0',
+  `success_count` bigint DEFAULT '0',
+  `failure_count` bigint DEFAULT '0',
+  `current_offset` int DEFAULT '0',
+  `started_at` timestamp NULL DEFAULT NULL,
+  `completed_at` timestamp NULL DEFAULT NULL,
+  `error_message` text,
+  `triggered_by` varchar(100) DEFAULT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `estimated_time_remaining` bigint DEFAULT NULL,
+  `processing_speed` double DEFAULT NULL,
+  PRIMARY KEY (`job_id`),
+  KEY `idx_status` (`status`),
+  KEY `idx_created_date` (`created_date`),
+  KEY `idx_job_type` (`job_type`)
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
