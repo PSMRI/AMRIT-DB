@@ -27,6 +27,21 @@ SET @sql = (
 );
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
+SET @schema = 'db_iemr';
+SET @table  = 'campaign_filariasis_mda';
+
+SET @col = 'mda_photos';
+SET @sql = (
+  SELECT IF(COUNT(*) = 0,
+    CONCAT('ALTER TABLE `', @schema, '`.`', @table, '` ADD COLUMN `', @col, '` JSON NULL DEFAULT NULL'),
+    'SELECT "mda_photos already exists"')
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE TABLE_SCHEMA = @schema
+    AND TABLE_NAME   = @table
+    AND COLUMN_NAME  = @col
+);
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
 ALTER TABLE t_anc_visit
 MODIFY lmp_date DATETIME NULL DEFAULT NULL;
 
@@ -35,6 +50,3 @@ DROP CHECK screening_aesje_chk_1;
 
 ALTER TABLE screening_aesje
 MODIFY follow_up_point INT(11) DEFAULT NULL;
-
-
-
