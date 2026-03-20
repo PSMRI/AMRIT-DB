@@ -50,3 +50,10 @@ DROP CHECK screening_aesje_chk_1;
 
 ALTER TABLE screening_aesje
 MODIFY follow_up_point INT(11) DEFAULT NULL;
+
+ALTER TABLE asha_profile
+DROP CONSTRAINT asha_profile_chk_10;
+
+ALTER TABLE asha_profile
+ADD CONSTRAINT chk_abha_number
+CHECK (`abha_number` REGEXP '^[0-9]{14}$');
