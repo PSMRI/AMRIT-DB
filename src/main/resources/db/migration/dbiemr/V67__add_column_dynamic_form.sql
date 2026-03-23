@@ -1,7 +1,10 @@
 USE db_iemr;
 
-SET @schema    = 'db_iemr';
-SET @table     = 'form_fields';
+USE db_iemr;
+
+SET @schema = 'db_iemr';
+
+SET @table = 'form_fields';
 
 SET @col = 'state_code';
 SET @sql = (
@@ -27,8 +30,7 @@ SET @sql = (
 );
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
-SET @schema = 'db_iemr';
-SET @table  = 'campaign_filariasis_mda';
+SET @table = 'campaign_filariasis_mda';
 
 SET @col = 'mda_photos';
 SET @sql = (
@@ -44,6 +46,10 @@ PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
 ALTER TABLE t_anc_visit
 MODIFY lmp_date DATETIME NULL DEFAULT NULL;
+
+ALTER TABLE t_anc_visit
+DROP session_date DATETIME NULL DEFAULT NULL;
+
 
 ALTER TABLE screening_aesje
 DROP CHECK screening_aesje_chk_1;
