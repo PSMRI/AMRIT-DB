@@ -1,7 +1,5 @@
 USE db_iemr;
 
-USE db_iemr;
-
 SET @schema = 'db_iemr';
 
 SET @table = 'form_fields';
