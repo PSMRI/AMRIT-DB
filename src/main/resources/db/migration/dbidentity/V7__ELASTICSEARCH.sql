@@ -19,4 +19,4 @@ CREATE TABLE `t_elasticsearch_sync_job` (
   KEY `idx_status` (`status`),
   KEY `idx_created_date` (`created_date`),
   KEY `idx_job_type` (`job_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
