@@ -40,9 +40,9 @@ B.alternatePhoneNo,
 B.ashaPhoneNo,
 B.anmPhoneNo,
 B.Age,
-,B.HighRisk_Reason /* New column */
-,B.isCallDisconnected
-,B.sort_createddate
+B.HighRisk_Reason, /* New column */
+B.isCallDisconnected,
+B.sort_createddate
 
 from
 (SELECT distinct A.OutboundCallType OutboundCallType,
