@@ -14,4 +14,4 @@ CREATE TABLE IF NOT EXISTS `m_procedure_fields` (
    PRIMARY KEY (`id`),
    KEY `ProcedureID` (`ProcedureID`),
    CONSTRAINT `m_procedure_fields_ibfk_1` FOREIGN KEY (`ProcedureID`) REFERENCES `m_procedure` (`ProcedureID`)
- ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ );
