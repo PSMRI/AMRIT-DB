@@ -1225,3 +1225,5 @@ CREATE TABLE IF NOT EXISTS `t_bendataaccess` (
 -- /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-08-22 10:48:55
+
+SET FOREIGN_KEY_CHECKS = 1;

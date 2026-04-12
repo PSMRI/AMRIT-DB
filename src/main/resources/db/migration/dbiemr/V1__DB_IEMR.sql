@@ -26829,3 +26829,5 @@ DELIMITER ;
 
 
 -- Dump completed on 2024-08-09 10:55:46
+
+SET FOREIGN_KEY_CHECKS = 1;
