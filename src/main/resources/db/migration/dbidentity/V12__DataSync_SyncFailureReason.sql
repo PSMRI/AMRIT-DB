@@ -1,0 +1,12 @@
+use db_identity;
+ALTER TABLE i_beneficiaryaccount ADD COLUMN SyncFailureReason VARCHAR(500);
+ALTER TABLE i_beneficiaryaddress ADD COLUMN SyncFailureReason VARCHAR(500);
+ALTER TABLE i_beneficiarycontacts ADD COLUMN SyncFailureReason VARCHAR(500);
+ALTER TABLE i_beneficiaryconsent ADD COLUMN SyncFailureReason VARCHAR(500);
+ALTER TABLE i_beneficiarydetails ADD COLUMN SyncFailureReason VARCHAR(500);
+ALTER TABLE i_beneficiaryfamilymapping ADD COLUMN SyncFailureReason VARCHAR(500);
+ALTER TABLE i_beneficiaryidentity ADD COLUMN SyncFailureReason VARCHAR(500);
+ALTER TABLE i_beneficiaryimage ADD COLUMN SyncFailureReason VARCHAR(500);
+ALTER TABLE i_beneficiarymapping ADD COLUMN SyncFailureReason VARCHAR(500);
+ALTER TABLE i_beneficiaryservicemapping ADD COLUMN SyncFailureReason VARCHAR(500);
+ALTER TABLE m_beneficiaryregidmapping ADD COLUMN SyncFailureReason VARCHAR(500);
