@@ -30,6 +30,11 @@ public class FlywayMigrator {
 
     @PostConstruct
     public void migrate() {
+        flywayDbiemr.repair();
+        flywayDbidentity.repair();
+        flywayDbreporting.repair();
+        flywayDb1097identity.repair();
+
         flywayDbiemr.migrate();
         flywayDbidentity.migrate();
         flywayDbreporting.migrate();
