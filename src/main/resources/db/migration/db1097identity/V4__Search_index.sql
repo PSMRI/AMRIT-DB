@@ -4,7 +4,7 @@ USE db_1097_identity;
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
-  WHERE table_schema = 'db_identity'
+  WHERE table_schema = 'db_1097_identity'
     AND table_name = 'i_beneficiarymapping'
     AND index_name = 'idx_benmap_details_van'
 );
@@ -19,7 +19,7 @@ PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
-  WHERE table_schema = 'db_identity'
+  WHERE table_schema = 'db_1097_identity'
     AND table_name = 'i_beneficiarymapping'
     AND index_name = 'idx_benmap_address_van'
 );
@@ -34,7 +34,7 @@ PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
-  WHERE table_schema = 'db_identity'
+  WHERE table_schema = 'db_1097_identity'
     AND table_name = 'i_beneficiarymapping'
     AND index_name = 'idx_benmap_vanserial_van'
 );
@@ -49,7 +49,7 @@ PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
-  WHERE table_schema = 'db_identity'
+  WHERE table_schema = 'db_1097_identity'
     AND table_name = 'i_beneficiarydetails'
     AND index_name = 'idx_bendetail_vanserial_van'
 );
@@ -64,7 +64,7 @@ PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
-  WHERE table_schema = 'db_identity'
+  WHERE table_schema = 'db_1097_identity'
     AND table_name = 'i_beneficiarydetails'
     AND index_name = 'idx_bendetail_firstname'
 );
@@ -79,7 +79,7 @@ PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
-  WHERE table_schema = 'db_identity'
+  WHERE table_schema = 'db_1097_identity'
     AND table_name = 'i_beneficiarydetails'
     AND index_name = 'idx_bendetail_lastname'
 );
@@ -94,7 +94,7 @@ PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
-  WHERE table_schema = 'db_identity'
+  WHERE table_schema = 'db_1097_identity'
     AND table_name = 'i_beneficiarydetails'
     AND index_name = 'idx_bendetail_gender'
 );
@@ -109,7 +109,7 @@ PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
-  WHERE table_schema = 'db_identity'
+  WHERE table_schema = 'db_1097_identity'
     AND table_name = 'i_beneficiarydetails'
     AND index_name = 'idx_bendetail_dob'
 );
@@ -124,7 +124,7 @@ PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
-  WHERE table_schema = 'db_identity'
+  WHERE table_schema = 'db_1097_identity'
     AND table_name = 'i_beneficiarydetails'
     AND index_name = 'idx_bendetail_father'
 );
@@ -139,7 +139,7 @@ PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 SET @exists := (
   SELECT COUNT(*)
   FROM information_schema.statistics
-  WHERE table_schema = 'db_identity'
+  WHERE table_schema = 'db_1097_identity'
     AND table_name = 'i_beneficiaryaddress'
     AND index_name = 'idx_benadd_vanserial_van'
 );
