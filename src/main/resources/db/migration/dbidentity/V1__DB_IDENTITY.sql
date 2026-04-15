@@ -1,3 +1,5 @@
+SET FOREIGN_KEY_CHECKS = 0;
+
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: 192.168.5.5    Database: db_identity
@@ -1592,3 +1594,5 @@ CREATE TABLE IF NOT EXISTS `t_bendataaccess` (
 -- /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-08-09 10:43:44
+
+SET FOREIGN_KEY_CHECKS = 1;
