@@ -561,11 +561,44 @@ public class RunCommand implements Callable<Integer> {
     private void validateConfiguration(AnonymizerConfig config, AnonymizationRules rules) {
         validateSourceConfiguration(config);
         validateTargetConfiguration(config);
+        validateSourceTargetDistinct(config);
         validateSchemaMatching(config);
         validateRules(rules);
         
         log.info("Configuration validated successfully");
         log.info("Schemas to process: {}", config.getSource().getSchemas());
+    }
+
+    /**
+     * Prevent accidental overwrite: source and target must not point to same host/port
+     * with overlapping schema names.
+     */
+    private void validateSourceTargetDistinct(AnonymizerConfig config) {
+        if (config == null) return;
+        AnonymizerConfig.DatabaseConfig src = config.getSource();
+        AnonymizerConfig.DatabaseConfig tgt = config.getTarget();
+        if (src == null || tgt == null) return;
+
+        String srcHost = src.getHost() == null ? "" : src.getHost().trim().toLowerCase();
+        String tgtHost = tgt.getHost() == null ? "" : tgt.getHost().trim().toLowerCase();
+        int srcPort = src.getPort();
+        int tgtPort = tgt.getPort();
+
+        if (srcHost.isEmpty() || tgtHost.isEmpty()) return;
+
+        if (srcHost.equals(tgtHost) && srcPort == tgtPort) {
+            java.util.List<String> sSchemas = src.getSchemas() == null ? java.util.Collections.emptyList() : src.getSchemas();
+            java.util.List<String> tSchemas = tgt.getSchemas() == null ? java.util.Collections.emptyList() : tgt.getSchemas();
+
+            for (String s : sSchemas) {
+                for (String t : tSchemas) {
+                    if (s != null && t != null && s.equalsIgnoreCase(t)) {
+                        throw new IllegalArgumentException(
+                            "Source and target are configured to the same host/port and share schema '" + s + "'. Refusing to run to avoid destructive overwrite. Configure a different target or mapping.");
+                    }
+                }
+            }
+        }
     }
     
     private void validateSourceConfiguration(AnonymizerConfig config) {

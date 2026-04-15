@@ -86,7 +86,6 @@ public class DirectRestoreWriter implements AutoCloseable {
      */
     public void resetSchema(DataSource sourceDataSource) throws SQLException {
         validateIdentifier(schema);
-        
         try {
             dropAndRecreateSchema(sourceDataSource);
         } catch (SQLException e) {
