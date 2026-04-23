@@ -1,0 +1,537 @@
+# AMRIT Anonymization Rules (Source of Truth)
+# Matches AnonymizationRules Java model structure
+#
+# Strategies:
+#   HASH_SHA256        - One-way hash (deterministic, linkable)
+#   HMAC_HASH          - HMAC-based one-way hash (deterministic, keyed)
+#   RANDOM_FAKE_DATA   - Realistic fake data using java-faker
+#   PARTIAL_MASK       - Mask characters (show last N digits)
+#   GENERALIZE         - Category/range reduction
+#   SUPPRESS           - Replace with NULL
+#   PRESERVE           - Keep original value
+
+rulesVersion: "1.0.0"
+# lastUpdated: "2026-02-15T12:00:00Z"
+schemaHint: "V6"
+# toolVersion: "1.0.0"
+
+databases:
+  db_identity:
+    tables:
+      datamigrationtable:
+        canonicalName: "datamigrationtable"
+      flyway_schema_history:
+        canonicalName: "flyway_schema_history"
+      hibernate_sequence:
+        canonicalName: "hibernate_sequence"
+      i_beneficiaryaccount:
+        canonicalName: "i_beneficiaryaccount"
+      i_beneficiaryaddress:
+        canonicalName: "i_beneficiaryaddress"
+        columns:
+          PermAddressValue:
+            canonicalName: "PermAddressValue"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "GENERALIZE"
+          CurrAddressValue:
+            canonicalName: "CurrAddressValue"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "GENERALIZE"
+          EmerAddressValue:
+            canonicalName: "EmerAddressValue"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "GENERALIZE"
+          PermPinCode:
+            canonicalName: "PermPinCode"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PARTIAL_MASK"
+          CurrPinCode:
+            canonicalName: "CurrPinCode"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PARTIAL_MASK"
+          PermCoordinate:
+            canonicalName: "PermCoordinate"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "GENERALIZE"
+          CurrCoordinate:
+            canonicalName: "CurrCoordinate"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "GENERALIZE"
+      i_beneficiaryaddress_bkp_14122021:
+        canonicalName: "i_beneficiaryaddress_bkp_14122021"
+      i_beneficiaryconsent:
+        canonicalName: "i_beneficiaryconsent"
+      i_beneficiarycontacts:
+        canonicalName: "i_beneficiarycontacts"
+        columns:
+          PreferredPhoneNum:
+            canonicalName: "PreferredPhoneNum"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PARTIAL_MASK"
+          PreferredSMSPhoneNum:
+            canonicalName: "PreferredSMSPhoneNum"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PARTIAL_MASK"
+          EmergencyContactNum:
+            canonicalName: "EmergencyContactNum"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PARTIAL_MASK"
+          PhoneNum1:
+            canonicalName: "PhoneNum1"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PARTIAL_MASK"
+          PhoneNum2:
+            canonicalName: "PhoneNum2"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PARTIAL_MASK"
+          PhoneNum3:
+            canonicalName: "PhoneNum3"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PARTIAL_MASK"
+          PhoneNum4:
+            canonicalName: "PhoneNum4"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PARTIAL_MASK"
+          PhoneNum5:
+            canonicalName: "PhoneNum5"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PARTIAL_MASK"
+          EmailId:
+            canonicalName: "EmailId"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "FAKE_EMAIL"
+      i_beneficiarycontacts_bkp_24092019:
+        canonicalName: "i_beneficiarycontacts_bkp_24092019"
+      i_beneficiarydetails:
+        canonicalName: "i_beneficiarydetails"
+        columns:
+          FirstName:
+            canonicalName: "FirstName"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "FAKE_FIRSTNAME"
+          MiddleName:
+            canonicalName: "MiddleName"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PARTIAL_MASK"
+          LastName:
+            canonicalName: "LastName"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "FAKE_LASTNAME"
+          DOB:
+            canonicalName: "DOB"
+            dataType: "DATETIME"
+            nullable: true
+            strategy: "GENERALIZE"
+          FatherName:
+            canonicalName: "FatherName"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "FAKE_FIRSTNAME"
+          MotherName:
+            canonicalName: "MotherName"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "FAKE_FIRSTNAME"
+          SpouseName:
+            canonicalName: "SpouseName"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "FAKE_FIRSTNAME"
+      i_beneficiarydetails_bkp_chirangv1:
+        canonicalName: "i_beneficiarydetails_bkp_chirangv1"
+      i_beneficiarydetails_bkp_kamrupv4:
+        canonicalName: "i_beneficiarydetails_bkp_kamrupv4"
+      i_beneficiarydetails_rmnch:
+        canonicalName: "i_beneficiarydetails_rmnch"
+      i_beneficiaryfamilymapping:
+        canonicalName: "i_beneficiaryfamilymapping"
+      i_beneficiaryidentity:
+        canonicalName: "i_beneficiaryidentity"
+        columns:
+          IdentityNo:
+            canonicalName: "IdentityNo"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "HMAC_HASH"
+          IdentityFilePath:
+            canonicalName: "IdentityFilePath"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "SUPPRESS"
+      i_beneficiaryimage:
+        canonicalName: "i_beneficiaryimage"
+        columns:
+          BenImage:
+            canonicalName: "BenImage"
+            dataType: "LONGTEXT"
+            nullable: true
+            strategy: "SUPPRESS"
+          BenBiometric:
+            canonicalName: "BenBiometric"
+            dataType: "LONGTEXT"
+            nullable: true
+            strategy: "SUPPRESS"
+      i_beneficiarymapping:
+        canonicalName: "i_beneficiarymapping"
+      i_beneficiaryservicemapping:
+        canonicalName: "i_beneficiaryservicemapping"
+      i_benfamilytag:
+        canonicalName: "i_benfamilytag"
+      i_bornbirthdeatils:
+        canonicalName: "i_bornbirthdeatils"
+      i_cbac_additional_details:
+        canonicalName: "i_cbac_additional_details"
+      i_cbacdetails:
+        canonicalName: "i_cbacdetails"
+      i_householddetails:
+        canonicalName: "i_householddetails"
+      m_beneficiaryregidmapping:
+        canonicalName: "m_beneficiaryregidmapping"
+        columns:
+          BenRegID:
+            canonicalName: "BenRegID"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "HASH_SHA256"
+          BeneficiaryID:
+            canonicalName: "BeneficiaryID"
+            dataType: "BIGINT"
+            nullable: false
+            strategy: "HMAC_HASH"
+          FirstName:
+            canonicalName: "FirstName"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "FAKE_FIRSTNAME"
+          LastName:
+            canonicalName: "LastName"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "FAKE_LASTNAME"
+          PhoneNo:
+            canonicalName: "PhoneNo"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PARTIAL_MASK"
+          AadhaarNo:
+            canonicalName: "AadhaarNo"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "HMAC_HASH"
+          EmailId:
+            canonicalName: "EmailId"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "FAKE_EMAIL"
+          Address:
+            canonicalName: "Address"
+            dataType: "TEXT"
+            nullable: true
+            strategy: "GENERALIZE"
+          DateOfBirth:
+            canonicalName: "DateOfBirth"
+            dataType: "DATE"
+            nullable: true
+            strategy: "GENERALIZE"
+          Gender:
+            canonicalName: "Gender"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PRESERVE"
+      m_bensecurestack:
+        canonicalName: "m_bensecurestack"
+        columns:
+          BenKey1:
+            canonicalName: "BenKey1"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "SUPPRESS"
+          BenKey2:
+            canonicalName: "BenKey2"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "SUPPRESS"
+          BenKey3:
+            canonicalName: "BenKey3"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "SUPPRESS"
+          BenKey4:
+            canonicalName: "BenKey4"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "SUPPRESS"
+          BenKey5:
+            canonicalName: "BenKey5"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "SUPPRESS"
+          BenKey6:
+            canonicalName: "BenKey6"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "SUPPRESS"
+          BenSalt1:
+            canonicalName: "BenSalt1"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "SUPPRESS"
+          BenSalt2:
+            canonicalName: "BenSalt2"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "SUPPRESS"
+          BenSalt3:
+            canonicalName: "BenSalt3"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "SUPPRESS"
+          BenSalt4:
+            canonicalName: "BenSalt4"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "SUPPRESS"
+          BenSalt5:
+            canonicalName: "BenSalt5"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "SUPPRESS"
+          BenSalt6:
+            canonicalName: "BenSalt6"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "SUPPRESS"
+      replicationtest:
+        canonicalName: "replicationtest"
+      samjeevani_zolt_datamigration:
+        canonicalName: "samjeevani_zolt_datamigration"
+      t_bendataaccess:
+        canonicalName: "t_bendataaccess"
+      t_elasticsearch_sync_job:
+        canonicalName: "t_elasticsearch_sync_job"
+      v_benadvancesearch:
+        canonicalName: "v_benadvancesearch"
+
+  db_1097_identity:
+    tables:
+      flyway_schema_history:
+        canonicalName: "flyway_schema_history"
+      i_beneficiaryaccount:
+        canonicalName: "i_beneficiaryaccount"
+      i_beneficiaryaddress:
+        canonicalName: "i_beneficiaryaddress"
+      i_beneficiaryconsent:
+        canonicalName: "i_beneficiaryconsent"
+      i_beneficiarycontacts:
+        canonicalName: "i_beneficiarycontacts"
+      i_beneficiarydetails:
+        canonicalName: "i_beneficiarydetails"
+      i_beneficiarydetails_fsr:
+        canonicalName: "i_beneficiarydetails_fsr"
+      i_beneficiarydetails_rmnch:
+        canonicalName: "i_beneficiarydetails_rmnch"
+      i_beneficiaryfamilymapping:
+        canonicalName: "i_beneficiaryfamilymapping"
+      i_beneficiaryidentity:
+        canonicalName: "i_beneficiaryidentity"
+      i_beneficiaryimage:
+        canonicalName: "i_beneficiaryimage"
+      i_beneficiarymapping:
+        canonicalName: "i_beneficiarymapping"
+      i_beneficiaryservicemapping:
+        canonicalName: "i_beneficiaryservicemapping"
+      i_bornbirthdeatils:
+        canonicalName: "i_bornbirthdeatils"
+      i_cbacdetails:
+        canonicalName: "i_cbacdetails"
+      i_householddetails:
+        canonicalName: "i_householddetails"
+      m_beneficiaryregidmapping:
+        canonicalName: "m_beneficiaryregidmapping"
+      m_bensecurestack:
+        canonicalName: "m_bensecurestack"
+      t_bendataaccess:
+        canonicalName: "t_bendataaccess"
+      v_benadvancesearch:
+        canonicalName: "v_benadvancesearch"
+
+  db_reporting:
+    tables:
+      dim_1097beneficiary:
+        canonicalName: "dim_1097beneficiary"
+      dim_beneficiary:
+        canonicalName: "dim_beneficiary"
+      dim_date:
+        canonicalName: "dim_date"
+      dim_user:
+        canonicalName: "dim_user"
+      fac_bencall:
+        canonicalName: "fac_bencall"
+      fact_104bencdiresponse:
+        canonicalName: "fact_104bencdiresponse"
+      fact_104benmedhistory:
+        canonicalName: "fact_104benmedhistory"
+      fact_104prescription:
+        canonicalName: "fact_104prescription"
+      fact_1097callsummary:
+        canonicalName: "fact_1097callsummary"
+      fact_anccare:
+        canonicalName: "fact_anccare"
+      fact_ancdiagnosis:
+        canonicalName: "fact_ancdiagnosis"
+      fact_bencall:
+        canonicalName: "fact_bencall"
+      fact_benchiefcomplaint:
+        canonicalName: "fact_benchiefcomplaint"
+      fact_bendisease:
+        canonicalName: "fact_bendisease"
+      fact_benreferdetails:
+        canonicalName: "fact_benreferdetails"
+      fact_benvisitdetail:
+        canonicalName: "fact_benvisitdetail"
+      fact_bloodrequest:
+        canonicalName: "fact_bloodrequest"
+      fact_childcongenitalanomalies:
+        canonicalName: "fact_childcongenitalanomalies"
+      fact_childinvalidrecord:
+        canonicalName: "fact_childinvalidrecord"
+      fact_childvalidrecord:
+        canonicalName: "fact_childvalidrecord"
+      fact_diahypercase:
+        canonicalName: "fact_diahypercase"
+      fact_directoryservice:
+        canonicalName: "fact_directoryservice"
+      fact_epidemicoutbreak:
+        canonicalName: "fact_epidemicoutbreak"
+      fact_feedback:
+        canonicalName: "fact_feedback"
+        columns:
+          SMSPhoneNo:
+            canonicalName: "SMSPhoneNo"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PARTIAL_MASK"
+          EmailStatusID:
+            canonicalName: "EmailStatusID"
+            dataType: "INT"
+            nullable: true
+            strategy: "PRESERVE"
+      fact_foodsafetycopmlaint:
+        canonicalName: "fact_foodsafetycopmlaint"
+        columns:
+          PatientName:
+            canonicalName: "PatientName"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "RANDOM_FAKE_DATA"
+          PatientAge:
+            canonicalName: "PatientAge"
+            dataType: "INT"
+            nullable: true
+            strategy: "PRESERVE"
+      fact_itemstockentry:
+        canonicalName: "fact_itemstockentry"
+      fact_itemstockexit:
+        canonicalName: "fact_itemstockexit"
+      fact_labtestorder:
+        canonicalName: "fact_labtestorder"
+      fact_labtestresult:
+        canonicalName: "fact_labtestresult"
+      fact_mctscallresponse:
+        canonicalName: "fact_mctscallresponse"
+      fact_mctsoutboundcall:
+        canonicalName: "fact_mctsoutboundcall"
+      fact_motherinvalidrecord:
+        canonicalName: "fact_motherinvalidrecord"
+        columns:
+          Name:
+            canonicalName: "Name"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "RANDOM_FAKE_DATA"
+          Husband_Name:
+            canonicalName: "Husband_Name"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "RANDOM_FAKE_DATA"
+          PhoneNo_Of_Whom:
+            canonicalName: "PhoneNo_Of_Whom"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PARTIAL_MASK"
+          Aadhar_no:
+            canonicalName: "Aadhar_no"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "HMAC_HASH"
+          Acc_No:
+            canonicalName: "Acc_No"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "HMAC_HASH"
+      fact_mothervalidrecord:
+        canonicalName: "fact_mothervalidrecord"
+      fact_organdonation:
+        canonicalName: "fact_organdonation"
+      fact_patientissueexit:
+        canonicalName: "fact_patientissueexit"
+      fact_phoneblock:
+        canonicalName: "fact_phoneblock"
+        columns:
+          phoneNo:
+            canonicalName: "phoneNo"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PARTIAL_MASK"
+      fact_phyvitals:
+        canonicalName: "fact_phyvitals"
+      fact_pnccare:
+        canonicalName: "fact_pnccare"
+      fact_pncdiagnosis:
+        canonicalName: "fact_pncdiagnosis"
+      fact_prescribeddrug:
+        canonicalName: "fact_prescribeddrug"
+      fact_prescription:
+        canonicalName: "fact_prescription"
+      fact_schemeservice:
+        canonicalName: "fact_schemeservice"
+      fact_tmanc:
+        canonicalName: "fact_tmanc"
+      fact_tmrequest:
+        canonicalName: "fact_tmrequest"
+      flyway_schema_history:
+        canonicalName: "flyway_schema_history"
+      m_report:
+        canonicalName: "m_report"
+      replicationtest:
+        canonicalName: "replicationtest"
+      sanjeevani_dashboard:
+        canonicalName: "sanjeevani_dashboard"
+      scheduler_status:
+        canonicalName: "scheduler_status"
+      t_itemstockentry:
+        canonicalName: "t_itemstockentry"
+
+  dbiemr:
+    tables:
+      flyway_schema_history:
+        canonicalName: "flyway_schema_history"
