@@ -5,7 +5,7 @@ SET @column_exists = (
     SELECT COUNT(*) 
     FROM INFORMATION_SCHEMA.COLUMNS 
     WHERE TABLE_SCHEMA = DATABASE()
-      AND TABLE_NAME = 'm_translation'
+      AND TABLE_NAME = 'form_field_options'
       AND COLUMN_NAME = 'label_bn'
 );
 
