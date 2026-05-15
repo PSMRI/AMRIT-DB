@@ -10,7 +10,7 @@ SET @column_exists = (
 );
 
 SET @sql = IF(@column_exists = 0,
-    'ALTER TABLE m_translation ADD COLUMN label_bn varchar(500) NULL DEFAULT NULL',
+    'ALTER TABLE form_field_options ADD COLUMN label_bn varchar(500) NULL DEFAULT NULL',
     'SELECT "Column already exists"'
 );
 

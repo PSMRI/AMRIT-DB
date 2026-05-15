@@ -10,7 +10,7 @@ SET @column_exists = (
 );
 
 SET @sql = IF(@column_exists = 0,
-        'ALTER TABLE m_translation ADD COLUMN is_default_activity tinyint(1) NULL DEFAULT NULL',
+        'ALTER TABLE m_incentive_activity ADD COLUMN is_default_activity tinyint(1) NULL DEFAULT NULL',
     'SELECT "Column already exists"'
 );
 
