@@ -1,4 +1,4 @@
-use db_1097_identity
+use db_1097_identity;
 
 -- Flyway migration friendly script for MySQL
 -- Creates indexes only if they do not already exist
