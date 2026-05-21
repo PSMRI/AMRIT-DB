@@ -2,6 +2,7 @@
 
 -- FLW/common column indexes indexing5 (online DDL, idempotent)
 
+
 -- phc_review_meeting
 SET @idx_exists = (
     SELECT COUNT(*) FROM information_schema.statistics

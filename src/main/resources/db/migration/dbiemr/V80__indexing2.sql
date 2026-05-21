@@ -2,6 +2,7 @@
 
 -- FLW/common column indexes indexing2 (online DDL, idempotent)
 
+
 -- high_risk_assess
 SET @idx_exists = (
     SELECT COUNT(*) FROM information_schema.statistics

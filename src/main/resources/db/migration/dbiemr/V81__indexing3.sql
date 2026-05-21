@@ -2,6 +2,7 @@
 
 -- FLW/common column indexes indexing3 (online DDL, idempotent)
 
+
 -- m_incentive_activity
 SET @idx_exists = (
     SELECT COUNT(*) FROM information_schema.statistics

@@ -2,6 +2,7 @@
 
 -- FLW/common column indexes indexing4 (online DDL, idempotent)
 
+
 -- tb_screening
 SET @idx_exists = (
     SELECT COUNT(*) FROM information_schema.statistics
