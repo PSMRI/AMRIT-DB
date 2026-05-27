@@ -4,18 +4,7 @@ UPDATE `db_iemr`.`m_synctabledetail` SET `VanColumnName` = 'BenRegId,BenDetailsI
 
 update `db_iemr`.`m_synctabledetail` SET `vancolumnname` = "ItemStockEntryID,FacilityID,Quantity,ProviderServiceMapID,ExitTypeID,ExitType,Deleted,Processed,CreatedBy,date_format(CreatedDate,'%Y-%m-%d %H:%i:%s'),ModifiedBy,date_format(LastModDate,'%Y-%m-%d %H:%i:%s'),ItemStockExitID,VanSerialNo,VanID,VehicalNo,ParkingPlaceID,SyncedBy,date_format(SyncedDate,'%Y-%m-%d %H:%i:%s'),ReservedForChange" where (`tablename`='t_itemstockexit');
 
-use db_identity;
-ALTER TABLE i_beneficiaryaccount ADD COLUMN SyncFailureReason VARCHAR(500);
-ALTER TABLE i_beneficiaryaddress ADD COLUMN SyncFailureReason VARCHAR(500);
-ALTER TABLE i_beneficiarycontacts ADD COLUMN SyncFailureReason VARCHAR(500);
-ALTER TABLE i_beneficiaryconsent ADD COLUMN SyncFailureReason VARCHAR(500);
-ALTER TABLE i_beneficiarydetails ADD COLUMN SyncFailureReason VARCHAR(500);
-ALTER TABLE i_beneficiaryfamilymapping ADD COLUMN SyncFailureReason VARCHAR(500);
-ALTER TABLE i_beneficiaryidentity ADD COLUMN SyncFailureReason VARCHAR(500);
-ALTER TABLE i_beneficiaryimage ADD COLUMN SyncFailureReason VARCHAR(500);
-ALTER TABLE i_beneficiarymapping ADD COLUMN SyncFailureReason VARCHAR(500);
-ALTER TABLE i_beneficiaryservicemapping ADD COLUMN SyncFailureReason VARCHAR(500);
-ALTER TABLE m_beneficiaryregidmapping ADD COLUMN SyncFailureReason VARCHAR(500);
+-- db_identity ALTER statements moved to dbidentity/V12__DataSync_SyncFailureReason.sql
 use db_iemr;
 ALTER TABLE t_benvisitdetail ADD COLUMN SyncFailureReason VARCHAR(500);
 ALTER TABLE t_phy_anthropometry ADD COLUMN SyncFailureReason VARCHAR(500);
