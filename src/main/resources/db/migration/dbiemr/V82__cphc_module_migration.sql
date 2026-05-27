@@ -21,10 +21,11 @@ CREATE TABLE IF NOT EXISTS `oral_health` (
    `beneficiary_id` bigint DEFAULT NULL,
    `beneficiary_reg_id` bigint DEFAULT NULL,
    PRIMARY KEY (`id`),
-   UNIQUE KEY `uq_oral_health_patient_visit` (`patient_id`,`ben_visit_no`)
- );
+   UNIQUE KEY `uq_oral_health_patient_visit` (`patient_id`,`ben_visit_no`),
+   KEY `idx_oh_user_id` (`user_id`)
+);
 
- CREATE TABLE IF NOT EXISTS `pain_symptom_assessment` (
+CREATE TABLE IF NOT EXISTS `pain_symptom_assessment` (
     `id` bigint NOT NULL AUTO_INCREMENT,
     `patient_id` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
     `ben_visit_no` int DEFAULT NULL,
@@ -55,8 +56,9 @@ CREATE TABLE IF NOT EXISTS `oral_health` (
     `beneficiary_id` mediumtext COLLATE utf8mb4_unicode_ci,
     `user_id` int DEFAULT NULL,
     `beneficiary_reg_id` mediumtext COLLATE utf8mb4_unicode_ci,
-    PRIMARY KEY (`id`)
-  );
+    PRIMARY KEY (`id`),
+    KEY `idx_psa_user_id` (`user_id`)
+);
 
 CREATE TABLE IF NOT EXISTS `psychosocial_caregiver_support` (
      `id` bigint NOT NULL AUTO_INCREMENT,
@@ -81,8 +83,9 @@ CREATE TABLE IF NOT EXISTS `psychosocial_caregiver_support` (
      `user_id` int DEFAULT NULL,
      `beneficiary_id` bigint DEFAULT NULL,
      `beneficiary_reg_id` bigint DEFAULT NULL,
-     PRIMARY KEY (`id`)
-   );
+     PRIMARY KEY (`id`),
+     KEY `idx_pcs_user_id` (`user_id`)
+);
 
 CREATE TABLE IF NOT EXISTS `nose_diagnosis_assessment` (
    `id` bigint NOT NULL AUTO_INCREMENT,
@@ -102,10 +105,11 @@ CREATE TABLE IF NOT EXISTS `nose_diagnosis_assessment` (
    `user_id` int DEFAULT NULL,
    `beneficiary_id` bigint DEFAULT NULL,
    `beneficiary_reg_id` bigint DEFAULT NULL,
-   PRIMARY KEY (`id`)
- );
+   PRIMARY KEY (`id`),
+   KEY `idx_nda_user_id` (`user_id`)
+);
 
- CREATE TABLE IF NOT EXISTS `throat_diagnosis_assessment` (
+CREATE TABLE IF NOT EXISTS `throat_diagnosis_assessment` (
     `id` bigint NOT NULL AUTO_INCREMENT,
     `patient_id` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
     `ben_visit_no` int DEFAULT NULL,
@@ -125,8 +129,9 @@ CREATE TABLE IF NOT EXISTS `nose_diagnosis_assessment` (
     `user_id` int DEFAULT NULL,
     `beneficiary_id` bigint DEFAULT NULL,
     `beneficiary_reg_id` bigint DEFAULT NULL,
-    PRIMARY KEY (`id`)
-  );
+    PRIMARY KEY (`id`),
+    KEY `idx_tda_user_id` (`user_id`)
+);
 
 CREATE TABLE IF NOT EXISTS `opthalmic_visit` (
      `visitId` varchar(36) NOT NULL COMMENT 'UUID',
@@ -158,8 +163,9 @@ CREATE TABLE IF NOT EXISTS `opthalmic_visit` (
      `user_id` int DEFAULT NULL,
      `beneficiary_reg_id` mediumtext,
      PRIMARY KEY (`visitId`),
-     KEY `idx_ophthalmic_patientID` (`patientID`)
-   );
+     KEY `idx_ophthalmic_patientID` (`patientID`),
+     KEY `idx_ov_user_id` (`user_id`)
+);
 
 CREATE TABLE IF NOT EXISTS `ear_diagnosis_assessment` (
       `assessment_id` int NOT NULL AUTO_INCREMENT,
@@ -176,8 +182,9 @@ CREATE TABLE IF NOT EXISTS `ear_diagnosis_assessment` (
       `user_id` int DEFAULT NULL,
       `beneficiary_id` mediumtext,
       `beneficiary_reg_id` mediumtext,
-      PRIMARY KEY (`assessment_id`)
-    );
+      PRIMARY KEY (`assessment_id`),
+      KEY `idx_eda_user_id` (`user_id`)
+);
 
 CREATE TABLE IF NOT EXISTS `elderly_health_assessment` (
        `id` bigint NOT NULL AUTO_INCREMENT,
@@ -217,8 +224,9 @@ CREATE TABLE IF NOT EXISTS `elderly_health_assessment` (
        `functional_status` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
        `functional_decline_flag` tinyint(1) DEFAULT NULL,
        PRIMARY KEY (`id`),
-       UNIQUE KEY `uq_elderly_patient_visit` (`patient_id`,`ben_visit_no`)
-     );
+       UNIQUE KEY `uq_elderly_patient_visit` (`patient_id`,`ben_visit_no`),
+       KEY `idx_eha_user_id` (`user_id`)
+);
 
 CREATE TABLE IF NOT EXISTS `mental_health_screening` (
         `id` bigint NOT NULL AUTO_INCREMENT,
@@ -302,16 +310,6 @@ CREATE TABLE IF NOT EXISTS `mental_health_screening` (
         `beneficiary_reg_id` bigint DEFAULT NULL,
         PRIMARY KEY (`id`),
         KEY `idx_mhs_patient_id` (`patient_id`),
-        KEY `idx_mhs_patient_visit` (`patient_id`,`ben_visit_no`)
-      );
-
-
-      CREATE INDEX idx_oh_user_id   ON oral_health                    (user_id);
-      CREATE INDEX idx_psa_user_id  ON pain_symptom_assessment         (user_id);
-      CREATE INDEX idx_pcs_user_id  ON psychosocial_caregiver_support   (user_id);
-      CREATE INDEX idx_nda_user_id  ON nose_diagnosis_assessment        (user_id);
-      CREATE INDEX idx_tda_user_id  ON throat_diagnosis_assessment      (user_id);
-      CREATE INDEX idx_ov_user_id   ON opthalmic_visit                  (user_id);
-      CREATE INDEX idx_eda_user_id  ON ear_diagnosis_assessment         (user_id);
-      CREATE INDEX idx_eha_user_id  ON elderly_health_assessment        (user_id);
-      CREATE INDEX idx_mhs_user_id  ON mental_health_screening          (user_id);
+        KEY `idx_mhs_patient_visit` (`patient_id`,`ben_visit_no`),
+        KEY `idx_mhs_user_id` (`user_id`)
+);
