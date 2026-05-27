@@ -304,3 +304,14 @@ CREATE TABLE IF NOT EXISTS `mental_health_screening` (
         KEY `idx_mhs_patient_id` (`patient_id`),
         KEY `idx_mhs_patient_visit` (`patient_id`,`ben_visit_no`)
       );
+
+
+      CREATE INDEX idx_oh_user_id   ON oral_health                    (user_id);
+      CREATE INDEX idx_psa_user_id  ON pain_symptom_assessment         (user_id);
+      CREATE INDEX idx_pcs_user_id  ON psychosocial_caregiver_support   (user_id);
+      CREATE INDEX idx_nda_user_id  ON nose_diagnosis_assessment        (user_id);
+      CREATE INDEX idx_tda_user_id  ON throat_diagnosis_assessment      (user_id);
+      CREATE INDEX idx_ov_user_id   ON opthalmic_visit                  (user_id);
+      CREATE INDEX idx_eda_user_id  ON ear_diagnosis_assessment         (user_id);
+      CREATE INDEX idx_eha_user_id  ON elderly_health_assessment        (user_id);
+      CREATE INDEX idx_mhs_user_id  ON mental_health_screening          (user_id);
