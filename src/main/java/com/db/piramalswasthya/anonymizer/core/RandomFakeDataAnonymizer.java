@@ -21,22 +21,20 @@
 */
 package com.db.piramalswasthya.anonymizer.core;
 
+import com.db.piramalswasthya.anonymizer.util.CryptoUtils;
 import com.github.javafaker.Faker;
-import java.security.SecureRandom;
 import java.util.Locale;
+import java.util.Random;
 
 /**
  * Provides realistic fake values for columns using JavaFaker.
  */
 public class RandomFakeDataAnonymizer {
 
-    private final Faker faker;
     private final Locale locale;
-    private final SecureRandom secureRandom = new SecureRandom();
 
     public RandomFakeDataAnonymizer(Locale locale) {
         this.locale = locale == null ? Locale.ENGLISH : locale;
-        this.faker = new Faker(this.locale);
     }
 
     private boolean isIndiaLocale() {
@@ -48,11 +46,16 @@ public class RandomFakeDataAnonymizer {
     }
 
     /**
-     * Non-deterministic fake value generation using a shared Faker instance.
+     * Deterministic fake value generation using the source value as part of the seed.
      */
     public Object anonymize(String columnName, String original) {
         if (original == null) return null;
 
+        Faker faker = fakerFor("COLUMN_HEURISTIC", columnName, original);
+        return anonymizeByColumn(faker, columnName, original);
+    }
+
+    private Object anonymizeByColumn(Faker faker, String columnName, String original) {
         String c = columnName == null ? "" : columnName.toLowerCase();
         try {
             if (c.contains("name") || c.contains("firstname") || c.contains("lastname")) {
@@ -75,12 +78,14 @@ public class RandomFakeDataAnonymizer {
     }
 
     /**
-     * Strategy-aware non-deterministic anonymization.
+     * Strategy-aware deterministic anonymization.
      * If `strategy` is null or unknown, falls back to column-name heuristics.
      */
     public Object anonymize(String strategy, String columnName, String original) {
         if (original == null) return null;
         String s = strategy == null ? "" : strategy.toUpperCase();
+        Random random = randomFor(s, columnName, original);
+        Faker faker = new Faker(locale, random);
 
         try {
             switch (s) {
@@ -105,7 +110,7 @@ public class RandomFakeDataAnonymizer {
                     // realistic 10-digit mobile starting with 6-9
                     if (isIndiaLocale()) {
                         char[] leading = new char[]{'6', '7', '8', '9'};
-                        char lead = leading[secureRandom.nextInt(leading.length)];
+                        char lead = leading[random.nextInt(leading.length)];
                         String rest = faker.numerify("#########");
                         return lead + rest;
                     }
@@ -124,11 +129,28 @@ public class RandomFakeDataAnonymizer {
                 case "ZIP":
                     return faker.address().zipCode();
                 default:
-                    return anonymize(columnName, original);
+                    return anonymizeByColumn(faker, columnName, original);
             }
         } catch (RuntimeException e) {
             return original;
         }
     }
 
+    private Faker fakerFor(String strategy, String columnName, String original) {
+        return new Faker(locale, randomFor(strategy, columnName, original));
+    }
+
+    private Random randomFor(String strategy, String columnName, String original) {
+        String material = locale.toLanguageTag() + "|" +
+            normalize(strategy) + "|" +
+            normalize(columnName) + "|" +
+            normalize(original);
+        String hash = CryptoUtils.sha256Hex(material);
+        long seed = Long.parseUnsignedLong(hash.substring(0, 16), 16);
+        return new Random(seed);
+    }
+
+    private String normalize(String value) {
+        return value == null ? "" : value;
+    }
 }

@@ -2,6 +2,7 @@ package com.db.piramalswasthya.anonymizer.output;
 
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -63,5 +64,36 @@ class DirectRestoreWriterTest {
         verify(ddlStatement).executeQuery("SHOW CREATE TABLE `Beneficiary`");
         verify(targetStatement).addBatch(createDdl);
         verify(targetStatement).executeBatch();
+    }
+
+    @Test
+    void closeCommitsWhenMarkedSuccessful() throws Exception {
+        DataSource targetDataSource = mock(DataSource.class);
+        Connection connection = mock(Connection.class);
+        when(targetDataSource.getConnection()).thenReturn(connection);
+
+        DirectRestoreWriter writer = new DirectRestoreWriter(targetDataSource, 100, "db_identity");
+
+        writer.markSuccess();
+        writer.close();
+
+        verify(connection).commit();
+        verify(connection, never()).rollback();
+        verify(connection).close();
+    }
+
+    @Test
+    void closeRollsBackWhenNotMarkedSuccessful() throws Exception {
+        DataSource targetDataSource = mock(DataSource.class);
+        Connection connection = mock(Connection.class);
+        when(targetDataSource.getConnection()).thenReturn(connection);
+
+        DirectRestoreWriter writer = new DirectRestoreWriter(targetDataSource, 100, "db_identity");
+
+        writer.close();
+
+        verify(connection).rollback();
+        verify(connection, never()).commit();
+        verify(connection).close();
     }
 }
