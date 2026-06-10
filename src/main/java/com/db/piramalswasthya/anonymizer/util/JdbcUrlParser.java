@@ -25,7 +25,7 @@ public final class JdbcUrlParser {
             if (hostPort.contains(":")) {
                 String[] hp = hostPort.split(":", 2);
                 host = hp[0];
-                try { port = Integer.parseInt(hp[1]); } catch (NumberFormatException ex) { port = 3306; }
+                port = parsePortOrDefault(hp[1]);
             }
             String db = rest;
             int q = db.indexOf('?'); if (q >= 0) db = db.substring(0, q);
@@ -33,6 +33,14 @@ public final class JdbcUrlParser {
             return new Parts(host, port, db);
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    private static int parsePortOrDefault(String rawPort) {
+        try {
+            return Integer.parseInt(rawPort);
+        } catch (NumberFormatException ex) {
+            return 3306;
         }
     }
 }

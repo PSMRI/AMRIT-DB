@@ -49,22 +49,31 @@ public final class DbUtils {
             ds.setConnectTimeout(dbConfig.getConnectionTimeout());
             ds.setRewriteBatchedStatements(true);
             ds.setUseServerPrepStmts(false);
-            try {
-                java.lang.reflect.Method m = ds.getClass().getMethod("setIntegerRuntimeProperty", String.class, int.class);
-                try {
-                    m.invoke(ds, "socketTimeout", 300000);
-                } catch (Exception invokeEx) {
-                    log.trace("Failed to invoke setIntegerRuntimeProperty on DataSource; continuing without socketTimeout", invokeEx);
-                }
-            } catch (NoSuchMethodException nsme) {
-                log.trace("DataSource does not support setIntegerRuntimeProperty, skipping socketTimeout");
-            }
+            setSocketTimeout(ds, 300000);
         } catch (SQLException e) {
             log.warn("Failed to set advanced connection properties for {}", dbConfig.getHost(), e);
         }
 
 
         return new ReadOnlyAwareDataSource(ds, dbConfig.isReadOnly());
+    }
+
+    private static void setSocketTimeout(MysqlDataSource ds, int socketTimeoutMs) {
+        try {
+            java.lang.reflect.Method m = ds.getClass().getMethod("setIntegerRuntimeProperty", String.class, int.class);
+            invokeSocketTimeoutSetter(ds, m, socketTimeoutMs);
+        } catch (NoSuchMethodException nsme) {
+            log.trace("DataSource does not support setIntegerRuntimeProperty, skipping socketTimeout");
+        }
+    }
+
+    private static void invokeSocketTimeoutSetter(MysqlDataSource ds, java.lang.reflect.Method method,
+                                                  int socketTimeoutMs) {
+        try {
+            method.invoke(ds, "socketTimeout", socketTimeoutMs);
+        } catch (ReflectiveOperationException | IllegalArgumentException invokeEx) {
+            log.trace("Failed to invoke setIntegerRuntimeProperty on DataSource; continuing without socketTimeout", invokeEx);
+        }
     }
 
     public static java.util.List<String> listTables(DataSource ds, String schema) throws SQLException {
@@ -74,19 +83,10 @@ public final class DbUtils {
         // TABLE_CAT rather than TABLE_SCHEM, so check both, and also compare to
         // the connection's current catalog.
         try (Connection conn = ds.getConnection()) {
-            String catalog = null;
-            try {
-                catalog = conn.getCatalog();
-            } catch (Exception ignored) {
-            }
+            String catalog = getCatalogQuietly(conn);
 
             java.sql.DatabaseMetaData md = conn.getMetaData();
-            try {
-                String metaUrl = md.getURL();
-                log.debug("DbUtils.listTables: requestedSchema='{}' connCatalog='{}' metaUrl='{}'", schema, catalog, metaUrl);
-            } catch (Exception e) {
-                log.debug("DbUtils.listTables: requestedSchema='{}' connCatalog='{}' (failed to get meta URL)", schema, catalog);
-            }
+            logMetadataContext(schema, catalog, md);
 
             try (ResultSet rs = md.getTables(catalog, null, "%", new String[]{"TABLE"})) {
                 while (rs.next()) {
@@ -116,12 +116,7 @@ public final class DbUtils {
         if (out.isEmpty()) {
             String sql = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = ?";
             try (Connection conn = ds.getConnection()) {
-                try {
-                    String url = conn.getMetaData().getURL();
-                    log.debug("DbUtils.listTables: metadata returned no tables; falling back to INFORMATION_SCHEMA on URL='{}', connCatalog='{}'", url, conn.getCatalog());
-                } catch (Exception ex) {
-                    log.debug("DbUtils.listTables: metadata returned no tables; falling back to INFORMATION_SCHEMA (couldn't read meta)");
-                }
+                logInformationSchemaFallbackContext(conn);
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
                     ps.setString(1, schema);
                     try (ResultSet rs = ps.executeQuery()) {
@@ -137,6 +132,33 @@ public final class DbUtils {
         return out;
     }
 
+    private static String getCatalogQuietly(Connection conn) {
+        try {
+            return conn.getCatalog();
+        } catch (SQLException e) {
+            log.trace("Unable to read connection catalog", e);
+            return null;
+        }
+    }
+
+    private static void logMetadataContext(String schema, String catalog, java.sql.DatabaseMetaData md) {
+        try {
+            String metaUrl = md.getURL();
+            log.debug("DbUtils.listTables: requestedSchema='{}' connCatalog='{}' metaUrl='{}'", schema, catalog, metaUrl);
+        } catch (SQLException e) {
+            log.debug("DbUtils.listTables: requestedSchema='{}' connCatalog='{}' (failed to get meta URL)", schema, catalog);
+        }
+    }
+
+    private static void logInformationSchemaFallbackContext(Connection conn) {
+        try {
+            String url = conn.getMetaData().getURL();
+            log.debug("DbUtils.listTables: metadata returned no tables; falling back to INFORMATION_SCHEMA on URL='{}', connCatalog='{}'", url, conn.getCatalog());
+        } catch (SQLException ex) {
+            log.debug("DbUtils.listTables: metadata returned no tables; falling back to INFORMATION_SCHEMA (couldn't read meta)");
+        }
+    }
+
     public static boolean isSslTrustFailure(Throwable t) {
         while (t != null) {
             if (t instanceof javax.net.ssl.SSLHandshakeException) return true;
@@ -146,11 +168,6 @@ public final class DbUtils {
             t = t.getCause();
         }
         return false;
-    }
-
-    private static String sanitizeError(Throwable e) {
-        String m = e.getMessage();
-        return m == null ? e.getClass().getSimpleName() : (m.length() > 1000 ? m.substring(0,1000) + "..." : m);
     }
 
     public static class ReadOnlyAwareDataSource implements DataSource {

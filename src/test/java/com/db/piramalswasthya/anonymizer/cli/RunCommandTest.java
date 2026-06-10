@@ -22,7 +22,6 @@ import com.db.piramalswasthya.anonymizer.output.DirectRestoreWriter;
 class RunCommandTest {
 
     @Test
-    @SuppressWarnings("unchecked")
     void processTableAddsUnknownColumnsAsPreserveWithoutMutatingUnmodifiableGetter() throws Exception {
         RunCommand command = new RunCommand();
         AnonymizationRules rules = new AnonymizationRules();
@@ -43,12 +42,42 @@ class RunCommandTest {
 
         command.processTable("db_identity", "Beneficiary", tableRules, rules, engine, paginator, writer);
 
-        ArgumentCaptor<List<String>> columnsCaptor =
-            ArgumentCaptor.forClass((Class<List<String>>) (Class<?>) List.class);
+        ArgumentCaptor<List<String>> columnsCaptor = listCaptor();
         verify(paginator).streamTable(eq("Beneficiary"), eq("id"), columnsCaptor.capture(), any());
 
         assertEquals(List.of("id", "newColumn"), columnsCaptor.getValue());
         assertEquals("PRESERVE", tableRules.getColumns().get("newColumn").getStrategy());
     }
 
+    @Test
+    void processTableWithEmptyColumnsCopiesSourceColumnsAsPreserve() throws Exception {
+        RunCommand command = new RunCommand();
+        AnonymizationRules rules = new AnonymizationRules();
+        rules.setUnknownColumnPolicy(AnonymizationRules.UnknownColumnPolicy.PRESERVE);
+
+        AnonymizationRules.TableRules tableRules = new AnonymizationRules.TableRules();
+        tableRules.setPrimaryKey("id");
+        tableRules.setColumns(new LinkedHashMap<>());
+
+        KeysetPaginator paginator = mock(KeysetPaginator.class);
+        when(paginator.getTableColumns("Beneficiary")).thenReturn(List.of("id", "name", "phoneNo"));
+
+        AnonymizationEngine engine = mock(AnonymizationEngine.class);
+        DirectRestoreWriter writer = mock(DirectRestoreWriter.class);
+
+        command.processTable("db_identity", "Beneficiary", tableRules, rules, engine, paginator, writer);
+
+        ArgumentCaptor<List<String>> columnsCaptor = listCaptor();
+        verify(paginator).streamTable(eq("Beneficiary"), eq("id"), columnsCaptor.capture(), any());
+
+        assertEquals(List.of("id", "name", "phoneNo"), columnsCaptor.getValue());
+        assertEquals("PRESERVE", tableRules.getColumns().get("id").getStrategy());
+        assertEquals("PRESERVE", tableRules.getColumns().get("name").getStrategy());
+        assertEquals("PRESERVE", tableRules.getColumns().get("phoneNo").getStrategy());
+    }
+
+    @SuppressWarnings("unchecked")
+    private ArgumentCaptor<List<String>> listCaptor() {
+        return ArgumentCaptor.forClass((Class<List<String>>) (Class<?>) List.class);
+    }
 }

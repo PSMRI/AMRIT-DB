@@ -144,7 +144,7 @@ public class RunCommand implements Callable<Integer> {
             
             // 4. Interactive safety confirmation
             log.info("Running safety confirmation checks...");
-            if (!interactiveSafetyConfirmation(config)) {
+            if (!interactiveSafetyConfirmation()) {
                 log.info("User declined safety confirmation. Aborting run.");
                 log.info("Execution {} aborted by user", executionId);
                 return 1;
@@ -152,55 +152,11 @@ public class RunCommand implements Callable<Integer> {
             log.info("Safety confirmation accepted");
             
             if (dryRun) {
-                log.info("DRY RUN: Performing schema/table checks...");
-                for (String schema : config.getSource().getSchemas()) {
-                    String physical = resolvePhysicalSchema(config, schema);
-                    log.info("\n--- Dry-run check schema: {} (physical={}) ---", schema, physical);
-                    try {
-                        DataSource sourceDs = DbUtils.createDataSource(config.getSource(), physical);
-                        java.util.List<String> sourceTables = DbUtils.listTables(sourceDs, physical);
-                        log.info("Source tables for {} (physical={}): {}", schema, physical, sourceTables);
-                        AnonymizationRules.DatabaseRules dbRules = rules.getDatabases() != null ? rules.getDatabases().get(schema) : null;
-                        if (dbRules != null && dbRules.getTables() != null) {
-                            java.util.Set<String> expected = new java.util.LinkedHashSet<>(dbRules.getTables().keySet());
-                            java.util.Set<String> present = new java.util.LinkedHashSet<>(sourceTables);
-                            java.util.Set<String> missingInSource = new java.util.LinkedHashSet<>(expected);
-                            missingInSource.removeAll(present);
-                            if (!missingInSource.isEmpty()) {
-                                log.warn("Tables defined in rules but missing in source {}: {}", schema, missingInSource);
-                            } else {
-                                log.info("All expected tables present in source {}", schema);
-                            }
-                        } else {
-                            log.warn("No rules found for schema: {}", schema);
-                        }
-                    } catch (Exception e) {
-                        log.warn("Dry-run: failed to inspect schema {}: {}", schema, e.getMessage());
-                    }
-                }
-                log.info("DRY RUN: Configuration and safety validated. Exiting.");
-                log.info("Execution {}: DRY_RUN_SUCCESS", executionId);
-                return 0;
+                return runDryRunChecks(config, rules, executionId);
             }
             
             // 5. Prepare HMAC secret and faker locale (engine will instantiate helpers)
-            String secret = System.getenv("ANONYMIZATION_SECRET");
-            if (secret == null || secret.length() < 32) {
-                // Attempt secure-ish fallback: read from properties file if config was provided as properties.
-                if (configFile != null && configFile.endsWith(".properties")) {
-                    try (java.io.FileInputStream fis = new java.io.FileInputStream(configFile)) {
-                        java.util.Properties p = new java.util.Properties();
-                        p.load(fis);
-                        String propSecret = p.getProperty("anonymizer.hmacSecretKey");
-                        if (propSecret != null && propSecret.length() >= 32) {
-                            log.warn("ANONYMIZATION_SECRET env var missing or weak; falling back to anonymizer.hmacSecretKey from properties. This is insecure for production and should only be used for local testing.");
-                            secret = propSecret;
-                        }
-                    } catch (IOException e) {
-                        log.warn("Failed to read properties for secret fallback: {}", e.getMessage());
-                    }
-                }
-            }
+            String secret = resolveAnonymizationSecret();
             if (secret == null || secret.length() < 32) {
                 throw new IllegalStateException(
                     "ANONYMIZATION_SECRET env var required (min 32 characters) or anonymizer.hmacSecretKey property in properties file");
@@ -243,6 +199,75 @@ public class RunCommand implements Callable<Integer> {
         return 0;
     }
 
+    private Integer runDryRunChecks(AnonymizerConfig config, AnonymizationRules rules, String executionId) {
+        log.info("DRY RUN: Performing schema/table checks...");
+        for (String schema : config.getSource().getSchemas()) {
+            runDryRunCheckForSchema(config, rules, schema);
+        }
+        log.info("DRY RUN: Configuration and safety validated. Exiting.");
+        log.info("Execution {}: DRY_RUN_SUCCESS", executionId);
+        return 0;
+    }
+
+    private void runDryRunCheckForSchema(AnonymizerConfig config, AnonymizationRules rules, String schema) {
+        String physical = resolvePhysicalSchema(config, schema);
+        log.info("\n--- Dry-run check schema: {} (physical={}) ---", schema, physical);
+        try {
+            DataSource sourceDs = DbUtils.createDataSource(config.getSource(), physical);
+            java.util.List<String> sourceTables = DbUtils.listTables(sourceDs, physical);
+            log.info("Source tables for {} (physical={}): {}", schema, physical, sourceTables);
+            reportMissingDryRunTables(schema, sourceTables, rules);
+        } catch (Exception e) {
+            log.warn("Dry-run: failed to inspect schema {}: {}", schema, e.getMessage());
+        }
+    }
+
+    private void reportMissingDryRunTables(String schema, java.util.List<String> sourceTables,
+                                           AnonymizationRules rules) {
+        AnonymizationRules.DatabaseRules dbRules =
+            rules.getDatabases() != null ? rules.getDatabases().get(schema) : null;
+        if (dbRules == null || dbRules.getTables() == null) {
+            log.warn("No rules found for schema: {}", schema);
+            return;
+        }
+
+        java.util.Set<String> expected = new java.util.LinkedHashSet<>(dbRules.getTables().keySet());
+        java.util.Set<String> present = new java.util.LinkedHashSet<>(sourceTables);
+        java.util.Set<String> missingInSource = new java.util.LinkedHashSet<>(expected);
+        missingInSource.removeAll(present);
+        if (!missingInSource.isEmpty()) {
+            log.warn("Tables defined in rules but missing in source {}: {}", schema, missingInSource);
+        } else {
+            log.info("All expected tables present in source {}", schema);
+        }
+    }
+
+    private String resolveAnonymizationSecret() {
+        String secret = System.getenv("ANONYMIZATION_SECRET");
+        if (secret != null && secret.length() >= 32) {
+            return secret;
+        }
+        return readSecretFromPropertiesConfig(secret);
+    }
+
+    private String readSecretFromPropertiesConfig(String fallbackSecret) {
+        if (configFile == null || !configFile.endsWith(".properties")) {
+            return fallbackSecret;
+        }
+        try (java.io.FileInputStream fis = new java.io.FileInputStream(configFile)) {
+            java.util.Properties p = new java.util.Properties();
+            p.load(fis);
+            String propSecret = p.getProperty("anonymizer.hmacSecretKey");
+            if (propSecret != null && propSecret.length() >= 32) {
+                log.warn("ANONYMIZATION_SECRET env var missing or weak; falling back to anonymizer.hmacSecretKey from properties. This is insecure for production and should only be used for local testing.");
+                return propSecret;
+            }
+        } catch (IOException e) {
+            log.warn("Failed to read properties for secret fallback: {}", e.getMessage());
+        }
+        return fallbackSecret;
+    }
+
     //Process all tables defined in rules for a schema
     private void processSchemaTables(String schema, AnonymizationRules rules,
                                      AnonymizationEngine engine, KeysetPaginator paginator,
@@ -262,11 +287,6 @@ public class RunCommand implements Callable<Integer> {
     void processTable(String schema, String tableName, AnonymizationRules.TableRules tableRules,
                       AnonymizationRules rules, AnonymizationEngine engine, KeysetPaginator paginator,
                       DirectRestoreWriter writer) throws SQLException {
-        
-        if (tableRules.getColumns() == null || tableRules.getColumns().isEmpty()) {
-            log.warn("No columns defined for table: {}.{}", schema, tableName);
-            return;
-        }
         
         log.info("Processing table: {}.{}", schema, tableName);
         
@@ -769,7 +789,7 @@ public class RunCommand implements Callable<Integer> {
      * Interactive safety confirmation.
      * Returns true if the user confirms (Y or A), false to abort.
      */
-    private boolean interactiveSafetyConfirmation(AnonymizerConfig config) {
+    private boolean interactiveSafetyConfirmation() {
         log.info("Safety checks enabled; proceeding without interactive approval prompt.");
         return true;
     }
@@ -786,7 +806,7 @@ public class RunCommand implements Callable<Integer> {
             return true;
         }
         Throwable cause = e.getCause();
-        if (cause instanceof SQLException) return isTableMissing((SQLException) cause);
+        if (cause instanceof SQLException sqlException) return isTableMissing(sqlException);
         return false;
     }
     
