@@ -32,9 +32,15 @@ import java.util.Random;
 public class RandomFakeDataAnonymizer {
 
     private final Locale locale;
+    private final FakerFactory fakerFactory;
 
     public RandomFakeDataAnonymizer(Locale locale) {
+        this(locale, Faker::new);
+    }
+
+    RandomFakeDataAnonymizer(Locale locale, FakerFactory fakerFactory) {
         this.locale = locale == null ? Locale.ENGLISH : locale;
+        this.fakerFactory = fakerFactory == null ? Faker::new : fakerFactory;
     }
 
     private boolean isIndiaLocale() {
@@ -51,30 +57,30 @@ public class RandomFakeDataAnonymizer {
     public Object anonymize(String columnName, String original) {
         if (original == null) return null;
 
-        Faker faker = fakerFor("COLUMN_HEURISTIC", columnName, original);
-        return anonymizeByColumn(faker, columnName, original);
+        try {
+            Faker faker = fakerFor("COLUMN_HEURISTIC", columnName, original);
+            return anonymizeByColumn(faker, columnName, original);
+        } catch (RuntimeException e) {
+            return fallbackValue("COLUMN_HEURISTIC", columnName, original);
+        }
     }
 
     private Object anonymizeByColumn(Faker faker, String columnName, String original) {
         String c = columnName == null ? "" : columnName.toLowerCase();
-        try {
-            if (c.contains("name") || c.contains("firstname") || c.contains("lastname")) {
-                if (c.contains("firstname")) return faker.name().firstName();
-                if (c.contains("lastname")) return faker.name().lastName();
-                return faker.name().fullName();
-            }
-
-            if (c.contains("email")) return faker.internet().emailAddress();
-            if (c.contains("phone") || c.contains("mobile")) return faker.phoneNumber().cellPhone();
-            if (c.contains("address")) return faker.address().fullAddress();
-            if (c.contains("city")) return faker.address().city();
-            if (c.contains("zip") || c.contains("postal")) return faker.address().zipCode();
-
-            // Fallback: return a short lorem word
-            return faker.lorem().word();
-        } catch (RuntimeException e) {
-            return original;
+        if (c.contains("name") || c.contains("firstname") || c.contains("lastname")) {
+            if (c.contains("firstname")) return faker.name().firstName();
+            if (c.contains("lastname")) return faker.name().lastName();
+            return faker.name().fullName();
         }
+
+        if (c.contains("email")) return faker.internet().emailAddress();
+        if (c.contains("phone") || c.contains("mobile")) return faker.phoneNumber().cellPhone();
+        if (c.contains("address")) return faker.address().fullAddress();
+        if (c.contains("city")) return faker.address().city();
+        if (c.contains("zip") || c.contains("postal")) return faker.address().zipCode();
+
+        // Fallback: return a short lorem word
+        return faker.lorem().word();
     }
 
     /**
@@ -85,9 +91,9 @@ public class RandomFakeDataAnonymizer {
         if (original == null) return null;
         String s = strategy == null ? "" : strategy.toUpperCase();
         Random random = randomFor(s, columnName, original);
-        Faker faker = new Faker(locale, random);
 
         try {
+            Faker faker = fakerFactory.create(locale, random);
             switch (s) {
                 case "FAKE_FIRSTNAME":
                 case "FIRSTNAME":
@@ -132,14 +138,15 @@ public class RandomFakeDataAnonymizer {
                     return anonymizeByColumn(faker, columnName, original);
             }
         } catch (RuntimeException e) {
-            return original;
+            return fallbackValue(s, columnName, original);
         }
     }
 
     private Faker fakerFor(String strategy, String columnName, String original) {
-        return new Faker(locale, randomFor(strategy, columnName, original));
+        return fakerFactory.create(locale, randomFor(strategy, columnName, original));
     }
 
+    @SuppressWarnings("java:S2245")
     private Random randomFor(String strategy, String columnName, String original) {
         String material = locale.toLanguageTag() + "|" +
             normalize(strategy) + "|" +
@@ -147,10 +154,25 @@ public class RandomFakeDataAnonymizer {
             normalize(original);
         String hash = CryptoUtils.sha256Hex(material);
         long seed = Long.parseUnsignedLong(hash.substring(0, 16), 16);
+        // Intentionally not SecureRandom: JavaFaker accepts java.util.Random here,
+        // and this path needs repeatable fake values, not security-sensitive randomness.
         return new Random(seed);
     }
 
     private String normalize(String value) {
         return value == null ? "" : value;
+    }
+
+    private String fallbackValue(String strategy, String columnName, String original) {
+        String material = locale.toLanguageTag() + "|" +
+            normalize(strategy) + "|" +
+            normalize(columnName) + "|" +
+            normalize(original);
+        return "ANON_" + CryptoUtils.sha256Hex(material).substring(0, 12);
+    }
+
+    @FunctionalInterface
+    interface FakerFactory {
+        Faker create(Locale locale, Random random);
     }
 }

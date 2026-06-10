@@ -251,9 +251,9 @@ public class RunCommand implements Callable<Integer> {
         }
     }
     //Process a single table
-    private void processTable(String schema, String tableName, AnonymizationRules.TableRules tableRules,
-                             AnonymizationRules rules, AnonymizationEngine engine, KeysetPaginator paginator,
-                             DirectRestoreWriter writer) throws SQLException {
+    void processTable(String schema, String tableName, AnonymizationRules.TableRules tableRules,
+                      AnonymizationRules rules, AnonymizationEngine engine, KeysetPaginator paginator,
+                      DirectRestoreWriter writer) throws SQLException {
         
         if (tableRules.getColumns() == null || tableRules.getColumns().isEmpty()) {
             log.warn("No columns defined for table: {}.{}", schema, tableName);

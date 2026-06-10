@@ -7,8 +7,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.lang.reflect.Method;
-import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +22,7 @@ import com.db.piramalswasthya.anonymizer.output.DirectRestoreWriter;
 class RunCommandTest {
 
     @Test
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings("unchecked")
     void processTableAddsUnknownColumnsAsPreserveWithoutMutatingUnmodifiableGetter() throws Exception {
         RunCommand command = new RunCommand();
         AnonymizationRules rules = new AnonymizationRules();
@@ -43,37 +41,14 @@ class RunCommandTest {
         AnonymizationEngine engine = mock(AnonymizationEngine.class);
         DirectRestoreWriter writer = mock(DirectRestoreWriter.class);
 
-        invokeProcessTable(command, "db_identity", "Beneficiary", tableRules, rules, engine, paginator, writer);
+        command.processTable("db_identity", "Beneficiary", tableRules, rules, engine, paginator, writer);
 
-        ArgumentCaptor<List<String>> columnsCaptor = ArgumentCaptor.forClass(List.class);
+        ArgumentCaptor<List<String>> columnsCaptor =
+            ArgumentCaptor.forClass((Class<List<String>>) (Class<?>) List.class);
         verify(paginator).streamTable(eq("Beneficiary"), eq("id"), columnsCaptor.capture(), any());
 
         assertEquals(List.of("id", "newColumn"), columnsCaptor.getValue());
         assertEquals("PRESERVE", tableRules.getColumns().get("newColumn").getStrategy());
     }
 
-    private void invokeProcessTable(RunCommand command, String schema, String tableName,
-                                    AnonymizationRules.TableRules tableRules, AnonymizationRules rules,
-                                    AnonymizationEngine engine, KeysetPaginator paginator,
-                                    DirectRestoreWriter writer) throws Exception {
-        Method processTable = RunCommand.class.getDeclaredMethod(
-            "processTable",
-            String.class,
-            String.class,
-            AnonymizationRules.TableRules.class,
-            AnonymizationRules.class,
-            AnonymizationEngine.class,
-            KeysetPaginator.class,
-            DirectRestoreWriter.class
-        );
-        processTable.setAccessible(true);
-        try {
-            processTable.invoke(command, schema, tableName, tableRules, rules, engine, paginator, writer);
-        } catch (java.lang.reflect.InvocationTargetException e) {
-            if (e.getCause() instanceof SQLException sqlException) {
-                throw sqlException;
-            }
-            throw e;
-        }
-    }
 }
