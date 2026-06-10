@@ -1,3 +1,5 @@
+SET FOREIGN_KEY_CHECKS = 0;
+
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: 192.168.5.5    Database: db_iemr
@@ -26827,3 +26829,5 @@ DELIMITER ;
 
 
 -- Dump completed on 2024-08-09 10:55:46
+
+SET FOREIGN_KEY_CHECKS = 1;
