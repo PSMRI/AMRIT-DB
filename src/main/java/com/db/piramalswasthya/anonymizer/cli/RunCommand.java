@@ -278,12 +278,13 @@ public class RunCommand implements Callable<Integer> {
             throw e;
         }
 
-        if (tableRules.getColumns() == null) {
-            tableRules.setColumns(new java.util.LinkedHashMap<>());
+        Map<String, AnonymizationRules.ColumnRule> mutableColumns = new java.util.LinkedHashMap<>();
+        if (tableRules.getColumns() != null) {
+            mutableColumns.putAll(tableRules.getColumns());
         }
 
         for (String srcCol : sourceColumns) {
-            if (!tableRules.getColumns().containsKey(srcCol)) {
+            if (!mutableColumns.containsKey(srcCol)) {
                 switch (rules.getUnknownColumnPolicy()) {
                     case FAIL -> throw new IllegalStateException("Unknown column found in source not present in rules: " + srcCol + " for table " + tableName);
                     case WARN -> log.warn("Unknown column {}.{} found in source - auto-adding with PRESERVE strategy", schema, srcCol);
@@ -293,10 +294,11 @@ public class RunCommand implements Callable<Integer> {
                 if (rules.getUnknownColumnPolicy() != AnonymizationRules.UnknownColumnPolicy.FAIL) {
                     AnonymizationRules.ColumnRule cr = new AnonymizationRules.ColumnRule();
                     cr.setStrategy("PRESERVE");
-                    tableRules.getColumns().put(srcCol, cr);
+                    mutableColumns.put(srcCol, cr);
                 }
             }
         }
+        tableRules.setColumns(mutableColumns);
         List<String> allColumns = sourceColumns;
 
         // Calculate strategy counts once per table for reporting (since we apply strategies per column, not per row)
