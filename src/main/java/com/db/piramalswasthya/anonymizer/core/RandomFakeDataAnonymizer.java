@@ -59,13 +59,13 @@ public class RandomFakeDataAnonymizer {
 
         try {
             Faker faker = fakerFor("COLUMN_HEURISTIC", columnName, original);
-            return anonymizeByColumn(faker, columnName, original);
+            return anonymizeByColumn(faker, columnName);
         } catch (RuntimeException e) {
             return fallbackValue("COLUMN_HEURISTIC", columnName, original);
         }
     }
 
-    private Object anonymizeByColumn(Faker faker, String columnName, String original) {
+    private Object anonymizeByColumn(Faker faker, String columnName) {
         String c = columnName == null ? "" : columnName.toLowerCase();
         if (c.contains("name") || c.contains("firstname") || c.contains("lastname")) {
             if (c.contains("firstname")) return faker.name().firstName();
@@ -95,24 +95,17 @@ public class RandomFakeDataAnonymizer {
         try {
             Faker faker = fakerFactory.create(locale, random);
             switch (s) {
-                case "FAKE_FIRSTNAME":
-                case "FIRSTNAME":
+                case "FAKE_FIRSTNAME", "FIRSTNAME":
                     return faker.name().firstName();
-                case "FAKE_LASTNAME":
-                case "LASTNAME":
+                case "FAKE_LASTNAME", "LASTNAME":
                     return faker.name().lastName();
-                case "FAKE_FULLNAME":
-                case "FULLNAME":
-                case "NAME":
+                case "FAKE_FULLNAME", "FULLNAME", "NAME":
                     return faker.name().fullName();
-                case "FAKE_USERNAME":
-                case "USERNAME":
+                case "FAKE_USERNAME", "USERNAME":
                     return faker.name().username();
-                case "FAKE_EMAIL":
-                case "EMAIL":
+                case "FAKE_EMAIL", "EMAIL":
                     return faker.internet().emailAddress();
-                case "FAKE_PHONE":
-                case "PHONE":
+                case "FAKE_PHONE", "PHONE":
                     // realistic 10-digit mobile starting with 6-9
                     if (isIndiaLocale()) {
                         char[] leading = new char[]{'6', '7', '8', '9'};
@@ -121,21 +114,17 @@ public class RandomFakeDataAnonymizer {
                         return lead + rest;
                     }
                     return faker.phoneNumber().cellPhone();
-                case "FAKE_ADDRESS":
-                case "ADDRESS":
+                case "FAKE_ADDRESS", "ADDRESS":
                     return faker.address().fullAddress();
-                case "FAKE_CITY":
-                case "CITY":
+                case "FAKE_CITY", "CITY":
                     return faker.address().city();
-                case "FAKE_COUNTRY":
-                case "COUNTRY":
+                case "FAKE_COUNTRY", "COUNTRY":
                     // Preserve country for single-country deployments
                     return original;
-                case "FAKE_ZIP":
-                case "ZIP":
+                case "FAKE_ZIP", "ZIP":
                     return faker.address().zipCode();
                 default:
-                    return anonymizeByColumn(faker, columnName, original);
+                    return anonymizeByColumn(faker, columnName);
             }
         } catch (RuntimeException e) {
             return fallbackValue(s, columnName, original);

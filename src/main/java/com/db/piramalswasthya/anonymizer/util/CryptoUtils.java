@@ -21,12 +21,12 @@ public final class CryptoUtils {
             byte[] digest = md.digest(input);
             return HexFormat.of().formatHex(digest);
         } catch (java.security.NoSuchAlgorithmException e) {
-            throw new RuntimeException("SHA-256 not available", e);
+            throw new CryptoOperationException("SHA-256 not available", e);
         }
     }
 
     public static byte[] decodeSecret(String secret) {
-        if (secret == null) return null;
+        if (secret == null) return new byte[0];
         String s = secret.trim();
         // Hex (even length, hex chars)
         if (s.length() % 2 == 0 && s.matches("[0-9a-fA-F]+")) {
@@ -39,5 +39,11 @@ public final class CryptoUtils {
             // fallthrough to raw bytes
         }
         return s.getBytes(StandardCharsets.UTF_8);
+    }
+
+    public static class CryptoOperationException extends RuntimeException {
+        public CryptoOperationException(String message, Throwable cause) {
+            super(message, cause);
+        }
     }
 }

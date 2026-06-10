@@ -27,7 +27,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
@@ -76,6 +79,11 @@ public class RunCommand implements Callable<Integer> {
     
     private static final String LOGS_DIRECTORY = "./logs";
     private static final String LOG_FORMAT_ERROR_CONTEXT = "{}: {}";
+    // this was suggested by sonarqube and in my humble opinion, isn't necessary unless exact timestampped logs help in recovery
+    private static final String LOG_FORMAT_EXECUTION_FAILED = "Execution {}: FAILED - {}";
+    private static final Clock SYSTEM_CLOCK = Clock.systemUTC();
+    private static final DateTimeFormatter EXECUTION_ID_FORMATTER =
+        DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss").withZone(ZoneId.systemDefault());
     
     private static final ObjectMapper YAML_MAPPER = new ObjectMapper(new YAMLFactory());
     private long totalRowsProcessed = 0L;
@@ -94,8 +102,8 @@ public class RunCommand implements Callable<Integer> {
         log.info("Config file: {}", configFile);
         log.info("Dry run: {}", dryRun);
         
-        LocalDateTime startTime = LocalDateTime.now();
-        String executionId = startTime.format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
+        Instant startTime = Instant.now(SYSTEM_CLOCK);
+        String executionId = EXECUTION_ID_FORMATTER.format(startTime);
         
         AnonymizerConfig config = null;
         
@@ -210,23 +218,23 @@ public class RunCommand implements Callable<Integer> {
             String errorContext = String.format("Anonymization failed during execution (ID: %s)", executionId);
             String sanitized = sanitizeError(e);
             log.error(LOG_FORMAT_ERROR_CONTEXT, errorContext, sanitized, e);
-            log.error("Execution {}: FAILED - {}", executionId, sanitized);
+            log.error(LOG_FORMAT_EXECUTION_FAILED, executionId, sanitized);
             return 1;
         } catch (IOException e) {
             String errorContext = String.format("Configuration or file I/O error (ID: %s)", executionId);
             String sanitized = sanitizeError(e);
             log.error(LOG_FORMAT_ERROR_CONTEXT, errorContext, sanitized, e);
-            log.error("Execution {}: FAILED - {}", executionId, sanitized);
+            log.error(LOG_FORMAT_EXECUTION_FAILED, executionId, sanitized);
             return 1;
         } catch (Exception e) {
             String errorContext = String.format("Unexpected error during execution (ID: %s)", executionId);
             String sanitized = sanitizeError(e);
             log.error(LOG_FORMAT_ERROR_CONTEXT, errorContext, sanitized, e);
-            log.error("Execution {}: FAILED - {}", executionId, sanitized);
+            log.error(LOG_FORMAT_EXECUTION_FAILED, executionId, sanitized);
             return 1;
         }
 
-        long endMillis = java.time.Duration.between(startTime, LocalDateTime.now()).toMillis();
+        long endMillis = Duration.between(startTime, Instant.now(SYSTEM_CLOCK)).toMillis();
         log.info("\n=== Anonymization Complete ===");
         log.info("Total rows processed: {}", totalRowsProcessed);
         log.info("Total duration: {} ms", endMillis);
