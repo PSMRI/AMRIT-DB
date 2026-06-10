@@ -132,13 +132,14 @@ public class DirectRestoreWriter implements AutoCloseable {
         List<String> tables = new ArrayList<>();
         
         // Get table list from source
-        try (Connection srcConn = sourceDataSource.getConnection();
-             Statement stmt = srcConn.createStatement();
-             ResultSet rs = stmt.executeQuery("SHOW TABLES")) {
-            
+        try (Connection srcConn = sourceDataSource.getConnection()) {
             srcConn.setCatalog(schema);
-            while (rs.next()) {
-                tables.add(rs.getString(1));
+            try (Statement stmt = srcConn.createStatement();
+                 ResultSet rs = stmt.executeQuery("SHOW TABLES")) {
+                
+                while (rs.next()) {
+                    tables.add(rs.getString(1));
+                }
             }
         }
         
