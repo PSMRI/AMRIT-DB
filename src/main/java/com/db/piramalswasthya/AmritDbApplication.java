@@ -23,8 +23,11 @@ package com.db.piramalswasthya;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 
 @SpringBootApplication
+@ComponentScan(excludeFilters = @ComponentScan.Filter(type = FilterType.REGEX, pattern = "com\\.db\\.piramalswasthya\\.anonymizer.*"))
 public class AmritDbApplication {
 
 	public static void main(String[] args) {

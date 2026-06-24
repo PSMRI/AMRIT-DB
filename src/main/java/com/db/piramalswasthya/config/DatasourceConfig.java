@@ -12,25 +12,25 @@ public class DatasourceConfig {
 	
 	@Bean
     @Primary
-    @ConfigurationProperties(prefix = "spring.datasource.dbiemr")
+    @ConfigurationProperties(prefix = "spring.datasource.db-iemr")
     public DataSource dbiemrDataSource() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.dbidentity")
+    @ConfigurationProperties(prefix = "spring.datasource.db-identity")
     public DataSource dbidentityDataSource() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.dbreporting")
+    @ConfigurationProperties(prefix = "spring.datasource.db-reporting")
     public DataSource dbreportingDataSource() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.db1097identity")
+    @ConfigurationProperties(prefix = "spring.datasource.db-1097-identity")
     public DataSource db1097identityDataSource() {
         return DataSourceBuilder.create().build();
     }
