@@ -1,4 +1,4 @@
-drop view v_fetchfacility;
+DROP VIEW IF EXISTS v_fetchfacility;
 
 CREATE 
     ALGORITHM = UNDEFINED 
