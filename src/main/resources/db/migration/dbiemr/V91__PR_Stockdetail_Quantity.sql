@@ -3,15 +3,6 @@ drop procedure if exists pr_Stockdetail;
 
 DELIMITER $$
 
--- Fix for inflated quantities in the inventory stock-detail report.
--- Root cause: pr_Stockdetail LEFT JOINed two independent one-to-many child
--- tables (t_itemstockexit and t_SAItemMapping) onto t_itemstockentry and then
--- aggregated. That produces a Cartesian product per entry (#exits x #adjustments),
--- so SUM(ISE.Quantity) (TotalQuantityReceived) and the exit/adjustment sums were
--- multiplied. Fix: pre-aggregate each child table to one row per
--- (ItemStockEntryID, VanID) BEFORE joining, so every join is 1:1 and nothing is
--- double-counted. Column order/aliases are unchanged (the report reads them
--- positionally).
 CREATE PROCEDURE `pr_Stockdetail`(
   IN v_FromDate DATE,
   IN v_ToDate   DATE,
@@ -27,7 +18,6 @@ BEGIN
       ISE.FacilityID,
       ISE.BatchNo,
 
-      -- Received is a parent attribute -> no join can duplicate it now
       IFNULL(ISE.Quantity, 0)                       AS TotalQuantityReceived,
 
       ISE.UnitCostPrice,
@@ -64,7 +54,6 @@ BEGIN
 
   FROM db_iemr.t_itemstockentry ISE
 
-  -- Pre-aggregated exits: one row per (ItemStockEntryID, VanID)
   LEFT JOIN (
       SELECT
           x.ItemStockEntryID,
@@ -80,7 +69,6 @@ BEGIN
   ) EX  ON EX.ItemStockEntryID = ISE.VanSerialNo
        AND EX.VanID            = ISE.VanID
 
-  -- Pre-aggregated adjustments: one row per (ItemStockEntryID, VanID)
   LEFT JOIN (
       SELECT
           s.ItemStockEntryID,
