@@ -24,9 +24,6 @@ package com.db.piramalswasthya.data;
 
 import java.sql.Timestamp;
 
-import lombok.Data;
-
-@Data
 public class FlywaySchemaVersion {
 	private int installedRank;
     private String version;
@@ -38,5 +35,85 @@ public class FlywaySchemaVersion {
     private Timestamp installedOn;
     private int executionTime;
     private boolean success;
+
+    public int getInstalledRank() {
+        return installedRank;
+    }
+
+    public void setInstalledRank(int installedRank) {
+        this.installedRank = installedRank;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getScript() {
+        return script;
+    }
+
+    public void setScript(String script) {
+        this.script = script;
+    }
+
+    public Integer getChecksum() {
+        return checksum;
+    }
+
+    public void setChecksum(Integer checksum) {
+        this.checksum = checksum;
+    }
+
+    public String getInstalledBy() {
+        return installedBy;
+    }
+
+    public void setInstalledBy(String installedBy) {
+        this.installedBy = installedBy;
+    }
+
+    public Timestamp getInstalledOn() {
+        return installedOn;
+    }
+
+    public void setInstalledOn(Timestamp installedOn) {
+        this.installedOn = installedOn;
+    }
+
+    public int getExecutionTime() {
+        return executionTime;
+    }
+
+    public void setExecutionTime(int executionTime) {
+        this.executionTime = executionTime;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
 }
 
