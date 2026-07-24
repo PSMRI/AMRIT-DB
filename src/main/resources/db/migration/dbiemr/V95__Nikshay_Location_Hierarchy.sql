@@ -3,7 +3,7 @@ USE db_iemr;
 -- =====================================================================
 -- CREATE — independent Nikshay hierarchy tables
 -- =====================================================================
-CREATE TABLE m_nikshay_state (
+CREATE TABLE IF NOT EXISTS m_nikshay_state (
   NikshayStateID INT AUTO_INCREMENT PRIMARY KEY,
   NikshayCode VARCHAR(20),
   StateName VARCHAR(255),
@@ -14,7 +14,7 @@ CREATE TABLE m_nikshay_state (
   LastModDate TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-CREATE TABLE m_nikshay_district (
+CREATE TABLE IF NOT EXISTS m_nikshay_district (
   NikshayDistrictID INT AUTO_INCREMENT PRIMARY KEY,
   NikshayCode VARCHAR(20),
   DistrictName VARCHAR(255),
@@ -27,7 +27,7 @@ CREATE TABLE m_nikshay_district (
   FOREIGN KEY (NikshayStateID) REFERENCES m_nikshay_state(NikshayStateID)
 );
 
-CREATE TABLE m_nikshay_tu (
+CREATE TABLE IF NOT EXISTS m_nikshay_tu (
   NikshayTUID INT AUTO_INCREMENT PRIMARY KEY,
   NikshayCode VARCHAR(50),
   TUName VARCHAR(255),
@@ -40,7 +40,7 @@ CREATE TABLE m_nikshay_tu (
   FOREIGN KEY (NikshayDistrictID) REFERENCES m_nikshay_district(NikshayDistrictID)
 );
 
-CREATE TABLE m_nikshay_facility (
+CREATE TABLE IF NOT EXISTS m_nikshay_facility (
   NikshayFacilityID INT AUTO_INCREMENT PRIMARY KEY,
   NikshayCode VARCHAR(50),
   FacilityName VARCHAR(255),
@@ -54,7 +54,7 @@ CREATE TABLE m_nikshay_facility (
   FOREIGN KEY (NikshayTUID) REFERENCES m_nikshay_tu(NikshayTUID)
 );
 
-CREATE TABLE m_nikshay_village (
+CREATE TABLE IF NOT EXISTS m_nikshay_village (
   NikshayVillageID INT AUTO_INCREMENT PRIMARY KEY,
   VillageName VARCHAR(255),
   NikshayFacilityID INT,
@@ -71,7 +71,66 @@ CREATE TABLE m_nikshay_village (
 -- ALTER — linking columns the application code reads/writes
 -- NOTE: TEXT, not INT — these hold comma-joined lists of IDs (multi-select)
 -- =====================================================================
-ALTER TABLE m_userservicerolemapping
-  ADD COLUMN NikshayTUID TEXT NULL,
-  ADD COLUMN NikshayFacilityID TEXT NULL,
-  ADD COLUMN DistrictID INT NULL;
+
+-- ============================================================
+-- Add NikshayTUID
+-- ============================================================
+SET @col_exists = (
+    SELECT COUNT(*)
+    FROM information_schema.columns
+    WHERE table_schema = 'db_iemr'
+      AND table_name = 'm_userservicerolemapping'
+      AND column_name = 'NikshayTUID'
+);
+
+SET @sql = IF(
+    @col_exists = 0,
+    'ALTER TABLE m_userservicerolemapping ADD COLUMN NikshayTUID TEXT NULL;',
+    'SELECT "Column NikshayTUID already exists";'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+-- ============================================================
+-- Add NikshayFacilityID
+-- ============================================================
+SET @col_exists = (
+    SELECT COUNT(*)
+    FROM information_schema.columns
+    WHERE table_schema = 'db_iemr'
+      AND table_name = 'm_userservicerolemapping'
+      AND column_name = 'NikshayFacilityID'
+);
+
+SET @sql = IF(
+    @col_exists = 0,
+    'ALTER TABLE m_userservicerolemapping ADD COLUMN NikshayFacilityID TEXT NULL;',
+    'SELECT "Column NikshayFacilityID already exists";'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+-- ============================================================
+-- Add DistrictID
+-- ============================================================
+SET @col_exists = (
+    SELECT COUNT(*)
+    FROM information_schema.columns
+    WHERE table_schema = 'db_iemr'
+      AND table_name = 'm_userservicerolemapping'
+      AND column_name = 'DistrictID'
+);
+
+SET @sql = IF(
+    @col_exists = 0,
+    'ALTER TABLE m_userservicerolemapping ADD COLUMN DistrictID INT NULL;',
+    'SELECT "Column DistrictID already exists";'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
