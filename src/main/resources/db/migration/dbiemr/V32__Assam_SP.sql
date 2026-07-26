@@ -4,7 +4,7 @@ DROP PROCEDURE IF EXISTS Pr_GetCallHistory;
 
 DELIMITER $$
 
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `Pr_GetCallHistory`(
+CREATE PROCEDURE `Pr_GetCallHistory`(
     IN v_obcallid INT
 )
 BEGIN
