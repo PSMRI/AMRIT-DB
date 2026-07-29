@@ -47,11 +47,17 @@ CREATE TABLE IF NOT EXISTS tb_diagnostic_order (
     modified_by VARCHAR(100) NULL,
     last_mod_date DATETIME NULL,
     deleted BIT NOT NULL DEFAULT 0,
+
+    -- Sync/Common Fields
     vanID INT NULL,
     parkingPlaceID INT NULL,
     visitCode BIGINT NULL,
     processed VARCHAR(1) NOT NULL DEFAULT 'N',
     vanSerialNo BIGINT NULL,
+    SyncedDate DATETIME NULL,
+    Syncedby VARCHAR(50) NULL,
+    SyncFailureReason TEXT NULL,
+
     PRIMARY KEY (id),
     UNIQUE KEY uk_diagnostic_order_ben_visit_type (ben_reg_id, visitCode, order_type),
     UNIQUE KEY uk_diagnostic_order_external_order_id (external_order_id)
@@ -76,9 +82,21 @@ CREATE TABLE IF NOT EXISTS tb_diagnostic_result (
     modified_by VARCHAR(100) NULL,
     last_mod_date DATETIME NULL,
     deleted BIT NOT NULL DEFAULT 0,
+
+    -- Sync/Common Fields
+    vanID INT NULL,
+    parkingPlaceID INT NULL,
+    processed VARCHAR(1) NOT NULL DEFAULT 'N',
+    vanSerialNo BIGINT NULL,
+    SyncedDate DATETIME NULL,
+    Syncedby VARCHAR(50) NULL,
+    SyncFailureReason TEXT NULL,
+
     PRIMARY KEY (id),
     UNIQUE KEY uk_diagnostic_result_order_id (diagnostic_order_id),
-    CONSTRAINT fk_diagnostic_result_order FOREIGN KEY (diagnostic_order_id) REFERENCES tb_diagnostic_order (id)
+    CONSTRAINT fk_diagnostic_result_order
+    FOREIGN KEY (diagnostic_order_id)
+    REFERENCES tb_diagnostic_order (id)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ==========================================================
@@ -103,12 +121,24 @@ CREATE TABLE IF NOT EXISTS tb_diagnostic_document (
     modified_by VARCHAR(100) NULL,
     last_mod_date DATETIME NULL,
     deleted BIT NOT NULL DEFAULT 0,
+
+    -- Sync/Common Fields
+    vanID INT NULL,
+    parkingPlaceID INT NULL,
+    processed VARCHAR(1) NOT NULL DEFAULT 'N',
+    vanSerialNo BIGINT NULL,
+    SyncedDate DATETIME NULL,
+    Syncedby VARCHAR(50) NULL,
+    SyncFailureReason TEXT NULL,
+
     PRIMARY KEY (id),
     UNIQUE KEY uk_diagnostic_document_order_doctype (diagnostic_order_id, document_type),
     KEY idx_diagnostic_document_ben_reg_id (ben_reg_id),
     KEY idx_diagnostic_document_order_type (order_type),
     KEY idx_diagnostic_document_epoch_time (epoch_time),
-    CONSTRAINT fk_diagnostic_document_order FOREIGN KEY (diagnostic_order_id) REFERENCES tb_diagnostic_order (id)
+    CONSTRAINT fk_diagnostic_document_order
+    FOREIGN KEY (diagnostic_order_id)
+    REFERENCES tb_diagnostic_order (id)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ==========================================================
@@ -123,6 +153,16 @@ CREATE TABLE IF NOT EXISTS tb_diagnostic_provider_token (
     expires_at DATETIME NULL,
     created_date DATETIME NOT NULL,
     last_mod_date DATETIME NULL,
+
+    -- Sync/Common Fields
+    vanID INT NULL,
+    parkingPlaceID INT NULL,
+    processed VARCHAR(1) NOT NULL DEFAULT 'N',
+    vanSerialNo BIGINT NULL,
+    SyncedDate DATETIME NULL,
+    Syncedby VARCHAR(50) NULL,
+    SyncFailureReason TEXT NULL,
+
     PRIMARY KEY (id),
     UNIQUE KEY uk_diagnostic_provider_token_code_type (provider_code, token_type)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

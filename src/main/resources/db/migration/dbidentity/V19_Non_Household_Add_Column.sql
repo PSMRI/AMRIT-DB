@@ -9,6 +9,13 @@
 
 USE db_identity;
 
+SET @schema_name = 'db_identity';
+SET @tbl_beneficiarydetails = 'i_beneficiarydetails';
+SET @tbl_beneficiarydetails_rmnch = 'i_beneficiarydetails_rmnch';
+SET @tbl_householddetails = 'i_householddetails';
+SET @tbl_beneficiaryaddress = 'i_beneficiaryaddress';
+SET @col_gps_unavailable = 'isGpsUnavailable';
+
 -- ==========================================================
 -- i_beneficiarydetails
 -- ==========================================================
@@ -19,8 +26,8 @@ SET @sql = (
         'ALTER TABLE db_identity.i_beneficiarydetails ADD COLUMN placeOfCurrentLiving VARCHAR(255) NULL;',
         'SELECT ''placeOfCurrentLiving already exists in i_beneficiarydetails'';')
     FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA = 'db_identity'
-      AND TABLE_NAME = 'i_beneficiarydetails'
+    WHERE TABLE_SCHEMA = @schema_name
+      AND TABLE_NAME = @tbl_beneficiarydetails
       AND COLUMN_NAME = 'placeOfCurrentLiving'
 );
 PREPARE stmt FROM @sql;
@@ -33,8 +40,8 @@ SET @sql = (
         'ALTER TABLE db_identity.i_beneficiarydetails ADD COLUMN otherPlaceOfCurrentLiving VARCHAR(255) NULL;',
         'SELECT ''otherPlaceOfCurrentLiving already exists in i_beneficiarydetails'';')
     FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA = 'db_identity'
-      AND TABLE_NAME = 'i_beneficiarydetails'
+    WHERE TABLE_SCHEMA = @schema_name
+      AND TABLE_NAME = @tbl_beneficiarydetails
       AND COLUMN_NAME = 'otherPlaceOfCurrentLiving'
 );
 PREPARE stmt FROM @sql;
@@ -47,8 +54,8 @@ SET @sql = (
         'ALTER TABLE db_identity.i_beneficiarydetails ADD COLUMN institutionName VARCHAR(255) NULL;',
         'SELECT ''institutionName already exists in i_beneficiarydetails'';')
     FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA = 'db_identity'
-      AND TABLE_NAME = 'i_beneficiarydetails'
+    WHERE TABLE_SCHEMA = @schema_name
+      AND TABLE_NAME = @tbl_beneficiarydetails
       AND COLUMN_NAME = 'institutionName'
 );
 PREPARE stmt FROM @sql;
@@ -65,8 +72,8 @@ SET @sql = (
         'ALTER TABLE db_identity.i_beneficiarydetails_rmnch ADD COLUMN placeOfCurrentLiving VARCHAR(255) NULL;',
         'SELECT ''placeOfCurrentLiving already exists in i_beneficiarydetails_rmnch'';')
     FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA = 'db_identity'
-      AND TABLE_NAME = 'i_beneficiarydetails_rmnch'
+    WHERE TABLE_SCHEMA = @schema_name
+      AND TABLE_NAME = @tbl_beneficiarydetails_rmnch
       AND COLUMN_NAME = 'placeOfCurrentLiving'
 );
 PREPARE stmt FROM @sql;
@@ -79,8 +86,8 @@ SET @sql = (
         'ALTER TABLE db_identity.i_beneficiarydetails_rmnch ADD COLUMN otherPlaceOfCurrentLiving VARCHAR(255) NULL;',
         'SELECT ''otherPlaceOfCurrentLiving already exists in i_beneficiarydetails_rmnch'';')
     FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA = 'db_identity'
-      AND TABLE_NAME = 'i_beneficiarydetails_rmnch'
+    WHERE TABLE_SCHEMA = @schema_name
+      AND TABLE_NAME = @tbl_beneficiarydetails_rmnch
       AND COLUMN_NAME = 'otherPlaceOfCurrentLiving'
 );
 PREPARE stmt FROM @sql;
@@ -93,8 +100,8 @@ SET @sql = (
         'ALTER TABLE db_identity.i_beneficiarydetails_rmnch ADD COLUMN institutionName VARCHAR(255) NULL;',
         'SELECT ''institutionName already exists in i_beneficiarydetails_rmnch'';')
     FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA = 'db_identity'
-      AND TABLE_NAME = 'i_beneficiarydetails_rmnch'
+    WHERE TABLE_SCHEMA = @schema_name
+      AND TABLE_NAME = @tbl_beneficiarydetails_rmnch
       AND COLUMN_NAME = 'institutionName'
 );
 PREPARE stmt FROM @sql;
@@ -111,8 +118,8 @@ SET @sql = (
         'ALTER TABLE db_identity.i_householddetails ADD COLUMN address VARCHAR(500) NULL;',
         'SELECT ''address already exists in i_householddetails'';')
     FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA = 'db_identity'
-      AND TABLE_NAME = 'i_householddetails'
+    WHERE TABLE_SCHEMA = @schema_name
+      AND TABLE_NAME = @tbl_householddetails
       AND COLUMN_NAME = 'address'
 );
 PREPARE stmt FROM @sql;
@@ -125,8 +132,8 @@ SET @sql = (
         'ALTER TABLE db_identity.i_householddetails ADD COLUMN totalHhMembers INT NULL;',
         'SELECT ''totalHhMembers already exists in i_householddetails'';')
     FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA = 'db_identity'
-      AND TABLE_NAME = 'i_householddetails'
+    WHERE TABLE_SCHEMA = @schema_name
+      AND TABLE_NAME = @tbl_householddetails
       AND COLUMN_NAME = 'totalHhMembers'
 );
 PREPARE stmt FROM @sql;
@@ -139,8 +146,8 @@ SET @sql = (
         'ALTER TABLE db_identity.i_householddetails ADD COLUMN registeredAtCampSite VARCHAR(255) NULL;',
         'SELECT ''registeredAtCampSite already exists in i_householddetails'';')
     FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA = 'db_identity'
-      AND TABLE_NAME = 'i_householddetails'
+    WHERE TABLE_SCHEMA = @schema_name
+      AND TABLE_NAME = @tbl_householddetails
       AND COLUMN_NAME = 'registeredAtCampSite'
 );
 PREPARE stmt FROM @sql;
@@ -153,8 +160,8 @@ SET @sql = (
         'ALTER TABLE db_identity.i_householddetails ADD COLUMN registeredAtCampSiteId INT NULL;',
         'SELECT ''registeredAtCampSiteId already exists in i_householddetails'';')
     FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA = 'db_identity'
-      AND TABLE_NAME = 'i_householddetails'
+    WHERE TABLE_SCHEMA = @schema_name
+      AND TABLE_NAME = @tbl_householddetails
       AND COLUMN_NAME = 'registeredAtCampSiteId'
 );
 PREPARE stmt FROM @sql;
@@ -170,9 +177,9 @@ SET @sql = (
         'ALTER TABLE db_identity.i_beneficiarydetails_rmnch MODIFY COLUMN isGpsUnavailable TINYINT(1) NULL DEFAULT 0;',
         'SELECT ''isGpsUnavailable does not exist in i_beneficiarydetails_rmnch'';')
     FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA = 'db_identity'
-      AND TABLE_NAME = 'i_beneficiarydetails_rmnch'
-      AND COLUMN_NAME = 'isGpsUnavailable'
+    WHERE TABLE_SCHEMA = @schema_name
+      AND TABLE_NAME = @tbl_beneficiarydetails_rmnch
+      AND COLUMN_NAME = @col_gps_unavailable
 );
 PREPARE stmt FROM @sql;
 EXECUTE stmt;
@@ -187,9 +194,9 @@ SET @sql = (
         'ALTER TABLE db_identity.i_householddetails MODIFY COLUMN isGpsUnavailable TINYINT(1) NULL DEFAULT 0;',
         'SELECT ''isGpsUnavailable does not exist in i_householddetails'';')
     FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA = 'db_identity'
-      AND TABLE_NAME = 'i_householddetails'
-      AND COLUMN_NAME = 'isGpsUnavailable'
+    WHERE TABLE_SCHEMA = @schema_name
+      AND TABLE_NAME = @tbl_householddetails
+      AND COLUMN_NAME = @col_gps_unavailable
 );
 PREPARE stmt FROM @sql;
 EXECUTE stmt;
@@ -204,9 +211,9 @@ SET @sql = (
         'ALTER TABLE db_identity.i_beneficiaryaddress MODIFY COLUMN isGpsUnavailable TINYINT(1) NULL DEFAULT 0;',
         'SELECT ''isGpsUnavailable does not exist in i_beneficiaryaddress'';')
     FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA = 'db_identity'
-      AND TABLE_NAME = 'i_beneficiaryaddress'
-      AND COLUMN_NAME = 'isGpsUnavailable'
+    WHERE TABLE_SCHEMA = @schema_name
+      AND TABLE_NAME = @tbl_beneficiaryaddress
+      AND COLUMN_NAME = @col_gps_unavailable
 );
 PREPARE stmt FROM @sql;
 EXECUTE stmt;
