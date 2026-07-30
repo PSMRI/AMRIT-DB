@@ -538,7 +538,7 @@ public class RunCommand implements Callable<Integer> {
             "Prefer explicit anonymizer.source.* properties.");
         java.util.List<String> discovered = new java.util.ArrayList<>();
         for (String key : props.stringPropertyNames()) {
-            if (key.startsWith("spring.datasource.") && key.endsWith(".jdbc-url")) {
+            if (key.startsWith("spring.datasource.") && (key.endsWith(".jdbc-url") || key.endsWith(".url"))) {
                 String url = props.getProperty(key);
                 JdbcUrlParser.Parts p = JdbcUrlParser.parse(url);
                 if (p != null && p.database() != null && !discovered.contains(p.database())) {
@@ -549,8 +549,9 @@ public class RunCommand implements Callable<Integer> {
                     }
 
                     // source credentials (first match wins). This supports properties
-                    // like spring.datasource.db-1097-identity.username/password.
-                    String prefix = key.substring(0, key.length() - ".jdbc-url".length());
+                    // like spring.datasource.dbiemr.username/password.
+                    String urlSuffix = key.endsWith(".jdbc-url") ? ".jdbc-url" : ".url";
+                    String prefix = key.substring(0, key.length() - urlSuffix.length());
                     String uKey = prefix + ".username";
                     String pKey = prefix + ".password";
                     String uVal = props.getProperty(uKey);

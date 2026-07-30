@@ -160,7 +160,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
                 <configuration>
-                    <packagingExcludes>WEB-INF/classes/com/db/piramalswasthya/anonymizer/**</packagingExcludes>
+                    <packagingExcludes>WEB-INF/classes/com/db/piramalswasthya/anonymizer/**,WEB-INF/classes/logback.xml,WEB-INF/classes/anonymizer/**</packagingExcludes>
                 </configuration>
             </plugin>
 

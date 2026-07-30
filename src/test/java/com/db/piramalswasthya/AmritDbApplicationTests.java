@@ -24,6 +24,8 @@ package com.db.piramalswasthya;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.db.piramalswasthya.AmritDbApplication;
+
 @SpringBootTest
 class AmritDbApplicationTests {
 

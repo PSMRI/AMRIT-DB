@@ -35,15 +35,17 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import javax.sql.DataSource;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PreDestroy;
 
 @Service
-@Slf4j
 public class HealthService {
+
+	private static final Logger logger = LoggerFactory.getLogger(HealthService.class);
 
 	// Event log constants
 	private static final String LOG_EVENT_STUCK_PROCESS = "MYSQL_STUCK_PROCESS";
@@ -114,16 +116,16 @@ public class HealthService {
 
 	@PreDestroy
 	public void shutdownDiagnostics() {
-		log.info("[HEALTH_SERVICE_SHUTDOWN] Shutting down diagnostic scheduler...");
+		logger.info("[HEALTH_SERVICE_SHUTDOWN] Shutting down diagnostic scheduler...");
 		diagnosticScheduler.shutdown();
 		try {
 			if (!diagnosticScheduler.awaitTermination(5, TimeUnit.SECONDS)) {
-				log.warn("[HEALTH_SERVICE_SHUTDOWN] Diagnostic scheduler did not terminate gracefully");
+				logger.warn("[HEALTH_SERVICE_SHUTDOWN] Diagnostic scheduler did not terminate gracefully");
 				diagnosticScheduler.shutdownNow();
 			}
-			log.info("[HEALTH_SERVICE_SHUTDOWN] Diagnostic scheduler shut down successfully");
+			logger.info("[HEALTH_SERVICE_SHUTDOWN] Diagnostic scheduler shut down successfully");
 		} catch (InterruptedException e) {
-			log.error("[HEALTH_SERVICE_SHUTDOWN] Interrupted while shutting down scheduler", e);
+			logger.error("[HEALTH_SERVICE_SHUTDOWN] Interrupted while shutting down scheduler", e);
 			diagnosticScheduler.shutdownNow();
 			Thread.currentThread().interrupt();
 		}
@@ -169,7 +171,7 @@ public class HealthService {
 
 		} catch (Exception e) {
 			// Log connection failure as a structured event
-			log.error("[MYSQL_CONNECT_FAILED] MySQL connectivity check failed | error=\"{}\"", 
+			logger.error("[MYSQL_CONNECT_FAILED] MySQL connectivity check failed | error=\"{}\"", 
 				e.getMessage());
 
 			result.put(FIELD_STATUS, STATUS_DOWN);
@@ -197,13 +199,13 @@ public class HealthService {
 			worstSeverity = escalate(worstSeverity, performConnectionUsageCheck(conn));
 
 		} catch (Exception e) {
-			log.error("[MYSQL_DIAGNOSTIC_ERROR] Could not open connection for diagnostics | error=\"{}\"", 
+			logger.error("[MYSQL_DIAGNOSTIC_ERROR] Could not open connection for diagnostics | error=\"{}\"", 
 				e.getMessage());
 			worstSeverity = SEVERITY_CRITICAL;
 		}
 
 		cachedDbSeverity.set(worstSeverity);
-		log.debug("[MYSQL_DIAGNOSTIC_COMPLETE] Background diagnostic cycle complete | severity={}", 
+		logger.debug("[MYSQL_DIAGNOSTIC_COMPLETE] Background diagnostic cycle complete | severity={}", 
 			worstSeverity);
 	}
 
@@ -218,12 +220,12 @@ public class HealthService {
 					int stuckCount = rs.getInt("cnt");
 					if (stuckCount > 0) {
 						if (stuckCount > STUCK_PROCESS_THRESHOLD) {
-							log.warn(
+							logger.warn(
 								"[{}] Stuck MySQL processes detected above threshold | count={} | threshold={} | thresholdSeconds={}",
 								LOG_EVENT_STUCK_PROCESS, stuckCount, STUCK_PROCESS_THRESHOLD, STUCK_PROCESS_SECONDS);
 							return SEVERITY_WARNING;
 						} else {
-							log.info(
+							logger.info(
 								"[{}] Stuck MySQL processes below threshold | count={} | threshold={}",
 								LOG_EVENT_STUCK_PROCESS, stuckCount, STUCK_PROCESS_THRESHOLD);
 						}
@@ -231,7 +233,7 @@ public class HealthService {
 				}
 			}
 		} catch (Exception e) {
-			log.error("[MYSQL_DIAGNOSTIC_ERROR] Stuck process check failed | error=\"{}\"", 
+			logger.error("[MYSQL_DIAGNOSTIC_ERROR] Stuck process check failed | error=\"{}\"", 
 				e.getMessage());
 		}
 		return SEVERITY_OK;
@@ -247,7 +249,7 @@ public class HealthService {
 				if (rs.next()) {
 					int lockCount = rs.getInt("cnt");
 					if (lockCount >= LONG_TXN_WARNING_THRESHOLD) {
-						log.warn(
+						logger.warn(
 							"[{}] InnoDB long-running transaction(s) detected | count={} | thresholdSeconds={}",
 							LOG_EVENT_LONG_TXN, lockCount, LONG_TXN_SECONDS);
 						// Graduated escalation: WARNING for 1-4, CRITICAL for 5+
@@ -256,7 +258,7 @@ public class HealthService {
 				}
 			}
 		} catch (Exception e) {
-			log.error("[MYSQL_DIAGNOSTIC_ERROR] Long transaction check failed | error=\"{}\"", 
+			logger.error("[MYSQL_DIAGNOSTIC_ERROR] Long transaction check failed | error=\"{}\"", 
 				e.getMessage());
 		}
 		return SEVERITY_OK;
@@ -275,7 +277,7 @@ public class HealthService {
 					}
 					if (currentDeadlocks > previousDeadlocks) {
 						long deltaDeadlocks = currentDeadlocks - previousDeadlocks;
-						log.warn(
+						logger.warn(
 							"[{}] InnoDB deadlocks detected since last run | deltaCount={} | cumulativeCount={}",
 							LOG_EVENT_DEADLOCK, deltaDeadlocks, currentDeadlocks);
 						return SEVERITY_WARNING;
@@ -283,7 +285,7 @@ public class HealthService {
 				}
 			}
 		} catch (Exception e) {
-			log.error("[MYSQL_DIAGNOSTIC_ERROR] Deadlock check failed | error=\"{}\"", 
+			logger.error("[MYSQL_DIAGNOSTIC_ERROR] Deadlock check failed | error=\"{}\"", 
 				e.getMessage());
 		}
 		return SEVERITY_OK;
@@ -303,7 +305,7 @@ public class HealthService {
 					// Only warn if slow queries have *increased* since last run
 					if (slowQueries > previousSlow) {
 						long delta = slowQueries - previousSlow;
-						log.warn(
+						logger.warn(
 							"[{}] New slow queries detected since last run | deltaCount={} | cumulativeCount={}",
 							LOG_EVENT_SLOW_QUERIES, delta, slowQueries);
 						return SEVERITY_WARNING;
@@ -311,7 +313,7 @@ public class HealthService {
 				}
 			}
 		} catch (Exception e) {
-			log.error("[MYSQL_DIAGNOSTIC_ERROR] Slow query check failed | error=\"{}\"", 
+			logger.error("[MYSQL_DIAGNOSTIC_ERROR] Slow query check failed | error=\"{}\"", 
 				e.getMessage());
 		}
 		return SEVERITY_OK;
@@ -338,20 +340,20 @@ public class HealthService {
 				int usagePct = (int) ((threadsConnected * 100.0) / maxConnections);
 
 				if (usagePct >= CONNECTION_USAGE_CRITICAL) {
-					log.error(
+					logger.error(
 						"[{}] MySQL connection pool near exhaustion | threadsConnected={} | maxConnections={} | usagePercent={}",
 						LOG_EVENT_POOL_EXHAUSTED, threadsConnected, maxConnections, usagePct);
 					return SEVERITY_CRITICAL;
 
 				} else if (usagePct > CONNECTION_USAGE_WARNING) {
-					log.warn(
+					logger.warn(
 						"[{}] MySQL connection usage is high | threadsConnected={} | maxConnections={} | usagePercent={}",
 						LOG_EVENT_CONN_USAGE, threadsConnected, maxConnections, usagePct);
 					return SEVERITY_WARNING;
 				}
 			}
 		} catch (Exception e) {
-			log.error("[MYSQL_DIAGNOSTIC_ERROR] Connection usage check failed | error=\"{}\"", 
+			logger.error("[MYSQL_DIAGNOSTIC_ERROR] Connection usage check failed | error=\"{}\"", 
 				e.getMessage());
 		}
 		return SEVERITY_OK;
