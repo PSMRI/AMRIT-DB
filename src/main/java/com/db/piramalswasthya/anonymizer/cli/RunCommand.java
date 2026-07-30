@@ -347,19 +347,22 @@ public class RunCommand implements Callable<Integer> {
         }
 
         for (String srcCol : sourceColumns) {
-            if (!mutableColumns.containsKey(srcCol)) {
-                switch (rules.getUnknownColumnPolicy()) {
-                    case FAIL -> throw new IllegalStateException("Unknown column found in source not present in rules: " + srcCol + " for table " + tableName);
-                    case WARN -> log.warn("Unknown column {}.{} found in source - auto-adding with PRESERVE strategy", schema, srcCol);
-                    case PRESERVE -> log.debug("Auto-adding unknown column {}.{} with PRESERVE strategy", schema, srcCol);
-                }
-
-                if (rules.getUnknownColumnPolicy() != AnonymizationRules.UnknownColumnPolicy.FAIL) {
-                    AnonymizationRules.ColumnRule cr = new AnonymizationRules.ColumnRule();
-                    cr.setStrategy("PRESERVE");
-                    mutableColumns.put(srcCol, cr);
-                }
+            if (mutableColumns.containsKey(srcCol)) {
+                continue;
             }
+
+            // The registry is the single source of truth for PII: columns not
+            // listed there are copied as-is. Devs maintain the registry when
+            // new tables/columns are added.
+            switch (rules.getUnknownColumnPolicy()) {
+                case FAIL -> throw new IllegalStateException("Unknown column found in source not present in rules: " + srcCol + " for table " + tableName);
+                case WARN -> log.debug("Column {}.{}.{} not in registry - preserving", schema, tableName, srcCol);
+                case PRESERVE -> log.debug("Auto-adding unknown column {}.{} with PRESERVE strategy", schema, srcCol);
+            }
+
+            AnonymizationRules.ColumnRule cr = new AnonymizationRules.ColumnRule();
+            cr.setStrategy("PRESERVE");
+            mutableColumns.put(srcCol, cr);
         }
         tableRules.setColumns(mutableColumns);
         List<String> allColumns = sourceColumns;

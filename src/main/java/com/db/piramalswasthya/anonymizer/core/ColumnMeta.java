@@ -31,10 +31,11 @@ import java.sql.Types;
  *
  * @param name      column name as reported by the database
  * @param jdbcType  {@link java.sql.Types} constant
+ * @param typeName  database-specific type name (e.g. VARCHAR, LONGTEXT)
  * @param precision column length for character types, numeric precision otherwise
  * @param nullable  whether the column accepts NULL
  */
-public record ColumnMeta(String name, int jdbcType, int precision, boolean nullable) {
+public record ColumnMeta(String name, int jdbcType, String typeName, int precision, boolean nullable) {
 
     public boolean isNumeric() {
         return switch (jdbcType) {

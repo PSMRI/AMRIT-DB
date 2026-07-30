@@ -342,6 +342,7 @@ public class KeysetPaginator {
                 cols.add(new ColumnMeta(
                     meta.getColumnLabel(i),
                     meta.getColumnType(i),
+                    meta.getColumnTypeName(i),
                     meta.getPrecision(i),
                     meta.isNullable(i) != ResultSetMetaData.columnNoNulls));
             }

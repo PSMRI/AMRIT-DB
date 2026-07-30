@@ -23,7 +23,7 @@ import com.db.piramalswasthya.anonymizer.output.DirectRestoreWriter;
 class RunCommandTest {
 
     private static ColumnMeta col(String name) {
-        return new ColumnMeta(name, java.sql.Types.VARCHAR, 255, true);
+        return new ColumnMeta(name, java.sql.Types.VARCHAR, "VARCHAR", 255, true);
     }
 
     @Test
