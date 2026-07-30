@@ -36,6 +36,13 @@ import java.util.Map;
 @Slf4j
 public class AnonymizationEngine {
 
+    /** Every strategy applyStrategy implements. Used for fail-fast rules validation. */
+    public static final java.util.Set<String> VALID_STRATEGIES = java.util.Set.of(
+        "HMAC_HASH", "HASH_SHA256", "PRESERVE", "SUPPRESS", "RANDOM_FAKE_DATA",
+        "FAKE_FULLNAME", "FAKE_FIRSTNAME", "FAKE_LASTNAME", "FAKE_EMAIL", "FAKE_PHONE",
+        "FAKE_ADDRESS", "FAKE_CITY", "FAKE_ZIP", "FAKE_USERNAME",
+        "GENERALIZE", "PARTIAL_MASK");
+
     private final HmacAnonymizer anonymizer;
     private final AnonymizationRules rules;
     private final RandomFakeDataAnonymizer faker;

@@ -693,7 +693,32 @@ public class RunCommand implements Callable<Integer> {
         if (rules.getDatabases() == null || rules.getDatabases().isEmpty()) {
             throw new IllegalArgumentException("Rules must define at least one database");
         }
-    }   
+
+        // Fail fast on typo'd strategies: a bad strategy on a column whose
+        // values happen to be NULL in the current data would otherwise go
+        // unnoticed until real values arrive - and then leak or crash mid-run.
+        java.util.List<String> invalid = new java.util.ArrayList<>();
+        for (Map.Entry<String, AnonymizationRules.DatabaseRules> db : rules.getDatabases().entrySet()) {
+            if (db.getValue() == null || db.getValue().getTables() == null) continue;
+            for (Map.Entry<String, AnonymizationRules.TableRules> table : db.getValue().getTables().entrySet()) {
+                Map<String, AnonymizationRules.ColumnRule> columns = table.getValue().getColumns();
+                if (columns == null) continue;
+                for (Map.Entry<String, AnonymizationRules.ColumnRule> col : columns.entrySet()) {
+                    String strategy = col.getValue() == null ? null : col.getValue().getStrategy();
+                    if (strategy == null
+                        || !AnonymizationEngine.VALID_STRATEGIES.contains(strategy.toUpperCase())) {
+                        invalid.add(db.getKey() + "." + table.getKey() + "." + col.getKey()
+                            + " -> '" + strategy + "'");
+                    }
+                }
+            }
+        }
+        if (!invalid.isEmpty()) {
+            throw new IllegalArgumentException(
+                "Rules file contains unknown strategies (valid: " + AnonymizationEngine.VALID_STRATEGIES
+                + "): " + invalid);
+        }
+    }
 
     /**
      * Resolve a logical schema name to a physical DB/schema name using optional mapping
