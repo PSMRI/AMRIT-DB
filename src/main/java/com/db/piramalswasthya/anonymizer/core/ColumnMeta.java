@@ -52,6 +52,14 @@ public record ColumnMeta(String name, int jdbcType, int precision, boolean nulla
         };
     }
 
+    public boolean isTemporal() {
+        return switch (jdbcType) {
+            case Types.DATE, Types.TIME, Types.TIMESTAMP,
+                 Types.TIME_WITH_TIMEZONE, Types.TIMESTAMP_WITH_TIMEZONE -> true;
+            default -> false;
+        };
+    }
+
     /**
      * Largest value that safely fits this numeric column type.
      */

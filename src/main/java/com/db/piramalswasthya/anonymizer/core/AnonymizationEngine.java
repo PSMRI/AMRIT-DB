@@ -92,19 +92,35 @@ public class AnonymizationEngine {
             List<KeysetPaginator.RowData> rows,
             Map<String, ColumnMeta> columnMeta
     ) {
-        Map<String, Integer> strategyCounts = new HashMap<>();
-
         AnonymizationRules.DatabaseRules dbRules = rules.getDatabases().get(database);
         if (dbRules == null) {
             log.warn("No rules found for database: {}", database);
-            return strategyCounts;
+            return new HashMap<>();
         }
 
         AnonymizationRules.TableRules tableRules = dbRules.getTables().get(table);
         if (tableRules == null) {
             log.warn("No rules found for table: {}.{}", database, table);
-            return strategyCounts;
+            return new HashMap<>();
         }
+
+        return anonymizeBatch(database, table, tableRules, rows, columnMeta);
+    }
+
+    /**
+     * Anonymize a batch of rows using explicitly provided (effective) table
+     * rules. Used by the full-copy pipeline, where tables absent from the
+     * registry still get copied with their effective rules computed by the
+     * caller (registry overlay + PII detection screening).
+     */
+    public Map<String, Integer> anonymizeBatch(
+            String database,
+            String table,
+            AnonymizationRules.TableRules tableRules,
+            List<KeysetPaginator.RowData> rows,
+            Map<String, ColumnMeta> columnMeta
+    ) {
+        Map<String, Integer> strategyCounts = new HashMap<>();
 
         Map<String, AnonymizationRules.ColumnRule> columnRules = tableRules.getColumns();
         if (columnRules == null || columnRules.isEmpty()) {
@@ -165,11 +181,31 @@ public class AnonymizationEngine {
                 // positive number that fits the column type.
                 return deriveNumeric(s, meta);
             }
+            if (meta.isTemporal()) {
+                // GENERALIZE reduces dates to the year; a DATE/DATETIME column
+                // needs a full value, so anchor to January 1st of that year.
+                return fitTemporal(s, meta);
+            }
             if (meta.isCharacter() && meta.precision() > 0 && s.length() > meta.precision()) {
                 return s.substring(0, meta.precision());
             }
         }
         return value;
+    }
+
+    /**
+     * Fit a string output to a DATE/DATETIME column: a bare year becomes
+     * January 1st of that year; anything unparsable is suppressed.
+     */
+    private Object fitTemporal(String s, ColumnMeta meta) {
+        java.util.regex.Matcher year = java.util.regex.Pattern.compile("^(\\d{4})").matcher(s);
+        if (year.find()) {
+            String anchored = year.group(1) + "-01-01";
+            return meta.jdbcType() == java.sql.Types.TIMESTAMP
+                || meta.jdbcType() == java.sql.Types.TIMESTAMP_WITH_TIMEZONE
+                ? anchored + " 00:00:00" : anchored;
+        }
+        return meta.nullable() ? null : "1900-01-01";
     }
 
     /**

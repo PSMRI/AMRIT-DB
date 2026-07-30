@@ -271,19 +271,42 @@ public class RunCommand implements Callable<Integer> {
         return fallbackSecret;
     }
 
-    //Process all tables defined in rules for a schema
+    /**
+     * Process ALL tables present in the source schema (full replica). The rules
+     * registry acts as a PII overlay: tables with registry entries get their
+     * configured strategies; every other table is copied with its columns
+     * screened by the unknown-column handling.
+     */
     private void processSchemaTables(String schema, AnonymizationRules rules,
                                      AnonymizationEngine engine, KeysetPaginator paginator,
-                                     DirectRestoreWriter writer) throws SQLException {
-        
+                                     DirectRestoreWriter writer,
+                                     List<String> sourceTables) throws SQLException {
+
         AnonymizationRules.DatabaseRules dbRules = rules.getDatabases().get(schema);
-        if (dbRules == null || dbRules.getTables() == null) {
-            log.warn("No rules found for schema: {}", schema);
-            return;
+        Map<String, AnonymizationRules.TableRules> ruleTables =
+            (dbRules == null || dbRules.getTables() == null) ? Map.of() : dbRules.getTables();
+
+        if (ruleTables.isEmpty()) {
+            log.warn("No registry rules for schema {} - all tables will be copied with " +
+                "unknown-column screening only", schema);
         }
-        
-        for (Map.Entry<String, AnonymizationRules.TableRules> entry : dbRules.getTables().entrySet()) {
-            processTable(schema, entry.getKey(), entry.getValue(), rules, engine, paginator, writer);
+
+        for (String tableName : sourceTables) {
+            AnonymizationRules.TableRules tableRules = ruleTables.get(tableName);
+            if (tableRules == null) {
+                log.info("Table {}.{} has no registry entry - copying with unknown-column screening",
+                    schema, tableName);
+                tableRules = new AnonymizationRules.TableRules();
+                tableRules.setColumns(new java.util.LinkedHashMap<>());
+            }
+            processTable(schema, tableName, tableRules, rules, engine, paginator, writer);
+        }
+
+        // Drift visibility: registry tables that vanished from the source
+        java.util.Set<String> missing = new java.util.LinkedHashSet<>(ruleTables.keySet());
+        sourceTables.forEach(missing::remove);
+        if (!missing.isEmpty()) {
+            log.warn("Registry defines tables that are missing in source {}: {}", schema, missing);
         }
     }
     //Process a single table
@@ -374,7 +397,8 @@ public class RunCommand implements Callable<Integer> {
      */
     private void processBatch(BatchContext context, List<RowData> batch) {
         try {
-            context.engine.anonymizeBatch(context.schema, context.tableName, batch, context.columnMeta);
+            context.engine.anonymizeBatch(context.schema, context.tableName, context.tableRules,
+                batch, context.columnMeta);
             List<Map<String, Object>> rowMaps = batch.stream()
                 .map(RowData::getData)
                 .toList();
@@ -709,30 +733,9 @@ public class RunCommand implements Callable<Integer> {
             config.getPerformance().getBatchSize()
         );
 
-        // Debug: list tables present in the source schema and compare with rules
-        try {
-            java.util.List<String> sourceTables = DbUtils.listTables(sourceDataSource, physicalSchema);
-            log.info("Source tables for {} (physical={}): {}", schema, physicalSchema, sourceTables);
-            AnonymizationRules.DatabaseRules dbRules = rules.getDatabases() != null ? rules.getDatabases().get(schema) : null;
-            if (dbRules != null && dbRules.getTables() != null) {
-                java.util.Set<String> expected = new java.util.LinkedHashSet<>(dbRules.getTables().keySet());
-                java.util.Set<String> present = new java.util.LinkedHashSet<>(sourceTables);
-                java.util.Set<String> missingInSource = new java.util.LinkedHashSet<>(expected);
-                missingInSource.removeAll(present);
-                if (!missingInSource.isEmpty()) {
-                    log.warn("Tables defined in rules but missing in source {}: {}", schema, missingInSource);
-                } else {
-                    log.info("All expected tables present in source {}", schema);
-                }
-                java.util.Set<String> extraInSource = new java.util.LinkedHashSet<>(present);
-                extraInSource.removeAll(expected);
-                if (!extraInSource.isEmpty()) {
-                    log.info("Extra tables present in source {} not defined in rules: {}", schema, extraInSource);
-                }
-            }
-        } catch (Exception e) {
-            log.debug("Failed to list/compare source tables for {}: {}", schema, e.getMessage());
-        }
+        // Full-copy model: every base table in the source schema is processed
+        List<String> sourceTables = DbUtils.listTables(sourceDataSource, physicalSchema);
+        log.info("Source tables for {} (physical={}): {} tables", schema, physicalSchema, sourceTables.size());
 
         try (DirectRestoreWriter writer = new DirectRestoreWriter(
                 writeTargetDataSource,
@@ -744,7 +747,7 @@ public class RunCommand implements Callable<Integer> {
             writer.resetSchema(sourceDataSource);
 
             // Process all tables in this schema (anonymize from source -> writeTarget)
-            processSchemaTables(schema, rules, engine, paginator, writer);
+            processSchemaTables(schema, rules, engine, paginator, writer, sourceTables);
 
             // Mark success to commit the transaction on the write target
             writer.markSuccess();
