@@ -485,7 +485,30 @@ public class RunCommand implements Callable<Integer> {
     private AnonymizerConfig.DatabaseConfig buildSourceConfig(java.util.Properties props) {
         AnonymizerConfig.DatabaseConfig src = new AnonymizerConfig.DatabaseConfig();
 
-        // Discover schemas and host/port from spring.datasource.*.jdbc-url entries
+        // Canonical explicit configuration: anonymizer.source.*
+        String explicitHost = prop(props, "anonymizer.source.host", "");
+        if (!explicitHost.isBlank()) {
+            src.setHost(explicitHost);
+            src.setPort(propInt(props, "anonymizer.source.port", 3306));
+            src.setUsername(prop(props, "anonymizer.source.username", ""));
+            src.setPassword(prop(props, "anonymizer.source.password", ""));
+            String schemas = prop(props, "anonymizer.source.schemas", "");
+            if (schemas.isBlank()) {
+                throw new IllegalArgumentException(
+                    "anonymizer.source.host is set but anonymizer.source.schemas is empty. " +
+                    "List the schemas to anonymize, e.g. anonymizer.source.schemas=db_iemr,db_identity");
+            }
+            src.setSchemas(StringUtils.commaSepToList(schemas));
+            src.setReadOnly(true);
+            src.setConnectionTimeout(propInt(props, "anonymizer.source.connectionTimeout", 30000));
+            src.setVerifyServerCertificate(propBool(props, "anonymizer.source.verifyServerCertificate", true));
+            return src;
+        }
+
+        // Legacy fallback: discover schemas and host/port from spring.datasource.*.jdbc-url
+        // entries. Only usable when every datasource points at the same server.
+        log.warn("anonymizer.source.host not set - falling back to spring.datasource.* discovery. " +
+            "Prefer explicit anonymizer.source.* properties.");
         java.util.List<String> discovered = new java.util.ArrayList<>();
         for (String key : props.stringPropertyNames()) {
             if (key.startsWith("spring.datasource.") && key.endsWith(".jdbc-url")) {
@@ -539,30 +562,30 @@ public class RunCommand implements Callable<Integer> {
 
     private AnonymizerConfig.DatabaseConfig buildTargetConfig(java.util.Properties props, AnonymizerConfig.DatabaseConfig src) {
         AnonymizerConfig.DatabaseConfig tgt = new AnonymizerConfig.DatabaseConfig();
-        String targetUrl = prop(props, "spring.datasource.db-identity.jdbc-url", "");
-        if (!targetUrl.isBlank()) {
-            JdbcUrlParser.Parts p = JdbcUrlParser.parse(targetUrl);
-            if (p != null) {
-                tgt.setHost(p.host());
-                tgt.setPort(p.port());
-                if (p.database() != null) tgt.setSchemas(java.util.List.of(p.database()));
-            }
-            if (!prop(props, "spring.datasource.db-identity.username", "").isBlank()) {
-                tgt.setUsername(prop(props, "spring.datasource.db-identity.username", ""));
-                tgt.setPassword(prop(props, "spring.datasource.db-identity.password", ""));
-            }
-        }
 
-        // If target schemas still not set, use discovered source schemas
-        if (tgt.getSchemas() == null || tgt.getSchemas().isEmpty()) {
+        // The target must be configured explicitly. Deriving it from a
+        // spring.datasource.* entry (previous behavior) was unsafe: those
+        // entries also define the SOURCE, so the tool could never point at a
+        // genuinely separate UAT server via properties.
+        String host = prop(props, "anonymizer.target.host", "");
+        if (host.isBlank()) {
+            throw new IllegalArgumentException(
+                "anonymizer.target.host is required in properties mode. Configure the UAT target " +
+                "explicitly: anonymizer.target.host / port / username / password " +
+                "(and optionally anonymizer.target.schemas).");
+        }
+        tgt.setHost(host);
+        tgt.setPort(propInt(props, "anonymizer.target.port", 3306));
+        tgt.setUsername(prop(props, "anonymizer.target.username", ""));
+        tgt.setPassword(prop(props, "anonymizer.target.password", ""));
+
+        String schemas = prop(props, "anonymizer.target.schemas", "");
+        if (!schemas.isBlank()) {
+            tgt.setSchemas(StringUtils.commaSepToList(schemas));
+        } else {
             tgt.setSchemas(src.getSchemas());
         }
 
-        // For any missing target host/port/credentials, fall back to anonymizer.* or source
-        if (tgt.getHost() == null || tgt.getHost().isBlank()) tgt.setHost(src.getHost());
-        if (tgt.getPort() == 0) tgt.setPort(src.getPort());
-        if (tgt.getUsername() == null || tgt.getUsername().isBlank()) tgt.setUsername(src.getUsername());
-        if (tgt.getPassword() == null) tgt.setPassword(src.getPassword());
         tgt.setReadOnly(propBool(props, "anonymizer.target.readOnly", false));
         tgt.setConnectionTimeout(propInt(props, "anonymizer.target.connectionTimeout", src.getConnectionTimeout()));
         tgt.setVerifyServerCertificate(propBool(props, "anonymizer.target.verifyServerCertificate", true));
@@ -665,10 +688,12 @@ public class RunCommand implements Callable<Integer> {
                 "Target database is configured as read-only. Set target.readOnly: false in local properties to enable writing.");
         }
 
-        // Resolve logical->physical schema mapping for source (if configured)
-        String physicalSourceSchema = resolvePhysicalSchema(config, schema);
+        // Resolve logical->physical schema mapping (if configured). The same
+        // mapping applies to both sides so the target schema is created with
+        // the production (physical) name.
+        String physicalSchema = resolvePhysicalSchema(config, schema);
         // Create DataSources for this schema using centralized DbUtils
-        DataSource sourceDataSource = DbUtils.createDataSource(config.getSource(), physicalSourceSchema);
+        DataSource sourceDataSource = DbUtils.createDataSource(config.getSource(), physicalSchema);
 
         // Determine write target: always the configured final target.
         // No default database - the writer creates the schema if missing.
@@ -686,8 +711,8 @@ public class RunCommand implements Callable<Integer> {
 
         // Debug: list tables present in the source schema and compare with rules
         try {
-            java.util.List<String> sourceTables = DbUtils.listTables(sourceDataSource, physicalSourceSchema);
-            log.info("Source tables for {} (physical={}): {}", schema, physicalSourceSchema, sourceTables);
+            java.util.List<String> sourceTables = DbUtils.listTables(sourceDataSource, physicalSchema);
+            log.info("Source tables for {} (physical={}): {}", schema, physicalSchema, sourceTables);
             AnonymizationRules.DatabaseRules dbRules = rules.getDatabases() != null ? rules.getDatabases().get(schema) : null;
             if (dbRules != null && dbRules.getTables() != null) {
                 java.util.Set<String> expected = new java.util.LinkedHashSet<>(dbRules.getTables().keySet());
@@ -712,10 +737,10 @@ public class RunCommand implements Callable<Integer> {
         try (DirectRestoreWriter writer = new DirectRestoreWriter(
                 writeTargetDataSource,
                 config.getPerformance().getBatchSize(),
-                schema)) {
+                physicalSchema)) {
 
             // Reset write target schema using source schema as template
-            log.info("Resetting write-target schema: {}", schema);
+            log.info("Resetting write-target schema: {} (physical={})", schema, physicalSchema);
             writer.resetSchema(sourceDataSource);
 
             // Process all tables in this schema (anonymize from source -> writeTarget)
