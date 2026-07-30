@@ -332,10 +332,12 @@ public class RunCommand implements Callable<Integer> {
         // Calculate strategy counts once per table for reporting (since we apply strategies per column, not per row)
         updateStrategyCounts(tableRules, strategyCounts);
         
-        BatchContext context = new BatchContext(schema, tableName, tableRules, allColumns, 
+        BatchContext context = new BatchContext(schema, tableName, tableRules, allColumns,
                                                 engine, writer, rowCount);
         processTableBatches(context, paginator);
-        
+
+        // Commit per table so a crash loses at most the current table
+        writer.commitTable();
         recordTableCompletion(schema, tableName, tableStartTime, rowCount[0], tableRules, strategyCounts);
     }
     
@@ -687,8 +689,9 @@ public class RunCommand implements Callable<Integer> {
         // Create DataSources for this schema using centralized DbUtils
         DataSource sourceDataSource = DbUtils.createDataSource(config.getSource(), physicalSourceSchema);
 
-        // Determine write target: always the configured final target
-        DataSource writeTargetDataSource = DbUtils.createDataSource(config.getTarget(), schema);
+        // Determine write target: always the configured final target.
+        // No default database - the writer creates the schema if missing.
+        DataSource writeTargetDataSource = DbUtils.createDataSource(config.getTarget(), null);
 
         // Initialize components - construct HMAC helper and shared faker, then inject into engine
         HmacAnonymizer hmac = new HmacAnonymizer(secret);

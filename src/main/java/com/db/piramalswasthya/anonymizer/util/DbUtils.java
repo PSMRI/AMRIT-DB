@@ -41,7 +41,11 @@ public final class DbUtils {
         MysqlDataSource ds = new MysqlDataSource();
         ds.setServerName(dbConfig.getHost());
         ds.setPort(dbConfig.getPort());
-        ds.setDatabaseName(schema);
+        // schema may be null for connections that must not assume the database
+        // exists yet (e.g. the target writer creates it during reset)
+        if (schema != null && !schema.isBlank()) {
+            ds.setDatabaseName(schema);
+        }
         ds.setUser(dbConfig.getUsername());
         ds.setPassword(dbConfig.getPassword());
 

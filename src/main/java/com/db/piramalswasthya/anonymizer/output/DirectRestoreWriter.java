@@ -1,8 +1,8 @@
 /*
-* AMRIT – Accessible Medical Records via Integrated Technology 
-* Integrated EHR (Electronic Health Records) Solution 
+* AMRIT – Accessible Medical Records via Integrated Technology
+* Integrated EHR (Electronic Health Records) Solution
 *
-* Copyright (C) "Piramal Swasthya Management and Research Institute" 
+* Copyright (C) "Piramal Swasthya Management and Research Institute"
 *
 * This file is part of AMRIT.
 *
@@ -35,9 +35,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import com.db.piramalswasthya.anonymizer.util.SqlUtils;
+
 /**
- * Writes anonymized data directly to target database (DB2)
+ * Writes anonymized data directly to target database (DB2).
  * Handles schema reset and supports multi-schema operations.
+ *
+ * <p><b>Transactionality note (honest contract):</b> MySQL DDL statements cause
+ * implicit commits, so the schema reset phase is NOT transactional. Data inserts
+ * are committed per table via {@link #commitTable()}; the rollback performed by
+ * {@link #close()} when {@link #markSuccess()} was not called only covers the
+ * current uncommitted table. A crashed run therefore leaves previously completed
+ * tables intact and at most one partially-written table, which is re-created on
+ * the next run's reset.</p>
+ *
+ * <p>Foreign key checks are disabled on the writer session for the lifetime of
+ * this writer because tables are copied in arbitrary order.</p>
  */
 @Slf4j
 public class DirectRestoreWriter implements AutoCloseable {
@@ -46,283 +58,287 @@ public class DirectRestoreWriter implements AutoCloseable {
     private final Connection connection;
     private final int batchSize;
     private final String schema;
-    
+    private boolean success = false;
+
+    /**
+     * @param targetDataSource DataSource for the target server. Must be able to
+     *                         connect without assuming the schema already exists
+     *                         (i.e. created without a default database).
+     */
     public DirectRestoreWriter(DataSource targetDataSource, int batchSize, String schema) throws SQLException {
         if (batchSize <= 0) {
             throw new IllegalArgumentException("batchSize must be > 0, got: " + batchSize);
         }
-        
-        // Wrap incoming DataSource via central delegating wrapper to avoid storing the caller's mutable reference directly.
-        if (targetDataSource == null) throw new IllegalArgumentException("targetDataSource must not be null");
+        if (targetDataSource == null) {
+            throw new IllegalArgumentException("targetDataSource must not be null");
+        }
+        validateIdentifier(schema);
+
         this.targetDataSource = com.db.piramalswasthya.anonymizer.util.DbUtils.delegateOf(targetDataSource);
         this.batchSize = batchSize;
         this.schema = schema;
         this.connection = this.targetDataSource.getConnection();
         this.connection.setAutoCommit(false);
-        this.connection.setCatalog(schema);  // Set schema context
-        
+
+        ensureSchemaExists();
+        this.connection.setCatalog(schema);
+        setForeignKeyChecks(false);
+
         log.info("Direct restore writer initialized for schema {} (batchSize={})", schema, batchSize);
     }
-    
-    /**
-     * Validate identifier to prevent SQL injection via YAML
-     */
+
     private void validateIdentifier(String identifier) {
         SqlUtils.validateIdentifier(identifier);
     }
-    
+
     /**
-     * Quote identifier with backticks after validation
-     * 
+     * Quote identifier with backticks after validation.
+     *
      * Security: All identifiers are validated against ^\w+$ pattern before quoting,
      * preventing SQL injection. This allows safe use in dynamic SQL construction.
      */
     private String quoteIdentifier(String identifier) {
         return SqlUtils.quoteIdentifier(identifier);
     }
-    
+
+    @SuppressWarnings("java:S2077") // SQL injection safe: schema validated by quoteIdentifier()
+    private void ensureSchemaExists() throws SQLException {
+        try (Statement stmt = connection.createStatement()) {
+            stmt.execute("CREATE DATABASE IF NOT EXISTS " + quoteIdentifier(schema));
+        }
+    }
+
+    private void setForeignKeyChecks(boolean enabled) throws SQLException {
+        try (Statement stmt = connection.createStatement()) {
+            stmt.execute("SET FOREIGN_KEY_CHECKS=" + (enabled ? "1" : "0"));
+        }
+    }
+
     /**
-     * Reset schema - tries DROP/CREATE, falls back to DELETE if no permissions
+     * Reset target schema so it structurally mirrors the source: per-table
+     * DROP + CREATE from the source's SHOW CREATE TABLE, then views.
+     * Falls back to DELETE-all-data when the target user lacks DDL permissions
+     * (tables must then already exist on the target).
      */
     public void resetSchema(DataSource sourceDataSource) throws SQLException {
-        validateIdentifier(schema);
         try {
-            dropAndRecreateSchema(sourceDataSource);
+            cloneSchemaFromSource(sourceDataSource);
         } catch (SQLException e) {
-            log.warn("DROP DATABASE failed (likely permissions): {}. Falling back to DELETE", e.getMessage());
-            // Fallback: disable FK checks and delete all data
+            log.warn("Schema clone via DROP/CREATE TABLE failed (likely permissions): {}. " +
+                "Falling back to DELETE of existing target tables", e.getMessage());
             deleteAllData();
         }
     }
-    
+
     /**
-     * Drop and recreate schema, then clone tables from source
-     */
-    @SuppressWarnings("java:S2077") // SQL injection safe: schema validated by quoteIdentifier()
-    private void dropAndRecreateSchema(DataSource sourceDataSource) throws SQLException {
-        String quotedSchema = quoteIdentifier(schema);
-        
-        log.info("Attempting to drop and recreate schema: {}", schema);
-        
-        try (Connection adminConn = targetDataSource.getConnection();
-             Statement stmt = adminConn.createStatement()) {
-            
-            // Drop and recreate (safe: quotedSchema validated against ^\w+$ pattern)
-            stmt.execute("DROP DATABASE IF EXISTS " + quotedSchema);
-            stmt.execute("CREATE DATABASE " + quotedSchema);
-            adminConn.commit();
-            
-            log.info("Schema {} dropped and recreated", schema);
-        }
-        
-        // Rebind main connection to the recreated schema
-        connection.setCatalog(schema);
-        
-        // Clone table structures from source
-        cloneTableStructures(sourceDataSource);
-    }
-    
-    /**
-     * Clone table DDL from source to target
+     * Clone all base tables (and then views) from source into target.
+     * The source connection's default database is taken from its DataSource,
+     * which the caller binds to the correct physical schema.
      */
     @SuppressWarnings("java:S2077") // SQL injection safe: all identifiers validated by quoteIdentifier()
-    private void cloneTableStructures(DataSource sourceDataSource) throws SQLException {
-        log.info("Cloning table structures from source schema: {}", schema);
-        
+    private void cloneSchemaFromSource(DataSource sourceDataSource) throws SQLException {
         List<String> tables = new ArrayList<>();
-        
-        // Get table list from source
-        try (Connection srcConn = sourceDataSource.getConnection()) {
-            srcConn.setCatalog(schema);
-            try (Statement stmt = srcConn.createStatement();
-                 ResultSet rs = stmt.executeQuery("SHOW TABLES")) {
-                
-                while (rs.next()) {
-                    tables.add(rs.getString(1));
+        List<String> views = new ArrayList<>();
+
+        try (Connection srcConn = sourceDataSource.getConnection();
+             Statement stmt = srcConn.createStatement();
+             ResultSet rs = stmt.executeQuery("SHOW FULL TABLES")) {
+            while (rs.next()) {
+                String name = rs.getString(1);
+                if ("VIEW".equalsIgnoreCase(rs.getString(2))) {
+                    views.add(name);
+                } else {
+                    tables.add(name);
                 }
             }
         }
-        
-        log.info("Found {} tables to clone", tables.size());
-        
-        // Clone each table structure
+
+        log.info("Cloning {} tables and {} views from source into target schema {}",
+            tables.size(), views.size(), schema);
+
         try (Connection srcConn = sourceDataSource.getConnection();
              Statement srcStmt = srcConn.createStatement();
              Statement tgtStmt = connection.createStatement()) {
-            
-            srcConn.setCatalog(schema);
-            
+
             for (String table : tables) {
                 validateIdentifier(table);
-                String quotedTable = quoteIdentifier(table);
-                
-                // Get CREATE TABLE statement from source (safe: quotedTable validated)
-                try (ResultSet rs = srcStmt.executeQuery("SHOW CREATE TABLE " + quotedTable)) {
+                String quoted = quoteIdentifier(table);
+                String ddl = null;
+                try (ResultSet rs = srcStmt.executeQuery("SHOW CREATE TABLE " + quoted)) {
                     if (rs.next()) {
-                        String createDdl = rs.getString(2);
-                        tgtStmt.addBatch(createDdl);
-                        log.debug("Queued table creation: {}", table);
+                        ddl = rs.getString(2);
                     }
                 }
+                if (ddl == null) {
+                    log.warn("No DDL returned for table {} - skipping", table);
+                    continue;
+                }
+                tgtStmt.execute("DROP TABLE IF EXISTS " + quoted);
+                tgtStmt.execute(ddl);
+                log.debug("Cloned table: {}", table);
             }
-            
-            // Execute all CREATE TABLE statements in batch
-            tgtStmt.executeBatch();
-            connection.commit();
-            log.info("Successfully cloned {} tables", tables.size());
+
+            for (String view : views) {
+                validateIdentifier(view);
+                String quoted = quoteIdentifier(view);
+                try {
+                    String ddl = null;
+                    try (ResultSet rs = srcStmt.executeQuery("SHOW CREATE VIEW " + quoted)) {
+                        if (rs.next()) {
+                            ddl = stripDefiner(rs.getString(2));
+                        }
+                    }
+                    if (ddl == null) {
+                        log.warn("No DDL returned for view {} - skipping", view);
+                        continue;
+                    }
+                    tgtStmt.execute("DROP VIEW IF EXISTS " + quoted);
+                    tgtStmt.execute(ddl);
+                    log.debug("Cloned view: {}", view);
+                } catch (SQLException e) {
+                    // Views can reference other schemas or unavailable definers; they carry
+                    // no data, so a failed view clone must not abort the restore.
+                    log.warn("Failed to clone view {} - skipping: {}", view, e.getMessage());
+                }
+            }
         }
+
+        log.info("Schema {} structure cloned successfully", schema);
     }
-    
+
     /**
-     * Fallback: Delete all data with FK checks disabled
+     * Remove DEFINER clauses from view DDL so restore does not require the
+     * original definer user to exist on the target server.
+     */
+    static String stripDefiner(String ddl) {
+        if (ddl == null) return null;
+        return ddl.replaceAll("DEFINER\\s*=\\s*(`[^`]*`|\"[^\"]*\"|\\S+)@(`[^`]*`|\"[^\"]*\"|\\S+)\\s*", "");
+    }
+
+    /**
+     * Fallback: Delete all data from existing target tables (FK checks are
+     * already disabled on this session).
      */
     @SuppressWarnings("java:S2077") // SQL injection safe: table names validated by quoteIdentifier()
     private void deleteAllData() throws SQLException {
-        log.info("Deleting all data from schema {} with FK checks disabled", schema);
-        
+        log.info("Deleting all data from existing tables in schema {}", schema);
+
         List<String> tables = new ArrayList<>();
-        
-        // Get table list
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery("SHOW TABLES")) {
-            
             while (rs.next()) {
                 tables.add(rs.getString(1));
             }
         }
-        
+
         if (tables.isEmpty()) {
-            log.info("No tables found in schema {}", schema);
+            log.warn("No tables found in target schema {} and DDL clone failed - " +
+                "nothing to restore into", schema);
             return;
         }
-        
-        log.info("Deleting data from {} tables", tables.size());
-        
+
         try (Statement stmt = connection.createStatement()) {
-            try {
-                // Disable FK checks
-                stmt.execute("SET FOREIGN_KEY_CHECKS=0");
-                
-                // Delete from each table using batch processing (safe: quotedTable validated)
-                for (String table : tables) {
-                    String quotedTable = quoteIdentifier(table);
-                    stmt.addBatch("DELETE FROM " + quotedTable);
-                    log.debug("Queued deletion from: {}", table);
-                }
-                
-                stmt.executeBatch();
-                connection.commit();
-                log.info("Successfully deleted data from {} tables", tables.size());
-            } finally {
-                // Always re-enable FK checks even if deletes fail
-                try {
-                    stmt.execute("SET FOREIGN_KEY_CHECKS=1");
-                } catch (SQLException e) {
-                    log.error("Failed to re-enable FOREIGN_KEY_CHECKS: {}", e.getMessage());
-                }
+            for (String table : tables) {
+                validateIdentifier(table);
+                stmt.addBatch("DELETE FROM " + quoteIdentifier(table));
             }
+            stmt.executeBatch();
+            connection.commit();
+            log.info("Deleted data from {} tables", tables.size());
         }
     }
-    
+
     /**
-     * Write batch directly to target database
+     * Write batch directly to target database.
      */
     @SuppressWarnings("java:S2077") // SQL injection safe: all identifiers validated by quoteIdentifier()
-    public void writeInsert(String tableName, List<String> columns, 
+    public void writeInsert(String tableName, List<String> columns,
                            List<Map<String, Object>> rows) throws SQLException {
-        
+
         if (rows.isEmpty()) {
             return;
         }
-        
+
         String quotedTable = quoteIdentifier(tableName);
-        
+
         String placeholders = columns.stream()
             .map(c -> "?")
             .collect(Collectors.joining(", "));
-        
+
         String columnList = columns.stream()
             .map(this::quoteIdentifier)
             .collect(Collectors.joining(", "));
-        
+
         // Safe: quotedTable and columnList contain only validated identifiers
         String sql = String.format("INSERT INTO %s (%s) VALUES (%s)",
             quotedTable, columnList, placeholders);
-        
+
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             int count = 0;
-            
+
             for (Map<String, Object> row : rows) {
                 for (int i = 0; i < columns.size(); i++) {
-                    Object v = row.get(columns.get(i));
-                    if (v == null) {
-                        stmt.setNull(i + 1, java.sql.Types.NULL);
-                    } else if (v instanceof String string) {
-                        stmt.setString(i + 1, string);
-                    } else if (v instanceof Boolean bool) {
-                        stmt.setBoolean(i + 1, bool);
-                    } else if (v instanceof Number) {
-                        stmt.setObject(i + 1, v);
-                    } else {
-                        // Fallback to string representation for unknown types
-                        stmt.setString(i + 1, v.toString());
-                    }
+                    setParameter(stmt, i + 1, row.get(columns.get(i)));
                 }
                 stmt.addBatch();
                 count++;
-                
-                // Execute batch at intervals but don't commit - let close() handle commit atomically
+
                 if (count % batchSize == 0) {
                     stmt.executeBatch();
                 }
             }
-            
-            // Execute remaining batch without committing
+
             if (count % batchSize != 0) {
                 stmt.executeBatch();
             }
-            
-            log.debug("Inserted {} rows into {} (commit deferred to close())", rows.size(), tableName);
+
+            log.debug("Inserted {} rows into {} (commit deferred to commitTable())", rows.size(), tableName);
         }
     }
-    
+
+    private void setParameter(PreparedStatement stmt, int index, Object v) throws SQLException {
+        if (v == null) {
+            stmt.setNull(index, java.sql.Types.NULL);
+        } else if (v instanceof String string) {
+            stmt.setString(index, string);
+        } else if (v instanceof byte[] bytes) {
+            stmt.setBytes(index, bytes);
+        } else {
+            // Timestamps, dates, booleans, numbers, BigDecimal etc. - let the
+            // driver map the original JDBC object back to the column type.
+            stmt.setObject(index, v);
+        }
+    }
+
     /**
-     * Delete all rows from table before restore (transactional, no implicit commit)
-     * Using DELETE FROM instead of TRUNCATE to maintain transaction control
+     * Commit all rows written since the last commit. Called once per completed
+     * table so a crash mid-run loses at most the current table.
      */
-    @SuppressWarnings("java:S2077") // SQL injection safe: tableName validated by quoteIdentifier()
-    public void truncateTable(String tableName) throws SQLException {
-        String quotedTable = quoteIdentifier(tableName);
-        
-        try (Statement stmt = connection.createStatement()) {
-            stmt.execute("DELETE FROM " + quotedTable);
-            // Note: commit is deferred to close() for atomic behavior
-            log.info("Deleted all rows from table: {} (commit deferred)", tableName);
-        }
+    public void commitTable() throws SQLException {
+        connection.commit();
     }
-    
-    private boolean success = false;
-    
+
     /**
-     * Mark the operation as successful to enable commit on close
+     * Mark the operation as successful to enable a final commit on close.
      */
     public void markSuccess() {
         this.success = true;
     }
-    
+
     @Override
     public void close() throws SQLException {
         if (connection != null && !connection.isClosed()) {
             SQLException primaryException = null;
-            
+
             try {
                 if (success) {
                     connection.commit();
                     log.info("Direct restore writer committed successfully for schema: {}", schema);
                 } else {
                     connection.rollback();
-                    log.warn("Direct restore writer rolled back due to incomplete operation for schema: {}", schema);
+                    log.warn("Direct restore writer rolled back current table due to incomplete operation for schema: {}", schema);
                 }
+                setForeignKeyChecks(true);
             } catch (SQLException e) {
                 primaryException = e;
                 log.error("Error during commit/rollback for schema {}: {}", schema, e.getMessage());
@@ -339,7 +355,7 @@ public class DirectRestoreWriter implements AutoCloseable {
                     }
                 }
             }
-            
+
             if (primaryException != null) {
                 throw primaryException;
             }
