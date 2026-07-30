@@ -182,8 +182,16 @@ public class KeysetPaginator {
      * Return the actual column list for the table as reported by the database.
      * Uses SELECT * WHERE 1=0 to obtain ResultSetMetaData so it works on empty tables.
      */
-    @SuppressWarnings("java:S2077")
     public List<String> getTableColumns(String table) throws SQLException {
+        return getTableColumnMeta(table).stream().map(ColumnMeta::name).toList();
+    }
+
+    /**
+     * Return column metadata (name, JDBC type, precision, nullability) for the
+     * table, so anonymization outputs can be fitted to the column definition.
+     */
+    @SuppressWarnings("java:S2077")
+    public List<ColumnMeta> getTableColumnMeta(String table) throws SQLException {
         validateIdentifier(table);
         String quotedTable = quoteIdentifier(table);
         String sql = String.format("SELECT * FROM %s WHERE 1=0", quotedTable);
@@ -193,9 +201,13 @@ public class KeysetPaginator {
              ResultSet rs = stmt.executeQuery()) {
 
             ResultSetMetaData meta = rs.getMetaData();
-            List<String> cols = new ArrayList<>();
+            List<ColumnMeta> cols = new ArrayList<>();
             for (int i = 1; i <= meta.getColumnCount(); i++) {
-                cols.add(meta.getColumnLabel(i));
+                cols.add(new ColumnMeta(
+                    meta.getColumnLabel(i),
+                    meta.getColumnType(i),
+                    meta.getPrecision(i),
+                    meta.isNullable(i) != ResultSetMetaData.columnNoNulls));
             }
             return cols;
         }

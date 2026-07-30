@@ -16,10 +16,15 @@ import org.mockito.ArgumentCaptor;
 
 import com.db.piramalswasthya.anonymizer.config.AnonymizationRules;
 import com.db.piramalswasthya.anonymizer.core.AnonymizationEngine;
+import com.db.piramalswasthya.anonymizer.core.ColumnMeta;
 import com.db.piramalswasthya.anonymizer.core.KeysetPaginator;
 import com.db.piramalswasthya.anonymizer.output.DirectRestoreWriter;
 
 class RunCommandTest {
+
+    private static ColumnMeta col(String name) {
+        return new ColumnMeta(name, java.sql.Types.VARCHAR, 255, true);
+    }
 
     @Test
     void processTableAddsUnknownColumnsAsPreserveWithoutMutatingUnmodifiableGetter() throws Exception {
@@ -35,7 +40,7 @@ class RunCommandTest {
         tableRules.setColumns(new LinkedHashMap<>(Map.of("id", idRule)));
 
         KeysetPaginator paginator = mock(KeysetPaginator.class);
-        when(paginator.getTableColumns("Beneficiary")).thenReturn(List.of("id", "newColumn"));
+        when(paginator.getTableColumnMeta("Beneficiary")).thenReturn(List.of(col("id"), col("newColumn")));
 
         AnonymizationEngine engine = mock(AnonymizationEngine.class);
         DirectRestoreWriter writer = mock(DirectRestoreWriter.class);
@@ -60,7 +65,8 @@ class RunCommandTest {
         tableRules.setColumns(new LinkedHashMap<>());
 
         KeysetPaginator paginator = mock(KeysetPaginator.class);
-        when(paginator.getTableColumns("Beneficiary")).thenReturn(List.of("id", "name", "phoneNo"));
+        when(paginator.getTableColumnMeta("Beneficiary"))
+            .thenReturn(List.of(col("id"), col("name"), col("phoneNo")));
 
         AnonymizationEngine engine = mock(AnonymizationEngine.class);
         DirectRestoreWriter writer = mock(DirectRestoreWriter.class);

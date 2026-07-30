@@ -294,16 +294,25 @@ public class RunCommand implements Callable<Integer> {
         long[] rowCount = {0};
         Map<String, Integer> strategyCounts = new HashMap<>();
 
-        // Fetch real source columns for this table so we don't accidentally drop unknown columns.
-        List<String> sourceColumns;
+        // Fetch real source columns (with metadata) so we don't accidentally drop
+        // unknown columns and so outputs can be fitted to column definitions.
+        List<com.db.piramalswasthya.anonymizer.core.ColumnMeta> sourceColumnMeta;
         try {
-            sourceColumns = paginator.getTableColumns(tableName);
+            sourceColumnMeta = paginator.getTableColumnMeta(tableName);
         } catch (SQLException e) {
             if (isTableMissing(e)) {
                 log.warn("Source table not found, skipping {}.{}", schema, tableName);
                 return;
             }
             throw e;
+        }
+        List<String> sourceColumns = sourceColumnMeta.stream()
+            .map(com.db.piramalswasthya.anonymizer.core.ColumnMeta::name)
+            .toList();
+        Map<String, com.db.piramalswasthya.anonymizer.core.ColumnMeta> columnMetaByName =
+            new java.util.LinkedHashMap<>();
+        for (com.db.piramalswasthya.anonymizer.core.ColumnMeta cm : sourceColumnMeta) {
+            columnMetaByName.put(cm.name(), cm);
         }
 
         Map<String, AnonymizationRules.ColumnRule> mutableColumns = new java.util.LinkedHashMap<>();
@@ -333,7 +342,7 @@ public class RunCommand implements Callable<Integer> {
         updateStrategyCounts(tableRules, strategyCounts);
         
         BatchContext context = new BatchContext(schema, tableName, tableRules, allColumns,
-                                                engine, writer, rowCount);
+                                                engine, writer, rowCount, columnMetaByName);
         processTableBatches(context, paginator);
 
         // Commit per table so a crash loses at most the current table
@@ -362,7 +371,7 @@ public class RunCommand implements Callable<Integer> {
      */
     private void processBatch(BatchContext context, List<RowData> batch) {
         try {
-            context.engine.anonymizeBatch(context.schema, context.tableName, batch);
+            context.engine.anonymizeBatch(context.schema, context.tableName, batch, context.columnMeta);
             List<Map<String, Object>> rowMaps = batch.stream()
                 .map(RowData::getData)
                 .toList();
@@ -833,10 +842,11 @@ public class RunCommand implements Callable<Integer> {
         private final AnonymizationEngine engine;
         private final DirectRestoreWriter writer;
         private final long[] rowCount;
-        
+        private final Map<String, com.db.piramalswasthya.anonymizer.core.ColumnMeta> columnMeta;
+
         BatchContext(String schema, String tableName, AnonymizationRules.TableRules tableRules,
                     List<String> allColumns, AnonymizationEngine engine, DirectRestoreWriter writer,
-                    long[] rowCount) {
+                    long[] rowCount, Map<String, com.db.piramalswasthya.anonymizer.core.ColumnMeta> columnMeta) {
             this.schema = schema;
             this.tableName = tableName;
             this.tableRules = tableRules;
@@ -844,6 +854,7 @@ public class RunCommand implements Callable<Integer> {
             this.engine = engine;
             this.writer = writer;
             this.rowCount = rowCount;
+            this.columnMeta = columnMeta;
         }
     }
 

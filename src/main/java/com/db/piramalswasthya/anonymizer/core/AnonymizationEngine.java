@@ -59,17 +59,38 @@ public class AnonymizationEngine {
     }
 
     /**
-     * Anonymize a batch of rows according to rules.
-     *
-     * @param database Database name
-     * @param table Table name
-     * @param rows Batch of rows to anonymize (modified in place)
-     * @return Strategy counts for reporting
+     * Anonymize a batch of rows according to rules (no column metadata available;
+     * outputs are not fitted to column definitions).
      */
     public Map<String, Integer> anonymizeBatch(
             String database,
             String table,
             List<KeysetPaginator.RowData> rows
+    ) {
+        return anonymizeBatch(database, table, rows, java.util.Collections.emptyMap());
+    }
+
+    /**
+     * Anonymize a batch of rows according to rules.
+     *
+     * <p>Columns whose strategy is PRESERVE (or which have no rule) are left
+     * completely untouched - the original JDBC object (Timestamp, Boolean,
+     * byte[], BigDecimal, ...) is kept so the writer can restore it with full
+     * type fidelity. Only columns with an active anonymization strategy are
+     * converted through their string representation.</p>
+     *
+     * @param database Database name
+     * @param table Table name
+     * @param rows Batch of rows to anonymize (modified in place)
+     * @param columnMeta source column metadata by column name, used to fit
+     *                   outputs to the column type/length (may be empty)
+     * @return Strategy counts for reporting
+     */
+    public Map<String, Integer> anonymizeBatch(
+            String database,
+            String table,
+            List<KeysetPaginator.RowData> rows,
+            Map<String, ColumnMeta> columnMeta
     ) {
         Map<String, Integer> strategyCounts = new HashMap<>();
 
@@ -97,20 +118,67 @@ public class AnonymizationEngine {
             List<String> columnSnapshot = new ArrayList<>(rowData.keySet());
 
             for (String column : columnSnapshot) {
-                Object originalValue = row.get(column);
                 AnonymizationRules.ColumnRule rule = columnRules.get(column);
-                
+
                 if (rule == null) {
                     handleUnknownColumn(database, table, column);
-                } else if (originalValue != null) {
-                    Object anonymizedValue = applyStrategy(rule.getStrategy(), column, originalValue.toString());
-                    row.put(column, anonymizedValue);
-                    strategyCounts.merge(rule.getStrategy(), 1, Integer::sum);
+                    continue;
                 }
+
+                String strategy = rule.getStrategy() == null ? "" : rule.getStrategy().toUpperCase();
+                if ("PRESERVE".equals(strategy)) {
+                    continue; // keep original JDBC object untouched
+                }
+
+                Object originalValue = row.get(column);
+                if (originalValue == null) {
+                    continue;
+                }
+
+                Object anonymizedValue = applyStrategy(strategy, column, originalValue.toString());
+                row.put(column, fitToColumn(anonymizedValue, columnMeta.get(column)));
+                strategyCounts.merge(rule.getStrategy(), 1, Integer::sum);
             }
         }
 
         return strategyCounts;
+    }
+
+    /**
+     * Fit a strategy output to the target column definition (target tables are
+     * structural clones of the source, so source metadata applies).
+     */
+    private Object fitToColumn(Object value, ColumnMeta meta) {
+        if (meta == null) {
+            return value;
+        }
+        if (value == null) {
+            // SUPPRESS on a NOT NULL column: use a neutral non-PII placeholder
+            if (!meta.nullable()) {
+                return meta.isNumeric() ? 0 : "";
+            }
+            return null;
+        }
+        if (value instanceof String s) {
+            if (meta.isNumeric()) {
+                // Hash/fake output destined for a numeric column: derive a stable
+                // positive number that fits the column type.
+                return deriveNumeric(s, meta);
+            }
+            if (meta.isCharacter() && meta.precision() > 0 && s.length() > meta.precision()) {
+                return s.substring(0, meta.precision());
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Deterministically derive a positive number fitting the column from a string.
+     */
+    private long deriveNumeric(String s, ColumnMeta meta) {
+        String hex = com.db.piramalswasthya.anonymizer.util.CryptoUtils.sha256Hex(s).substring(0, 15);
+        long h = Long.parseLong(hex, 16); // 60 bits, always positive
+        return h % (meta.numericCap() + 1);
     }
 
     /**
@@ -125,6 +193,11 @@ public class AnonymizationEngine {
                 return anonymizer.sha256Hash(value);
             case "PRESERVE":
                 return value;
+            case "SUPPRESS":
+                return null;
+            case "RANDOM_FAKE_DATA":
+                // column-name heuristics pick an appropriate fake value type
+                return faker.anonymize(column, value);
             case "FAKE_FULLNAME":
             case "FAKE_FIRSTNAME":
             case "FAKE_LASTNAME":
@@ -138,31 +211,7 @@ public class AnonymizationEngine {
 
                 return faker.anonymize(strategy, column, value);
             case "GENERALIZE":
-                // Date patterns
-                if (value.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                    return anonymizer.generalizeDate(value);
-                } else if (value.matches("\\d{2}/\\d{2}/\\d{4}")) {
-                    return anonymizer.generalizeDate(value.replace('/', '-'));
-                }
-
-                // Coordinate pattern: lat,lon  (e.g. 12.9715987,77.5945627)
-                String coordRegex = "^-?\\d+(?:\\.\\d+)?,\\s*-?\\d+(?:\\.\\d+)?$";
-                if (value.matches(coordRegex)) {
-                    try {
-                        String[] parts = value.split(",");
-                        double lat = Double.parseDouble(parts[0].trim());
-                        double lon = Double.parseDouble(parts[1].trim());
-                        String latStr = String.format("%.2f", lat);
-                        String lonStr = String.format("%.2f", lon);
-                        return latStr + "," + lonStr;
-                    } catch (NumberFormatException e) {
-                        log.warn("GENERALIZE coordinate parse failed for {}: {}", column, value);
-                        return value;
-                    }
-                }
-
-                log.warn("GENERALIZE strategy applied to column {} - preserving value", column);
-                return value;
+                return generalize(column, value);
             case "PARTIAL_MASK":
                 String lc = column == null ? "" : column.toLowerCase();
                 if (lc.contains("phone") || lc.contains("mobile") || lc.contains("msisdn")) {
@@ -173,9 +222,43 @@ public class AnonymizationEngine {
                     return anonymizer.maskPartial(value, 3);
                 }
             default:
-                log.warn("Unknown strategy: {} - preserving value", strategy);
-                return value;
+                // A typo'd or unimplemented strategy must fail the run: silently
+                // preserving would ship raw PII to the target.
+                throw new UnknownStrategyException(strategy, column);
         }
+    }
+
+    /**
+     * Generalize dates/datetimes to year and coordinates to 2-decimal precision.
+     */
+    private Object generalize(String column, String value) {
+        // Date or datetime: 2023-06-15, 2023-06-15 10:30:00[.0], 2023-06-15T10:30:00
+        if (value.matches("\\d{4}-\\d{2}-\\d{2}([ T].*)?")) {
+            return anonymizer.generalizeDate(value);
+        } else if (value.matches("\\d{2}/\\d{2}/\\d{4}")) {
+            return anonymizer.generalizeDate(value.replace('/', '-'));
+        }
+
+        // Coordinate pattern: lat,lon  (e.g. 12.9715987,77.5945627)
+        String coordRegex = "^-?\\d+(?:\\.\\d+)?,\\s*-?\\d+(?:\\.\\d+)?$";
+        if (value.matches(coordRegex)) {
+            try {
+                String[] parts = value.split(",");
+                double lat = Double.parseDouble(parts[0].trim());
+                double lon = Double.parseDouble(parts[1].trim());
+                String latStr = String.format("%.2f", lat);
+                String lonStr = String.format("%.2f", lon);
+                return latStr + "," + lonStr;
+            } catch (NumberFormatException e) {
+                log.warn("GENERALIZE coordinate parse failed for column {} - suppressing", column);
+                return null;
+            }
+        }
+
+        // Free-text values marked GENERALIZE (e.g. address lines): the safe
+        // generalization is suppression, never pass-through of raw PII.
+        log.debug("GENERALIZE on non-date/coordinate column {} - suppressing value", column);
+        return null;
     }
 
     private void handleUnknownColumn(String database, String table, String column) {
@@ -195,5 +278,18 @@ class UnknownColumnException extends RuntimeException {
 
     UnknownColumnException(String database, String table, String column) {
         super(String.format("Unknown column %s.%s.%s - policy is FAIL", database, table, column));
+    }
+}
+
+/**
+ * Thrown when a rule references a strategy the engine does not implement.
+ * Failing the run is mandatory: silently preserving would leak raw PII.
+ */
+class UnknownStrategyException extends RuntimeException {
+
+    UnknownStrategyException(String strategy, String column) {
+        super(String.format("Unknown anonymization strategy '%s' on column %s - refusing to run. " +
+            "Fix the rules file: valid strategies are HMAC_HASH, HASH_SHA256, PRESERVE, SUPPRESS, " +
+            "RANDOM_FAKE_DATA, FAKE_*, GENERALIZE, PARTIAL_MASK", strategy, column));
     }
 }
