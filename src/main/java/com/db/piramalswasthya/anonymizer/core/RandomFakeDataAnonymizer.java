@@ -34,6 +34,15 @@ public class RandomFakeDataAnonymizer {
     private final Locale locale;
     private final FakerFactory fakerFactory;
 
+    /**
+     * Faker construction loads locale YAML data and is far too expensive to do
+     * per value (hundreds of thousands of rows). One instance is created lazily
+     * and shared; determinism is preserved by re-seeding the shared Random
+     * before every value.
+     */
+    private final Random sharedRandom = new Random(0);
+    private Faker cachedFaker;
+
     public RandomFakeDataAnonymizer(Locale locale) {
         this(locale, Faker::new);
     }
@@ -41,6 +50,14 @@ public class RandomFakeDataAnonymizer {
     RandomFakeDataAnonymizer(Locale locale, FakerFactory fakerFactory) {
         this.locale = locale == null ? Locale.ENGLISH : locale;
         this.fakerFactory = fakerFactory == null ? Faker::new : fakerFactory;
+    }
+
+    private Faker fakerWithSeed(long seed) {
+        if (cachedFaker == null) {
+            cachedFaker = fakerFactory.create(locale, sharedRandom);
+        }
+        sharedRandom.setSeed(seed);
+        return cachedFaker;
     }
 
     private boolean isIndiaLocale() {
@@ -90,10 +107,10 @@ public class RandomFakeDataAnonymizer {
     public Object anonymize(String strategy, String columnName, String original) {
         if (original == null) return null;
         String s = strategy == null ? "" : strategy.toUpperCase();
-        Random random = randomFor(s, columnName, original);
 
         try {
-            Faker faker = fakerFactory.create(locale, random);
+            Faker faker = fakerWithSeed(seedFor(s, columnName, original));
+            Random random = sharedRandom;
             switch (s) {
                 case "FAKE_FIRSTNAME", "FIRSTNAME":
                     return faker.name().firstName();
@@ -132,20 +149,19 @@ public class RandomFakeDataAnonymizer {
     }
 
     private Faker fakerFor(String strategy, String columnName, String original) {
-        return fakerFactory.create(locale, randomFor(strategy, columnName, original));
+        return fakerWithSeed(seedFor(strategy, columnName, original));
     }
 
     @SuppressWarnings("java:S2245")
-    private Random randomFor(String strategy, String columnName, String original) {
+    private long seedFor(String strategy, String columnName, String original) {
         String material = locale.toLanguageTag() + "|" +
             normalize(strategy) + "|" +
             normalize(columnName) + "|" +
             normalize(original);
         String hash = CryptoUtils.sha256Hex(material);
-        long seed = Long.parseUnsignedLong(hash.substring(0, 16), 16);
         // Intentionally not SecureRandom: JavaFaker accepts java.util.Random here,
         // and this path needs repeatable fake values, not security-sensitive randomness.
-        return new Random(seed);
+        return Long.parseUnsignedLong(hash.substring(0, 16), 16);
     }
 
     private String normalize(String value) {
