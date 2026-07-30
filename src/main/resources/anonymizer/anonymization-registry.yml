@@ -1,14 +1,33 @@
-# AMRIT Anonymization Rules (Source of Truth)
+# AMRIT Anonymization Rules (SOURCE OF TRUTH for PII)
 # Matches AnonymizationRules Java model structure
+#
+# This registry is maintained by developers: when a table or column holding
+# PII is added to any schema, add it here. Columns/tables not listed are
+# copied to the target AS-IS (full-copy model).
+#
+# Database keys must match the schema names passed to the anonymizer
+# (anonymizer.source.schemas), before any schema.map resolution.
 #
 # Strategies:
 #   HASH_SHA256        - One-way hash (deterministic, linkable)
-#   HMAC_HASH          - HMAC-based one-way hash (deterministic, keyed)
-#   RANDOM_FAKE_DATA   - Realistic fake data using java-faker
+#   HMAC_HASH          - HMAC-based one-way hash (deterministic, keyed).
+#                        On numeric columns a stable positive number is derived.
+#   RANDOM_FAKE_DATA   - Realistic fake data via column-name heuristics (java-faker)
+#   FAKE_FULLNAME / FAKE_FIRSTNAME / FAKE_LASTNAME / FAKE_EMAIL / FAKE_PHONE /
+#   FAKE_ADDRESS / FAKE_CITY / FAKE_ZIP / FAKE_USERNAME
+#                      - Specific fake value types (deterministic per input)
 #   PARTIAL_MASK       - Mask characters (show last N digits)
-#   GENERALIZE         - Category/range reduction
-#   SUPPRESS           - Replace with NULL
+#   GENERALIZE         - Dates/datetimes reduced to year (anchored to Jan 1st
+#                        on DATE/DATETIME columns), coordinates to 2 decimals;
+#                        other values are SUPPRESSED (never passed through raw)
+#   SUPPRESS           - Replace with NULL ('' / 0 on NOT NULL columns)
 #   PRESERVE           - Keep original value
+#
+# Optional per-table key:
+#   primaryKey         - Override for keyset pagination; auto-detected via
+#                        JDBC metadata when omitted
+#
+# Unknown/typo'd strategies FAIL the run (never silently preserved).
 
 rulesVersion: "1.0.0"
 # lastUpdated: "2026-02-15T12:00:00Z"
@@ -531,7 +550,7 @@ databases:
       t_itemstockentry:
         canonicalName: "t_itemstockentry"
 
-  dbiemr:
+  db_iemr:
     tables:
       flyway_schema_history:
         canonicalName: "flyway_schema_history"

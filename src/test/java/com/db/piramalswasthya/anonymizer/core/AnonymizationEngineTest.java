@@ -95,6 +95,42 @@ class AnonymizationEngineTest {
     }
 
     @Test
+    void strategyOutputsAreFittedToColumnDefinitions() {
+        AnonymizationEngine e = new AnonymizationEngine(
+            new HmacAnonymizer(SECRET),
+            rulesFor(Map.of(
+                "IdentityNo", rule("HMAC_HASH"),
+                "ShortCode", rule("HMAC_HASH"),
+                "DOB", rule("GENERALIZE"),
+                "Biometric", rule("SUPPRESS")
+            )),
+            new RandomFakeDataAnonymizer(Locale.ENGLISH)
+        );
+        Map<String, ColumnMeta> meta = Map.of(
+            "IdentityNo", new ColumnMeta("IdentityNo", java.sql.Types.BIGINT, "BIGINT", 19, true),
+            "ShortCode", new ColumnMeta("ShortCode", java.sql.Types.VARCHAR, "VARCHAR", 10, true),
+            "DOB", new ColumnMeta("DOB", java.sql.Types.TIMESTAMP, "DATETIME", 19, true),
+            "Biometric", new ColumnMeta("Biometric", java.sql.Types.VARCHAR, "VARCHAR", 255, false)
+        );
+        KeysetPaginator.RowData row = row(Map.of(
+            "IdentityNo", 123456789012L,
+            "ShortCode", "SECRET-CODE-VALUE",
+            "DOB", "1985-03-12 00:00:00",
+            "Biometric", "TEMPLATE"));
+        e.anonymizeBatch("db_identity", "t", List.of(row), meta);
+
+        assertInstanceOf(Long.class, row.get("IdentityNo"),
+            "HMAC on a numeric column must produce a number, not a hex string");
+        assertTrue((Long) row.get("IdentityNo") >= 0);
+        assertTrue(row.get("ShortCode").toString().length() <= 10,
+            "hash output must be truncated to the column length");
+        assertEquals("1985-01-01 00:00:00", row.get("DOB"),
+            "generalized DOB must remain a valid DATETIME value anchored to Jan 1st");
+        assertEquals("", row.get("Biometric"),
+            "SUPPRESS on a NOT NULL column must use a neutral placeholder, not NULL");
+    }
+
+    @Test
     void unknownStrategyFailsRunInsteadOfLeaking() {
         AnonymizationEngine badEngine = new AnonymizationEngine(
             new HmacAnonymizer(SECRET),
