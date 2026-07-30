@@ -148,10 +148,24 @@ public class DiffSchemaCommand implements Callable<Integer> {
         AnonymizerConfig cfg = new AnonymizerConfig();
         AnonymizerConfig.DatabaseConfig src = new AnonymizerConfig.DatabaseConfig();
 
-        // Discover source schemas from spring.datasource.*.jdbc-url entries
+        // Canonical explicit configuration: anonymizer.source.* (same as RunCommand)
+        String explicitHost = props.getProperty("anonymizer.source.host", "");
+        if (!explicitHost.isBlank()) {
+            src.setHost(explicitHost);
+            src.setPort(Integer.parseInt(props.getProperty("anonymizer.source.port", "3306")));
+            src.setUsername(props.getProperty("anonymizer.source.username", ""));
+            src.setPassword(props.getProperty("anonymizer.source.password", ""));
+            String schemas = props.getProperty("anonymizer.source.schemas", "");
+            if (!schemas.isBlank()) {
+                src.setSchemas(splitCommaSeparated(schemas));
+            }
+        }
+
+        // Legacy fallback: discover source schemas from spring.datasource.*.jdbc-url/.url entries
         java.util.List<String> discovered = new java.util.ArrayList<>();
         for (String key : props.stringPropertyNames()) {
-            if (key.startsWith("spring.datasource.") && key.endsWith(".jdbc-url")) {
+            if (!explicitHost.isBlank()) break;
+            if (key.startsWith("spring.datasource.") && (key.endsWith(".jdbc-url") || key.endsWith(".url"))) {
                 String url = props.getProperty(key);
                 // parse to get database name
                 try {
@@ -173,8 +187,10 @@ public class DiffSchemaCommand implements Callable<Integer> {
         }
         if (!discovered.isEmpty()) src.setSchemas(discovered);
 
-        src.setUsername(props.getProperty("spring.datasource.username", ""));
-        src.setPassword(props.getProperty("spring.datasource.password", ""));
+        if (src.getUsername() == null || src.getUsername().isBlank()) {
+            src.setUsername(props.getProperty("spring.datasource.username", ""));
+            src.setPassword(props.getProperty("spring.datasource.password", ""));
+        }
         src.setReadOnly(true);
         src.setConnectionTimeout(30000);
         src.setVerifyServerCertificate(true);
