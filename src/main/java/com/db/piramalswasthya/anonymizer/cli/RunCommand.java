@@ -95,6 +95,9 @@ public class RunCommand implements Callable<Integer> {
     
     @Option(names = {"--dry-run"}, description = "Validate configuration without executing")
     private boolean dryRun;
+
+    @Option(names = {"--yes", "-y"}, description = "Skip the interactive confirmation prompt (for cron/CI)")
+    private boolean assumeYes;
     
     @Override
     public Integer call() throws Exception {
@@ -144,7 +147,7 @@ public class RunCommand implements Callable<Integer> {
             
             // 4. Interactive safety confirmation
             log.info("Running safety confirmation checks...");
-            if (!interactiveSafetyConfirmation()) {
+            if (!interactiveSafetyConfirmation(config)) {
                 log.info("User declined safety confirmation. Aborting run.");
                 log.info("Execution {} aborted by user", executionId);
                 return 1;
@@ -602,44 +605,13 @@ public class RunCommand implements Callable<Integer> {
     private void validateConfiguration(AnonymizerConfig config, AnonymizationRules rules) {
         validateSourceConfiguration(config);
         validateTargetConfiguration(config);
-        validateSourceTargetDistinct(config);
+        // Enforces host allowlist and source!=target using resolved IPs
+        com.db.piramalswasthya.anonymizer.core.SafetyGuard.enforce(config);
         validateSchemaMatching(config);
         validateRules(rules);
-        
+
         log.info("Configuration validated successfully");
         log.info("Schemas to process: {}", config.getSource().getSchemas());
-    }
-
-    /**
-     * Prevent accidental overwrite: source and target must not point to same host/port
-     * with overlapping schema names.
-     */
-    private void validateSourceTargetDistinct(AnonymizerConfig config) {
-        if (config == null) return;
-        AnonymizerConfig.DatabaseConfig src = config.getSource();
-        AnonymizerConfig.DatabaseConfig tgt = config.getTarget();
-        if (src == null || tgt == null) return;
-
-        String srcHost = src.getHost() == null ? "" : src.getHost().trim().toLowerCase();
-        String tgtHost = tgt.getHost() == null ? "" : tgt.getHost().trim().toLowerCase();
-        int srcPort = src.getPort();
-        int tgtPort = tgt.getPort();
-
-        if (srcHost.isEmpty() || tgtHost.isEmpty()) return;
-
-        if (srcHost.equals(tgtHost) && srcPort == tgtPort) {
-            java.util.List<String> sSchemas = src.getSchemas() == null ? java.util.Collections.emptyList() : src.getSchemas();
-            java.util.List<String> tSchemas = tgt.getSchemas() == null ? java.util.Collections.emptyList() : tgt.getSchemas();
-
-            for (String s : sSchemas) {
-                for (String t : tSchemas) {
-                    if (s != null && t != null && s.equalsIgnoreCase(t)) {
-                        throw new IllegalArgumentException(
-                            "Source and target are configured to the same host/port and share schema '" + s + "'. Refusing to run to avoid destructive overwrite. Configure a different target or mapping.");
-                    }
-                }
-            }
-        }
     }
     
     private void validateSourceConfiguration(AnonymizerConfig config) {
@@ -798,12 +770,34 @@ public class RunCommand implements Callable<Integer> {
     }
 
     /**
-     * Interactive safety confirmation.
-     * Returns true if the user confirms (Y or A), false to abort.
+     * Interactive safety confirmation: shows what the run will do (including
+     * that the target schemas get reset) and requires a typed 'yes'.
+     * Non-interactive sessions must pass --yes explicitly.
      */
-    private boolean interactiveSafetyConfirmation() {
-        log.info("Safety checks enabled; proceeding without interactive approval prompt.");
-        return true;
+    private boolean interactiveSafetyConfirmation(AnonymizerConfig config) {
+        AnonymizerConfig.DatabaseConfig src = config.getSource();
+        AnonymizerConfig.DatabaseConfig tgt = config.getTarget();
+        log.info("About to anonymize:");
+        log.info("  Source (read):  {}:{} schemas={}", src.getHost(), src.getPort(), src.getSchemas());
+        log.info("  Target (RESET + WRITE): {}:{} schemas={}", tgt.getHost(), tgt.getPort(), tgt.getSchemas());
+        log.info("  All target tables in these schemas will be dropped and re-created.");
+
+        if (assumeYes) {
+            log.info("--yes supplied; skipping interactive approval");
+            return true;
+        }
+        if (dryRun) {
+            return true; // dry run writes nothing
+        }
+
+        java.io.Console console = System.console();
+        if (console == null) {
+            log.error("Non-interactive session and --yes not supplied - aborting for safety. " +
+                "Pass --yes to run from cron/CI.");
+            return false;
+        }
+        String answer = console.readLine("Type 'yes' to proceed: ");
+        return answer != null && answer.trim().equalsIgnoreCase("yes");
     }
 
     /**
