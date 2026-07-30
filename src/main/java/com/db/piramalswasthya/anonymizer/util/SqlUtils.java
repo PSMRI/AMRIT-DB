@@ -30,18 +30,30 @@ import java.util.regex.Pattern;
 public final class SqlUtils {
     private SqlUtils() {}
 
-    public static final Pattern VALID_IDENTIFIER = Pattern.compile("^\\w+$");
+    /**
+     * Characters that could break out of a backtick-quoted MySQL identifier or
+     * smuggle statements: backticks and control characters. Everything else is
+     * legal inside backticks - real AMRIT schemas contain column names with
+     * spaces, dots and slashes (e.g. "WBC_TotalCount _/c.mm").
+     */
+    private static final Pattern FORBIDDEN_CHARS = Pattern.compile("[`\\x00-\\x1f\\x7f]");
 
     public static void validateIdentifier(String identifier) {
         if (identifier == null || identifier.isEmpty()) {
             throw new IllegalArgumentException("Identifier cannot be null or empty");
         }
-        if (!VALID_IDENTIFIER.matcher(identifier).matches()) {
+        if (FORBIDDEN_CHARS.matcher(identifier).find()) {
             throw new IllegalArgumentException(
-                "Invalid identifier: " + identifier + " (only alphanumeric and underscore allowed)");
+                "Invalid identifier: " + identifier + " (backticks and control characters not allowed)");
         }
     }
 
+    /**
+     * Quote identifier with backticks after validation.
+     *
+     * Security: backticks are rejected by validateIdentifier, so the quoted
+     * identifier cannot break out of its backtick delimiters.
+     */
     public static String quoteIdentifier(String identifier) {
         validateIdentifier(identifier);
         return "`" + identifier + "`";

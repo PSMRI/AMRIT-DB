@@ -94,8 +94,9 @@ public class DirectRestoreWriter implements AutoCloseable {
     /**
      * Quote identifier with backticks after validation.
      *
-     * Security: All identifiers are validated against ^\w+$ pattern before quoting,
-     * preventing SQL injection. This allows safe use in dynamic SQL construction.
+     * Security: identifiers are validated (backticks and control characters
+     * rejected) before backtick-quoting, preventing SQL injection while
+     * allowing real-world column names with spaces/dots/slashes.
      */
     private String quoteIdentifier(String identifier) {
         return SqlUtils.quoteIdentifier(identifier);
