@@ -48,7 +48,7 @@ class RunCommandTest {
         command.processTable("db_identity", "Beneficiary", tableRules, rules, engine, paginator, writer);
 
         ArgumentCaptor<List<String>> columnsCaptor = listCaptor();
-        verify(paginator).streamTable(eq("Beneficiary"), eq("id"), columnsCaptor.capture(), any());
+        verify(paginator).streamTableAuto(eq("Beneficiary"), eq("id"), columnsCaptor.capture(), any());
 
         assertEquals(List.of("id", "newColumn"), columnsCaptor.getValue());
         assertEquals("PRESERVE", tableRules.getColumns().get("newColumn").getStrategy());
@@ -74,7 +74,7 @@ class RunCommandTest {
         command.processTable("db_identity", "Beneficiary", tableRules, rules, engine, paginator, writer);
 
         ArgumentCaptor<List<String>> columnsCaptor = listCaptor();
-        verify(paginator).streamTable(eq("Beneficiary"), eq("id"), columnsCaptor.capture(), any());
+        verify(paginator).streamTableAuto(eq("Beneficiary"), eq("id"), columnsCaptor.capture(), any());
 
         assertEquals(List.of("id", "name", "phoneNo"), columnsCaptor.getValue());
         assertEquals("PRESERVE", tableRules.getColumns().get("id").getStrategy());

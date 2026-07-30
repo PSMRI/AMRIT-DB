@@ -355,7 +355,7 @@ public class RunCommand implements Callable<Integer> {
      */
     private void processTableBatches(BatchContext context, KeysetPaginator paginator) throws SQLException {
         try {
-            paginator.streamTable(
+            paginator.streamTableAuto(
                 context.tableName,
                 context.tableRules.getPrimaryKey(),
                 context.allColumns,

@@ -98,8 +98,136 @@ public class KeysetPaginator {
     }
     
     /**
+     * Stream a table, automatically choosing the best strategy:
+     * <ul>
+     *   <li>Registry-provided primary key override, else auto-detected via
+     *       {@link java.sql.DatabaseMetaData#getPrimaryKeys}</li>
+     *   <li>Single-column numeric PK → keyset pagination (O(log n) per page)</li>
+     *   <li>Composite / non-numeric / missing PK → single full-scan with
+     *       MySQL row streaming</li>
+     * </ul>
+     *
+     * @param table Table name
+     * @param primaryKeyOverride Optional PK column from the rules registry (may be null)
+     * @param columns Columns to select
+     * @param handler Handler for each batch of rows
+     */
+    public void streamTableAuto(String table, String primaryKeyOverride, List<String> columns,
+                                BatchHandler handler) throws SQLException {
+        String pk = (primaryKeyOverride == null || primaryKeyOverride.isBlank())
+            ? detectSingleColumnPrimaryKey(table)
+            : primaryKeyOverride;
+
+        if (pk != null && isNumericColumn(table, pk)) {
+            log.info("Table {}: keyset pagination on primary key {}", table, pk);
+            streamTable(table, pk, columns, handler);
+        } else {
+            if (pk != null) {
+                log.info("Table {}: primary key {} is non-numeric - using full-scan streaming", table, pk);
+            } else {
+                log.info("Table {}: no single-column primary key - using full-scan streaming", table);
+            }
+            streamTableFullScan(table, columns, handler);
+        }
+    }
+
+    /**
+     * Detect a single-column primary key via JDBC metadata.
+     *
+     * @return the PK column name, or null when the table has no PK or a composite PK
+     */
+    public String detectSingleColumnPrimaryKey(String table) throws SQLException {
+        validateIdentifier(table);
+        List<String> pkColumns = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection()) {
+            try (ResultSet rs = conn.getMetaData().getPrimaryKeys(conn.getCatalog(), null, table)) {
+                while (rs.next()) {
+                    pkColumns.add(rs.getString("COLUMN_NAME"));
+                }
+            }
+        }
+        return pkColumns.size() == 1 ? pkColumns.get(0) : null;
+    }
+
+    /**
+     * Check whether a column has an integral numeric type usable for keyset pagination.
+     */
+    @SuppressWarnings("java:S2077") // SQL injection safe: identifiers validated by quoteIdentifier()
+    private boolean isNumericColumn(String table, String column) throws SQLException {
+        String sql = String.format("SELECT %s FROM %s WHERE 1=0",
+            quoteIdentifier(column), quoteIdentifier(table));
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            int type = rs.getMetaData().getColumnType(1);
+            return type == Types.TINYINT || type == Types.SMALLINT
+                || type == Types.INTEGER || type == Types.BIGINT;
+        }
+    }
+
+    /**
+     * Stream a table with a single full scan using MySQL row streaming
+     * (fetchSize=Integer.MIN_VALUE). Used for tables where keyset pagination
+     * is impossible; still constant-memory because rows are consumed as they
+     * arrive and handed to the handler in batches.
+     */
+    @SuppressWarnings("java:S2077") // SQL injection safe: all identifiers validated by quoteIdentifier()
+    public void streamTableFullScan(String table, List<String> columns,
+                                    BatchHandler handler) throws SQLException {
+        String quotedTable = quoteIdentifier(table);
+        StringBuilder columnList = new StringBuilder();
+        for (int i = 0; i < columns.size(); i++) {
+            if (i > 0) columnList.append(", ");
+            columnList.append(quoteIdentifier(columns.get(i)));
+        }
+        String sql = String.format("SELECT %s FROM %s", columnList, quotedTable);
+
+        log.info("Streaming table {} with full scan (batch={})", table, batchSize);
+
+        long totalRows = 0;
+        int batchCount = 0;
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql,
+                 ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY)) {
+
+            stmt.setFetchSize(Integer.MIN_VALUE); // MySQL streaming mode
+
+            List<RowData> batch = new ArrayList<>(batchSize);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    RowData row = new RowData();
+                    for (String column : columns) {
+                        row.put(column, rs.getObject(column));
+                    }
+                    batch.add(row);
+
+                    if (batch.size() >= batchSize) {
+                        handler.handle(batch);
+                        totalRows += batch.size();
+                        batchCount++;
+                        batch = new ArrayList<>(batchSize);
+                        if (batchCount % 100 == 0) {
+                            log.info("Processed {} batches, {} total rows from {}",
+                                batchCount, totalRows, table);
+                        }
+                    }
+                }
+            }
+            if (!batch.isEmpty()) {
+                handler.handle(batch);
+                totalRows += batch.size();
+                batchCount++;
+            }
+        }
+
+        log.info("Completed full-scan streaming {} - {} batches, {} total rows",
+            table, batchCount, totalRows);
+    }
+
+    /**
      * Streams a table using keyset pagination.
-     * 
+     *
      * @param table Table name
      * @param primaryKey Primary key column name (must be numeric)
      * @param columns Columns to select
@@ -137,17 +265,25 @@ public class KeysetPaginator {
         );
         
         log.info("Streaming table {} with keyset pagination (batch={})", table, batchSize);
-        
-        long lastKey = 0L;
+
         long totalRows = 0;
         int batchCount = 0;
-        
+
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(selectSql)) {
-            
+
             // Validate PK is numeric using existing connection
             validateNumericPrimaryKey(conn, table, primaryKey);
-            
+
+            // Seed the keyset from the actual minimum key: PKs are not
+            // guaranteed to be positive, and starting at 0 would skip rows.
+            Long minKey = selectMinKey(conn, quotedTable, quotedPk);
+            if (minKey == null) {
+                log.info("Table {} is empty - nothing to stream", table);
+                return;
+            }
+            long lastKey = minKey - 1;
+
             stmt.setFetchSize(batchSize);
             stmt.setInt(2, batchSize); // Loop-invariant
             
@@ -214,9 +350,25 @@ public class KeysetPaginator {
     }
     
     /**
+     * Select the minimum primary key value, or null when the table is empty.
+     */
+    @SuppressWarnings("java:S2077") // SQL injection safe: identifiers pre-quoted by caller
+    private Long selectMinKey(Connection conn, String quotedTable, String quotedPk) throws SQLException {
+        String sql = String.format("SELECT MIN(%s) FROM %s", quotedPk, quotedTable);
+        try (PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                long min = rs.getLong(1);
+                return rs.wasNull() ? null : min;
+            }
+            return null;
+        }
+    }
+
+    /**
      * Process a single batch of rows from the result set
      */
-    private BatchResult processBatch(PreparedStatement stmt, List<String> columns, String primaryKey) 
+    private BatchResult processBatch(PreparedStatement stmt, List<String> columns, String primaryKey)
             throws SQLException {
         List<RowData> batch = new ArrayList<>();
         long lastKey = 0L;
