@@ -131,6 +131,30 @@ class AnonymizationEngineTest {
     }
 
     @Test
+    void hashedNumericIdsStayConsistentAcrossColumnTypes() {
+        // BeneficiaryID is BIGINT in some tables and VARCHAR in others; the
+        // hashed value must be identical (as digits) in both, or cross-table
+        // references break.
+        AnonymizationEngine e = new AnonymizationEngine(
+            new HmacAnonymizer(SECRET),
+            rulesFor(Map.of("BeneficiaryID", rule("HMAC_HASH"), "beneficiaryId", rule("HMAC_HASH"))),
+            new RandomFakeDataAnonymizer(Locale.ENGLISH)
+        );
+        Map<String, ColumnMeta> meta = Map.of(
+            "BeneficiaryID", new ColumnMeta("BeneficiaryID", java.sql.Types.BIGINT, "BIGINT", 19, true),
+            "beneficiaryId", new ColumnMeta("beneficiaryId", java.sql.Types.VARCHAR, "VARCHAR", 500, true)
+        );
+        KeysetPaginator.RowData row = row(Map.of(
+            "BeneficiaryID", 200000682873L,
+            "beneficiaryId", "200000682873"));
+        e.anonymizeBatch("db_identity", "t", List.of(row), meta);
+
+        assertInstanceOf(Long.class, row.get("BeneficiaryID"));
+        assertEquals(String.valueOf(row.get("BeneficiaryID")), row.get("beneficiaryId"),
+            "same source ID must map to the same anonymized value in BIGINT and VARCHAR carriers");
+    }
+
+    @Test
     void unknownStrategyFailsRunInsteadOfLeaking() {
         AnonymizationEngine badEngine = new AnonymizationEngine(
             new HmacAnonymizer(SECRET),

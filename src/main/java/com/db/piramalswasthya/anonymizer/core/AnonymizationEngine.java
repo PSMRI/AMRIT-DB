@@ -158,8 +158,9 @@ public class AnonymizationEngine {
                     continue;
                 }
 
-                Object anonymizedValue = applyStrategy(strategy, column, originalValue.toString());
-                row.put(column, fitToColumn(anonymizedValue, columnMeta.get(column)));
+                String originalString = originalValue.toString();
+                Object anonymizedValue = applyStrategy(strategy, column, originalString);
+                row.put(column, fitToColumn(strategy, originalString, anonymizedValue, columnMeta.get(column)));
                 strategyCounts.merge(rule.getStrategy(), 1, Integer::sum);
             }
         }
@@ -167,11 +168,14 @@ public class AnonymizationEngine {
         return strategyCounts;
     }
 
+    /** Default cap for canonical numeric derivation - matches ColumnMeta's BIGINT cap. */
+    private static final long CANONICAL_NUMERIC_CAP = 999_999_999_999_999L;
+
     /**
      * Fit a strategy output to the target column definition (target tables are
      * structural clones of the source, so source metadata applies).
      */
-    private Object fitToColumn(Object value, ColumnMeta meta) {
+    private Object fitToColumn(String strategy, String original, Object value, ColumnMeta meta) {
         if (meta == null) {
             return value;
         }
@@ -183,10 +187,24 @@ public class AnonymizationEngine {
             return null;
         }
         if (value instanceof String s) {
+            // Hashed NUMERIC identifiers (e.g. BeneficiaryID) may be carried by
+            // BIGINT columns in some tables and VARCHAR columns in others. Both
+            // must receive the SAME representation or cross-table references
+            // break: derive one canonical number and render it as digits in
+            // string columns.
+            boolean hashStrategy = "HMAC_HASH".equals(strategy) || "HASH_SHA256".equals(strategy);
+            if (hashStrategy && isAllDigits(original)) {
+                if (meta.isNumeric()) {
+                    return deriveNumeric(s, meta.numericCap());
+                }
+                if (meta.isCharacter()) {
+                    return String.valueOf(deriveNumeric(s, CANONICAL_NUMERIC_CAP));
+                }
+            }
             if (meta.isNumeric()) {
                 // Hash/fake output destined for a numeric column: derive a stable
                 // positive number that fits the column type.
-                return deriveNumeric(s, meta);
+                return deriveNumeric(s, meta.numericCap());
             }
             if (meta.isTemporal()) {
                 // GENERALIZE reduces dates to the year; a DATE/DATETIME column
@@ -198,6 +216,14 @@ public class AnonymizationEngine {
             }
         }
         return value;
+    }
+
+    private static boolean isAllDigits(String s) {
+        if (s == null || s.isEmpty()) return false;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) < '0' || s.charAt(i) > '9') return false;
+        }
+        return true;
     }
 
     /**
@@ -216,12 +242,12 @@ public class AnonymizationEngine {
     }
 
     /**
-     * Deterministically derive a positive number fitting the column from a string.
+     * Deterministically derive a positive number (within cap) from a string.
      */
-    private long deriveNumeric(String s, ColumnMeta meta) {
+    private long deriveNumeric(String s, long cap) {
         String hex = com.db.piramalswasthya.anonymizer.util.CryptoUtils.sha256Hex(s).substring(0, 15);
         long h = Long.parseLong(hex, 16); // 60 bits, always positive
-        return h % (meta.numericCap() + 1);
+        return h % (cap + 1);
     }
 
     /**
