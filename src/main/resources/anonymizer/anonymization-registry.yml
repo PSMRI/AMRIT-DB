@@ -179,8 +179,36 @@ databases:
         canonicalName: "i_beneficiarydetails_bkp_chirangv1"
       i_beneficiarydetails_bkp_kamrupv4:
         canonicalName: "i_beneficiarydetails_bkp_kamrupv4"
+      i_beneficiarydetails_bkp_15052024:
+        canonicalName: "i_beneficiarydetails_bkp_15052024"
+        columns:
+          FirstName:
+            strategy: "FAKE_FIRSTNAME"
+          MiddleName:
+            strategy: "PARTIAL_MASK"
+          LastName:
+            strategy: "FAKE_LASTNAME"
+          DOB:
+            strategy: "GENERALIZE"
+          FatherName:
+            strategy: "FAKE_FIRSTNAME"
+          MotherName:
+            strategy: "FAKE_FIRSTNAME"
+          SpouseName:
+            strategy: "FAKE_FIRSTNAME"
       i_beneficiarydetails_rmnch:
         canonicalName: "i_beneficiarydetails_rmnch"
+        columns:
+          aadhaNo:
+            strategy: "HMAC_HASH"
+          aadha_no:
+            strategy: "HMAC_HASH"
+          mobileOthers:
+            strategy: "FAKE_PHONE"
+          mobilenoofRelation:
+            strategy: "FAKE_PHONE"
+          motherName:
+            strategy: "FAKE_FIRSTNAME"
       i_beneficiaryfamilymapping:
         canonicalName: "i_beneficiaryfamilymapping"
       i_beneficiaryidentity:
@@ -223,6 +251,15 @@ databases:
         canonicalName: "i_cbacdetails"
       i_householddetails:
         canonicalName: "i_householddetails"
+        columns:
+          familyHeadName:
+            strategy: "FAKE_FULLNAME"
+          familyHeadPhoneNo:
+            strategy: "FAKE_PHONE"
+          familyName:
+            strategy: "FAKE_LASTNAME"
+          rationCardDetails:
+            strategy: "SUPPRESS"
       m_beneficiaryregidmapping:
         canonicalName: "m_beneficiaryregidmapping"
         columns:
@@ -368,6 +405,17 @@ databases:
         canonicalName: "i_beneficiarydetails_fsr"
       i_beneficiarydetails_rmnch:
         canonicalName: "i_beneficiarydetails_rmnch"
+        columns:
+          aadhaNo:
+            strategy: "HMAC_HASH"
+          aadha_no:
+            strategy: "HMAC_HASH"
+          mobileOthers:
+            strategy: "FAKE_PHONE"
+          mobilenoofRelation:
+            strategy: "FAKE_PHONE"
+          motherName:
+            strategy: "FAKE_FIRSTNAME"
       i_beneficiaryfamilymapping:
         canonicalName: "i_beneficiaryfamilymapping"
       i_beneficiaryidentity:
@@ -384,6 +432,15 @@ databases:
         canonicalName: "i_cbacdetails"
       i_householddetails:
         canonicalName: "i_householddetails"
+        columns:
+          familyHeadName:
+            strategy: "FAKE_FULLNAME"
+          familyHeadPhoneNo:
+            strategy: "FAKE_PHONE"
+          familyName:
+            strategy: "FAKE_LASTNAME"
+          rationCardDetails:
+            strategy: "SUPPRESS"
       m_beneficiaryregidmapping:
         canonicalName: "m_beneficiaryregidmapping"
       m_bensecurestack:
@@ -554,3 +611,134 @@ databases:
     tables:
       flyway_schema_history:
         canonicalName: "flyway_schema_history"
+      i_ben_flow_outreach:
+        canonicalName: "i_ben_flow_outreach"
+        columns:
+          ben_name:
+            strategy: "FAKE_FULLNAME"
+          ben_dob:
+            strategy: "GENERALIZE"
+          ben_phone_no:
+            strategy: "FAKE_PHONE"
+          father_name:
+            strategy: "FAKE_FULLNAME"
+          spouse_name:
+            strategy: "FAKE_FULLNAME"
+      t_healthid:
+        canonicalName: "t_healthid"
+        columns:
+          HealthIdNumber:
+            strategy: "HMAC_HASH"
+          HealthId:
+            strategy: "HMAC_HASH"
+          Name:
+            strategy: "FAKE_FULLNAME"
+          FirstName:
+            strategy: "FAKE_FIRSTNAME"
+          MiddleName:
+            strategy: "PARTIAL_MASK"
+          LastName:
+            strategy: "FAKE_LASTNAME"
+          MonthOfBirth:
+            strategy: "SUPPRESS"
+          DayOfBirth:
+            strategy: "SUPPRESS"
+          email:
+            strategy: "FAKE_EMAIL"
+          mobile:
+            strategy: "FAKE_PHONE"
+          TxnID:
+            strategy: "HMAC_HASH"
+      t_detailedcallreport:
+        canonicalName: "t_detailedcallreport"
+        columns:
+          Customer_Name:
+            strategy: "FAKE_FULLNAME"
+          PHONE:
+            strategy: "FAKE_PHONE"
+          SessionID:
+            strategy: "HMAC_HASH"
+          Monitor_File_Name:
+            strategy: "SUPPRESS"
+          Custom_Monitor_File_Name:
+            strategy: "SUPPRESS"
+      m_user:
+        canonicalName: "m_user"
+        columns:
+          AadhaarNo:
+            strategy: "HMAC_HASH"
+          DOB:
+            strategy: "GENERALIZE"
+          ContactNo:
+            strategy: "FAKE_PHONE"
+          EmailID:
+            strategy: "FAKE_EMAIL"
+          EmergencyContactPerson:
+            strategy: "FAKE_FULLNAME"
+          EmergencyContactNo:
+            strategy: "FAKE_PHONE"
+          # Passwords are suppressed; run docs/anonymization/uat-user-password-reset.sql
+          # on the target after each refresh to restore UAT logins.
+          Password:
+            strategy: "SUPPRESS"
+          CZPassword:
+            strategy: "SUPPRESS"
+          AgentPassword:
+            strategy: "SUPPRESS"
+      m_institution:
+        canonicalName: "m_institution"
+        columns:
+          ContactPerson1:
+            strategy: "FAKE_FULLNAME"
+          ContactPerson1_Email:
+            strategy: "FAKE_EMAIL"
+          ContactNo1:
+            strategy: "FAKE_PHONE"
+          ContactPerson2:
+            strategy: "FAKE_FULLNAME"
+          ContactPerson2_Email:
+            strategy: "FAKE_EMAIL"
+          ContactNo2:
+            strategy: "FAKE_PHONE"
+          ContactPerson3:
+            strategy: "FAKE_FULLNAME"
+          ContactPerson3_Email:
+            strategy: "FAKE_EMAIL"
+          ContactNo3:
+            strategy: "FAKE_PHONE"
+      m_serviceprovider:
+        canonicalName: "m_serviceprovider"
+        columns:
+          PrimaryContactName:
+            strategy: "FAKE_FULLNAME"
+          PrimaryContactEmailID:
+            strategy: "FAKE_EMAIL"
+          PrimaryContactNo:
+            strategy: "FAKE_PHONE"
+          PrimaryContactAddress:
+            strategy: "SUPPRESS"
+          SecondaryContactName:
+            strategy: "FAKE_FULLNAME"
+          SecondaryContactEmailID:
+            strategy: "FAKE_EMAIL"
+          SecondaryContactNo:
+            strategy: "FAKE_PHONE"
+          SecondaryContactAddress:
+            strategy: "SUPPRESS"
+      chirag_old_bkp:
+        canonicalName: "chirag_old_bkp"
+        columns:
+          FirstName:
+            strategy: "FAKE_FIRSTNAME"
+          MiddleName:
+            strategy: "PARTIAL_MASK"
+          LastName:
+            strategy: "FAKE_LASTNAME"
+          DOB:
+            strategy: "GENERALIZE"
+          FatherName:
+            strategy: "FAKE_FIRSTNAME"
+          MotherName:
+            strategy: "FAKE_FIRSTNAME"
+          SpouseName:
+            strategy: "FAKE_FIRSTNAME"

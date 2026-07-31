@@ -125,6 +125,10 @@ key is auto-detected from JDBC metadata.
 - **Foreign keys**: disabled on the writer session for the duration of the run
   (copy order is arbitrary), restored on close.
 - **Scheduling**: run from cron/CI with `--yes`. Exit code 0 = success.
+- **UAT logins**: `m_user` password columns are SUPPRESSed (production
+  credentials never reach UAT). After each refresh, run
+  `docs/anonymization/uat-user-password-reset.sql` against the target to set
+  the known test password for all users.
 - **diff-schema**: `diff-schema` compares a live schema against the registry to
   spot columns the registry doesn't cover — useful in review, not enforced at
   runtime.
