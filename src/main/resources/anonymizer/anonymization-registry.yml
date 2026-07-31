@@ -199,6 +199,8 @@ databases:
       i_beneficiarydetails_rmnch:
         canonicalName: "i_beneficiarydetails_rmnch"
         columns:
+          beneficiaryId:
+            strategy: "HMAC_HASH"
           aadhaNo:
             strategy: "HMAC_HASH"
           aadha_no:
@@ -245,13 +247,21 @@ databases:
         canonicalName: "i_benfamilytag"
       i_bornbirthdeatils:
         canonicalName: "i_bornbirthdeatils"
+        columns:
+          beneficiaryId:
+            strategy: "HMAC_HASH"
       i_cbac_additional_details:
         canonicalName: "i_cbac_additional_details"
       i_cbacdetails:
         canonicalName: "i_cbacdetails"
+        columns:
+          beneficiaryId:
+            strategy: "HMAC_HASH"
       i_householddetails:
         canonicalName: "i_householddetails"
         columns:
+          beneficiaryId:
+            strategy: "HMAC_HASH"
           familyHeadName:
             strategy: "FAKE_FULLNAME"
           familyHeadPhoneNo:
@@ -263,11 +273,16 @@ databases:
       m_beneficiaryregidmapping:
         canonicalName: "m_beneficiaryregidmapping"
         columns:
+          # Internal surrogate key: must stay consistent with the raw
+          # BeneficiaryRegID preserved in 159+ other tables, or UAT joins break.
           BenRegID:
             canonicalName: "BenRegID"
-            dataType: "VARCHAR"
+            dataType: "BIGINT"
             nullable: false
-            strategy: "HASH_SHA256"
+            strategy: "PRESERVE"
+          # External 12-digit card number: deterministic HMAC everywhere it
+          # appears so joins stay consistent but real card numbers can't be
+          # used to find a person in UAT.
           BeneficiaryID:
             canonicalName: "BeneficiaryID"
             dataType: "BIGINT"
@@ -406,6 +421,8 @@ databases:
       i_beneficiarydetails_rmnch:
         canonicalName: "i_beneficiarydetails_rmnch"
         columns:
+          beneficiaryId:
+            strategy: "HMAC_HASH"
           aadhaNo:
             strategy: "HMAC_HASH"
           aadha_no:
@@ -428,11 +445,19 @@ databases:
         canonicalName: "i_beneficiaryservicemapping"
       i_bornbirthdeatils:
         canonicalName: "i_bornbirthdeatils"
+        columns:
+          beneficiaryId:
+            strategy: "HMAC_HASH"
       i_cbacdetails:
         canonicalName: "i_cbacdetails"
+        columns:
+          beneficiaryId:
+            strategy: "HMAC_HASH"
       i_householddetails:
         canonicalName: "i_householddetails"
         columns:
+          beneficiaryId:
+            strategy: "HMAC_HASH"
           familyHeadName:
             strategy: "FAKE_FULLNAME"
           familyHeadPhoneNo:
@@ -611,6 +636,33 @@ databases:
     tables:
       flyway_schema_history:
         canonicalName: "flyway_schema_history"
+      # External beneficiary card number (BeneficiaryID) carriers in db_iemr:
+      # HMAC everywhere so real card numbers can't locate a person in UAT.
+      t_104covid19:
+        canonicalName: "t_104covid19"
+        columns:
+          beneficiaryID:
+            strategy: "HMAC_HASH"
+      t_104referredcdssdetails:
+        canonicalName: "t_104referredcdssdetails"
+        columns:
+          BeneficiaryID:
+            strategy: "HMAC_HASH"
+      t_everwellapi:
+        canonicalName: "t_everwellapi"
+        columns:
+          BeneficiaryID:
+            strategy: "HMAC_HASH"
+      t_fetosensedata:
+        canonicalName: "t_fetosensedata"
+        columns:
+          BeneficiaryID:
+            strategy: "HMAC_HASH"
+      t_mda_distribution_data:
+        canonicalName: "t_mda_distribution_data"
+        columns:
+          BeneficiaryId:
+            strategy: "HMAC_HASH"
       i_ben_flow_outreach:
         canonicalName: "i_ben_flow_outreach"
         columns:
