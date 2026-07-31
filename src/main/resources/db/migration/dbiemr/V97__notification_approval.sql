@@ -16,9 +16,73 @@ SET @sql = (
 );
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
-alter table db_iemr.elderly_health_assessment add column referral_priority varchar(250);
-alter table db_iemr.mental_health_screening add column case_status varchar(250);
-alter table db_iemr.mental_health_screening add column date_of_death timestamp;
+-- elderly_health_assessment.referral_priority
+SET @schema = 'db_iemr';
+SET @table = 'elderly_health_assessment';
+SET @col = 'referral_priority';
+
+SET @sql = (
+    SELECT IF(COUNT(*) = 0,
+        CONCAT(
+            'ALTER TABLE `', @schema, '`.`', @table,
+            '` ADD COLUMN `', @col, '` VARCHAR(250)'
+        ),
+        'SELECT "referral_priority already exists"'
+    )
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = @schema
+      AND TABLE_NAME = @table
+      AND COLUMN_NAME = @col
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+-- mental_health_screening.case_status
+SET @table = 'mental_health_screening';
+SET @col = 'case_status';
+
+SET @sql = (
+    SELECT IF(COUNT(*) = 0,
+        CONCAT(
+            'ALTER TABLE `', @schema, '`.`', @table,
+            '` ADD COLUMN `', @col, '` VARCHAR(250)'
+        ),
+        'SELECT "case_status already exists"'
+    )
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = @schema
+      AND TABLE_NAME = @table
+      AND COLUMN_NAME = @col
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+-- mental_health_screening.date_of_death
+SET @col = 'date_of_death';
+
+SET @sql = (
+    SELECT IF(COUNT(*) = 0,
+        CONCAT(
+            'ALTER TABLE `', @schema, '`.`', @table,
+            '` ADD COLUMN `', @col, '` TIMESTAMP'
+        ),
+        'SELECT "date_of_death already exists"'
+    )
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = @schema
+      AND TABLE_NAME = @table
+      AND COLUMN_NAME = @col
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
 
 CREATE TABLE IF NOT EXISTS user_fcm_tokens (
     id BIGINT  NOT NULL AUTO_INCREMENT,
