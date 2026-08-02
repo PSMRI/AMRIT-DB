@@ -40,8 +40,9 @@ public class AnonymizationRules {
     private UnknownColumnPolicy unknownColumnPolicy = UnknownColumnPolicy.WARN;
     private Map<String, DatabaseRules> databases;
 
+    /** Never null: an absent section behaves as "no rules", not a crash. */
     public Map<String, DatabaseRules> getDatabases() {
-        return databases == null ? null : java.util.Collections.unmodifiableMap(new java.util.HashMap<>(databases));
+        return databases == null ? Map.of() : java.util.Collections.unmodifiableMap(new java.util.HashMap<>(databases));
     }
 
     public void setDatabases(Map<String, DatabaseRules> databases) {
@@ -59,8 +60,9 @@ public class AnonymizationRules {
     public static class DatabaseRules {
         private Map<String, TableRules> tables;
 
+        /** Never null: an absent section behaves as "no rules", not a crash. */
         public Map<String, TableRules> getTables() {
-            return tables == null ? null : java.util.Collections.unmodifiableMap(new java.util.HashMap<>(tables));
+            return tables == null ? Map.of() : java.util.Collections.unmodifiableMap(new java.util.HashMap<>(tables));
         }
 
         public void setTables(Map<String, TableRules> tables) {
@@ -75,8 +77,9 @@ public class AnonymizationRules {
         private String canonicalName;
         private Map<String, ColumnRule> columns;
 
+        /** Never null: a table with no column rules is copied unchanged. */
         public Map<String, ColumnRule> getColumns() {
-            return columns == null ? null : java.util.Collections.unmodifiableMap(new java.util.HashMap<>(columns));
+            return columns == null ? Map.of() : java.util.Collections.unmodifiableMap(new java.util.HashMap<>(columns));
         }
 
         public void setColumns(Map<String, ColumnRule> columns) {

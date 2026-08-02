@@ -229,7 +229,7 @@ public class RunCommand implements Callable<Integer> {
                                            AnonymizationRules rules) {
         AnonymizationRules.DatabaseRules dbRules =
             rules.getDatabases() != null ? rules.getDatabases().get(schema) : null;
-        if (dbRules == null || dbRules.getTables() == null) {
+        if (dbRules == null || dbRules.getTables().isEmpty()) {
             log.warn("No rules found for schema: {}", schema);
             return;
         }
@@ -284,7 +284,7 @@ public class RunCommand implements Callable<Integer> {
 
         AnonymizationRules.DatabaseRules dbRules = rules.getDatabases().get(schema);
         Map<String, AnonymizationRules.TableRules> ruleTables =
-            (dbRules == null || dbRules.getTables() == null) ? Map.of() : dbRules.getTables();
+            dbRules == null ? Map.of() : dbRules.getTables();
 
         if (ruleTables.isEmpty()) {
             log.warn("No registry rules for schema {} - all tables will be copied with " +
@@ -342,9 +342,7 @@ public class RunCommand implements Callable<Integer> {
         }
 
         Map<String, AnonymizationRules.ColumnRule> mutableColumns = new java.util.LinkedHashMap<>();
-        if (tableRules.getColumns() != null) {
-            mutableColumns.putAll(tableRules.getColumns());
-        }
+        mutableColumns.putAll(tableRules.getColumns());
 
         for (String srcCol : sourceColumns) {
             if (mutableColumns.containsKey(srcCol)) {
@@ -666,31 +664,34 @@ public class RunCommand implements Callable<Integer> {
     }
     
     private void validateSourceConfiguration(AnonymizerConfig config) {
-        if (config.getSource() == null) {
+        AnonymizerConfig.DatabaseConfig source = config.getSource();
+        if (source == null) {
             throw new IllegalArgumentException("Source database configuration required");
         }
-        if (config.getSource().getSchemas() == null || config.getSource().getSchemas().isEmpty()) {
+        if (source.getSchemas().isEmpty()) {
             throw new IllegalArgumentException("Source schemas list cannot be empty");
         }
     }
-    
+
     private void validateTargetConfiguration(AnonymizerConfig config) {
-        if (config.getTarget() == null) {
+        AnonymizerConfig.DatabaseConfig target = config.getTarget();
+        if (target == null) {
             throw new IllegalArgumentException("Target database configuration required for direct restore");
         }
-        if (config.getTarget().getSchemas() == null || config.getTarget().getSchemas().isEmpty()) {
+        if (target.getSchemas().isEmpty()) {
             throw new IllegalArgumentException("Target schemas list cannot be empty");
         }
     }
-    
+
     private void validateSchemaMatching(AnonymizerConfig config) {
+        // Both configs are validated non-null before this runs
         if (!config.getSource().getSchemas().equals(config.getTarget().getSchemas())) {
             log.warn("Source and target schema lists differ - ensure this is intentional");
         }
     }
     
     private void validateRules(AnonymizationRules rules) {
-        if (rules.getDatabases() == null || rules.getDatabases().isEmpty()) {
+        if (rules.getDatabases().isEmpty()) {
             throw new IllegalArgumentException("Rules must define at least one database");
         }
 
@@ -699,7 +700,7 @@ public class RunCommand implements Callable<Integer> {
         // unnoticed until real values arrive - and then leak or crash mid-run.
         java.util.List<String> invalid = new java.util.ArrayList<>();
         for (Map.Entry<String, AnonymizationRules.DatabaseRules> db : rules.getDatabases().entrySet()) {
-            if (db.getValue() == null || db.getValue().getTables() == null) continue;
+            if (db.getValue() == null) continue;
             for (Map.Entry<String, AnonymizationRules.TableRules> table : db.getValue().getTables().entrySet()) {
                 Map<String, AnonymizationRules.ColumnRule> columns = table.getValue().getColumns();
                 if (columns == null) continue;

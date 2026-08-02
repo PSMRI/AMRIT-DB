@@ -309,7 +309,7 @@ public class DiffSchemaCommand implements Callable<Integer> {
             ? rules.getDatabases().get(database) 
             : null;
         
-        if (dbRules == null || dbRules.getTables() == null) {
+        if (dbRules == null || dbRules.getTables().isEmpty()) {
             // All tables are missing from rules
             dbSchema.keySet().forEach(diff.missingTables::add);
             return diff;

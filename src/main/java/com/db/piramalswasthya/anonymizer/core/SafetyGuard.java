@@ -103,8 +103,8 @@ public final class SafetyGuard {
             return;
         }
 
-        List<String> sourceSchemas = src.getSchemas() == null ? Collections.emptyList() : src.getSchemas();
-        List<String> targetSchemas = tgt.getSchemas() == null ? Collections.emptyList() : tgt.getSchemas();
+        List<String> sourceSchemas = src.getSchemas();
+        List<String> targetSchemas = tgt.getSchemas();
         for (String s : sourceSchemas) {
             for (String t : targetSchemas) {
                 if (s != null && s.equalsIgnoreCase(t)) {

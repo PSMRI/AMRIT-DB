@@ -38,6 +38,9 @@ public final class DbUtils {
     private DbUtils() {}
 
     public static DataSource createDataSource(AnonymizerConfig.DatabaseConfig dbConfig, String schema) {
+        if (dbConfig == null) {
+            throw new IllegalArgumentException("Database configuration must not be null");
+        }
         MysqlDataSource ds = new MysqlDataSource();
         ds.setServerName(dbConfig.getHost());
         ds.setPort(dbConfig.getPort());

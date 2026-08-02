@@ -57,8 +57,9 @@ public class AnonymizerConfig {
         private int connectionTimeout = 30000;
         private boolean verifyServerCertificate = true;
         
+        /** Never null: callers treat "no schemas" as an empty list, not a crash. */
         public java.util.List<String> getSchemas() {
-            return schemas == null ? null : java.util.List.copyOf(schemas);
+            return schemas == null ? java.util.List.of() : java.util.List.copyOf(schemas);
         }
 
         // Defensive setter for schemas to avoid storing callers' mutable lists

@@ -102,7 +102,9 @@ public class DirectRestoreWriter implements AutoCloseable {
         return SqlUtils.quoteIdentifier(identifier);
     }
 
-    @SuppressWarnings("java:S2077") // SQL injection safe: schema validated by quoteIdentifier()
+    // SQL injection safe: schema is validated (backticks/control chars rejected)
+    // by quoteIdentifier() before interpolation, and DDL cannot be parameterized.
+    @SuppressWarnings({"java:S2077", "java:S3649"})
     private void ensureSchemaExists() throws SQLException {
         try (Statement stmt = connection.createStatement()) {
             stmt.execute("CREATE DATABASE IF NOT EXISTS " + quoteIdentifier(schema));

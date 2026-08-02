@@ -36,9 +36,16 @@ import java.util.Map;
 @Slf4j
 public class AnonymizationEngine {
 
+    /** Default cap for canonical numeric derivation - matches ColumnMeta's BIGINT cap. */
+    private static final long CANONICAL_NUMERIC_CAP = 999_999_999_999_999L;
+
+    private static final String STRATEGY_HMAC_HASH = "HMAC_HASH";
+    private static final String STRATEGY_HASH_SHA256 = "HASH_SHA256";
+    private static final String STRATEGY_PRESERVE = "PRESERVE";
+
     /** Every strategy applyStrategy implements. Used for fail-fast rules validation. */
     public static final java.util.Set<String> VALID_STRATEGIES = java.util.Set.of(
-        "HMAC_HASH", "HASH_SHA256", "PRESERVE", "SUPPRESS", "RANDOM_FAKE_DATA",
+        STRATEGY_HMAC_HASH, STRATEGY_HASH_SHA256, STRATEGY_PRESERVE, "SUPPRESS", "RANDOM_FAKE_DATA",
         "FAKE_FULLNAME", "FAKE_FIRSTNAME", "FAKE_LASTNAME", "FAKE_EMAIL", "FAKE_PHONE",
         "FAKE_ADDRESS", "FAKE_CITY", "FAKE_ZIP", "FAKE_USERNAME",
         "GENERALIZE", "PARTIAL_MASK");
@@ -130,7 +137,7 @@ public class AnonymizationEngine {
         Map<String, Integer> strategyCounts = new HashMap<>();
 
         Map<String, AnonymizationRules.ColumnRule> columnRules = tableRules.getColumns();
-        if (columnRules == null || columnRules.isEmpty()) {
+        if (columnRules.isEmpty()) {
             return strategyCounts;
         }
 
@@ -149,7 +156,7 @@ public class AnonymizationEngine {
                 }
 
                 String strategy = rule.getStrategy() == null ? "" : rule.getStrategy().toUpperCase();
-                if ("PRESERVE".equals(strategy)) {
+                if (STRATEGY_PRESERVE.equals(strategy)) {
                     continue; // keep original JDBC object untouched
                 }
 
@@ -167,9 +174,6 @@ public class AnonymizationEngine {
 
         return strategyCounts;
     }
-
-    /** Default cap for canonical numeric derivation - matches ColumnMeta's BIGINT cap. */
-    private static final long CANONICAL_NUMERIC_CAP = 999_999_999_999_999L;
 
     /**
      * Fit a strategy output to the target column definition (target tables are
@@ -192,7 +196,7 @@ public class AnonymizationEngine {
             // must receive the SAME representation or cross-table references
             // break: derive one canonical number and render it as digits in
             // string columns.
-            boolean hashStrategy = "HMAC_HASH".equals(strategy) || "HASH_SHA256".equals(strategy);
+            boolean hashStrategy = STRATEGY_HMAC_HASH.equals(strategy) || STRATEGY_HASH_SHA256.equals(strategy);
             if (hashStrategy && isAllDigits(original)) {
                 if (meta.isNumeric()) {
                     return deriveNumeric(s, meta.numericCap());
@@ -256,11 +260,11 @@ public class AnonymizationEngine {
     private Object applyStrategy(String strategy, String column, String value) {
         String s = strategy == null ? "" : strategy.toUpperCase();
         switch (s) {
-            case "HMAC_HASH":
+            case STRATEGY_HMAC_HASH:
                 return anonymizer.hashId(value);
-            case "HASH_SHA256":
+            case STRATEGY_HASH_SHA256:
                 return anonymizer.sha256Hash(value);
-            case "PRESERVE":
+            case STRATEGY_PRESERVE:
                 return value;
             case "SUPPRESS":
                 return null;

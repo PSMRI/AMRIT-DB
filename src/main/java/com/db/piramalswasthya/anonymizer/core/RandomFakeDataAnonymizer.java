@@ -40,6 +40,10 @@ public class RandomFakeDataAnonymizer {
      * and shared; determinism is preserved by re-seeding the shared Random
      * before every value.
      */
+    // Intentionally not SecureRandom: JavaFaker requires java.util.Random and
+    // this path needs repeatable fake values, not cryptographic randomness.
+    // The privacy guarantee comes from the keyed HMAC seed, not from this PRNG.
+    @SuppressWarnings("java:S2245")
     private final Random sharedRandom = new Random(0);
     private Faker cachedFaker;
 
