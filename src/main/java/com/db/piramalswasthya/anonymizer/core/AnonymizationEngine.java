@@ -155,7 +155,7 @@ public class AnonymizationEngine {
                     continue;
                 }
 
-                String strategy = rule.getStrategy() == null ? "" : rule.getStrategy().toUpperCase();
+                String strategy = rule.getStrategy() == null ? "" : rule.getStrategy().toUpperCase(java.util.Locale.ROOT);
                 if (STRATEGY_PRESERVE.equals(strategy)) {
                     continue; // keep original JDBC object untouched
                 }
@@ -258,7 +258,7 @@ public class AnonymizationEngine {
      * Apply anonymization strategy.
      */
     private Object applyStrategy(String strategy, String column, String value) {
-        String s = strategy == null ? "" : strategy.toUpperCase();
+        String s = strategy == null ? "" : strategy.toUpperCase(java.util.Locale.ROOT);
         switch (s) {
             case STRATEGY_HMAC_HASH:
                 return anonymizer.hashId(value);
@@ -286,7 +286,7 @@ public class AnonymizationEngine {
             case "GENERALIZE":
                 return generalize(column, value);
             case "PARTIAL_MASK":
-                String lc = column == null ? "" : column.toLowerCase();
+                String lc = column == null ? "" : column.toLowerCase(java.util.Locale.ROOT);
                 if (lc.contains("phone") || lc.contains("mobile") || lc.contains("msisdn")) {
                     return anonymizer.maskPhone(value);
                 } else if (lc.contains("pin") || lc.contains("pincode") || lc.contains("zip") || lc.contains("postal")) {

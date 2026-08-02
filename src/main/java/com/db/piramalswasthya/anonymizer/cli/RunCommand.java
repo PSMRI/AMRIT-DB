@@ -707,7 +707,7 @@ public class RunCommand implements Callable<Integer> {
                 for (Map.Entry<String, AnonymizationRules.ColumnRule> col : columns.entrySet()) {
                     String strategy = col.getValue() == null ? null : col.getValue().getStrategy();
                     if (strategy == null
-                        || !AnonymizationEngine.VALID_STRATEGIES.contains(strategy.toUpperCase())) {
+                        || !AnonymizationEngine.VALID_STRATEGIES.contains(strategy.toUpperCase(java.util.Locale.ROOT))) {
                         invalid.add(db.getKey() + "." + table.getKey() + "." + col.getKey()
                             + " -> '" + strategy + "'");
                     }
@@ -726,7 +726,6 @@ public class RunCommand implements Callable<Integer> {
      * provided in configuration. If no mapping exists, returns the original logical name.
      */
     private String resolvePhysicalSchema(AnonymizerConfig config, String logicalSchema) {
-        if (config == null) return logicalSchema;
         java.util.Map<String,String> map = config.getSchemaMap();
         if (map == null) return logicalSchema;
         return map.getOrDefault(logicalSchema, logicalSchema);
@@ -866,7 +865,7 @@ public class RunCommand implements Callable<Integer> {
         String sqlState = e.getSQLState();
         if (sqlState != null && sqlState.equals("42S02")) return true;
         String msg = e.getMessage();
-        if (msg != null && (msg.toLowerCase().contains("doesn't exist") || msg.toLowerCase().contains("does not exist"))) {
+        if (msg != null && (msg.toLowerCase(java.util.Locale.ROOT).contains("doesn't exist") || msg.toLowerCase(java.util.Locale.ROOT).contains("does not exist"))) {
             return true;
         }
         Throwable cause = e.getCause();

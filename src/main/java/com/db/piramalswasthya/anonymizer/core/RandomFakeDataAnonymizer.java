@@ -73,7 +73,7 @@ public class RandomFakeDataAnonymizer {
         String country = locale.getCountry();
         if (country != null && country.equalsIgnoreCase("IN")) return true;
         String tag = locale.toString();
-        return tag != null && tag.toUpperCase().contains("IN");
+        return tag != null && tag.toUpperCase(java.util.Locale.ROOT).contains("IN");
     }
 
     /**
@@ -91,7 +91,7 @@ public class RandomFakeDataAnonymizer {
     }
 
     private Object anonymizeByColumn(Faker faker, String columnName) {
-        String c = columnName == null ? "" : columnName.toLowerCase();
+        String c = columnName == null ? "" : columnName.toLowerCase(java.util.Locale.ROOT);
         if (c.contains("name") || c.contains("firstname") || c.contains("lastname")) {
             if (c.contains("firstname")) return faker.name().firstName();
             if (c.contains("lastname")) return faker.name().lastName();
@@ -114,7 +114,7 @@ public class RandomFakeDataAnonymizer {
      */
     public Object anonymize(String strategy, String columnName, String original) {
         if (original == null) return null;
-        String s = strategy == null ? "" : strategy.toUpperCase();
+        String s = strategy == null ? "" : strategy.toUpperCase(java.util.Locale.ROOT);
 
         try {
             Faker faker = fakerWithSeed(seedFor(s, columnName, original));

@@ -174,7 +174,7 @@ public final class DbUtils {
             if (t instanceof javax.net.ssl.SSLHandshakeException) return true;
             if (t instanceof java.security.cert.CertPathValidatorException) return true;
             String msg = t.getMessage();
-            if (msg != null && msg.toLowerCase().contains("trust anchors")) return true;
+            if (msg != null && msg.toLowerCase(java.util.Locale.ROOT).contains("trust anchors")) return true;
             t = t.getCause();
         }
         return false;

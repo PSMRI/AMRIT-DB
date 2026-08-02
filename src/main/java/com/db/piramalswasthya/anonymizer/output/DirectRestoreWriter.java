@@ -113,7 +113,11 @@ public class DirectRestoreWriter implements AutoCloseable {
 
     private void setForeignKeyChecks(boolean enabled) throws SQLException {
         try (Statement stmt = connection.createStatement()) {
-            stmt.execute("SET FOREIGN_KEY_CHECKS=" + (enabled ? "1" : "0"));
+            if (enabled) {
+                stmt.execute("SET FOREIGN_KEY_CHECKS=1");
+            } else {
+                stmt.execute("SET FOREIGN_KEY_CHECKS=0");
+            }
         }
     }
 
