@@ -114,45 +114,66 @@ public class RandomFakeDataAnonymizer {
      */
     public Object anonymize(String strategy, String columnName, String original) {
         if (original == null) return null;
-        String s = strategy == null ? "" : strategy.toUpperCase(java.util.Locale.ROOT);
+        FakeKind kind = FakeKind.of(strategy);
 
         try {
-            Faker faker = fakerWithSeed(seedFor(s, columnName, original));
-            Random random = sharedRandom;
-            switch (s) {
-                case "FAKE_FIRSTNAME", "FIRSTNAME":
-                    return faker.name().firstName();
-                case "FAKE_LASTNAME", "LASTNAME":
-                    return faker.name().lastName();
-                case "FAKE_FULLNAME", "FULLNAME", "NAME":
-                    return faker.name().fullName();
-                case "FAKE_USERNAME", "USERNAME":
-                    return faker.name().username();
-                case "FAKE_EMAIL", "EMAIL":
-                    return faker.internet().emailAddress();
-                case "FAKE_PHONE", "PHONE":
-                    // realistic 10-digit mobile starting with 6-9
-                    if (isIndiaLocale()) {
-                        char[] leading = new char[]{'6', '7', '8', '9'};
-                        char lead = leading[random.nextInt(leading.length)];
-                        String rest = faker.numerify("#########");
-                        return lead + rest;
-                    }
-                    return faker.phoneNumber().cellPhone();
-                case "FAKE_ADDRESS", "ADDRESS":
-                    return faker.address().fullAddress();
-                case "FAKE_CITY", "CITY":
-                    return faker.address().city();
-                case "FAKE_COUNTRY", "COUNTRY":
-                    // Preserve country for single-country deployments
-                    return original;
-                case "FAKE_ZIP", "ZIP":
-                    return faker.address().zipCode();
-                default:
-                    return anonymizeByColumn(faker, columnName);
-            }
+            Faker faker = fakerWithSeed(seedFor(strategy, columnName, original));
+            return switch (kind) {
+                case FIRSTNAME -> faker.name().firstName();
+                case LASTNAME -> faker.name().lastName();
+                case FULLNAME -> faker.name().fullName();
+                case USERNAME -> faker.name().username();
+                case EMAIL -> faker.internet().emailAddress();
+                case PHONE -> fakePhone(faker);
+                case ADDRESS -> faker.address().fullAddress();
+                case CITY -> faker.address().city();
+                // Preserve country for single-country deployments
+                case COUNTRY -> original;
+                case ZIP -> faker.address().zipCode();
+                case COLUMN_HEURISTIC -> anonymizeByColumn(faker, columnName);
+            };
         } catch (RuntimeException e) {
-            return fallbackValue(s, columnName, original);
+            return fallbackValue(strategy, columnName, original);
+        }
+    }
+
+    private Object fakePhone(Faker faker) {
+        // realistic 10-digit Indian mobile starting with 6-9
+        if (isIndiaLocale()) {
+            char[] leading = new char[]{'6', '7', '8', '9'};
+            char lead = leading[sharedRandom.nextInt(leading.length)];
+            return lead + faker.numerify("#########");
+        }
+        return faker.phoneNumber().cellPhone();
+    }
+
+    /**
+     * Fake value categories. Matching uses {@code constant.equalsIgnoreCase(input)},
+     * which is null-safe and locale-independent by construction.
+     */
+    private enum FakeKind {
+        FIRSTNAME, LASTNAME, FULLNAME, USERNAME, EMAIL, PHONE,
+        ADDRESS, CITY, COUNTRY, ZIP, COLUMN_HEURISTIC;
+
+        static FakeKind of(String strategy) {
+            if (matches(strategy, "FAKE_FIRSTNAME", "FIRSTNAME")) return FIRSTNAME;
+            if (matches(strategy, "FAKE_LASTNAME", "LASTNAME")) return LASTNAME;
+            if (matches(strategy, "FAKE_FULLNAME", "FULLNAME", "NAME")) return FULLNAME;
+            if (matches(strategy, "FAKE_USERNAME", "USERNAME")) return USERNAME;
+            if (matches(strategy, "FAKE_EMAIL", "EMAIL")) return EMAIL;
+            if (matches(strategy, "FAKE_PHONE", "PHONE")) return PHONE;
+            if (matches(strategy, "FAKE_ADDRESS", "ADDRESS")) return ADDRESS;
+            if (matches(strategy, "FAKE_CITY", "CITY")) return CITY;
+            if (matches(strategy, "FAKE_COUNTRY", "COUNTRY")) return COUNTRY;
+            if (matches(strategy, "FAKE_ZIP", "ZIP")) return ZIP;
+            return COLUMN_HEURISTIC;
+        }
+
+        private static boolean matches(String strategy, String... names) {
+            for (String name : names) {
+                if (name.equalsIgnoreCase(strategy)) return true;
+            }
+            return false;
         }
     }
 
