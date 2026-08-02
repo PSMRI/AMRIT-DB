@@ -149,6 +149,30 @@ public class AnonymizerConfig {
         this.schemaMap = schemaMap == null ? null : new java.util.HashMap<>(schemaMap);
     }
 
+    /**
+     * Source config, guaranteed non-null. Use after validation instead of
+     * {@link #getSource()} when the configuration is known to be complete.
+     */
+    public DatabaseConfig requireSource() {
+        DatabaseConfig s = getSource();
+        if (s == null) {
+            throw new IllegalStateException("Source database configuration required");
+        }
+        return s;
+    }
+
+    /**
+     * Target config, guaranteed non-null. Use after validation instead of
+     * {@link #getTarget()} when the configuration is known to be complete.
+     */
+    public DatabaseConfig requireTarget() {
+        DatabaseConfig t = getTarget();
+        if (t == null) {
+            throw new IllegalStateException("Target database configuration required");
+        }
+        return t;
+    }
+
     // Defensive getters/setters for mutable object fields
     public DatabaseConfig getSource() {
         return source == null ? null : new DatabaseConfig(source);

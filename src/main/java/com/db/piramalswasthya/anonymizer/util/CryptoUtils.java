@@ -10,9 +10,12 @@ import java.util.Base64;
 public final class CryptoUtils {
     private CryptoUtils() {}
 
+    /**
+     * SHA-256 hex digest. Never returns null: a null input is treated as the
+     * empty string so callers can hash without null-checking every call site.
+     */
     public static String sha256Hex(String input) {
-        if (input == null) return null;
-        return sha256Hex(input.getBytes(StandardCharsets.UTF_8));
+        return sha256Hex((input == null ? "" : input).getBytes(StandardCharsets.UTF_8));
     }
 
     public static String sha256Hex(byte[] input) {

@@ -58,7 +58,11 @@ public class RandomFakeDataAnonymizer {
 
     private Faker fakerWithSeed(long seed) {
         if (cachedFaker == null) {
-            cachedFaker = fakerFactory.create(locale, sharedRandom);
+            Faker created = fakerFactory.create(locale, sharedRandom);
+            if (created == null) {
+                throw new IllegalStateException("Faker factory returned no instance for locale " + locale);
+            }
+            cachedFaker = created;
         }
         sharedRandom.setSeed(seed);
         return cachedFaker;

@@ -249,8 +249,8 @@ public class AnonymizationEngine {
      * Deterministically derive a positive number (within cap) from a string.
      */
     private long deriveNumeric(String s, long cap) {
-        String hex = com.db.piramalswasthya.anonymizer.util.CryptoUtils.sha256Hex(s).substring(0, 15);
-        long h = Long.parseLong(hex, 16); // 60 bits, always positive
+        String digest = com.db.piramalswasthya.anonymizer.util.CryptoUtils.sha256Hex(s);
+        long h = Long.parseLong(digest.substring(0, 15), 16); // 60 bits, always positive
         return h % (cap + 1);
     }
 

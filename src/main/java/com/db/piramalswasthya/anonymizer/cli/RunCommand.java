@@ -169,7 +169,7 @@ public class RunCommand implements Callable<Integer> {
             java.util.Locale locale = java.util.Locale.forLanguageTag(fakeLocale.replace('_', '-'));
             
             // 6. Process each schema
-            for (String schema : config.getSource().getSchemas()) {
+            for (String schema : config.requireSource().getSchemas()) {
                 log.info("\n========== Processing schema: {} ==========", schema);
                 processSchema(schema, config, rules, secret, locale);
             }
@@ -204,7 +204,7 @@ public class RunCommand implements Callable<Integer> {
 
     private Integer runDryRunChecks(AnonymizerConfig config, AnonymizationRules rules, String executionId) {
         log.info("DRY RUN: Performing schema/table checks...");
-        for (String schema : config.getSource().getSchemas()) {
+        for (String schema : config.requireSource().getSchemas()) {
             runDryRunCheckForSchema(config, rules, schema);
         }
         log.info("DRY RUN: Configuration and safety validated. Exiting.");
@@ -216,7 +216,7 @@ public class RunCommand implements Callable<Integer> {
         String physical = resolvePhysicalSchema(config, schema);
         log.info("\n--- Dry-run check schema: {} (physical={}) ---", schema, physical);
         try {
-            DataSource sourceDs = DbUtils.createDataSource(config.getSource(), physical);
+            DataSource sourceDs = DbUtils.createDataSource(config.requireSource(), physical);
             java.util.List<String> sourceTables = DbUtils.listTables(sourceDs, physical);
             log.info("Source tables for {} (physical={}): {}", schema, physical, sourceTables);
             reportMissingDryRunTables(schema, sourceTables, rules);
@@ -660,7 +660,7 @@ public class RunCommand implements Callable<Integer> {
         validateRules(rules);
 
         log.info("Configuration validated successfully");
-        log.info("Schemas to process: {}", config.getSource().getSchemas());
+        log.info("Schemas to process: {}", config.requireSource().getSchemas());
     }
     
     private void validateSourceConfiguration(AnonymizerConfig config) {
@@ -685,7 +685,7 @@ public class RunCommand implements Callable<Integer> {
 
     private void validateSchemaMatching(AnonymizerConfig config) {
         // Both configs are validated non-null before this runs
-        if (!config.getSource().getSchemas().equals(config.getTarget().getSchemas())) {
+        if (!config.requireSource().getSchemas().equals(config.requireTarget().getSchemas())) {
             log.warn("Source and target schema lists differ - ensure this is intentional");
         }
     }
@@ -737,7 +737,7 @@ public class RunCommand implements Callable<Integer> {
      */
     private void processSchema(String schema, AnonymizerConfig config,
                                AnonymizationRules rules, String secret, java.util.Locale locale) throws SQLException {
-        if (config.getTarget().isReadOnly()) {
+        if (config.requireTarget().isReadOnly()) {
             throw new IllegalStateException(
                 "Target database is configured as read-only. Set target.readOnly: false in local properties to enable writing.");
         }
@@ -747,11 +747,11 @@ public class RunCommand implements Callable<Integer> {
         // the production (physical) name.
         String physicalSchema = resolvePhysicalSchema(config, schema);
         // Create DataSources for this schema using centralized DbUtils
-        DataSource sourceDataSource = DbUtils.createDataSource(config.getSource(), physicalSchema);
+        DataSource sourceDataSource = DbUtils.createDataSource(config.requireSource(), physicalSchema);
 
         // Determine write target: always the configured final target.
         // No default database - the writer creates the schema if missing.
-        DataSource writeTargetDataSource = DbUtils.createDataSource(config.getTarget(), null);
+        DataSource writeTargetDataSource = DbUtils.createDataSource(config.requireTarget(), null);
 
         // Initialize components - construct HMAC helper and shared faker, then inject into engine
         HmacAnonymizer hmac = new HmacAnonymizer(secret);
@@ -833,8 +833,8 @@ public class RunCommand implements Callable<Integer> {
      * Non-interactive sessions must pass --yes explicitly.
      */
     private boolean interactiveSafetyConfirmation(AnonymizerConfig config) {
-        AnonymizerConfig.DatabaseConfig src = config.getSource();
-        AnonymizerConfig.DatabaseConfig tgt = config.getTarget();
+        AnonymizerConfig.DatabaseConfig src = config.requireSource();
+        AnonymizerConfig.DatabaseConfig tgt = config.requireTarget();
         log.info("About to anonymize:");
         log.info("  Source (read):  {}:{} schemas={}", src.getHost(), src.getPort(), src.getSchemas());
         log.info("  Target (RESET + WRITE): {}:{} schemas={}", tgt.getHost(), tgt.getPort(), tgt.getSchemas());
