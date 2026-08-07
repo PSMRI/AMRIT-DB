@@ -104,6 +104,55 @@ WHERE NOT EXISTS (
 );
 
 -- ============================================================
+-- Dynamic Form module (Counselling / contact-tracing forms) - the response
+-- tables hold actual per-beneficiary submitted answers and need to sync.
+-- The 7 form-definition/structure tables (t_dynamic_form, t_form_version,
+-- t_form_section, t_question_option, t_question_validation,
+-- t_option_condition, t_section_question) are deliberately NOT registered -
+-- they're seeded once at app startup, not per-van transactional data.
+-- All 3 already have SyncFailureReason from V87 - no ALTER TABLE needed,
+-- unlike the legacy db_identity tables above.
+-- ============================================================
+INSERT INTO db_iemr.m_synctabledetail
+    (SchemaName, TableName, ServerColumnName, VanColumnName, VanAutoIncColumnName,
+     IsMaster, SyncTableGroupID, Deleted, Processed, CreatedBy, CreatedDate)
+SELECT
+    'db_iemr', 't_form_response',
+    'beneficiaryId,formId,versionId,officerId,status,submittedAt,completedAt,last_follow_up_at,created_by,updated_by,createdAt,updatedAt,vanID,parkingPlaceID,processed,vanSerialNo,SyncedDate,Syncedby,SyncFailureReason',
+    'beneficiaryId,formId,versionId,officerId,status,date_format(submittedAt,''%Y-%m-%d %H:%i:%s''),date_format(completedAt,''%Y-%m-%d %H:%i:%s''),date_format(last_follow_up_at,''%Y-%m-%d %H:%i:%s''),created_by,updated_by,date_format(createdAt,''%Y-%m-%d %H:%i:%s''),date_format(updatedAt,''%Y-%m-%d %H:%i:%s''),vanID,parkingPlaceID,processed,vanSerialNo,date_format(SyncedDate,''%Y-%m-%d %H:%i:%s''),Syncedby,SyncFailureReason',
+    'vanSerialNo', 0, 11, 0, 'N', 'Admin', NOW()
+FROM DUAL
+WHERE NOT EXISTS (
+    SELECT 1 FROM db_iemr.m_synctabledetail WHERE TableName = 't_form_response' AND SyncTableGroupID = 11
+);
+
+INSERT INTO db_iemr.m_synctabledetail
+    (SchemaName, TableName, ServerColumnName, VanColumnName, VanAutoIncColumnName,
+     IsMaster, SyncTableGroupID, Deleted, Processed, CreatedBy, CreatedDate)
+SELECT
+    'db_iemr', 't_section_response',
+    'responseId,sectionId,status,savedAt,created_by,updated_by,vanID,parkingPlaceID,processed,vanSerialNo,SyncedDate,Syncedby,SyncFailureReason',
+    'responseId,sectionId,status,date_format(savedAt,''%Y-%m-%d %H:%i:%s''),created_by,updated_by,vanID,parkingPlaceID,processed,vanSerialNo,date_format(SyncedDate,''%Y-%m-%d %H:%i:%s''),Syncedby,SyncFailureReason',
+    'vanSerialNo', 0, 11, 0, 'N', 'Admin', NOW()
+FROM DUAL
+WHERE NOT EXISTS (
+    SELECT 1 FROM db_iemr.m_synctabledetail WHERE TableName = 't_section_response' AND SyncTableGroupID = 11
+);
+
+INSERT INTO db_iemr.m_synctabledetail
+    (SchemaName, TableName, ServerColumnName, VanColumnName, VanAutoIncColumnName,
+     IsMaster, SyncTableGroupID, Deleted, Processed, CreatedBy, CreatedDate)
+SELECT
+    'db_iemr', 't_question_response',
+    'sectionResponseId,questionId,optionId,answerText,created_by,updated_by,vanID,parkingPlaceID,processed,vanSerialNo,SyncedDate,Syncedby,SyncFailureReason',
+    'sectionResponseId,questionId,optionId,answerText,created_by,updated_by,vanID,parkingPlaceID,processed,vanSerialNo,date_format(SyncedDate,''%Y-%m-%d %H:%i:%s''),Syncedby,SyncFailureReason',
+    'vanSerialNo', 0, 11, 0, 'N', 'Admin', NOW()
+FROM DUAL
+WHERE NOT EXISTS (
+    SELECT 1 FROM db_iemr.m_synctabledetail WHERE TableName = 't_question_response' AND SyncTableGroupID = 11
+);
+
+-- ============================================================
 -- Fix: i_beneficiarydetails_rmnch/i_householddetails/i_bornbirthdeatils have
 -- their real column named VanSerialNo (capital V), not vanSerialNo like the
 -- tb_* tables - the 3 INSERTs above already register them correctly, this
