@@ -1,0 +1,52 @@
+package com.db.piramalswasthya.anonymizer.util;
+
+import java.nio.charset.StandardCharsets;
+import java.util.HexFormat;
+import java.util.Base64;
+
+/**
+ * Small crypto helpers used across the anonymizer to avoid duplicated implementations.
+ */
+public final class CryptoUtils {
+    private CryptoUtils() {}
+
+    /**
+     * SHA-256 hex digest. Never returns null: a null input is treated as the
+     * empty string so callers can hash without null-checking every call site.
+     */
+    public static String sha256Hex(String input) {
+        return sha256Hex((input == null ? "" : input).getBytes(StandardCharsets.UTF_8));
+    }
+
+    public static String sha256Hex(byte[] input) {
+        try {
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance("SHA-256");
+            byte[] digest = md.digest(input);
+            return HexFormat.of().formatHex(digest);
+        } catch (java.security.NoSuchAlgorithmException e) {
+            throw new CryptoOperationException("SHA-256 not available", e);
+        }
+    }
+
+    public static byte[] decodeSecret(String secret) {
+        if (secret == null) return new byte[0];
+        String s = secret.trim();
+        // Hex (even length, hex chars)
+        if (s.length() % 2 == 0 && s.matches("[0-9a-fA-F]+")) {
+            return HexFormat.of().parseHex(s);
+        }
+        // Base64
+        try {
+            return Base64.getDecoder().decode(s);
+        } catch (IllegalArgumentException ignored) {
+            // fallthrough to raw bytes
+        }
+        return s.getBytes(StandardCharsets.UTF_8);
+    }
+
+    public static class CryptoOperationException extends RuntimeException {
+        public CryptoOperationException(String message, Throwable cause) {
+            super(message, cause);
+        }
+    }
+}
