@@ -10,91 +10,87 @@ USE db_identity;
 -- NULL here anyway.
 -- =========================================================
 
-SET @tbl_exists = (
-SELECT COUNT(*) FROM information_schema.tables
-WHERE table_schema = 'db_identity'
-AND table_name = 'i_beneficiaryaddress'
-);
+SET @schema_name = 'db_identity';
+SET @tbl_name = 'i_beneficiaryaddress';
 
-SET @col_exists = (
-SELECT COUNT(*) FROM information_schema.columns
-WHERE table_schema = 'db_identity'
-AND table_name = 'i_beneficiaryaddress'
-AND column_name = 'gpsLatitude'
-);
+SET @tbl_exists = 0;
+PREPARE chk_tbl FROM 'SELECT COUNT(*) INTO @tbl_exists FROM information_schema.tables WHERE table_schema = ? AND table_name = ?';
+EXECUTE chk_tbl USING @schema_name, @tbl_name;
+DEALLOCATE PREPARE chk_tbl;
+
+SET @col_name = 'gpsLatitude';
+SET @col_exists = 0;
+PREPARE chk_col FROM 'SELECT COUNT(*) INTO @col_exists FROM information_schema.columns WHERE table_schema = ? AND table_name = ? AND column_name = ?';
+EXECUTE chk_col USING @schema_name, @tbl_name, @col_name;
+DEALLOCATE PREPARE chk_col;
 SET @sql = IF(@tbl_exists = 1 AND @col_exists = 1,
-'ALTER TABLE i_beneficiaryaddress DROP COLUMN gpsLatitude',
-'SELECT ''i_beneficiaryaddress.gpsLatitude drop skipped'''
+CONCAT('ALTER TABLE ', @tbl_name, ' DROP COLUMN ', @col_name),
+CONCAT('SELECT ''', @tbl_name, '.', @col_name, ' drop skipped''')
 );
 PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
-SET @col_exists = (
-SELECT COUNT(*) FROM information_schema.columns
-WHERE table_schema = 'db_identity'
-AND table_name = 'i_beneficiaryaddress'
-AND column_name = 'gpsLongitude'
-);
+SET @col_name = 'gpsLongitude';
+SET @col_exists = 0;
+PREPARE chk_col FROM 'SELECT COUNT(*) INTO @col_exists FROM information_schema.columns WHERE table_schema = ? AND table_name = ? AND column_name = ?';
+EXECUTE chk_col USING @schema_name, @tbl_name, @col_name;
+DEALLOCATE PREPARE chk_col;
 SET @sql = IF(@tbl_exists = 1 AND @col_exists = 1,
-'ALTER TABLE i_beneficiaryaddress DROP COLUMN gpsLongitude',
-'SELECT ''i_beneficiaryaddress.gpsLongitude drop skipped'''
+CONCAT('ALTER TABLE ', @tbl_name, ' DROP COLUMN ', @col_name),
+CONCAT('SELECT ''', @tbl_name, '.', @col_name, ' drop skipped''')
 );
 PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
-SET @col_exists = (
-SELECT COUNT(*) FROM information_schema.columns
-WHERE table_schema = 'db_identity'
-AND table_name = 'i_beneficiaryaddress'
-AND column_name = 'digipin'
-);
+SET @col_name = 'digipin';
+SET @col_exists = 0;
+PREPARE chk_col FROM 'SELECT COUNT(*) INTO @col_exists FROM information_schema.columns WHERE table_schema = ? AND table_name = ? AND column_name = ?';
+EXECUTE chk_col USING @schema_name, @tbl_name, @col_name;
+DEALLOCATE PREPARE chk_col;
 SET @sql = IF(@tbl_exists = 1 AND @col_exists = 1,
-'ALTER TABLE i_beneficiaryaddress DROP COLUMN digipin',
-'SELECT ''i_beneficiaryaddress.digipin drop skipped'''
+CONCAT('ALTER TABLE ', @tbl_name, ' DROP COLUMN ', @col_name),
+CONCAT('SELECT ''', @tbl_name, '.', @col_name, ' drop skipped''')
 );
 PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
-SET @col_exists = (
-SELECT COUNT(*) FROM information_schema.columns
-WHERE table_schema = 'db_identity'
-AND table_name = 'i_beneficiaryaddress'
-AND column_name = 'gpsTimestamp'
-);
+SET @col_name = 'gpsTimestamp';
+SET @col_exists = 0;
+PREPARE chk_col FROM 'SELECT COUNT(*) INTO @col_exists FROM information_schema.columns WHERE table_schema = ? AND table_name = ? AND column_name = ?';
+EXECUTE chk_col USING @schema_name, @tbl_name, @col_name;
+DEALLOCATE PREPARE chk_col;
 SET @sql = IF(@tbl_exists = 1 AND @col_exists = 1,
-'ALTER TABLE i_beneficiaryaddress DROP COLUMN gpsTimestamp',
-'SELECT ''i_beneficiaryaddress.gpsTimestamp drop skipped'''
+CONCAT('ALTER TABLE ', @tbl_name, ' DROP COLUMN ', @col_name),
+CONCAT('SELECT ''', @tbl_name, '.', @col_name, ' drop skipped''')
 );
 PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
-SET @col_exists = (
-SELECT COUNT(*) FROM information_schema.columns
-WHERE table_schema = 'db_identity'
-AND table_name = 'i_beneficiaryaddress'
-AND column_name = 'isGpsUnavailable'
-);
+SET @col_name = 'isGpsUnavailable';
+SET @col_exists = 0;
+PREPARE chk_col FROM 'SELECT COUNT(*) INTO @col_exists FROM information_schema.columns WHERE table_schema = ? AND table_name = ? AND column_name = ?';
+EXECUTE chk_col USING @schema_name, @tbl_name, @col_name;
+DEALLOCATE PREPARE chk_col;
 SET @sql = IF(@tbl_exists = 1 AND @col_exists = 1,
-'ALTER TABLE i_beneficiaryaddress DROP COLUMN isGpsUnavailable',
-'SELECT ''i_beneficiaryaddress.isGpsUnavailable drop skipped'''
+CONCAT('ALTER TABLE ', @tbl_name, ' DROP COLUMN ', @col_name),
+CONCAT('SELECT ''', @tbl_name, '.', @col_name, ' drop skipped''')
 );
 PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
-SET @col_exists = (
-SELECT COUNT(*) FROM information_schema.columns
-WHERE table_schema = 'db_identity'
-AND table_name = 'i_beneficiaryaddress'
-AND column_name = 'gpsUnavailableReason'
-);
+SET @col_name = 'gpsUnavailableReason';
+SET @col_exists = 0;
+PREPARE chk_col FROM 'SELECT COUNT(*) INTO @col_exists FROM information_schema.columns WHERE table_schema = ? AND table_name = ? AND column_name = ?';
+EXECUTE chk_col USING @schema_name, @tbl_name, @col_name;
+DEALLOCATE PREPARE chk_col;
 SET @sql = IF(@tbl_exists = 1 AND @col_exists = 1,
-'ALTER TABLE i_beneficiaryaddress DROP COLUMN gpsUnavailableReason',
-'SELECT ''i_beneficiaryaddress.gpsUnavailableReason drop skipped'''
+CONCAT('ALTER TABLE ', @tbl_name, ' DROP COLUMN ', @col_name),
+CONCAT('SELECT ''', @tbl_name, '.', @col_name, ' drop skipped''')
 );
 PREPARE stmt FROM @sql;
 EXECUTE stmt;
