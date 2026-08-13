@@ -34,7 +34,7 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
-SET @col_name = 'reaosn_for_refusal_mdrrif';
+SET @col_name = 'reason_for_refusal_mdrrif';
 SET @col_exists = 0;
 PREPARE chk_col FROM 'SELECT COUNT(*) INTO @col_exists FROM information_schema.columns WHERE table_schema = ? AND table_name = ? AND column_name = ?';
 EXECUTE chk_col USING @schema_name, @tbl_name, @col_name;
