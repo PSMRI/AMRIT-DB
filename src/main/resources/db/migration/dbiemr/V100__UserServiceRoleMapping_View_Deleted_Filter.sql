@@ -1,4 +1,9 @@
 USE `db_iemr`;
+
+
+
+DROP VIEW IF EXISTS `v_userservicerolemapping`;
+
 CREATE
      OR REPLACE ALGORITHM = UNDEFINED
 
