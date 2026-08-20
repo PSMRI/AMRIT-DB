@@ -142,7 +142,6 @@
                         <name>com.db/amrit-db</name>
                     </image>
                     <mainClass>com.db.piramalswasthya.AmritDbApplication</mainClass>
-                    <classifier>exec</classifier>
                 </configuration>
             </plugin>
 
