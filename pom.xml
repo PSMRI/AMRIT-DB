@@ -150,9 +150,6 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.6.3</version>
-                <configuration>
-                    <mainClass>com.db.piramalswasthya.AmritDbApplication</mainClass>
-                </configuration>
             </plugin>
 
             <plugin>
