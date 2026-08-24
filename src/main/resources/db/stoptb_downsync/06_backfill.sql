@@ -1,14 +1,3 @@
--- A row that already carries a VanSerialNo reached central through the up-sync,
--- so the van it belongs to already has it. Left at 'N', the first down-sync of
--- every van would pull its entire history back down.
---
--- The modification-time column is assigned to itself so MySQL does not fire
--- ON UPDATE CURRENT_TIMESTAMP and make every backfilled row look freshly edited
--- in central - which would send it straight back down. It is named per table,
--- hence the two spellings below.
---
--- RUN ONCE, on first setup.
-
 UPDATE db_identity.i_beneficiarydetails
 SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
 WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
@@ -314,39 +303,39 @@ SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
 WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
 
 UPDATE db_iemr.tb_stoptb_general_opd
-SET DownSynced = 'P', DownSyncDate = NOW(), last_mod_date = last_mod_date
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
 WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
 
 UPDATE db_iemr.tb_stoptb_general_examination
-SET DownSynced = 'P', DownSyncDate = NOW(), last_mod_date = last_mod_date
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
 WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
 
 UPDATE db_iemr.tb_screening
-SET DownSynced = 'P', DownSyncDate = NOW(), last_mod_date = last_mod_date
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
 WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
 
 UPDATE db_iemr.tb_stoptb_diagnostics
-SET DownSynced = 'P', DownSyncDate = NOW(), last_mod_date = last_mod_date
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
 WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
 
 UPDATE db_iemr.tb_suspected
-SET DownSynced = 'P', DownSyncDate = NOW(), last_mod_date = last_mod_date
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
 WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
 
 UPDATE db_iemr.tb_confirmed_cases
-SET DownSynced = 'P', DownSyncDate = NOW(), last_mod_date = last_mod_date
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
 WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
 
 UPDATE db_iemr.tb_diagnostic_order
-SET DownSynced = 'P', DownSyncDate = NOW(), last_mod_date = last_mod_date
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
 WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
 
 UPDATE db_iemr.tb_diagnostic_result
-SET DownSynced = 'P', DownSyncDate = NOW(), last_mod_date = last_mod_date
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
 WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
 
 UPDATE db_iemr.tb_diagnostic_document
-SET DownSynced = 'P', DownSyncDate = NOW(), last_mod_date = last_mod_date
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
 WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
 
 UPDATE db_identity.i_beneficiarydetails_rmnch
@@ -362,18 +351,18 @@ SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
 WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
 
 UPDATE db_iemr.tb_stoptb_visit
-SET DownSynced = 'P', DownSyncDate = NOW(), last_mod_date = last_mod_date
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
 WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
 
 UPDATE db_iemr.t_form_response
-SET DownSynced = 'P', DownSyncDate = NOW(), last_mod_date = last_mod_date
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
 WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
 
 UPDATE db_iemr.t_section_response
-SET DownSynced = 'P', DownSyncDate = NOW(), last_mod_date = last_mod_date
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
 WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
 
 UPDATE db_iemr.t_question_response
-SET DownSynced = 'P', DownSyncDate = NOW(), last_mod_date = last_mod_date
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
 WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
 
