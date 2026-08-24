@@ -1,184 +1,18 @@
 USE db_iemr;
 
--- ----------------------------------------------------------------------------
--- db_iemr.tb_stoptb_general_opd   <-- already has last_mod_date; LastModDate would be a DUPLICATE
--- ----------------------------------------------------------------------------
-
-SET @sql = (
-    SELECT IF(
-        EXISTS (
-            SELECT 1 FROM information_schema.COLUMNS
-            WHERE TABLE_SCHEMA = 'db_iemr'
-              AND TABLE_NAME   = 'tb_stoptb_general_opd'
-              AND COLUMN_NAME  = 'LastModDate'
-        ),
-        'SELECT ''db_iemr.tb_stoptb_general_opd.LastModDate already exists''',
-        'ALTER TABLE db_iemr.tb_stoptb_general_opd ADD COLUMN LastModDate DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
-    )
-);
-PREPARE stmt FROM @sql;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
--- ----------------------------------------------------------------------------
--- db_iemr.tb_stoptb_general_examination   <-- already has last_mod_date; LastModDate would be a DUPLICATE
--- ----------------------------------------------------------------------------
-
-SET @sql = (
-    SELECT IF(
-        EXISTS (
-            SELECT 1 FROM information_schema.COLUMNS
-            WHERE TABLE_SCHEMA = 'db_iemr'
-              AND TABLE_NAME   = 'tb_stoptb_general_examination'
-              AND COLUMN_NAME  = 'LastModDate'
-        ),
-        'SELECT ''db_iemr.tb_stoptb_general_examination.LastModDate already exists''',
-        'ALTER TABLE db_iemr.tb_stoptb_general_examination ADD COLUMN LastModDate DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
-    )
-);
-PREPARE stmt FROM @sql;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
--- ----------------------------------------------------------------------------
--- db_iemr.tb_screening   <-- already has last_mod_date; LastModDate would be a DUPLICATE
--- ----------------------------------------------------------------------------
-
-SET @sql = (
-    SELECT IF(
-        EXISTS (
-            SELECT 1 FROM information_schema.COLUMNS
-            WHERE TABLE_SCHEMA = 'db_iemr'
-              AND TABLE_NAME   = 'tb_screening'
-              AND COLUMN_NAME  = 'LastModDate'
-        ),
-        'SELECT ''db_iemr.tb_screening.LastModDate already exists''',
-        'ALTER TABLE db_iemr.tb_screening ADD COLUMN LastModDate DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
-    )
-);
-PREPARE stmt FROM @sql;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
--- ----------------------------------------------------------------------------
--- db_iemr.tb_stoptb_diagnostics   <-- already has last_mod_date; LastModDate would be a DUPLICATE
--- ----------------------------------------------------------------------------
-
-SET @sql = (
-    SELECT IF(
-        EXISTS (
-            SELECT 1 FROM information_schema.COLUMNS
-            WHERE TABLE_SCHEMA = 'db_iemr'
-              AND TABLE_NAME   = 'tb_stoptb_diagnostics'
-              AND COLUMN_NAME  = 'LastModDate'
-        ),
-        'SELECT ''db_iemr.tb_stoptb_diagnostics.LastModDate already exists''',
-        'ALTER TABLE db_iemr.tb_stoptb_diagnostics ADD COLUMN LastModDate DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
-    )
-);
-PREPARE stmt FROM @sql;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
--- ----------------------------------------------------------------------------
--- db_iemr.tb_suspected   <-- already has last_mod_date; LastModDate would be a DUPLICATE
--- ----------------------------------------------------------------------------
-
-SET @sql = (
-    SELECT IF(
-        EXISTS (
-            SELECT 1 FROM information_schema.COLUMNS
-            WHERE TABLE_SCHEMA = 'db_iemr'
-              AND TABLE_NAME   = 'tb_suspected'
-              AND COLUMN_NAME  = 'LastModDate'
-        ),
-        'SELECT ''db_iemr.tb_suspected.LastModDate already exists''',
-        'ALTER TABLE db_iemr.tb_suspected ADD COLUMN LastModDate DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
-    )
-);
-PREPARE stmt FROM @sql;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
--- ----------------------------------------------------------------------------
--- db_iemr.tb_confirmed_cases   <-- already has last_mod_date; LastModDate would be a DUPLICATE
--- ----------------------------------------------------------------------------
-
-SET @sql = (
-    SELECT IF(
-        EXISTS (
-            SELECT 1 FROM information_schema.COLUMNS
-            WHERE TABLE_SCHEMA = 'db_iemr'
-              AND TABLE_NAME   = 'tb_confirmed_cases'
-              AND COLUMN_NAME  = 'LastModDate'
-        ),
-        'SELECT ''db_iemr.tb_confirmed_cases.LastModDate already exists''',
-        'ALTER TABLE db_iemr.tb_confirmed_cases ADD COLUMN LastModDate DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
-    )
-);
-PREPARE stmt FROM @sql;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
--- ----------------------------------------------------------------------------
--- db_iemr.tb_diagnostic_order   <-- already has last_mod_date; LastModDate would be a DUPLICATE
--- ----------------------------------------------------------------------------
-
-SET @sql = (
-    SELECT IF(
-        EXISTS (
-            SELECT 1 FROM information_schema.COLUMNS
-            WHERE TABLE_SCHEMA = 'db_iemr'
-              AND TABLE_NAME   = 'tb_diagnostic_order'
-              AND COLUMN_NAME  = 'LastModDate'
-        ),
-        'SELECT ''db_iemr.tb_diagnostic_order.LastModDate already exists''',
-        'ALTER TABLE db_iemr.tb_diagnostic_order ADD COLUMN LastModDate DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
-    )
-);
-PREPARE stmt FROM @sql;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
--- ----------------------------------------------------------------------------
--- db_iemr.tb_diagnostic_result   <-- already has last_mod_date; LastModDate would be a DUPLICATE
--- ----------------------------------------------------------------------------
-
-SET @sql = (
-    SELECT IF(
-        EXISTS (
-            SELECT 1 FROM information_schema.COLUMNS
-            WHERE TABLE_SCHEMA = 'db_iemr'
-              AND TABLE_NAME   = 'tb_diagnostic_result'
-              AND COLUMN_NAME  = 'LastModDate'
-        ),
-        'SELECT ''db_iemr.tb_diagnostic_result.LastModDate already exists''',
-        'ALTER TABLE db_iemr.tb_diagnostic_result ADD COLUMN LastModDate DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
-    )
-);
-PREPARE stmt FROM @sql;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
--- ----------------------------------------------------------------------------
--- db_iemr.tb_diagnostic_document   <-- already has last_mod_date; LastModDate would be a DUPLICATE
--- ----------------------------------------------------------------------------
-
-SET @sql = (
-    SELECT IF(
-        EXISTS (
-            SELECT 1 FROM information_schema.COLUMNS
-            WHERE TABLE_SCHEMA = 'db_iemr'
-              AND TABLE_NAME   = 'tb_diagnostic_document'
-              AND COLUMN_NAME  = 'LastModDate'
-        ),
-        'SELECT ''db_iemr.tb_diagnostic_document.LastModDate already exists''',
-        'ALTER TABLE db_iemr.tb_diagnostic_document ADD COLUMN LastModDate DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
-    )
-);
-PREPARE stmt FROM @sql;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
+-- The modification-time column is NOT forced to one name: 79 tables call it
+-- LastModDate, 9 StopTB tables call it last_mod_date, and both are left as they
+-- are. Script 05 records which name each table uses, in
+-- m_downsynctabledetail.LastModColumnName. No duplicate column is created.
+--
+-- Only the four tables below have no modification-time column at all. They get
+-- last_mod_date, matching their StopTB siblings - the sync needs a modification
+-- time to detect an edit made in central and to spot a conflict.
+--
+-- The last section repairs three tables whose last_mod_date exists but is NOT
+-- auto-maintained. Without ON UPDATE CURRENT_TIMESTAMP the timestamp never moves
+-- when a record is edited, so central's "edited since delivery" test
+-- (last_mod_date > DownSyncDate) is never true and the edit is never delivered.
 
 -- ----------------------------------------------------------------------------
 -- db_iemr.tb_stoptb_visit
@@ -190,10 +24,10 @@ SET @sql = (
             SELECT 1 FROM information_schema.COLUMNS
             WHERE TABLE_SCHEMA = 'db_iemr'
               AND TABLE_NAME   = 'tb_stoptb_visit'
-              AND COLUMN_NAME  = 'LastModDate'
+              AND COLUMN_NAME  = 'last_mod_date'
         ),
-        'SELECT ''db_iemr.tb_stoptb_visit.LastModDate already exists''',
-        'ALTER TABLE db_iemr.tb_stoptb_visit ADD COLUMN LastModDate DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
+        'SELECT ''db_iemr.tb_stoptb_visit.last_mod_date already exists''',
+        'ALTER TABLE db_iemr.tb_stoptb_visit ADD COLUMN last_mod_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
     )
 );
 PREPARE stmt FROM @sql;
@@ -210,10 +44,10 @@ SET @sql = (
             SELECT 1 FROM information_schema.COLUMNS
             WHERE TABLE_SCHEMA = 'db_iemr'
               AND TABLE_NAME   = 't_form_response'
-              AND COLUMN_NAME  = 'LastModDate'
+              AND COLUMN_NAME  = 'last_mod_date'
         ),
-        'SELECT ''db_iemr.t_form_response.LastModDate already exists''',
-        'ALTER TABLE db_iemr.t_form_response ADD COLUMN LastModDate DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
+        'SELECT ''db_iemr.t_form_response.last_mod_date already exists''',
+        'ALTER TABLE db_iemr.t_form_response ADD COLUMN last_mod_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
     )
 );
 PREPARE stmt FROM @sql;
@@ -230,10 +64,10 @@ SET @sql = (
             SELECT 1 FROM information_schema.COLUMNS
             WHERE TABLE_SCHEMA = 'db_iemr'
               AND TABLE_NAME   = 't_section_response'
-              AND COLUMN_NAME  = 'LastModDate'
+              AND COLUMN_NAME  = 'last_mod_date'
         ),
-        'SELECT ''db_iemr.t_section_response.LastModDate already exists''',
-        'ALTER TABLE db_iemr.t_section_response ADD COLUMN LastModDate DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
+        'SELECT ''db_iemr.t_section_response.last_mod_date already exists''',
+        'ALTER TABLE db_iemr.t_section_response ADD COLUMN last_mod_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
     )
 );
 PREPARE stmt FROM @sql;
@@ -250,10 +84,68 @@ SET @sql = (
             SELECT 1 FROM information_schema.COLUMNS
             WHERE TABLE_SCHEMA = 'db_iemr'
               AND TABLE_NAME   = 't_question_response'
-              AND COLUMN_NAME  = 'LastModDate'
+              AND COLUMN_NAME  = 'last_mod_date'
         ),
-        'SELECT ''db_iemr.t_question_response.LastModDate already exists''',
-        'ALTER TABLE db_iemr.t_question_response ADD COLUMN LastModDate DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
+        'SELECT ''db_iemr.t_question_response.last_mod_date already exists''',
+        'ALTER TABLE db_iemr.t_question_response ADD COLUMN last_mod_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
+    )
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+-- ----------------------------------------------------------------------------
+-- last_mod_date exists but is not auto-maintained - add ON UPDATE.
+--
+-- MODIFY COLUMN keeps the existing values; rows already holding NULL stay NULL,
+-- which reads as "never edited in central" and is correct.
+-- ----------------------------------------------------------------------------
+
+SET @sql = (
+    SELECT IF(
+        EXISTS (
+            SELECT 1 FROM information_schema.COLUMNS
+            WHERE TABLE_SCHEMA = 'db_iemr'
+              AND TABLE_NAME   = 'tb_diagnostic_document'
+              AND COLUMN_NAME  = 'last_mod_date'
+              AND EXTRA LIKE '%on update%'
+        ),
+        'SELECT ''db_iemr.tb_diagnostic_document.last_mod_date is already auto-maintained''',
+        'ALTER TABLE db_iemr.tb_diagnostic_document MODIFY COLUMN last_mod_date DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
+    )
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+SET @sql = (
+    SELECT IF(
+        EXISTS (
+            SELECT 1 FROM information_schema.COLUMNS
+            WHERE TABLE_SCHEMA = 'db_iemr'
+              AND TABLE_NAME   = 'tb_diagnostic_order'
+              AND COLUMN_NAME  = 'last_mod_date'
+              AND EXTRA LIKE '%on update%'
+        ),
+        'SELECT ''db_iemr.tb_diagnostic_order.last_mod_date is already auto-maintained''',
+        'ALTER TABLE db_iemr.tb_diagnostic_order MODIFY COLUMN last_mod_date DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
+    )
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+SET @sql = (
+    SELECT IF(
+        EXISTS (
+            SELECT 1 FROM information_schema.COLUMNS
+            WHERE TABLE_SCHEMA = 'db_iemr'
+              AND TABLE_NAME   = 'tb_diagnostic_result'
+              AND COLUMN_NAME  = 'last_mod_date'
+              AND EXTRA LIKE '%on update%'
+        ),
+        'SELECT ''db_iemr.tb_diagnostic_result.last_mod_date is already auto-maintained''',
+        'ALTER TABLE db_iemr.tb_diagnostic_result MODIFY COLUMN last_mod_date DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
     )
 );
 PREPARE stmt FROM @sql;

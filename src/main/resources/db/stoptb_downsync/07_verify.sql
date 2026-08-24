@@ -38,21 +38,46 @@ ORDER BY t.TABLE_SCHEMA, t.TABLE_NAME;
 --    every ACTIVE transactional table, or that table fails with
 --    "Unknown column".
 -- -----------------------------------------------------------------------------
+-- The modification-time column is named per table, so it is checked through
+-- LastModColumnName rather than by assuming LastModDate. A row here is an active
+-- table that will fail the sync.
 SELECT '3. missing sync prerequisites' AS check_name, d.SchemaName, d.TableName,
+       IFNULL(d.LastModColumnName,'LastModDate') AS lastmod_column,
        MAX(c.COLUMN_NAME = 'VanID')       AS has_vanid,
        MAX(c.COLUMN_NAME = 'VanSerialNo') AS has_vanserialno,
        MAX(c.COLUMN_NAME = 'Processed')   AS has_processed,
-       MAX(c.COLUMN_NAME = 'LastModDate') AS has_lastmoddate,
-       MAX(c.COLUMN_NAME = 'LastModDate' AND c.EXTRA LIKE '%on update%') AS lastmoddate_auto,
+       MAX(c.COLUMN_NAME = IFNULL(d.LastModColumnName,'LastModDate')) AS has_lastmod,
+       MAX(c.COLUMN_NAME = IFNULL(d.LastModColumnName,'LastModDate')
+           AND c.EXTRA LIKE '%on update%') AS lastmod_auto,
        MAX(LOWER(c.COLUMN_NAME) = LOWER(d.VanAutoIncColumnName)
            AND c.EXTRA LIKE '%auto_increment%') AS pk_is_autoinc
 FROM db_iemr.m_downsynctabledetail d
 JOIN information_schema.COLUMNS c
   ON LOWER(c.TABLE_SCHEMA) = LOWER(d.SchemaName) AND LOWER(c.TABLE_NAME) = LOWER(d.TableName)
 WHERE d.IsActive = b'1' AND d.TableType = 'TRANSACTIONAL'
-GROUP BY d.SchemaName, d.TableName
+GROUP BY d.SchemaName, d.TableName, d.LastModColumnName, d.VanAutoIncColumnName
 HAVING has_vanid = 0 OR has_vanserialno = 0 OR has_processed = 0
-    OR has_lastmoddate = 0 OR lastmoddate_auto = 0 OR pk_is_autoinc = 0
+    OR has_lastmod = 0 OR lastmod_auto = 0 OR pk_is_autoinc = 0
+ORDER BY d.SchemaName, d.TableName;
+
+-- 3b. no table may carry BOTH spellings - that is the duplicate column we set out
+--     to avoid, and it means two modification times drifting apart.
+SELECT '3b. duplicate modification columns' AS check_name, TABLE_SCHEMA, TABLE_NAME
+FROM information_schema.COLUMNS
+WHERE COLUMN_NAME IN ('LastModDate','last_mod_date')
+GROUP BY TABLE_SCHEMA, TABLE_NAME
+HAVING COUNT(DISTINCT COLUMN_NAME) > 1
+ORDER BY TABLE_SCHEMA, TABLE_NAME;
+
+-- 3c. the configured name must match what the table actually has
+SELECT '3c. LastModColumnName mismatch' AS check_name, d.SchemaName, d.TableName,
+       IFNULL(d.LastModColumnName,'LastModDate') AS configured
+FROM db_iemr.m_downsynctabledetail d
+WHERE d.TableType = 'TRANSACTIONAL'
+  AND NOT EXISTS (SELECT 1 FROM information_schema.COLUMNS c
+                  WHERE LOWER(c.TABLE_SCHEMA) = LOWER(d.SchemaName)
+                    AND LOWER(c.TABLE_NAME) = LOWER(d.TableName)
+                    AND c.COLUMN_NAME = IFNULL(d.LastModColumnName,'LastModDate'))
 ORDER BY d.SchemaName, d.TableName;
 
 -- -----------------------------------------------------------------------------
@@ -134,10 +159,12 @@ GROUP BY p.UserID HAVING vans > 1;
 -- -----------------------------------------------------------------------------
 -- 8. What the next down-sync of a given van will actually send. Replace 1.
 -- -----------------------------------------------------------------------------
+-- tb_screening's modification column is last_mod_date, not LastModDate - use each
+-- table's own name here, exactly as m_downsynctabledetail records it.
 SELECT '8. eligible for VanID 1' AS check_name, id, VanID, VanSerialNo,
-       DownSynced, DownSyncDate, LastModDate, DownSyncFailureReason
+       DownSynced, DownSyncDate, last_mod_date, DownSyncFailureReason
 FROM db_iemr.tb_screening
 WHERE VanID = 1
   AND ( DownSynced IS NULL OR DownSynced IN ('N','U')
-        OR ( DownSynced = 'P' AND DownSyncDate IS NOT NULL AND LastModDate > DownSyncDate ) )
+        OR ( DownSynced = 'P' AND DownSyncDate IS NOT NULL AND last_mod_date > DownSyncDate ) )
 ORDER BY id;

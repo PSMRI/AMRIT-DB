@@ -1,27 +1,18 @@
--- =============================================================================
--- StopTB down-sync : m_downsynctabledetail
---
--- Run by hand, in file-number order, against the StopTB database only.
---
--- m_downsynctabledetail drives the down-sync the way m_synctabledetail drives
--- the up-sync. SyncOrder is the FK dependency chain - lower syncs first - and
--- is numbered 1, 2, 3 ... in the order the up-sync already uses
--- (SyncTableGroupID, then SyncTableDetailID).
---
--- VanAutoIncColumnName is the table's real AUTO_INCREMENT primary key, taken
--- from information_schema - NOT the value m_synctabledetail holds, which is the
--- literal string 'vanSerialNo' for 16 of these tables. The down-sync omits the
--- PK on INSERT so the local DB mints its own id, so the wrong name breaks it.
---
--- IsActive = 0 rows are registered but not synced. The eight beneficiary
--- identity tables MUST stay inactive: i_beneficiarymapping points at the
--- primary keys of the other identity tables, those keys are per-DB
--- AUTO_INCREMENTs that differ between central and a van, and the down-sync mints
--- a fresh local id on insert - so copying the pointers verbatim silently
--- mis-links beneficiaries. BenRegId is safe; it comes from the provisioned pool.
--- =============================================================================
-
 USE db_iemr;
+
+-- LastModColumnName is the table's modification-time column. NULL means
+-- LastModDate; the StopTB tables record last_mod_date instead. Central puts it in
+-- the WHERE clause that decides which records to send, and the van uses it to
+-- compare its copy against central's - a wrong value means edits made in central
+-- are never delivered.
+--
+-- VanAutoIncColumnName is the real AUTO_INCREMENT primary key, NOT the literal
+-- 'vanSerialNo' that m_synctabledetail holds for 16 of these tables.
+--
+-- The eight beneficiary identity tables are IsActive = 0 and must stay that way:
+-- i_beneficiarymapping points at the primary keys of the other identity tables,
+-- which are per-DB AUTO_INCREMENTs that differ between central and a van, so
+-- copying them verbatim silently mis-links beneficiaries.
 
 CREATE TABLE IF NOT EXISTS db_iemr.m_downsynctabledetail (
     DownSyncTableDetailID INT           NOT NULL AUTO_INCREMENT,
@@ -30,7 +21,8 @@ CREATE TABLE IF NOT EXISTS db_iemr.m_downsynctabledetail (
     ServerColumnName      TEXT          NULL     COMMENT 'columns to SELECT from central; NULL = resolve from information_schema',
     VanColumnName         TEXT          NULL     COMMENT 'columns in local, positionally mapped with ServerColumnName',
     VanAutoIncColumnName  VARCHAR(200)  NULL     COMMENT 'local auto-increment PK - skipped on INSERT so local generates its own value',
-    TableType             VARCHAR(20)   NOT NULL DEFAULT 'MASTER' COMMENT 'MASTER = full pull, no VanID filter / TRANSACTIONAL = filter by VanID + DownSynced',
+    LastModColumnName     VARCHAR(200)  NULL     COMMENT 'modification-time column; NULL = LastModDate',
+    TableType             VARCHAR(20)   NOT NULL DEFAULT 'MASTER' COMMENT 'MASTER = full pull / TRANSACTIONAL = filter by VanID + DownSynced',
     SyncOrder             INT           NOT NULL DEFAULT 1000 COMMENT 'lower number syncs first - enforces the FK dependency chain',
     IsActive              BIT(1)        NOT NULL DEFAULT b'1',
     PRIMARY KEY (DownSyncTableDetailID),
@@ -38,129 +30,149 @@ CREATE TABLE IF NOT EXISTS db_iemr.m_downsynctabledetail (
     KEY idx_downsynctabledetail_order (SyncOrder)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- -----------------------------------------------------------------------------
--- Master / reference data - full pull, central authoritative, no VanID filter.
--- -----------------------------------------------------------------------------
+SET @sql = (
+    SELECT IF(
+        EXISTS (
+            SELECT 1 FROM information_schema.COLUMNS
+            WHERE TABLE_SCHEMA = 'db_iemr'
+              AND TABLE_NAME   = 'm_downsynctabledetail'
+              AND COLUMN_NAME  = 'LastModColumnName'
+        ),
+        'SELECT ''db_iemr.m_downsynctabledetail.LastModColumnName already exists''',
+        'ALTER TABLE db_iemr.m_downsynctabledetail ADD COLUMN LastModColumnName VARCHAR(200) NULL DEFAULT NULL'
+    )
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+-- ----------------------------------------------------------------------------
+-- master / reference data - full pull, no VanID filter
+-- ----------------------------------------------------------------------------
+
 INSERT INTO db_iemr.m_downsynctabledetail
-    (SchemaName, TableName, VanAutoIncColumnName, TableType, SyncOrder, IsActive)
+    (SchemaName, TableName, VanAutoIncColumnName, LastModColumnName, TableType, SyncOrder, IsActive)
 VALUES
-    ('db_iemr', 'm_state', NULL, 'MASTER', 1, b'1'),
-    ('db_iemr', 'm_district', NULL, 'MASTER', 2, b'1'),
-    ('db_iemr', 'm_districtblock', NULL, 'MASTER', 3, b'1'),
-    ('db_iemr', 'm_providerservicemapping', NULL, 'MASTER', 4, b'1'),
-    ('db_iemr', 'm_vantype', NULL, 'MASTER', 5, b'1'),
-    ('db_iemr', 'm_van', NULL, 'MASTER', 6, b'1'),
-    ('db_iemr', 'm_parkingplace', NULL, 'MASTER', 7, b'1'),
-    ('db_iemr', 'm_servicepoint', NULL, 'MASTER', 8, b'1'),
-    ('db_iemr', 'm_servicepointvillagemap', NULL, 'MASTER', 9, b'1'),
-    ('db_iemr', 'm_vanservicepointmap', NULL, 'MASTER', 10, b'1'),
-    ('db_iemr', 'm_user', NULL, 'MASTER', 11, b'1'),
-    ('db_iemr', 'm_uservanmapping', NULL, 'MASTER', 12, b'1'),
-    ('db_iemr', 'm_userparkingplacemap', NULL, 'MASTER', 13, b'1')
+    ('db_iemr', 'm_state', NULL, NULL, 'MASTER', 1, b'1'),
+    ('db_iemr', 'm_district', NULL, NULL, 'MASTER', 2, b'1'),
+    ('db_iemr', 'm_districtblock', NULL, NULL, 'MASTER', 3, b'1'),
+    ('db_iemr', 'm_providerservicemapping', NULL, NULL, 'MASTER', 4, b'1'),
+    ('db_iemr', 'm_vantype', NULL, NULL, 'MASTER', 5, b'1'),
+    ('db_iemr', 'm_van', NULL, NULL, 'MASTER', 6, b'1'),
+    ('db_iemr', 'm_parkingplace', NULL, NULL, 'MASTER', 7, b'1'),
+    ('db_iemr', 'm_servicepoint', NULL, NULL, 'MASTER', 8, b'1'),
+    ('db_iemr', 'm_servicepointvillagemap', NULL, NULL, 'MASTER', 9, b'1'),
+    ('db_iemr', 'm_vanservicepointmap', NULL, NULL, 'MASTER', 10, b'1'),
+    ('db_iemr', 'm_user', NULL, NULL, 'MASTER', 11, b'1'),
+    ('db_iemr', 'm_uservanmapping', NULL, NULL, 'MASTER', 12, b'1'),
+    ('db_iemr', 'm_userparkingplacemap', NULL, NULL, 'MASTER', 13, b'1')
 ON DUPLICATE KEY UPDATE
     VanAutoIncColumnName = VALUES(VanAutoIncColumnName),
+    LastModColumnName    = VALUES(LastModColumnName),
     TableType            = VALUES(TableType),
     SyncOrder            = VALUES(SyncOrder);
 
--- -----------------------------------------------------------------------------
--- Transactional data - filtered by VanID and the DownSynced flag.
--- -----------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
+-- transactional data - filtered by VanID and the DownSynced flag
+-- ----------------------------------------------------------------------------
+
 INSERT INTO db_iemr.m_downsynctabledetail
-    (SchemaName, TableName, VanAutoIncColumnName, TableType, SyncOrder, IsActive)
+    (SchemaName, TableName, VanAutoIncColumnName, LastModColumnName, TableType, SyncOrder, IsActive)
 VALUES
-    ('db_identity', 'i_beneficiarydetails', 'BeneficiaryDetailsId', 'TRANSACTIONAL', 14, b'0'),   -- identity graph: keep inactive
-    ('db_identity', 'i_beneficiaryaddress', 'BenAddressID', 'TRANSACTIONAL', 15, b'0'),   -- identity graph: keep inactive
-    ('db_identity', 'i_beneficiarycontacts', 'BenContactsID', 'TRANSACTIONAL', 16, b'0'),   -- identity graph: keep inactive
-    ('db_identity', 'i_beneficiaryaccount', 'BenAccountID', 'TRANSACTIONAL', 17, b'0'),   -- identity graph: keep inactive
-    ('db_identity', 'i_beneficiarymapping', 'BenMapId', 'TRANSACTIONAL', 18, b'0'),   -- identity graph: keep inactive
-    ('db_identity', 'i_beneficiaryfamilymapping', 'BenFamilyMapId', 'TRANSACTIONAL', 19, b'0'),   -- identity graph: keep inactive
-    ('db_identity', 'i_beneficiaryidentity', 'BenIdentityId', 'TRANSACTIONAL', 20, b'0'),   -- identity graph: keep inactive
-    ('db_identity', 'm_beneficiaryregidmapping', 'BenRegId', 'TRANSACTIONAL', 21, b'0'),   -- identity graph: keep inactive
-    ('db_iemr', 't_benvisitdetail', 'BenVisitID', 'TRANSACTIONAL', 22, b'1'),
-    ('db_iemr', 't_phy_anthropometry', 'ID', 'TRANSACTIONAL', 23, b'1'),
-    ('db_iemr', 't_phy_vitals', 'ID', 'TRANSACTIONAL', 24, b'1'),
-    ('db_iemr', 't_benadherence', 'ID', 'TRANSACTIONAL', 25, b'1'),
-    ('db_iemr', 't_anccare', 'ID', 'TRANSACTIONAL', 26, b'1'),
-    ('db_iemr', 't_pnccare', 'ID', 'TRANSACTIONAL', 27, b'1'),
-    ('db_iemr', 't_ncdscreening', 'ID', 'TRANSACTIONAL', 28, b'1'),
-    ('db_iemr', 't_ncdcare', 'ID', 'TRANSACTIONAL', 29, b'1'),
-    ('db_iemr', 't_phy_generalexam', 'ID', 'TRANSACTIONAL', 30, b'1'),
-    ('db_iemr', 't_phy_headtotoe', 'ID', 'TRANSACTIONAL', 31, b'1'),
-    ('db_iemr', 't_sys_obstetric', 'ID', 'TRANSACTIONAL', 32, b'1'),
-    ('db_iemr', 't_sys_gastrointestinal', 'ID', 'TRANSACTIONAL', 33, b'1'),
-    ('db_iemr', 't_sys_cardiovascular', 'ID', 'TRANSACTIONAL', 34, b'1'),
-    ('db_iemr', 't_sys_respiratory', 'ID', 'TRANSACTIONAL', 35, b'1'),
-    ('db_iemr', 't_sys_centralnervous', 'ID', 'TRANSACTIONAL', 36, b'1'),
-    ('db_iemr', 't_sys_musculoskeletalsystem', 'ID', 'TRANSACTIONAL', 37, b'1'),
-    ('db_iemr', 't_sys_genitourinarysystem', 'ID', 'TRANSACTIONAL', 38, b'1'),
-    ('db_iemr', 't_ancdiagnosis', 'ID', 'TRANSACTIONAL', 39, b'1'),
-    ('db_iemr', 't_ncddiagnosis', 'ID', 'TRANSACTIONAL', 40, b'1'),
-    ('db_iemr', 't_pncdiagnosis', 'ID', 'TRANSACTIONAL', 41, b'1'),
-    ('db_iemr', 't_benchiefcomplaint', 'ID', 'TRANSACTIONAL', 42, b'1'),
-    ('db_iemr', 't_benclinicalobservation', 'ClinicalObservationID', 'TRANSACTIONAL', 43, b'1'),
-    ('db_iemr', 't_prescription', 'PrescriptionID', 'TRANSACTIONAL', 44, b'1'),
-    ('db_iemr', 't_prescribeddrug', 'PrescribedDrugID', 'TRANSACTIONAL', 45, b'1'),
-    ('db_iemr', 't_lab_testorder', 'ID', 'TRANSACTIONAL', 46, b'1'),
-    ('db_iemr', 't_benreferdetails', 'benReferID', 'TRANSACTIONAL', 47, b'1'),
-    ('db_iemr', 't_lab_testresult', 'ID', 'TRANSACTIONAL', 48, b'1'),
-    ('db_iemr', 't_physicalstockentry', 'PhyEntryID', 'TRANSACTIONAL', 49, b'1'),
-    ('db_iemr', 't_patientissue', 'PatientIssueID', 'TRANSACTIONAL', 50, b'1'),
-    ('db_iemr', 't_facilityconsumption', 'ConsumptionID', 'TRANSACTIONAL', 51, b'1'),
-    ('db_iemr', 't_itemstockentry', 'ItemStockEntryID', 'TRANSACTIONAL', 52, b'1'),
-    ('db_iemr', 't_itemstockexit', 'ItemStockExitID', 'TRANSACTIONAL', 53, b'1'),
-    ('db_iemr', 't_benmedhistory', 'BenMedHistoryID', 'TRANSACTIONAL', 54, b'1'),
-    ('db_iemr', 't_femaleobstetrichistory', 'ObstetricHistoryID', 'TRANSACTIONAL', 55, b'1'),
-    ('db_iemr', 't_benmenstrualdetails', 'BenMenstrualID', 'TRANSACTIONAL', 56, b'1'),
-    ('db_iemr', 't_benpersonalhabit', 'BenPersonalHabitID', 'TRANSACTIONAL', 57, b'1'),
-    ('db_iemr', 't_childvaccinedetail1', 'ID', 'TRANSACTIONAL', 58, b'1'),
-    ('db_iemr', 't_childvaccinedetail2', 'ID', 'TRANSACTIONAL', 59, b'1'),
-    ('db_iemr', 't_childoptionalvaccinedetail', 'ID', 'TRANSACTIONAL', 60, b'1'),
-    ('db_iemr', 't_ancwomenvaccinedetail', 'ID', 'TRANSACTIONAL', 61, b'1'),
-    ('db_iemr', 't_childfeedinghistory', 'ID', 'TRANSACTIONAL', 62, b'1'),
-    ('db_iemr', 't_benallergyhistory', 'ID', 'TRANSACTIONAL', 63, b'1'),
-    ('db_iemr', 't_bencomorbiditycondition', 'ID', 'TRANSACTIONAL', 64, b'1'),
-    ('db_iemr', 't_benmedicationhistory', 'ID', 'TRANSACTIONAL', 65, b'1'),
-    ('db_iemr', 't_benfamilyhistory', 'ID', 'TRANSACTIONAL', 66, b'1'),
-    ('db_iemr', 't_perinatalhistory', 'ID', 'TRANSACTIONAL', 67, b'1'),
-    ('db_iemr', 't_developmenthistory', 'ID', 'TRANSACTIONAL', 68, b'1'),
-    ('db_iemr', 't_cancerfamilyhistory', 'ID', 'TRANSACTIONAL', 69, b'1'),
-    ('db_iemr', 't_cancerpersonalhistory', 'ID', 'TRANSACTIONAL', 70, b'1'),
-    ('db_iemr', 't_cancerdiethistory', 'ID', 'TRANSACTIONAL', 71, b'1'),
-    ('db_iemr', 't_cancerobstetrichistory', 'ID', 'TRANSACTIONAL', 72, b'1'),
-    ('db_iemr', 't_cancervitals', 'ID', 'TRANSACTIONAL', 73, b'1'),
-    ('db_iemr', 't_cancersignandsymptoms', 'ID', 'TRANSACTIONAL', 74, b'1'),
-    ('db_iemr', 't_cancerlymphnode', 'ID', 'TRANSACTIONAL', 75, b'1'),
-    ('db_iemr', 't_canceroralexamination', 'ID', 'TRANSACTIONAL', 76, b'1'),
-    ('db_iemr', 't_cancerbreastexamination', 'ID', 'TRANSACTIONAL', 77, b'1'),
-    ('db_iemr', 't_cancerabdominalexamination', 'ID', 'TRANSACTIONAL', 78, b'1'),
-    ('db_iemr', 't_cancergynecologicalexamination', 'ID', 'TRANSACTIONAL', 79, b'1'),
-    ('db_iemr', 't_cancerdiagnosis', 'ID', 'TRANSACTIONAL', 80, b'1'),
-    ('db_iemr', 't_cancerimageannotation', 'ID', 'TRANSACTIONAL', 81, b'1'),
-    ('db_identity', 'i_beneficiaryimage', 'BenImageId', 'TRANSACTIONAL', 82, b'1'),
-    ('db_iemr', 't_stockadjustment', 'StockAdjustmentID', 'TRANSACTIONAL', 83, b'1'),
-    ('db_iemr', 't_stocktransfer', 'StockTransferID', 'TRANSACTIONAL', 84, b'1'),
-    ('db_iemr', 't_patientreturn', 'PatientReturnID', 'TRANSACTIONAL', 85, b'1'),
-    ('db_iemr', 't_indent', 'IndentID', 'TRANSACTIONAL', 86, b'1'),
-    ('db_iemr', 't_indentissue', 'IndentIssueID', 'TRANSACTIONAL', 87, b'1'),
-    ('db_iemr', 't_indentorder', 'IndentOrderID', 'TRANSACTIONAL', 88, b'1'),
-    ('db_iemr', 't_saitemmapping', 'SAItemMapID', 'TRANSACTIONAL', 89, b'1'),
-    ('db_iemr', 'tb_stoptb_general_opd', 'id', 'TRANSACTIONAL', 90, b'1'),
-    ('db_iemr', 'tb_stoptb_general_examination', 'id', 'TRANSACTIONAL', 91, b'1'),
-    ('db_iemr', 'tb_screening', 'id', 'TRANSACTIONAL', 92, b'1'),
-    ('db_iemr', 'tb_stoptb_diagnostics', 'id', 'TRANSACTIONAL', 93, b'1'),
-    ('db_iemr', 'tb_suspected', 'id', 'TRANSACTIONAL', 94, b'1'),
-    ('db_iemr', 'tb_confirmed_cases', 'id', 'TRANSACTIONAL', 95, b'1'),
-    ('db_iemr', 'tb_diagnostic_order', 'id', 'TRANSACTIONAL', 96, b'1'),
-    ('db_iemr', 'tb_diagnostic_result', 'id', 'TRANSACTIONAL', 97, b'1'),
-    ('db_iemr', 'tb_diagnostic_document', 'id', 'TRANSACTIONAL', 98, b'1'),
-    ('db_identity', 'i_beneficiarydetails_rmnch', 'beneficiaryDetails_RmnchId', 'TRANSACTIONAL', 99, b'1'),
-    ('db_identity', 'i_bornbirthdeatils', 'BornBirthDeatilsId', 'TRANSACTIONAL', 100, b'1'),
-    ('db_identity', 'i_householddetails', 'houseHoldDetailsId', 'TRANSACTIONAL', 101, b'1'),
-    ('db_iemr', 'tb_stoptb_visit', 'id', 'TRANSACTIONAL', 102, b'1'),
-    ('db_iemr', 't_form_response', 'responseId', 'TRANSACTIONAL', 103, b'1'),
-    ('db_iemr', 't_section_response', 'sectionResponseId', 'TRANSACTIONAL', 104, b'1'),
-    ('db_iemr', 't_question_response', 'questionResponseId', 'TRANSACTIONAL', 105, b'1')
+    ('db_identity', 'i_beneficiarydetails', 'BeneficiaryDetailsId', NULL, 'TRANSACTIONAL', 14, b'0'),   -- identity graph: keep inactive
+    ('db_identity', 'i_beneficiaryaddress', 'BenAddressID', NULL, 'TRANSACTIONAL', 15, b'0'),   -- identity graph: keep inactive
+    ('db_identity', 'i_beneficiarycontacts', 'BenContactsID', NULL, 'TRANSACTIONAL', 16, b'0'),   -- identity graph: keep inactive
+    ('db_identity', 'i_beneficiaryaccount', 'BenAccountID', NULL, 'TRANSACTIONAL', 17, b'0'),   -- identity graph: keep inactive
+    ('db_identity', 'i_beneficiarymapping', 'BenMapId', NULL, 'TRANSACTIONAL', 18, b'0'),   -- identity graph: keep inactive
+    ('db_identity', 'i_beneficiaryfamilymapping', 'BenFamilyMapId', NULL, 'TRANSACTIONAL', 19, b'0'),   -- identity graph: keep inactive
+    ('db_identity', 'i_beneficiaryidentity', 'BenIdentityId', NULL, 'TRANSACTIONAL', 20, b'0'),   -- identity graph: keep inactive
+    ('db_identity', 'm_beneficiaryregidmapping', 'BenRegId', NULL, 'TRANSACTIONAL', 21, b'0'),   -- identity graph: keep inactive
+    ('db_iemr', 't_benvisitdetail', 'BenVisitID', NULL, 'TRANSACTIONAL', 22, b'1'),
+    ('db_iemr', 't_phy_anthropometry', 'ID', NULL, 'TRANSACTIONAL', 23, b'1'),
+    ('db_iemr', 't_phy_vitals', 'ID', NULL, 'TRANSACTIONAL', 24, b'1'),
+    ('db_iemr', 't_benadherence', 'ID', NULL, 'TRANSACTIONAL', 25, b'1'),
+    ('db_iemr', 't_anccare', 'ID', NULL, 'TRANSACTIONAL', 26, b'1'),
+    ('db_iemr', 't_pnccare', 'ID', NULL, 'TRANSACTIONAL', 27, b'1'),
+    ('db_iemr', 't_ncdscreening', 'ID', NULL, 'TRANSACTIONAL', 28, b'1'),
+    ('db_iemr', 't_ncdcare', 'ID', NULL, 'TRANSACTIONAL', 29, b'1'),
+    ('db_iemr', 't_phy_generalexam', 'ID', NULL, 'TRANSACTIONAL', 30, b'1'),
+    ('db_iemr', 't_phy_headtotoe', 'ID', NULL, 'TRANSACTIONAL', 31, b'1'),
+    ('db_iemr', 't_sys_obstetric', 'ID', NULL, 'TRANSACTIONAL', 32, b'1'),
+    ('db_iemr', 't_sys_gastrointestinal', 'ID', NULL, 'TRANSACTIONAL', 33, b'1'),
+    ('db_iemr', 't_sys_cardiovascular', 'ID', NULL, 'TRANSACTIONAL', 34, b'1'),
+    ('db_iemr', 't_sys_respiratory', 'ID', NULL, 'TRANSACTIONAL', 35, b'1'),
+    ('db_iemr', 't_sys_centralnervous', 'ID', NULL, 'TRANSACTIONAL', 36, b'1'),
+    ('db_iemr', 't_sys_musculoskeletalsystem', 'ID', NULL, 'TRANSACTIONAL', 37, b'1'),
+    ('db_iemr', 't_sys_genitourinarysystem', 'ID', NULL, 'TRANSACTIONAL', 38, b'1'),
+    ('db_iemr', 't_ancdiagnosis', 'ID', NULL, 'TRANSACTIONAL', 39, b'1'),
+    ('db_iemr', 't_ncddiagnosis', 'ID', NULL, 'TRANSACTIONAL', 40, b'1'),
+    ('db_iemr', 't_pncdiagnosis', 'ID', NULL, 'TRANSACTIONAL', 41, b'1'),
+    ('db_iemr', 't_benchiefcomplaint', 'ID', NULL, 'TRANSACTIONAL', 42, b'1'),
+    ('db_iemr', 't_benclinicalobservation', 'ClinicalObservationID', NULL, 'TRANSACTIONAL', 43, b'1'),
+    ('db_iemr', 't_prescription', 'PrescriptionID', NULL, 'TRANSACTIONAL', 44, b'1'),
+    ('db_iemr', 't_prescribeddrug', 'PrescribedDrugID', NULL, 'TRANSACTIONAL', 45, b'1'),
+    ('db_iemr', 't_lab_testorder', 'ID', NULL, 'TRANSACTIONAL', 46, b'1'),
+    ('db_iemr', 't_benreferdetails', 'benReferID', NULL, 'TRANSACTIONAL', 47, b'1'),
+    ('db_iemr', 't_lab_testresult', 'ID', NULL, 'TRANSACTIONAL', 48, b'1'),
+    ('db_iemr', 't_physicalstockentry', 'PhyEntryID', NULL, 'TRANSACTIONAL', 49, b'1'),
+    ('db_iemr', 't_patientissue', 'PatientIssueID', NULL, 'TRANSACTIONAL', 50, b'1'),
+    ('db_iemr', 't_facilityconsumption', 'ConsumptionID', NULL, 'TRANSACTIONAL', 51, b'1'),
+    ('db_iemr', 't_itemstockentry', 'ItemStockEntryID', NULL, 'TRANSACTIONAL', 52, b'1'),
+    ('db_iemr', 't_itemstockexit', 'ItemStockExitID', NULL, 'TRANSACTIONAL', 53, b'1'),
+    ('db_iemr', 't_benmedhistory', 'BenMedHistoryID', NULL, 'TRANSACTIONAL', 54, b'1'),
+    ('db_iemr', 't_femaleobstetrichistory', 'ObstetricHistoryID', NULL, 'TRANSACTIONAL', 55, b'1'),
+    ('db_iemr', 't_benmenstrualdetails', 'BenMenstrualID', NULL, 'TRANSACTIONAL', 56, b'1'),
+    ('db_iemr', 't_benpersonalhabit', 'BenPersonalHabitID', NULL, 'TRANSACTIONAL', 57, b'1'),
+    ('db_iemr', 't_childvaccinedetail1', 'ID', NULL, 'TRANSACTIONAL', 58, b'1'),
+    ('db_iemr', 't_childvaccinedetail2', 'ID', NULL, 'TRANSACTIONAL', 59, b'1'),
+    ('db_iemr', 't_childoptionalvaccinedetail', 'ID', NULL, 'TRANSACTIONAL', 60, b'1'),
+    ('db_iemr', 't_ancwomenvaccinedetail', 'ID', NULL, 'TRANSACTIONAL', 61, b'1'),
+    ('db_iemr', 't_childfeedinghistory', 'ID', NULL, 'TRANSACTIONAL', 62, b'1'),
+    ('db_iemr', 't_benallergyhistory', 'ID', NULL, 'TRANSACTIONAL', 63, b'1'),
+    ('db_iemr', 't_bencomorbiditycondition', 'ID', NULL, 'TRANSACTIONAL', 64, b'1'),
+    ('db_iemr', 't_benmedicationhistory', 'ID', NULL, 'TRANSACTIONAL', 65, b'1'),
+    ('db_iemr', 't_benfamilyhistory', 'ID', NULL, 'TRANSACTIONAL', 66, b'1'),
+    ('db_iemr', 't_perinatalhistory', 'ID', NULL, 'TRANSACTIONAL', 67, b'1'),
+    ('db_iemr', 't_developmenthistory', 'ID', NULL, 'TRANSACTIONAL', 68, b'1'),
+    ('db_iemr', 't_cancerfamilyhistory', 'ID', NULL, 'TRANSACTIONAL', 69, b'1'),
+    ('db_iemr', 't_cancerpersonalhistory', 'ID', NULL, 'TRANSACTIONAL', 70, b'1'),
+    ('db_iemr', 't_cancerdiethistory', 'ID', NULL, 'TRANSACTIONAL', 71, b'1'),
+    ('db_iemr', 't_cancerobstetrichistory', 'ID', NULL, 'TRANSACTIONAL', 72, b'1'),
+    ('db_iemr', 't_cancervitals', 'ID', NULL, 'TRANSACTIONAL', 73, b'1'),
+    ('db_iemr', 't_cancersignandsymptoms', 'ID', NULL, 'TRANSACTIONAL', 74, b'1'),
+    ('db_iemr', 't_cancerlymphnode', 'ID', NULL, 'TRANSACTIONAL', 75, b'1'),
+    ('db_iemr', 't_canceroralexamination', 'ID', NULL, 'TRANSACTIONAL', 76, b'1'),
+    ('db_iemr', 't_cancerbreastexamination', 'ID', NULL, 'TRANSACTIONAL', 77, b'1'),
+    ('db_iemr', 't_cancerabdominalexamination', 'ID', NULL, 'TRANSACTIONAL', 78, b'1'),
+    ('db_iemr', 't_cancergynecologicalexamination', 'ID', NULL, 'TRANSACTIONAL', 79, b'1'),
+    ('db_iemr', 't_cancerdiagnosis', 'ID', NULL, 'TRANSACTIONAL', 80, b'1'),
+    ('db_iemr', 't_cancerimageannotation', 'ID', NULL, 'TRANSACTIONAL', 81, b'1'),
+    ('db_identity', 'i_beneficiaryimage', 'BenImageId', NULL, 'TRANSACTIONAL', 82, b'1'),
+    ('db_iemr', 't_stockadjustment', 'StockAdjustmentID', NULL, 'TRANSACTIONAL', 83, b'1'),
+    ('db_iemr', 't_stocktransfer', 'StockTransferID', NULL, 'TRANSACTIONAL', 84, b'1'),
+    ('db_iemr', 't_patientreturn', 'PatientReturnID', NULL, 'TRANSACTIONAL', 85, b'1'),
+    ('db_iemr', 't_indent', 'IndentID', NULL, 'TRANSACTIONAL', 86, b'1'),
+    ('db_iemr', 't_indentissue', 'IndentIssueID', NULL, 'TRANSACTIONAL', 87, b'1'),
+    ('db_iemr', 't_indentorder', 'IndentOrderID', NULL, 'TRANSACTIONAL', 88, b'1'),
+    ('db_iemr', 't_saitemmapping', 'SAItemMapID', NULL, 'TRANSACTIONAL', 89, b'1'),
+    ('db_iemr', 'tb_stoptb_general_opd', 'id', 'last_mod_date', 'TRANSACTIONAL', 90, b'1'),
+    ('db_iemr', 'tb_stoptb_general_examination', 'id', 'last_mod_date', 'TRANSACTIONAL', 91, b'1'),
+    ('db_iemr', 'tb_screening', 'id', 'last_mod_date', 'TRANSACTIONAL', 92, b'1'),
+    ('db_iemr', 'tb_stoptb_diagnostics', 'id', 'last_mod_date', 'TRANSACTIONAL', 93, b'1'),
+    ('db_iemr', 'tb_suspected', 'id', 'last_mod_date', 'TRANSACTIONAL', 94, b'1'),
+    ('db_iemr', 'tb_confirmed_cases', 'id', 'last_mod_date', 'TRANSACTIONAL', 95, b'1'),
+    ('db_iemr', 'tb_diagnostic_order', 'id', 'last_mod_date', 'TRANSACTIONAL', 96, b'1'),
+    ('db_iemr', 'tb_diagnostic_result', 'id', 'last_mod_date', 'TRANSACTIONAL', 97, b'1'),
+    ('db_iemr', 'tb_diagnostic_document', 'id', 'last_mod_date', 'TRANSACTIONAL', 98, b'1'),
+    ('db_identity', 'i_beneficiarydetails_rmnch', 'beneficiaryDetails_RmnchId', NULL, 'TRANSACTIONAL', 99, b'1'),
+    ('db_identity', 'i_bornbirthdeatils', 'BornBirthDeatilsId', NULL, 'TRANSACTIONAL', 100, b'1'),
+    ('db_identity', 'i_householddetails', 'houseHoldDetailsId', NULL, 'TRANSACTIONAL', 101, b'1'),
+    ('db_iemr', 'tb_stoptb_visit', 'id', 'last_mod_date', 'TRANSACTIONAL', 102, b'1'),
+    ('db_iemr', 't_form_response', 'responseId', 'last_mod_date', 'TRANSACTIONAL', 103, b'1'),
+    ('db_iemr', 't_section_response', 'sectionResponseId', 'last_mod_date', 'TRANSACTIONAL', 104, b'1'),
+    ('db_iemr', 't_question_response', 'questionResponseId', 'last_mod_date', 'TRANSACTIONAL', 105, b'1')
 ON DUPLICATE KEY UPDATE
     VanAutoIncColumnName = VALUES(VanAutoIncColumnName),
+    LastModColumnName    = VALUES(LastModColumnName),
     TableType            = VALUES(TableType),
     SyncOrder            = VALUES(SyncOrder);
