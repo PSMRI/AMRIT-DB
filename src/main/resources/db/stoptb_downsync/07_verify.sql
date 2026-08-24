@@ -1,17 +1,3 @@
--- =============================================================================
--- StopTB down-sync : verification.  READ-ONLY.
---
---   mysql -h <host> -u <user> -p --force --table < 07_verify.sql
---
--- Use --force: a check that runs before its object exists fails with "doesn't
--- exist", and without --force the client stops at the first one.
---
--- Run this on the central DB and on the laptop DB and compare the outputs.
--- =============================================================================
-
--- -----------------------------------------------------------------------------
--- 1. Every configured table carries the four down-sync columns.
--- -----------------------------------------------------------------------------
 SELECT '1. down-sync columns' AS check_name, scope.sch AS schema_name,
        COUNT(*) AS tables_in_scope,
        SUM(IFNULL(cols.found,0) = 4) AS complete,

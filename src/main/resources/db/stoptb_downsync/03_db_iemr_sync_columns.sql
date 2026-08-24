@@ -1,25 +1,3 @@
--- =============================================================================
--- StopTB down-sync : the columns the sync itself requires
---
--- Run by hand, in file-number order, against the StopTB database only.
--- Not a Flyway migration - these scripts live outside db/migration on purpose.
---
--- Every statement is guarded: it checks information_schema first and prints
--- "already exists" instead of failing, so the whole file is safe to re-run.
---
--- The down-sync reads VanID, VanSerialNo, Processed and LastModDate by those
--- exact names - they are written into the SQL text in
--- DataSyncRepositoryCentralDownload and DataSyncRepository, so a table without
--- one of them fails the sync with "Unknown column".
---
--- READ THIS BEFORE RUNNING: nine of these tables already track modification
--- time as last_mod_date. Adding LastModDate gives them a SECOND such column.
--- Both carry ON UPDATE CURRENT_TIMESTAMP so they stay in step, and this is what
--- the previous branch did - but if you would rather not duplicate, the
--- alternative is a code change so the sync resolves the column name per table.
--- The tables affected are marked below.
--- =============================================================================
-
 USE db_iemr;
 
 -- ----------------------------------------------------------------------------

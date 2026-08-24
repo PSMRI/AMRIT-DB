@@ -1,18 +1,3 @@
--- =============================================================================
--- StopTB down-sync : the four down-sync columns on db_identity
---
--- Run by hand, in file-number order, against the StopTB database only.
--- Not a Flyway migration - these scripts live outside db/migration on purpose.
---
--- Every statement is guarded: it checks information_schema first and prints
--- "already exists" instead of failing, so the whole file is safe to re-run.
---
--- 12 tables - every table configured for up-sync in
--- m_synctabledetail. DownSynced / DownSyncDate / DownSyncFailureReason are
--- written by central; LastDownSyncDate is written by the van. Both sides get
--- all four so neither has to care which end it is.
--- =============================================================================
-
 USE db_identity;
 
 -- ----------------------------------------------------------------------------

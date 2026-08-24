@@ -1,16 +1,3 @@
--- =============================================================================
--- StopTB down-sync : indexes
---
--- Run by hand, in file-number order, against the StopTB database only.
--- Not a Flyway migration - these scripts live outside db/migration on purpose.
---
--- Every statement is guarded: it checks information_schema first and prints
--- "already exists" instead of failing, so the whole file is safe to re-run.
---
--- (VanID, DownSynced) serves the down-sync select, (VanID, Processed) the
--- up-sync select. Only the tables that actually carry both columns.
--- =============================================================================
-
 SET @sql = (
     SELECT IF(
         EXISTS (
