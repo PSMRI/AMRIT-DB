@@ -15,6 +15,12 @@ public class FlywayConfig {
 	                .dataSource(dataSource)
 	                .locations("classpath:db/migration/dbiemr")
 	                .baselineOnMigrate(true)
+	                // A migration that was renamed after some environments had already
+	                // moved past its version number stays pending for ever, and
+	                // validation then refuses every later migration. V99 is in exactly
+	                // that state. Allowing out-of-order lets it apply on the
+	                // environments that skipped it, without blocking the rest.
+	                .outOfOrder(true)
 	                .load();
 	    }
 
