@@ -1,0 +1,387 @@
+-- =============================================================================
+-- StopTB down-sync : backfill the already-delivered rows
+--
+-- Run by hand, in file-number order, against the StopTB database only.
+--
+-- A row that already carries a VanSerialNo reached central through the up-sync,
+-- so the van it belongs to already has it. Left at 'N', the first down-sync of
+-- every van would pull its entire history back down.
+--
+-- DownSyncDate is stamped alongside because the "edited in central since
+-- delivery" test is LastModDate > DownSyncDate, and a NULL DownSyncDate never
+-- satisfies it. LastModDate is assigned to itself so that MySQL does not fire
+-- ON UPDATE CURRENT_TIMESTAMP and make every backfilled row look freshly edited.
+--
+-- RUN THIS ONCE, on first setup. Re-running is harmless (it only touches rows
+-- still at 'N'), but do not run it to "fix" a later problem - it would mark
+-- genuinely pending records as already delivered.
+-- =============================================================================
+
+UPDATE db_identity.i_beneficiarydetails
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_identity.i_beneficiaryaddress
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_identity.i_beneficiarycontacts
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_identity.i_beneficiaryaccount
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_identity.i_beneficiarymapping
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_identity.i_beneficiaryfamilymapping
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_identity.i_beneficiaryidentity
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_identity.m_beneficiaryregidmapping
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_benvisitdetail
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_phy_anthropometry
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_phy_vitals
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_benadherence
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_anccare
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_pnccare
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_ncdscreening
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_ncdcare
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_phy_generalexam
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_phy_headtotoe
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_sys_obstetric
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_sys_gastrointestinal
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_sys_cardiovascular
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_sys_respiratory
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_sys_centralnervous
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_sys_musculoskeletalsystem
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_sys_genitourinarysystem
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_ancdiagnosis
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_ncddiagnosis
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_pncdiagnosis
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_benchiefcomplaint
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_benclinicalobservation
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_prescription
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_prescribeddrug
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_lab_testorder
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_benreferdetails
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_lab_testresult
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_physicalstockentry
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_patientissue
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_facilityconsumption
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_itemstockentry
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_itemstockexit
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_benmedhistory
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_femaleobstetrichistory
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_benmenstrualdetails
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_benpersonalhabit
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_childvaccinedetail1
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_childvaccinedetail2
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_childoptionalvaccinedetail
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_ancwomenvaccinedetail
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_childfeedinghistory
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_benallergyhistory
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_bencomorbiditycondition
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_benmedicationhistory
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_benfamilyhistory
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_perinatalhistory
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_developmenthistory
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_cancerfamilyhistory
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_cancerpersonalhistory
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_cancerdiethistory
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_cancerobstetrichistory
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_cancervitals
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_cancersignandsymptoms
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_cancerlymphnode
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_canceroralexamination
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_cancerbreastexamination
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_cancerabdominalexamination
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_cancergynecologicalexamination
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_cancerdiagnosis
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_cancerimageannotation
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_identity.i_beneficiaryimage
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_stockadjustment
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_stocktransfer
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_patientreturn
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_indent
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_indentissue
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_indentorder
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_saitemmapping
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.tb_stoptb_general_opd
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.tb_stoptb_general_examination
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.tb_screening
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.tb_stoptb_diagnostics
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.tb_suspected
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.tb_confirmed_cases
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.tb_diagnostic_order
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.tb_diagnostic_result
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.tb_diagnostic_document
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_identity.i_beneficiarydetails_rmnch
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_identity.i_bornbirthdeatils
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_identity.i_householddetails
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.tb_stoptb_visit
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_form_response
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_section_response
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
+UPDATE db_iemr.t_question_response
+SET DownSynced = 'P', DownSyncDate = NOW(), LastModDate = LastModDate
+WHERE DownSynced = 'N' AND VanSerialNo IS NOT NULL;
+
