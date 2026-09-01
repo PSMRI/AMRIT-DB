@@ -32,7 +32,6 @@ DROP VIEW IF EXISTS db_iemr.v_get_qualityaudit_sectionquestionairevalues;
 
 CREATE 
     ALGORITHM = UNDEFINED 
-    DEFINER = `piramaldev`@`%` 
     SQL SECURITY DEFINER
 VIEW `db_iemr`.`v_get_qualityaudit_sectionquestionairevalues` AS
     SELECT 
