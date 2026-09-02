@@ -549,13 +549,6 @@ ALTER TABLE db_identity.i_beneficiarydetails_rmnch
     ADD COLUMN LastDownSyncDate      DATETIME     NULL COMMENT 'when this row was last received from central',
     ADD COLUMN CentralID             BIGINT       NULL COMMENT 'primary key of this row in the central DB',
     ADD INDEX idx_downsync_centralid_i_beneficiarydetails_rmnch (CentralID, VanID);
-ALTER TABLE db_identity.i_bornbirthdeatils
-    ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N',
-    ADD COLUMN DownSyncDate          DATETIME     NULL,
-    ADD COLUMN DownSyncFailureReason VARCHAR(255) NULL,
-    ADD COLUMN LastDownSyncDate      DATETIME     NULL COMMENT 'when this row was last received from central',
-    ADD COLUMN CentralID             BIGINT       NULL COMMENT 'primary key of this row in the central DB',
-    ADD INDEX idx_downsync_centralid_i_bornbirthdeatils (CentralID, VanID);
 ALTER TABLE db_identity.i_householddetails
     ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N',
     ADD COLUMN DownSyncDate          DATETIME     NULL,

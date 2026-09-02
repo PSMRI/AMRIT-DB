@@ -391,11 +391,6 @@ ALTER TABLE db_identity.i_beneficiarydetails_rmnch
     ADD COLUMN DownSyncDate          DATETIME     NULL COMMENT 'when last delivered to a van',
     ADD COLUMN DownSyncFailureReason VARCHAR(255) NULL COMMENT 'CONFLICT, or the failure detail',
     ADD INDEX idx_downsync_i_beneficiarydetails_rmnch (VanID, DownSynced);
-ALTER TABLE db_identity.i_bornbirthdeatils
-    ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N' COMMENT 'N never sent / P delivered / U update pending / F conflict',
-    ADD COLUMN DownSyncDate          DATETIME     NULL COMMENT 'when last delivered to a van',
-    ADD COLUMN DownSyncFailureReason VARCHAR(255) NULL COMMENT 'CONFLICT, or the failure detail',
-    ADD INDEX idx_downsync_i_bornbirthdeatils (VanID, DownSynced);
 ALTER TABLE db_identity.i_householddetails
     ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N' COMMENT 'N never sent / P delivered / U update pending / F conflict',
     ADD COLUMN DownSyncDate          DATETIME     NULL COMMENT 'when last delivered to a van',
