@@ -569,6 +569,7 @@ ALTER TABLE db_iemr.t_form_response
     ADD COLUMN DownSyncFailureReason VARCHAR(255) NULL,
     ADD COLUMN LastDownSyncDate      DATETIME     NULL COMMENT 'when this row was last received from central',
     ADD COLUMN CentralID             BIGINT       NULL COMMENT 'primary key of this row in the central DB',
+    ADD COLUMN LastModDate           DATETIME     NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'maintained by MySQL - dates a change for the sync; V87 gave this table updatedAt/savedAt, which resolveLastModColumn does not accept',
     ADD INDEX idx_downsync_centralid_t_form_response (CentralID, vanID);
 ALTER TABLE db_iemr.t_section_response
     ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N',
@@ -576,6 +577,7 @@ ALTER TABLE db_iemr.t_section_response
     ADD COLUMN DownSyncFailureReason VARCHAR(255) NULL,
     ADD COLUMN LastDownSyncDate      DATETIME     NULL COMMENT 'when this row was last received from central',
     ADD COLUMN CentralID             BIGINT       NULL COMMENT 'primary key of this row in the central DB',
+    ADD COLUMN LastModDate           DATETIME     NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'maintained by MySQL - dates a change for the sync; V87 gave this table updatedAt/savedAt, which resolveLastModColumn does not accept',
     ADD INDEX idx_downsync_centralid_t_section_response (CentralID, vanID);
 ALTER TABLE db_iemr.t_question_response
     ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N',
@@ -583,4 +585,12 @@ ALTER TABLE db_iemr.t_question_response
     ADD COLUMN DownSyncFailureReason VARCHAR(255) NULL,
     ADD COLUMN LastDownSyncDate      DATETIME     NULL COMMENT 'when this row was last received from central',
     ADD COLUMN CentralID             BIGINT       NULL COMMENT 'primary key of this row in the central DB',
+    ADD COLUMN LastModDate           DATETIME     NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'maintained by MySQL - dates a change for the sync; V87 gave this table updatedAt/savedAt, which resolveLastModColumn does not accept',
     ADD INDEX idx_downsync_centralid_t_question_response (CentralID, vanID);
+
+UPDATE db_iemr.t_form_response    SET LastModDate = COALESCE(updatedAt, createdAt) WHERE LastModDate IS NULL;
+UPDATE db_iemr.t_section_response SET LastModDate = savedAt WHERE LastModDate IS NULL AND savedAt IS NOT NULL;
+UPDATE db_iemr.t_question_response q
+  JOIN db_iemr.t_section_response s ON s.sectionResponseId = q.sectionResponseId
+   SET q.LastModDate = s.LastModDate
+ WHERE q.LastModDate IS NULL AND s.LastModDate IS NOT NULL;

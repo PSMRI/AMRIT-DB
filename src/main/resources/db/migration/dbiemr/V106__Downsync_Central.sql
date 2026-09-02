@@ -405,14 +405,24 @@ ALTER TABLE db_iemr.t_form_response
     ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N' COMMENT 'N never sent / P delivered / U update pending / F conflict',
     ADD COLUMN DownSyncDate          DATETIME     NULL COMMENT 'when last delivered to a van',
     ADD COLUMN DownSyncFailureReason VARCHAR(255) NULL COMMENT 'CONFLICT, or the failure detail',
+    ADD COLUMN LastModDate           DATETIME     NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'maintained by MySQL - dates a change for the sync; V87 gave this table updatedAt/savedAt, which resolveLastModColumn does not accept',
     ADD INDEX idx_downsync_t_form_response (vanID, DownSynced);
 ALTER TABLE db_iemr.t_section_response
     ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N' COMMENT 'N never sent / P delivered / U update pending / F conflict',
     ADD COLUMN DownSyncDate          DATETIME     NULL COMMENT 'when last delivered to a van',
     ADD COLUMN DownSyncFailureReason VARCHAR(255) NULL COMMENT 'CONFLICT, or the failure detail',
+    ADD COLUMN LastModDate           DATETIME     NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'maintained by MySQL - dates a change for the sync; V87 gave this table updatedAt/savedAt, which resolveLastModColumn does not accept',
     ADD INDEX idx_downsync_t_section_response (vanID, DownSynced);
 ALTER TABLE db_iemr.t_question_response
     ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N' COMMENT 'N never sent / P delivered / U update pending / F conflict',
     ADD COLUMN DownSyncDate          DATETIME     NULL COMMENT 'when last delivered to a van',
     ADD COLUMN DownSyncFailureReason VARCHAR(255) NULL COMMENT 'CONFLICT, or the failure detail',
+    ADD COLUMN LastModDate           DATETIME     NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'maintained by MySQL - dates a change for the sync; V87 gave this table updatedAt/savedAt, which resolveLastModColumn does not accept',
     ADD INDEX idx_downsync_t_question_response (vanID, DownSynced);
+
+UPDATE db_iemr.t_form_response    SET LastModDate = COALESCE(updatedAt, createdAt) WHERE LastModDate IS NULL;
+UPDATE db_iemr.t_section_response SET LastModDate = savedAt WHERE LastModDate IS NULL AND savedAt IS NOT NULL;
+UPDATE db_iemr.t_question_response q
+  JOIN db_iemr.t_section_response s ON s.sectionResponseId = q.sectionResponseId
+   SET q.LastModDate = s.LastModDate
+ WHERE q.LastModDate IS NULL AND s.LastModDate IS NOT NULL;
