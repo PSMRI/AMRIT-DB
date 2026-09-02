@@ -355,6 +355,9 @@ ALTER TABLE db_iemr.tb_screening
     ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N' COMMENT 'N never sent / P delivered / U update pending / F conflict',
     ADD COLUMN DownSyncDate          DATETIME     NULL COMMENT 'when last delivered to a van',
     ADD COLUMN DownSyncFailureReason VARCHAR(255) NULL COMMENT 'CONFLICT, or the failure detail',
+    ADD COLUMN vanID                 INT          NULL COMMENT 'the van this record belongs to - the down-sync filters on it',
+    ADD COLUMN vanSerialNo           BIGINT       NULL COMMENT 'this row primary key on the van it came from',
+    ADD COLUMN last_mod_date         DATETIME     NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'maintained by MySQL - dates a change for the sync',
     ADD INDEX idx_downsync_tb_screening (vanID, DownSynced);
 ALTER TABLE db_iemr.tb_stoptb_diagnostics
     ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N' COMMENT 'N never sent / P delivered / U update pending / F conflict',
@@ -365,11 +368,17 @@ ALTER TABLE db_iemr.tb_suspected
     ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N' COMMENT 'N never sent / P delivered / U update pending / F conflict',
     ADD COLUMN DownSyncDate          DATETIME     NULL COMMENT 'when last delivered to a van',
     ADD COLUMN DownSyncFailureReason VARCHAR(255) NULL COMMENT 'CONFLICT, or the failure detail',
+    ADD COLUMN vanID                 INT          NULL COMMENT 'the van this record belongs to - the down-sync filters on it',
+    ADD COLUMN vanSerialNo           BIGINT       NULL COMMENT 'this row primary key on the van it came from',
+    ADD COLUMN last_mod_date         DATETIME     NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'maintained by MySQL - dates a change for the sync',
     ADD INDEX idx_downsync_tb_suspected (vanID, DownSynced);
 ALTER TABLE db_iemr.tb_confirmed_cases
     ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N' COMMENT 'N never sent / P delivered / U update pending / F conflict',
     ADD COLUMN DownSyncDate          DATETIME     NULL COMMENT 'when last delivered to a van',
     ADD COLUMN DownSyncFailureReason VARCHAR(255) NULL COMMENT 'CONFLICT, or the failure detail',
+    ADD COLUMN vanID                 INT          NULL COMMENT 'the van this record belongs to - the down-sync filters on it',
+    ADD COLUMN vanSerialNo           BIGINT       NULL COMMENT 'this row primary key on the van it came from',
+    ADD COLUMN last_mod_date         DATETIME     NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'maintained by MySQL - dates a change for the sync',
     ADD INDEX idx_downsync_tb_confirmed_cases (vanID, DownSynced);
 ALTER TABLE db_iemr.tb_diagnostic_order
     ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N' COMMENT 'N never sent / P delivered / U update pending / F conflict',
@@ -400,6 +409,7 @@ ALTER TABLE db_iemr.tb_stoptb_visit
     ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N' COMMENT 'N never sent / P delivered / U update pending / F conflict',
     ADD COLUMN DownSyncDate          DATETIME     NULL COMMENT 'when last delivered to a van',
     ADD COLUMN DownSyncFailureReason VARCHAR(255) NULL COMMENT 'CONFLICT, or the failure detail',
+    ADD COLUMN last_mod_date         DATETIME     NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'maintained by MySQL - dates a change for the sync',
     ADD INDEX idx_downsync_tb_stoptb_visit (vanID, DownSynced);
 ALTER TABLE db_iemr.t_form_response
     ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N' COMMENT 'N never sent / P delivered / U update pending / F conflict',

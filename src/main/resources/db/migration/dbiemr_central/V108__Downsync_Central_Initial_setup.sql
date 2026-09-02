@@ -82,12 +82,17 @@ UPDATE db_iemr.t_indentorder                    SET DownSynced='P', DownSyncDate
 UPDATE db_iemr.t_saitemmapping                  SET DownSynced='P', DownSyncDate=NOW(), LastModDate=LastModDate WHERE DownSynced='N' AND VanSerialNo IS NOT NULL;
 UPDATE db_iemr.tb_stoptb_general_opd            SET DownSynced='P', DownSyncDate=NOW(), last_mod_date=last_mod_date WHERE DownSynced='N' AND VanSerialNo IS NOT NULL;
 UPDATE db_iemr.tb_stoptb_general_examination    SET DownSynced='P', DownSyncDate=NOW(), last_mod_date=last_mod_date WHERE DownSynced='N' AND VanSerialNo IS NOT NULL;
+UPDATE db_iemr.tb_screening                     SET DownSynced='P', DownSyncDate=NOW(), last_mod_date=last_mod_date WHERE DownSynced='N' AND VanSerialNo IS NOT NULL;
 UPDATE db_iemr.tb_stoptb_diagnostics            SET DownSynced='P', DownSyncDate=NOW(), last_mod_date=last_mod_date WHERE DownSynced='N' AND VanSerialNo IS NOT NULL;
+UPDATE db_iemr.tb_suspected                     SET DownSynced='P', DownSyncDate=NOW(), last_mod_date=last_mod_date WHERE DownSynced='N' AND VanSerialNo IS NOT NULL;
+UPDATE db_iemr.tb_confirmed_cases               SET DownSynced='P', DownSyncDate=NOW(), last_mod_date=last_mod_date WHERE DownSynced='N' AND VanSerialNo IS NOT NULL;
 UPDATE db_iemr.tb_diagnostic_order              SET DownSynced='P', DownSyncDate=NOW(), last_mod_date=last_mod_date WHERE DownSynced='N' AND VanSerialNo IS NOT NULL;
 UPDATE db_iemr.tb_diagnostic_result             SET DownSynced='P', DownSyncDate=NOW(), last_mod_date=last_mod_date WHERE DownSynced='N' AND VanSerialNo IS NOT NULL;
 UPDATE db_iemr.tb_diagnostic_document           SET DownSynced='P', DownSyncDate=NOW(), last_mod_date=last_mod_date WHERE DownSynced='N' AND VanSerialNo IS NOT NULL;
 UPDATE db_identity.i_beneficiarydetails_rmnch   SET DownSynced='P', DownSyncDate=NOW(), LastModDate=LastModDate WHERE DownSynced='N' AND VanSerialNo IS NOT NULL;
 UPDATE db_identity.i_householddetails           SET DownSynced='P', DownSyncDate=NOW(), LastModDate=LastModDate WHERE DownSynced='N' AND VanSerialNo IS NOT NULL;
+UPDATE db_iemr.tb_stoptb_visit                  SET DownSynced='P', DownSyncDate=NOW(), last_mod_date=last_mod_date WHERE DownSynced='N' AND VanSerialNo IS NOT NULL;
 UPDATE db_iemr.t_form_response                  SET DownSynced='P', DownSyncDate=NOW(), LastModDate=LastModDate WHERE DownSynced='N' AND VanSerialNo IS NOT NULL;
 UPDATE db_iemr.t_section_response               SET DownSynced='P', DownSyncDate=NOW(), LastModDate=LastModDate WHERE DownSynced='N' AND VanSerialNo IS NOT NULL;
 UPDATE db_iemr.t_question_response              SET DownSynced='P', DownSyncDate=NOW(), LastModDate=LastModDate WHERE DownSynced='N' AND VanSerialNo IS NOT NULL;
+

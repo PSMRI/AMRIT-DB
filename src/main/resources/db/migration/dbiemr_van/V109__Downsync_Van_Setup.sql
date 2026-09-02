@@ -499,6 +499,9 @@ ALTER TABLE db_iemr.tb_screening
     ADD COLUMN DownSyncFailureReason VARCHAR(255) NULL,
     ADD COLUMN LastDownSyncDate      DATETIME     NULL COMMENT 'when this row was last received from central',
     ADD COLUMN CentralID             BIGINT       NULL COMMENT 'primary key of this row in the central DB',
+    ADD COLUMN vanID                 INT          NULL COMMENT 'the van this record belongs to - the down-sync filters on it',
+    ADD COLUMN vanSerialNo           BIGINT       NULL COMMENT 'this row primary key on the van it came from',
+    ADD COLUMN last_mod_date         DATETIME     NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'maintained by MySQL - dates a change for the sync',
     ADD INDEX idx_downsync_centralid_tb_screening (CentralID, vanID);
 ALTER TABLE db_iemr.tb_stoptb_diagnostics
     ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N',
@@ -513,6 +516,9 @@ ALTER TABLE db_iemr.tb_suspected
     ADD COLUMN DownSyncFailureReason VARCHAR(255) NULL,
     ADD COLUMN LastDownSyncDate      DATETIME     NULL COMMENT 'when this row was last received from central',
     ADD COLUMN CentralID             BIGINT       NULL COMMENT 'primary key of this row in the central DB',
+    ADD COLUMN vanID                 INT          NULL COMMENT 'the van this record belongs to - the down-sync filters on it',
+    ADD COLUMN vanSerialNo           BIGINT       NULL COMMENT 'this row primary key on the van it came from',
+    ADD COLUMN last_mod_date         DATETIME     NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'maintained by MySQL - dates a change for the sync',
     ADD INDEX idx_downsync_centralid_tb_suspected (CentralID, vanID);
 ALTER TABLE db_iemr.tb_confirmed_cases
     ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N',
@@ -520,6 +526,9 @@ ALTER TABLE db_iemr.tb_confirmed_cases
     ADD COLUMN DownSyncFailureReason VARCHAR(255) NULL,
     ADD COLUMN LastDownSyncDate      DATETIME     NULL COMMENT 'when this row was last received from central',
     ADD COLUMN CentralID             BIGINT       NULL COMMENT 'primary key of this row in the central DB',
+    ADD COLUMN vanID                 INT          NULL COMMENT 'the van this record belongs to - the down-sync filters on it',
+    ADD COLUMN vanSerialNo           BIGINT       NULL COMMENT 'this row primary key on the van it came from',
+    ADD COLUMN last_mod_date         DATETIME     NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'maintained by MySQL - dates a change for the sync',
     ADD INDEX idx_downsync_centralid_tb_confirmed_cases (CentralID, vanID);
 ALTER TABLE db_iemr.tb_diagnostic_order
     ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N',
@@ -562,6 +571,7 @@ ALTER TABLE db_iemr.tb_stoptb_visit
     ADD COLUMN DownSyncFailureReason VARCHAR(255) NULL,
     ADD COLUMN LastDownSyncDate      DATETIME     NULL COMMENT 'when this row was last received from central',
     ADD COLUMN CentralID             BIGINT       NULL COMMENT 'primary key of this row in the central DB',
+    ADD COLUMN last_mod_date         DATETIME     NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'maintained by MySQL - dates a change for the sync',
     ADD INDEX idx_downsync_centralid_tb_stoptb_visit (CentralID, vanID);
 ALTER TABLE db_iemr.t_form_response
     ADD COLUMN DownSynced            CHAR(1)      NOT NULL DEFAULT 'N',
