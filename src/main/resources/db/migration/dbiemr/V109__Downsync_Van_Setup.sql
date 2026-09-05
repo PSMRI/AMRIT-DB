@@ -604,3 +604,7 @@ UPDATE db_iemr.t_question_response q
   JOIN db_iemr.t_section_response s ON s.sectionResponseId = q.sectionResponseId
    SET q.LastModDate = s.LastModDate
  WHERE q.LastModDate IS NULL AND s.LastModDate IS NOT NULL;
+
+ALTER TABLE db_iemr.t_form_response
+    CHANGE last_mod_date LastModDate DATETIME NULL
+    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
