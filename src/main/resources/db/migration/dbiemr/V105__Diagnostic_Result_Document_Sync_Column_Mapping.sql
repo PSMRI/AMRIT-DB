@@ -22,6 +22,7 @@
 
 USE db_iemr;
 
+drop procedure if exists sp_v106_assert_synctabledetail_row;
 DELIMITER $$
 CREATE PROCEDURE sp_v106_assert_synctabledetail_row(IN p_table_name VARCHAR(100))
 BEGIN
@@ -38,24 +39,24 @@ DELIMITER ;
 -- tb_diagnostic_result
 -- ----------------------------------------------------------
 
-CALL sp_v106_assert_synctabledetail_row('tb_diagnostic_result');
+-- CALL sp_v106_assert_synctabledetail_row('tb_diagnostic_result');
 
-UPDATE m_synctabledetail
-SET ServerColumnName = CONCAT(ServerColumnName, ',external_order_id'),
-    VanColumnName = CONCAT(VanColumnName, ',external_order_id')
-WHERE TableName = 'tb_diagnostic_result'
-  AND FIND_IN_SET('external_order_id', ServerColumnName) = 0;
+-- UPDATE m_synctabledetail
+-- SET ServerColumnName = CONCAT(ServerColumnName, ',external_order_id'),
+--     VanColumnName = CONCAT(VanColumnName, ',external_order_id')
+-- WHERE TableName = 'tb_diagnostic_result'
+--   AND FIND_IN_SET('external_order_id', ServerColumnName) = 0;
 
--- ----------------------------------------------------------
--- tb_diagnostic_document
--- ----------------------------------------------------------
+-- -- ----------------------------------------------------------
+-- -- tb_diagnostic_document
+-- -- ----------------------------------------------------------
 
-CALL sp_v106_assert_synctabledetail_row('tb_diagnostic_document');
+-- CALL sp_v106_assert_synctabledetail_row('tb_diagnostic_document');
 
-UPDATE m_synctabledetail
-SET ServerColumnName = CONCAT(ServerColumnName, ',external_order_id'),
-    VanColumnName = CONCAT(VanColumnName, ',external_order_id')
-WHERE TableName = 'tb_diagnostic_document'
-  AND FIND_IN_SET('external_order_id', ServerColumnName) = 0;
+-- UPDATE m_synctabledetail
+-- SET ServerColumnName = CONCAT(ServerColumnName, ',external_order_id'),
+--     VanColumnName = CONCAT(VanColumnName, ',external_order_id')
+-- WHERE TableName = 'tb_diagnostic_document'
+--   AND FIND_IN_SET('external_order_id', ServerColumnName) = 0;
 
 DROP PROCEDURE sp_v106_assert_synctabledetail_row;
