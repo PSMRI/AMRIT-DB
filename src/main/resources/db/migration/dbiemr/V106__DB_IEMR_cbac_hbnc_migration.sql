@@ -4,32 +4,6 @@ SET @schema = 'db_iemr';
 
 
 -- =========================================================
--- t_hbnc_visit.is_admitted_in_sncu
--- =========================================================
-
-SET @table = 't_hbnc_visit';
-SET @col = 'is_admitted_in_sncu';
-
-SET @sql = (
-    SELECT IF(COUNT(*) = 0,
-        CONCAT(
-            'ALTER TABLE `', @schema, '`.`', @table,
-            '` ADD COLUMN `', @col, '` TINYINT(1) DEFAULT NULL'
-        ),
-        'SELECT "is_admitted_in_sncu already exists"'
-    )
-    FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA = @schema
-      AND TABLE_NAME = @table
-      AND COLUMN_NAME = @col
-);
-
-PREPARE stmt FROM @sql;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
--- =========================================================
 -- t_infant_register.is_sncu
 -- =========================================================
 
