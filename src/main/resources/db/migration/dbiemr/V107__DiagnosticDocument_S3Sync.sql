@@ -52,19 +52,33 @@ SET @sql = (
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
 -- ==========================================================
--- Register the columns above in the generic van<->central sync column mapping
--- (m_synctabledetail.ServerColumnName / VanColumnName) for tb_diagnostic_document, following
--- the same pattern as V105 for external_order_id.
---
--- Skipped, not failed, when the row is absent: see V105's header -- the m_synctabledetail row
--- for tb_diagnostic_document is not seeded by any migration in this repo, so on a server with
--- no such row the UPDATEs below simply match nothing.
---
--- Idempotent: FIND_IN_SET guards every append, so re-running only touches columns not already
--- present in the list.
--- ==========================================================
+-- ============================================================
+-- Guarded UPDATE script for m_synctabledetail
+-- Skips execution entirely if the table or the required columns
+-- (ServerColumnName, VanColumnName) do not exist in the current
+-- database (checked via INFORMATION_SCHEMA, schema()-scoped).
+-- ============================================================
 
-UPDATE m_synctabledetail
+-- ------------------------------------------------------------
+-- 1) docsProcessed
+-- ------------------------------------------------------------
+
+set sql_safe_updates=0;
+SET @tbl_exists := (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES
+    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'm_synctabledetail'
+);
+SET @col_server_exists := (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'm_synctabledetail' AND COLUMN_NAME = 'ServerColumnName'
+);
+SET @col_van_exists := (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'm_synctabledetail' AND COLUMN_NAME = 'VanColumnName'
+);
+
+SET @sql := IF(@tbl_exists = 1 AND @col_server_exists = 1 AND @col_van_exists = 1,
+"UPDATE m_synctabledetail
 SET ServerColumnName = CASE
         WHEN FIND_IN_SET('docsProcessed', ServerColumnName) = 0
         THEN CONCAT(ServerColumnName, ',docsProcessed')
@@ -79,9 +93,18 @@ WHERE TableName = 'tb_diagnostic_document'
   AND (
       FIND_IN_SET('docsProcessed', ServerColumnName) = 0
       OR FIND_IN_SET('docsProcessed', VanColumnName) = 0
-  );
+  )",
+"SELECT 'SKIPPED: m_synctabledetail table/columns not found - docsProcessed update skipped' AS message");
 
-UPDATE m_synctabledetail
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+-- ------------------------------------------------------------
+-- 2) docSyncedDate
+-- ------------------------------------------------------------
+SET @sql := IF(@tbl_exists = 1 AND @col_server_exists = 1 AND @col_van_exists = 1,
+"UPDATE m_synctabledetail
 SET ServerColumnName = CASE
         WHEN FIND_IN_SET('docSyncedDate', ServerColumnName) = 0
         THEN CONCAT(ServerColumnName, ',docSyncedDate')
@@ -96,9 +119,18 @@ WHERE TableName = 'tb_diagnostic_document'
   AND (
       FIND_IN_SET('docSyncedDate', ServerColumnName) = 0
       OR FIND_IN_SET('docSyncedDate', VanColumnName) = 0
-  );
+  )",
+"SELECT 'SKIPPED: m_synctabledetail table/columns not found - docSyncedDate update skipped' AS message");
 
-UPDATE m_synctabledetail
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+-- ------------------------------------------------------------
+-- 3) docSyncFailureReason
+-- ------------------------------------------------------------
+SET @sql := IF(@tbl_exists = 1 AND @col_server_exists = 1 AND @col_van_exists = 1,
+"UPDATE m_synctabledetail
 SET ServerColumnName = CASE
         WHEN FIND_IN_SET('docSyncFailureReason', ServerColumnName) = 0
         THEN CONCAT(ServerColumnName, ',docSyncFailureReason')
@@ -113,9 +145,18 @@ WHERE TableName = 'tb_diagnostic_document'
   AND (
       FIND_IN_SET('docSyncFailureReason', ServerColumnName) = 0
       OR FIND_IN_SET('docSyncFailureReason', VanColumnName) = 0
-  );
+  )",
+"SELECT 'SKIPPED: m_synctabledetail table/columns not found - docSyncFailureReason update skipped' AS message");
 
-UPDATE m_synctabledetail
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+-- ------------------------------------------------------------
+-- 4) s3_path
+-- ------------------------------------------------------------
+SET @sql := IF(@tbl_exists = 1 AND @col_server_exists = 1 AND @col_van_exists = 1,
+"UPDATE m_synctabledetail
 SET ServerColumnName = CASE
         WHEN FIND_IN_SET('s3_path', ServerColumnName) = 0
         THEN CONCAT(ServerColumnName, ',s3_path')
@@ -130,20 +171,12 @@ WHERE TableName = 'tb_diagnostic_document'
   AND (
       FIND_IN_SET('s3_path', ServerColumnName) = 0
       OR FIND_IN_SET('s3_path', VanColumnName) = 0
-  );
+  )",
+"SELECT 'SKIPPED: m_synctabledetail table/columns not found - s3_path update skipped' AS message");
 
--- ----------------------------------------------------------
--- Post-state, for anyone running this by hand
--- ----------------------------------------------------------
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
 
-SELECT s.TableName,
-       IF(FIND_IN_SET('docsProcessed', s.ServerColumnName) > 0, 'ok', 'MISSING') AS docsProcessed_server,
-       IF(FIND_IN_SET('docsProcessed', s.VanColumnName) > 0, 'ok', 'MISSING') AS docsProcessed_van,
-       IF(FIND_IN_SET('docSyncedDate', s.ServerColumnName) > 0, 'ok', 'MISSING') AS docSyncedDate_server,
-       IF(FIND_IN_SET('docSyncedDate', s.VanColumnName) > 0, 'ok', 'MISSING') AS docSyncedDate_van,
-       IF(FIND_IN_SET('docSyncFailureReason', s.ServerColumnName) > 0, 'ok', 'MISSING') AS docSyncFailureReason_server,
-       IF(FIND_IN_SET('docSyncFailureReason', s.VanColumnName) > 0, 'ok', 'MISSING') AS docSyncFailureReason_van,
-       IF(FIND_IN_SET('s3_path', s.ServerColumnName) > 0, 'ok', 'MISSING') AS s3_path_server,
-       IF(FIND_IN_SET('s3_path', s.VanColumnName) > 0, 'ok', 'MISSING') AS s3_path_van
-FROM m_synctabledetail s
-WHERE s.TableName = 'tb_diagnostic_document';
+-- Cleanup
+SET @tbl_exists := NULL, @col_server_exists := NULL, @col_van_exists := NULL, @sql := NULL;
