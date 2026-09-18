@@ -1,7 +1,71 @@
 USE db_iemr;
 
-UPDATE m_nikshay_state    SET StateName    = TRIM(StateName)    WHERE StateName    <> TRIM(StateName);
-UPDATE m_nikshay_district SET DistrictName = TRIM(DistrictName) WHERE DistrictName <> TRIM(DistrictName);
-UPDATE m_nikshay_tu       SET TUName       = TRIM(TUName)       WHERE TUName       <> TRIM(TUName);
-UPDATE m_nikshay_facility SET FacilityName = TRIM(FacilityName) WHERE FacilityName <> TRIM(FacilityName);
-UPDATE m_nikshay_village  SET VillageName  = TRIM(VillageName)  WHERE VillageName  <> TRIM(VillageName);
+SET @tbl := 'm_nikshay_state';
+SET @col := 'StateName';
+SET @exists := (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = @tbl AND COLUMN_NAME = @col
+);
+SET @sql := IF(@exists > 0,
+    CONCAT('UPDATE `', @tbl, '` SET `', @col, '` = TRIM(`', @col, '`) WHERE `', @col, '` <> TRIM(`', @col, '`)'),
+    'DO 0'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+SET @tbl := 'm_nikshay_district';
+SET @col := 'DistrictName';
+SET @exists := (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = @tbl AND COLUMN_NAME = @col
+);
+SET @sql := IF(@exists > 0,
+    CONCAT('UPDATE `', @tbl, '` SET `', @col, '` = TRIM(`', @col, '`) WHERE `', @col, '` <> TRIM(`', @col, '`)'),
+    'DO 0'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+SET @tbl := 'm_nikshay_tu';
+SET @col := 'TUName';
+SET @exists := (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = @tbl AND COLUMN_NAME = @col
+);
+SET @sql := IF(@exists > 0,
+    CONCAT('UPDATE `', @tbl, '` SET `', @col, '` = TRIM(`', @col, '`) WHERE `', @col, '` <> TRIM(`', @col, '`)'),
+    'DO 0'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+SET @tbl := 'm_nikshay_facility';
+SET @col := 'FacilityName';
+SET @exists := (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = @tbl AND COLUMN_NAME = @col
+);
+SET @sql := IF(@exists > 0,
+    CONCAT('UPDATE `', @tbl, '` SET `', @col, '` = TRIM(`', @col, '`) WHERE `', @col, '` <> TRIM(`', @col, '`)'),
+    'DO 0'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+SET @tbl := 'm_nikshay_village';
+SET @col := 'VillageName';
+SET @exists := (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = @tbl AND COLUMN_NAME = @col
+);
+SET @sql := IF(@exists > 0,
+    CONCAT('UPDATE `', @tbl, '` SET `', @col, '` = TRIM(`', @col, '`) WHERE `', @col, '` <> TRIM(`', @col, '`)'),
+    'DO 0'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
