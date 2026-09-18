@@ -1,14 +1,5 @@
 USE db_iemr;
 
--- Nikshay location hierarchy remap (see bootstrap.sh masterdata) resolves every
--- TU/facility/village by NAME, not by numeric ID, so the resulting data-load SQL
--- stays portable across environments instead of hardcoding one database's own
--- auto-increment IDs. Without an index on these name columns, every one of those
--- lookups is a full table scan -- m_nikshay_facility alone runs into the hundreds
--- of thousands of rows, which is what made the initial unindexed version slow.
--- Idempotent (IF NOT EXISTS via information_schema.statistics), matches the
--- pattern already used in V89__DB_iemr_performance_index.sql.
-
 SET @idx_exists = (
     SELECT COUNT(*)
     FROM information_schema.statistics
@@ -30,8 +21,6 @@ SET @sql = IF(
 PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
-
-
 
 SET @idx_exists = (
     SELECT COUNT(*)
@@ -55,8 +44,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
-
-
 SET @idx_exists = (
     SELECT COUNT(*)
     FROM information_schema.statistics
@@ -78,8 +65,6 @@ SET @sql = IF(
 PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
-
-
 
 SET @idx_exists = (
     SELECT COUNT(*)
