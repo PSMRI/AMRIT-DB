@@ -2,7 +2,6 @@ DROP VIEW IF EXISTS v_fetchfacility;
 
 CREATE 
     ALGORITHM = UNDEFINED 
-    DEFINER = `piramaldev`@`%` 
     SQL SECURITY DEFINER
 VIEW `v_fetchfacility` AS
     SELECT 

@@ -4,7 +4,6 @@ Drop VIEW if Exists v_drugforprescription;
 
 CREATE 
     ALGORITHM = UNDEFINED 
-    DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
 VIEW `db_iemr`.`v_drugforprescription` AS
     SELECT 
