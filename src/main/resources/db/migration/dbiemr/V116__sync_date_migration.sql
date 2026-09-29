@@ -1,8 +1,8 @@
 use db_iemr;
 
-SET @tbl_name = 'general_opd_entry';
-SET @schema = 'db_iemr';
+SET @schema_name = 'db_iemr';
 
+SET @tbl_name = 'general_opd_entry';
 
 SET @col_name = 'synced_by';
 SET @col_exists = 0;
