@@ -519,3 +519,81 @@ SET @sql = IF(@col_exists = 0,
 PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
+
+SET @tbl_name = 't_benreferdetails';
+
+-- 1. benId
+SET @col_name = 'benId';
+SET @col_exists = 0;
+
+PREPARE chk_col FROM
+'SELECT COUNT(*) INTO @col_exists
+ FROM information_schema.columns
+ WHERE table_schema = ? AND table_name = ? AND column_name = ?';
+
+EXECUTE chk_col USING @schema_name, @tbl_name, @col_name;
+DEALLOCATE PREPARE chk_col;
+
+SET @sql = IF(
+    @col_exists = 0,
+    CONCAT(
+        'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
+        '` ADD COLUMN `', @col_name, '` BIGINT DEFAULT NULL'
+    ),
+    CONCAT(
+        'SELECT ''', @tbl_name, '.', @col_name,
+        ' already exists'''
+    )
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+-- 2. referral_type
+SET @col_name = 'referral_type';
+SET @col_exists = 0;
+
+PREPARE chk_col FROM
+'SELECT COUNT(*) INTO @col_exists
+ FROM information_schema.columns
+ WHERE table_schema = ? AND table_name = ? AND column_name = ?';
+
+EXECUTE chk_col USING @schema_name, @tbl_name, @col_name;
+DEALLOCATE PREPARE chk_col;
+
+SET @sql = IF(
+    @col_exists = 0,
+    CONCAT(
+        'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
+        '` ADD COLUMN `', @col_name, '` VARCHAR(500) DEFAULT NULL'
+    ),
+    CONCAT(
+        'SELECT ''', @tbl_name, '.', @col_name,
+        ' already exists'''
+    )
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+CREATE TABLE if not exists `tb_referral_follow_up` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `ben_id` BIGINT DEFAULT NULL,
+    `household_id` BIGINT DEFAULT NULL,
+    `referred_on_date` TIMESTAMP NULL DEFAULT NULL,
+    `follow_up_date` TIMESTAMP NULL DEFAULT NULL,
+    `follow_up_status` VARCHAR(250) DEFAULT NULL,
+    `created_date` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_date` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `created_by` VARCHAR(100) DEFAULT NULL,
+    `updated_by` VARCHAR(100) DEFAULT NULL,
+    `synced_by` VARCHAR(100) DEFAULT NULL,
+    `user_id` INT DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `idx_tb_referral_follow_up_ben_id` (`ben_id`),
+    KEY `idx_tb_referral_follow_up_household_id` (`household_id`),
+    KEY `idx_tb_referral_follow_up_user_id` (`user_id`)
+);
