@@ -3,7 +3,7 @@ Drop procedure if exists PR_FetchECDMotherOutboundWorklist;
 
 DELIMITER $$
 
-CREATE DEFINER=`piramaldev`@`%` PROCEDURE `PR_FetchECDMotherOutboundWorklist`(v_AllocatedUserID int)
+CREATE PROCEDURE `PR_FetchECDMotherOutboundWorklist`(v_AllocatedUserID int)
 BEGIN
  declare v_NextAttemptPeriod int(11);
 select distinct NextAttemptPeriod into v_NextAttemptPeriod from m_mctscallconfiguration
