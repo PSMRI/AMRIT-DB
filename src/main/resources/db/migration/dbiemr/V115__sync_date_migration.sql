@@ -1270,6 +1270,52 @@ EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
 
+SET @tbl_name = 'cdtf_visit_details';
+
+SET @col_name = 'synced_by';
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
+  AND column_name = @col_name;
+
+SET @sql = IF(
+    @col_exists = 0,
+    CONCAT(
+        'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
+        '` ADD COLUMN `synced_by` VARCHAR(255) DEFAULT NULL'
+    ),
+    'SELECT "cdtf_visit_details.synced_by already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+SET @col_name = 'synced_date';
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
+  AND column_name = @col_name;
+
+SET @sql = IF(
+    @col_exists = 0,
+    CONCAT(
+        'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
+        '` ADD COLUMN `synced_date` TIMESTAMP NULL DEFAULT NULL'
+    ),
+    'SELECT "cdtf_visit_details.synced_date already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
 SET @tbl_name = 't_anc_visit';
 
 SET @col_name = 'synced_by';
