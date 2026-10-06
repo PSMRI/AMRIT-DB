@@ -1,5 +1,3 @@
--- tb_diagnostic_order: revert the V114 rename (reason_to_close -> reason_for_refusal).
-
 USE db_iemr;
 
 SET @schema_name = 'db_iemr';
