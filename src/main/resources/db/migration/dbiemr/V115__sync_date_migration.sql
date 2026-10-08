@@ -1,3 +1,5 @@
+use db_iemr;
+
 SET @schema_name = 'db_iemr';
 
 SET @tbl_name = 'general_opd_entry';
@@ -994,13 +996,36 @@ SET @tbl_exists = (SELECT COUNT(*) FROM information_schema.tables WHERE table_sc
 
 -- synced_by
 SET @col_name = 'synced_by';
-AND column_name = @col_name;
+SET @col_exists = 0;
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
+  AND column_name = @col_name;
 
 SET @sql = IF(
     @col_exists = 0 AND @tbl_exists > 0,
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_by` VARCHAR(255) DEFAULT NULL'
+    ),
+    'SELECT "synced_by already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+-- synced_date
+SET @col_name = 'synced_date';
+SET @col_exists = 0;
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
   AND column_name = @col_name;
 
 SET @sql = IF(
@@ -1008,6 +1033,13 @@ SET @sql = IF(
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_date` TIMESTAMP NULL DEFAULT NULL'
+    ),
+    'SELECT "synced_date already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
 
 
 SET @tbl_name = 'm_incentive_activity';
@@ -1015,6 +1047,11 @@ SET @tbl_exists = (SELECT COUNT(*) FROM information_schema.tables WHERE table_sc
 
 -- synced_by
 SET @col_name = 'synced_by';
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
   AND column_name = @col_name;
 
 SET @sql = IF(
@@ -1022,6 +1059,22 @@ SET @sql = IF(
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_by` VARCHAR(255) DEFAULT NULL'
+    ),
+    'SELECT "m_incentive_activity.synced_by already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+-- synced_date
+SET @col_name = 'synced_date';
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
   AND column_name = @col_name;
 
 SET @sql = IF(
@@ -1029,6 +1082,13 @@ SET @sql = IF(
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_date` TIMESTAMP NULL DEFAULT NULL'
+    ),
+    'SELECT "m_incentive_activity.synced_date already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
 
 
 SET @tbl_name = 't_cdr';
@@ -1036,6 +1096,12 @@ SET @tbl_exists = (SELECT COUNT(*) FROM information_schema.tables WHERE table_sc
 
 
 -- synced_by
+SET @col_name = 'synced_by';
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
   AND column_name = @col_name;
 
 SET @sql = IF(
@@ -1043,6 +1109,22 @@ SET @sql = IF(
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_by` VARCHAR(255) DEFAULT NULL'
+    ),
+    'SELECT "t_cdr.synced_by already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+-- synced_date
+SET @col_name = 'synced_date';
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
   AND column_name = @col_name;
 
 SET @sql = IF(
@@ -1050,6 +1132,14 @@ SET @sql = IF(
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_date` TIMESTAMP NULL DEFAULT NULL'
+    ),
+    'SELECT "t_cdr.synced_date already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
 
 
 SET @tbl_name = 'anc_counselling_care';
@@ -1057,6 +1147,11 @@ SET @tbl_exists = (SELECT COUNT(*) FROM information_schema.tables WHERE table_sc
 
 
 SET @col_name = 'synced_by';
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
   AND column_name = @col_name;
 
 SET @sql = IF(
@@ -1064,6 +1159,21 @@ SET @sql = IF(
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_by` VARCHAR(255) DEFAULT NULL'
+    ),
+    'SELECT "anc_counselling_care.synced_by already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+SET @col_name = 'synced_date';
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
   AND column_name = @col_name;
 
 SET @sql = IF(
@@ -1071,6 +1181,12 @@ SET @sql = IF(
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_date` TIMESTAMP NULL DEFAULT NULL'
+    ),
+    'SELECT "anc_counselling_care.synced_date already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
 SET @tbl_name = 't_eligible_couple_register';
@@ -1078,6 +1194,11 @@ SET @tbl_exists = (SELECT COUNT(*) FROM information_schema.tables WHERE table_sc
 
 
 SET @col_name = 'synced_by';
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
   AND column_name = @col_name;
 
 SET @sql = IF(
@@ -1085,6 +1206,21 @@ SET @sql = IF(
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_by` VARCHAR(255) DEFAULT NULL'
+    ),
+    'SELECT "t_eligible_couple_register.synced_by already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+SET @col_name = 'synced_date';
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
   AND column_name = @col_name;
 
 SET @sql = IF(
@@ -1092,6 +1228,13 @@ SET @sql = IF(
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_date` TIMESTAMP NULL DEFAULT NULL'
+    ),
+    'SELECT "t_eligible_couple_register.synced_date already exists"'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+-- ==========================
 -- Table: t_ors_distribution
 -- ==========================
 SET @tbl_name = 'campaign_ors';
@@ -1138,6 +1281,10 @@ SET @tbl_exists = (SELECT COUNT(*) FROM information_schema.tables WHERE table_sc
 
 SET @col_name = 'synced_by';
 
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
   AND column_name = @col_name;
 
 SET @sql = IF(
@@ -1145,6 +1292,21 @@ SET @sql = IF(
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_by` VARCHAR(255) DEFAULT NULL'
+    ),
+    'SELECT "asha_profile.synced_by already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+SET @col_name = 'synced_date';
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
   AND column_name = @col_name;
 
 SET @sql = IF(
@@ -1152,6 +1314,13 @@ SET @sql = IF(
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_date` TIMESTAMP NULL DEFAULT NULL'
+    ),
+    'SELECT "asha_profile.synced_date already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
 
 
 SET @tbl_name = 't_anc_visit';
@@ -1159,6 +1328,10 @@ SET @tbl_exists = (SELECT COUNT(*) FROM information_schema.tables WHERE table_sc
 
 SET @col_name = 'synced_by';
 
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
   AND column_name = @col_name;
 
 SET @sql = IF(
@@ -1166,6 +1339,21 @@ SET @sql = IF(
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_by` VARCHAR(255) DEFAULT NULL'
+    ),
+    'SELECT "t_anc_visit.synced_by already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+SET @col_name = 'synced_date';
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
   AND column_name = @col_name;
 
 SET @sql = IF(
@@ -1173,6 +1361,12 @@ SET @sql = IF(
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_date` TIMESTAMP NULL DEFAULT NULL'
+    ),
+    'SELECT "t_anc_visit.synced_date already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
 SET @tbl_name = 't_eye_checkup';
@@ -1180,6 +1374,12 @@ SET @tbl_exists = (SELECT COUNT(*) FROM information_schema.tables WHERE table_sc
 
 
 -- synced_by
+SET @col_name = 'synced_by';
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
   AND column_name = @col_name;
 
 SET @sql = IF(
@@ -1187,6 +1387,22 @@ SET @sql = IF(
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_by` VARCHAR(255) DEFAULT NULL'
+    ),
+    'SELECT "t_eye_checkup.synced_by already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+-- synced_date
+SET @col_name = 'synced_date';
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
   AND column_name = @col_name;
 
 SET @sql = IF(
@@ -1194,6 +1410,13 @@ SET @sql = IF(
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_date` TIMESTAMP NULL DEFAULT NULL'
+    ),
+    'SELECT "t_eye_checkup.synced_date already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
 
 
 SET @tbl_name = 'uwin_session_record';
@@ -1201,6 +1424,11 @@ SET @tbl_exists = (SELECT COUNT(*) FROM information_schema.tables WHERE table_sc
 
 -- synced_by
 SET @col_name = 'synced_by';
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
   AND column_name = @col_name;
 
 SET @sql = IF(
@@ -1208,6 +1436,22 @@ SET @sql = IF(
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_by` VARCHAR(255) DEFAULT NULL'
+    ),
+    'SELECT "ELIGIBLE_COUPLE_TRACKING.synced_by already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+-- synced_date
+SET @col_name = 'synced_date';
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
   AND column_name = @col_name;
 
 SET @sql = IF(
@@ -1215,6 +1459,13 @@ SET @sql = IF(
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_date` TIMESTAMP NULL DEFAULT NULL'
+    ),
+    'SELECT "ELIGIBLE_COUPLE_TRACKING.synced_date already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
 
 
 SET @tbl_name = 'ELIGIBLE_COUPLE_TRACKING';
@@ -1222,6 +1473,11 @@ SET @tbl_exists = (SELECT COUNT(*) FROM information_schema.tables WHERE table_sc
 
 -- synced_by
 SET @col_name = 'synced_by';
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
   AND column_name = @col_name;
 
 SET @sql = IF(
@@ -1229,6 +1485,22 @@ SET @sql = IF(
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_by` VARCHAR(255) DEFAULT NULL'
+    ),
+    'SELECT "ELIGIBLE_COUPLE_TRACKING.synced_by already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+-- synced_date
+SET @col_name = 'synced_date';
+
+SELECT COUNT(*) INTO @col_exists
+FROM information_schema.columns
+WHERE table_schema = @schema_name
+  AND table_name = @tbl_name
   AND column_name = @col_name;
 
 SET @sql = IF(
@@ -1236,3 +1508,49 @@ SET @sql = IF(
     CONCAT(
         'ALTER TABLE `', @schema_name, '`.`', @tbl_name,
         '` ADD COLUMN `synced_date` TIMESTAMP NULL DEFAULT NULL'
+    ),
+    'SELECT "ELIGIBLE_COUPLE_TRACKING.synced_date already exists"'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+CREATE TABLE if not exists db_iemr.`tb_tpt_follow_up` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+
+    `ben_id` BIGINT DEFAULT NULL,
+    `household_id` BIGINT DEFAULT NULL,
+    `regimen_type` VARCHAR(250) DEFAULT NULL,
+
+    `treatment_start_date` TIMESTAMP NULL DEFAULT NULL,
+    `expected_treatment_completion_date` TIMESTAMP NULL DEFAULT NULL,
+
+    `follow_up_date` TIMESTAMP NULL DEFAULT NULL,
+    `follow_up_month` VARCHAR(250) DEFAULT NULL,
+    `adherence_to_medicines` VARCHAR(250) DEFAULT NULL,
+    `any_discomfort` BIT(1) DEFAULT NULL,
+
+    `treatment_completed` BIT(1) DEFAULT NULL,
+    `actual_treatment_completion_date` TIMESTAMP NULL DEFAULT NULL,
+
+    `tpt_outcome` VARCHAR(100) DEFAULT NULL,
+    `date_of_death` TIMESTAMP NULL DEFAULT NULL,
+    `place_of_death` VARCHAR(100) DEFAULT NULL,
+    `reason_for_death` VARCHAR(255) DEFAULT NULL,
+
+    `created_date` TIMESTAMP NULL DEFAULT NULL,
+    `updated_date` TIMESTAMP NULL DEFAULT NULL,
+
+    `created_by` VARCHAR(255) DEFAULT NULL,
+    `updated_by` VARCHAR(255) DEFAULT NULL,
+    `synced_by` VARCHAR(255) DEFAULT NULL,
+    `user_id` INT DEFAULT NULL,
+
+    PRIMARY KEY (`id`),
+
+    KEY `idx_tb_tpt_follow_up_ben_id` (`ben_id`),
+    KEY `idx_tb_tpt_follow_up_household_id` (`household_id`),
+    KEY `idx_tb_tpt_follow_up_user_id` (`user_id`)
+
+);
