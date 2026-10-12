@@ -28,7 +28,7 @@
         S.BatchNo                                     AS `Batch No`,
         S.UnitCostPrice                               AS `Unit Cost Price`,
         DATE_FORMAT(S.ExpiryDate, '%d-%m-%Y')         AS `Expiry Date`,
-        S.ReceivedInPeriod                            AS `Total Quantity Received(Batch wise)`,
+        S.BatchQuantity                               AS `Total Quantity Received(Batch wise)`,
         S.OpeningStock                                AS `Opening Stock`,
         S.ExitInPeriod                                AS `Dispensed Quantity`,
         S.AdjInPeriodReceipt                          AS `Adjustment Receipt`,
@@ -52,6 +52,7 @@
                 ITM.Strength,
                 UOM.UOMName,
                 ITMC.ItemCategoryName,
+                IFNULL(ISE.Quantity, 0) AS BatchQuantity,
                 (CASE WHEN ISE.CreatedDate <  v_FromDate THEN GREATEST(IFNULL(ISE.Quantity,0),0) ELSE 0 END) AS ReceivedBefore,
                 (CASE WHEN ISE.CreatedDate >= v_FromDate THEN GREATEST(IFNULL(ISE.Quantity,0),0) ELSE 0 END) AS ReceivedInPeriod,
                 IFNULL(EX.ExitBeforeFrom, 0)          AS ExitBeforeFrom,
@@ -110,12 +111,18 @@
               AND IFNULL(FAC.Deleted, 0) = 0
               AND ISE.CreatedDate < v_ToDateExcl
               AND IFNULL(ISE.Deleted, 0) = 0
+              -- Same batches as the stock screens (itemBatchPartialSearch):
+              -- stock in hand, item mapped to the facility and not deleted.
+              AND IFNULL(ISE.QuantityInHand, 0) > 0
+              AND IFNULL(ITM.Deleted, 0) = 0
+              AND EXISTS (
+                    SELECT 1 FROM db_iemr.m_itemfacilitymapping MIF
+                    WHERE MIF.ItemID = ISE.ItemID
+                      AND MIF.FacilityID = ISE.FacilityID
+                      AND IFNULL(MIF.Deleted, 0) = 0
+                  )
         ) B
     ) S
-    -- Only batches that had stock available in the period.
-    WHERE S.OpeningStock > 0
-      OR S.ReceivedInPeriod > 0
-      OR S.AdjInPeriodReceipt > 0
     ORDER BY S.FacilityName, S.ItemName, S.BatchNo;
 
   END$$
@@ -141,7 +148,7 @@
         S.ItemName,
         S.FacilityName,
         S.ItemCategoryName,
-        SUM(S.ReceivedInPeriod)                       AS TotalQuantityReceived,
+        SUM(S.BatchQuantity)                          AS TotalQuantityReceived,
         SUM(S.OpeningStock)                           AS OpeningStock,
         0                                             AS AdjustedQuantity_FromDate,
         SUM(S.ExitInPeriod)                           AS QuantityDispanced,
@@ -160,6 +167,7 @@
                 FAC.FacilityName,
                 ITM.ItemName,
                 ITMC.ItemCategoryName,
+                IFNULL(ISE.Quantity, 0) AS BatchQuantity,
                 (CASE WHEN ISE.CreatedDate <  v_FromDate THEN GREATEST(IFNULL(ISE.Quantity,0),0) ELSE 0 END) AS ReceivedBefore,
                 (CASE WHEN ISE.CreatedDate >= v_FromDate THEN GREATEST(IFNULL(ISE.Quantity,0),0) ELSE 0 END) AS ReceivedInPeriod,
                 IFNULL(EX.ExitBeforeFrom, 0)          AS ExitBeforeFrom,
@@ -216,12 +224,18 @@
               AND IFNULL(FAC.Deleted, 0) = 0
               AND ISE.CreatedDate < v_ToDateExcl
               AND IFNULL(ISE.Deleted, 0) = 0
+              -- Same batches as the stock screens (itemBatchPartialSearch):
+              -- stock in hand, item mapped to the facility and not deleted.
+              AND IFNULL(ISE.QuantityInHand, 0) > 0
+              AND IFNULL(ITM.Deleted, 0) = 0
+              AND EXISTS (
+                    SELECT 1 FROM db_iemr.m_itemfacilitymapping MIF
+                    WHERE MIF.ItemID = ISE.ItemID
+                      AND MIF.FacilityID = ISE.FacilityID
+                      AND IFNULL(MIF.Deleted, 0) = 0
+                  )
         ) B
     ) S
-    -- Only batches that had stock available in the period.
-    WHERE S.OpeningStock > 0
-      OR S.ReceivedInPeriod > 0
-      OR S.AdjInPeriodReceipt > 0
     GROUP BY S.ItemID, S.FacilityID, S.ItemName, S.FacilityName, S.ItemCategoryName
     ORDER BY S.FacilityName, S.ItemName;
 
