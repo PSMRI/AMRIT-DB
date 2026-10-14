@@ -109,6 +109,8 @@
 
             WHERE (v_facilityid IS NULL OR ISE.FacilityID = v_facilityid)
               AND IFNULL(FAC.Deleted, 0) = 0
+              -- "All" facilities: skip facilities marked Inactive in m_facility.
+              AND (v_facilityid IS NOT NULL OR FAC.Status IS NULL OR FAC.Status <> 'Inactive')
               AND ISE.CreatedDate < v_ToDateExcl
               AND IFNULL(ISE.Deleted, 0) = 0
               -- Same batches as the stock screens (itemBatchPartialSearch):
@@ -222,6 +224,8 @@
 
             WHERE (v_facilityid IS NULL OR ISE.FacilityID = v_facilityid)
               AND IFNULL(FAC.Deleted, 0) = 0
+              -- "All" facilities: skip facilities marked Inactive in m_facility.
+              AND (v_facilityid IS NOT NULL OR FAC.Status IS NULL OR FAC.Status <> 'Inactive')
               AND ISE.CreatedDate < v_ToDateExcl
               AND IFNULL(ISE.Deleted, 0) = 0
               -- Same batches as the stock screens (itemBatchPartialSearch):
