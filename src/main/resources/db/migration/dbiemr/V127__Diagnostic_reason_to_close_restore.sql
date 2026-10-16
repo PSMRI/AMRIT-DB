@@ -1,12 +1,3 @@
--- ==========================================================
--- tb_diagnostic_order: reverts V126.
---   Renames reason_for_refusal -> reason_to_close (TEXT NULL) again,
---   restoring the column name introduced in V114.
---
--- Idempotent: skipped (with a SELECT no-op) when reason_to_close
--- already exists or reason_for_refusal does not exist.
--- ==========================================================
-
 USE db_iemr;
 
 SET @schema_name = 'db_iemr';

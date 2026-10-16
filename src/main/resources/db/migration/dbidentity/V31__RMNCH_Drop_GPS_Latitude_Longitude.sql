@@ -1,17 +1,5 @@
 USE db_identity;
 
--- =========================================================
--- i_beneficiarydetails_rmnch (RMNCHBeneficiaryDetailsRmnch)
--- Reverts V30: drops gpsLatitude / gpsLongitude again, returning
--- the table to its post-V28 state.
---
--- 1. Backfill latitude / longitude from gpsLatitude / gpsLongitude
---    (data written while V30's columns existed), only where
---    latitude / longitude is NULL and the gps value is NOT NULL.
---    Existing latitude / longitude values are kept (same rule as V28).
--- 2. Drop gpsLatitude / gpsLongitude.
--- =========================================================
-
 SET @old_safe_updates := @@SQL_SAFE_UPDATES;
 set sql_safe_updates=0;
 
@@ -49,7 +37,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- Drop the gps columns (only after both backfills above have run)
 SET @col_name = 'gpsLatitude';
 SET @col_exists = 0;
 PREPARE chk_col FROM 'SELECT COUNT(*) INTO @col_exists FROM information_schema.columns WHERE table_schema = ? AND table_name = ? AND column_name = ?';
@@ -76,6 +63,5 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- Cleanup
 SET sql_safe_updates = @old_safe_updates;
 SET @old_safe_updates := NULL, @sql := NULL;
