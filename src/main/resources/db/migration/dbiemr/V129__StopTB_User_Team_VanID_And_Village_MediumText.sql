@@ -52,3 +52,9 @@ SET @sql = IF(
 PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
+
+UPDATE m_downloadmastertable
+SET LastDownloadDate = (SELECT MAX(COALESCE(v.LastModDate, v.CreatedDate)) FROM m_districtbranchmapping v)
+WHERE TableName = 'm_DistrictBranchMapping'
+  AND LastDownloadDate IS NULL
+  AND EXISTS (SELECT 1 FROM m_districtbranchmapping);
