@@ -1,16 +1,3 @@
--- ============================================================
--- Stop TB work location mapping (m_userservicerolemapping):
---   1. VanID: the user's team (van = camp laptop's STOPTB_VAN_ID), AMM-2496
---   2. Villageid / VillageName: TEXT -> MEDIUMTEXT, so large village
---      selections are saved instead of failing with "Data too long"
---
--- Run before an Admin-API build that maps VanID is deployed: without the
--- column every user role mapping query fails. Re-runnable.
--- ============================================================
-
--- ============================================================
--- Add VanID
--- ============================================================
 SET @col_exists = (
     SELECT COUNT(*)
     FROM information_schema.columns
@@ -29,9 +16,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- ============================================================
--- Index for users of a van (team members, laptop sync)
--- ============================================================
 SET @idx_exists = (
     SELECT COUNT(*)
     FROM information_schema.statistics
@@ -50,9 +34,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- ============================================================
--- Villageid / VillageName -> MEDIUMTEXT
--- ============================================================
 SET @needs_widen = (
     SELECT COUNT(*)
     FROM information_schema.columns
