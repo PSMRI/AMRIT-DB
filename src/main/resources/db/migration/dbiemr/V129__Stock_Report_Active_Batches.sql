@@ -113,9 +113,7 @@
               AND (v_facilityid IS NOT NULL OR FAC.Status IS NULL OR FAC.Status <> 'Inactive')
               AND ISE.CreatedDate < v_ToDateExcl
               AND IFNULL(ISE.Deleted, 0) = 0
-              -- Same batches as the stock screens (itemBatchPartialSearch):
-              -- stock in hand, item mapped to the facility and not deleted.
-              AND IFNULL(ISE.QuantityInHand, 0) > 0
+              -- Item mapped to the facility and not deleted.
               AND IFNULL(ITM.Deleted, 0) = 0
               AND EXISTS (
                     SELECT 1 FROM db_iemr.m_itemfacilitymapping MIF
@@ -125,6 +123,12 @@
                   )
         ) B
     ) S
+    -- Batches with stock or movement in the period. Not current QuantityInHand,
+    -- which hides batches that had stock in a past period but are empty today.
+    WHERE S.OpeningStock > 0
+       OR S.ReceivedInPeriod > 0
+       OR S.ExitInPeriod > 0
+       OR S.AdjInPeriodSigned <> 0
     ORDER BY S.FacilityName, S.ItemName, S.BatchNo;
 
   END$$
@@ -228,9 +232,7 @@
               AND (v_facilityid IS NOT NULL OR FAC.Status IS NULL OR FAC.Status <> 'Inactive')
               AND ISE.CreatedDate < v_ToDateExcl
               AND IFNULL(ISE.Deleted, 0) = 0
-              -- Same batches as the stock screens (itemBatchPartialSearch):
-              -- stock in hand, item mapped to the facility and not deleted.
-              AND IFNULL(ISE.QuantityInHand, 0) > 0
+              -- Item mapped to the facility and not deleted.
               AND IFNULL(ITM.Deleted, 0) = 0
               AND EXISTS (
                     SELECT 1 FROM db_iemr.m_itemfacilitymapping MIF
@@ -240,6 +242,12 @@
                   )
         ) B
     ) S
+    -- Batches with stock or movement in the period. Not current QuantityInHand,
+    -- which hides batches that had stock in a past period but are empty today.
+    WHERE S.OpeningStock > 0
+       OR S.ReceivedInPeriod > 0
+       OR S.ExitInPeriod > 0
+       OR S.AdjInPeriodSigned <> 0
     GROUP BY S.ItemID, S.FacilityID, S.ItemName, S.FacilityName, S.ItemCategoryName
     ORDER BY S.FacilityName, S.ItemName;
 
