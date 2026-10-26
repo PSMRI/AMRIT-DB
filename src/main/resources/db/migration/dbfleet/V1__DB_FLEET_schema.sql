@@ -8,7 +8,7 @@
 -- Spec: PSMRI plans/amrit-fleet-service-design.md, Part 1.
 
 -- A physical laptop. A van has at most one ACTIVE device (enforced by the generated column).
-CREATE TABLE device (
+CREATE TABLE IF NOT EXISTS device (
     device_id        CHAR(36)     PRIMARY KEY,                 -- UUID, issued by the server
     machine_id       VARCHAR(64)  NOT NULL UNIQUE,             -- /etc/machine-id (laptops installed individually)
     van_id           INT          NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE device (
 
 -- A laptop asked to enrol for a van that already has a LIVE active laptop (seen in the last
 -- 14 days). Nothing is replaced and no token is issued until an admin decides (§2.9).
-CREATE TABLE enrolment_conflict (
+CREATE TABLE IF NOT EXISTS enrolment_conflict (
     id               BIGINT       AUTO_INCREMENT PRIMARY KEY,
     van_id           INT          NOT NULL,
     machine_id       VARCHAR(64)  NOT NULL,                    -- the newcomer
@@ -52,7 +52,7 @@ CREATE TABLE enrolment_conflict (
 );
 
 -- Latest heartbeat, flattened for list/dashboard queries. One row per device, overwritten.
-CREATE TABLE device_snapshot (
+CREATE TABLE IF NOT EXISTS device_snapshot (
     device_id        CHAR(36)     PRIMARY KEY,
     received_at      DATETIME     NOT NULL,
     hb_trigger       VARCHAR(24)  NOT NULL,                    -- interval|startup|update|...
@@ -70,7 +70,7 @@ CREATE TABLE device_snapshot (
 -- Deployed artifacts per device, from installed.json. Replaced wholesale on each heartbeat.
 -- artifact_key is the name both sides agree on: the war file name (flw-api.war), the UI web
 -- folder (mmu: installed.json keys UIs by folder), or the deb file name (tbmja-enrollment.deb).
-CREATE TABLE device_artifact (
+CREATE TABLE IF NOT EXISTS device_artifact (
     device_id        CHAR(36)     NOT NULL,
     artifact         VARCHAR(128) NOT NULL,                    -- artifact_key
     kind             ENUM('war','ui','app') NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE device_artifact (
 );
 
 -- Per-service state per device. Replaced wholesale on each heartbeat.
-CREATE TABLE device_service (
+CREATE TABLE IF NOT EXISTS device_service (
     device_id        CHAR(36)     NOT NULL,
     unit             VARCHAR(64)  NOT NULL,                    -- amrit-flw-api, mysql, nginx ...
     active_state     VARCHAR(16)  NOT NULL,                    -- active|failed|inactive
@@ -96,7 +96,7 @@ CREATE TABLE device_service (
 -- Phase 2 baseline: each laptop's current .env values, reported once via POST /v1/env-report
 -- (and again on request). Non-secret values in clear; secret values ONLY as a hash, so the
 -- report can say "same as the majority" without the secret ever leaving the laptop.
-CREATE TABLE device_env_value (
+CREATE TABLE IF NOT EXISTS device_env_value (
     device_id        CHAR(36)     NOT NULL,
     key_name         VARCHAR(128) NOT NULL,
     value_text       TEXT         NULL,                        -- NULL when is_secret
@@ -113,7 +113,7 @@ CREATE TABLE device_env_value (
 -- heartbeats just update device_snapshot + last_seen_at. Pruned nightly to 90 days.
 -- Size: ~180 × a few changes/day × 90 days ≈ 50–100k rows (~0.5 GB), instead of 1.5M rows /
 -- 5–15 GB if every 15-minute heartbeat were kept.
-CREATE TABLE heartbeat (
+CREATE TABLE IF NOT EXISTS heartbeat (
     id               BIGINT       AUTO_INCREMENT PRIMARY KEY,
     device_id        CHAR(36)     NOT NULL,
     received_at      DATETIME     NOT NULL,
@@ -124,7 +124,7 @@ CREATE TABLE heartbeat (
 
 -- Update / redeploy / self-update / config-apply outcomes. Idempotent on (device, run_id),
 -- because an offline laptop replays its outbox and may resend the same run.
-CREATE TABLE device_event (
+CREATE TABLE IF NOT EXISTS device_event (
     id               BIGINT       AUTO_INCREMENT PRIMARY KEY,
     device_id        CHAR(36)     NOT NULL,
     run_id           VARCHAR(64)  NOT NULL,
@@ -140,7 +140,7 @@ CREATE TABLE device_event (
 
 -- What the builds server currently publishes, one row per artifact_key. Refreshed every
 -- 10 min (see "Release versions" below).
-CREATE TABLE artifact_release (
+CREATE TABLE IF NOT EXISTS artifact_release (
     artifact         VARCHAR(128) PRIMARY KEY,                 -- artifact_key: flw-api.war | mmu | tbmja-enrollment.deb
     file_name        VARCHAR(160) NOT NULL,                    -- what is on the builds server: mmu-3.7.0.zip
     kind             ENUM('war','ui','app') NOT NULL,
@@ -153,7 +153,7 @@ CREATE TABLE artifact_release (
 );
 
 -- The catalogue of variables. A key exists here before it can have values.
-CREATE TABLE config_key (
+CREATE TABLE IF NOT EXISTS config_key (
     key_name         VARCHAR(128) PRIMARY KEY,                 -- [A-Za-z_][A-Za-z0-9_]*
     target           ENUM('env','agent_env') NOT NULL DEFAULT 'env',
     category         VARCHAR(64)  NULL,                        -- "Central URLs", "eSanjeevani" ... (grouping in UI)
@@ -171,7 +171,7 @@ CREATE TABLE config_key (
 
 -- The WORKING COPY that admins edit. Laptops never read this directly: they get the last
 -- published revision. scope_ref = 0 for global, state_id for state, van_id for van.
-CREATE TABLE config_value (
+CREATE TABLE IF NOT EXISTS config_value (
     scope            ENUM('global','state','van') NOT NULL,
     scope_ref        INT          NOT NULL DEFAULT 0,
     key_name         VARCHAR(128) NOT NULL,
@@ -188,7 +188,7 @@ CREATE TABLE config_value (
 );
 
 -- Immutable published snapshots. Publishing copies config_key + config_value as they are now.
-CREATE TABLE config_revision (
+CREATE TABLE IF NOT EXISTS config_revision (
     revision_id      INT          AUTO_INCREMENT PRIMARY KEY,
     published_by     VARCHAR(64)  NOT NULL,
     published_at     DATETIME     NOT NULL,
@@ -202,7 +202,7 @@ CREATE TABLE config_revision (
 -- What each van SHOULD have as of the latest revision. Recomputed for every van at publish
 -- time, and by the 10-minute m_van refresh when a van's placeholder source (parking place,
 -- PSM id ...) changed in AMRIT.
-CREATE TABLE van_effective_config (
+CREATE TABLE IF NOT EXISTS van_effective_config (
     van_id           INT          PRIMARY KEY,
     revision_id      INT          NOT NULL,
     etag             CHAR(64)     NOT NULL,                    -- sha256(sorted KEY=value lines actually served)
@@ -213,7 +213,7 @@ CREATE TABLE van_effective_config (
 );
 
 -- What each laptop HAS: last config served, last applied, and drift.
-CREATE TABLE device_config (
+CREATE TABLE IF NOT EXISTS device_config (
     device_id          CHAR(36)   PRIMARY KEY,
     served_etag        CHAR(64)   NULL,
     served_revision    INT        NULL,
@@ -227,7 +227,7 @@ CREATE TABLE device_config (
     CONSTRAINT fk_dc_device FOREIGN KEY (device_id) REFERENCES device(device_id) ON DELETE CASCADE
 );
 
-CREATE TABLE audit_log (
+CREATE TABLE IF NOT EXISTS audit_log (
     id               BIGINT       AUTO_INCREMENT PRIMARY KEY,
     at               DATETIME     NOT NULL,
     actor            VARCHAR(80)  NOT NULL,                    -- AMRIT user name (SuperAdmin) | device:<uuid> | system
