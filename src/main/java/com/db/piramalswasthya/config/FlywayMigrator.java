@@ -3,7 +3,9 @@ package com.db.piramalswasthya.config;
 import org.flywaydb.core.Flyway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.db.piramalswasthya.controller.VersionController;
@@ -17,15 +19,19 @@ public class FlywayMigrator {
     private final Flyway flywayDbidentity;
     private final Flyway flywayDbreporting;
     private final Flyway flywayDb1097identity;
+    /** Only present where db_fleet is configured (STOP-TB central); see DbFleetConfigured. */
+    private final Flyway flywayDbfleet;
 
     public FlywayMigrator(Flyway flywayDbiemr,
                           Flyway flywayDbidentity,
                           Flyway flywayDbreporting,
-                          Flyway flywayDb1097identity) {
+                          Flyway flywayDb1097identity,
+                          @Qualifier("flywayDbfleet") ObjectProvider<Flyway> flywayDbfleet) {
         this.flywayDbiemr = flywayDbiemr;
         this.flywayDbidentity = flywayDbidentity;
         this.flywayDbreporting = flywayDbreporting;
         this.flywayDb1097identity = flywayDb1097identity;
+        this.flywayDbfleet = flywayDbfleet.getIfAvailable();
     }
 
     @PostConstruct
@@ -39,6 +45,11 @@ public class FlywayMigrator {
         flywayDbidentity.migrate();
         flywayDbreporting.migrate();
         flywayDb1097identity.migrate();
+        if (flywayDbfleet != null) {
+            flywayDbfleet.repair();
+            flywayDbfleet.migrate();
+            logger.info("db_fleet migrated");
+        }
         System.out.println("SUCCESS");
         logger.info("Flyway migration completed successfully");
         
