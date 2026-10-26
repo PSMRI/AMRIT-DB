@@ -1,8 +1,3 @@
----- -----------------------------------------------------------------------------
----- Down-sync : CENTRAL initial state            ** RUN ONCE ON THE CENTRAL DB **
-----
----- -----------------------------------------------------------------------------
---
 -- UPDATE db_iemr.t_benvisitdetail                 SET DownSynced='P', DownSyncDate=NOW(), LastModDate=LastModDate WHERE DownSynced='N' AND VanSerialNo IS NOT NULL;
 -- UPDATE db_iemr.t_phy_anthropometry              SET DownSynced='P', DownSyncDate=NOW(), LastModDate=LastModDate WHERE DownSynced='N' AND VanSerialNo IS NOT NULL;
 -- UPDATE db_iemr.t_phy_vitals                     SET DownSynced='P', DownSyncDate=NOW(), LastModDate=LastModDate WHERE DownSynced='N' AND VanSerialNo IS NOT NULL;
