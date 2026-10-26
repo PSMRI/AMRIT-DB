@@ -1,11 +1,13 @@
 -- db_fleet V1: camp-laptop fleet (Fleet-API). Devices, heartbeats, update events, published
 -- configuration and audit for the STOP-TB camp laptops.
 --
--- Opt-in: this folder is migrated ONLY where spring.datasource.dbfleet.jdbc-url is set (the
--- STOP-TB central server). State servers and camp laptops run the same db.war and skip it.
+-- Opt-in: this folder is migrated ONLY where .env has FLEET_ENABLED=true and DATABASE_FLEET_URL
+-- (the STOP-TB central server). State servers and camp laptops run the same db.war and skip it.
 -- Camps themselves are NOT stored here: Fleet-API reads db_iemr.m_van / m_state /
 -- m_parkingplace live. All DATETIME columns are UTC.
 -- Spec: PSMRI plans/amrit-fleet-service-design.md, Part 1.
+
+USE db_fleet;
 
 -- A physical laptop. A van has at most one ACTIVE device (enforced by the generated column).
 CREATE TABLE IF NOT EXISTS device (
