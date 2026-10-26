@@ -29,7 +29,7 @@ import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 
 /**
- * db_fleet must stay off unless FLEET_ENABLED=true and DATABASE_FLEET_URL is a real jdbc: URL.
+ * db_fleet must stay off unless FLEET_ENABLED=true and FLEET_DATABASE_URL is a real jdbc: URL.
  *
  * @author Piramal Swasthya
  */
@@ -53,8 +53,8 @@ class DbFleetConfiguredTest {
 		assertTrue(DbFleetConfigured.isRealUrl(URL));
 		assertFalse(DbFleetConfigured.isRealUrl(null));
 		assertFalse(DbFleetConfigured.isRealUrl("   "));
-		assertFalse(DbFleetConfigured.isRealUrl("@env.DATABASE_FLEET_URL@"));
-		assertFalse(DbFleetConfigured.isRealUrl("${DATABASE_FLEET_URL}"));
+		assertFalse(DbFleetConfigured.isRealUrl("@env.FLEET_DATABASE_URL@"));
+		assertFalse(DbFleetConfigured.isRealUrl("${FLEET_DATABASE_URL}"));
 		assertFalse(DbFleetConfigured.isRealUrl("<Enter DB_FLEET URL here>"));
 	}
 
