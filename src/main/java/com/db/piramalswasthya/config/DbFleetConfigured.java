@@ -31,7 +31,7 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  * database does not exist. So db_fleet is touched ONLY when the server opts in explicitly:
  *
  *   FLEET_ENABLED=true            (amrit.fleet.enabled; anything else, or unset, means off)
- *   DATABASE_FLEET_URL=jdbc:...   (spring.datasource.dbfleet.jdbc-url; must be a real jdbc: URL)
+ *   FLEET_DATABASE_URL=jdbc:...   (spring.datasource.dbfleet.jdbc-url; must be a real jdbc: URL)
  *
  * When either is missing no dbfleet datasource or Flyway bean is created at all, so db.war never
  * even tries to connect to db_fleet. A ci build leaves an unresolved "@env.X@" token in place when
