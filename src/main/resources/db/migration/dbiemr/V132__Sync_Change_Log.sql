@@ -1,9 +1,8 @@
--- Hub only (AMRIT_HUB=true, see HubConfigured): never runs on production central or state servers.
---
 -- STOP-TB sync change log. Every change to a record the STOP-TB app pulls appends one line here;
 -- the FLW-API changes feed (/stoptb/sync/changes) returns the current rows for lines after a
--- tablet's token. seq is the token. The log is local to this laptop and is never synced to central
--- (do not add it to m_synctabledetail).
+-- tablet's token. seq is the token. Every server gets the log, but only camp laptops (hubs) serve
+-- the feed. It is local to each server and never synced between them (do not add it to
+-- m_synctabledetail).
 --
 -- entity  = the record type the app receives (beneficiary, tb_screening, opd_visit, ...)
 -- row_pk  = that record's key: BenRegId for beneficiary, otherwise the table's primary key

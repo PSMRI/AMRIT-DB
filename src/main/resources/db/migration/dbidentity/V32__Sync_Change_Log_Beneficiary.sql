@@ -1,7 +1,5 @@
--- Hub only (AMRIT_HUB=true, see HubConfigured): never runs on production central or state servers.
---
 -- Beneficiary changes for the STOP-TB sync change log. The log table lives in db_iemr
--- (dbiemr_hub/V1) so tablets hold a single token; these triggers write to it across schemas.
+-- (dbiemr/V132) so tablets hold a single token; these triggers write to it across schemas.
 -- Every table that makes up the beneficiary record logs entity 'beneficiary' keyed by BenRegId.
 -- Tables keyed by their own ID resolve BenRegId through i_beneficiarymapping; on the first insert
 -- the mapping doesn't exist yet, so nothing is logged until the mapping insert, which covers it.
@@ -9,8 +7,8 @@
 --
 -- Privileges: a trigger runs as its definer, the db_identity migration user. That user must be
 -- able to INSERT into db_iemr.t_sync_change_log, or every beneficiary save on this server fails.
--- Camp laptops use one account with ALL PRIVILEGES for every schema; anywhere else (UAT central)
--- grant it before setting AMRIT_HUB=true, together with TRIGGER and EVENT.
+-- Camp laptops use one account with ALL PRIVILEGES for every schema; on other servers grant it
+-- before deploying this version, together with TRIGGER and EVENT.
 --
 -- Triggers are single statements on purpose: they must never make a save fail, and Flyway needs
 -- no DELIMITER handling. Each one appends a line to db_iemr.t_sync_change_log; nothing else.
