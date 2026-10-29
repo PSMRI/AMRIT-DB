@@ -7,6 +7,11 @@
 -- the mapping doesn't exist yet, so nothing is logged until the mapping insert, which covers it.
 -- A household is sent inside each member's record, so a household change updates every member.
 --
+-- Privileges: a trigger runs as its definer, the db_identity migration user. That user must be
+-- able to INSERT into db_iemr.t_sync_change_log, or every beneficiary save on this server fails.
+-- Camp laptops use one account with ALL PRIVILEGES for every schema; anywhere else (UAT central)
+-- grant it before setting AMRIT_HUB=true, together with TRIGGER and EVENT.
+--
 -- Triggers are single statements on purpose: they must never make a save fail, and Flyway needs
 -- no DELIMITER handling. Each one appends a line to db_iemr.t_sync_change_log; nothing else.
 

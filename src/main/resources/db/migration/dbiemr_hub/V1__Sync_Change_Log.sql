@@ -16,7 +16,7 @@
 
 
 CREATE TABLE IF NOT EXISTS `t_sync_change_log` (
-  `seq`            BIGINT      NOT NULL AUTO_INCREMENT,
+  `seq`            BIGINT      NOT NULL AUTO_INCREMENT COMMENT 'insert order, not commit order: readers must stop at a safe point (lines older than a few seconds) so a transaction that commits late is not skipped',
   `entity`         VARCHAR(40) NOT NULL,
   `row_pk`         BIGINT      NOT NULL,
   `op`             CHAR(1)     NOT NULL COMMENT 'I, U or D',
@@ -233,6 +233,21 @@ CREATE TRIGGER `trg_scl_t_prescribeddrug_au` AFTER UPDATE ON `t_prescribeddrug` 
 
 DROP TRIGGER IF EXISTS `trg_scl_t_prescribeddrug_ad`;
 CREATE TRIGGER `trg_scl_t_prescribeddrug_ad` AFTER DELETE ON `t_prescribeddrug` FOR EACH ROW
+  INSERT INTO db_iemr.t_sync_change_log (entity, row_pk, op, ben_reg_id, beneficiary_id)
+  SELECT 'opd_visit', k.row_pk, 'U', k.ben_reg_id, k.beneficiary_id FROM (SELECT OLD.BenVisitID AS row_pk, OLD.BeneficiaryRegID AS ben_reg_id, NULL AS beneficiary_id) k WHERE k.row_pk IS NOT NULL;
+
+DROP TRIGGER IF EXISTS `trg_scl_t_prescription_ai`;
+CREATE TRIGGER `trg_scl_t_prescription_ai` AFTER INSERT ON `t_prescription` FOR EACH ROW
+  INSERT INTO db_iemr.t_sync_change_log (entity, row_pk, op, ben_reg_id, beneficiary_id)
+  SELECT 'opd_visit', k.row_pk, 'U', k.ben_reg_id, k.beneficiary_id FROM (SELECT NEW.BenVisitID AS row_pk, NEW.BeneficiaryRegID AS ben_reg_id, NULL AS beneficiary_id) k WHERE k.row_pk IS NOT NULL;
+
+DROP TRIGGER IF EXISTS `trg_scl_t_prescription_au`;
+CREATE TRIGGER `trg_scl_t_prescription_au` AFTER UPDATE ON `t_prescription` FOR EACH ROW
+  INSERT INTO db_iemr.t_sync_change_log (entity, row_pk, op, ben_reg_id, beneficiary_id)
+  SELECT 'opd_visit', k.row_pk, 'U', k.ben_reg_id, k.beneficiary_id FROM (SELECT NEW.BenVisitID AS row_pk, NEW.BeneficiaryRegID AS ben_reg_id, NULL AS beneficiary_id) k WHERE k.row_pk IS NOT NULL;
+
+DROP TRIGGER IF EXISTS `trg_scl_t_prescription_ad`;
+CREATE TRIGGER `trg_scl_t_prescription_ad` AFTER DELETE ON `t_prescription` FOR EACH ROW
   INSERT INTO db_iemr.t_sync_change_log (entity, row_pk, op, ben_reg_id, beneficiary_id)
   SELECT 'opd_visit', k.row_pk, 'U', k.ben_reg_id, k.beneficiary_id FROM (SELECT OLD.BenVisitID AS row_pk, OLD.BeneficiaryRegID AS ben_reg_id, NULL AS beneficiary_id) k WHERE k.row_pk IS NOT NULL;
 
