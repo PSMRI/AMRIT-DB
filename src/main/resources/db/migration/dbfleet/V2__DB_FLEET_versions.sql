@@ -1,6 +1,6 @@
 -- db_fleet V2: what else each laptop reports and what it should be running.
 --  * device_tablet: STOP-TB tablets that reported their app version to the camp laptop
---  * device_schema: each laptop's Flyway version per AMRIT schema (db.war /db/migration/versions)
+--  * device_schema: each laptop's Flyway version per AMRIT schema (db.war /db/migration/version)
 --  * schema_release: the Flyway version per schema in the db.war on the builds server (db-schema.json)
 --  * fleet_setting: small admin settings, e.g. the STOP-TB app version tablets should run
 -- All DATETIME columns are UTC.
@@ -27,8 +27,7 @@ CREATE TABLE IF NOT EXISTS device_schema (
     device_id        CHAR(36)     NOT NULL,
     db_name          VARCHAR(64)  NOT NULL,                    -- db_iemr | db_identity | ...
     version          VARCHAR(32)  NULL,                        -- last applied Flyway version; NULL = none
-    pending          INT          NOT NULL DEFAULT 0,          -- migrations in the laptop's db.war not applied yet
-    failed           BOOLEAN      NOT NULL DEFAULT FALSE,
+    failed           BOOLEAN      NOT NULL DEFAULT FALSE,      -- a migration failed (db.war down, service failed)
     stale            BOOLEAN      NOT NULL DEFAULT FALSE,      -- db.war not reachable; last known values
     reported_at      DATETIME     NULL,
     PRIMARY KEY (device_id, db_name),

@@ -27,16 +27,14 @@ import java.util.Map;
 
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.MigrationInfo;
-import org.flywaydb.core.api.MigrationInfoService;
-import org.flywaydb.core.api.MigrationState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- * Where each schema's migrations stand, as Flyway sees it: the last applied version, how many
- * bundled migrations are not applied yet, and whether any failed. Camp laptops report this to
- * Fleet so it can spot laptops whose databases are behind.
+ * The applied Flyway version of each schema, as Flyway itself sees it (the last successful
+ * migration, not simply the newest history row). Camp laptops send this to Fleet so it can spot
+ * laptops whose databases are behind.
  *
  * @author Piramal Swasthya
  */
@@ -45,7 +43,7 @@ public class SchemaVersionService {
 
 	private static final Logger log = LoggerFactory.getLogger(SchemaVersionService.class);
 
-	/** Flyway bean name -> schema name, in report order. db_fleet exists only where configured. */
+	/** Flyway bean name -> schema name. db_fleet exists only where configured. */
 	static final Map<String, String> SCHEMAS = Map.of(
 			"flywayDbiemr", "db_iemr",
 			"flywayDbidentity", "db_identity",
@@ -55,43 +53,29 @@ public class SchemaVersionService {
 	private static final List<String> ORDER = List.of("flywayDbiemr", "flywayDbidentity", "flywayDbreporting",
 			"flywayDb1097identity", "flywayDbfleet");
 
-	public record Schema(String version, int pending, boolean failed, String installedOn, String error) {}
-
 	private final Map<String, Flyway> flyways;
 
 	public SchemaVersionService(Map<String, Flyway> flyways) {
 		this.flyways = flyways;
 	}
 
-	public Map<String, Schema> versions() {
-		Map<String, Schema> out = new LinkedHashMap<>();
+	/** Schema -> applied version; null when nothing is applied or the schema can't be read. */
+	public Map<String, String> versions() {
+		Map<String, String> out = new LinkedHashMap<>();
 		for (String bean : ORDER) {
 			Flyway f = flyways.get(bean);
-			if (f != null) out.put(SCHEMAS.get(bean), of(f, SCHEMAS.get(bean)));
+			if (f != null) out.put(SCHEMAS.get(bean), versionOf(f, SCHEMAS.get(bean)));
 		}
 		return out;
 	}
 
-	static Schema of(Flyway f, String name) {
+	static String versionOf(Flyway f, String name) {
 		try {
-			MigrationInfoService info = f.info();
-			MigrationInfo current = info.current();
-			boolean failed = false;
-			for (MigrationInfo m : info.all()) {
-				if (isFailed(m.getState())) failed = true;
-			}
-			int pending = info.pending() == null ? 0 : info.pending().length;
-			return new Schema(current == null || current.getVersion() == null ? null : current.getVersion().getVersion(),
-					pending, failed,
-					current == null || current.getInstalledOn() == null ? null : current.getInstalledOn().toInstant().toString(),
-					null);
+			MigrationInfo current = f.info().current();
+			return current == null || current.getVersion() == null ? null : current.getVersion().getVersion();
 		} catch (Exception e) {
 			log.warn("could not read migration state of {}: {}", name, e.getMessage());
-			return new Schema(null, 0, false, null, "could not read migration state");
+			return null;
 		}
-	}
-
-	static boolean isFailed(MigrationState s) {
-		return s != null && s.isFailed();
 	}
 }
