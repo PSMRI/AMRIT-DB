@@ -21,45 +21,27 @@
 */
 package com.db.piramalswasthya.controller;
 
-import java.util.List;
+import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.db.piramalswasthya.data.FlywaySchemaVersion;
-import com.db.piramalswasthya .service.VersionService;
-import com.google.gson.Gson;
+import com.db.piramalswasthya.service.SchemaVersionService;
 
 @RestController
-
 @RequestMapping("/db/migration")
 public class VersionController {
-	private Logger logger = LoggerFactory.getLogger(VersionController.class);
-	
-	private VersionService service;
-	
-	@Autowired
-	public void setCommonServiceImpl(VersionService service) {
-		this.service = service;
+
+	private final SchemaVersionService schemas;
+
+	public VersionController(SchemaVersionService schemas) {
+		this.schemas = schemas;
 	}
 
+	/** The applied Flyway version of every schema, e.g. {"db_iemr":"135","db_identity":"32",...}. */
 	@GetMapping("/version")
-	public String getLatestDBMigrationVersion() throws Exception {
-		String resp = null;
-		try {
-			List<FlywaySchemaVersion> latestVersion = service.getLatestVersion();
-			Gson gson = new Gson();
-			if (null != latestVersion && !CollectionUtils.isEmpty(latestVersion)) {
-				resp = gson.toJson(latestVersion);
-			}
-		} catch (Exception e) {
-			throw new Exception("Error while getting DB Migration version: " + e.getMessage(), e);
-		}
-		return resp;
+	public Map<String, String> getVersions() {
+		return schemas.versions();
 	}
 }
