@@ -25,9 +25,8 @@ CREATE TABLE IF NOT EXISTS camp_issue (
     ack_note         VARCHAR(500) NULL,
     snoozed_until    DATETIME     NULL,
     snoozed_by       VARCHAR(64)  NULL,
-    open_key         VARCHAR(200) GENERATED ALWAYS AS
-                         (IF(resolved_at IS NULL, CONCAT(van_id, ':', code, ':', subject), NULL)) STORED,
-    UNIQUE KEY ux_issue_open (open_key),                       -- NULLs don't collide
+    open_marker      TINYINT      GENERATED ALWAYS AS (IF(resolved_at IS NULL, 1, NULL)) STORED,
+    UNIQUE KEY ux_issue_open (van_id, code, subject, open_marker),  -- resolved rows (NULL marker) never collide
     INDEX ix_issue_van (van_id, resolved_at),
     INDEX ix_issue_open (resolved_at, severity, code)
 );
