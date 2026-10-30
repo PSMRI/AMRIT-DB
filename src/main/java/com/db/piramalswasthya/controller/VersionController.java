@@ -22,6 +22,7 @@
 package com.db.piramalswasthya.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +33,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.db.piramalswasthya.data.FlywaySchemaVersion;
-import com.db.piramalswasthya .service.VersionService;
+import com.db.piramalswasthya.service.SchemaVersionService;
+import com.db.piramalswasthya.service.VersionService;
 import com.google.gson.Gson;
 
 @RestController
@@ -42,10 +44,23 @@ public class VersionController {
 	private Logger logger = LoggerFactory.getLogger(VersionController.class);
 	
 	private VersionService service;
+
+	private SchemaVersionService schemas;
 	
 	@Autowired
 	public void setCommonServiceImpl(VersionService service) {
 		this.service = service;
+	}
+
+	@Autowired
+	public void setSchemaVersionService(SchemaVersionService schemas) {
+		this.schemas = schemas;
+	}
+
+	/** Every schema's migration state, e.g. {"db_iemr":{"version":"135","pending":0,"failed":false,...}}. */
+	@GetMapping("/versions")
+	public Map<String, SchemaVersionService.Schema> getSchemaVersions() {
+		return schemas.versions();
 	}
 
 	@GetMapping("/version")
