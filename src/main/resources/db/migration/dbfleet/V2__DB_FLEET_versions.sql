@@ -27,7 +27,8 @@ CREATE TABLE IF NOT EXISTS device_schema (
     device_id        CHAR(36)     NOT NULL,
     db_name          VARCHAR(64)  NOT NULL,                    -- db_iemr | db_identity | ...
     version          VARCHAR(32)  NULL,                        -- last applied Flyway version; NULL = none
-    failed           BOOLEAN      NOT NULL DEFAULT FALSE,      -- a migration failed (db.war down, service failed)
+    failed           BOOLEAN      NOT NULL DEFAULT FALSE,      -- a migration failed (db.war keeps restarting)
+    error            VARCHAR(500) NULL,                        -- the failed migration and Flyway's message, from db.war's log
     stale            BOOLEAN      NOT NULL DEFAULT FALSE,      -- db.war not reachable; last known values
     reported_at      DATETIME     NULL,
     PRIMARY KEY (device_id, db_name),
