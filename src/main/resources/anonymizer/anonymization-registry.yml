@@ -681,9 +681,15 @@ databases:
       m_nikshay_device_configuration:
         canonicalName: "m_nikshay_device_configuration"
         columns:
-          # Encrypted Ni-kshay login for the device PHI. NOT NULL, so it becomes ''.
-          # UAT devices must be set up again with UAT Ni-kshay credentials.
           password:
+            strategy: "SUPPRESS"
+          # Free-form JSON (vendor reference, remarks): no content restriction.
+          more_data:
+            strategy: "SUPPRESS"
+      m_nikshay_device_village_mapping:
+        canonicalName: "m_nikshay_device_village_mapping"
+        columns:
+          more_data:
             strategy: "SUPPRESS"
       nikshay_worker_job_history_log:
         canonicalName: "nikshay_worker_job_history_log"
