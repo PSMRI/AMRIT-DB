@@ -31,17 +31,17 @@ The AMRIT-DB service leverages Flyway within a Spring Boot framework to manage a
 - **Schema Management**: Automates database schema creation and version control using Flyway.  
 - **Migration Scripts**: Supports SQL-based migration scripts for defining tables, constraints, and relationships.  
 
+---
 ### Mandatory Database  
 
 Ensure the following databases are created:  
 
-- `db_iemr`  
+- `dbiemr`  
 - `db_reporting`  
 - `db_identity`  
 - `db_1097_identity`  
 
 ---
-
 ## Prerequisites  
 
 Ensure you have the following installed before starting:  
@@ -92,8 +92,8 @@ For subsequent changes, increment the version number, e.g., `V3__<description>.s
 1. **Setup Spring Boot Configuration**:  
    - Go to **Run > Run Configurations**.  
    - Select **Spring Boot App (STS)** or **Java Application (Eclipse)** and create a new configuration.  
-   - Choose the project and main class.  
-   - Apply and run the configuration.  
+   - **Main Class**: `com.db.piramalswasthya.AmritDbApplication`
+   - Choose the project and apply the configuration.  
 
 2. **Verify Application**:  
    - Access Swagger UI: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)  

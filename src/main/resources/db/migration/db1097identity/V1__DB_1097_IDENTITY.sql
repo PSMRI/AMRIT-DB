@@ -1191,7 +1191,7 @@ CREATE TABLE IF NOT EXISTS `t_bendataaccess` (
 -- /*!50001 SET character_set_results     = utf8 */;
 -- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013 SQL SECURITY DEFINER */
 /*!50001 VIEW `v_benadvancesearch` AS select `benmap`.`BenMapId` AS `BenMapId`,`benmap`.`BenRegId` AS `BenRegId`,`benmap`.`BenDetailsId` AS `BenDetailsId`,`benmap`.`BenAddressId` AS `BenAddressId`,`benmap`.`BenImageId` AS `BenImageId`,`benmap`.`BenContactsId` AS `BenContactsId`,`benmap`.`BenConsentId` AS `BenConsentId`,`benmap`.`BenAccountID` AS `BenAccountID`,`benmap`.`BenSecureStackId` AS `BenSecureStackId`,`benmap`.`VanSerialNo` AS `VanSerialNo`,`benmap`.`VanID` AS `VanID`,`benadd`.`CurrStateId` AS `CurrStateId`,`benadd`.`CurrDistrictId` AS `CurrDistrictId`,`bendetail`.`FirstName` AS `FirstName`,`bendetail`.`MiddleName` AS `MiddleName`,`bendetail`.`LastName` AS `LastName`,`bendetail`.`GenderId` AS `GenderId` from ((`i_beneficiarymapping` `benmap` join `i_beneficiarydetails` `bendetail` on(((`benmap`.`BenDetailsId` = `bendetail`.`VanSerialNo`) and (`benmap`.`VanID` = `bendetail`.`VanID`)))) join `i_beneficiaryaddress` `benadd` on(((`benmap`.`BenAddressId` = `benadd`.`VanSerialNo`) and (`benmap`.`VanID` = `benadd`.`VanID`)))) */;
 -- /*!50001 SET character_set_client      = @saved_cs_client */;
 -- /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -1209,7 +1209,7 @@ CREATE TABLE IF NOT EXISTS `t_bendataaccess` (
 -- /*!50001 SET character_set_results     = utf8 */;
 -- /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013 SQL SECURITY DEFINER */
 /*!50001 VIEW `v_centraldashboard` AS select `bsm`.`BenServiceMapID` AS `BenServiceMapID`,`bsm`.`BenMapID` AS `BenMapID`,`bsm`.`ProviderServiceMapId` AS `ProviderServiceMapId`,`bsm`.`VanID` AS `VanID`,`psm`.`ServiceID` AS `ServiceID`,`psm`.`ServiceProviderID` AS `ServiceProviderID`,`psm`.`StateID` AS `StateID`,`bm`.`BenDetailsId` AS `BenDetailsId`,`bd`.`GenderId` AS `GenderId`,`bd`.`Gender` AS `Gender`,`bd`.`DOB` AS `DOB`,floor(((to_days(`bd`.`CreatedDate`) - to_days(`bd`.`DOB`)) / 365.25)) AS `age` from (((`db_1097_identity`.`i_beneficiaryservicemapping` `bsm` join `db_iemr`.`m_providerservicemapping` `psm` on((`bsm`.`ProviderServiceMapId` = `psm`.`ProviderServiceMapID`))) join `db_1097_identity`.`i_beneficiarymapping` `bm` on((`bsm`.`BenMapID` = `bm`.`BenMapId`))) join `db_1097_identity`.`i_beneficiarydetails` `bd` on((`bm`.`BenDetailsId` = `bd`.`BeneficiaryDetailsId`))) */;
 -- /*!50001 SET character_set_client      = @saved_cs_client */;
 -- /*!50001 SET character_set_results     = @saved_cs_results */;
