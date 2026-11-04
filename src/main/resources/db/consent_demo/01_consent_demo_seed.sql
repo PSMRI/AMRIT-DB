@@ -80,3 +80,80 @@ FROM (
 ) t
 WHERE NOT EXISTS (SELECT 1 FROM cm_notice_translation x
                   WHERE x.notice_version_id = t.notice_version_id AND x.language_code = t.lang);
+
+-- ---------------------------------------------------------------------------------------------
+-- Consent-API feature 004 (apply after V35__Consent_Capture_Review.sql). Re-runnable.
+-- ---------------------------------------------------------------------------------------------
+
+-- Grievance officer contact on the central notices (only when not set yet).
+UPDATE cm_notice
+SET grievance_officer_name = '[DEMO – TODO-LEGAL] Grievance Officer',
+    grievance_phone = '1800-000-0000',
+    grievance_email = 'grievance.demo@example.org',
+    grievance_address = '[DEMO – TODO-LEGAL] Grievance cell, district health office',
+    grievance_office_hours = '[DEMO – TODO-LEGAL] Mon–Fri, 10:00–17:00',
+    ModifiedBy = 'consent-demo-seed'
+WHERE notice_code IN ('MMU-REGISTRATION', 'MMU-REVISIT') AND version_no = 1
+  AND project_id IS NULL AND grievance_officer_name IS NULL;
+
+-- Declarations on the central translations (only when not set yet).
+UPDATE cm_notice_translation t
+JOIN cm_notice n ON n.notice_version_id = t.notice_version_id
+SET t.declaration = CASE t.language_code
+      WHEN 'en' THEN '[DEMO – TODO-LEGAL] I have read or heard this notice and I agree to the uses I selected.'
+      WHEN 'hi' THEN '[DEMO – TODO-LEGAL] मैंने यह सूचना पढ़ी या सुनी है और चुने गए उपयोगों के लिए सहमति देता/देती हूँ।'
+      ELSE '[DEMO – TODO-LEGAL] মই এই জাননী পঢ়িলোঁ বা শুনিলোঁ আৰু বাছনি কৰা ব্যৱহাৰত সন্মতি দিলোঁ।' END,
+    t.representative_declaration = CASE t.language_code
+      WHEN 'en' THEN '[DEMO – TODO-LEGAL] As guardian / representative, I agree on behalf of the patient to the uses I selected.'
+      ELSE NULL END,
+    t.ModifiedBy = 'consent-demo-seed'
+WHERE n.notice_code IN ('MMU-REGISTRATION', 'MMU-REVISIT') AND n.version_no = 1 AND t.declaration IS NULL;
+
+-- Project 3's own REGISTRATION notice (project_id = 3).
+INSERT INTO cm_notice (notice_code, version_no, context, is_material, status, approved_by, published_at,
+  project_id, grievance_officer_name, grievance_phone, grievance_email, grievance_address, grievance_office_hours,
+  CreatedBy)
+SELECT 'MMU-REGISTRATION-P3', 1, 'REGISTRATION', b'0', 'PUBLISHED', 'TODO-LEGAL', UTC_TIMESTAMP(3),
+  3, '[DEMO – TODO-LEGAL] Project 3 Grievance Officer', '1800-000-0003', 'grievance.p3.demo@example.org',
+  '[DEMO – TODO-LEGAL] Project 3 office', '[DEMO – TODO-LEGAL] Mon–Sat, 09:00–17:00', 'consent-demo-seed'
+WHERE NOT EXISTS (SELECT 1 FROM cm_notice x WHERE x.notice_code = 'MMU-REGISTRATION-P3' AND x.version_no = 1);
+
+INSERT INTO cm_notice_purpose (notice_version_id, purpose_code, display_rank, CreatedBy)
+SELECT n.notice_version_id, p.code, p.rnk, 'consent-demo-seed'
+FROM cm_notice n
+JOIN (SELECT 'P-REG' code, 1 rnk UNION ALL SELECT 'P-TRT', 2 UNION ALL SELECT 'P-REM', 3) p
+WHERE n.notice_code = 'MMU-REGISTRATION-P3' AND n.version_no = 1
+  AND NOT EXISTS (SELECT 1 FROM cm_notice_purpose x
+                  WHERE x.notice_version_id = n.notice_version_id AND x.purpose_code = p.code);
+
+INSERT INTO cm_notice_translation (notice_version_id, language_code, language_name, body,
+  data_items, retention, recipients, withdrawal_info, grievance_info, text_hash, audio_ref,
+  declaration, representative_declaration, CreatedBy)
+SELECT t.notice_version_id, t.lang, t.lname, t.body, t.items, t.ret, t.rec, t.wd, t.gr,
+  SHA2(CONCAT_WS('\n', t.body, t.items, t.ret, t.rec, t.wd, t.gr), 256), NULL, t.decl, t.rdecl,
+  'consent-demo-seed'
+FROM (
+  SELECT n.notice_version_id, 'en' lang, 'English' lname,
+    '[DEMO – TODO-LEGAL] Project 3 notice: how your health data is used in this programme.' body,
+    '[DEMO – TODO-LEGAL] Name, age, phone, address, health details.' items,
+    '[DEMO – TODO-LEGAL] Kept as long as the law requires.' ret,
+    '[DEMO – TODO-LEGAL] Project 3 health workers; others only with your consent.' rec,
+    '[DEMO – TODO-LEGAL] You can withdraw at any time at the facility or helpline.' wd,
+    '[DEMO – TODO-LEGAL] Complain to the project grievance officer or the Data Protection Board.' gr,
+    '[DEMO – TODO-LEGAL] I have read or heard the project 3 notice and I agree to the uses I selected.' decl,
+    '[DEMO – TODO-LEGAL] As guardian / representative, I agree on behalf of the patient (project 3).' rdecl
+  FROM cm_notice n WHERE n.notice_code = 'MMU-REGISTRATION-P3' AND n.version_no = 1
+  UNION ALL
+  SELECT n.notice_version_id, 'hi', 'हिन्दी',
+    '[DEMO – TODO-LEGAL] परियोजना 3 सूचना: इस कार्यक्रम में आपके स्वास्थ्य डेटा का उपयोग।',
+    '[DEMO – TODO-LEGAL] नाम, आयु, फ़ोन, पता, स्वास्थ्य विवरण।',
+    '[DEMO – TODO-LEGAL] कानून के अनुसार रखा जाएगा।',
+    '[DEMO – TODO-LEGAL] परियोजना 3 के स्वास्थ्य कर्मी; अन्य केवल आपकी सहमति से।',
+    '[DEMO – TODO-LEGAL] आप कभी भी सहमति वापस ले सकते हैं।',
+    '[DEMO – TODO-LEGAL] शिकायत परियोजना शिकायत अधिकारी या डेटा संरक्षण बोर्ड से करें।',
+    '[DEMO – TODO-LEGAL] मैंने परियोजना 3 की सूचना पढ़ी या सुनी है और चुने गए उपयोगों के लिए सहमति देता/देती हूँ।',
+    NULL
+  FROM cm_notice n WHERE n.notice_code = 'MMU-REGISTRATION-P3' AND n.version_no = 1
+) t
+WHERE NOT EXISTS (SELECT 1 FROM cm_notice_translation x
+                  WHERE x.notice_version_id = t.notice_version_id AND x.language_code = t.lang);
