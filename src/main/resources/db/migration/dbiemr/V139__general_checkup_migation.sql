@@ -71,6 +71,28 @@ CREATE TABLE IF NOT EXISTS `general_check_up` (
    KEY `idx_general_checkup_ben_id` (`ben_id`)
  );
 
+ALTER TABLE phc_review_meeting
+MODIFY COLUMN image1 LONGBLOB,
+MODIFY COLUMN image2 LONGBLOB;
+
+ALTER TABLE VHND_form
+MODIFY COLUMN image1 LONGBLOB,
+MODIFY COLUMN image2 LONGBLOB;
+
+
+ALTER TABLE vhnc_form
+MODIFY COLUMN image1 LONGBLOB,
+MODIFY COLUMN image2 LONGBLOB;
+
+
+ALTER TABLE deworming_form
+MODIFY COLUMN image1 LONGBLOB,
+MODIFY COLUMN image2 LONGBLOB;
+
+ALTER TABLE ahd_form
+MODIFY COLUMN image1 LONGBLOB,
+MODIFY COLUMN image2 LONGBLOB;
+
 CREATE TABLE IF NOT EXISTS `general_checkup_followup` (
    `id` bigint NOT NULL AUTO_INCREMENT,
    `ben_id` bigint DEFAULT NULL,
