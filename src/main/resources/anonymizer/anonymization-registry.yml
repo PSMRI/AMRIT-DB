@@ -744,6 +744,70 @@ databases:
             strategy: "HMAC_HASH"
           ben_reg_id:
             strategy: "PRESERVE"
+      # Ni-kshay sync (V136). beneficiary_id is the card number: HMAC'd like every
+      # other carrier. ben_reg_id / ben_id / index_ben_reg_id are internal BenRegIDs
+      # and stay as they are so joins still work. nikshay_id / episode_id stay as they
+      # are to match the existing Ni-kshay ID columns (V93 nikshay_id,
+      # db_identity nikshayId), which are not in this registry either.
+      m_nikshay_device_configuration:
+        canonicalName: "m_nikshay_device_configuration"
+        columns:
+          password:
+            strategy: "SUPPRESS"
+          # Free-form JSON (vendor reference, remarks): no content restriction.
+          more_data:
+            strategy: "SUPPRESS"
+      m_nikshay_device_village_mapping:
+        canonicalName: "m_nikshay_device_village_mapping"
+        columns:
+          more_data:
+            strategy: "SUPPRESS"
+      nikshay_worker_job_history_log:
+        canonicalName: "nikshay_worker_job_history_log"
+        columns:
+          # Full patient JSON sent to / returned by Ni-kshay on a failed call.
+          request_payload:
+            strategy: "SUPPRESS"
+          response_body:
+            strategy: "SUPPRESS"
+          # Error / validation text can echo patient fields.
+          message:
+            strategy: "SUPPRESS"
+          ben_id:
+            strategy: "PRESERVE"
+      nikshay_beneficiary_episode:
+        canonicalName: "nikshay_beneficiary_episode"
+        columns:
+          beneficiary_id:
+            strategy: "HMAC_HASH"
+          ben_reg_id:
+            strategy: "PRESERVE"
+      nikshay_beneficiary_phase_status:
+        canonicalName: "nikshay_beneficiary_phase_status"
+        columns:
+          beneficiary_id:
+            strategy: "HMAC_HASH"
+          ben_reg_id:
+            strategy: "PRESERVE"
+          index_ben_reg_id:
+            strategy: "PRESERVE"
+          # Latest error message; can echo patient fields like message above.
+          error_detail:
+            strategy: "SUPPRESS"
+      # Ni-kshay beneficiary sync status (V139): same rules as
+      # nikshay_beneficiary_phase_status above.
+      nikshay_beneficiary_sync_status:
+        canonicalName: "nikshay_beneficiary_sync_status"
+        columns:
+          beneficiary_id:
+            strategy: "HMAC_HASH"
+          ben_reg_id:
+            strategy: "PRESERVE"
+          index_ben_reg_id:
+            strategy: "PRESERVE"
+          # Latest error message; can echo patient fields.
+          error_detail:
+            strategy: "SUPPRESS"
       i_ben_flow_outreach:
         canonicalName: "i_ben_flow_outreach"
         columns:
