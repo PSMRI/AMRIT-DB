@@ -723,6 +723,20 @@ databases:
           # Latest error message; can echo patient fields like message above.
           error_detail:
             strategy: "SUPPRESS"
+      # Ni-kshay beneficiary sync status (V139): same rules as
+      # nikshay_beneficiary_phase_status above.
+      nikshay_beneficiary_sync_status:
+        canonicalName: "nikshay_beneficiary_sync_status"
+        columns:
+          beneficiary_id:
+            strategy: "HMAC_HASH"
+          ben_reg_id:
+            strategy: "PRESERVE"
+          index_ben_reg_id:
+            strategy: "PRESERVE"
+          # Latest error message; can echo patient fields.
+          error_detail:
+            strategy: "SUPPRESS"
       i_ben_flow_outreach:
         canonicalName: "i_ben_flow_outreach"
         columns:
