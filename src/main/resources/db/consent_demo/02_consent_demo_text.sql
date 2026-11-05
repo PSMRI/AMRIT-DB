@@ -31,6 +31,16 @@ JOIN (
 SET p.name = x.name, p.description = x.descr, p.ModifiedBy = 'consent-demo-text'
 WHERE p.name LIKE '%TODO-LEGAL%' OR p.description LIKE '%TODO-LEGAL%';
 
+-- Legal basis (internal, not returned by any API). Draft for legal to confirm: purposes that cannot be withdrawn
+-- cannot rest on consent alone (DPDP s.6), so they need a s.7 legitimate use; which clause applies depends on
+-- how the programme is run.
+UPDATE cm_purpose
+SET legal_basis = CASE
+      WHEN purpose_code IN ('P-REG', 'P-TRT') THEN 'DPDP Act 2023 s.7 - legitimate use (health service)'
+      ELSE 'DPDP Act 2023 s.6 - consent' END,
+    ModifiedBy = 'consent-demo-text'
+WHERE legal_basis = 'TODO-LEGAL';
+
 -- ---------------------------------------------------------------------------------------------
 -- Notice text
 -- ---------------------------------------------------------------------------------------------
@@ -104,12 +114,18 @@ SET grievance_officer_name = 'Grievance Officer',
 WHERE notice_code IN ('MMU-REGISTRATION', 'MMU-REVISIT', 'MMU-REGISTRATION-P3') AND version_no = 1
   AND CreatedBy = 'consent-demo-seed';
 
+-- Approver (internal): stays "Pending legal approval" until legal signs off, then the approver's name.
+UPDATE cm_notice
+SET approved_by = 'Pending legal approval', ModifiedBy = 'consent-demo-text'
+WHERE approved_by = 'TODO-LEGAL';
+
 -- Check: nothing below should still contain the placeholder.
-SELECT 'purpose' tbl, purpose_code ref, name txt FROM cm_purpose WHERE name LIKE '%TODO-LEGAL%' OR description LIKE '%TODO-LEGAL%'
+SELECT 'purpose' tbl, purpose_code ref, name txt FROM cm_purpose
+ WHERE CONCAT_WS(' ', name, description, legal_basis) LIKE '%TODO-LEGAL%'
 UNION ALL
 SELECT 'translation', CONCAT(notice_version_id, '/', language_code), LEFT(body, 60) FROM cm_notice_translation
  WHERE CONCAT_WS(' ', body, data_items, retention, recipients, withdrawal_info, grievance_info, declaration,
                  representative_declaration) LIKE '%TODO-LEGAL%'
 UNION ALL
 SELECT 'notice', notice_code, grievance_officer_name FROM cm_notice
- WHERE CONCAT_WS(' ', grievance_officer_name, grievance_address, grievance_office_hours) LIKE '%TODO-LEGAL%';
+ WHERE CONCAT_WS(' ', grievance_officer_name, grievance_address, grievance_office_hours, approved_by) LIKE '%TODO-LEGAL%';
