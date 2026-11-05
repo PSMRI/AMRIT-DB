@@ -29,7 +29,7 @@ JOIN (
          'Use your information, with your name and identity removed, for health research and programme improvement'
 ) x ON x.code = p.purpose_code
 SET p.name = x.name, p.description = x.descr, p.ModifiedBy = 'consent-demo-text'
-WHERE p.version = 1 AND p.CreatedBy = 'consent-demo-seed';
+WHERE p.name LIKE '%TODO-LEGAL%' OR p.description LIKE '%TODO-LEGAL%';
 
 -- ---------------------------------------------------------------------------------------------
 -- Notice text
