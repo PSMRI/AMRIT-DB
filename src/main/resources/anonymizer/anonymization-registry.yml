@@ -108,6 +108,26 @@ databases:
             dataType: "VARCHAR"
             nullable: true
             strategy: "SUPPRESS"
+      # Legacy consent upload (Consent-API feature 008): the 12-digit Beneficiary ID as sent, and the
+      # representative's name and remarks (stored encrypted).
+      cm_legacy_row:
+        canonicalName: "cm_legacy_row"
+        columns:
+          beneficiary_id:
+            canonicalName: "beneficiary_id"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "HMAC_HASH"
+          representative_name:
+            canonicalName: "representative_name"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "SUPPRESS"
+          remarks:
+            canonicalName: "remarks"
+            dataType: "TEXT"
+            nullable: true
+            strategy: "SUPPRESS"
       datamigrationtable:
         canonicalName: "datamigrationtable"
       flyway_schema_history:
