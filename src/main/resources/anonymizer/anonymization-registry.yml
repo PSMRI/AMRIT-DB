@@ -37,6 +37,97 @@ schemaHint: "V6"
 databases:
   db_identity:
     tables:
+      cm_access_grant:
+        canonicalName: "cm_access_grant"
+        columns:
+          grantee_name:
+            canonicalName: "grantee_name"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "SUPPRESS"
+          reason:
+            canonicalName: "reason"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "SUPPRESS"
+          approval_masked_phone:
+            canonicalName: "approval_masked_phone"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "SUPPRESS"
+      cm_consent_evidence:
+        canonicalName: "cm_consent_evidence"
+        columns:
+          witness_name:
+            canonicalName: "witness_name"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "SUPPRESS"
+          masked_phone:
+            canonicalName: "masked_phone"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "SUPPRESS"
+      cm_consent_notification:
+        canonicalName: "cm_consent_notification"
+        columns:
+          phone:
+            canonicalName: "phone"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "SUPPRESS"
+      # Grievance officer's official, published contact: not patient data, kept as is.
+      cm_notice:
+        canonicalName: "cm_notice"
+        columns:
+          grievance_officer_name:
+            canonicalName: "grievance_officer_name"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PRESERVE"
+          grievance_phone:
+            canonicalName: "grievance_phone"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PRESERVE"
+          grievance_email:
+            canonicalName: "grievance_email"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "PRESERVE"
+      cm_guardian_link:
+        canonicalName: "cm_guardian_link"
+        columns:
+          guardian_name:
+            canonicalName: "guardian_name"
+            dataType: "VARCHAR"
+            nullable: false
+            strategy: "SUPPRESS"
+          guardian_phone:
+            canonicalName: "guardian_phone"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "SUPPRESS"
+      # Legacy consent upload (Consent-API feature 008): the 12-digit Beneficiary ID as sent, and the
+      # representative's name and remarks (stored encrypted).
+      cm_legacy_row:
+        canonicalName: "cm_legacy_row"
+        columns:
+          beneficiary_id:
+            canonicalName: "beneficiary_id"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "HMAC_HASH"
+          representative_name:
+            canonicalName: "representative_name"
+            dataType: "VARCHAR"
+            nullable: true
+            strategy: "SUPPRESS"
+          remarks:
+            canonicalName: "remarks"
+            dataType: "TEXT"
+            nullable: true
+            strategy: "SUPPRESS"
       datamigrationtable:
         canonicalName: "datamigrationtable"
       flyway_schema_history:
