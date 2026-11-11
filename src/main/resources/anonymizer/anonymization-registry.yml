@@ -663,6 +663,16 @@ databases:
         columns:
           BeneficiaryId:
             strategy: "HMAC_HASH"
+      # STOP-TB sync change log (V132): beneficiary_id is the card number, so it is
+      # HMAC'd like every other carrier; ben_reg_id is the internal BenRegID and is
+      # preserved, as everywhere, so it still joins.
+      t_sync_change_log:
+        canonicalName: "t_sync_change_log"
+        columns:
+          beneficiary_id:
+            strategy: "HMAC_HASH"
+          ben_reg_id:
+            strategy: "PRESERVE"
       i_ben_flow_outreach:
         canonicalName: "i_ben_flow_outreach"
         columns:
