@@ -33,12 +33,14 @@
         S.ExitInPeriod                                AS `Dispensed Quantity`,
         S.AdjInPeriodReceipt                          AS `Adjustment Receipt`,
         S.AdjInPeriodIssue                            AS `Adjustment Issue`,
-        GREATEST(S.OpeningStock + S.ReceivedInPeriod - S.ExitInPeriod + S.AdjInPeriodSigned, 0) AS `Closing Stock`,
+        GREATEST(S.OpeningStock - S.ExitInPeriod + S.AdjInPeriodSigned, 0) AS `Closing Stock`,
         DATE_FORMAT(S.CreatedDate, '%d-%m-%Y')        AS `Item Entered Date`
     FROM (
         SELECT
             B.*,
-            GREATEST(B.ReceivedBefore - B.ExitBeforeFrom + B.AdjBeforeFrom, 0) AS OpeningStock
+            -- Batches entered within the period count in Opening Stock too, so an item
+            -- entered today shows its stock in today's report like every other item.
+            GREATEST(B.ReceivedBefore + B.ReceivedInPeriod - B.ExitBeforeFrom + B.AdjBeforeFrom, 0) AS OpeningStock
         FROM (
             SELECT
                 ISE.EntryType,
@@ -161,11 +163,13 @@
         SUM(S.AdjInPeriodSigned)                      AS AdjustedQuantity_ToDate,
         SUM(S.AdjInPeriodReceipt)                     AS AdjustedQuantity_ToDate_Receipt,
         SUM(S.AdjInPeriodIssue)                       AS AdjustedQuantity_ToDate_Issue,
-        SUM(GREATEST(S.OpeningStock + S.ReceivedInPeriod - S.ExitInPeriod + S.AdjInPeriodSigned, 0)) AS ClosingStock
+        SUM(GREATEST(S.OpeningStock - S.ExitInPeriod + S.AdjInPeriodSigned, 0)) AS ClosingStock
     FROM (
         SELECT
             B.*,
-            GREATEST(B.ReceivedBefore - B.ExitBeforeFrom + B.AdjBeforeFrom, 0) AS OpeningStock
+            -- Batches entered within the period count in Opening Stock too, so an item
+            -- entered today shows its stock in today's report like every other item.
+            GREATEST(B.ReceivedBefore + B.ReceivedInPeriod - B.ExitBeforeFrom + B.AdjBeforeFrom, 0) AS OpeningStock
         FROM (
             SELECT
                 ISE.ItemID,
