@@ -1,11 +1,10 @@
--- Stock detail / summary reports: count a stock exit or adjustment against a batch
--- only when it was recorded by the batch's own facility.
+-- Stock detail / summary reports: leave out items discontinued (deactivated) in the
+-- Admin module.
 --
--- Exits and adjustments uploaded from MMU vans can carry the van's local
--- ItemStockEntryID. At central that number can belong to another facility's batch,
--- so V143 added those movements to the wrong batch (e.g. van adjustments of 24,536
--- against a 200-unit batch in another store). Matching on FacilityID keeps each
--- facility's report to its own movements. Otherwise identical to V143.
+-- The Inventory itemPartialSearch API hides an item once Admin discontinues it
+-- (m_item.Discontinued = 1), but the daily/monthly/yearly stock reports still listed
+-- it because pr_Stockdetail / Pr_Stocksummary only checked m_item.Deleted. Both
+-- procedures now also require Discontinued = 0. Otherwise identical to V144.
 
   use db_iemr;
 
@@ -131,6 +130,8 @@
               AND IFNULL(ISE.Deleted, 0) = 0
               -- Item mapped to the facility and not deleted.
               AND IFNULL(ITM.Deleted, 0) = 0
+              -- Item not discontinued (deactivated in Admin), same as the itemPartialSearch API.
+              AND IFNULL(ITM.Discontinued, 0) = 0
               AND EXISTS (
                     SELECT 1 FROM db_iemr.m_itemfacilitymapping MIF
                     WHERE MIF.ItemID = ISE.ItemID
@@ -257,6 +258,8 @@
               AND IFNULL(ISE.Deleted, 0) = 0
               -- Item mapped to the facility and not deleted.
               AND IFNULL(ITM.Deleted, 0) = 0
+              -- Item not discontinued (deactivated in Admin), same as the itemPartialSearch API.
+              AND IFNULL(ITM.Discontinued, 0) = 0
               AND EXISTS (
                     SELECT 1 FROM db_iemr.m_itemfacilitymapping MIF
                     WHERE MIF.ItemID = ISE.ItemID
