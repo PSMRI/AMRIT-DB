@@ -192,8 +192,6 @@ CREATE TABLE IF NOT EXISTS cm_guardian_link (
     REFERENCES cm_consent (consent_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Hash-chained, append-only audit log. The application user must have no UPDATE/DELETE
--- rights on it (grant script: docs/consent/cm_audit_log_grants.sql, applied by DevOps).
 CREATE TABLE IF NOT EXISTS cm_audit_log (
   id                  BIGINT       NOT NULL AUTO_INCREMENT,
   action              VARCHAR(30)  NOT NULL,
