@@ -100,15 +100,15 @@ FROM (
 ) n
 WHERE NOT EXISTS (SELECT 1 FROM cm_notice x WHERE x.notice_code = n.code AND x.version_no = 1);
 
--- Purposes covered by each notice. Central notices: all six; project 3: P-REG, P-TRT, P-REM.
+-- Purposes covered by each notice: all six, for the central notices and project 3's own notice.
+-- Re-running adds any missing links, so a database seeded with project 3's earlier three purposes gets all six.
 INSERT INTO cm_notice_purpose (notice_version_id, purpose_code, display_rank, CreatedBy)
 SELECT n.notice_version_id, p.code, p.rnk, 'consent-demo-seed'
 FROM cm_notice n
 JOIN (SELECT 'P-REG' code, 1 rnk UNION ALL SELECT 'P-TRT', 2 UNION ALL SELECT 'P-REM', 3
       UNION ALL SELECT 'P-FAM', 4 UNION ALL SELECT 'P-SHR', 5 UNION ALL SELECT 'P-RES', 6) p
 WHERE n.version_no = 1
-  AND (n.notice_code IN ('MMU-REGISTRATION', 'MMU-REVISIT')
-       OR (n.notice_code = 'MMU-REGISTRATION-P3' AND p.code IN ('P-REG', 'P-TRT', 'P-REM')))
+  AND n.notice_code IN ('MMU-REGISTRATION', 'MMU-REVISIT', 'MMU-REGISTRATION-P3')
   AND NOT EXISTS (SELECT 1 FROM cm_notice_purpose x
                   WHERE x.notice_version_id = n.notice_version_id AND x.purpose_code = p.code);
 
