@@ -1,24 +1,6 @@
--- Stop TB van-to-central sync fixes. Safe to re-run.
---
--- 1. SputumCollectionDate (V138) was registered in the tb_stoptb_diagnostics sync row as a plain
---    column. MMU-API serialises van rows with plain Gson, so a raw DATETIME is sent in a locale
---    format that central rejects. It is now sent with date_format, like every other datetime.
---
--- 2. Columns written on the camp laptop whose migrations (V124, V127, identity V23/V24) created the
---    column but never registered it in m_synctabledetail, so they never reached central:
---    tb_screening symptoms, visitCode on tb_suspected / tb_confirmed_cases, and the
---    i_beneficiarydetails fields Identity-API writes on the laptop (STOP-444).
---    Each is appended to VanColumnName and ServerColumnName (MMU matches columns by name).
---
--- Not registered on purpose: nikshayId / nikshayCreatedByAmrit (central's Nikshay job owns them),
--- synced_date / synced_by (laptop-only tracking).
-
 SET @sync_tbl_exists = (SELECT COUNT(*) FROM information_schema.tables
                         WHERE table_schema = 'db_iemr' AND table_name = 'm_synctabledetail');
 
--- ---------------------------------------------------------------------------------------------
--- 1. tb_stoptb_diagnostics.SputumCollectionDate: send formatted
--- ---------------------------------------------------------------------------------------------
 SET @sql = IF(@sync_tbl_exists > 0,
 "UPDATE db_iemr.m_synctabledetail
     SET VanColumnName = REPLACE(VanColumnName, ',SputumCollectionDate',
@@ -30,11 +12,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- ---------------------------------------------------------------------------------------------
--- 2. Register missing columns (one block per column)
--- ---------------------------------------------------------------------------------------------
-
--- db_iemr.tb_screening.fatigue
 SET @col_exists = (SELECT COUNT(*) FROM information_schema.columns
                    WHERE table_schema = 'db_iemr' AND table_name = 'tb_screening' AND column_name = 'fatigue');
 SET @sql = IF(@sync_tbl_exists > 0 AND @col_exists > 0,
@@ -49,7 +26,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- db_iemr.tb_screening.chest_pain
 SET @col_exists = (SELECT COUNT(*) FROM information_schema.columns
                    WHERE table_schema = 'db_iemr' AND table_name = 'tb_screening' AND column_name = 'chest_pain');
 SET @sql = IF(@sync_tbl_exists > 0 AND @col_exists > 0,
@@ -64,7 +40,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- db_iemr.tb_screening.shortness_of_breath
 SET @col_exists = (SELECT COUNT(*) FROM information_schema.columns
                    WHERE table_schema = 'db_iemr' AND table_name = 'tb_screening' AND column_name = 'shortness_of_breath');
 SET @sql = IF(@sync_tbl_exists > 0 AND @col_exists > 0,
@@ -79,7 +54,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- db_iemr.tb_screening.failure_to_gain_weight
 SET @col_exists = (SELECT COUNT(*) FROM information_schema.columns
                    WHERE table_schema = 'db_iemr' AND table_name = 'tb_screening' AND column_name = 'failure_to_gain_weight');
 SET @sql = IF(@sync_tbl_exists > 0 AND @col_exists > 0,
@@ -94,7 +68,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- db_iemr.tb_screening.decreased_activity_or_playfulness
 SET @col_exists = (SELECT COUNT(*) FROM information_schema.columns
                    WHERE table_schema = 'db_iemr' AND table_name = 'tb_screening' AND column_name = 'decreased_activity_or_playfulness');
 SET @sql = IF(@sync_tbl_exists > 0 AND @col_exists > 0,
@@ -109,7 +82,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- db_iemr.tb_screening.others
 SET @col_exists = (SELECT COUNT(*) FROM information_schema.columns
                    WHERE table_schema = 'db_iemr' AND table_name = 'tb_screening' AND column_name = 'others');
 SET @sql = IF(@sync_tbl_exists > 0 AND @col_exists > 0,
@@ -124,7 +96,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- db_iemr.tb_suspected.visitCode
 SET @col_exists = (SELECT COUNT(*) FROM information_schema.columns
                    WHERE table_schema = 'db_iemr' AND table_name = 'tb_suspected' AND column_name = 'visitCode');
 SET @sql = IF(@sync_tbl_exists > 0 AND @col_exists > 0,
@@ -139,7 +110,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- db_iemr.tb_confirmed_cases.visitCode
 SET @col_exists = (SELECT COUNT(*) FROM information_schema.columns
                    WHERE table_schema = 'db_iemr' AND table_name = 'tb_confirmed_cases' AND column_name = 'visitCode');
 SET @sql = IF(@sync_tbl_exists > 0 AND @col_exists > 0,
@@ -154,7 +124,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- db_identity.i_beneficiarydetails.economicStatus
 SET @col_exists = (SELECT COUNT(*) FROM information_schema.columns
                    WHERE table_schema = 'db_identity' AND table_name = 'i_beneficiarydetails' AND column_name = 'economicStatus');
 SET @sql = IF(@sync_tbl_exists > 0 AND @col_exists > 0,
@@ -169,7 +138,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- db_identity.i_beneficiarydetails.economicStatusId
 SET @col_exists = (SELECT COUNT(*) FROM information_schema.columns
                    WHERE table_schema = 'db_identity' AND table_name = 'i_beneficiarydetails' AND column_name = 'economicStatusId');
 SET @sql = IF(@sync_tbl_exists > 0 AND @col_exists > 0,
@@ -184,7 +152,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- db_identity.i_beneficiarydetails.residentialArea
 SET @col_exists = (SELECT COUNT(*) FROM information_schema.columns
                    WHERE table_schema = 'db_identity' AND table_name = 'i_beneficiarydetails' AND column_name = 'residentialArea');
 SET @sql = IF(@sync_tbl_exists > 0 AND @col_exists > 0,
@@ -199,7 +166,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- db_identity.i_beneficiarydetails.residentialAreaId
 SET @col_exists = (SELECT COUNT(*) FROM information_schema.columns
                    WHERE table_schema = 'db_identity' AND table_name = 'i_beneficiarydetails' AND column_name = 'residentialAreaId');
 SET @sql = IF(@sync_tbl_exists > 0 AND @col_exists > 0,
@@ -214,7 +180,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- db_identity.i_beneficiarydetails.placeOfCurrentLiving
 SET @col_exists = (SELECT COUNT(*) FROM information_schema.columns
                    WHERE table_schema = 'db_identity' AND table_name = 'i_beneficiarydetails' AND column_name = 'placeOfCurrentLiving');
 SET @sql = IF(@sync_tbl_exists > 0 AND @col_exists > 0,
@@ -229,7 +194,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- db_identity.i_beneficiarydetails.otherPlaceOfCurrentLiving
 SET @col_exists = (SELECT COUNT(*) FROM information_schema.columns
                    WHERE table_schema = 'db_identity' AND table_name = 'i_beneficiarydetails' AND column_name = 'otherPlaceOfCurrentLiving');
 SET @sql = IF(@sync_tbl_exists > 0 AND @col_exists > 0,
@@ -244,7 +208,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- db_identity.i_beneficiarydetails.institutionName
 SET @col_exists = (SELECT COUNT(*) FROM information_schema.columns
                    WHERE table_schema = 'db_identity' AND table_name = 'i_beneficiarydetails' AND column_name = 'institutionName');
 SET @sql = IF(@sync_tbl_exists > 0 AND @col_exists > 0,
@@ -259,7 +222,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- db_identity.i_beneficiarydetails.familyid
 SET @col_exists = (SELECT COUNT(*) FROM information_schema.columns
                    WHERE table_schema = 'db_identity' AND table_name = 'i_beneficiarydetails' AND column_name = 'familyid');
 SET @sql = IF(@sync_tbl_exists > 0 AND @col_exists > 0,
