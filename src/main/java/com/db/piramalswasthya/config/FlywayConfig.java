@@ -13,8 +13,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FlywayConfig {
 	 /**
-	  * {@code ${isProduction}} in db_iemr migrations: "true" only when is.production (IS_PRODUCTION) is
-	  * exactly true, otherwise "false". Used by V151 to skip its camp-only backfills on production.
+	  * {@code ${isCentralServer}} in db_iemr migrations: "true" only when is.central.server (IS_CENTRAL_SERVER)
+	  * is exactly true, otherwise "false" (the default). Used by V151 to skip its camp-only backfills on the
+	  * central server.
 	  * <p>
 	  * {@code ${vanId}}: this camp's van ID from stoptb.van.id (STOPTB_VAN_ID), or "" when it is unset or
 	  * not a number (e.g. an unresolved "@env.STOPTB_VAN_ID@" in a CI build). Used by V151 to fill vanID on
@@ -22,16 +23,16 @@ public class FlywayConfig {
 	  */
 	 @Bean
 	    public Flyway flywayDbiemr(@Qualifier("dbiemrDataSource") DataSource dataSource,
-	                               @Value("${is.production:false}") String isProduction,
+	                               @Value("${is.central.server:false}") String isCentralServer,
 	                               @Value("${stoptb.van.id:}") String vanId) {
-	        boolean production = "true".equalsIgnoreCase(isProduction == null ? "" : isProduction.trim());
+	        boolean centralServer = "true".equalsIgnoreCase(isCentralServer == null ? "" : isCentralServer.trim());
 	        String van = vanId == null ? "" : vanId.trim();
 	        if (!van.matches("[1-9][0-9]{0,9}")) van = "";
 	        return Flyway.configure()
 	                .dataSource(dataSource)
 	                .locations("classpath:db/migration/dbiemr")
 	                .baselineOnMigrate(true)
-	                .placeholders(Map.of("isProduction", Boolean.toString(production), "vanId", van))
+	                .placeholders(Map.of("isCentralServer", Boolean.toString(centralServer), "vanId", van))
 	                .load();
 	    }
 

@@ -3,7 +3,7 @@
 --   Part A - dynamic form response UUIDs added in V150 (STOP-745)
 --   Part B - diagnostic sync keys (vanID, vanSerialNo) on rows that have none
 --
--- Skipped on production/central (${isProduction} = true, from IS_PRODUCTION; see FlywayConfig). The
+-- Skipped on the central server (${isCentralServer} = true, from IS_CENTRAL_SERVER; see FlywayConfig). The
 -- migration still completes, so Flyway records V151 as applied either way.
 --   Part A: rows uploaded to central carry the camp's numeric IDs, which central cannot resolve.
 --           Central gets the UUIDs when each camp uploads its rows again (step A2 re-queues them).
@@ -43,7 +43,7 @@ DELIMITER $$
 
 CREATE PROCEDURE v151_camp_only_backfill()
 BEGIN
-    IF '${isProduction}' = 'false' THEN
+    IF '${isCentralServer}' = 'false' THEN
 
         -- ===== Part A: dynamic form response UUIDs =====
 
@@ -116,7 +116,7 @@ BEGIN
         END IF;
 
     ELSE
-        SELECT 'V151 skipped: IS_PRODUCTION=true (camp-only backfills run on camps only)' AS message;
+        SELECT 'V151 skipped: IS_CENTRAL_SERVER=true (camp-only backfills run on camps only)' AS message;
     END IF;
 END$$
 
